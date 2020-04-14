@@ -1,0 +1,157 @@
+Public Sub CargaADODCConta(TablaMaestra As String, ByRef nombreADODC As Adodc, xsinonimo, nombreCombo As String, apliTrim As String, conex As String, f As Form, sqlOrd As String, Optional estado As String)
+nombreADODC.ConnectionString = Conexion
+If TablaMaestra = "Oficinas" Then
+    sql = "select (Descripcion)," & TablaMaestra & ".Idreg from " & TablaMaestra & "  " & sqlOrd
+End If
+
+If TablaMaestra = "ResponsablesAreas" Then
+    sql = "select (NombreResponsable)," & TablaMaestra & ".Idreg from " & TablaMaestra & "  " & sqlOrd
+End If
+
+On Local Error Resume Next
+    Err = 0
+    nombreADODC.ConnectionString = ConexionContable
+    nombreADODC.RecordSource = sql
+    nombreADODC.Refresh
+    If Err <> 0 Then
+        nombreADODC.ConnectionString = ConexionContable
+        nombreADODC.RecordSource = sql
+        nombreADODC.Refresh
+    End If
+End Sub
+
+-----------------------------------------------------------------------------------
+
+Function EsCedulaValida(cedula As String) As Boolean
+   EsCedulaValida = False
+   If Len(cedula) = 16 Then
+      If IsNumeric(Mid(cedula, 1, 3)) And Mid(cedula, 4, 1) = "-" And IsNumeric(Mid(cedula, 5, 6)) And Mid(cedula, 11, 1) = "-" And IsNumeric(Mid(cedula, 12, 4)) And Mid(cedula, 16, 1) = ObtenerLetra(cedula) Then
+         'Asi: MaxTeen. 2010-08-18 10:53:24 am. Validando correctamente la cadena de seis dígitos para saber si es de tipo fecha válida
+         'If IsDate(Mid(cedula, 5, 2) & "/" & Mid(cedula, 7, 2) & "/" & Mid(cedula, 9, 2)) Then
+         If EsFecha_SeisDigitos(Mid(cedula, 5, 2) & Mid(cedula, 7, 2) & Mid(cedula, 9, 2)) = True Then
+            EsCedulaValida = True
+         End If
+      End If
+   End If
+End Function
+-------------------------------------------------------------------------------------------
+Public Function EsFecha_SeisDigitos(cadfecha As String) As Boolean
+'Asi: MaxTeen. 2010-08-18 10:50:30 am. Nueva función para validar si el parámetro es una fecha válida
+Dim dd As Integer, MM As Integer
+Dim aa As Integer, bisiesto As Boolean
+'''
+EsFecha_SeisDigitos = True
+bisiesto = False
+'cadfecha = Mid(Trim(cadfecha),  5, 6)
+'''
+dd = val(Mid(cadfecha, 1, 2))
+MM = val(Mid(cadfecha, 3, 2))
+aa = val(Mid(cadfecha, 5, 2))
+If aa Mod 2 = 0 Then
+    If aa Mod 4 = 0 Then bisiesto = True
+End If
+If MM < 1 Or MM > 12 Then
+    EsFecha_SeisDigitos = False
+    Exit Function
+Else
+    Select Case MM
+        Case 1: Case 3: Case 5: Case 7: Case 8: Case 10: Case 12
+            If dd < 1 Or dd > 31 Then EsFecha_SeisDigitos = False: Exit Function
+        Case 2
+            If bisiesto Then
+                If dd < 1 Or dd > 29 Then EsFecha_SeisDigitos = False: Exit Function
+            Else
+                If dd < 1 Or dd > 28 Then EsFecha_SeisDigitos = False: Exit Function
+            End If
+        Case Else
+            If dd < 1 Or dd > 30 Then EsFecha_SeisDigitos = False: Exit Function
+    End Select
+End If
+End Function
+-------------------------------------------------------------------------------------------
+Public Function ArchivoActual(d As String) As String
+Dim AactL As Integer, ind%, pleca%
+'Dim ArchActual
+d = Trim(d)
+AactL = Len(Trim(d))
+For ind = 1 To AactL
+    If Mid(d, ind, 1) = "\" Then
+        pleca = ind
+    End If
+Next ind
+ArchivoActual = Mid(d, pleca + 1, AactL)
+End Function
+-------------------------------------------------------------------------------------------
+Function Mod2(Cadena, num) As Long
+   Dim texto As String
+   Dim num1, num2 As Long
+
+   texto = ""
+   num1 = 0
+   num2 = num
+
+   For i = 1 To Len(Cadena)
+      texto = texto & Mid(Cadena, i, 1)
+      num1 = val(texto)
+      res = num1 Mod num2
+      texto = Str(res)
+   Next
+
+   Mod2 = res
+End Function
+-------------------------------------------------------------------------------------------
+Function ObtenerLetra(cedula As String) As String
+   Dim Cadena As String
+   Dim posicion As Long
+   Cadena = "ABCDEFGHJKLMNPQRSTUVWXY"
+   posicion = Mod2(cedula, 23) + 1
+   ObtenerLetra = Mid(Cadena, posicion, 1)
+End Function
+-------------------------------------------------------------------------------------------
+Public Function DameNombreEmpleado(codempl) As String
+Set rsa1 = Nothing
+If codempl <> 0 Then
+    sql = "select nombre1, nombre2, apellido1, apellido2, codtiponomina, codgrupo, codcargo, SueldoPeriodo, dolarizado from empleado where codempleado=" & codempl & ""
+Else
+    sql = "select nombre1, nombre2, apellido1, apellido2, codtiponomina, codgrupo, codcargo, SueldoPeriodo,dolarizado from empleado where codempleado=" & FrmFormulario.AdoHist.Recordset!idsoli & ""
+End If
+rsa1.Open sql, Conexion, adOpenForwardOnly, adLockOptimistic
+If rsa1.EOF = True Then
+    Set rsa1 = Nothing
+    sql = "select nombre1, nombre2, apellido1, apellido2, codtiponomina, codgrupo, codcargo, SueldoPeriodo,dolarizado from empleado where codempleado1=" & codempl & ""
+    rsa1.Open sql, Conexion, adOpenForwardOnly, adLockOptimistic
+End If
+DameNombreEmpleado = rsa1!Nombre1 & " " & rsa1!Nombre2 & " " & rsa1!Apellido1 & " " & rsa1!Apellido2
+idnomina = rsa1!CodTipoNomina
+salanterior = rsa1!SueldoPeriodo
+If IsNull(rsa1!codgrupo) Then
+    idgrupo = 0
+Else
+    idgrupo = rsa1!codgrupo
+    grupo = NombreGrupo(rsa1!codgrupo)
+End If
+
+If IsNull(rsa1!codcargo) Then
+    idcargo = 0
+Else
+    idcargo = rsa1!codcargo
+    nomcargo = NombreCargo(rsa1!codcargo)
+End If
+nomina = NombreNominaC(rsa1!CodTipoNomina)
+isaldolar = rsa1!dolarizado
+End Function
+Public Function NombreNominaC(cod As String) As String
+Set rsa2 = Nothing
+sql = "select nomina from dbo.TipoNomina where codtiponomina = '" & cod & "'"
+rsa2.Open sql, Conexion, adOpenForwardOnly, adLockOptimistic
+NombreNominaC = rsa2!nomina
+End Function
+-------------------------------------------------------------------------------------------
+Public Function NombreGrupo(cod As String) As String
+Set rsa2 = Nothing
+sql = "select grupo from grupo where codgrupo= '" & cod & "'"
+
+rsa2.Open sql, Conexion, adOpenForwardOnly, adLockOptimistic
+NombreGrupo = rsa2!grupo
+End Function
+-------------------------------------------------------------------------------------------

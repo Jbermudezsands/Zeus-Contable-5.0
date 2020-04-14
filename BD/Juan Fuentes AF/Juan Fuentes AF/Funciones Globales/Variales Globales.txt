@@ -1,0 +1,5 @@
+Public wfecha As Date 'JUAN
+Public wtextc As String 'JUAN
+Public wnombre As String  'nombre de la sede
+Public wnombreFinca As String  'nombre de la finca
+Public wforma As Form 'JUAN

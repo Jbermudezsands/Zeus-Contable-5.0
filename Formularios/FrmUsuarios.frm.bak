@@ -1,0 +1,829 @@
+VERSION 5.00
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Begin VB.Form FrmUsuarios 
+   BorderStyle     =   1  'Fixed Single
+   Caption         =   "Usuarios."
+   ClientHeight    =   2430
+   ClientLeft      =   3150
+   ClientTop       =   2955
+   ClientWidth     =   3480
+   HelpContextID   =   17
+   Icon            =   "FrmUsuarios.frx":0000
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MDIChild        =   -1  'True
+   MinButton       =   0   'False
+   ScaleHeight     =   2430
+   ScaleWidth      =   3480
+   Begin MSDataListLib.DataCombo DBCnombre 
+      Height          =   315
+      Left            =   1800
+      TabIndex        =   11
+      Top             =   240
+      Width           =   1455
+      _ExtentX        =   2566
+      _ExtentY        =   556
+      _Version        =   393216
+      Text            =   ""
+   End
+   Begin MSAdodcLib.Adodc DtaUsuarios 
+      Height          =   375
+      Left            =   720
+      Top             =   3840
+      Width           =   2655
+      _ExtentX        =   4683
+      _ExtentY        =   661
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "DtaUsuarios"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin MSAdodcLib.Adodc DtaNacceso2 
+      Height          =   375
+      Left            =   720
+      Top             =   3480
+      Width           =   2655
+      _ExtentX        =   4683
+      _ExtentY        =   661
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "DtaNacceso2"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin MSAdodcLib.Adodc DtaUsuarios2 
+      Height          =   375
+      Left            =   720
+      Top             =   3120
+      Width           =   2655
+      _ExtentX        =   4683
+      _ExtentY        =   661
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "DtaUsuarios2"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin MSAdodcLib.Adodc DtaNacceso 
+      Height          =   375
+      Left            =   720
+      Top             =   2760
+      Width           =   2655
+      _ExtentX        =   4683
+      _ExtentY        =   661
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "DtaNacceso"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin VB.Frame Frame1 
+      Caption         =   "Botones de Comando"
+      ForeColor       =   &H00008000&
+      Height          =   735
+      Left            =   480
+      MouseIcon       =   "FrmUsuarios.frx":27A2
+      TabIndex        =   7
+      Top             =   1560
+      Width           =   2775
+      Begin VB.CommandButton Command3 
+         Caption         =   "Salir"
+         Height          =   375
+         Left            =   1800
+         Picture         =   "FrmUsuarios.frx":2BE4
+         TabIndex        =   10
+         Top             =   240
+         Width           =   735
+      End
+      Begin VB.CommandButton Command2 
+         Caption         =   "Borrar"
+         Height          =   375
+         Left            =   960
+         Picture         =   "FrmUsuarios.frx":2D32
+         TabIndex        =   9
+         Top             =   240
+         Width           =   735
+      End
+      Begin VB.CommandButton Command1 
+         Caption         =   "Grabar"
+         Height          =   375
+         Left            =   120
+         Picture         =   "FrmUsuarios.frx":2E80
+         TabIndex        =   8
+         Top             =   240
+         Width           =   735
+      End
+   End
+   Begin VB.TextBox TxtConfirma 
+      Height          =   285
+      IMEMode         =   3  'DISABLE
+      Left            =   1800
+      MaxLength       =   9
+      PasswordChar    =   "*"
+      TabIndex        =   6
+      Top             =   1320
+      Width           =   1455
+   End
+   Begin VB.TextBox Txtpasword 
+      Height          =   285
+      IMEMode         =   3  'DISABLE
+      Left            =   1800
+      MaxLength       =   9
+      PasswordChar    =   "*"
+      TabIndex        =   5
+      Top             =   960
+      Width           =   1455
+   End
+   Begin VB.TextBox TxtAcceso 
+      Height          =   285
+      Left            =   1800
+      MaxLength       =   3
+      TabIndex        =   4
+      Top             =   600
+      Width           =   1455
+   End
+   Begin VB.Label Label4 
+      Caption         =   "Confirmar Pasword"
+      Height          =   255
+      Left            =   240
+      TabIndex        =   3
+      Top             =   1320
+      Width           =   1455
+   End
+   Begin VB.Label Label3 
+      Caption         =   "Pasword:"
+      Height          =   255
+      Left            =   960
+      TabIndex        =   2
+      Top             =   960
+      Width           =   735
+   End
+   Begin VB.Label Label2 
+      Caption         =   "Nivel Acceso:"
+      Height          =   255
+      Left            =   600
+      TabIndex        =   1
+      Top             =   600
+      Width           =   1095
+   End
+   Begin VB.Label Label1 
+      Caption         =   "Nombre:"
+      Height          =   255
+      Left            =   960
+      TabIndex        =   0
+      Top             =   240
+      Width           =   735
+   End
+End
+Attribute VB_Name = "FrmUsuarios"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Private Sub Command1_Click()
+Permiso = True
+Dim Usuario As Integer
+
+   
+   
+   
+     If Not IsNumeric(TxtAcceso.Text) Then
+      MsgBox "El Nivel no es Correcto", vbExclamation, "Sistema de Facturacion"
+        TxtAcceso.Text = ""
+        TxtAcceso.SetFocus
+        Exit Sub
+     End If
+     
+     If Val(Nivel2) > Val(NivelAcceso) Then
+        MsgBox "No Puede Cambiar el Nivel", vbExclamation, "Sistema de Facturacion"
+        Exit Sub
+     End If
+     
+     If (Txtpasword.Text) <> (TxtConfirma.Text) Then
+       MsgBox "Confime Nuemvamente", vbInformation, "Sistema de Facturacion"
+       TxtConfirma.Text = ""
+       TxtConfirma.SetFocus
+       Exit Sub
+     End If
+
+DtaUsuarios.Refresh
+     Do While Not DtaUsuarios.Recordset.EOF
+        If DtaUsuarios.Recordset("NombreUsuario") = DBCnombre.Text Then
+             If DtaUsuarios.Recordset("NivelAcceso") < Val(TxtAcceso.Text) Then
+               MsgBox "No Puede Ponerse un Nivel Superior", vbExclamation, "Sistema de Facturacion"
+               Exit Sub
+             End If
+             'DtaUsuarios.Recordset.Edit
+             DtaUsuarios.Recordset("Nivel") = TxtAcceso.Text
+             DtaUsuarios.Recordset("Clave") = Txtpasword.Text
+             DtaUsuarios.Recordset.Update
+             DBCnombre.Text = ""
+             Permiso = True
+             Exit Sub
+        End If
+       DtaUsuarios.Recordset.MoveNext
+      Loop
+             
+             If NivelAcceso < Val(TxtAcceso.Text) Then
+               MsgBox "No Puede Crear un Nivel Superior", vbExclamation, "Sistema de Facturacion"
+               Exit Sub
+             End If
+                       
+             
+             
+             DtaUsuarios.Recordset.AddNew
+             DtaUsuarios.Recordset("NombreUsuario") = DBCnombre.Text
+             DtaUsuarios.Recordset("Nivel") = TxtAcceso.Text
+             DtaUsuarios.Recordset("Clave") = Txtpasword.Text
+             CodUsuario = DtaUsuarios.Recordset("CodUsuario")
+             DtaUsuarios.Recordset.Update
+             DBCnombre.Text = ""
+             Permiso = True
+             
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Niveles"
+           Me.DtaNacceso.Recordset.Update
+             
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Niveles"
+           Me.DtaNacceso.Recordset.Update
+              
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Cuentas"
+           Me.DtaNacceso.Recordset.Update
+              
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Cuentas"
+           Me.DtaNacceso.Recordset.Update
+           
+          Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Cuentas"
+           Me.DtaNacceso.Recordset.Update
+       
+         
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Cuentas"
+           Me.DtaNacceso.Recordset.Update
+         
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Grupo Cuentas"
+           Me.DtaNacceso.Recordset.Update
+              
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Grupo Cuentas"
+           Me.DtaNacceso.Recordset.Update
+           
+          Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Grupo Cuentas"
+           Me.DtaNacceso.Recordset.Update
+       
+         
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Grupo Cuentas"
+           Me.DtaNacceso.Recordset.Update
+         
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Contratistas"
+           Me.DtaNacceso.Recordset.Update
+              
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Contratistas"
+           Me.DtaNacceso.Recordset.Update
+           
+          Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Contratistas"
+           Me.DtaNacceso.Recordset.Update
+       
+         
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Contratistas"
+           Me.DtaNacceso.Recordset.Update
+         
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Empleados"
+           Me.DtaNacceso.Recordset.Update
+              
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Empleados"
+           Me.DtaNacceso.Recordset.Update
+           
+          Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Empleados"
+           Me.DtaNacceso.Recordset.Update
+       
+         
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Empleados"
+           Me.DtaNacceso.Recordset.Update
+         
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Activo Fijo"
+           Me.DtaNacceso.Recordset.Update
+              
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Activo Fijo"
+           Me.DtaNacceso.Recordset.Update
+           
+          Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Activo Fijo"
+           Me.DtaNacceso.Recordset.Update
+       
+         
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Activo Fijo"
+           Me.DtaNacceso.Recordset.Update
+         
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Periodos"
+           Me.DtaNacceso.Recordset.Update
+              
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Periodos"
+           Me.DtaNacceso.Recordset.Update
+           
+          Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Periodos"
+           Me.DtaNacceso.Recordset.Update
+       
+         Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Transacciones"
+           Me.DtaNacceso.Recordset.Update
+              
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Transacciones"
+           Me.DtaNacceso.Recordset.Update
+           
+          Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Transacciones"
+           Me.DtaNacceso.Recordset.Update
+       
+         
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Transacciones"
+           Me.DtaNacceso.Recordset.Update
+         
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Cheques"
+           Me.DtaNacceso.Recordset.Update
+              
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Cheques"
+           Me.DtaNacceso.Recordset.Update
+           
+          Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Cheques"
+           Me.DtaNacceso.Recordset.Update
+       
+         
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Cheques"
+           Me.DtaNacceso.Recordset.Update
+         
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Depreciacion"
+           Me.DtaNacceso.Recordset.Update
+              
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Usuarios"
+           Me.DtaNacceso.Recordset.Update
+              
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Usuarios"
+           Me.DtaNacceso.Recordset.Update
+           
+          Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Usuarios"
+           Me.DtaNacceso.Recordset.Update
+       
+         
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Usuarios"
+           Me.DtaNacceso.Recordset.Update
+         
+          Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Tasa Cambio"
+           Me.DtaNacceso.Recordset.Update
+              
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Tasa Cambio"
+           Me.DtaNacceso.Recordset.Update
+           
+          Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Tasa Cambio"
+           Me.DtaNacceso.Recordset.Update
+       
+         
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Tasa Cambio"
+           Me.DtaNacceso.Recordset.Update
+           
+            Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Presupuesto"
+           Me.DtaNacceso.Recordset.Update
+              
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Presupuesto"
+           Me.DtaNacceso.Recordset.Update
+           
+          Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Presupuesto"
+           Me.DtaNacceso.Recordset.Update
+       
+         
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Presupuesto"
+           Me.DtaNacceso.Recordset.Update
+         
+          Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Reportes Generales"
+           Me.DtaNacceso.Recordset.Update
+              
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Reportes Movimientos"
+           Me.DtaNacceso.Recordset.Update
+           
+          Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Reportes Bancos"
+           Me.DtaNacceso.Recordset.Update
+       
+           
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+           
+             
+           
+Exit Sub
+'TipoErrs:
+'ControlErrores
+'Unload Me
+End Sub
+
+Private Sub Command2_Click()
+On Error GoTo TipoErrs
+ Dim Respuesta, Rsp
+'Elimino el registro activo en la pantalla
+  Set Rsp = DtaUsuarios.Recordset
+  Respuesta = MsgBox("Esta seguro de Borrar el registro?", vbYesNo, "Borrando al Usuario: " & DBCnombre.Text)
+   If Respuesta = 6 Then
+     DtaUsuarios2.Refresh
+       Do While Not DtaUsuarios2.Recordset.EOF
+        If DtaUsuarios2.Recordset("NombreUsuario") = DBCnombre.Text Then
+           Rsp.Delete
+           DtaUsuarios.Recordset.MovePrevious
+           DBCnombre.Text = DtaUsuarios.Recordset("NombreUsuario")
+           Permiso = True
+           Exit Sub
+        End If
+       DtaUsuarios2.Recordset.MoveNext
+      Loop
+    Else
+   Exit Sub
+   End If
+MsgBox "No se puede Eliminar,No Existe este Registro", vbCritical, "Sistema de Facturacion"
+Exit Sub
+TipoErrs:
+If err = 3021 Then
+ DtaUsuarios.Refresh
+ DBCnombre.Text = ""
+ Permiso = True
+Exit Sub
+Else
+'ControlErrores
+ Unload Me
+End If
+End Sub
+
+Private Sub Command3_Click()
+Unload Me
+End Sub
+Private Sub DBCNombre_Change()
+DtaUsuarios.Refresh
+If Not Me.DBCnombre.Text = "" Then
+   Do While Not DtaUsuarios.Recordset.EOF
+        If DtaUsuarios.Recordset("NombreUsuario") = DBCnombre.Text Then
+           Nivel2 = DtaUsuarios.Recordset("Nivel")
+           If NivelAcceso >= Nivel2 Then
+           TxtAcceso.Text = DtaUsuarios.Recordset("Nivel")
+           Txtpasword.Text = DtaUsuarios.Recordset("Clave")
+           Permiso = True
+           Exit Sub
+           Else
+           MsgBox "No Puede Cambiar el Nivel", vbExclamation, "Sistema de Facturacion"
+           DBCnombre.Text = ""
+           Exit Sub
+           End If
+        End If
+       DtaUsuarios.Recordset.MoveNext
+      Loop
+ End If
+TxtAcceso.Text = ""
+Txtpasword.Text = ""
+TxtConfirma.Text = ""
+Permiso = False
+End Sub
+
+Private Sub DBCNombre_DblClick(Area As Integer)
+DtaUsuarios.Refresh
+Do While Not DtaUsuarios.Recordset.EOF
+        If DtaUsuarios.Recordset("NombreUsuario") = DBCnombre.Text Then
+           TxtAcceso.Text = DtaUsuarios.Recordset("NivelAcceso")
+           Txtpasword.Text = DtaUsuarios.Recordset("Pasword")
+           Exit Sub
+        End If
+       DtaUsuarios.Recordset.MoveNext
+      Loop
+TxtAcceso.Text = ""
+Txtpasword.Text = ""
+End Sub
+
+Private Sub DBCnombre_KeyPress(KeyAscii As Integer)
+If KeyAscii = 13 Then
+ TxtAcceso.SetFocus
+End If
+End Sub
+
+Private Sub Form_Activate()
+On Error GoTo TipoErrs
+ 
+If Not CodigoUsuario = 0 Then
+Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodigoUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Usuarios'))"
+Me.DtaNacceso.Refresh
+If Me.DtaNacceso.Recordset.EOF Then
+  Me.Command1.Enabled = False
+   
+
+End If
+Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodigoUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Usuarios'))"
+Me.DtaNacceso.Refresh
+If Me.DtaNacceso.Recordset.EOF Then
+  Me.Command2.Enabled = False
+
+End If
+End If
+Exit Sub
+TipoErrs:
+MsgBox err.Description
+End Sub
+
+Private Sub Form_Load()
+Permiso = True
+With Me.DtaNacceso2
+   '.DatabaseName = Ruta
+   .ConnectionString = Conexion
+End With
+
+With Me.DtaUsuarios
+   '.DatabaseName = Ruta
+   .ConnectionString = Conexion
+End With
+
+With Me.DtaUsuarios2
+   '.DatabaseName = Ruta
+   .ConnectionString = Conexion
+End With
+
+With Me.DtaNacceso
+   '.DatabaseName = Ruta
+   .ConnectionString = Conexion
+   .RecordSource = "Accesos"
+   .Refresh
+End With
+
+End Sub
+
+Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
+ Dim Respuesta As Integer
+ If Permiso = False Then
+   Respuesta = MsgBox("Desea Guardar los Cambios?", vbYesNo, "Usuario: " & DBCnombre.Text)
+    If Respuesta = 6 Then
+      Command1.Value = True
+    End If
+ End If
+End Sub
+
+Private Sub TxtAcceso_Change()
+If Val(TxtAcceso.Text) > 100 Then
+ MsgBox "No deber ser mayor de 100", vbCritical, "Sistema de Facturacion"
+ TxtAcceso.Text = ""
+ Exit Sub
+End If
+Permiso = False
+End Sub
+
+Private Sub TxtAcceso_KeyPress(KeyAscii As Integer)
+If KeyAscii = 13 Then
+ Txtpasword.SetFocus
+End If
+End Sub
+
+Private Sub TxtConfirma_Change()
+Permiso = False
+End Sub
+
+Private Sub TxtConfirma_KeyPress(KeyAscii As Integer)
+If KeyAscii = 13 Then
+ Command1.SetFocus
+End If
+End Sub
+
+
+Private Sub Txtpasword_Change()
+Permiso = False
+End Sub
+
+Private Sub Txtpasword_KeyPress(KeyAscii As Integer)
+If KeyAscii = 13 Then
+TxtConfirma.SetFocus
+End If
+End Sub

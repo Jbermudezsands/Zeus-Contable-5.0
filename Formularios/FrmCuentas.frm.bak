@@ -1,0 +1,1194 @@
+VERSION 5.00
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "tabctl32.ocx"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{E1C6DB9D-BD4A-4A61-A759-0CED75D034BF}#43.0#0"; "SmartButton.ocx"
+Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
+Begin VB.Form FrmCuentas 
+   BorderStyle     =   1  'Fixed Single
+   ClientHeight    =   4965
+   ClientLeft      =   45
+   ClientTop       =   330
+   ClientWidth     =   10950
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MDIChild        =   -1  'True
+   MinButton       =   0   'False
+   ScaleHeight     =   4965
+   ScaleWidth      =   10950
+   Begin MSAdodcLib.Adodc DtaSaldos 
+      Height          =   375
+      Left            =   240
+      Top             =   7080
+      Width           =   2655
+      _ExtentX        =   4683
+      _ExtentY        =   661
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "DtaSaldos"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin MSAdodcLib.Adodc DtaNacceso 
+      Height          =   375
+      Left            =   240
+      Top             =   6720
+      Width           =   2655
+      _ExtentX        =   4683
+      _ExtentY        =   661
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "DtaNacceso"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin MSAdodcLib.Adodc DtaCuentas 
+      Height          =   375
+      Left            =   240
+      Top             =   5640
+      Width           =   2655
+      _ExtentX        =   4683
+      _ExtentY        =   661
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "DtaCuentas"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin MSAdodcLib.Adodc DtaGrupoCuentas 
+      Height          =   375
+      Left            =   240
+      Top             =   6360
+      Width           =   2655
+      _ExtentX        =   4683
+      _ExtentY        =   661
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "DtaGrupoCuentas"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin MSAdodcLib.Adodc DtaConsulta 
+      Height          =   375
+      Left            =   240
+      Top             =   6000
+      Width           =   2655
+      _ExtentX        =   4683
+      _ExtentY        =   661
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "DtaConsulta"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin TabDlg.SSTab SSTab1 
+      Height          =   3615
+      Left            =   120
+      TabIndex        =   4
+      Top             =   120
+      Width           =   10695
+      _ExtentX        =   18865
+      _ExtentY        =   6376
+      _Version        =   393216
+      Tabs            =   2
+      TabHeight       =   520
+      TabCaption(0)   =   "Informacion Cuentas"
+      TabPicture(0)   =   "FrmCuentas.frx":0000
+      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).Control(0)=   "Frame2"
+      Tab(0).Control(0).Enabled=   0   'False
+      Tab(0).Control(1)=   "Frame1"
+      Tab(0).Control(1).Enabled=   0   'False
+      Tab(0).ControlCount=   2
+      TabCaption(1)   =   "Informacion de Saldos"
+      TabPicture(1)   =   "FrmCuentas.frx":001C
+      Tab(1).ControlEnabled=   0   'False
+      Tab(1).Control(0)=   "LblSaldo"
+      Tab(1).Control(0).Enabled=   0   'False
+      Tab(1).Control(1)=   "Label5"
+      Tab(1).Control(1).Enabled=   0   'False
+      Tab(1).Control(2)=   "DBGCuentas"
+      Tab(1).Control(2).Enabled=   0   'False
+      Tab(1).ControlCount=   3
+      Begin TrueOleDBGrid80.TDBGrid DBGCuentas 
+         Bindings        =   "FrmCuentas.frx":0038
+         Height          =   2535
+         Left            =   -74880
+         TabIndex        =   23
+         Top             =   480
+         Width           =   10455
+         _ExtentX        =   18441
+         _ExtentY        =   4471
+         _LayoutType     =   4
+         _RowHeight      =   -2147483647
+         _WasPersistedAsPixels=   0
+         Columns(0)._VlistStyle=   0
+         Columns(0)._MaxComboItems=   5
+         Columns(0).Caption=   "Fecha Movimiento"
+         Columns(0).DataField=   "FechaTransaccion"
+         Columns(0).NumberFormat=   "Short Date"
+         Columns(0)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
+         Columns(1)._VlistStyle=   0
+         Columns(1)._MaxComboItems=   5
+         Columns(1).Caption=   "Movimiento No"
+         Columns(1).DataField=   "NumeroMovimiento"
+         Columns(1).NumberFormat=   "General Number"
+         Columns(1)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
+         Columns(2)._VlistStyle=   0
+         Columns(2)._MaxComboItems=   5
+         Columns(2).Caption=   "Descripcion Movimiento"
+         Columns(2).DataField=   "DescripcionMovimiento"
+         Columns(2)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
+         Columns(3)._VlistStyle=   0
+         Columns(3)._MaxComboItems=   5
+         Columns(3).Caption=   "Tasa Cambio"
+         Columns(3).DataField=   "TCambio"
+         Columns(3).NumberFormat=   "Edit Mask"
+         Columns(3).EditMask=   "##,##0.0000"
+         Columns(3)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
+         Columns(4)._VlistStyle=   0
+         Columns(4)._MaxComboItems=   5
+         Columns(4).Caption=   "Debito"
+         Columns(4).DataField=   "MDebito"
+         Columns(4).NumberFormat=   "Edit Mask"
+         Columns(4).EditMask=   "##,##0.00"
+         Columns(4)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
+         Columns(5)._VlistStyle=   0
+         Columns(5)._MaxComboItems=   5
+         Columns(5).Caption=   "Credito"
+         Columns(5).DataField=   "MCredito"
+         Columns(5).NumberFormat=   "Edit Mask"
+         Columns(5).EditMask=   "##,##0.00"
+         Columns(5)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
+         Columns.Count   =   6
+         Splits(0)._UserFlags=   0
+         Splits(0).RecordSelectorWidth=   688
+         Splits(0)._SavedRecordSelectors=   -1  'True
+         Splits(0).Caption=   "Historico de Saldos"
+         Splits(0).DividerColor=   14215660
+         Splits(0).SpringMode=   0   'False
+         Splits(0)._PropDict=   "_ColumnProps,515,0;_UserFlags,518,3"
+         Splits(0)._ColumnProps(0)=   "Columns.Count=6"
+         Splits(0)._ColumnProps(1)=   "Column(0).Width=2725"
+         Splits(0)._ColumnProps(2)=   "Column(0).DividerColor=0"
+         Splits(0)._ColumnProps(3)=   "Column(0)._WidthInPix=2646"
+         Splits(0)._ColumnProps(4)=   "Column(0)._ColStyle=131588"
+         Splits(0)._ColumnProps(5)=   "Column(0).Order=1"
+         Splits(0)._ColumnProps(6)=   "Column(1).Width=2725"
+         Splits(0)._ColumnProps(7)=   "Column(1).DividerColor=0"
+         Splits(0)._ColumnProps(8)=   "Column(1)._WidthInPix=2646"
+         Splits(0)._ColumnProps(9)=   "Column(1)._ColStyle=131588"
+         Splits(0)._ColumnProps(10)=   "Column(1).Order=2"
+         Splits(0)._ColumnProps(11)=   "Column(2).Width=2725"
+         Splits(0)._ColumnProps(12)=   "Column(2).DividerColor=0"
+         Splits(0)._ColumnProps(13)=   "Column(2)._WidthInPix=2646"
+         Splits(0)._ColumnProps(14)=   "Column(2)._ColStyle=131588"
+         Splits(0)._ColumnProps(15)=   "Column(2).Order=3"
+         Splits(0)._ColumnProps(16)=   "Column(3).Width=2725"
+         Splits(0)._ColumnProps(17)=   "Column(3).DividerColor=0"
+         Splits(0)._ColumnProps(18)=   "Column(3)._WidthInPix=2646"
+         Splits(0)._ColumnProps(19)=   "Column(3)._ColStyle=131588"
+         Splits(0)._ColumnProps(20)=   "Column(3).Order=4"
+         Splits(0)._ColumnProps(21)=   "Column(4).Width=2725"
+         Splits(0)._ColumnProps(22)=   "Column(4).DividerColor=0"
+         Splits(0)._ColumnProps(23)=   "Column(4)._WidthInPix=2646"
+         Splits(0)._ColumnProps(24)=   "Column(4)._ColStyle=131588"
+         Splits(0)._ColumnProps(25)=   "Column(4).Order=5"
+         Splits(0)._ColumnProps(26)=   "Column(5).Width=2725"
+         Splits(0)._ColumnProps(27)=   "Column(5).DividerColor=0"
+         Splits(0)._ColumnProps(28)=   "Column(5)._WidthInPix=2646"
+         Splits(0)._ColumnProps(29)=   "Column(5)._ColStyle=131588"
+         Splits(0)._ColumnProps(30)=   "Column(5).Order=6"
+         Splits.Count    =   1
+         PrintInfos(0)._StateFlags=   0
+         PrintInfos(0).Name=   "piInternal 0"
+         PrintInfos(0).PageHeaderFont=   "Size=8.25,Charset=0,Weight=400,Underline=0,Italic=0,Strikethrough=0,Name=MS Sans Serif"
+         PrintInfos(0).PageFooterFont=   "Size=8.25,Charset=0,Weight=400,Underline=0,Italic=0,Strikethrough=0,Name=MS Sans Serif"
+         PrintInfos(0).PageHeaderHeight=   0
+         PrintInfos(0).PageFooterHeight=   0
+         PrintInfos.Count=   1
+         DefColWidth     =   0
+         HeadLines       =   1
+         FootLines       =   1
+         PictureCurrentRow.CLSID=   "{0BE35204-8F91-11CE-9DE3-00AA004BB851}"
+         PictureCurrentRow(0)=   "bHQAAO4BAABCTe4BAAAAAAAANgAAACgAAAAOAAAACgAAAAEAGAAAAAAAuAEAAAAAAAAAAAAAAAAA"
+         PictureCurrentRow(1)=   "AAAAAADAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAAAMDAwAAAAP//"
+         PictureCurrentRow(2)=   "/////////////////////////////////////////8DAwAAAwMDAAAAAgICAwMDAwMDAwMDAwMDA"
+         PictureCurrentRow(3)=   "wMDAwMDAwMDAwMDAwMDA////wMDAAADAwMAAAACAgIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDA"
+         PictureCurrentRow(4)=   "wMD////AwMAAAMDAwAAAAICAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwP///8DAwAAAwMDA"
+         PictureCurrentRow(5)=   "AAAAgICAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDA////wMDAAADAwMAAAACAgIDAwMDAwMDA"
+         PictureCurrentRow(6)=   "wMDAwMDAwMDAwMDAwMDAwMDAwMD////AwMAAAMDAwAAAAICAgICAgICAgICAgICAgICAgICAgICA"
+         PictureCurrentRow(7)=   "gICAgICAgP///8DAwAAAwMDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwMDA"
+         PictureCurrentRow(8)=   "AADAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAAAA=="
+         PictureCurrentRow.vt=   9
+         MultipleLines   =   0
+         CellTipsWidth   =   0
+         DeadAreaBackColor=   14215660
+         RowDividerColor =   14215660
+         RowSubDividerColor=   14215660
+         DirectionAfterEnter=   1
+         DirectionAfterTab=   1
+         MaxRows         =   250000
+         ViewColumnCaptionWidth=   0
+         ViewColumnWidth =   0
+         _PropDict       =   "_ExtentX,2003,3;_ExtentY,2004,3;_LayoutType,512,2;_RowHeight,16,3;_StyleDefs,513,0;_WasPersistedAsPixels,516,2"
+         _StyleDefs(0)   =   "_StyleRoot:id=0,.parent=-1,.alignment=3,.valignment=0,.bgcolor=&H80000005&"
+         _StyleDefs(1)   =   ":id=0,.fgcolor=&H80000008&,.wraptext=0,.locked=0,.transparentBmp=0"
+         _StyleDefs(2)   =   ":id=0,.fgpicPosition=0,.bgpicMode=0,.appearance=0,.borderSize=0,.ellipsis=0"
+         _StyleDefs(3)   =   ":id=0,.borderColor=&H80000005&,.borderType=0,.bold=0,.fontsize=825,.italic=0"
+         _StyleDefs(4)   =   ":id=0,.underline=0,.strikethrough=0,.charset=0"
+         _StyleDefs(5)   =   ":id=0,.fontname=MS Sans Serif"
+         _StyleDefs(6)   =   "Style:id=1,.parent=0,.namedParent=33"
+         _StyleDefs(7)   =   "CaptionStyle:id=4,.parent=2,.namedParent=37"
+         _StyleDefs(8)   =   "HeadingStyle:id=2,.parent=1,.namedParent=34"
+         _StyleDefs(9)   =   "FooterStyle:id=3,.parent=1,.namedParent=35"
+         _StyleDefs(10)  =   "InactiveStyle:id=5,.parent=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+         _StyleDefs(11)  =   "SelectedStyle:id=6,.parent=1,.namedParent=36"
+         _StyleDefs(12)  =   "EditorStyle:id=7,.parent=1"
+         _StyleDefs(13)  =   "HighlightRowStyle:id=8,.parent=1,.namedParent=38"
+         _StyleDefs(14)  =   "EvenRowStyle:id=9,.parent=1,.namedParent=39"
+         _StyleDefs(15)  =   "OddRowStyle:id=10,.parent=1,.namedParent=40"
+         _StyleDefs(16)  =   "RecordSelectorStyle:id=11,.parent=2,.namedParent=41"
+         _StyleDefs(17)  =   "FilterBarStyle:id=12,.parent=1,.namedParent=42"
+         _StyleDefs(18)  =   "Splits(0).Style:id=13,.parent=1"
+         _StyleDefs(19)  =   "Splits(0).CaptionStyle:id=22,.parent=4,.bgcolor=&HFFAEFF&,.fgcolor=&H800080&"
+         _StyleDefs(20)  =   ":id=22,.bold=-1,.fontsize=825,.italic=0,.underline=0,.strikethrough=0,.charset=0"
+         _StyleDefs(21)  =   ":id=22,.fontname=Lucida Calligraphy"
+         _StyleDefs(22)  =   "Splits(0).HeadingStyle:id=14,.parent=2,.alignment=2,.bgcolor=&HECB877&"
+         _StyleDefs(23)  =   ":id=14,.fgcolor=&H800000&,.bold=-1,.fontsize=825,.italic=0,.underline=0"
+         _StyleDefs(24)  =   ":id=14,.strikethrough=0,.charset=0"
+         _StyleDefs(25)  =   ":id=14,.fontname=MS Sans Serif"
+         _StyleDefs(26)  =   "Splits(0).FooterStyle:id=15,.parent=3,.alignment=2,.bgcolor=&HFF0000&"
+         _StyleDefs(27)  =   "Splits(0).InactiveStyle:id=16,.parent=5"
+         _StyleDefs(28)  =   "Splits(0).SelectedStyle:id=18,.parent=6"
+         _StyleDefs(29)  =   "Splits(0).EditorStyle:id=17,.parent=7"
+         _StyleDefs(30)  =   "Splits(0).HighlightRowStyle:id=19,.parent=8"
+         _StyleDefs(31)  =   "Splits(0).EvenRowStyle:id=20,.parent=9"
+         _StyleDefs(32)  =   "Splits(0).OddRowStyle:id=21,.parent=10"
+         _StyleDefs(33)  =   "Splits(0).RecordSelectorStyle:id=23,.parent=11"
+         _StyleDefs(34)  =   "Splits(0).FilterBarStyle:id=24,.parent=12"
+         _StyleDefs(35)  =   "Splits(0).Columns(0).Style:id=28,.parent=13"
+         _StyleDefs(36)  =   "Splits(0).Columns(0).HeadingStyle:id=25,.parent=14"
+         _StyleDefs(37)  =   "Splits(0).Columns(0).FooterStyle:id=26,.parent=15"
+         _StyleDefs(38)  =   "Splits(0).Columns(0).EditorStyle:id=27,.parent=17"
+         _StyleDefs(39)  =   "Splits(0).Columns(1).Style:id=32,.parent=13"
+         _StyleDefs(40)  =   "Splits(0).Columns(1).HeadingStyle:id=29,.parent=14"
+         _StyleDefs(41)  =   "Splits(0).Columns(1).FooterStyle:id=30,.parent=15"
+         _StyleDefs(42)  =   "Splits(0).Columns(1).EditorStyle:id=31,.parent=17"
+         _StyleDefs(43)  =   "Splits(0).Columns(2).Style:id=46,.parent=13"
+         _StyleDefs(44)  =   "Splits(0).Columns(2).HeadingStyle:id=43,.parent=14"
+         _StyleDefs(45)  =   "Splits(0).Columns(2).FooterStyle:id=44,.parent=15"
+         _StyleDefs(46)  =   "Splits(0).Columns(2).EditorStyle:id=45,.parent=17"
+         _StyleDefs(47)  =   "Splits(0).Columns(3).Style:id=50,.parent=13"
+         _StyleDefs(48)  =   "Splits(0).Columns(3).HeadingStyle:id=47,.parent=14"
+         _StyleDefs(49)  =   "Splits(0).Columns(3).FooterStyle:id=48,.parent=15"
+         _StyleDefs(50)  =   "Splits(0).Columns(3).EditorStyle:id=49,.parent=17"
+         _StyleDefs(51)  =   "Splits(0).Columns(4).Style:id=54,.parent=13"
+         _StyleDefs(52)  =   "Splits(0).Columns(4).HeadingStyle:id=51,.parent=14"
+         _StyleDefs(53)  =   "Splits(0).Columns(4).FooterStyle:id=52,.parent=15"
+         _StyleDefs(54)  =   "Splits(0).Columns(4).EditorStyle:id=53,.parent=17"
+         _StyleDefs(55)  =   "Splits(0).Columns(5).Style:id=58,.parent=13"
+         _StyleDefs(56)  =   "Splits(0).Columns(5).HeadingStyle:id=55,.parent=14"
+         _StyleDefs(57)  =   "Splits(0).Columns(5).FooterStyle:id=56,.parent=15"
+         _StyleDefs(58)  =   "Splits(0).Columns(5).EditorStyle:id=57,.parent=17"
+         _StyleDefs(59)  =   "Named:id=33:Normal"
+         _StyleDefs(60)  =   ":id=33,.parent=0"
+         _StyleDefs(61)  =   "Named:id=34:Heading"
+         _StyleDefs(62)  =   ":id=34,.parent=33,.valignment=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+         _StyleDefs(63)  =   ":id=34,.wraptext=-1"
+         _StyleDefs(64)  =   "Named:id=35:Footing"
+         _StyleDefs(65)  =   ":id=35,.parent=33,.valignment=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+         _StyleDefs(66)  =   "Named:id=36:Selected"
+         _StyleDefs(67)  =   ":id=36,.parent=33,.bgcolor=&H8000000D&,.fgcolor=&H8000000E&"
+         _StyleDefs(68)  =   "Named:id=37:Caption"
+         _StyleDefs(69)  =   ":id=37,.parent=34,.alignment=2"
+         _StyleDefs(70)  =   "Named:id=38:HighlightRow"
+         _StyleDefs(71)  =   ":id=38,.parent=33,.bgcolor=&H8000000D&,.fgcolor=&H8000000E&"
+         _StyleDefs(72)  =   "Named:id=39:EvenRow"
+         _StyleDefs(73)  =   ":id=39,.parent=33,.bgcolor=&HFFFF00&"
+         _StyleDefs(74)  =   "Named:id=40:OddRow"
+         _StyleDefs(75)  =   ":id=40,.parent=33"
+         _StyleDefs(76)  =   "Named:id=41:RecordSelector"
+         _StyleDefs(77)  =   ":id=41,.parent=34"
+         _StyleDefs(78)  =   "Named:id=42:FilterBar"
+         _StyleDefs(79)  =   ":id=42,.parent=33"
+      End
+      Begin VB.Frame Frame1 
+         Height          =   2055
+         Left            =   120
+         TabIndex        =   7
+         Top             =   480
+         Width           =   10335
+         Begin VB.CommandButton CmdBuscaCuenta 
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   300
+            Left            =   4200
+            Picture         =   "FrmCuentas.frx":0050
+            Style           =   1  'Graphical
+            TabIndex        =   22
+            Top             =   240
+            Width           =   375
+         End
+         Begin VB.CommandButton CmdBuscarEmpleado 
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   300
+            Left            =   9840
+            Picture         =   "FrmCuentas.frx":019E
+            Style           =   1  'Graphical
+            TabIndex        =   21
+            Top             =   1320
+            Width           =   375
+         End
+         Begin VB.TextBox TxtDescripcionGrupo 
+            Height          =   285
+            Left            =   1080
+            Locked          =   -1  'True
+            TabIndex        =   2
+            Top             =   1320
+            Width           =   8535
+         End
+         Begin VB.ComboBox CmbTipo 
+            Height          =   315
+            ItemData        =   "FrmCuentas.frx":02EC
+            Left            =   5760
+            List            =   "FrmCuentas.frx":02EE
+            TabIndex        =   0
+            Top             =   240
+            Width           =   2895
+         End
+         Begin VB.TextBox TxtDescripcion 
+            Height          =   285
+            Left            =   1080
+            MaxLength       =   255
+            TabIndex        =   1
+            Top             =   840
+            Width           =   8655
+         End
+         Begin MSDataListLib.DataCombo DBCliente 
+            Bindings        =   "FrmCuentas.frx":02F0
+            Height          =   315
+            Left            =   1080
+            TabIndex        =   24
+            Top             =   240
+            Width           =   2895
+            _ExtentX        =   5106
+            _ExtentY        =   556
+            _Version        =   393216
+            Text            =   ""
+         End
+         Begin VB.Label Label7 
+            Caption         =   "Grupo"
+            Height          =   255
+            Left            =   120
+            TabIndex        =   20
+            Top             =   1320
+            Width           =   855
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Cuenta"
+            Height          =   255
+            Left            =   240
+            TabIndex        =   10
+            Top             =   240
+            Width           =   855
+         End
+         Begin VB.Label Label2 
+            Caption         =   "Tipo"
+            Height          =   255
+            Left            =   5160
+            TabIndex        =   9
+            Top             =   240
+            Width           =   495
+         End
+         Begin VB.Label Label3 
+            Caption         =   "Descripcion"
+            Height          =   255
+            Left            =   120
+            TabIndex        =   8
+            Top             =   840
+            Width           =   975
+         End
+      End
+      Begin VB.Frame Frame2 
+         Height          =   855
+         Left            =   120
+         TabIndex        =   5
+         Top             =   2520
+         Width           =   10335
+         Begin VB.ComboBox CmbTipoMoneda 
+            Height          =   315
+            ItemData        =   "FrmCuentas.frx":0309
+            Left            =   7200
+            List            =   "FrmCuentas.frx":0316
+            TabIndex        =   3
+            Top             =   240
+            Width           =   2535
+         End
+         Begin MSDataListLib.DataCombo DBGrupos 
+            Bindings        =   "FrmCuentas.frx":0334
+            Height          =   315
+            Left            =   1320
+            TabIndex        =   25
+            Top             =   240
+            Width           =   4095
+            _ExtentX        =   7223
+            _ExtentY        =   556
+            _Version        =   393216
+            ListField       =   "DescripcionGrupo"
+            Text            =   ""
+         End
+         Begin VB.Label Label6 
+            Caption         =   "Tipo Moneda"
+            Height          =   375
+            Left            =   5640
+            TabIndex        =   19
+            Top             =   240
+            Width           =   1215
+         End
+         Begin VB.Label Label4 
+            Caption         =   "Departamentos"
+            Height          =   375
+            Left            =   120
+            TabIndex        =   6
+            Top             =   240
+            Width           =   1935
+         End
+      End
+      Begin VB.Label Label5 
+         Caption         =   "Saldo Final de la Cuenta"
+         Height          =   255
+         Left            =   -70080
+         TabIndex        =   12
+         Top             =   3120
+         Width           =   1935
+      End
+      Begin VB.Label LblSaldo 
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   13.5
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   375
+         Left            =   -68160
+         TabIndex        =   11
+         Top             =   3000
+         Width           =   1935
+      End
+   End
+   Begin SmartButtonProject.SmartButton CmdGrabar 
+      Height          =   855
+      Left            =   120
+      TabIndex        =   13
+      Top             =   3960
+      Width           =   975
+      _ExtentX        =   1720
+      _ExtentY        =   1508
+      ForeColor       =   12582912
+      Caption         =   "Grabar"
+      Picture         =   "FrmCuentas.frx":0352
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin SmartButtonProject.SmartButton CmdAnterior 
+      Height          =   855
+      Left            =   2280
+      TabIndex        =   15
+      Top             =   3960
+      Width           =   975
+      _ExtentX        =   1720
+      _ExtentY        =   1508
+      ForeColor       =   12582912
+      Caption         =   "Anterior"
+      Picture         =   "FrmCuentas.frx":0C2C
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin SmartButtonProject.SmartButton CmdSiguiente 
+      Height          =   855
+      Left            =   3360
+      TabIndex        =   16
+      Top             =   3960
+      Width           =   975
+      _ExtentX        =   1720
+      _ExtentY        =   1508
+      ForeColor       =   12582912
+      Caption         =   "Siguiente"
+      Picture         =   "FrmCuentas.frx":107E
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin SmartButtonProject.SmartButton CmdNuevo 
+      Height          =   855
+      Left            =   1200
+      TabIndex        =   14
+      Top             =   3960
+      Width           =   975
+      _ExtentX        =   1720
+      _ExtentY        =   1508
+      ForeColor       =   12582912
+      Caption         =   "Nuevo"
+      Picture         =   "FrmCuentas.frx":14D0
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin SmartButtonProject.SmartButton CmdSalir 
+      Height          =   855
+      Left            =   9720
+      TabIndex        =   18
+      Top             =   3960
+      Width           =   975
+      _ExtentX        =   1720
+      _ExtentY        =   1508
+      ForeColor       =   12582912
+      Caption         =   "Salir"
+      Picture         =   "FrmCuentas.frx":1922
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin SmartButtonProject.SmartButton CmdBorrar 
+      Height          =   855
+      Left            =   4440
+      TabIndex        =   17
+      Top             =   3960
+      Width           =   975
+      _ExtentX        =   1720
+      _ExtentY        =   1508
+      ForeColor       =   12582912
+      Caption         =   "Borrar"
+      Picture         =   "FrmCuentas.frx":7BBC
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+End
+Attribute VB_Name = "FrmCuentas"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Private Sub CmdAnterior_Click()
+On Error GoTo TipoErrs
+Dim Respuesta As Integer
+DtaCuentas.Recordset.MovePrevious
+If DtaCuentas.Recordset.BOF Then
+   DtaCuentas.Recordset.MoveNext
+   MsgBox "Este es el Primer Registro", vbInfoContabilidadtion, "Control de Cuentas Contabilidad"
+Else
+  Me.DBCliente.Text = DtaCuentas.Recordset("CodCuentas")
+End If
+   Exit Sub
+TipoErrs:
+   ControlErrores
+End Sub
+
+Private Sub CmdBorrar_Click()
+On Error GoTo TipoErrs
+  Dim Respuesta, Rsp
+  Me.DtaConsulta.RecordSource = "SELECT Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.CodGrupo, Cuentas.SaldoActual, Cuentas.TipoMoneda, Cuentas.KeyGrupo, Cuentas.DescripcionGrupo From Cuentas Where (((Cuentas.CodCuentas) = '" & Me.DBCliente.Text & "'))"
+  Me.DtaConsulta.Refresh
+  
+  If Not DtaConsulta.Recordset.EOF Then
+     Set Rsp = DtaCuentas.Recordset
+     TipoMoneda = Me.DtaConsulta.Recordset("TipoMoneda")
+     Respuesta = MsgBox("Esta seguro de Borrar el registro?", vbYesNo, "Borrando: " & Me.DBCliente.Text)
+     If Respuesta = 6 Then
+   Me.DtaSaldos.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento, Transacciones.DescripcionMovimiento,Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Debito*TCambio AS MDebito, TCambio*Credito AS MCredito From Transacciones Where (((Transacciones.CodCuentas) =  '" & Me.DBCliente.Text & "')) ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
+        Me.DtaSaldos.Refresh
+        If DtaSaldos.Recordset.EOF Then
+         DtaConsulta.Recordset.Delete
+        Else
+          FrmTransferencia.Txtorigen.Text = Me.DBCliente.Text
+          FrmTransferencia.Show 1
+        End If
+        
+      Me.DBCliente.Text = ""
+     End If
+  End If
+' Me.DtaCuentas.RecordSource = "SELECT Cuentas.CodCuentas, Cuentas.DescripcionCuentas From Cuentas Where (((Cuentas.KeyGrupo) = '" & KeyPrincipal & "')) ORDER BY Cuentas.CodCuentas"
+ 
+ Me.DtaCuentas.Refresh
+'  Me.DBGCuentas.Columns(5).Visible = False
+'  Me.DBGCuentas.Columns(6).Visible = False
+'  Me.DBGCuentas.Columns(7).Caption = "Debito"
+'  Me.DBGCuentas.Columns(8).Caption = "Credito"
+'  Me.DBGCuentas.Columns(7).NumberFormat = "##,##0.00"
+'  Me.DBGCuentas.Columns(8).NumberFormat = "##,##0.00"
+'  Me.DBGCuentas.Columns(4).NumberFormat = "##,##0.000000"
+  Me.LblSaldo.Caption = Format(Total1, "##,##0.00")
+' Me.DBGCuentas.Columns(0).Visible = False
+
+
+ Exit Sub
+TipoErrs:
+ ControlErrores
+End Sub
+
+Private Sub CmdBuscaCuenta_Click()
+QueProducto = "Cuenta"
+FrmConsulta.Show 1
+End Sub
+
+Private Sub CmdBuscarEmpleado_Click()
+FrmGrupoLista.Show 1
+End Sub
+
+Private Sub CmdGrabar_Click()
+On Error GoTo TipoErrs
+
+
+  If Me.CmbTipoMoneda.Text = "" Then
+    MsgBox "Se necesita el Tipo de Moneda", vbCritical, "Sistema Contable"
+    Exit Sub
+  End If
+  
+  If Me.TxtDescripcionGrupo.Text = "" Then
+    MsgBox "Debe Seleccionar un Grupo", vbCritical, "Sistema Contable"
+    Exit Sub
+  End If
+
+If KeyGrupoCuenta = "" Then
+    MsgBox "Debe Seleccionar un Grupo", vbCritical, "Sistema Contable"
+    Exit Sub
+End If
+
+Criterio = "CodCuentas='" & Me.DBCliente.Text & "'"
+Me.DtaCuentas.Recordset.Find (Criterio)
+If DtaCuentas.Recordset.EOF Then
+ DtaCuentas.Recordset.AddNew
+  DtaCuentas.Recordset("KeyGrupo") = KeyGrupoCuenta
+  DtaCuentas.Recordset("DescripcionGrupo") = Me.TxtDescripcionGrupo.Text
+  DtaCuentas.Recordset("CodCuentas") = Me.DBCliente.Text
+  DtaCuentas.Recordset("DescripcionCuentas") = Me.TxtDescripcion
+  DtaCuentas.Recordset("TipoCuenta") = Me.CmbTipo.Text
+  DtaCuentas.Recordset("CodGrupo") = CodGrupo
+  DtaCuentas.Recordset("TipoMoneda") = CmbTipoMoneda
+  DtaCuentas.Recordset("SaldoActual") = 0#
+ DtaCuentas.Recordset.Update
+Else
+  'DtaCuentas.Recordset.Edit
+  DtaCuentas.Recordset("KeyGrupo") = KeyGrupoCuenta
+  DtaCuentas.Recordset("DescripcionGrupo") = Me.TxtDescripcionGrupo.Text
+  DtaCuentas.Recordset("DescripcionCuentas") = Me.TxtDescripcion
+  DtaCuentas.Recordset("TipoCuenta") = Me.CmbTipo.Text
+  DtaCuentas.Recordset("CodGrupo") = CodGrupo
+  DtaCuentas.Recordset("TipoMoneda") = CmbTipoMoneda
+ DtaCuentas.Recordset.Update
+End If
+DtaCuentas.Refresh
+Me.DBCliente.Text = ""
+Exit Sub
+TipoErrs:
+   ControlErrores
+End Sub
+
+Private Sub CmdNuevo_Click()
+Me.DBCliente.Text = ""
+End Sub
+
+Private Sub CmdSalir_Click()
+Unload Me
+End Sub
+
+Private Sub CmdSiguiente_Click()
+On Error GoTo TipoErrs
+Dim Respuesta As Integer
+DtaCuentas.Recordset.MoveNext
+If DtaCuentas.Recordset.EOF Then
+   DtaCuentas.Recordset.MovePrevious
+   MsgBox "Este es el Ultimo Registro", vbInfoContabilidadtion, "Control de Cuentas Contabilidad"
+Else
+  Me.DBCliente.Text = DtaCuentas.Recordset("CodCuentas")
+End If
+   Exit Sub
+TipoErrs:
+   ControlErrores
+End Sub
+
+Private Sub DBCliente_Change()
+Dim Rbusqueda As Boolean
+On Error GoTo TipoErrs
+Dim Debito As Double, Credito As Double
+Total1 = 0
+If Me.DBCliente.Text = "" Then
+  Me.CmbTipo.Enabled = True
+  Me.TxtDescripcionGrupo.Text = ""
+  Me.TxtDescripcion.Text = ""
+  Me.CmbTipo.Text = ""
+  Me.DBGrupos.Text = ""
+  Me.LblSaldo.Caption = "0.00"
+  Me.CmbTipoMoneda.Text = ""
+  Me.DtaSaldos.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento, Transacciones.DescripcionMovimiento, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Debito*TCambio AS MDebito, TCambio*Credito AS MCredito From Transacciones Where (((Transacciones.CodCuentas) =  '-1')) ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
+  Me.DtaSaldos.Refresh
+'  Me.DBGCuentas.Columns(5).Visible = False
+'  Me.DBGCuentas.Columns(6).Visible = False
+'  Me.DBGCuentas.Columns(7).Caption = "Debito"
+'  Me.DBGCuentas.Columns(8).Caption = "Credito"
+'  Me.DBGCuentas.Columns(7).NumberFormat = "##,##0.00"
+'  Me.DBGCuentas.Columns(8).NumberFormat = "##,##0.00"
+'  Me.DBGCuentas.Columns(4).NumberFormat = "##,##0.000000"
+  Me.LblSaldo.Caption = Format(Total1, "##,##0.00")
+' Me.DBGCuentas.Columns(0).Visible = False
+  Me.CmbTipoMoneda.Enabled = True
+  Exit Sub
+End If
+
+Me.DtaCuentas.Refresh
+Criterio = "CodCuentas='" & Me.DBCliente.Text & "'"
+ Me.DtaCuentas.Recordset.Find (Criterio)
+If Me.DtaCuentas.Recordset.EOF Then
+'If kk = 1 Then
+  Me.CmbTipo.Enabled = True
+  Me.TxtDescripcionGrupo.Text = ""
+  Me.TxtDescripcion.Text = ""
+  Me.CmbTipo.Text = ""
+  Me.DBGrupos.Text = ""
+  Me.LblSaldo.Caption = "0.00"
+  Me.CmbTipoMoneda.Text = ""
+  Me.DtaSaldos.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento, Transacciones.DescripcionMovimiento, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Debito*TCambio AS MDebito, TCambio*Credito AS MCredito From Transacciones Where (((Transacciones.CodCuentas) =  '-1')) ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
+  Me.DtaSaldos.Refresh
+'  Me.DBGCuentas.Columns(5).Visible = False
+'  Me.DBGCuentas.Columns(6).Visible = False
+'  Me.DBGCuentas.Columns(7).Caption = "Debito"
+'  Me.DBGCuentas.Columns(8).Caption = "Credito"
+'  Me.DBGCuentas.Columns(7).NumberFormat = "##,##0.00"
+'  Me.DBGCuentas.Columns(8).NumberFormat = "##,##0.00"
+'  Me.DBGCuentas.Columns(4).NumberFormat = "##,##0.000000"
+  Me.LblSaldo.Caption = Format(Total1, "##,##0.00")
+' Me.DBGCuentas.Columns(0).Visible = False
+  Me.CmbTipoMoneda.Enabled = True
+  
+Else
+
+'Me.DtaCuentas.Refresh
+ 
+ If Not IsNull(DtaCuentas.Recordset("DescripcionGrupo")) Then
+  Me.TxtDescripcionGrupo.Text = DtaCuentas.Recordset("DescripcionGrupo")
+ End If
+  Me.TxtDescripcion.Text = DtaCuentas.Recordset("DescripcionCuentas")
+  Me.CmbTipo.Text = DtaCuentas.Recordset("TipoCuenta")
+  If Not IsNull(DtaCuentas.Recordset("TipoCuenta")) Then
+   TipoCuenta = DtaCuentas.Recordset("TipoCuenta")
+  End If
+  If Not IsNull(DtaCuentas.Recordset("TipoMoneda")) Then
+   CmbTipoMoneda = DtaCuentas.Recordset("TipoMoneda")
+  End If
+  Me.LblSaldo.Caption = Format(DtaCuentas.Recordset("SaldoActual"), "##,##0.00")
+ '/////Busco la Descripcion del Grupo/////////////////
+  CodGrupo = DtaCuentas.Recordset("CodGrupo")
+  Criterio = "CodGrupo='" & CodGrupo & "'"
+  Me.DtaGrupoCuentas.Recordset.Find Criterio
+  If Not DtaGrupoCuentas.Recordset.EOF Then
+    Me.DBGrupos.Text = DtaGrupoCuentas.Recordset("DescripcionGrupo")
+  End If
+  '//////////Muestro los Saldos de las cuentas/////////////////////
+ Me.DtaSaldos.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento, Transacciones.DescripcionMovimiento,Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Debito*TCambio AS MDebito, TCambio*Credito AS MCredito From Transacciones Where (((Transacciones.CodCuentas) =  '" & Me.DBCliente.Text & "')) ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
+ Me.DtaSaldos.Refresh
+ 
+ 
+  Me.DtaConsulta.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento, Transacciones.DescripcionMovimiento, Transacciones.TCambio,Transacciones.Debito, Transacciones.Credito, Debito*TCambio AS MDebito, TCambio*Credito AS MCredito, Transacciones.TCambio From Transacciones Where (((Transacciones.CodCuentas) =  '" & Me.DBCliente.Text & "')) ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
+  Me.DtaConsulta.Refresh
+  If DtaConsulta.Recordset.EOF Then
+     Me.CmbTipoMoneda.Enabled = True
+     Me.CmbTipo.Enabled = True
+  Else
+     Me.CmbTipoMoneda.Enabled = False
+     Me.CmbTipo.Enabled = False
+  End If
+  
+  Do While Not Me.DtaConsulta.Recordset.EOF
+   Me.CmbTipoMoneda.Enabled = False
+   If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Bancos" Or TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Or TipoCuenta = "Papeleria - Utiles" Or TipoCuenta = "Inventario" Then
+    If Not IsNull(Me.DtaConsulta.Recordset("MDebito")) Then
+     Debito = Me.DtaConsulta.Recordset("MDebito")
+    End If
+    If Not IsNull(Me.DtaConsulta.Recordset("MCredito")) Then
+     Credito = Me.DtaConsulta.Recordset("MCredito")
+    End If
+    Total1 = Debito - Credito + Total1
+    Debito = 0
+    Credito = 0
+   Else
+    If Not IsNull(Me.DtaConsulta.Recordset("MDebito")) Then
+     Debito = Me.DtaConsulta.Recordset("MDebito")
+    End If
+    If Not IsNull(Me.DtaConsulta.Recordset("MCredito")) Then
+     Credito = Me.DtaConsulta.Recordset("MCredito")
+    End If
+    Total1 = Credito - Debito + Total1
+    Debito = 0
+    Credito = 0
+   End If
+   
+   Me.DtaConsulta.Recordset.MoveNext
+  Loop
+  
+''  Me.DBGCuentas.Columns(5).Visible = False
+''  Me.DBGCuentas.Columns(6).Visible = False
+'  Me.DBGCuentas.Columns(7).Caption = "Debito"
+'  Me.DBGCuentas.Columns(8).Caption = "Credito"
+'  Me.DBGCuentas.Columns(7).NumberFormat = "##,##0.00"
+'  Me.DBGCuentas.Columns(8).NumberFormat = "##,##0.00"
+'  Me.DBGCuentas.Columns(4).NumberFormat = "##,##0.000000"
+  Me.LblSaldo.Caption = Format(Total1, "##,##0.00")
+' Me.DBGCuentas.Columns(0).Visible = False
+ 
+ 
+ 
+ 
+ 
+End If
+Exit Sub
+TipoErrs:
+ControlErrores
+End Sub
+
+
+
+Private Sub DBGrupos_Change()
+On Error GoTo TipoErrs:
+If Me.DBGrupos.Text = "" Then
+  Exit Sub
+End If
+  Me.DtaGrupoCuentas.Refresh
+  Criterio = "DescripcionGrupo='" & Me.DBGrupos.Text & "'"
+  Me.DtaGrupoCuentas.Recordset.Find Criterio
+  CodGrupo = DtaGrupoCuentas.Recordset("CodGrupo")
+  
+Exit Sub
+TipoErrs:
+ ControlErrores
+End Sub
+
+Private Sub Form_Activate()
+ On Error GoTo TipoErrs
+' Me.DtaGrupoCuentas.Refresh
+ Me.DtaSaldos.Refresh
+ Me.DtaCuentas.Refresh
+ 
+'  Me.DBGCuentas.Columns(5).Visible = False
+'  Me.DBGCuentas.Columns(6).Visible = False
+'  Me.DBGCuentas.Columns(7).Caption = "Debito"
+'  Me.DBGCuentas.Columns(8).Caption = "Credito"
+'  Me.DBGCuentas.Columns(7).NumberFormat = "##,##0.00"
+'  Me.DBGCuentas.Columns(8).NumberFormat = "##,##0.00"
+'  Me.DBGCuentas.Columns(4).NumberFormat = "##,##0.000000"
+'  Me.DBGCuentas.Columns(0).Visible = False
+ 
+ Me.CmbTipo.AddItem ("Otros Activos")
+ Me.CmbTipo.AddItem ("Caja")
+ Me.CmbTipo.AddItem ("Bancos")
+ Me.CmbTipo.AddItem ("Cuentas x Cobrar")
+ Me.CmbTipo.AddItem ("Inventario")
+ Me.CmbTipo.AddItem ("Papeleria - Utiles")
+ Me.CmbTipo.AddItem ("Activo Fijo")
+ Me.CmbTipo.AddItem ("Otros Pasivos")
+ Me.CmbTipo.AddItem ("Cuentas x Pagar")
+ Me.CmbTipo.AddItem ("Pasivo")
+ Me.CmbTipo.AddItem ("Capital")
+ Me.CmbTipo.AddItem ("Ingresos - Ventas")
+ Me.CmbTipo.AddItem ("Costos")
+ Me.CmbTipo.AddItem ("Gastos")
+  Me.CmbTipo.AddItem ("Cuentas de Orden")
+ 
+If Not CodigoUsuario = 0 Then
+ Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodigoUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Cuentas'))"
+ Me.DtaNacceso.Refresh
+ If Me.DtaNacceso.Recordset.EOF Then
+   Me.CmdGrabar.Enabled = False
+ End If
+ Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodigoUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Cuentas'))"
+ Me.DtaNacceso.Refresh
+ If Me.DtaNacceso.Recordset.EOF Then
+   Me.CmdBorrar.Enabled = False
+ End If
+End If
+Exit Sub
+TipoErrs:
+MsgBox Err.Description
+End Sub
+
+Private Sub Form_Load()
+
+ Me.DBGCuentas.EvenRowStyle.BackColor = &H80FFFF
+ Me.DBGCuentas.OddRowStyle.BackColor = &HC0FFFF
+ Me.DBGCuentas.AlternatingRowStyle = True
+
+
+With Me.DtaConsulta
+   '.DatabaseName = Ruta
+   .ConnectionString = Conexion
+'   .RecordSource = "Cuentas"
+'   .Refresh
+End With
+
+
+With Me.DtaNacceso
+   '.DatabaseName = Ruta
+   .ConnectionString = Conexion
+'   .RecordSource = "Cuentas"
+'   .Refresh
+End With
+
+With Me.DtaCuentas
+   '.DatabaseName = Ruta
+   .ConnectionString = Conexion
+   .RecordSource = "Cuentas"
+   .Refresh
+End With
+
+With Me.DtaGrupoCuentas
+   '.DatabaseName = Ruta
+   .ConnectionString = Conexion
+   .RecordSource = "GrupoCuentas"
+   .Refresh
+End With
+
+With Me.DtaSaldos
+   '.DatabaseName = Ruta
+   .ConnectionString = Conexion
+'   .RecordSource = "Cuentas"
+'   .Refresh
+End With
+CambiarTipo = True
+Me.DBCliente.ListField = "CodCuentas"
+
+Me.DtaSaldos.RecordSource = "SELECT CodCuentas, FechaTransaccion, NumeroMovimiento, DescripcionMovimiento, Debito, Credito, Debito * TCambio AS MDebito,TCambio * Credito AS MCredito, TCambio From Transacciones ORDER BY FechaTransaccion, NumeroMovimiento"
+Me.DtaSaldos.Refresh
+  'Me.DBGCuentas.Columns(5).Visible = False
+  'Me.DBGCuentas.Columns(6).Visible = False
+  'Me.DBGCuentas.Columns(7).Caption = "Debito"
+  'Me.DBGCuentas.Columns(8).Caption = "Credito"
+  'Me.DBGCuentas.Columns(7).NumberFormat = "##,##0.00"
+  'Me.DBGCuentas.Columns(8).NumberFormat = "##,##0.00"
+  'Me.DBGCuentas.Columns(4).NumberFormat = "##,##0.000000"
+  'Me.DBGCuentas.Columns(0).Visible = False
+
+End Sub
+

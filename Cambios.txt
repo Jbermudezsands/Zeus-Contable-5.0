@@ -1,0 +1,24 @@
+22/06/06
+tabla usuarios: el campo codusuario lo puse como autonumérico
+
+23/06/06
+para evitar el problema de aquél error en estados de resultados y balances se puede
+hacer un query de actualización y ahí se acaba el problema
+update Reportes
+set debe3=debe1+debe2,haber3=haber1+haber2
+en el módulo de variable agregué ejecutar de tipo adodb.connection
+
+11/12/2006
+Tabla Transacciones: Agregue el Campo beneficiario, para poder grabar los cheques e imprimirlos
+despues.
+
+26/12/2006
+Agregue nueva Tabla CordenadasCheque:
+Campòs:
+ 
+ Id; AutoNumeric  -  PK
+ CodCuenta: Nvarchar - PK
+ X1,y1 hasta X13,Y13 : Nvarchar : Valor Predeterminado 0
+ Relacionado con la Tabla Cuentas
+ 
+

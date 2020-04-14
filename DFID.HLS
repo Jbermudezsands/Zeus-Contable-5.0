@@ -1,0 +1,160 @@
+þVQHLPSTFILE_02.59þ
+
+[DICTIONARY]
+SG, ESG = START, END OF STYLE GROUP
+FN, EFN = START, END OF FONT NAME
+SZ, ESZ = START, END OF FONT SIZE
+IT, EIT = START, END OF ITALIC
+BD, EBD = START, END OF BOLD
+BD2, EBD2 = START, END OF BOLD ver 2.0
+SK, ESK = START, END OF STRIKETHRU
+UL, EUL = START, END OF UNDERLINE
+SC, ESC = START, END OF SMALLCAPS
+CL, ECL = START, END OF COLOR
+DF, EDF = START, END OF DEFINED FONT STYLE NAME
+[END DICTIONARY]
+[SG]
+[CL]
+0
+[ECL]
+[SZ]
+ 10 
+[ESZ]
+[IT]
+ 0 
+[EIT]
+[BD2]
+0
+[EBD2]
+[SK]
+0
+[ESK]
+[UL]
+0
+[EUL]
+[SC]
+0
+[ESC]
+[FN]
+MS Sans Serif
+[EFN]
+[DF]
+Default Help Text
+[EDF]
+[ESG]
+[SG]
+[CL]
+0
+[ECL]
+[SZ]
+ 12 
+[ESZ]
+[IT]
+ 0 
+[EIT]
+[BD2]
+-1
+[EBD2]
+[SK]
+0
+[ESK]
+[UL]
+0
+[EUL]
+[SC]
+0
+[ESC]
+[FN]
+MS Sans Serif
+[EFN]
+[DF]
+Topic Heading
+[EDF]
+[ESG]
+[SG]
+[CL]
+0
+[ECL]
+[SZ]
+ 10 
+[ESZ]
+[IT]
+ 0 
+[EIT]
+[BD2]
+-1
+[EBD2]
+[SK]
+0
+[ESK]
+[UL]
+0
+[EUL]
+[SC]
+0
+[ESC]
+[FN]
+MS Sans Serif
+[EFN]
+[DF]
+Emphasized Help Text
+[EDF]
+[ESG]
+[SG]
+[CL]
+800000
+[ECL]
+[SZ]
+ 10 
+[ESZ]
+[IT]
+ 0 
+[EIT]
+[BD2]
+-1
+[EBD2]
+[SK]
+0
+[ESK]
+[UL]
+0
+[EUL]
+[SC]
+0
+[ESC]
+[FN]
+Arial
+[EFN]
+[DF]
+Arial
+[EDF]
+[ESG]
+[SG]
+[CL]
+80
+[ECL]
+[SZ]
+ 12 
+[ESZ]
+[IT]
+-1 
+[EIT]
+[BD2]
+-1
+[EBD2]
+[SK]
+0
+[ESK]
+[UL]
+0
+[EUL]
+[SC]
+0
+[ESC]
+[FN]
+Black Chancery
+[EFN]
+[DF]
+Titulo
+[EDF]
+[ESG]

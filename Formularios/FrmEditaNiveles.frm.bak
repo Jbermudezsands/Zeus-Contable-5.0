@@ -1,0 +1,1983 @@
+VERSION 5.00
+Object = "{080026CA-5CAE-11D6-82C2-000021B74250}#16.0#0"; "vbskfree.ocx"
+Object = "{FAEEE763-117E-101B-8933-08002B2F4F5A}#1.1#0"; "DBLIST32.OCX"
+Begin VB.Form FrmEditarNiveles 
+   BorderStyle     =   1  'Fixed Single
+   Caption         =   "Editar Niveles"
+   ClientHeight    =   4935
+   ClientLeft      =   45
+   ClientTop       =   330
+   ClientWidth     =   6120
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   4935
+   ScaleWidth      =   6120
+   StartUpPosition =   2  'CenterScreen
+   Begin VB.Data DtaNacceso2 
+      Caption         =   "DtaNacceso2"
+      Connect         =   ";DATABASENAME="" + Ruta + "";UID=Administrador;PWD=DFID"
+      DatabaseName    =   "D:\DFID\dfid.bak"
+      DefaultCursorType=   0  'DefaultCursor
+      DefaultType     =   2  'UseODBC
+      Exclusive       =   0   'False
+      Height          =   375
+      Left            =   0
+      Options         =   0
+      ReadOnly        =   0   'False
+      RecordsetType   =   1  'Dynaset
+      RecordSource    =   "Accesos"
+      Top             =   5280
+      Visible         =   0   'False
+      Width           =   10515
+   End
+   Begin VB.Data DtaConsulta 
+      Caption         =   "DtaConsulta"
+      Connect         =   ";DATABASENAME="" + Ruta + "";UID=Administrador;PWD=DFID"
+      DatabaseName    =   "D:\DFID\dfid.bak"
+      DefaultCursorType=   0  'DefaultCursor
+      DefaultType     =   2  'UseODBC
+      Exclusive       =   0   'False
+      Height          =   375
+      Left            =   3000
+      Options         =   0
+      ReadOnly        =   0   'False
+      RecordsetType   =   1  'Dynaset
+      RecordSource    =   "Accesos"
+      Top             =   5760
+      Visible         =   0   'False
+      Width           =   2415
+   End
+   Begin vbskfree.Skinner Skinner1 
+      Left            =   840
+      Top             =   4080
+      _ExtentX        =   1270
+      _ExtentY        =   1270
+      CloseButtonToolTipText=   "Cerrar"
+      MinButtonToolTipText=   "Minimizar"
+      MaxButtonToolTipText=   "Maximizar"
+      RestoreButtonToolTipText=   "Restaurar"
+   End
+   Begin VB.TextBox TxtCodPasword 
+      DataSource      =   "DtaPasword"
+      Height          =   375
+      Left            =   240
+      TabIndex        =   14
+      Text            =   "TxtCodPasword"
+      Top             =   5640
+      Visible         =   0   'False
+      Width           =   2175
+   End
+   Begin VB.CommandButton CmdAceptar 
+      DownPicture     =   "FrmEditaNiveles.frx":0000
+      Height          =   375
+      Left            =   3120
+      MouseIcon       =   "FrmEditaNiveles.frx":1AE2
+      MousePointer    =   99  'Custom
+      Picture         =   "FrmEditaNiveles.frx":1F24
+      Style           =   1  'Graphical
+      TabIndex        =   13
+      Top             =   4440
+      Width           =   1455
+   End
+   Begin VB.CommandButton CmdCancelar 
+      DownPicture     =   "FrmEditaNiveles.frx":3A06
+      Height          =   375
+      Left            =   4560
+      MouseIcon       =   "FrmEditaNiveles.frx":54E8
+      MousePointer    =   99  'Custom
+      Picture         =   "FrmEditaNiveles.frx":592A
+      Style           =   1  'Graphical
+      TabIndex        =   12
+      Top             =   4440
+      Width           =   1455
+   End
+   Begin VB.Frame Frame2 
+      Height          =   615
+      Left            =   2040
+      TabIndex        =   10
+      Top             =   3720
+      Width           =   3975
+      Begin VB.Label LblNombre 
+         Height          =   255
+         Left            =   120
+         TabIndex        =   11
+         Top             =   240
+         Width           =   3735
+      End
+   End
+   Begin VB.Data DtaNacceso 
+      Caption         =   "DtaNacceso"
+      Connect         =   ";DATABASENAME="" + Ruta + "";UID=Administrador;PWD=DFID"
+      DatabaseName    =   "D:\DFID\dfid.bak"
+      DefaultCursorType=   0  'DefaultCursor
+      DefaultType     =   2  'UseODBC
+      Exclusive       =   0   'False
+      Height          =   375
+      Left            =   2880
+      Options         =   0
+      ReadOnly        =   0   'False
+      RecordsetType   =   1  'Dynaset
+      RecordSource    =   "Accesos"
+      Top             =   5280
+      Visible         =   0   'False
+      Width           =   2415
+   End
+   Begin VB.Data DtaPasword 
+      Caption         =   "DtaPasword"
+      Connect         =   ";DATABASENAME="" + Ruta + "";UID=Administrador;PWD=DFID"
+      DatabaseName    =   "D:\DFID\Dfid.bak"
+      DefaultCursorType=   0  'DefaultCursor
+      DefaultType     =   2  'UseODBC
+      Exclusive       =   0   'False
+      Height          =   375
+      Left            =   240
+      Options         =   0
+      ReadOnly        =   0   'False
+      RecordsetType   =   1  'Dynaset
+      RecordSource    =   "Usuarios"
+      Top             =   6240
+      Visible         =   0   'False
+      Width           =   2415
+   End
+   Begin VB.TextBox TxtNivel 
+      Height          =   375
+      Left            =   480
+      TabIndex        =   9
+      Text            =   "TxtNivel"
+      Top             =   5280
+      Visible         =   0   'False
+      Width           =   2175
+   End
+   Begin VB.Data DtaPasword2 
+      Caption         =   "DtaPasword2"
+      Connect         =   ";DATABASENAME="" + Ruta + "";UID=Administrador;PWD=DFID"
+      DatabaseName    =   "D:\DFID\dfid.bak"
+      DefaultCursorType=   0  'DefaultCursor
+      DefaultType     =   2  'UseODBC
+      Exclusive       =   0   'False
+      Height          =   420
+      Left            =   3000
+      Options         =   0
+      ReadOnly        =   0   'False
+      RecordsetType   =   1  'Dynaset
+      RecordSource    =   "Usuarios"
+      Top             =   6120
+      Visible         =   0   'False
+      Width           =   2655
+   End
+   Begin VB.Frame Frame1 
+      Caption         =   "Permisos"
+      Height          =   1455
+      Left            =   120
+      TabIndex        =   4
+      Top             =   2160
+      Width           =   5895
+      Begin VB.CheckBox ChEliminar 
+         Caption         =   "Eliminar Datos"
+         Height          =   255
+         Left            =   3240
+         TabIndex        =   8
+         Top             =   840
+         Value           =   1  'Checked
+         Width           =   1335
+      End
+      Begin VB.CheckBox ChGrabar 
+         Caption         =   "Grabar Datos"
+         Height          =   255
+         Left            =   3240
+         TabIndex        =   7
+         Top             =   360
+         Value           =   1  'Checked
+         Width           =   1695
+      End
+      Begin VB.CheckBox ChLeer 
+         Caption         =   "Leer Datos"
+         Height          =   255
+         Left            =   240
+         TabIndex        =   6
+         Top             =   840
+         Value           =   1  'Checked
+         Width           =   1335
+      End
+      Begin VB.CheckBox ChAbrir 
+         Caption         =   "Abrir o Ejecutar"
+         Height          =   255
+         Left            =   240
+         TabIndex        =   5
+         Top             =   360
+         Value           =   1  'Checked
+         Width           =   1455
+      End
+   End
+   Begin VB.ListBox ListAcceso 
+      Height          =   1620
+      ItemData        =   "FrmEditaNiveles.frx":740C
+      Left            =   3120
+      List            =   "FrmEditaNiveles.frx":740E
+      TabIndex        =   1
+      Top             =   480
+      Width           =   2895
+   End
+   Begin MSDBCtls.DBList DBLNEmpleado 
+      Bindings        =   "FrmEditaNiveles.frx":7410
+      Height          =   1620
+      Left            =   120
+      TabIndex        =   0
+      Top             =   480
+      Width           =   2775
+      _ExtentX        =   4895
+      _ExtentY        =   2858
+      _Version        =   393216
+      ListField       =   "NombreUsuario"
+   End
+   Begin VB.Label Label3 
+      Caption         =   "Usuario Seleccionado:"
+      Height          =   255
+      Left            =   120
+      TabIndex        =   15
+      Top             =   3960
+      Width           =   1695
+   End
+   Begin VB.Label Label2 
+      Caption         =   "Ventanas del Sistema"
+      Height          =   255
+      Left            =   3240
+      TabIndex        =   3
+      Top             =   120
+      Width           =   2535
+   End
+   Begin VB.Label Label1 
+      Caption         =   "Nombre de Usuarios o Grupos:"
+      Height          =   255
+      Left            =   120
+      TabIndex        =   2
+      Top             =   120
+      Width           =   2775
+   End
+End
+Attribute VB_Name = "FrmEditarNiveles"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Private Sub CmdAceptar_Click()
+On Error GoTo TipoErrs
+'Busco si el codigo esta repetido si se repite solo se guarda la descripcion
+     If NivelAcceso < Val(TxtNivel.Text) Then
+        MsgBox "Imposible Modificar su Nivel es Inferior", vbExclamation, "Sistema de Nominas"
+        Exit Sub
+      End If
+      
+  Select Case Me.ListAcceso.Text
+        Case "Presupuesto"
+       '//////////////Verifico el Chabrir//////////////////
+        If Me.ChAbrir.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Presupuesto'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Presupuesto"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Presupuesto'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+        End If
+        
+       '////////////Verifico Grabar /////////////////////
+         
+         If Me.ChGrabar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Presupuesto'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Presupuesto"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Presupuesto'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+        '////////////Verifico Leer /////////////////////
+         
+         If Me.ChLeer.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Presupuesto'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Presupuesto"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Presupuesto'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+     '////////////Verifico Borrar /////////////////////
+         
+         If Me.ChEliminar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Presupuesto'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Presupuesto"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Presupuesto'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+  
+  
+  
+  
+      Case "Editar Niveles"
+      
+      '//////////////Verifico el Chabrir//////////////////
+        If Me.ChAbrir.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Niveles'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Niveles"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Niveles'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+        End If
+       '////////////Verifico Grabar Niveles//////////////////////
+         
+         If Me.ChGrabar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Niveles'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Niveles"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Niveles'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+      Case "Cuentas"
+       '//////////////Verifico el Chabrir//////////////////
+        If Me.ChAbrir.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Cuentas"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+        End If
+        
+       '////////////Verifico Grabar /////////////////////
+         
+         If Me.ChGrabar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Cuentas"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+        '////////////Verifico Leer /////////////////////
+         
+         If Me.ChLeer.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Cuentas"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+     '////////////Verifico Borrar /////////////////////
+         
+         If Me.ChEliminar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Cuentas"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+      
+      Case "Grupo Cuentas"
+      '//////////////Verifico el Chabrir//////////////////
+        If Me.ChAbrir.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Grupo Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Grupo Cuentas"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Grupo Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+        End If
+        
+       '////////////Verifico Grabar /////////////////////
+         
+         If Me.ChGrabar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Grupo Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Grupo Cuentas"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Grupo Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+        '////////////Verifico Leer /////////////////////
+         
+         If Me.ChLeer.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Grupo Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Grupo Cuentas"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Grupo Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+     '////////////Verifico Borrar /////////////////////
+         
+         If Me.ChEliminar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Grupo Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Grupo Cuentas"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Grupo Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+      
+      
+         
+      Case "Contratistas"
+            '//////////////Verifico el Chabrir//////////////////
+        If Me.ChAbrir.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Contratistas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Contratistas"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Contratistas'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+        End If
+        
+       '////////////Verifico Grabar /////////////////////
+         
+         If Me.ChGrabar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Contratistas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Contratistas"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Contratistas'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+        '////////////Verifico Leer /////////////////////
+         
+         If Me.ChLeer.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Contratistas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Contratistas"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Contratistas'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+     '////////////Verifico Borrar /////////////////////
+         
+         If Me.ChEliminar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Contratistas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Contratistas"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Contratistas'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+      
+        
+      Case "Empleados"
+                 '//////////////Verifico el Chabrir//////////////////
+        If Me.ChAbrir.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Empleados'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Empleados"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Empleados'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+        End If
+        
+       '////////////Verifico Grabar /////////////////////
+         
+         If Me.ChGrabar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Empleados'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Empleados"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Empleados'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+        '////////////Verifico Leer /////////////////////
+         
+         If Me.ChLeer.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Empleados'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Empleados"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Empleados'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+     '////////////Verifico Borrar /////////////////////
+         
+         If Me.ChEliminar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Empleados'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Empleados"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Empleados'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+      
+    Case "Activo Fijo"
+    
+          '//////////////Verifico el Chabrir//////////////////
+        If Me.ChAbrir.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Activo Fijo'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Activo Fijo"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Activo Fijo'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+        End If
+        
+       '////////////Verifico Grabar /////////////////////
+         
+         If Me.ChGrabar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Activo Fijo'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Activo Fijo"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Activo Fijo'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+        '////////////Verifico Leer /////////////////////
+         
+         If Me.ChLeer.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Activo Fijo'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Activo Fijo"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Activo Fijo'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+     '////////////Verifico Borrar /////////////////////
+         
+         If Me.ChEliminar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Activo Fijo'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Activo Fijo"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Activo Fijo'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+         
+    Case "Periodos"
+    
+          '//////////////Verifico el Chabrir//////////////////
+        If Me.ChAbrir.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Periodos'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Periodos"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Periodos'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+        End If
+        
+       '////////////Verifico Grabar /////////////////////
+         
+         If Me.ChGrabar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Periodos'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Periodos"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Periodos'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+        '////////////Verifico Leer /////////////////////
+         
+         If Me.ChLeer.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Periodos'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Periodos"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Periodos'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+               
+    Case "Transacciones"
+               '//////////////Verifico el Chabrir//////////////////
+        If Me.ChAbrir.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Transacciones'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Transacciones"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Transacciones'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+        End If
+        
+       '////////////Verifico Grabar /////////////////////
+         
+         If Me.ChGrabar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Transacciones'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Transacciones"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Transacciones'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+        '////////////Verifico Leer /////////////////////
+         
+         If Me.ChLeer.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Transacciones'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Transacciones"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Transacciones'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+     '////////////Verifico Borrar /////////////////////
+         
+         If Me.ChEliminar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Transacciones'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Transacciones"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Transacciones'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+    Case "Cheques"
+              '//////////////Verifico el Chabrir//////////////////
+        If Me.ChAbrir.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Cheques'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Cheques"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Cheques'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+        End If
+        
+       '////////////Verifico Grabar /////////////////////
+         
+         If Me.ChGrabar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Cheques'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Cheques"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Cheques'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+        '////////////Verifico Leer /////////////////////
+         
+         If Me.ChLeer.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Cheques'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Cheques"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Cheques'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+     '////////////Verifico Borrar /////////////////////
+         
+         If Me.ChEliminar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Cheques'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Cheques"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Cheques'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+    
+        
+    Case "Calcular Depreciacion"
+               '//////////////Verifico el Chabrir//////////////////
+        If Me.ChAbrir.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Depreciacion'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Depreciacion"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Depreciacion'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+        End If
+     
+    Case "Usuarios"
+             '//////////////Verifico el Chabrir//////////////////
+        If Me.ChAbrir.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Usuarios'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Usuarios"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Usuarios'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+        End If
+        
+       '////////////Verifico Grabar /////////////////////
+         
+         If Me.ChGrabar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Usuarios'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Usuarios"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Usuarios'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+        '////////////Verifico Leer /////////////////////
+         
+         If Me.ChLeer.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Usuarios'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Usuarios"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Usuarios'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+     '////////////Verifico Borrar /////////////////////
+         
+         If Me.ChEliminar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Usuarios'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Usuarios"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Usuarios'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+    
+    Case "Tasa de Cambio"
+               '//////////////Verifico el Chabrir//////////////////
+        If Me.ChAbrir.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Tasa Cambio'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Tasa Cambio"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Tasa Cambio'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+        End If
+        
+       '////////////Verifico Grabar /////////////////////
+         
+         If Me.ChGrabar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Tasa Cambio'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Grabar Tasa Cambio"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Tasa Cambio'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+        '////////////Verifico Leer /////////////////////
+         
+         If Me.ChLeer.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Tasa Cambio'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Leer Tasa Cambio"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Tasa Cambio'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+          
+     '////////////Verifico Borrar /////////////////////
+         
+         If Me.ChEliminar.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Tasa Cambio'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Borrar Tasa Cambio"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Tasa Cambio'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+       
+        End If
+    Case "Reportes Generales"
+          '//////////////Verifico el Chabrir//////////////////
+        If Me.ChAbrir.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Reportes Generales'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Reportes Generales"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Reportes Generales'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+        End If
+        
+ 
+    
+          
+    Case "Reportes Movimientos"
+                   '//////////////Verifico el Chabrir//////////////////
+        If Me.ChAbrir.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Reportes Movimientos'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Reportes Movimientos"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Reportes Movimientos'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+        End If
+         
+         
+    Case "Reportes Bancos"
+                  '//////////////Verifico el Chabrir//////////////////
+        If Me.ChAbrir.Value = 1 Then
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Reportes Bancos'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.AddNew
+             DtaNacceso.Recordset("CodUsuario") = CodUsuario
+             DtaNacceso.Recordset("AccesoModulo") = "Abrir Reportes Bancos"
+           Me.DtaNacceso.Recordset.Update
+         End If
+        Else
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Reportes Bancos'))"
+          Me.DtaNacceso.Refresh
+         If Not Me.DtaNacceso.Recordset.EOF Then
+           Me.DtaNacceso.Recordset.Delete
+         End If
+        End If
+     
+    
+        
+    End Select
+      
+      
+      
+      
+      
+Exit Sub
+TipoErrs:
+ ControlErrores
+Unload Me
+End Sub
+
+Private Sub CmdCancelar_Click()
+Unload Me
+End Sub
+Private Sub DBLNEmpleado_Click()
+On Error GoTo TipoErrs
+LblNombre.Caption = DBLNEmpleado.Text
+DtaPasword2.Refresh
+      Do While Not DtaPasword2.Recordset.EOF
+       If DtaPasword2.Recordset.NombreUsuario = DBLNEmpleado.Text Then
+         CodUsuario = DtaPasword2.Recordset.CodUsuario
+         TxtNivel.Text = DtaPasword2.Recordset.Nivel
+         Exit Do
+       End If
+        DtaPasword2.Recordset.MoveNext
+      Loop
+ 
+ DtaNacceso.Refresh
+      Do While Not DtaNacceso.Recordset.EOF
+         If DtaNacceso.Recordset("CodUsuario") = TxtCodPasword.Text Then
+           
+           
+           
+           
+           Exit Sub
+         End If
+        DtaNacceso.Recordset.MoveNext
+      Loop
+      
+      
+Exit Sub
+TipoErrs:
+ ControlErrores
+ Unload Me
+End Sub
+
+Private Sub Form_Activate()
+On Error GoTo TipoErrs
+DtaPasword.Refresh
+
+ 
+If Not CodigoUsuario = 0 Then
+ Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodigoUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Niveles'))"
+ Me.DtaNacceso.Refresh
+ If Me.DtaNacceso.Recordset.EOF Then
+   Me.CmdAceptar.Enabled = False
+
+ End If
+End If
+
+Exit Sub
+TipoErrs:
+MsgBox err.Description
+End Sub
+
+Private Sub Form_Load()
+'With Me.DtaNacceso2
+'
+'   .ConnectionString = Conexion
+'End With
+'
+'With Me.DtaConsulta
+'
+'   .ConnectionString = Conexion
+'End With
+'
+'With Me.DtaNacceso
+'
+'   .ConnectionString = Conexion
+'End With
+'
+'With Me.DtaPasword
+'
+'   .ConnectionString = Conexion
+'End With
+'
+'With Me.DtaPasword2
+'
+'   .ConnectionString = Conexion
+'End With
+
+Me.ListAcceso.AddItem ("Editar Niveles")
+Me.ListAcceso.AddItem ("Cuentas")
+Me.ListAcceso.AddItem ("Grupo Cuentas")
+Me.ListAcceso.AddItem ("Contratistas")
+Me.ListAcceso.AddItem ("Empleados")
+Me.ListAcceso.AddItem ("Activo Fijo")
+Me.ListAcceso.AddItem ("Periodos")
+Me.ListAcceso.AddItem ("Transacciones")
+Me.ListAcceso.AddItem ("Presupuesto")
+Me.ListAcceso.AddItem ("Cheques")
+Me.ListAcceso.AddItem ("Calcular Depreciacion")
+Me.ListAcceso.AddItem ("Usuarios")
+Me.ListAcceso.AddItem ("Tasa de Cambio")
+Me.ListAcceso.AddItem ("Reportes Generales")
+Me.ListAcceso.AddItem ("Reportes Movimientos")
+Me.ListAcceso.AddItem ("Reportes Bancos")
+
+
+
+
+
+
+
+End Sub
+
+Private Sub ListAcceso_Click()
+On Error GoTo TipoErrs
+    'Busco si el codigo esta repetido si se repite solo se guarda la descripcion
+    
+    Select Case Me.ListAcceso.Text
+      
+            Case "Presupuesto"
+          Me.ChAbrir.Enabled = True
+          Me.ChGrabar.Enabled = True
+          Me.ChEliminar.Enabled = True
+          Me.ChLeer.Enabled = True
+          
+        '///////Chek abrir////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Presupuesto'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChAbrir.Value = 0
+         Else
+          Me.ChAbrir.Value = 1
+         End If
+     '///////Chek Grabar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Presupuesto'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChGrabar.Value = 0
+         Else
+          Me.ChGrabar.Value = 1
+         End If
+         
+          '///////Chek leer////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Presupuesto'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChLeer.Value = 0
+         Else
+          Me.ChLeer.Value = 1
+         End If
+     '///////Chek borrar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Presupuesto'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChEliminar.Value = 0
+         Else
+          Me.ChEliminar.Value = 1
+         End If
+    
+      Case "Editar Niveles"
+          Me.ChAbrir.Enabled = True
+          Me.ChGrabar.Enabled = True
+          Me.ChEliminar.Enabled = False
+          Me.ChLeer.Enabled = False
+     '///////Chek abrir////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Niveles'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChAbrir.Value = 0
+         Else
+          Me.ChAbrir.Value = 1
+         End If
+     '///////Chek Grabar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Niveles'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChGrabar.Value = 0
+         Else
+          Me.ChGrabar.Value = 1
+         End If
+          
+          
+          
+          
+      Case "Cuentas"
+          Me.ChAbrir.Enabled = True
+          Me.ChGrabar.Enabled = True
+          Me.ChEliminar.Enabled = True
+          Me.ChLeer.Enabled = True
+          
+        '///////Chek abrir////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChAbrir.Value = 0
+         Else
+          Me.ChAbrir.Value = 1
+         End If
+     '///////Chek Grabar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChGrabar.Value = 0
+         Else
+          Me.ChGrabar.Value = 1
+         End If
+         
+          '///////Chek leer////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChLeer.Value = 0
+         Else
+          Me.ChLeer.Value = 1
+         End If
+     '///////Chek borrar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChEliminar.Value = 0
+         Else
+          Me.ChEliminar.Value = 1
+         End If
+          
+      
+      Case "Grupo Cuentas"
+          Me.ChAbrir.Enabled = True
+          Me.ChGrabar.Enabled = True
+          Me.ChEliminar.Enabled = True
+          Me.ChLeer.Enabled = True
+                  '///////Chek abrir////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Grupo Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChAbrir.Value = 0
+         Else
+          Me.ChAbrir.Value = 1
+         End If
+     '///////Chek Grabar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Grupo Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChGrabar.Value = 0
+         Else
+          Me.ChGrabar.Value = 1
+         End If
+         
+          '///////Chek leer////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Grupo Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChLeer.Value = 0
+         Else
+          Me.ChLeer.Value = 1
+         End If
+     '///////Chek borrar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Grupo Cuentas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChEliminar.Value = 0
+         Else
+          Me.ChEliminar.Value = 1
+         End If
+          
+      Case "Contratistas"
+          Me.ChAbrir.Enabled = True
+          Me.ChGrabar.Enabled = True
+          Me.ChEliminar.Enabled = True
+          Me.ChLeer.Enabled = True
+          
+                  '///////Chek abrir////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Contratistas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChAbrir.Value = 0
+         Else
+          Me.ChAbrir.Value = 1
+         End If
+     '///////Chek Grabar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Contratistas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChGrabar.Value = 0
+         Else
+          Me.ChGrabar.Value = 1
+         End If
+         
+          '///////Chek leer////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Contratistas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChLeer.Value = 0
+         Else
+          Me.ChLeer.Value = 1
+         End If
+     '///////Chek borrar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Contratistas'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChEliminar.Value = 0
+         Else
+          Me.ChEliminar.Value = 1
+         End If
+      Case "Empleados"
+          Me.ChAbrir.Enabled = True
+          Me.ChGrabar.Enabled = True
+          Me.ChEliminar.Enabled = True
+          Me.ChLeer.Enabled = True
+      
+                           '///////Chek abrir////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Empleados'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChAbrir.Value = 0
+         Else
+          Me.ChAbrir.Value = 1
+         End If
+     '///////Chek Grabar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Empleados'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChGrabar.Value = 0
+         Else
+          Me.ChGrabar.Value = 1
+         End If
+         
+          '///////Chek leer////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Empleados'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChLeer.Value = 0
+         Else
+          Me.ChLeer.Value = 1
+         End If
+     '///////Chek borrar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Empleados'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChEliminar.Value = 0
+         Else
+          Me.ChEliminar.Value = 1
+         End If
+      
+      Case "Activo Fijo"
+          Me.ChAbrir.Enabled = True
+          Me.ChGrabar.Enabled = True
+          Me.ChEliminar.Enabled = True
+          Me.ChLeer.Enabled = True
+          
+                            '///////Chek abrir////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Activo Fijo'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChAbrir.Value = 0
+         Else
+          Me.ChAbrir.Value = 1
+         End If
+     '///////Chek Grabar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Activo Fijo'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChGrabar.Value = 0
+         Else
+          Me.ChGrabar.Value = 1
+         End If
+         
+          '///////Chek leer////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Activo Fijo'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChLeer.Value = 0
+         Else
+          Me.ChLeer.Value = 1
+         End If
+     '///////Chek borrar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Activo Fijo'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChEliminar.Value = 0
+         Else
+          Me.ChEliminar.Value = 1
+         End If
+          
+    Case "Periodos"
+          Me.ChAbrir.Enabled = True
+          Me.ChGrabar.Enabled = True
+          Me.ChEliminar.Enabled = False
+          Me.ChLeer.Enabled = False
+          
+                            '///////Chek abrir////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Periodos'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChAbrir.Value = 0
+         Else
+          Me.ChAbrir.Value = 1
+         End If
+     '///////Chek Grabar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Periodos'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChGrabar.Value = 0
+         Else
+          Me.ChGrabar.Value = 1
+         End If
+         
+          '///////Chek leer////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Periodos'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChLeer.Value = 0
+         Else
+          Me.ChLeer.Value = 1
+         End If
+   
+          
+    Case "Transacciones"
+         Me.ChAbrir.Enabled = True
+          Me.ChGrabar.Enabled = True
+          Me.ChEliminar.Enabled = True
+          Me.ChLeer.Enabled = True
+          
+                            '///////Chek abrir////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Transacciones'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChAbrir.Value = 0
+         Else
+          Me.ChAbrir.Value = 1
+         End If
+     '///////Chek Grabar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Transacciones'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChGrabar.Value = 0
+         Else
+          Me.ChGrabar.Value = 1
+         End If
+         
+          '///////Chek leer////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Transacciones'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChLeer.Value = 0
+         Else
+          Me.ChLeer.Value = 1
+         End If
+     '///////Chek borrar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Transacciones'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChEliminar.Value = 0
+         Else
+          Me.ChEliminar.Value = 1
+         End If
+          
+    Case "Cheques"
+          Me.ChAbrir.Enabled = True
+          Me.ChGrabar.Enabled = True
+          Me.ChEliminar.Enabled = True
+          Me.ChLeer.Enabled = True
+          
+                            '///////Chek abrir////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Cheques'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChAbrir.Value = 0
+         Else
+          Me.ChAbrir.Value = 1
+         End If
+     '///////Chek Grabar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Cheques'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChGrabar.Value = 0
+         Else
+          Me.ChGrabar.Value = 1
+         End If
+         
+          '///////Chek leer////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Cheques'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChLeer.Value = 0
+         Else
+          Me.ChLeer.Value = 1
+         End If
+     '///////Chek borrar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Cheques'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChEliminar.Value = 0
+         Else
+          Me.ChEliminar.Value = 1
+         End If
+          
+    Case "Calcular Depreciacion"
+          Me.ChAbrir.Enabled = True
+          Me.ChGrabar.Enabled = False
+          Me.ChEliminar.Enabled = False
+          Me.ChLeer.Enabled = False
+                            '///////Chek abrir////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Depreciacion'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChAbrir.Value = 0
+         Else
+          Me.ChAbrir.Value = 1
+         End If
+   
+
+          
+    Case "Usuarios"
+          Me.ChAbrir.Enabled = True
+          Me.ChGrabar.Enabled = True
+          Me.ChEliminar.Enabled = True
+          Me.ChLeer.Enabled = True
+                            '///////Chek abrir////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Usuarios'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChAbrir.Value = 0
+         Else
+          Me.ChAbrir.Value = 1
+         End If
+     '///////Chek Grabar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Usuarios'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChGrabar.Value = 0
+         Else
+          Me.ChGrabar.Value = 1
+         End If
+         
+          '///////Chek leer////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Usuarios'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChLeer.Value = 0
+         Else
+          Me.ChLeer.Value = 1
+         End If
+     '///////Chek borrar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Usuarios'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChEliminar.Value = 0
+         Else
+          Me.ChEliminar.Value = 1
+         End If
+          
+    Case "Tasa de Cambio"
+          Me.ChAbrir.Enabled = True
+          Me.ChGrabar.Enabled = True
+          Me.ChEliminar.Enabled = True
+          Me.ChLeer.Enabled = True
+          
+                            '///////Chek abrir////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Tasa Cambio'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChAbrir.Value = 0
+         Else
+          Me.ChAbrir.Value = 1
+         End If
+     '///////Chek Grabar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Tasa Cambio'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChGrabar.Value = 0
+         Else
+          Me.ChGrabar.Value = 1
+         End If
+         
+          '///////Chek leer////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Tasa Cambio'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChLeer.Value = 0
+         Else
+          Me.ChLeer.Value = 1
+         End If
+     '///////Chek borrar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Tasa Cambio'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChEliminar.Value = 0
+         Else
+          Me.ChEliminar.Value = 1
+         End If
+    Case "Reportes Generales"
+          Me.ChAbrir.Enabled = True
+          Me.ChGrabar.Enabled = False
+          Me.ChEliminar.Enabled = False
+          Me.ChLeer.Enabled = False
+                            '///////Chek abrir////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Reportes Generales'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChAbrir.Value = 0
+         Else
+          Me.ChAbrir.Value = 1
+         End If
+     '///////Chek Grabar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Reportes Generales'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChGrabar.Value = 0
+         Else
+          Me.ChGrabar.Value = 1
+         End If
+         
+          '///////Chek leer////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Reportes Generales'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChLeer.Value = 0
+         Else
+          Me.ChLeer.Value = 1
+         End If
+     '///////Chek borrar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Reportes Generales'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChEliminar.Value = 0
+         Else
+          Me.ChEliminar.Value = 1
+         End If
+          
+    Case "Reportes Movimientos"
+          Me.ChAbrir.Enabled = True
+          Me.ChGrabar.Enabled = False
+          Me.ChEliminar.Enabled = False
+          Me.ChLeer.Enabled = False
+                            '///////Chek abrir////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Reportes Movimientos'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChAbrir.Value = 0
+         Else
+          Me.ChAbrir.Value = 1
+         End If
+     '///////Chek Grabar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Reportes Movimientos'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChGrabar.Value = 0
+         Else
+          Me.ChGrabar.Value = 1
+         End If
+         
+          '///////Chek leer////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Reportes Movimientos'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChLeer.Value = 0
+         Else
+          Me.ChLeer.Value = 1
+         End If
+     '///////Chek borrar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Reportes Movimientos'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChEliminar.Value = 0
+         Else
+          Me.ChEliminar.Value = 1
+         End If
+          
+    Case "Reportes Bancos"
+          Me.ChAbrir.Enabled = True
+          Me.ChGrabar.Enabled = False
+          Me.ChEliminar.Enabled = False
+          Me.ChLeer.Enabled = False
+          
+                            '///////Chek abrir////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Abrir Reportes Bancos'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChAbrir.Value = 0
+         Else
+          Me.ChAbrir.Value = 1
+         End If
+     '///////Chek Grabar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Reportes Bancos'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChGrabar.Value = 0
+         Else
+          Me.ChGrabar.Value = 1
+         End If
+         
+          '///////Chek leer////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Leer Reportes Bancos'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChLeer.Value = 0
+         Else
+          Me.ChLeer.Value = 1
+         End If
+     '///////Chek borrar////
+          Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Reportes Bancos'))"
+          Me.DtaNacceso.Refresh
+         If Me.DtaNacceso.Recordset.EOF Then
+          Me.ChEliminar.Value = 0
+         Else
+          Me.ChEliminar.Value = 1
+         End If
+    
+    End Select
+    
+      DtaNacceso.Refresh
+      Do While Not DtaNacceso.Recordset.EOF
+         If DtaNacceso.Recordset("CodUsuario") = TxtCodPasword.Text Then
+          
+           Exit Sub
+         End If
+        DtaNacceso.Recordset.MoveNext
+      Loop
+     
+Exit Sub
+TipoErrs:
+ControlErrores
+Unload Me
+End Sub
+
+Private Sub xptopbuttons1_Click()
+Unload Me
+End Sub
+

@@ -1,0 +1,443 @@
+VERSION 5.00
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{E1C6DB9D-BD4A-4A61-A759-0CED75D034BF}#43.0#0"; "SmartButton.ocx"
+Begin VB.Form FrmGrupo 
+   BorderStyle     =   1  'Fixed Single
+   Caption         =   "Departamentos de Cuentas"
+   ClientHeight    =   1560
+   ClientLeft      =   45
+   ClientTop       =   330
+   ClientWidth     =   7995
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MDIChild        =   -1  'True
+   MinButton       =   0   'False
+   ScaleHeight     =   1560
+   ScaleWidth      =   7995
+   Begin MSDataListLib.DataCombo DBCodigo 
+      Height          =   315
+      Left            =   1200
+      TabIndex        =   9
+      Top             =   120
+      Width           =   1455
+      _ExtentX        =   2566
+      _ExtentY        =   556
+      _Version        =   393216
+      Text            =   ""
+   End
+   Begin MSAdodcLib.Adodc DtaNacceso 
+      Height          =   330
+      Left            =   4200
+      Top             =   2160
+      Width           =   2655
+      _ExtentX        =   4683
+      _ExtentY        =   582
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "DtaNacceso"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin MSAdodcLib.Adodc DtaGrupoCuentas 
+      Height          =   375
+      Left            =   4200
+      Top             =   1800
+      Width           =   2655
+      _ExtentX        =   4683
+      _ExtentY        =   661
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "DtaGrupoCuentas"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin VB.TextBox TxtDescripcion 
+      Height          =   315
+      Left            =   4320
+      TabIndex        =   2
+      Top             =   120
+      Width           =   3615
+   End
+   Begin SmartButtonProject.SmartButton CmdAnterior 
+      Height          =   855
+      Left            =   2400
+      TabIndex        =   3
+      Top             =   600
+      Width           =   975
+      _ExtentX        =   1720
+      _ExtentY        =   1508
+      ForeColor       =   12582912
+      Caption         =   "Anterior"
+      Picture         =   "FrmGrupo.frx":0000
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin SmartButtonProject.SmartButton CmdSiguiente 
+      Height          =   855
+      Left            =   3480
+      TabIndex        =   4
+      Top             =   600
+      Width           =   975
+      _ExtentX        =   1720
+      _ExtentY        =   1508
+      ForeColor       =   12582912
+      Caption         =   "Siguiente"
+      Picture         =   "FrmGrupo.frx":0452
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin SmartButtonProject.SmartButton CmdNuevo 
+      Height          =   855
+      Left            =   1320
+      TabIndex        =   5
+      Top             =   600
+      Width           =   975
+      _ExtentX        =   1720
+      _ExtentY        =   1508
+      ForeColor       =   12582912
+      Caption         =   "Nuevo"
+      Picture         =   "FrmGrupo.frx":08A4
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin SmartButtonProject.SmartButton CmdSalir 
+      Height          =   855
+      Left            =   6960
+      TabIndex        =   6
+      Top             =   600
+      Width           =   975
+      _ExtentX        =   1720
+      _ExtentY        =   1508
+      ForeColor       =   12582912
+      Caption         =   "Salir"
+      Picture         =   "FrmGrupo.frx":0CF6
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin SmartButtonProject.SmartButton CmdGrabar 
+      Height          =   855
+      Left            =   120
+      TabIndex        =   7
+      Top             =   600
+      Width           =   975
+      _ExtentX        =   1720
+      _ExtentY        =   1508
+      ForeColor       =   12582912
+      Caption         =   "Grabar"
+      Picture         =   "FrmGrupo.frx":6F90
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin SmartButtonProject.SmartButton CmdBorrar 
+      Height          =   855
+      Left            =   4560
+      TabIndex        =   8
+      Top             =   600
+      Width           =   975
+      _ExtentX        =   1720
+      _ExtentY        =   1508
+      ForeColor       =   12582912
+      Caption         =   "Borrar"
+      Picture         =   "FrmGrupo.frx":786A
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin VB.Label Label2 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Descripcion"
+      Height          =   255
+      Left            =   3360
+      TabIndex        =   1
+      Top             =   120
+      Width           =   1215
+   End
+   Begin VB.Label Label1 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Codigo Dpto"
+      Height          =   255
+      Left            =   120
+      TabIndex        =   0
+      Top             =   120
+      Width           =   1455
+   End
+End
+Attribute VB_Name = "FrmGrupo"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Private Sub CmdAnterior_Click()
+On Error GoTo TipoErrs
+Dim Respuesta As Integer
+Me.DtaGrupoCuentas.Recordset.MovePrevious
+If Me.DtaGrupoCuentas.Recordset.BOF Then
+   Me.DtaGrupoCuentas.Recordset.MoveNext
+   MsgBox "Este es el Primer Registro", vbInfoContabilidadtion, "Control de Cuentas Contabilidad"
+Else
+  Me.DBCodigo.Text = Me.DtaGrupoCuentas.Recordset!CodGrupo
+End If
+   Exit Sub
+TipoErrs:
+   ControlErrores
+End Sub
+
+Private Sub CmdBorrar_Click()
+On Error GoTo TipoErrs
+  Dim Respuesta, Rsp
+    If DtaGrupoCuentas.Recordset.RecordCount = 0 Then
+        MsgBox "No Existen Registros de Departamentos de Cuentas Actualmente", vbInformation
+        Exit Sub
+    End If
+  Set Rsp = Me.DtaGrupoCuentas.Recordset
+  Respuesta = MsgBox("Esta seguro de Borrar el registro?", vbYesNo, "Borrando: " & Me.TxtDescripcion.Text)
+   If Respuesta = 6 Then
+     Criterio = "CodGrupo='" & Me.DBCodigo & "'"
+     DtaGrupoCuentas.Recordset.MoveFirst
+     Me.DtaGrupoCuentas.Recordset.Find (Criterio)
+    If Not Me.DtaGrupoCuentas.Recordset.EOF Then
+     Me.DtaGrupoCuentas.Recordset.Delete
+   
+    End If
+      Me.DBCodigo.Text = ""
+      TxtDescripcion.Text = ""
+  End If
+  Me.DtaGrupoCuentas.Refresh
+
+ Exit Sub
+TipoErrs:
+ ControlErrores
+End Sub
+
+Private Sub CmdGrabar_Click()
+On Error GoTo TipoErrs
+If DBCodigo.Text = "" Then
+    MsgBox "El Código del Departamento de Cuentas es Requerido", vbInformation
+    DBCodigo.SetFocus
+    Exit Sub
+End If
+If TxtDescripcion.Text = "" Then
+    MsgBox "La Descripción del Departamento de Cuentas es Requerido", vbInformation
+    TxtDescripcion.SetFocus
+    Exit Sub
+End If
+
+Criterio = "CodGrupo='" & Me.DBCodigo.Text & "'"
+If DtaGrupoCuentas.Recordset.RecordCount <> 0 Then DtaGrupoCuentas.Recordset.MoveFirst
+Me.DtaGrupoCuentas.Recordset.Find (Criterio)
+If DtaGrupoCuentas.Recordset.EOF Then
+  Me.DtaGrupoCuentas.Recordset.AddNew
+  Me.DtaGrupoCuentas.Recordset!CodGrupo = Me.DBCodigo.Text
+  Me.DtaGrupoCuentas.Recordset!DescripcionGrupo = Me.TxtDescripcion.Text
+  Me.DtaGrupoCuentas.Recordset.Update
+
+Else
+  'Me.DtaGrupoCuentas.Recordset.Edit
+  Me.DtaGrupoCuentas.Recordset!DescripcionGrupo = Me.TxtDescripcion.Text
+  Me.DtaGrupoCuentas.Recordset.Update
+ 
+End If
+Me.DBCodigo.Text = ""
+Exit Sub
+TipoErrs:
+ControlErrores
+End Sub
+
+Private Sub CmdNuevo_Click()
+Me.DBCodigo.Text = ""
+End Sub
+
+Private Sub CmdSalir_Click()
+Unload Me
+End Sub
+
+Private Sub CmdSiguiente_Click()
+On Error GoTo TipoErrs
+Dim Respuesta As Integer
+Me.DtaGrupoCuentas.Recordset.MoveNext
+If Me.DtaGrupoCuentas.Recordset.EOF Then
+   Me.DtaGrupoCuentas.Recordset.MovePrevious
+   MsgBox "Este es el Ultimo Registro", vbInfoContabilidadtion, "Control de Cuentas Contabilidad"
+Else
+  Me.DBCodigo.Text = Me.DtaGrupoCuentas.Recordset!CodGrupo
+End If
+   Exit Sub
+TipoErrs:
+   ControlErrores
+End Sub
+
+Private Sub DBCodigo_Change()
+On Error GoTo TipoErrs
+If DtaGrupoCuentas.Recordset.RecordCount = 0 Then
+    Exit Sub
+End If
+Criterio = "CodGrupo='" & Me.DBCodigo.Text & "'"
+DtaGrupoCuentas.Recordset.MoveFirst
+Me.DtaGrupoCuentas.Recordset.Find (Criterio)
+If DtaGrupoCuentas.Recordset.EOF Then
+  Me.TxtDescripcion.Text = ""
+
+Else
+  Me.TxtDescripcion.Text = Me.DtaGrupoCuentas.Recordset!DescripcionGrupo
+ 
+ 
+End If
+Exit Sub
+TipoErrs:
+ControlErrores
+End Sub
+
+Private Sub Form_Activate()
+On Error GoTo TipoErrs
+
+If Not CodigoUsuario = 0 Then
+ Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodigoUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Grupo Cuentas'))"
+ Me.DtaNacceso.Refresh
+ If Me.DtaNacceso.Recordset.EOF Then
+   Me.CmdGrabar.Enabled = False
+
+ End If
+ Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodigoUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Grupo Cuentas'))"
+ Me.DtaNacceso.Refresh
+ If Me.DtaNacceso.Recordset.EOF Then
+   Me.CmdBorrar.Enabled = False
+
+ End If
+End If
+Exit Sub
+TipoErrs:
+MsgBox err.Description
+End Sub
+
+Private Sub Form_Load()
+With Me.DtaGrupoCuentas
+   '.DatabaseName = Ruta
+   .ConnectionString = Conexion
+   .RecordSource = "select * from GrupoCuentas"
+   .Refresh
+End With
+LlenarDataCombos DtaGrupoCuentas, DBCodigo, "CodGrupo", "CodGrupo"
+With Me.DtaNacceso
+   '.DatabaseName = Ruta
+   .ConnectionString = Conexion
+   .RecordSource = "Select * from Accesos"
+   .Refresh
+End With
+Me.BackColor = RGB(236, 233, 216)
+Me.CmdAnterior.BackColor = RGB(236, 233, 216)
+Me.CmdBorrar.BackColor = RGB(236, 233, 216)
+Me.CmdGrabar.BackColor = RGB(236, 233, 216)
+Me.CmdNuevo.BackColor = RGB(236, 233, 216)
+Me.CmdSalir.BackColor = RGB(236, 233, 216)
+Me.CmdSiguiente.BackColor = RGB(236, 233, 216)
+
+
+End Sub

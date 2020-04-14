@@ -1,0 +1,98 @@
+Public Sub CargaADODC(TablaMaestra As String, ByRef nombreADODC As Adodc, xsinonimo, nombreCombo As String, apliTrim As String, conex As String, f As Form, sqlOrd As String, Optional estado As String)
+    nombreADODC.ConnectionString = Conexion
+    
+    If TablaMaestra = "CatCombus" Then
+            sql = "select (descripcombus)," & TablaMaestra & ".idcombus from " & TablaMaestra & " " & sqlOrd
+    End If
+    
+    If TablaMaestra = "CataVH" Then
+            sql = "select (descricpcion)," & TablaMaestra & ".idvh from " & TablaMaestra & " " & sqlOrd
+    End If
+    
+    If TablaMaestra = "_Sede" Then
+            sql = "select (Descripcion)," & TablaMaestra & ".IdSede from " & TablaMaestra & " where activo=" & xsinonimo & " " & sqlOrd
+    End If
+    
+    If TablaMaestra = "ControlSeccionFinca" Then
+        sql = "select IdReg, NoSeccion from ControlSeccionFinca where IdFinca=" & FrmPlanificaActividad.cmdfinca.BoundText & " and  anoplanta=" & Trim(FrmPlanificaActividad.txtplantado.Text) & " "
+    End If
+    
+     If TablaMaestra = "TipoNomina" Then
+        sql = "select CodTipoNomina, Nomina from TipoNomina where activa='True'"
+    End If
+        
+    If TablaMaestra = "_Finca" Then
+        If apliTrim = "" Then
+            sql = "select ((Finca))," & TablaMaestra & ".IdFinca from " & TablaMaestra & " where IdSede=" & FrmRegSeccion.sede.BoundText & " " & sqlOrd
+        Else
+            If apliTrim = "2" Then
+                sql = "select ((Finca))," & TablaMaestra & ".IdFinca from " & TablaMaestra & " where IdSede=" & FrmPlanificaActividad.cmdsede.BoundText & " " & sqlOrd
+            Else
+                sql = "select ((Finca))," & TablaMaestra & ".IdFinca from " & TablaMaestra & "  " & sqlOrd
+            End If
+        End If
+    End If
+    
+    If TablaMaestra = "_Plantacion" Then
+            sql = "select (Plantacion)," & TablaMaestra & ".IdPlantacion from " & TablaMaestra & "  " & sqlOrd
+    End If
+    If TablaMaestra = "DatosEmpresa" Then
+            sql = "select NombreEmpresa,ConexionSistemaContable, " & TablaMaestra & ".Numero from " & TablaMaestra & " where  Numero=2 " & sqlOrd
+    End If
+    If TablaMaestra = "Cargo" Then
+            sql = "select Cargo, " & TablaMaestra & ".CodCargo from " & TablaMaestra & "  " & sqlOrd
+    End If
+    If TablaMaestra = "tab_units" Then
+            sql = "select name, " & TablaMaestra & ".id_unit from " & TablaMaestra & "  " & sqlOrd
+    End If
+    If TablaMaestra = "Productos" Then
+            sql = "select Descripcion_Producto, " & TablaMaestra & ".Cod_Productos from " & TablaMaestra & " WHERE Cod_Cuenta_Inventario LIKE '" & wcodbodega & "%'" & sqlOrd
+    End If
+    If TablaMaestra = "Tareas" Then
+        If wregNuSede = 0 Then
+            If IsNumeric(FrmPlanificaActividad.cmdsede.BoundText) Then
+                wregNuSede = FrmPlanificaActividad.cmdsede.BoundText
+            End If
+        End If
+            sql = "select CodigoTarea as No_Tarea, (LOWER (Nombre_Tarea)) as Nombre_Tarea , QuienPaga,UnidMedida, DH from  " & TablaMaestra & " where CodigoTarea like '" & wregNuSede & "%'"
+    End If
+    
+    If TablaMaestra = "Empleado" Then
+            sql = "select (nombre1 +' '+ nombre2 +' '+ apellido1 +' '+ apellido2) as nombrecompleto, Empleado.CodEmpleado from Empleado where (activo=1 or activo='True') "
+    End If
+
+    On Local Error Resume Next
+    Err = 0
+    If TablaMaestra = "Productos" Or TablaMaestra = "Tareas" Then
+        nombreADODC.ConnectionString = ConexionInventario
+    Else
+        If TablaMaestra = "CataVH" Or TablaMaestra = "CatCombus" Then
+            nombreADODC.ConnectionString = ConexionContable
+        Else
+            nombreADODC.ConnectionString = Conexion
+        End If
+    End If
+    nombreADODC.RecordSource = sql
+    nombreADODC.Refresh
+    If Err <> 0 Then
+        nombreADODC.ConnectionString = Conexion
+        nombreADODC.RecordSource = sql
+        nombreADODC.Refresh
+    End If
+    
+'    Set nombreADODC.Recordset.ActiveConnection = Nothing
+End Sub
+Public Function tienepermiso(usu As Integer, aplica As String, oper As String) As Boolean
+Set rsa = Nothing
+sql = "select permitido from mapermisos where cci_rif=" & usu & " and aplicacion='" & aplica & "' and operacion='" & oper & "' "
+rsa.Open sql, Conexion, adOpenForwardOnly, adLockReadOnly
+If rsa.EOF = True Then
+    tienepermiso = False
+Else
+    If rsa!permitido = 1 Then
+        tienepermiso = True
+    Else
+        tienepermiso = False
+    End If
+End If
+End Function

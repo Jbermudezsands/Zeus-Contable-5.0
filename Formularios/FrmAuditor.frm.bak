@@ -1,0 +1,293 @@
+VERSION 5.00
+Object = "{080026CA-5CAE-11D6-82C2-000021B74250}#16.0#0"; "vbskfree.ocx"
+Object = "{AF8CD3F4-666F-11D1-940D-000021A73813}#5.0#0"; "osProgress.ocx"
+Begin VB.Form FrmAuditor 
+   BorderStyle     =   1  'Fixed Single
+   Caption         =   "Auditoria de Movimientos"
+   ClientHeight    =   6945
+   ClientLeft      =   45
+   ClientTop       =   435
+   ClientWidth     =   9150
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   6945
+   ScaleWidth      =   9150
+   StartUpPosition =   2  'CenterScreen
+   Begin VB.ListBox List1 
+      Height          =   4350
+      ItemData        =   "FrmAuditor.frx":0000
+      Left            =   120
+      List            =   "FrmAuditor.frx":0002
+      TabIndex        =   3
+      Top             =   1920
+      Width           =   8895
+   End
+   Begin VB.Data DtaIndiceTransaccion 
+      Caption         =   "IndiceTransaccion"
+      Connect         =   "Access"
+      DatabaseName    =   ""
+      DefaultCursorType=   0  'DefaultCursor
+      DefaultType     =   2  'UseODBC
+      Exclusive       =   0   'False
+      Height          =   495
+      Left            =   360
+      Options         =   0
+      ReadOnly        =   0   'False
+      RecordsetType   =   1  'Dynaset
+      RecordSource    =   ""
+      Top             =   3240
+      Visible         =   0   'False
+      Width           =   4095
+   End
+   Begin VB.Data DtaMovimientos 
+      Caption         =   "DtaMovimientos"
+      Connect         =   "Access"
+      DatabaseName    =   ""
+      DefaultCursorType=   0  'DefaultCursor
+      DefaultType     =   2  'UseODBC
+      Exclusive       =   0   'False
+      Height          =   495
+      Left            =   360
+      Options         =   0
+      ReadOnly        =   0   'False
+      RecordsetType   =   1  'Dynaset
+      RecordSource    =   ""
+      Top             =   2640
+      Visible         =   0   'False
+      Width           =   3735
+   End
+   Begin vbskfree.Skinner Skinner1 
+      Left            =   2160
+      Top             =   1080
+      _ExtentX        =   1270
+      _ExtentY        =   1270
+      CloseButtonToolTipText=   "Cerrar"
+      MinButtonToolTipText=   "Minimizar"
+      MaxButtonToolTipText=   "Maximizar"
+      RestoreButtonToolTipText=   "Restaurar"
+   End
+   Begin Progress.osProgress Barra 
+      Height          =   495
+      Left            =   240
+      TabIndex        =   2
+      Top             =   240
+      Width           =   8775
+      _ExtentX        =   6694
+      _ExtentY        =   873
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin VB.CommandButton CmdSalir 
+      Caption         =   "Salir"
+      Height          =   855
+      Left            =   7920
+      Picture         =   "FrmAuditor.frx":0004
+      Style           =   1  'Graphical
+      TabIndex        =   1
+      Top             =   840
+      Width           =   1095
+   End
+   Begin VB.CommandButton CmdAuditoria 
+      Caption         =   "Auditar "
+      Height          =   855
+      Left            =   240
+      Picture         =   "FrmAuditor.frx":5C16
+      Style           =   1  'Graphical
+      TabIndex        =   0
+      Top             =   840
+      Width           =   1095
+   End
+   Begin VB.Data DtaTasas 
+      Caption         =   "DtaTasas"
+      Connect         =   "Access"
+      DatabaseName    =   ""
+      DefaultCursorType=   0  'DefaultCursor
+      DefaultType     =   2  'UseODBC
+      Exclusive       =   0   'False
+      Height          =   375
+      Left            =   360
+      Options         =   0
+      ReadOnly        =   0   'False
+      RecordsetType   =   1  'Dynaset
+      RecordSource    =   ""
+      Top             =   4080
+      Width           =   4695
+   End
+   Begin VB.Data DtaTransacciones 
+      Caption         =   "DtaTransacciones"
+      Connect         =   "Access"
+      DatabaseName    =   ""
+      DefaultCursorType=   0  'DefaultCursor
+      DefaultType     =   2  'UseODBC
+      Exclusive       =   0   'False
+      Height          =   375
+      Left            =   480
+      Options         =   0
+      ReadOnly        =   0   'False
+      RecordsetType   =   1  'Dynaset
+      RecordSource    =   ""
+      Top             =   4560
+      Width           =   4455
+   End
+End
+Attribute VB_Name = "FrmAuditor"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Private Sub CmdAuditoria_Click()
+On Error GoTo TipoErrs
+Dim CantRegistros As Integer, I As Integer
+Dim MonedaCuenta As String
+Dim TasaCambio1 As Double, TasaCambio2 As Double
+Dim Debito As Double, Credito As Double
+
+'//////////////////////Cargo todos los movimientos Contable///////////////////////////////
+Me.DtaMovimientos.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.TCambio, Transacciones.Credito, Transacciones.Debito, Transacciones.FechaTasas, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
+Me.DtaMovimientos.Refresh
+If Not Me.DtaMovimientos.Recordset.EOF Then
+ Me.DtaMovimientos.Recordset.MoveLast
+ CanRegistros = Me.DtaMovimientos.Recordset.RecordCount
+ Me.DtaMovimientos.Recordset.MoveFirst
+Else
+  MsgBox "No Existen Registros", vbInformation, "Sistema Contable"
+  Exit Sub
+End If
+
+With Barra
+ .Min = 0
+ .Max = CanRegistros
+ .Value = 0
+ I = 1
+ Do While Not Me.DtaMovimientos.Recordset.EOF
+  
+  TasaCambio1 = DtaMovimientos.Recordset.TCambio
+  MonedaCuenta = Me.DtaMovimientos.Recordset.TipoMoneda
+  .Value = I
+  NumFecha1 = DtaMovimientos.Recordset.FechaTransaccion
+  NumeroMovimiento = DtaMovimientos.Recordset.NumeroMovimiento
+   
+   Debito = 0
+   Credito = 0
+   Me.DtaTransacciones.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.Credito, Transacciones.Debito FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas Where (((Transacciones.FechaTransaccion) = " & NumFecha1 & ") And ((Transacciones.NumeroMovimiento) = " & NumeroMovimiento & ")) ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
+   Me.DtaTransacciones.Refresh
+   Do While Not Me.DtaTransacciones.Recordset.EOF
+     Debito = Me.DtaTransacciones.Recordset("Debito") + Debito
+     Credito = Me.DtaTransacciones.Recordset("Credito") + Credito
+     Me.DtaTransacciones.Recordset.MoveNext
+   Loop
+  
+   If Debito <> Credito Then
+   Me.List1.AddItem ("---------O-----------")
+   Me.List1.AddItem ("Existe Descuadre en el Sistema, Transaccion No: " & NumeroMovimiento & "   Fecha Transaccion:   " & CDate(NumFecha1))
+   Me.List1.AddItem ("por la Cantidad:" & Debito - Credito)
+   End If
+  
+  Me.DtaTasas.RecordSource = "SELECT Tasas.FechaTasas, Tasas.MontoCordobas, Tasas.MontoLibras From Tasas Where (((Tasas.FechaTasas) = " & NumFecha1 & "))"
+  Me.DtaTasas.Refresh
+  If Me.DtaTasas.Recordset.EOF Then
+   Me.List1.AddItem ("---------O-----------")
+   Me.List1.AddItem ("No Existen Tasas para la Transaccion No: " & NumeroMovimiento & " Fecha Tasa: " & CDate(NumFecha1))
+   TasaCambio2 = 0
+  Else
+   TasaCambio2 = Me.DtaTasas.Recordset("MontoCordobas")
+  End If
+  
+  Me.DtaIndiceTransaccion.RecordSource = "SELECT IndiceTransaccion.FechaTransaccion, IndiceTransaccion.NumeroMovimiento, IndiceTransaccion.DescripcionMovimiento, IndiceTransaccion.Nperiodo, IndiceTransaccion.Fuente, IndiceTransaccion.TipoMoneda From IndiceTransaccion WHERE (((IndiceTransaccion.FechaTransaccion)=" & NumFecha1 & ") AND ((IndiceTransaccion.NumeroMovimiento)=" & NumeroMovimiento & "))"
+  Me.DtaIndiceTransaccion.Refresh
+  
+  If Not Me.DtaIndiceTransaccion.Recordset.EOF Then
+    TipoMoneda = Me.DtaIndiceTransaccion.Recordset.TipoMoneda
+       If TipoMoneda = MonedaCuenta Then
+            If Not TasaCambio1 = 1 Then
+              Me.List1.AddItem ("---------O-----------")
+                  Me.List1.AddItem ("Las Tasas de Cambios en Transacciones no Coinciden,Transaccion No: " & NumeroMovimiento & "  Fecha " & CDate(NumFecha1))
+              Me.DtaMovimientos.Recordset.Edit
+                 DtaMovimientos.Recordset.TCambio = 1
+              Me.DtaMovimientos.Recordset.Update
+            End If
+       Else
+         Select Case TipoMoneda
+          
+
+              Case "Córdobas"
+                 If Not TasaCambio1 = (1 / TasaCambio2) Then
+                   Me.List1.AddItem ("---------O-----------")
+                   Me.List1.AddItem ("Las Tasas de Cambios en Transacciones no Coinciden,Transaccion No: " & NumeroMovimiento & " Fecha " & CDate(NumFecha1))
+                   If Not TasaCambio2 = 0 Then
+                    Me.DtaMovimientos.Recordset.Edit
+                     DtaMovimientos.Recordset.TCambio = 1 / TasaCambio2
+                    Me.DtaMovimientos.Recordset.Update
+                   End If
+                 End If
+              Case "Dólares"
+                 If Not TasaCambio1 = TasaCambio2 Then
+                   Me.List1.AddItem ("---------O-----------")
+                   Me.List1.AddItem ("Las Tasas de Cambios en Transacciones no Coinciden,Transaccion No: " & NumeroMovimiento & " Fecha " & CDate(NumFecha1))
+                   If Not TasaCambio2 = 0 Then
+                    Me.DtaMovimientos.Recordset.Edit
+                     DtaMovimientos.Recordset.TCambio = TasaCambio2
+                    Me.DtaMovimientos.Recordset.Update
+                   End If
+                 End If
+         End Select
+       End If
+  
+  
+  
+  
+  Else
+    Me.List1.AddItem ("---------O-----------")
+    Me.List1.AddItem ("Existe un Error con la Tabla de Indices Transacciones, MovimientoNo" & NumeroMovimiento & " Fecha: " & CDate(NumFecha1))
+  End If
+ 
+
+  
+  Me.DtaMovimientos.Recordset.MoveNext
+  I = I + 1
+
+ Loop
+End With
+If Me.List1.Text = "" Then
+
+     Me.List1.AddItem ("---------O-----------")
+End If
+
+Exit Sub
+TipoErrs:
+  MsgBox err.Description
+End Sub
+
+Private Sub CmdSalir_Click()
+Unload Me
+End Sub
+
+Private Sub Form_Load()
+'With Me.DtaMovimientos
+
+' .ConnectionString = Conexion
+'End With
+'
+'With Me.DtaTransacciones
+
+' .ConnectionString = Conexion
+'End With
+'
+'With Me.DtaIndiceTransaccion
+
+' .ConnectionString = Conexion
+'End With
+'
+'With Me.DtaTasas
+
+' .ConnectionString = Conexion
+'End With
+End Sub

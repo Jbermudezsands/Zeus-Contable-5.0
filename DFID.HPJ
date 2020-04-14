@@ -1,0 +1,47 @@
+[OPTIONS]
+ROOT = D:\DFID
+COMPRESS = FALSE
+WARNING = 3
+REPORT = 1
+CONTENTS = Menu_Principal
+ERRORLOG = D:\DFID\DFID.ERR
+TITLE = DFID
+MULTIKEY = M
+
+[BAGGAGE]
+
+
+[BITMAPS]
+d:\dfid\imagenes\menu.bmp
+c:\hm20\source\hlprabit.bmp
+d:\dfid\imagenes\archivo.bmp
+d:\dfid\imagenes\dash.bmp
+d:\dfid\imagenes\cuentasa.bmp
+d:\dfid\imagenes\guardar.bmp
+d:\dfid\imagenes\nuevo.bmp
+d:\dfid\imagenes\anterior.bmp
+d:\dfid\imagenes\siguie~1.bmp
+d:\dfid\imagenes\borrar.bmp
+d:\dfid\imagenes\bsalir.bmp
+d:\dfid\imagenes\grupoa.bmp
+d:\dfid\imagenes\contra~2.bmp
+
+[FILES]
+D:\DFID\DFID.RTF
+
+[WINDOWS]
+main="DFID",(500,80,500,800),0,(255,255,187),(249,253,170),0
+
+[MAP]
+Menu_Principal      1; Menu Principal
+Menu_Archivo        2; Menu Archivo
+Editar_Niveles      3; Editar Niveles
+Usuarios            4; Usuarios
+Cuentas             5; Cuentas
+Tipo_de_Cuentas     6; Tipo de Cuentas
+Grupo_de_Cuentas    7; Grupo de Cuentas
+Contratistas        8; Contratistas
+Justificacion       9; Justificacion
+Empleados           10; Empleados
+
+; WARNING! Some context numbers have been generated internally.

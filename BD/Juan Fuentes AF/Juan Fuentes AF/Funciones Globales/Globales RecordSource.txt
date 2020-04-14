@@ -1,0 +1,5 @@
+Public rsa As New ADODB.Recordset
+Public rsa1 As New ADODB.Recordset
+Public rsa2 As New ADODB.Recordset
+Public rsa3 As New ADODB.Recordset
+Public rsa4 As New ADODB.Recordset

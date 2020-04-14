@@ -1,0 +1,4 @@
+If Not IsNull(Me.AdoDatosEmpresa.Recordset("ConexionSistemaContable")) Then
+  ConexionContable = Me.AdoDatosEmpresa.Recordset("ConexionSistemaContable")
+ End If
+ 

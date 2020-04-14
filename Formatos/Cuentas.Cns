@@ -1,0 +1,155 @@
+A1-1-01-01       CMACaja General                       02
+A1-1-01-02       CMACaja Chica                         02
+A1-1-02-01       CMABanco 1                            02
+A1-1-02-02       CMABanco 2                            02
+A1-1-02-03       CMABanco 3                            02
+A1-1-03-01       CMAClientes Nacionales                03
+A1-1-04-01       CMACuentas por Cobrar Socios          03
+A1-1-04-02       CMAAnticipo para gastos               03
+A1-1-06-01       CMAInventario Productos               05
+A1-1-06-01       CMAInv secado  Patio                  05
+A1-1-06-02       CMAInv secado  Camas                  05
+A1-1-06-03       CMAInv Bodega para trillo             05
+A1-1-06-04       CMAInv en Trillo                      05
+A1-1-06-05       CMAMercaderia en transito             05
+A1-1-06-06       CMAInv  suministros                   05
+A1-1-07-01       CMAIVA por cobrar                     01
+A1-1-07-02       CMAAnticipo IR                        01
+A1-1-07-03       CMARetenciones por cobrar             01
+A1-1-07-04       CMARetenciones municipal              01
+A1-1-08-01       CMAEstimacion para incobrable         01
+A1-2-01-01       CMATerreno                            06
+A1-2-01-02       CMAEdificio                           06
+A1-2-01-03       CMAMobiiario y Equipo Oficina         06
+A1-2-01-04       CMAEquipos Computo                    06
+A1-2-01-05       CMAEquipos Rodante                    06
+A1-2-01-06       CMAMaquinarias- Herramientas          06
+A1-2-01-07       CMAEquipo Laboratorio                 06
+A1-2-01-08       CMACamas de secado                    06
+A1-2-02-01       CMADep Edificio                       01
+A1-2-02-02       CMADep Mobiiario y Equipo Oficina     01
+A1-2-02-03       CMADep Equipos Computo                01
+A1-2-02-04       CMADep Equipos Rodante                01
+A1-2-02-05       CMADep Maquinas y Herramientas        01
+A1-2-02-06       CMADep Equipo Laboratorio             01
+A1-2-02-07       CMADep Camas de secado                01
+A1-2-03-01       CMAActivo en proceso                  01
+A1-3-01-01       CMAGastos pre-operativos              01
+A1-3-01-02       CMADepositos en Garantias             01
+A2-1-01-01       CMAProveedores Locales                07
+A2-1-01-02       CMAProveedores Extranjeros            07
+A2-1-01-03       CMAProductores                        07
+A2-1-02-01       CMAAcreedores Diversos                07
+A2-1-02-02       CMACuentas por Pagar Socios           07
+A2-1-03-01       CMAPrestamos Bancarios CP             07
+A2-1-04-01       CMAImpuestos por pagar                07
+A2-1-04-02       CMAIVA por pagar                      07
+A2-1-04-03       CMAIR anual                           07
+A2-1-04-04       CMARetencion por Compra y Servicios   07
+A2-1-04-05       CMARetencion Empleados                07
+A2-1-04-06       CMAMunicipalidad                      07
+A2-1-06-01       CMACarga Laboral                      07
+A2-1-06-02       CMASalarios por Pagar                 07
+A2-1-06-03       CMAINSS Laboral                       07
+A2-1-06-04       CMAINSS Patronal                      07
+A2-1-06-05       CMAINATEC                             07
+A2-1-06-01       CMAProvision Vacaciones               07
+A2-1-06-02       CMAProvision Aguinaldo                07
+A2-1-06-03       CMAProvision Indenmizacion            07
+A2-2-01-01       CMAPrestamos Bancarios LP             07
+A2-2-02-01       CMACuentas por Pagar LP               07
+A2-2-03-01       CMAProvision Indemnizacion LP         07
+A3-1-01-01       CMACapital Suscrito                   08
+A3-1-02-01       CMAResultados Periodos Anteriores     08
+A3-1-02-02       CMAResultado del Periodo              08
+A3-1-03-01       CMAReserva Legal                      08
+A4-1-01-01       CMAVtas Productos                     09
+A4-1-01-02       CMAServicios de Secado                09
+A4-1-01-03       CMAServicios de Trillado              09
+A4-1-01-04       CMAServicios de Catacion              09
+A4-1-02-02       CMADescuentos s/ventas                09
+A5-2-01-01       CMACV Productos Vendidos              10
+A5-2-01-02       CMACV Servicios de Secado             10
+A5-2-01-03       CMACV Servicios de Trillado           10
+A5-2-01-04       CMACV Servicios de Catacion           10
+A5-2-02-01       CMACP 1                               10
+A5-2-02-02       CMACP 2                               10
+A5-2-02-03       CMACP 3                               10
+A5-2-02-04       CMACP 4                               10
+A6-1-01-01       CMASalarios                           10
+A6-1-01-02       CMAVacaciones                         10
+A6-1-01-03       CMAAguinaldo                          10
+A6-1-01-04       CMAIndemnizacion                      10
+A6-1-01-05       CMAInss                               10
+A6-1-01-06       CMAInatec                             10
+A6-1-01-07       CMAViaticos                           10
+A6-1-02-01       CMAAgua                               10
+A6-1-02-02       CMAEnergia                            10
+A6-1-02-03       CMATelefono                           10
+A6-1-02-04       CMAIntenet - Web                      10
+A6-1-02-05       CMACombustible                        10
+A6-1-02-06       CMAAlquiler                           10
+A6-1-02-07       CMASeguros                            10
+A6-1-02-08       CMAVigilancia                         10
+A6-1-02-09       CMADesanuaje                          10
+A6-1-03-01       CMAPapeleria y utiles de oficina      10
+A6-2-03-02       CMAMaterial de limpieza               10
+A6-2-03-03       CMAMaterial y empaques                10
+A6-2-03-04       CMATransporte                         10
+A6-2-03-05       CMAGarantia a clientes                10
+A6-1-04-01       CMAProfesionales y Tecnicos           10
+A6-1-04-02       CMACapacitacion                       10
+A6-1-06-01       CMAMant y Rep Local                   10
+A6-1-06-02       CMAMantenimiento Mobiliario           10
+A6-1-06-03       CMAMantenimiento de Computo           10
+A6-1-06-04       CMAMantenimiento Vehiculos            10
+A6-1-06-05       CMAMantenimeento Maquinarias          10
+A6-1-06-06       CMAMant y Rep Equipo Laboratorio      10
+A6-1-06-07       CMAMant y Prep Camas de secado        10
+A6-1-06-01       CMADeprec Mobiiario y Equipo Oficina  10
+A6-1-06-02       CMADeprec Equipo Computo              10
+A6-1-06-03       CMADeprec Equipo Rodante              10
+A6-1-06-04       CMADeprec Maquinaria                  10
+A6-1-07-01       CMARenta Anual                        10
+A6-1-07-02       CMAImpuesto Alcaldia                  10
+A6-1-07-03       CMAimpuesto IR anual                  10
+A6-2-01-01       CMASalarios                           10
+A6-2-01-02       CMAVacaciones                         10
+A6-2-01-03       CMAAguinaldo                          10
+A6-2-01-04       CMAIndemnizacion                      10
+A6-2-01-05       CMAInss                               10
+A6-2-01-06       CMAInatec                             10
+A6-2-01-07       CMAViaticos                           10
+A6-2-02-01       CMAAgua                               10
+A6-2-02-02       CMAEnergia                            10
+A6-2-02-03       CMATelefono                           10
+A6-2-02-04       CMAIntenet                            10
+A6-2-02-05       CMACombustible                        10
+A6-2-02-06       CMAAlquiler                           10
+A6-2-02-07       CMASeguros                            10
+A6-2-02-08       CMAVigilancia                         10
+A6-2-02-09       CMADesadunaje                         10
+A6-2-03-01       CMAPapeleria y utiles de oficina      10
+A6-2-03-02       CMAMaterial de limpieza               10
+A6-2-03-03       CMAMaterial de empaques               10
+A6-2-03-04       CMAGarantia a clientes                10
+A6-2-04-01       CMAProfesionales y Tecnicos           10
+A6-2-04-02       CMACapacitacion                       10
+A6-2-06-01       CMAMant y Rep Local                   10
+A6-2-06-02       CMAMant y Rep Mobiliario              10
+A6-2-06-03       CMAMant y Rep Equipos Computo         10
+A6-2-06-04       CMAMant y Rep Vehiculos               10
+A6-2-06-05       CMAMant y Rep Maquinaria              10
+A6-2-06-06       CMADep Equipo Laboratorio             10
+A6-2-06-07       CMADep Camas de secado                10
+A6-2-06-01       CMADeprec Mobiiario y Equipo Oficina  10
+A6-2-06-02       CMADeprec Equipo Computo              10
+A6-2-06-03       CMADeprec Equipo Rodante              10
+A6-2-06-04       CMADeprec Maquinaria                  10
+A6-2-07-01       CMARenta Anual                        10
+A6-2-07-02       CMAImpuesto Alcaldia                  10
+A6-2-07-03       CMAimpuesto IR anual                  10
+A6-3-01-01       CMAIntereses                          10
+A6-3-01-02       CMAComisiones bancaria                10
+A6-3-01-03       CMADiferencial Cambiario              10
+A6-4-01-01       CMAGastos no Deducibles               10

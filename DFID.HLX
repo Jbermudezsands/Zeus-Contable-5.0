@@ -1,0 +1,827 @@
+ýVQHLPEDFILE_02.59ý
+
+[DICTIONARY]
+AF - Append Project FILES Section
+AM - Append Project MAP Section
+BI - Browse info
+AV - Audio/Video Project Options
+BN - Browse group names
+BR - Bitmap root
+CH - Character set
+CI - Citation
+CM - Context map
+CN - Context number
+CNI - Context Number Index
+CP - Compress
+CR - Copyright
+CS - Context string
+CSI - Context String Index
+CV - Compiler version
+DH - Defined help styles
+D2 - Defined help styles - ver 2.00
+FM - Font markers
+F2 - Font markers - ver 2.00
+HA - Help author
+HC - Help compiler dir
+HF - Help files
+HX - Help comments
+HT - Help topic section
+IC - Icon FileName
+IN - Index
+JM - Jump markers
+J2 - Jump markers - ver 2.00
+KW - Keywords
+LN - Language
+MD - Macro definitions
+MM - Multimedia markers
+MK - Multiple keywords
+MI - Macro info
+OK - Old key phrase
+OP - Optimize for  CDROM
+PJ - Project macro
+PM - Popup markers
+PR - Paragraph markers
+PT - Page title
+RC - RTF Compatibility
+TI - Title
+TM - Topic macro
+TP - Template
+TX - Help Text
+WA - Warning
+WD - Window definitions
+WM - Write map file
+WS - Windows specification source
+[END OF DICTIONARY]
+
+[HA]
+[EHA]
+
+[HX]
+[EHX]
+
+[AF]
+[EAF]
+
+[AM]
+[EAM]
+
+[HC]
+C:\HM20\HC.EXE
+[EHC]
+
+[CV]
+2
+[ECV]
+
+[WA]
+3
+[EWA]
+
+[CP]
+0
+[ECP]
+
+[IN]
+1
+[EIN]
+
+[RC]
+6
+[ERC]
+
+[TI]
+DFID
+[ETI]
+
+[LN]
+0
+[ELN]
+
+[OK]
+0
+[EOK]
+
+[OP]
+0
+[EOP]
+
+[PJ]
+0
+[EPJ]
+
+[WS]
+-1
+[EWS]
+
+[WM]
+0
+[EWM]
+
+[CH]
+0
+[ECH]
+
+[AV]
+0 0 0 0
+[EAV]
+
+[BR]
+[EBR]
+
+[HF]
+[EHF]
+
+[D2]
+0;10;0;0;0;0;0;MS Sans Serif;Default Help Text;
+0;12;0;-1;0;0;0;MS Sans Serif;Topic Heading;
+0;10;0;-1;0;0;0;MS Sans Serif;Emphasized Help Text;
+800000;10;0;-1;0;0;0;Arial;Arial;
+80;12;-1;-1;0;0;0;Black Chancery;Titulo;
+[ED2]
+
+[BN]
+[EBN]
+
+[MD]
+[EMD]
+
+[MI]
+[EMI]
+
+[WD]
+main="DFID",(500,80,500,800),0,(255,255,187),(249,253,170),0
+[EWD]
+
+[HT]
+[PT]
+Menu Principal
+[EPT]
+
+[F2]
+001
+[EF2]
+
+[J2]
+009100020000
+[EJ2]
+
+[PR]
+03100000000000001200000008000000050310000000000000000000000800000005
+[EPR]
+
+[CS]
+
+[ECS]
+[TX]
+Menu Principal
+
+d:\dfid\imagenes\menu.bmp
+
+Archivo        Procesos     Opciones    Reportes     Ventanas    Ayuda
+
+
+
+
+c:\hm20\source\hlprabit.bmp
+
+[ETX]
+[EHT]
+
+[PT]
+Menu Archivo
+[EPT]
+
+[KW]
+Archivo,Menu Archivo,
+[EKW]
+
+[F2]
+001
+[EF2]
+
+[J2]
+009100030000009100050000009100070000009100080000
+[EJ2]
+
+[PR]
+03100000000000001200000008000000050310000000000000000000000800000005
+[EPR]
+
+[CS]
+
+[ECS]
+[TX]
+Menu Archivo
+
+d:\dfid\imagenes\archivo.bmp
+
+d:\dfid\imagenes\dash.bmp Editar Niveles
+d:\dfid\imagenes\dash.bmp Cuentas
+d:\dfid\imagenes\dash.bmp Grupo de Cuentas
+d:\dfid\imagenes\dash.bmp Contratistas
+Empleados
+Activo Fijo
+Periodos
+Salir
+
+
+[ETX]
+[EHT]
+
+[PT]
+Editar Niveles
+[EPT]
+
+[KW]
+Editar Niveles,Niveles,
+[EKW]
+
+[F2]
+001
+[EF2]
+
+[J2]
+009100040000
+[EJ2]
+
+[PR]
+03110000000000005200000008000000050310000000000000000000000800000005
+[EPR]
+
+[CS]
+
+[ECS]
+[TX]
+Editar Niveles
+
+
+-El acceso a Editar Niveles lo podemos optener
+ cuando hagamos click en  Archvios, Niveles,
+ Editar Niveles de seguridad.  Para poder editar 
+ niveles de  seguridad es necesario primero haver 
+ creado las cuentas a los usuarios por que  de lo
+ contrario, el sistema bloqueará esta  opcion, 
+ mientras  no se haga esta funcion.
+
+Editar Niveles le Permite Crear Acceso a los
+distintos  usuarios de una manera, rapida y
+sensilla. La ventana de Edita le muestra una 
+
+lista de los usuarios del Sistema que tienen  
+acceso al sistema (ubicado en la Parte
+izquierda de la  pantalla) y una lista de todas
+las rutinas en la cual usted  puede escoger.
+En la parte inferior de la Ventana tiene las 
+distintas opciones para negar el acceso de un 
+determinado usuario a siertas rutinas. para algunas 
+rutinas tendra apagada algunas opciones, esto es 
+por que en esa rutina nunca ejecutara esa opcion, 
+por lo tanto  lo bloqueara.
+
+ 
+Tambien encontrara en la parate inferior dos
+botones, Aceptar y Cancelar. Acepartar le sirve 
+para que el sistema entienda que usted ha 
+elegida determinadas opciones de acceso al 
+sistema, si  usted llegara a cambiar de Usuario 
+del sistema o Rutinas el sistema no modificara 
+ninguna opcion, el sistema  entendera que todo queda
+por defecto como estaba anteriormente. 
+ 
+
+[ETX]
+[EHT]
+
+[PT]
+Usuarios
+[EPT]
+
+[KW]
+Usuarios,
+[EKW]
+
+[F2]
+001
+[EF2]
+
+[PR]
+03110000000000005200000008000000050310000000000000000000000800000005
+[EPR]
+
+[CS]
+
+[ECS]
+[TX]
+Usuarios
+
+Para Crear Usuarios o Cuentas de Usuarios
+en el sistema, lo encontrara en Opciones/
+Usuarios. en esta ventana usted tendrá la 
+opcion de crear un usuario del sistema.
+Le apareceran tres campos, en la cual es 
+obligatorio llenarlos. uno de los campos es
+Nombre del usuario, es aqui donde se llena
+en nombre de la persona a la que se le esta
+creando el permiso,este nombre puede ser 
+nemonico o alfanumerico (Letras Mescladas 
+con numeros), es un campo requerido por el
+
+sistema osea que no se puede dejar en blanco.
+
+el segundo campo que aparece en esta ventana
+es el  Nivel de Usuario, que se define solo 
+para que el sistema  pueda identificar quien es el Jefe
+en el sistema o quien es el que tiene mayor 
+autoridad de Permisos . Es recomendable en 
+caso que usted quiera tener muchos niveles de
+acceso en El sistema que ponga el nivel maximo que
+en este caso es 100 desde aqui usted podra 
+delimitar una gran variedad de niveles para no 
+limitar al sistema con un rango pequeño. Esto es
+
+por que despues que le define el primer nivel en
+El sistema Contable este ubica dicho nivel como el 
+maximo en el sistema y no se prodra modificar
+luego. Para saber que Usuario esta actualmente
+en el sistema debe hacerle click en Opciones/
+Informa Usuario. Este campo es solo numerico
+por lo tanto no dejara que usted agrege un tipo
+diferente.
+
+El tercer campo en requerido en el sistema y es
+la clave de acceso, este campo es de tipo
+alfanumerico. Lo que le permite libertad para
+
+escribir la clave, de la forma en que usted
+decida.
+
+En la parte inferior del sistema usted tiene la
+opcion de Grabar, Borrar, Salir, cuando usted 
+hace click en grabar este ejecuta una serie de 
+acciones para saber si los datos estan correctos, 
+de lo contrario no graba el registro. si todo esta
+correcto le pedirá que repita la clave, esto es
+para saber si fue correctamente introducida en el
+sistema. De lo contrario le pedira que repita
+nuevamenta la clave. Cuando usted intenta Borrar
+
+a un usuario El sistema preguntara si realmente esta 
+seguro de borrarlo, cuando la respuesta sea si
+usted elimina el registro.
+Si intenta eliminar un registro, y este tiene nivel 
+superior El sistema no permintira esta accion. de igual
+manera ocurre cuando selecciona un usuario de
+nivel superior.
+
+Cuando intenta salir de  El sistema o de la rutina
+usuarios y ejecutó algún cambio El sistema preguntara
+si desea guardar los cambios, como simpre El sistema
+está tratando de resguardar los registros.
+
+[ETX]
+[EHT]
+
+[PT]
+Cuentas
+[EPT]
+
+[KW]
+Cuentas,Grupo de Cuentas,
+[EKW]
+
+[F2]
+003003003003003004003003003003003003
+[EF2]
+
+[J2]
+009100070000
+[EJ2]
+
+[P2]
+009100060000009100060000
+[EP2]
+
+[PR]
+031100000000000052000000080000000503100000000000000000000008000000050311000000000000500000000800000005
+[EPR]
+
+[CS]
+
+[ECS]
+[TX]
+Cuentas
+
+d:\dfid\imagenes\cuentasa.bmp
+
+Para accesar al modulo de cuentas puede hacerlo
+desde el menu principal en Archivo/ Cuentas o 
+bien puede abrir cuentas el el boton de la barra
+haciendo Click.
+
+en este modulo de cuentas encontrara que 
+el modulo de cuentas esta divido por dos 
+Pestañas (Informacion de Cuentas e 
+informacion de Saldos).
+
+Cuentas:  En este campo puede digitar el codigo
+de la cuenta, si existe mostrara la informacion de 
+cuentas e informacion de saldos, de lo contrario
+permitira que se digite la informacion.
+
+Tipo: Para esta opcion usted tiene que 
+seleccionar de la lista de tipos de cuentas
+dependiendo a la actividad de la cuenta, 
+(Otros activos, Cuentas de Efectivo, Cuentas 
+x Cobrar, Cuentas x Pagar, Otros Pasivos, 
+Cuentas de Ingreso, Cuentas de Gasto,
+Cuentas Banco Cordobas,
+Cuenta Banco Dolares )
+
+Descripcion: En este campo usted puede
+digitar el nombre que el sistema 
+reconocera a la cuenta.
+
+Grupo de Cuentas: En este campo debe 
+seleccionar una de las opciones de la 
+lista que le aparecera al hacer click en
+el boton que la sale junto a este nombre,
+estos campos fueron creados en el 
+modulo de Grupo de Cuentas.
+
+Botones de Comando
+
+d:\dfid\imagenes\guardar.bmp
+Grabar:  Este Boton Graba todos los Cambios  efectuados en el modulo
+de cuentas los campos requeridos por el sistema  son el codigo de
+la cuenta, tipo,  grupo de cuentas
+
+d:\dfid\imagenes\nuevo.bmp
+Nuevo; Este boton borra toda la infomracion anterior o limpia la 
+pantalla para que pueda digitar nueva informacion.
+
+d:\dfid\imagenes\anterior.bmp
+Anterior: Este boton mueve el registro al anterior del seleccionado,
+si llega al  primer  manda un mesaje que indica que estamos
+en el primer registro.
+
+d:\dfid\imagenes\siguie~1.bmp
+Siguiente: Este boton mueve el registro siguiente del seleccionado,
+si llega al ultimo  registro manda un mensaje que indica que estamos
+en el ultimo registro.
+
+d:\dfid\imagenes\borrar.bmp
+Borrar: Este boton elimina el registro activo, en la pantalla, siempre
+pregunta si esta seguro de eliminar el registro, si hace click en No
+no se efectua ninguna operacion.
+
+d:\dfid\imagenes\bsalir.bmp
+Salir: Este boton nos permite cerra la ventana Activa.
+
+
+
+
+
+
+
+[ETX]
+[EHT]
+
+[PT]
+Tipo de Cuentas
+[EPT]
+
+[F2]
+001
+[EF2]
+
+[CS]
+
+[ECS]
+[TX]
+Tipo de Cuentas
+
+Los Tipos de Cuentas como Banco Cordobas
+y Dolares son utilizadas en el modulo de 
+cheques por que el sistema lee el tipo
+y en el cheque pondra la cantidad 
+dependiendo del tipo de cuenta.
+
+[ETX]
+[EHT]
+
+[PT]
+Grupo de Cuentas
+[EPT]
+
+[KW]
+Grupo de Cuentas,
+[EKW]
+
+[F2]
+001003003004003003003003003003
+[EF2]
+
+[PR]
+03110000000000005000000008000000050311000000000000000000000800000005
+[EPR]
+
+[CS]
+
+[ECS]
+[TX]
+Grupo de Cuentas
+
+d:\dfid\imagenes\grupoa.bmp
+Para accesar a este modulo lo puede, hacer desde el menu en Archivos/
+Grupo de cuentas o bien el el boton de grupo de cuentas.
+
+Codigo Grupo: En este campo usted puede digitar el codigo 
+del grupo de cuentas o bien seleccionar de la lista.
+
+Descripcion: En este campo usted puede digitar el nombre del
+grupo de cuenta
+
+
+
+Botones de Comando
+
+d:\dfid\imagenes\guardar.bmp
+Grabar:  Este Boton Graba todos los Cambios  efectuados en el modulo
+de cuentas los campos requeridos por el sistema  son el codigo de
+la cuenta, tipo,  grupo de cuentas
+
+d:\dfid\imagenes\nuevo.bmp
+Nuevo; Este boton borra toda la infomracion anterior o limpia la 
+pantalla para que pueda digitar nueva informacion.
+
+d:\dfid\imagenes\anterior.bmp
+Anterior: Este boton mueve el registro al anterior del seleccionado,
+si llega al  primer  manda un mesaje que indica que estamos
+en el primer registro.
+
+d:\dfid\imagenes\siguie~1.bmp
+Siguiente: Este boton mueve el registro siguiente del seleccionado,
+si llega al ultimo  registro manda un mensaje que indica que estamos
+en el ultimo registro.
+
+d:\dfid\imagenes\borrar.bmp
+Borrar: Este boton elimina el registro activo, en la pantalla, siempre
+pregunta si esta seguro de eliminar el registro, si hace click en No
+no se efectua ninguna operacion.
+
+d:\dfid\imagenes\bsalir.bmp
+Salir: Este boton nos permite cerra la ventana Activa.
+
+
+
+
+
+
+
+[ETX]
+[EHT]
+
+[PT]
+Contratistas
+[EPT]
+
+[KW]
+Contratistas,
+[EKW]
+
+[F2]
+001003003003003003003003003003003003003003003003003003003004003003003003003003
+[EF2]
+
+[J2]
+009100070000009100090000
+[EJ2]
+
+[PR]
+0311000000000000000000000800000005
+[EPR]
+
+[CS]
+
+[ECS]
+[TX]
+Contratistas
+
+d:\dfid\imagenes\contra~2.bmp
+
+Para Accesar a esta opcion del sistema usted necesita hacerlo
+desde el menu principal en Archivo/ contratista o bien en la barra 
+de acceso directo.
+
+apareceran los siguientes campos:
+
+Codigo contratista: en este campo usted podra digitar o 
+seleccionar el codigo del contratista. este es un campo
+requerido
+
+
+Nombre Contratista: en este campo usted puede digitar el
+nombre del contratista tiene un espacio de hasta 
+200  caracteres para el nombre. Este es un campo requerido
+
+Direccion:  en este campo usted puede digitar la direccion
+del contratista, tiene un espacio maximo de 256 caracteres.
+
+Grupo de Cuentas: en esta opcion usted tiene que digitar
+el grupo de cuentas de la lista, no puede agregar un
+grupo desde aqui, si no digita un dato de la lista le dara
+un error. este es un dato requerido por el sistema.
+
+Ciudad: en este campo usted tiene que digitar la ciudad
+del contratista.
+
+Telefono: En este campo usted tiene que digitar el telefono
+del contratista.
+
+Codigo Postal: en este campo usted tiene que digitar  el 
+codigo postal del contratista.
+
+Fax: en este campo usted tiene que digitar la fax
+del contratista.
+
+E-mail: en este campo usted tiene que digitar el correo
+electronico del contratista.
+
+Fecha de Contratacion: En este campo usted puede seleccionar
+la fecha de contratacion, en este campo siempre aparecera
+la fecha actual, dependiendo del reloj de la maquina.
+es un campo requerido
+
+Fecha Finalizacion:  En este campo usted puede seleccionar
+la fecha de finalizacion del contrato, en este campo siempre aparecera
+la fecha actual, dependiendo del reloj de la maquina.
+es un campo requerido.
+
+Telefono caso emergencia: en este campo puede digitar un telefono y 
+una descripcion adicional hasta 256 caracteres.
+
+Conocimientos y Cursos: este campo puede utilizarlo para digitar un
+dato adicional de los conocimientos y datos de cursos, tiene hasta 
+256 caracteres.
+
+Razones Contratacion:  En este campo usted tiene un espacio de 256
+caractres
+
+Trabajo Anteriores:  en este campo usted digta informacion de trab 
+anteriores, tiene espacio de 256 caracteres.
+
+Recomendaciones: puede digitar hasta 256 caracteres
+
+Idiomas que domina:  en este campo puede digitar hasta 256 caracteres.
+
+
+Datos Justificacion:   para esta opcion usted tiene primero que 
+seleccionar un codigo de contratista y se activara esta opcion, 
+al hacer clik mostrara la informacion de Justificacion.
+
+
+Botones de Comando
+
+d:\dfid\imagenes\guardar.bmp
+Grabar:  Este Boton Graba todos los Cambios  efectuados en el modulo
+de cuentas los campos requeridos por el sistema  son el codigo de
+la cuenta, tipo,  grupo de cuentas
+
+d:\dfid\imagenes\nuevo.bmp
+Nuevo; Este boton borra toda la infomracion anterior o limpia la 
+pantalla para que pueda digitar nueva informacion.
+
+d:\dfid\imagenes\anterior.bmp
+Anterior: Este boton mueve el registro al anterior del seleccionado,
+si llega al  primer  manda un mesaje que indica que estamos
+en el primer registro.
+
+d:\dfid\imagenes\siguie~1.bmp
+Siguiente: Este boton mueve el registro siguiente del seleccionado,
+si llega al ultimo  registro manda un mensaje que indica que estamos
+en el ultimo registro.
+
+d:\dfid\imagenes\borrar.bmp
+Borrar: Este boton elimina el registro activo, en la pantalla, siempre
+pregunta si esta seguro de eliminar el registro, si hace click en No
+no se efectua ninguna operacion.
+
+d:\dfid\imagenes\bsalir.bmp
+Salir: Este boton nos permite cerra la ventana Activa.
+
+
+[ETX]
+[EHT]
+
+[PT]
+Justificacion
+[EPT]
+
+[KW]
+Justifiacion,
+[EKW]
+
+[F2]
+001003003003003003003003004003003003003
+[EF2]
+
+[J2]
+009100080000
+[EJ2]
+
+[PR]
+0311000000000000000000000800000005
+[EPR]
+
+[CS]
+
+[ECS]
+[TX]
+Justificacion
+
+
+En la parte superior de la justificacion aparece el nombre del 
+contratista, el la parte inferior esta encuadrada con los 
+siguietes datos:
+
+
+Fecha de contratacion: Este campo es proporcionado por el modulo 
+de contratista. No puede ser modificado
+
+Fecha Finalizacion:  Este campo es proporcionado por el modulo 
+de contratista. No puede ser modificado
+
+Fecha ultimo cobro: Este campo muestra la fecha ultima en que
+se le pago al contratista o cobro el contratista. segun el detalle
+de movimientos. este campo no puede ser modificado.
+
+Monto Acordado: este monto es el que se pagara al contratista en
+su totalidad. este campo debe ser digitado para que el sistema
+pueda hacer los calculos.
+
+Cobrado a la Fecha:  Este campo no es modifable y se alimenta
+automaticamente del detalle de movimientos.
+
+Pendiente: es la diferencia entre lo cobrado y lo acordado con el
+contratista. este campo no es modificable
+
+% Pendiente: este  no es modificable y muestra el porcentaje pendiente
+entre el monto acordado y el pendiente.
+
+Detalle de Movimientos: Este muestra la fecha del Anticipo, Numero 
+de Transaccion que se Genero el modulo de Transacciones, Ref Voucher
+Monto Anticipo. todos estos campos no pueden ser digitados, solo en el
+modulo de Transacciones.
+
+
+
+Botones de Comando
+
+d:\dfid\imagenes\guardar.bmp
+Grabar:  Este Boton Graba todos los Cambios  efectuados en el modulo
+de Justifiacion, pero solo graba Monto Acordado.
+
+d:\dfid\imagenes\anterior.bmp
+Anterior: Este boton mueve el registro al anterior del seleccionado,
+si llega al  primer  manda un mesaje que indica que estamos
+en el primer registro.
+
+d:\dfid\imagenes\siguie~1.bmp
+Siguiente: Este boton mueve el registro siguiente del seleccionado,
+si llega al ultimo  registro manda un mensaje que indica que estamos
+en el ultimo registro.
+
+d:\dfid\imagenes\bsalir.bmp
+Salir: Este boton nos permite cerra la ventana Activa.
+
+
+[ETX]
+[EHT]
+
+[PT]
+Empleados
+[EPT]
+
+[KW]
+Empleados,
+[EKW]
+
+[F2]
+001
+[EF2]
+
+[CS]
+
+[ECS]
+[TX]
+Empleados
+
+
+Para Accesar a esta venta tiene que selecionar del menu
+Archivo / Empleados o bien en la barra de acceso directo
+en empleados.
+
+[ETX]
+[EHT]
+
+[EOF]

@@ -1,0 +1,155 @@
+A,1-1-01-01,,Caja General,02
+A,1-1-01-02,,Caja Chica,02
+A,1-1-02-01,,Banco 1,02
+A,1-1-02-02,,Banco 2,02
+A,1-1-02-03,,Banco 3,02
+A,1-1-03-01,,Clientes Nacionales,03
+A,1-1-04-01,,Cuentas por Cobrar Socios,03
+A,1-1-04-02,,Anticipo para gastos,03
+A,1-1-06-01,,Inventario Productos,05
+A,1-1-06-01,,Inv secado  Patio,05
+A,1-1-06-02,,Inv secado  Camas,05
+A,1-1-06-03,,Inv Bodega para trillo,05
+A,1-1-06-04,,Inv en Trillo ,05
+A,1-1-06-05,,Mercaderia en transito,05
+A,1-1-06-06,,Inv  suministros ,05
+A,1-1-07-01,,IVA por cobrar,01
+A,1-1-07-02,,Anticipo IR,01
+A,1-1-07-03,,Retenciones por cobrar,01
+A,1-1-07-04,,Retenciones municipal,01
+A,1-1-08-01,,Estimacion para incobrable,01
+A,1-2-01-01,,Terreno,06
+A,1-2-01-02,,Edificio,06
+A,1-2-01-03,,Mobiiario y Equipo Oficina,06
+A,1-2-01-04,,Equipos Computo,06
+A,1-2-01-05,,Equipos Rodante,06
+A,1-2-01-06,,Maquinarias- Herramientas,06
+A,1-2-01-07,,Equipo Laboratorio,06
+A,1-2-01-08,,Camas de secado,06
+A,1-2-02-01,,Dep Edificio,01
+A,1-2-02-02,,Dep Mobiiario y Equipo Oficina,01
+A,1-2-02-03,,Dep Equipos Computo,01
+A,1-2-02-04,,Dep Equipos Rodante,01
+A,1-2-02-05,,Dep Maquinas y Herramientas,01
+A,1-2-02-06,,Dep Equipo Laboratorio,01
+A,1-2-02-07,,Dep Camas de secado,01
+A,1-2-03-01,,Activo en proceso ,01
+A,1-3-01-01,,Gastos pre-operativos,01
+A,1-3-01-02,,Depositos en Garantias,01
+A,2-1-01-01,,Proveedores Locales ,07
+A,2-1-01-02,,Proveedores Extranjeros,07
+A,2-1-01-03,,Productores,07
+A,2-1-02-01,,Acreedores Diversos,07
+A,2-1-02-02,,Cuentas por Pagar Socios,07
+A,2-1-03-01,,Prestamos Bancarios CP,07
+A,2-1-04-01,,Impuestos por pagar,07
+A,2-1-04-02,,IVA por pagar,07
+A,2-1-04-03,,IR anual,07
+A,2-1-04-04,,Retencion por Compra y Servicios,07
+A,2-1-04-05,,Retencion Empleados,07
+A,2-1-04-06,,Municipalidad,07
+A,2-1-06-01,,Carga Laboral,07
+A,2-1-06-02,,Salarios por Pagar,07
+A,2-1-06-03,,INSS Laboral,07
+A,2-1-06-04,,INSS Patronal,07
+A,2-1-06-05,,INATEC,07
+A,2-1-06-01,,Provision Vacaciones,07
+A,2-1-06-02,,Provision Aguinaldo,07
+A,2-1-06-03,,Provision Indenmizacion,07
+A,2-2-01-01,,Prestamos Bancarios LP,07
+A,2-2-02-01,,Cuentas por Pagar LP,07
+A,2-2-03-01,,Provision Indemnizacion LP,07
+A,3-1-01-01,,Capital Suscrito,08
+A,3-1-02-01,,Resultados Periodos Anteriores,08
+A,3-1-02-02,,Resultado del Periodo,08
+A,3-1-03-01,,Reserva Legal,08
+A,4-1-01-01,,Vtas Productos,09
+A,4-1-01-02,,Servicios de Secado,09
+A,4-1-01-03,,Servicios de Trillado,09
+A,4-1-01-04,,Servicios de Catacion,09
+A,4-1-02-02,,Descuentos s/ventas,09
+A,5-2-01-01,,CV Productos Vendidos,10
+A,5-2-01-02,,CV Servicios de Secado,10
+A,5-2-01-03,,CV Servicios de Trillado,10
+A,5-2-01-04,,CV Servicios de Catacion,10
+A,5-2-02-01,,CP 1,10
+A,5-2-02-02,,CP 2,10
+A,5-2-02-03,,CP 3,10
+A,5-2-02-04,,CP 4,10
+A,6-1-01-01,,Salarios,10
+A,6-1-01-02,,Vacaciones,10
+A,6-1-01-03,,Aguinaldo,10
+A,6-1-01-04,,Indemnizacion,10
+A,6-1-01-05,,Inss,10
+A,6-1-01-06,,Inatec,10
+A,6-1-01-07,,Viaticos,10
+A,6-1-02-01,,Agua,10
+A,6-1-02-02,,Energia,10
+A,6-1-02-03,,Telefono ,10
+A,6-1-02-04,,Intenet - Web,10
+A,6-1-02-05,,Combustible,10
+A,6-1-02-06,,Alquiler,10
+A,6-1-02-07,,Seguros,10
+A,6-1-02-08,,Vigilancia,10
+A,6-1-02-09,,Desanuaje ,10
+A,6-1-03-01,,Papeleria y utiles de oficina,10
+A,6-2-03-02,,Material de limpieza,10
+A,6-2-03-03,,Material y empaques,10
+A,6-2-03-04,,Transporte,10
+A,6-2-03-05,,Garantia a clientes,10
+A,6-1-04-01,,Profesionales y Tecnicos,10
+A,6-1-04-02,,Capacitacion,10
+A,6-1-06-01,,Mant y Rep Local,10
+A,6-1-06-02,,Mantenimiento Mobiliario,10
+A,6-1-06-03,,Mantenimiento de Computo,10
+A,6-1-06-04,,Mantenimiento Vehiculos,10
+A,6-1-06-05,,Mantenimeento Maquinarias,10
+A,6-1-06-06,,Mant y Rep Equipo Laboratorio,10
+A,6-1-06-07,,Mant y Prep Camas de secado,10
+A,6-1-06-01,,Deprec Mobiiario y Equipo Oficina,10
+A,6-1-06-02,,Deprec Equipo Computo,10
+A,6-1-06-03,,Deprec Equipo Rodante,10
+A,6-1-06-04,,Deprec Maquinaria,10
+A,6-1-07-01,,Renta Anual,10
+A,6-1-07-02,,Impuesto Alcaldia,10
+A,6-1-07-03,,impuesto IR anual,10
+A,6-2-01-01,,Salarios,10
+A,6-2-01-02,,Vacaciones,10
+A,6-2-01-03,,Aguinaldo,10
+A,6-2-01-04,,Indemnizacion,10
+A,6-2-01-05,,Inss ,10
+A,6-2-01-06,,Inatec,10
+A,6-2-01-07,,Viaticos,10
+A,6-2-02-01,,Agua,10
+A,6-2-02-02,,Energia,10
+A,6-2-02-03,,Telefono ,10
+A,6-2-02-04,,Intenet,10
+A,6-2-02-05,,Combustible,10
+A,6-2-02-06,,Alquiler,10
+A,6-2-02-07,,Seguros,10
+A,6-2-02-08,,Vigilancia,10
+A,6-2-02-09,,Desadunaje,10
+A,6-2-03-01,,Papeleria y utiles de oficina,10
+A,6-2-03-02,,Material de limpieza,10
+A,6-2-03-03,,Material de empaques,10
+A,6-2-03-04,,Garantia a clientes,10
+A,6-2-04-01,,Profesionales y Tecnicos,10
+A,6-2-04-02,,Capacitacion,10
+A,6-2-06-01,,Mant y Rep Local,10
+A,6-2-06-02,,Mant y Rep Mobiliario ,10
+A,6-2-06-03,,Mant y Rep Equipos Computo,10
+A,6-2-06-04,,Mant y Rep Vehiculos,10
+A,6-2-06-05,,Mant y Rep Maquinaria,10
+A,6-2-06-06,,Dep Equipo Laboratorio,10
+A,6-2-06-07,,Dep Camas de secado,10
+A,6-2-06-01,,Deprec Mobiiario y Equipo Oficina,10
+A,6-2-06-02,,Deprec Equipo Computo,10
+A,6-2-06-03,,Deprec Equipo Rodante,10
+A,6-2-06-04,,Deprec Maquinaria,10
+A,6-2-07-01,,Renta Anual,10
+A,6-2-07-02,,Impuesto Alcaldia,10
+A,6-2-07-03,,impuesto IR anual,10
+A,6-3-01-01,,Intereses,10
+A,6-3-01-02,,Comisiones bancaria,10
+A,6-3-01-03,,Diferencial Cambiario,10
+A,6-4-01-01,,Gastos no Deducibles,10
