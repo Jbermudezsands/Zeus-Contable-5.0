@@ -8,11 +8,11 @@ Object = "{60CCE6A8-5C61-4F30-8513-F57EED62E86A}#8.0#0"; "todl8.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
 Begin VB.Form FrmContabilizaNomina 
    Caption         =   "Contabilizar Nominas"
-   ClientHeight    =   7080
+   ClientHeight    =   7035
    ClientLeft      =   60
    ClientTop       =   450
    ClientWidth     =   12810
-   ScaleHeight     =   7080
+   ScaleHeight     =   7035
    ScaleWidth      =   12810
    StartUpPosition =   3  'Windows Default
    Begin MSAdodcLib.Adodc AdoCuentas 
@@ -375,7 +375,7 @@ Begin VB.Form FrmContabilizaNomina
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   76087297
+            Format          =   77529089
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton RadioButton1 
@@ -891,8 +891,8 @@ Begin VB.Form FrmContabilizaNomina
    End
    Begin MSAdodcLib.Adodc AdoConsultas 
       Height          =   450
-      Left            =   7560
-      Top             =   8760
+      Left            =   9360
+      Top             =   9120
       Width           =   2775
       _ExtentX        =   4895
       _ExtentY        =   794
@@ -937,8 +937,8 @@ Begin VB.Form FrmContabilizaNomina
    End
    Begin MSAdodcLib.Adodc AdoProcesos 
       Height          =   375
-      Left            =   7800
-      Top             =   8280
+      Left            =   7080
+      Top             =   8640
       Width           =   3015
       _ExtentX        =   5318
       _ExtentY        =   661
@@ -983,8 +983,8 @@ Begin VB.Form FrmContabilizaNomina
    End
    Begin MSAdodcLib.Adodc AdoDetalleNomina 
       Height          =   450
-      Left            =   7800
-      Top             =   7800
+      Left            =   7440
+      Top             =   7560
       Width           =   2775
       _ExtentX        =   4895
       _ExtentY        =   794
@@ -1029,8 +1029,8 @@ Begin VB.Form FrmContabilizaNomina
    End
    Begin MSAdodcLib.Adodc AdoIcentivos 
       Height          =   375
-      Left            =   7200
-      Top             =   8640
+      Left            =   7320
+      Top             =   9000
       Width           =   3015
       _ExtentX        =   5318
       _ExtentY        =   661
@@ -1121,8 +1121,8 @@ Begin VB.Form FrmContabilizaNomina
    End
    Begin MSAdodcLib.Adodc AdoSubsidios 
       Height          =   375
-      Left            =   10680
-      Top             =   7800
+      Left            =   10560
+      Top             =   7680
       Width           =   3015
       _ExtentX        =   5318
       _ExtentY        =   661

@@ -624,7 +624,7 @@ Begin VB.Form FrmActivoFijo
          _ExtentX        =   3836
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   63832065
+         Format          =   17104897
          CurrentDate     =   37992
       End
       Begin MSDataListLib.DataCombo DBGrupos 
@@ -647,7 +647,7 @@ Begin VB.Form FrmActivoFijo
          _ExtentX        =   3413
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   63832065
+         Format          =   17104897
          CurrentDate     =   37992
       End
       Begin MSComCtl2.DTPicker TxtFechaUltDep 
@@ -659,7 +659,7 @@ Begin VB.Form FrmActivoFijo
          _ExtentX        =   3413
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   63832065
+         Format          =   17104897
          CurrentDate     =   37992
       End
       Begin VB.Label Label21 
@@ -1038,7 +1038,7 @@ If DtaActivoFijo.Recordset.EOF Then
    Me.DtaActivoFijo.Recordset!NumeroMarbete = Me.TxtMarbete.Text
    Me.DtaActivoFijo.Recordset!FechaCompra = Me.TxtFechaCompra.Value
    Me.DtaActivoFijo.Recordset!NumeroSerie = Me.TxtSerie.Text
-   Me.DtaActivoFijo.Recordset!Marca = Me.TxtMarca.Text
+   Me.DtaActivoFijo.Recordset!marca = Me.TxtMarca.Text
    Me.DtaActivoFijo.Recordset!ValorOriginal = Val(Me.TxtValorOriginal.Text)
    Me.DtaActivoFijo.Recordset!FechaUltimaDepre = Me.TxtFechaUltDep.Value
    Me.DtaActivoFijo.Recordset!ValorEstimadoMeses = Val(Me.TxtValorEstMeses.Text)
@@ -1070,7 +1070,7 @@ Else
    Me.DtaActivoFijo.Recordset!NumeroMarbete = Me.TxtMarbete.Text
    Me.DtaActivoFijo.Recordset!FechaCompra = Me.TxtFechaCompra.Value
    Me.DtaActivoFijo.Recordset!NumeroSerie = Me.TxtSerie.Text
-   Me.DtaActivoFijo.Recordset!Marca = Me.TxtMarca.Text
+   Me.DtaActivoFijo.Recordset!marca = Me.TxtMarca.Text
    Me.DtaActivoFijo.Recordset!ValorOriginal = Me.TxtValorOriginal.Text
    Me.DtaActivoFijo.Recordset!FechaUltimaDepre = Me.TxtFechaUltDep.Value
    Me.DtaActivoFijo.Recordset!ValorEstimadoMeses = Me.TxtValorEstMeses.Text
@@ -1156,7 +1156,7 @@ Else
   Me.TxtMarbete.Text = Me.DtaActivoFijo.Recordset!NumeroMarbete
   Me.TxtFechaCompra.Value = Me.DtaActivoFijo.Recordset!FechaCompra
   Me.TxtSerie.Text = Me.DtaActivoFijo.Recordset!NumeroSerie
-  Me.TxtMarca.Text = Me.DtaActivoFijo.Recordset!Marca
+  Me.TxtMarca.Text = Me.DtaActivoFijo.Recordset!marca
   'Me.TxtValorOriginal.Text = Me.DtaActivoFijo.Recordset!ValorOriginal
   Me.TxtFechaUltDep.Value = Me.DtaActivoFijo.Recordset!FechaUltimaDepre
   Me.TxtValorEstMeses.Text = Me.DtaActivoFijo.Recordset!ValorEstimadoMeses

@@ -5,23 +5,32 @@ Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
 Begin VB.Form FrmListadoCheques 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Listado Cheques"
-   ClientHeight    =   5805
+   ClientHeight    =   6315
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   9150
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   5805
+   ScaleHeight     =   6315
    ScaleWidth      =   9150
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame Frame1 
       Caption         =   "Encabezados"
-      Height          =   855
+      Height          =   1455
       Left            =   120
       TabIndex        =   6
       Top             =   4800
       Width           =   2415
+      Begin VB.CheckBox Check2 
+         Caption         =   "Imprimir Cheque y Comprobante"
+         Height          =   495
+         Left            =   240
+         TabIndex        =   8
+         Top             =   720
+         Value           =   1  'Checked
+         Width           =   1575
+      End
       Begin VB.CheckBox Check1 
          Caption         =   "Imprimir Comprobante"
          Height          =   495
@@ -33,7 +42,7 @@ Begin VB.Form FrmListadoCheques
    End
    Begin VB.Frame Frame2 
       Caption         =   "Consecutivo Cheque"
-      Height          =   855
+      Height          =   1455
       Left            =   2520
       TabIndex        =   3
       Top             =   4800
@@ -498,7 +507,7 @@ Dim X1 As Double, Y1 As Double, X2 As Double, Y2 As Double, X3 As Double, Y3 As 
 Dim UltimaLinea As Double, DiferenciaY As Double, NLineas As Double
 Dim Caracter As Double, ContadorLinea As Double, CadenaDescripcion As String, CaracteresLineas As Double
 Dim Meses As Double, ConsecutivoCheque As Double
-Dim Letras As String, Memo As String, Beneficiario As String, TipoMoneda As String
+Dim Letras As String, Memo As String, Beneficiario As String, TipoMoneda As String, NumeroTransaccion As String, Ciudad As String
  
 
 CodigoCuenta = FrmCheque.DBCodigo.Text
@@ -515,6 +524,7 @@ Do While Not Me.AdoImprime.Recordset.EOF
             Beneficiario = Me.AdoImprime.Recordset("Beneficiario")
             Memo = Me.AdoImprime.Recordset("DescripcionMovimiento")
             TipoMoneda = Me.AdoImprime.Recordset("TipoMoneda")
+
             
             Page = 1
             
@@ -541,6 +551,7 @@ Do While Not Me.AdoImprime.Recordset.EOF
                   NumFecha1 = Me.AdoImprime.Recordset("FechaTransaccion")
                   Fechas1 = Format(Me.AdoImprime.Recordset("FechaTransaccion"), "yyyymmdd")
                   NMovimiento = Val(Me.AdoImprime.Recordset("NumeroMovimiento"))
+                  NumeroMovimiento = Val(Me.AdoImprime.Recordset("NumeroMovimiento"))
                   FrmCheque.DtaConsulta.RecordSource = "SELECT FechaTransaccion, CodCuentas, NTransaccion, NumeroMovimiento, TCambio * Debito AS MDebito, TCambio * Credito AS MCredito, TCambio, Debito, Credito From Transacciones WHERE (FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (NumeroMovimiento = " & NMovimiento & ")"
                   FrmCheque.DtaConsulta.Refresh
                 Do While Not FrmCheque.DtaConsulta.Recordset.EOF
@@ -583,9 +594,9 @@ Do While Not Me.AdoImprime.Recordset.EOF
             End If
             
                    
-                    
+            Monto = MontoCheque
               
-            If Me.Check1.Value = 1 Then
+   If Me.Check1.Value = 1 Then
              If Dir(RutaLogo) <> "" Then
              ArepCheque.Logo.Picture = LoadPicture(RutaLogo)
              End If
@@ -603,7 +614,7 @@ Do While Not Me.AdoImprime.Recordset.EOF
              If FrmCheque.CmbMoneda.Text = "Córdobas" Then
                If FrmCheque.ChkCheque.Value = 1 Then
                
-                 TasaCambio = BuscaTasaCambio(FrmCheque.txtfecha.Value)
+                 TasaCambio = BuscaTasaCambio(FrmCheque.TxtFecha.Value)
                  Monto = FrmCheque.TxtMonto.Text
                  Monto = Monto / TasaCambio
                  ArepCheque.LblDescripcionMonto.Caption = sw.ConvertCurrencyToSpanish(Monto, "Dólares")
@@ -637,25 +648,454 @@ Do While Not Me.AdoImprime.Recordset.EOF
             FechaCheque = Fechas1
             NumeroMovimientos = NumeroTransaccion
             
-                If FrmCheque.CmbMoneda.Text = "Córdobas" Then
+                If TipoMoneda = "Córdobas" Then
                     
                     ArepCheque.DtaCheque.Source = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NumeroMovimiento, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.Debito, Transacciones.Credito, Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTasas,  " & _
                                                   "CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito / Tasas.MontoCordobas ELSE Transacciones.Debito END AS DebitoD, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito / Tasas.MontoCordobas ELSE Transacciones.Credito END AS CreditoD, Transacciones.NPeriodo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
                                                   "WHERE (Transacciones.FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (Transacciones.NumeroMovimiento = " & NumeroTransaccion & ") ORDER BY Transacciones.NTransaccion"
                     ArepCheque2.DtaCheque.Source = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NumeroMovimiento, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.Debito, Transacciones.Credito, Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTasas,  " & _
                                                   "CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito / Tasas.MontoCordobas ELSE Transacciones.Debito END AS DebitoD, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito / Tasas.MontoCordobas ELSE Transacciones.Credito END AS CreditoD, Transacciones.NPeriodo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
-                                                  "WHERE (Transacciones.FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (Transacciones.NumeroMovimiento = " & NumeroTransaccion & ") ORDER BY Transacciones.NTransaccion"
+                                                  "WHERE (Transacciones.FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (Transacciones.NumeroMovimiento = " & NMovimiento & ") ORDER BY Transacciones.NTransaccion"
                 Else
                     ArepCheque.DtaCheque.Source = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NumeroMovimiento, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.Debito, Transacciones.Credito, Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTasas,  " & _
                                                   "CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito * Tasas.MontoCordobas ELSE Transacciones.Debito END AS DebitoD, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito / Tasas.MontoCordobas ELSE Transacciones.Credito END AS CreditoD, Transacciones.NPeriodo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
                                                   "WHERE (Transacciones.FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (Transacciones.NumeroMovimiento = " & NumeroTransaccion & ") ORDER BY Transacciones.NTransaccion"
                     ArepCheque2.DtaCheque.Source = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NumeroMovimiento, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito*Tasas.MontoCordobas  ELSE Transacciones.Debito END AS Debito,  CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito*Tasas.MontoCordobas  ELSE Transacciones.Credito END AS Credito, Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTasas,  " & _
                                                   "CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito  ELSE Transacciones.Debito * Tasas.MontoCordobas END AS DebitoD, CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito  ELSE Transacciones.Credito * Tasas.MontoCordobas END AS CreditoD, Transacciones.NPeriodo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
-                                                  "WHERE (Transacciones.FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (Transacciones.NumeroMovimiento = " & NumeroTransaccion & ") ORDER BY Transacciones.NTransaccion"
+                                                  "WHERE (Transacciones.FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (Transacciones.NumeroMovimiento = " & NMovimiento & ") ORDER BY Transacciones.NTransaccion"
                 
                 End If
              ArepCheque2.Show 1
+             
+  ElseIf Me.Check2.Value = 1 Then
+
+'---------------------------------------------------------------------------------------------------------------------------------------
+'-------------------------------------IMPRIMO EL COMPROBANTE PRIMERO------------------------------------
+'-------------------------------------------------------------------------------------------------------
+         ArepCheque2.DtaCheque.ConnectionString = ConexionReporte
+         ArepCheque.DtaCheque.ConnectionString = ConexionReporte
+         
+         If TipoMoneda = "Córdobas" Then
+           If FrmCheque.ChkCheque.Value = 1 Then
+           
+             TasaCambio = BuscaTasaCambio(Me.AdoImprime.Recordset("FechaTransaccion"))
+             Monto = MontoCheque
+             Monto = Monto / TasaCambio
+             ArepCheque.LblDescripcionMonto.Caption = sw.ConvertCurrencyToSpanish(Monto, "Dólares")
+             ArepCheque.LblMonto.Caption = Format(Monto, "##,##0.00")
+             
+             ArepCheque2.LblDescripcionMonto.Caption = sw.ConvertCurrencyToSpanish(Monto, "Dólares")
+             ArepCheque2.LblMonto.Caption = Format(Monto, "##,##0.00")
+           Else
+           
+            Monto = MontoCheque
+            ArepCheque.LblDescripcionMonto.Caption = Letras
+            ArepCheque.LblMonto.Caption = Format(Monto, "##,##0.00")
+            
+            ArepCheque2.LblDescripcionMonto.Caption = Letras
+            ArepCheque2.LblMonto.Caption = Format(Monto, "##,##0.00")
+           End If
+         Else
+            ArepCheque.LblDescripcionMonto.Caption = Letras
+            ArepCheque.LblMonto.Caption = Format(Monto, "##,##0.00")
+            
+            ArepCheque2.LblDescripcionMonto.Caption = Letras
+            ArepCheque2.LblMonto.Caption = Format(Monto, "##,##0.00")
+         End If
+         
+         
+         ArepCheque.LblMemo.Caption = Memo
+         ArepCheque2.LblMemo.Caption = Memo
+         
+         ArepCheque.LblNombre.Caption = Beneficiario
+         ArepCheque.LblChequeNo.Caption = Me.LblConsecutivo.Text
+         
+         ArepCheque2.LblNombre.Caption = Beneficiario
+         ArepCheque2.LblChequeNo.Caption = Me.LblConsecutivo.Text
+        
+        FechaCheque = Fechas1
+        NumeroMovimientos = NMovimiento
+        
+            If TipoMoneda = "Córdobas" Then
+                
+                ArepCheque.DtaCheque.Source = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NumeroMovimiento, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.Debito, Transacciones.Credito, Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTasas,  " & _
+                                              "CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito / Tasas.MontoCordobas ELSE Transacciones.Debito END AS DebitoD, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito / Tasas.MontoCordobas ELSE Transacciones.Credito END AS CreditoD, Transacciones.NPeriodo, Cuentas.DescripcionGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
+                                              "WHERE (Transacciones.FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (Transacciones.NumeroMovimiento = " & NMovimiento & ") ORDER BY Transacciones.NTransaccion"
+                ArepCheque2.DtaCheque.Source = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NumeroMovimiento, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.Debito, Transacciones.Credito, Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTasas,  " & _
+                                              "CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito / Tasas.MontoCordobas ELSE Transacciones.Debito END AS DebitoD, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito / Tasas.MontoCordobas ELSE Transacciones.Credito END AS CreditoD, Transacciones.NPeriodo, Cuentas.DescripcionGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
+                                              "WHERE (Transacciones.FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (Transacciones.NumeroMovimiento = " & NMovimiento & ") ORDER BY Transacciones.NTransaccion"
             Else
+                ArepCheque.DtaCheque.Source = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NumeroMovimiento, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.Debito, Transacciones.Credito, Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTasas,  " & _
+                                              "CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito * Tasas.MontoCordobas ELSE Transacciones.Debito END AS DebitoD, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito / Tasas.MontoCordobas ELSE Transacciones.Credito END AS CreditoD, Transacciones.NPeriodo, Cuentas.DescripcionGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
+                                              "WHERE (Transacciones.FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (Transacciones.NumeroMovimiento = " & NMovimiento & ") ORDER BY Transacciones.NTransaccion"
+                ArepCheque2.DtaCheque.Source = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NumeroMovimiento, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito*Tasas.MontoCordobas  ELSE Transacciones.Debito END AS Debito,  CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito*Tasas.MontoCordobas  ELSE Transacciones.Credito END AS Credito, Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTasas,  " & _
+                                              "CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito  ELSE Transacciones.Debito * Tasas.MontoCordobas END AS DebitoD, CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito  ELSE Transacciones.Credito * Tasas.MontoCordobas END AS CreditoD, Transacciones.NPeriodo, Cuentas.DescripcionGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
+                                              "WHERE (Transacciones.FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (Transacciones.NumeroMovimiento = " & NMovimiento & ") ORDER BY Transacciones.NTransaccion"
+            
+            End If
+         ArepCheque2.Show 1
+ 
+ 
+        MsgBox "Coloque El Comprobante en la impresora", vbInformation, "Zeus Contable"
+        
+ 
+        FrmCheque.AdoCordenadas.RecordSource = "SELECT CodCuenta, X1, Y1, X2, Y2, X3, Y3, X4, Y4, X5, Y5, X6, Y6, X7, Y7, X8, Y8, X9, Y9, X10, Y10, X11, Y11, X12, Y12, X13, Y13,X14, Y14,X15, Y15,X16, Y16,X17, Y17, X18, Y18, X19, Y19,X20, Y20,X21, Y21, X22, Y22, NLineas,CaracteresLineas, CaracteresConcepto, Ciudad From CordenadasCheque WHERE  (CodCuenta = '" & CodigoCuenta & "')"
+        FrmCheque.AdoCordenadas.Refresh
+        If FrmCheque.AdoCordenadas.Recordset.EOF Then
+         MsgBox "No Existen Coordenadas, para la Cuenta", vbCritical, "Sistema Contable"
+         Exit Sub
+        End If
+
+
+        X1 = FrmCheque.AdoCordenadas.Recordset("X1")
+        Y1 = FrmCheque.AdoCordenadas.Recordset("Y1")
+        X2 = FrmCheque.AdoCordenadas.Recordset("X2")
+        Y2 = FrmCheque.AdoCordenadas.Recordset("Y2")
+        X3 = FrmCheque.AdoCordenadas.Recordset("X3")
+        Y3 = FrmCheque.AdoCordenadas.Recordset("Y3")
+        X4 = FrmCheque.AdoCordenadas.Recordset("X4")
+        Y4 = FrmCheque.AdoCordenadas.Recordset("Y4")
+        X5 = FrmCheque.AdoCordenadas.Recordset("X5")
+        Y5 = FrmCheque.AdoCordenadas.Recordset("Y5")
+        X6 = FrmCheque.AdoCordenadas.Recordset("X6")
+        Y6 = FrmCheque.AdoCordenadas.Recordset("Y6")
+        X7 = FrmCheque.AdoCordenadas.Recordset("X7")
+        Y7 = FrmCheque.AdoCordenadas.Recordset("Y7")
+        X8 = FrmCheque.AdoCordenadas.Recordset("X8")
+        Y8 = FrmCheque.AdoCordenadas.Recordset("Y8")
+        X9 = FrmCheque.AdoCordenadas.Recordset("X9")
+        Y9 = FrmCheque.AdoCordenadas.Recordset("Y9")
+        X10 = FrmCheque.AdoCordenadas.Recordset("X10")
+        Y10 = FrmCheque.AdoCordenadas.Recordset("Y10")
+        X11 = FrmCheque.AdoCordenadas.Recordset("X11")
+        Y11 = FrmCheque.AdoCordenadas.Recordset("Y11")
+        X12 = FrmCheque.AdoCordenadas.Recordset("X12")
+        Y12 = FrmCheque.AdoCordenadas.Recordset("Y12")
+        X13 = FrmCheque.AdoCordenadas.Recordset("X13")
+        Y13 = FrmCheque.AdoCordenadas.Recordset("Y13")
+        X14 = FrmCheque.AdoCordenadas.Recordset("X14")
+        Y14 = FrmCheque.AdoCordenadas.Recordset("Y14")
+        X15 = FrmCheque.AdoCordenadas.Recordset("X15")
+        Y15 = FrmCheque.AdoCordenadas.Recordset("Y15")
+        X16 = FrmCheque.AdoCordenadas.Recordset("X16")
+        Y16 = FrmCheque.AdoCordenadas.Recordset("Y16")
+        X17 = FrmCheque.AdoCordenadas.Recordset("X17")
+        Y17 = FrmCheque.AdoCordenadas.Recordset("Y17")
+        X18 = FrmCheque.AdoCordenadas.Recordset("X18")
+        Y18 = FrmCheque.AdoCordenadas.Recordset("Y18")
+        X19 = FrmCheque.AdoCordenadas.Recordset("X19")
+        Y19 = FrmCheque.AdoCordenadas.Recordset("Y19")
+        X20 = FrmCheque.AdoCordenadas.Recordset("X20")
+        Y20 = FrmCheque.AdoCordenadas.Recordset("Y20")
+        X21 = FrmCheque.AdoCordenadas.Recordset("X21")
+        Y21 = FrmCheque.AdoCordenadas.Recordset("Y21")
+        X22 = FrmCheque.AdoCordenadas.Recordset("X22")
+        Y22 = FrmCheque.AdoCordenadas.Recordset("Y22")
+        NLineas = Val(FrmCheque.AdoCordenadas.Recordset("NLineas"))
+        CaracteresLineas = Val(FrmCheque.AdoCordenadas.Recordset("CaracteresLineas"))
+        CaracteresConcepto = Val(FrmCheque.AdoCordenadas.Recordset("CaracteresConcepto"))
+        Ciudad = FrmCheque.AdoCordenadas.Recordset("Ciudad")
+        
+       If TipoMoneda = "Córdobas" Then
+            If FrmCheque.ChkCheque.Value = 1 Then
+              TasaCambio = BuscaTasaCambio(Me.AdoImprime.Recordset("FechaTransaccion"))
+              Monto = MontoCheque
+              Monto = Monto / TasaCambio
+              FrmCheque.TxtLetras.Text = Letras
+'              ArepCheque.LblMonto.Caption = Format(Monto, "##,##0.00")
+            Else
+              Monto = MontoCheque
+            End If
+         Else
+           Monto = MontoCheque
+      End If
+      
+      Concepto = Memo
+      
+      
+        FrmCheque.DtaConsulta.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento,Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito,Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas,Transacciones.NumeroMovimiento , Periodos.Periodo FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Fechas1 & "', 102) AND CONVERT(DATETIME, '" & Fechas1 & "', 102))AND (Transacciones.NumeroMovimiento = " & NMovimiento & ")ORDER BY Transacciones.NTransaccion"
+        FrmCheque.DtaConsulta.Refresh
+        Printer.FontSize = 8
+        'Inicio el Ciclo de Impresion
+        i = 1
+        
+        TasaCambio = BuscaTasaCambio(FrmCheque.TxtFecha.Value)
+'        Do While Not FrmCheque.DtaConsulta.Recordset.EOF
+        
+                   If i = 1 Then
+                        ContadorLinea = i
+                          
+                                  '//////////////////////////////////////////////////////////////////////////////////////
+                                  '//////////////////////////IMPRIMO LOS ENCABEZADOS ////////////////////////////////////
+                                  '//////////////////////////////////////////////////////////////////////////////////
+                           
+                                   If X5 <> 0 Or Y5 <> 0 Then
+                                     Caracter = 1
+                                     LineaConcepto = 1
+                                     Cadena = Concepto
+                                     If Len(Cadena) > CaracteresConcepto Then
+                                          Do While Len(Cadena) >= CaracteresConcepto
+                                                 If Caracter = 1 Then
+                '                                    Printer.CurrentX = Val(X5) '5
+                '                                    Printer.CurrentY = Val(Y5) + (5 * i) '120
+                '                                    Printer.FontName = "Times New Roman"
+                '                                    Printer.FontSize = 11
+                '                                    Printer.FontBold = True
+                '                                    Printer.Print Concepto
+                                                    
+                                                           
+                                                                 Cadena = Mid(Concepto, 1, CaracteresConcepto)
+                                                                 Printer.CurrentX = Val(X5) '25
+                                                                 Printer.CurrentY = Val(Y5) + (5 * LineaConcepto)
+                                                                 Printer.FontName = "Times New Roman"
+                                                                 Printer.FontSize = 11
+                                                                 Printer.FontBold = True
+                                                                 Printer.Print Cadena
+                                                                 Caracter = Caracter + CaracteresConcepto
+                                                                 
+                                                                 '//////////////////VERIFICO SI LO QUE SOBRE ES MAYOR DE LA LINEA SIGUIENTE/////////////////
+                                                                 
+                                                                 Cadena = Mid(Concepto, Caracter, CaracteresConcepto)
+                                                                 If Len(Cadena) < CaracteresConcepto Then
+                                                                  '///////////////////////SI ES MENOR IMPRIMO/////////////////////////
+                                                                     LineaConcepto = LineaConcepto + 1
+                                                                     Printer.CurrentX = Val(X5) '25
+                                                                     Printer.CurrentY = Val(Y5) + (5 * LineaConcepto)
+                                                                     Printer.FontName = "Times New Roman"
+                                                                     Printer.FontSize = 11
+                                                                     Printer.FontBold = True
+                                                                     Printer.Print Cadena
+                                                                     
+                                                                     Caracter = Caracter + CaracteresConcepto
+                                                                 End If
+                                                                 
+                                                 Else
+                                                                 
+                                                                 LineaConcepto = LineaConcepto + 1
+                                                                 Cadena = Mid(Concepto, Caracter, CaracteresConcepto)
+                                                                 Printer.CurrentX = Val(X5) '25
+                                                                 Printer.CurrentY = Val(Y5) + (5 * LineaConcepto)
+                                                                 Printer.FontName = "Times New Roman"
+                                                                 Printer.FontSize = 11
+                                                                 Printer.FontBold = True
+                                                                 Printer.Print Cadena
+                                                                 
+                                                                 Caracter = Caracter + CaracteresConcepto
+                                                                 
+                                                                 '//////////////////VERIFICO SI LO QUE SOBRE ES MAYOR DE LA LINEA/////////////////
+                                                                 Cadena = Mid(Concepto, Caracter, CaracteresConcepto)
+                                                                 If Len(Cadena) < CaracteresConcepto Then
+                                                                  '///////////////////////SI ES MENOR IMPRIMO/////////////////////////
+                                                                     LineaConcepto = LineaConcepto + 1
+                                                                     Printer.CurrentX = Val(X5) '25
+                                                                     Printer.CurrentY = Val(Y5) + (5 * LineaConcepto)
+                                                                     Printer.FontName = "Times New Roman"
+                                                                     Printer.FontSize = 11
+                                                                     Printer.FontBold = True
+                                                                     Printer.Print Cadena
+                                                                     
+                                                                     Caracter = Caracter + CaracteresConcepto
+                                                                 End If
+                                                    
+                                                 End If
+                                          Loop
+                                          
+                                     Else
+                                                    Printer.CurrentX = Val(X5) '5
+                                                    Printer.CurrentY = Val(Y5) + (5 * i) '120
+                                                    Printer.FontName = "Times New Roman"
+                                                    Printer.FontSize = 11
+                                                    Printer.FontBold = True
+                                                    Printer.Print Concepto
+                                     End If
+                                   End If
+                                   
+                                   
+                                  If X18 <> 0 Or Y18 <> 0 Then
+                                     Caracter = 1
+                                     LineaConcepto = 1
+                                     Cadena = Memo
+                                     If Len(Cadena) > CaracteresConcepto Then
+                                          Do While Len(Cadena) >= CaracteresConcepto
+                                                 If Caracter = 1 Then
+                '                                    Printer.CurrentX = Val(X5) '5
+                '                                    Printer.CurrentY = Val(Y5) + (5 * i) '120
+                '                                    Printer.FontName = "Times New Roman"
+                '                                    Printer.FontSize = 11
+                '                                    Printer.FontBold = True
+                '                                    Printer.Print Concepto
+                                                    
+                                                           
+                                                                 Cadena = Mid(Concepto, 1, CaracteresConcepto)
+                                                                 Printer.CurrentX = Val(X18) '25
+                                                                 Printer.CurrentY = Val(Y18) + (5 * LineaConcepto)
+                                                                 Printer.FontName = "Times New Roman"
+                                                                 Printer.FontSize = 11
+                                                                 Printer.FontBold = True
+                                                                 Printer.Print Cadena
+                                                                 Caracter = Caracter + CaracteresConcepto
+                                                                 
+                                                                 '//////////////////VERIFICO SI LO QUE SOBRE ES MAYOR DE LA LINEA SIGUIENTE/////////////////
+                                                                 
+                                                                 Cadena = Mid(Concepto, Caracter, CaracteresConcepto)
+                                                                 If Len(Cadena) < CaracteresConcepto Then
+                                                                  '///////////////////////SI ES MENOR IMPRIMO/////////////////////////
+                                                                     LineaConcepto = LineaConcepto + 1
+                                                                     Printer.CurrentX = Val(X18) '25
+                                                                     Printer.CurrentY = Val(Y18) + (5 * LineaConcepto)
+                                                                     Printer.FontName = "Times New Roman"
+                                                                     Printer.FontSize = 11
+                                                                     Printer.FontBold = True
+                                                                     Printer.Print Cadena
+                                                                     
+                                                                     Caracter = Caracter + CaracteresConcepto
+                                                                 End If
+                                                                 
+                                                 Else
+                                                                 
+                                                                 LineaConcepto = LineaConcepto + 1
+                                                                 Cadena = Mid(Concepto, Caracter, CaracteresConcepto)
+                                                                 Printer.CurrentX = Val(X18) '25
+                                                                 Printer.CurrentY = Val(Y18) + (5 * LineaConcepto)
+                                                                 Printer.FontName = "Times New Roman"
+                                                                 Printer.FontSize = 11
+                                                                 Printer.FontBold = True
+                                                                 Printer.Print Cadena
+                                                                 
+                                                                 Caracter = Caracter + CaracteresConcepto
+                                                                 
+                                                                 '//////////////////VERIFICO SI LO QUE SOBRE ES MAYOR DE LA LINEA/////////////////
+                                                                 Cadena = Mid(Concepto, Caracter, CaracteresConcepto)
+                                                                 If Len(Cadena) < CaracteresConcepto Then
+                                                                  '///////////////////////SI ES MENOR IMPRIMO/////////////////////////
+                                                                     LineaConcepto = LineaConcepto + 1
+                                                                     Printer.CurrentX = Val(X18) '25
+                                                                     Printer.CurrentY = Val(Y18) + (5 * LineaConcepto)
+                                                                     Printer.FontName = "Times New Roman"
+                                                                     Printer.FontSize = 11
+                                                                     Printer.FontBold = True
+                                                                     Printer.Print Cadena
+                                                                     
+                                                                     Caracter = Caracter + CaracteresConcepto
+                                                                 End If
+                                                    
+                                                 End If
+                                          Loop
+                                          
+                                     Else
+                                                    Printer.CurrentX = Val(X18) '5
+                                                    Printer.CurrentY = Val(Y18) + (5 * i) '120
+                                                    Printer.FontName = "Times New Roman"
+                                                    Printer.FontSize = 11
+                                                    Printer.FontBold = True
+                                                    Printer.Print Concepto
+                                     End If
+                                   End If
+                                    
+                                    Dia = Day(FrmCheque.DtaConsulta.Recordset("FechaTransaccion"))
+                                    mes = Month(FrmCheque.DtaConsulta.Recordset("FechaTransaccion"))
+                                    Año = Year(FrmCheque.DtaConsulta.Recordset("FechaTransaccion"))
+                                    Meses = Month(FrmCheque.DtaConsulta.Recordset("FechaTransaccion"))
+                                  
+                                '    FrmCheque.DtaConsulta.Recordset.MoveLast
+                                   If X9 <> 0 Or Y9 <> 0 Then
+                                    Printer.CurrentX = X9
+                                    Printer.CurrentY = Y9
+                                    Printer.FontName = "Times New Roman"
+                                    Printer.FontSize = 11
+                                    Printer.FontBold = True
+                '                    Printer.Print FrmCheque.DtaConsulta.Recordset("NumeroMovimiento")
+                                    Printer.Print Me.LblConsecutivo.Text
+                                   End If
+                                    
+                                   If X1 <> 0 Or Y1 <> 0 Then
+                                    Printer.CurrentX = Val(X1)
+                                    Printer.CurrentY = Val(Y1) + (5 * i)
+                                    Printer.FontName = "Times New Roman"
+                                    Printer.FontSize = 9
+                                    Printer.FontBold = True
+                                    Printer.Print Beneficiario
+                                   End If
+                                   
+                                  If X14 <> 0 Or Y14 <> 0 Then
+                                    Printer.CurrentX = Val(X14)
+                                    Printer.CurrentY = Val(Y14) + (5 * i)
+                                    Printer.FontName = "Times New Roman"
+                                    Printer.FontSize = 9
+                                    Printer.FontBold = True
+                                    Printer.Print Beneficiario
+                                   End If
+                                   
+                                   If X4 <> 0 Or Y4 <> 0 Then
+                                    Printer.CurrentX = Val(X4)
+                                    Printer.CurrentY = Val(Y4) + (5 * i)
+                                    Printer.FontName = "Times New Roman"
+                                    Printer.FontSize = 9
+                                    Printer.FontBold = True
+                                    Printer.Print Letras
+                                   End If
+                                   
+                                  If X15 <> 0 Or Y15 <> 0 Then
+                                    Printer.CurrentX = Val(X15)
+                                    Printer.CurrentY = Val(Y15) + (5 * i)
+                                    Printer.FontName = "Times New Roman"
+                                    Printer.FontSize = 9
+                                    Printer.FontBold = True
+                                    Printer.Print Letras
+                                   End If
+                                   
+                                   If X3 <> 0 Or Y3 <> 0 Then
+                                    Printer.CurrentX = Val(X3)
+                                    Printer.CurrentY = Val(Y3) + (5 * i)
+                                    Printer.FontName = "Times New Roman"
+                                    Printer.FontSize = 11
+                                    Printer.FontBold = True
+                                    Printer.Print Format(Monto, "##,##0.00")
+                                   End If
+                                   
+                                                      
+                                   If X16 <> 0 Or Y16 <> 0 Then
+                                    Printer.CurrentX = Val(X16)
+                                    Printer.CurrentY = Val(Y16) + (5 * i)
+                                    Printer.FontName = "Times New Roman"
+                                    Printer.FontSize = 11
+                                    Printer.FontBold = True
+                                    Printer.Print Format(Monto, "##,##0.00")
+                                   End If
+                                
+                                   If X2 <> 0 Or Y2 <> 0 Then
+                                    Printer.CurrentX = Val(X2) '20
+                                    Printer.CurrentY = Val(Y2) '288
+                                    Printer.FontName = "Times New Roman"
+                                    Printer.FontSize = 11
+                                    Printer.FontBold = True
+                                    FechaLetra = Ciudad & "         " & Format(Day(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "          " & Format(Month(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "           " & Year(FrmCheque.DtaConsulta.Recordset("FechaTransaccion"))
+                                    Printer.Print FechaLetra
+                                   End If
+                                
+                                    If X17 <> 0 Or Y17 <> 0 Then
+                                    Printer.CurrentX = Val(X17) '20
+                                    Printer.CurrentY = Val(Y17) '288
+                                    Printer.FontName = "Times New Roman"
+                                    Printer.FontSize = 11
+                                    Printer.FontBold = True
+                                    FechaLetra = Ciudad & "          " & Format(Day(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "          " & Format(Month(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "           " & Year(FrmCheque.DtaConsulta.Recordset("FechaTransaccion"))
+                                    Printer.Print FechaLetra
+                                   End If
+                                
+                   End If
+
+        
+        Printer.EndDoc
+        
+        ConsecutivoCheque = Me.LblConsecutivo.Text
+        ConsecutivoCheque = ConsecutivoCheque + 1
+        Me.LblConsecutivo.Text = ConsecutivoCheque
+'         FrmCheque.DtaConsulta.Recordset.MoveNext
+'        Loop
+             
+             
+  Else
             
            
              FrmCheque.AdoCordenadas.RecordSource = "SELECT CodCuenta, X1, Y1, X2, Y2, X3, Y3, X4, Y4, X5, Y5, X6, Y6, X7, Y7, X8, Y8, X9, Y9, X10, Y10, X11, Y11, X12, Y12, X13, Y13,X14, Y14,X15, Y15,X16, Y16,X17, Y17, X18, Y18, X19, Y19,X20, Y20,X21, Y21, X22, Y22, NLineas,CaracteresLineas, CaracteresConcepto From CordenadasCheque WHERE  (CodCuenta = '" & CodigoCuenta & "')"

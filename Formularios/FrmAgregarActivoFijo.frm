@@ -439,7 +439,7 @@ Begin VB.Form FrmAgregarActivoFijo
             Strikethrough   =   0   'False
          EndProperty
          CalendarForeColor=   0
-         Format          =   79560705
+         Format          =   82051073
          CurrentDate     =   38651
       End
       Begin VB.Label Label37 
@@ -610,7 +610,7 @@ Begin VB.Form FrmAgregarActivoFijo
             Strikethrough   =   0   'False
          EndProperty
          CalendarForeColor=   0
-         Format          =   79560705
+         Format          =   82051073
          CurrentDate     =   38651
       End
       Begin MSComCtl2.DTPicker DTPicker6 
@@ -632,7 +632,7 @@ Begin VB.Form FrmAgregarActivoFijo
             Strikethrough   =   0   'False
          EndProperty
          CalendarForeColor=   0
-         Format          =   79560705
+         Format          =   82051073
          CurrentDate     =   38651
       End
       Begin VB.Label Label33 
@@ -817,7 +817,7 @@ Begin VB.Form FrmAgregarActivoFijo
             Strikethrough   =   0   'False
          EndProperty
          CalendarForeColor=   0
-         Format          =   79560705
+         Format          =   82051073
          CurrentDate     =   38651
       End
       Begin MSComCtl2.DTPicker DTPicker4 
@@ -839,7 +839,7 @@ Begin VB.Form FrmAgregarActivoFijo
             Strikethrough   =   0   'False
          EndProperty
          CalendarForeColor=   0
-         Format          =   79560705
+         Format          =   82051073
          CurrentDate     =   38651
       End
       Begin VB.Label Label34 
@@ -1045,7 +1045,7 @@ Begin VB.Form FrmAgregarActivoFijo
             Strikethrough   =   0   'False
          EndProperty
          CalendarForeColor=   0
-         Format          =   79560705
+         Format          =   82051073
          CurrentDate     =   38651
       End
       Begin MSComCtl2.DTPicker DTPicker1 
@@ -1067,7 +1067,7 @@ Begin VB.Form FrmAgregarActivoFijo
             Strikethrough   =   0   'False
          EndProperty
          CalendarForeColor=   0
-         Format          =   79560705
+         Format          =   82051073
          CurrentDate     =   38651
       End
       Begin VB.Label Label18 
@@ -1559,7 +1559,7 @@ Begin VB.Form FrmAgregarActivoFijo
          Strikethrough   =   0   'False
       EndProperty
       CalendarForeColor=   0
-      Format          =   79560705
+      Format          =   82051073
       CurrentDate     =   38651
    End
    Begin MSComDlg.CommonDialog CommonDialog1 
@@ -2200,20 +2200,48 @@ rsa.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
 If actualiza = 0 Then
     rsa.AddNew
 End If
-rsa!Unidad = txttipopla.Text
-rsa!marca = Text1.Text
-rsa!modelo = Text2.Text
+If txttipopla.Text <> "" Then
+  rsa!Unidad = txttipopla.Text
+Else
+  rsa!Unidad = 1
+End If
+
+If Text1.Text <> "" Then
+  rsa!marca = Text1.Text
+End If
+If Text2.Text <> "" Then
+ rsa!modelo = Text2.Text
+End If
+
 If Text3.Text = "" Then
     rsa!Año = 0
 Else
     rsa!Año = Text3.Text
 End If
-rsa!Color = Text4.Text
-rsa!Serie = Text5.Text
-rsa!DescripcionAF = Text24.Text
-rsa!CNTACONTABLE = Text20.Text
-rsa!CuentaGastos = Text7.Text
-rsa!CuentaDepreciacion = Text23.Text
+
+If Text4.Text <> "" Then
+  rsa!Color = Text4.Text
+End If
+
+If Text5.Text <> "" Then
+ rsa!Serie = Text5.Text
+End If
+If Text24.Text <> "" Then
+  rsa!DescripcionAF = Text24.Text
+End If
+
+If Text20.Text <> "" Then
+ rsa!CNTACONTABLE = Text20.Text
+End If
+
+If Text7.Text <> "" Then
+  rsa!CuentaGastos = Text7.Text
+End If
+
+If Text23.Text <> "" Then
+ rsa!CuentaDepreciacion = Text23.Text
+End If
+
 If vehi.BoundText = "" Then
 
 Else

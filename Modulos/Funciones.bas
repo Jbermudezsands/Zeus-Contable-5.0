@@ -6480,7 +6480,7 @@ Function GrabaDetalleNomina(CodCuentas As String, FechaTransaccion As Date, Nume
    
    If Fuente = "CHEQUE" Then
             
-            NumeroFactura = "-"
+'            NumeroFactura = "-"
             TipoMoneda = "Córdobas"
 
    
@@ -8326,14 +8326,14 @@ Else
     idcargo = rsa1!codcargo
 '    nomcargo = NombreCargo(rsa1!codcargo)
 End If
-nomina = NombreNominaC(rsa1!CodTipoNomina)
+Nomina = NombreNominaC(rsa1!CodTipoNomina)
 isaldolar = rsa1!dolarizado
 End Function
 Public Function NombreNominaC(Cod As String) As String
 Set rsa2 = Nothing
 SQL = "select nomina from dbo.TipoNomina where codtiponomina = '" & Cod & "'"
 rsa2.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
-NombreNominaC = rsa2!nomina
+NombreNominaC = rsa2!Nomina
 End Function
 
 Public Function NombreGrupo(Cod As String) As String

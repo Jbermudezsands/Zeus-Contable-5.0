@@ -7,14 +7,14 @@ Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12
 Begin VB.Form FrmContabilizaFacturacion 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Contabilizacion del Sistema de Factuacion"
-   ClientHeight    =   7785
+   ClientHeight    =   10050
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   13275
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7785
+   ScaleHeight     =   10050
    ScaleWidth      =   13275
    StartUpPosition =   2  'CenterScreen
    Begin MSAdodcLib.Adodc AdoProcesosFacturacion 
@@ -203,8 +203,8 @@ Begin VB.Form FrmContabilizaFacturacion
    End
    Begin MSAdodcLib.Adodc AdoProcesos 
       Height          =   375
-      Left            =   1080
-      Top             =   7800
+      Left            =   1200
+      Top             =   8880
       Width           =   3015
       _ExtentX        =   5318
       _ExtentY        =   661
@@ -454,10 +454,11 @@ Begin VB.Form FrmContabilizaFacturacion
       _ExtentY        =   10610
       _Version        =   393216
       Tabs            =   4
+      Tab             =   3
       TabHeight       =   520
       TabCaption(0)   =   "Facturacion"
       TabPicture(0)   =   "FrmContabiliza.frx":0000
-      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "TDBGridFacturacion"
       Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "GroupBox1"
@@ -467,11 +468,8 @@ Begin VB.Form FrmContabilizaFacturacion
       TabPicture(1)   =   "FrmContabiliza.frx":001C
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "PushButton2"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "TDBGridCompras"
-      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).Control(2)=   "GroupBox2"
-      Tab(1).Control(2).Enabled=   0   'False
       Tab(1).ControlCount=   3
       TabCaption(2)   =   "Cuentas x Cobrar y Pagar"
       TabPicture(2)   =   "FrmContabiliza.frx":0038
@@ -481,8 +479,8 @@ Begin VB.Form FrmContabilizaFacturacion
       Tab(2).ControlCount=   2
       TabCaption(3)   =   "Planilla Leche"
       TabPicture(3)   =   "FrmContabiliza.frx":0054
-      Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "TDBGrid1"
+      Tab(3).ControlEnabled=   -1  'True
+      Tab(3).Control(0)=   "TDGridPlanillaLeche"
       Tab(3).Control(0).Enabled=   0   'False
       Tab(3).Control(1)=   "GroupBox4"
       Tab(3).Control(1).Enabled=   0   'False
@@ -516,7 +514,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80281601
+            Format          =   77529089
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker3 
@@ -528,7 +526,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80281601
+            Format          =   77529089
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptCompras 
@@ -580,7 +578,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80281601
+            Format          =   77529089
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton RadioButton4 
@@ -694,7 +692,7 @@ Begin VB.Form FrmContabilizaFacturacion
       End
       Begin XtremeSuiteControls.GroupBox GroupBox1 
          Height          =   5055
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   3
          Top             =   780
          Width           =   2295
@@ -720,7 +718,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80281601
+            Format          =   77529089
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptFacturacion 
@@ -773,7 +771,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80281601
+            Format          =   77529089
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecibos 
@@ -826,7 +824,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80281601
+            Format          =   77529089
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptSalidaBodega 
@@ -871,7 +869,7 @@ Begin VB.Form FrmContabilizaFacturacion
       Begin TrueOleDBGrid80.TDBGrid TDBGridFacturacion 
          Bindings        =   "FrmContabiliza.frx":0070
          Height          =   4935
-         Left            =   2520
+         Left            =   -72480
          TabIndex        =   8
          Top             =   900
          Width           =   9975
@@ -1519,7 +1517,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80281601
+            Format          =   77529089
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebito 
@@ -1557,7 +1555,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80281601
+            Format          =   77529089
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.PushButton CmdContabilizarNotas 
@@ -1597,7 +1595,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80281601
+            Format          =   77529089
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebitoProveedor 
@@ -2024,7 +2022,7 @@ Begin VB.Form FrmContabilizaFacturacion
       End
       Begin XtremeSuiteControls.GroupBox GroupBox4 
          Height          =   5055
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   56
          Top             =   840
          Width           =   2295
@@ -2039,6 +2037,7 @@ Begin VB.Form FrmContabilizaFacturacion
             Left            =   120
             TabIndex        =   57
             Top             =   4440
+            Visible         =   0   'False
             Width           =   2055
          End
          Begin MSComCtl2.DTPicker DTPicker10 
@@ -2051,7 +2050,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80281601
+            Format          =   77529089
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker11 
@@ -2063,7 +2062,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80281601
+            Format          =   77529089
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecepcion 
@@ -2089,7 +2088,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80281601
+            Format          =   77529089
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptPlanilla 
@@ -2105,7 +2104,7 @@ Begin VB.Form FrmContabilizaFacturacion
             Caption         =   "Pago a Productores"
             UseVisualStyle  =   -1  'True
          End
-         Begin XtremeSuiteControls.PushButton PushButton1 
+         Begin XtremeSuiteControls.PushButton CmdContabilizarPlanilla 
             Height          =   375
             Left            =   360
             TabIndex        =   63
@@ -2162,6 +2161,15 @@ Begin VB.Form FrmContabilizaFacturacion
             UseVisualStyle  =   -1  'True
             Value           =   1
          End
+         Begin VB.Label LblFechaRecepcion 
+            Caption         =   "Feha:"
+            Height          =   255
+            Left            =   240
+            TabIndex        =   71
+            Top             =   3600
+            Visible         =   0   'False
+            Width           =   615
+         End
          Begin VB.Label Label10 
             Caption         =   "Hasta:"
             Height          =   255
@@ -2188,10 +2196,10 @@ Begin VB.Form FrmContabilizaFacturacion
             Width           =   615
          End
       End
-      Begin TrueOleDBGrid80.TDBGrid TDBGrid1 
+      Begin TrueOleDBGrid80.TDBGrid TDGridPlanillaLeche 
          Bindings        =   "FrmContabiliza.frx":00BC
          Height          =   4815
-         Left            =   -72240
+         Left            =   2760
          TabIndex        =   70
          Top             =   960
          Width           =   9975
@@ -2510,7 +2518,7 @@ Begin VB.Form FrmContabilizaFacturacion
       BorderStyle     =   0  'None
       ForeColor       =   &H00FFFFFF&
       Height          =   1095
-      Left            =   0
+      Left            =   -240
       ScaleHeight     =   1095
       ScaleWidth      =   15495
       TabIndex        =   0
@@ -2546,7 +2554,7 @@ Begin VB.Form FrmContabilizaFacturacion
       Begin VB.Image Image2 
          Height          =   960
          Left            =   240
-         Picture         =   "FrmContabiliza.frx":00D5
+         Picture         =   "FrmContabiliza.frx":00D7
          Stretch         =   -1  'True
          Top             =   0
          Width           =   960
@@ -2648,6 +2656,144 @@ Begin VB.Form FrmContabilizaFacturacion
       Password        =   ""
       RecordSource    =   ""
       Caption         =   "AdoNota"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin MSAdodcLib.Adodc AdoRecepcion 
+      Height          =   375
+      Left            =   10560
+      Top             =   8880
+      Width           =   2415
+      _ExtentX        =   4260
+      _ExtentY        =   661
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "AdoRecepcion"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin MSAdodcLib.Adodc AdoNominas 
+      Height          =   450
+      Left            =   840
+      Top             =   9120
+      Width           =   2775
+      _ExtentX        =   4895
+      _ExtentY        =   794
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "AdoNominas"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin MSAdodcLib.Adodc AdoBuscaNomina 
+      Height          =   450
+      Left            =   4680
+      Top             =   9120
+      Width           =   2775
+      _ExtentX        =   4895
+      _ExtentY        =   794
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "AdoBuscaNomina"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -4922,7 +5068,9 @@ End If
     
 End Sub
 
-Private Sub CmdRecepcion_Click()
+
+Private Sub CmdContabilizarPlanilla_Click()
+ 
   Dim Periodo As Double, NumeroPeriodo As Double, FechaIni As String, FechaFin As String, EstadoPeriodo As String, NumeroTransaccion As Double
   Dim mes As Double, Año As Double, Moneda, Resultado As Boolean
   Dim SqlString As String, FechaInicio As String
@@ -4932,30 +5080,59 @@ Private Sub CmdRecepcion_Click()
   Dim MonedaFactura As String, Reg As Double, CodigoCuentaIngresos As String, CodCuentaEfectivo As String
   Dim CostoProducto As Double, CodigoCuentaCostos As String, CodigoCuentaInventario As String, CodigoCuentaOtros As String, CodigoCuentaMetodo As String
   Dim Pagado As Double, NumeroReferencia As String, MonedaMovimiento As String, TasaMovimiento As Double
-  Dim cn As New ADODB.Connection, SuReferencia As String
-  Dim rs As New ADODB.Recordset
-  Dim cmd As New ADODB.Command
+  Dim cn As New ADODB.Connection, SuReferencia As String, CodigoCuentaBanco As String
+  Dim rs As New ADODB.Recordset, Registro As Double, NumeroCompra As String
+  Dim cmd As New ADODB.Command, Ret1Porc As Double, Ret2Porc As Double, MontoRetencion1 As Double, MontoRetencion2 As Double, Ret3Porc As Double, Ret4Porc As Double, MontoRetencion3 As Double, MontoRetencion4 As Double
+  Dim MontoBanco As Double, Directorio As String
+  Dim CtaxPagar As String, Cuenta_Banco As String, Cuenta_IR As String, Cuenta_Bolsa As String, Cuenta_Anticipo As String, Cuenta_Pulperia As String
+  Dim Cuenta_Transporte As String, Cuenta_Trazabilidad As String, Cuenta_Veterinario As String, Cuenta_Inseminacion As String
+  Dim Cuenta_Otras As String, NumeroNomina As String
   
   Reg = 1
   
-  Me.CmdContabilizarCompras.Enabled = False
   
-              FechaInicio = Format(Me.DTPicker3.Value, "yyyy-mm-dd")
-              FechaFin = Format(Me.DTPicker4.Value, "yyyy-mm-dd")
-'             SqlString = "SELECT Recepcion.Fecha AS Fecha_Compra, Recepcion.NumeroRecepcion AS Numero_Compra, Recepcion.Cod_Proveedor AS Nombre_Proveedor, Recepcion.SubTotal, Recepcion.Marca , Proveedor.Cod_Cuenta_Pagar FROM Recepcion INNER JOIN Proveedor ON Recepcion.Cod_Proveedor = Proveedor.Cod_Proveedor " & _
-'                         "WHERE (Fecha BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) ORDER BY NumeroRecepcion"
-              SqlString = "SELECT ReciboPago.Fecha_Recibo, ReciboPago.CodReciboPago, ReciboPago.Cod_Proveedor, Proveedor.Nombre_Proveedor, ReciboPago.Sub_Total, ReciboPago.Descuento , ReciboPago.Total, ReciboPago.Marca, Proveedor.Cod_Cuenta_Pagar FROM ReciboPago INNER JOIN Proveedor ON ReciboPago.Cod_Proveedor = Proveedor.Cod_Proveedor  " & _
-                          "WHERE (ReciboPago.Fecha_Recibo BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) AND (ReciboPago.Marca = 1) AND (ReciboPago.Contabilizado = 0)"
+  Me.CmdContabilizarPlanilla.Enabled = False
+  
+    If Me.OptRecepcion.Value = True Then
+     TipoFactura = "Recepcion"
+    ElseIf Me.OptPlanilla.Value = True Then
+     TipoFactura = "Pago Proveedor"
+    End If
 
+
+                Select Case TipoFactura
+
+                    Case "Pago Proveedor"
+                       FechaInicio = Format(Me.DTPicker11.Value, "yyyy-mm-dd")
+                       FechaFin = Format(Me.DTPicker12.Value, "yyyy-mm-dd")
+                       SqlString = "SELECT Nomina.NumPlanilla, Nomina.FechaFinal, Nomina.FechaInicial, Productor.CodProductor, Productor.NombreProductor + ' ' + Productor.ApellidoProductor, Detalle_Nomina.PrecioVenta,  Detalle_Nomina.Total, Detalle_Nomina.TotalIngresos, Productor.Cod_Cuenta_Proveedor AS Cod_Cuenta_Pagar, Detalle_Nomina.IR, Detalle_Nomina.DeduccionPolicia, Detalle_Nomina.Anticipo, Detalle_Nomina.DeduccionTransporte, Detalle_Nomina.Pulperia, Detalle_Nomina.Inseminacion, Detalle_Nomina.ProductosVeterinarios, Detalle_Nomina.Trazabilidad, Detalle_Nomina.OtrasDeducciones, Detalle_Nomina.Bolsa, Detalle_Nomina.Nombres,  Productor.Cuenta_Banco, Productor.Cuenta_IR, Productor.Cuenta_Bolsa, Productor.Cuenta_Anticipo, Productor.Cuenta_Pulperia, Productor.Cuenta_Transporte, Productor.Cuenta_Inseminacion, Productor.Cuenta_Trazabilidad, Productor.Cuenta_Veterinario, Productor.Cuenta_Otras, Productor.Cuenta_GastoPlanilla, " & _
+                                   "Detalle_Nomina.TotalIngresos - (Detalle_Nomina.IR + Detalle_Nomina.DeduccionPolicia + Detalle_Nomina.Anticipo + Detalle_Nomina.DeduccionTransporte + Detalle_Nomina.Pulperia + Detalle_Nomina.Inseminacion + Detalle_Nomina.ProductosVeterinarios + Detalle_Nomina.OtrasDeducciones + Detalle_Nomina.Trazabilidad) AS NetoPagar, Nomina.Marca , Nomina.Contabilizado  FROM  Nomina INNER JOIN  Detalle_Nomina ON Nomina.NumPlanilla = Detalle_Nomina.NumNomina INNER JOIN Productor ON Detalle_Nomina.CodProductor = Productor.CodProductor AND Detalle_Nomina.TipoProductor = Productor.TipoProductor  Where (Nomina.Marca = 1) And (Nomina.Contabilizado = 0)"
+                
+                       
+                    Case "Recepcion"
+                       FechaInicio = Format(Me.DTPicker11.Value, "yyyy-mm-dd")
+                       FechaFin = Format(Me.DTPicker12.Value, "yyyy-mm-dd")
+'                       SqlString = "SELECT  Proveedor.Cod_Cuenta_Proveedor, Compras.Numero_Compra, Compras.Fecha_Compra, Compras.MonedaCompra, Compras.Cod_Proveedor, Compras.Nombre_Proveedor, Compras.Apellido_Proveedor, Compras.Fecha_Vencimiento, Compras.SubTotal, Compras.Descuento, Compras.IVA, Compras.NetoPagar, Compras.Pagado , Compras.Marca, Compras.Contabilizado, Compras.Tipo_Compra, Proveedor.Cod_Cuenta_Pagar, Proveedor.Cod_Cuenta_Cobrar,Compras.Su_Referencia, Compras.Nuestra_Referencia FROM Proveedor INNER JOIN Compras ON Proveedor.Cod_Proveedor = Compras.Cod_Proveedor  " & _
+'                                    "WHERE  (Compras.Nombre_Proveedor <> N'******CANCELADO') AND (Compras.Fecha_Compra BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME,'" & FechaFin & "', 102)) AND (Compras.Marca = 1) AND (Compras.Contabilizado = 0) AND (Compras.Tipo_Compra = '" & TipoFactura & "') ORDER BY Compras.Fecha_Compra, Compras.Numero_Compra"
+                        SqlString = "SELECT Compras.Numero_Compra, Compras.Fecha_Compra, Compras.MonedaCompra, Compras.Cod_Proveedor, Compras.Nombre_Proveedor, Compras.Apellido_Proveedor, Compras.Fecha_Vencimiento, Compras.SubTotal, Compras.Descuento, Compras.IVA, Compras.NetoPagar, Compras.Pagado, Compras.Marca , Compras.Contabilizado, Compras.Tipo_Compra, Compras.Su_Referencia, Compras.Nuestra_Referencia ,  Productor.Cod_Cuenta_Proveedor AS Cod_Cuenta_Pagar , Compras.Observaciones FROM  Compras INNER JOIN  Productor ON Compras.Cod_Proveedor = Productor.CodProductor  " & _
+                                    "WHERE  (Compras.Nombre_Proveedor <> N'******CANCELADO') AND (Compras.Fecha_Compra BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) AND (Compras.Marca = 1) AND (Compras.Contabilizado = 0) AND (Compras.Tipo_Compra = '" & TipoFactura & "') ORDER BY Compras.Fecha_Compra, Compras.Numero_Compra"
+                    
+                    Case "Mercancia Recibida"
+                       FechaInicio = Format(Me.DTPicker3.Value, "yyyy-mm-dd")
+                       FechaFin = Format(Me.DTPicker4.Value, "yyyy-mm-dd")
+                       SqlString = "SELECT  Proveedor.Cod_Cuenta_Proveedor, Compras.Numero_Compra, Compras.Observaciones, Compras.Fecha_Compra, Compras.MonedaCompra, Compras.Cod_Proveedor, Compras.Nombre_Proveedor, Compras.Apellido_Proveedor, Compras.Fecha_Vencimiento, Compras.SubTotal, Compras.Descuento, Compras.IVA, Compras.NetoPagar, Compras.Pagado , Compras.Marca, Compras.Contabilizado, Compras.Tipo_Compra, Proveedor.Cod_Cuenta_Pagar, Proveedor.Cod_Cuenta_Cobrar,Compras.Su_Referencia, Compras.Nuestra_Referencia FROM Proveedor INNER JOIN Compras ON Proveedor.Cod_Proveedor = Compras.Cod_Proveedor  " & _
+                                    "WHERE  (Compras.Nombre_Proveedor <> N'******CANCELADO') AND (Compras.Fecha_Compra BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME,'" & FechaFin & "', 102)) AND (Compras.Marca = 1) AND (Compras.Contabilizado = 0) AND (Compras.Tipo_Compra = '" & TipoFactura & "') ORDER BY Compras.Fecha_Compra, Compras.Numero_Compra"
+                 
+                 End Select
 
                  '//////////////////////////////////////////////////////////////////////////////////////////////
                  '//////////SI LA CUENTA EXISTE AGREGO LOS ENCABEZADOS///////////////////////////////////////
                  '/////////////////////////////////////////////////////////////////////////////////////////////
                  
 
-                         mes = Month(Me.DTPicker6.Value)
-                         Año = Year(Me.DTPicker6.Value)
-                         FechaIni = CDate("1/" & Month(Me.DTPicker6.Value) & "/" & Year(Me.DTPicker6.Value))
+                         mes = Month(Me.DTPicker10.Value)
+                         Año = Year(Me.DTPicker10.Value)
+                         FechaIni = CDate("1/" & Month(Me.DTPicker10.Value) & "/" & Year(Me.DTPicker10.Value))
                          FechaFin = DateSerial(Año, mes + 1, 1 - 1)
 
                  
@@ -4967,11 +5144,93 @@ Private Sub CmdRecepcion_Click()
                             EstadoPeriodo = Me.AdoConsulta.Recordset("EstadoPeriodo")
                       
 
-
-                              Me.AdoConsulta.Recordset("NTransacciones") = Me.AdoConsulta.Recordset("NTransacciones") + 1
-                              Me.AdoConsulta.Recordset.Update
-                              NumeroTransaccion = Me.AdoConsulta.Recordset("NTransacciones")
+                  If TipoFactura = "Recepcion" Then
+                        Me.AdoConsulta.Recordset("NTransacciones") = Me.AdoConsulta.Recordset("NTransacciones") + 1
+                        Me.AdoConsulta.Recordset.Update
+                        NumeroTransaccion = Me.AdoConsulta.Recordset("NTransacciones")
+                  Else
+                  
+                     '///////////////////////////////////////VERIFICO SI LAS CUENTAS EXISTEN EN EL SISTEMA CONTABLE
+                        Directorio = App.Path + "\Cuentas.txt"
+                        Open Directorio For Output As #1
+                           Print #1, "Zeus Contable"
+                           Print #1, "Contabilizar Nominas"
+                           Print #1, ""
+                           
+                            Me.AdoBuscaFacturacion.RecordSource = SqlString
+                            Me.AdoBuscaFacturacion.Refresh
+                             Me.osProgress1.Visible = True
+                             Me.osProgress1.Min = 0
+                             Me.osProgress1.Value = 0
+                             If Not Me.AdoBuscaFacturacion.Recordset.EOF Then
+                                Me.AdoBuscaFacturacion.Recordset.MoveFirst
+                                Me.osProgress1.Max = Me.AdoBuscaFacturacion.Recordset.RecordCount
+                             End If
+                             Me.AdoBuscaFacturacion.Refresh
+                             
+                             Do While Not Me.AdoBuscaFacturacion.Recordset.EOF
+                            
+                                                      
+                            
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cod_Cuenta_Pagar")) Then
+                                      CtaxPagar = Me.AdoBuscaFacturacion.Recordset("Cod_Cuenta_Pagar")
+                                 End If
+                                   If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Banco")) Then
+                                      Cuenta_Banco = Me.AdoBuscaFacturacion.Recordset("Cuenta_Banco")
+                                 End If
+                                
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_IR")) Then
+                                      Cuenta_IR = Me.AdoBuscaFacturacion.Recordset("Cuenta_IR")
+                                 End If
+                                 
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Bolsa")) Then
+                                      Cuenta_Bolsa = Me.AdoBuscaFacturacion.Recordset("Cuenta_Bolsa")
+                                 End If
+                                 
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Anticipo")) Then
+                                      Cuenta_Anticipo = Me.AdoBuscaFacturacion.Recordset("Cuenta_Anticipo")
+                                 End If
+                                 
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Pulperia")) Then
+                                      Cuenta_Pulperia = Me.AdoBuscaFacturacion.Recordset("Cuenta_Pulperia")
+                                 End If
+                                 
+                                                                  
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Transporte")) Then
+                                      Cuenta_Transporte = Me.AdoBuscaFacturacion.Recordset("Cuenta_Transporte")
+                                 End If
+                                 
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Inseminacion")) Then
+                                      Cuenta_Inseminacion = Me.AdoBuscaFacturacion.Recordset("Cuenta_Inseminacion")
+                                 End If
+                                 
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Trazabilidad")) Then
+                                      Cuenta_Trazabilidad = Me.AdoBuscaFacturacion.Recordset("Cuenta_Trazabilidad")
+                                 End If
                               
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Veterinario")) Then
+                                      Cuenta_Veterinario = Me.AdoBuscaFacturacion.Recordset("Cuenta_Veterinario")
+                                 End If
+                                 
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Otras")) Then
+                                      Cuenta_Otras = Me.AdoBuscaFacturacion.Recordset("Cuenta_Otras")
+                                End If
+                           
+                           
+                               If ValidarCuentas(Cod_Cuenta_Pagar) = False Then Print #1, Cod_Cuenta_Pagar; ExisteCodigo = False
+                               If ValidarCuentas(Cuenta_Banco) = False Then Print #1, Cuenta_Banco; ExisteCodigo = False
+                               If ValidarCuentas(Cuenta_IR) = False Then Print #1, Cuenta_IR; ExisteCodigo = False
+                                 
+                           
+                           
+                           
+                           
+                               Me.AdoBuscaFacturacion.Recordset.MoveNext
+                           Loop
+                       Close #1
+                              
+                           
+                  End If
 
                                
  
@@ -4985,112 +5244,735 @@ Private Sub CmdRecepcion_Click()
                              Me.osProgress1.Max = Me.AdoProcesos.Recordset.RecordCount
                              End If
                              Me.AdoProcesos.Refresh
-                             Do While Not Me.AdoProcesos.Recordset.EOF
                              
-'                                FechaFactura = Me.AdoProcesos.Recordset("Fecha_Compra")
-'                                FechaVence = Me.AdoProcesos.Recordset("Fecha_Compra")
-'                                NumeroFactura = Me.AdoProcesos.Recordset("Numero_Compra")
-'                                MonedaFactura = "Cordobas"
-'                                NumeroReferencia = "00"
-
-                                FechaFactura = Me.AdoProcesos.Recordset("Fecha_Recibo")
-                                FechaVence = Me.AdoProcesos.Recordset("Fecha_Recibo")
-                                NumeroFactura = Me.AdoProcesos.Recordset("CodReciboPago")
-                                MonedaFactura = "Cordobas"
-                                NumeroReferencia = "00"
-
+                             Beneficiario = ""
+                             Ret1Porc = 0
+                             Ret2Porc = 0
+                             Ret3Porc = 0
+                             Ret4Porc = 0
+                             
+                             
+                             
+                        Do While Not Me.AdoProcesos.Recordset.EOF
+                           
+                           Select Case TipoFactura
+                              Case "Pago Proveedor"
+                              
+                                
+                              
+                                MontoBanco = 0
+                                FechaFactura = Me.AdoProcesos.Recordset("FechaFinal")
+                                FechaVence = Me.AdoProcesos.Recordset("FechaFinal")
+                                NumeroNomina = Me.AdoProcesos.Recordset("NumPlanilla")
                                 CodigoCuentaCliente = Me.AdoProcesos.Recordset("Cod_Cuenta_Pagar")
                                 
-                                    SubTotal = 0
-                                    Descuento = 0
-                                    Iva = 0
-                                    NetoPagar = 0
-                                    TasaCambio = 1
-                                    TasaMovimiento = 1
-                                    
-                                    
-'                                    SqlString = "SELECT * From Recepcion WHERE (NumeroRecepcion = '" & NumeroFactura & "') "
-'                                    Me.AdoBuscaFacturacion.RecordSource = SqlString
-'                                    Me.AdoBuscaFacturacion.Refresh
-                                    
-                                    If MonedaFactura = "Dolares" Then
-                                         TasaCambio = BuscaTasaCambio(FechaFactura)    'Format(Val(Me.AdoBuscaFacturacion.Recordset("TasaCambio")), "##,##0.0000")
-                                    Else
-                                         TasaCambio = 1
-                                    End If
                                 
+                                If CodigoCuentaCliente = "" Then
+                                  MsgBox "No existe la cuenta del productor", vbCritical, "Zeus contable"
+                                  Exit Sub
+                                End If
+                                
+                              
+                                
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cod_Cuenta_Pagar")) Then
+                                      CtaxPagar = Me.AdoProcesos.Recordset("Cod_Cuenta_Pagar")
+                                 End If
+                                   If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_Banco")) Then
+                                      Cuenta_Banco = Me.AdoProcesos.Recordset("Cuenta_Banco")
+                                 End If
+                                
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_IR")) Then
+                                      Cuenta_IR = Me.AdoProcesos.Recordset("Cuenta_IR")
+                                 End If
+                                 
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_Bolsa")) Then
+                                      Cuenta_Bolsa = Me.AdoProcesos.Recordset("Cuenta_Bolsa")
+                                 End If
+                                 
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_Anticipo")) Then
+                                      Cuenta_Anticipo = Me.AdoProcesos.Recordset("Cuenta_Anticipo")
+                                 End If
+                                 
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_Pulperia")) Then
+                                      Cuenta_Pulperia = Me.AdoProcesos.Recordset("Cuenta_Pulperia")
+                                 End If
+                                 
+                                                                  
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_Transporte")) Then
+                                      Cuenta_Transporte = Me.AdoProcesos.Recordset("Cuenta_Transporte")
+                                 End If
+                                 
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_Inseminacion")) Then
+                                      Cuenta_Inseminacion = Me.AdoProcesos.Recordset("Cuenta_Inseminacion")
+                                 End If
+                                 
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_Trazabilidad")) Then
+                                      Cuenta_Trazabilidad = Me.AdoProcesos.Recordset("Cuenta_Trazabilidad")
+                                 End If
+                              
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_Veterinario")) Then
+                                      Cuenta_Veterinario = Me.AdoProcesos.Recordset("Cuenta_Veterinario")
+                                 End If
+                                 
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_Otras")) Then
+                                      Cuenta_Otras = Me.AdoProcesos.Recordset("Cuenta_Otras")
+                                End If
+                                
+                                
+                              Me.AdoConsulta.Recordset("NTransacciones") = Me.AdoConsulta.Recordset("NTransacciones") + 1
+                              Me.AdoConsulta.Recordset.Update
+                              NumeroTransaccion = Me.AdoConsulta.Recordset("NTransacciones")
+                                
+                                
+                               If Reg = 1 Then
+                                   '////////////////////////////////////////////////////////////////
+                                   '////////AGREGO LOS INDICES DE TRANSACCIONES//////
+                                   '///////////////////////////////////////////////////////////////
+                                   MonedaNomina = "Córdobas"
+                                    Resultado = GrabaEncabezado(NumeroPeriodo, NumeroTransaccion, Format(Me.DTPicker10.Value, "yyyy-mm-dd"), "Movimiento de Nominas", "CHEQUE", "Córdobas")
+                                    Reg = 2
+                                End If
+                                 
+                                 
+                                 
+'                                Me.AdoBuscaNomina.RecordSource = "SELECT  * FROM  Nomina INNER JOIN  TipoNomina ON Nomina.CodTipoNomina = TipoNomina.CodTipoNomina Where (Nomina.NumNomina = " & NumNomina & ")"
+'                                Me.AdoBuscaNomina.Refresh
+'                                If Not Me.AdoBuscaNomina.Recordset.EOF Then
+                                  DescripcionMovimiento = "Registrando Nomina " & NumeroFactura
+'                                  DescripcionMovimiento = "Registrando Nominas No " & NumNomina
+'                                End If
+'
+                                Dim MontoNominaPagar As Double, IR As Double, DeduccionPolicia As Double
+                                Dim Anticipo As Double, DeduccionTransporte As Double, Pulperia As Double, Inseminacion As Double, ProductosVeterinarios As Double, Trazabilidad As Double
+                                Dim OtrasDeducciones As Double, Bolsa As Double
+                                
+                                MontoNominaPagar = Format(Me.AdoProcesos.Recordset("TotalIngresos"), "##,##0.00")
+                                NetoPagar = Format(Me.AdoProcesos.Recordset("NetoPagar"), "##,##0.00")
+                                IR = Format(Me.AdoProcesos.Recordset("IR"), "##,##0.00")
+                                DeduccionPolicia = Format(Me.AdoProcesos.Recordset("DeduccionPolicia"), "##,##0.00")
+                                Anticipo = Format(Me.AdoProcesos.Recordset("Anticipo"), "##,##0.00")
+                                DeduccionTransporte = Format(Me.AdoProcesos.Recordset("DeduccionTransporte"), "##,##0.00")
+                                Pulperia = Format(Me.AdoProcesos.Recordset("Pulperia"), "##,##0.00")
+                                Inseminacion = Format(Me.AdoProcesos.Recordset("Inseminacion"), "##,##0.00")
+                                ProductosVeterinarios = Format(Me.AdoProcesos.Recordset("ProductosVeterinarios"), "##,##0.00")
+                                Trazabilidad = Format(Me.AdoProcesos.Recordset("Trazabilidad"), "##,##0.00")
+                                OtrasDeducciones = Format(Me.AdoProcesos.Recordset("OtrasDeducciones"), "##,##0.00")
+                                Bolsa = Format(Me.AdoProcesos.Recordset("Bolsa"), "##,##0.00")
 
-                                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                '///////////////////////////////////////BUSCO LOS DETALLES DE LACOMPRA ////////////////////////////////////////////////////
-                                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-'                                Me.AdoConsultaFactura.RecordSource = "SELECT MAX(Detalle_Recepcion.Cod_Productos) AS Cod_Productos, SUM(Detalle_Recepcion.Cantidad) AS Cantidad, SUM(Productos.Precio_Venta) AS Precio_Unitario, SUM(Detalle_Recepcion.Cantidad * Productos.Precio_Venta) AS Importe, SUM(Detalle_Recepcion.Cantidad * Productos.Precio_Venta) AS SubTotal,Productos.Cod_Cuenta_Inventario FROM Detalle_Recepcion INNER JOIN Productos ON Detalle_Recepcion.Cod_Productos = Productos.Cod_Productos  " & _
-                                                                     "WHERE (Detalle_Recepcion.NumeroRecepcion = '" & NumeroFactura & "')"
+                                NetoPagar = Format(MontoNominaPagar - IR - DeduccionPolicia - Anticipo - DeduccionTransporte - Pulperia - Inseminacion - ProductosVeterinarios - Trazabilidad - OtrasDeducciones - Bolsa, "##,##0.00")
                                 
-'                                AdoConsultaFactura.RecordSource = "SELECT  MAX(Detalle_Recepcion.Cod_Productos) AS Cod_Productos, SUM(Detalle_Recepcion.Cantidad) AS Cantidad, SUM(Productos.Precio_Venta) AS Precio_Unitario, SUM(Detalle_Recepcion.Cantidad * Productos.Precio_Venta) AS Importe, SUM(Detalle_Recepcion.Cantidad * Productos.Precio_Venta) AS SubTotal, MAX(Productos.Cod_Cuenta_Inventario) As Cod_Cuenta_Inventario FROM Detalle_Recepcion INNER JOIN Productos ON Detalle_Recepcion.Cod_Productos = Productos.Cod_Productos  " & _
-'                                                                  "WHERE (Detalle_Recepcion.NumeroRecepcion = '" & NumeroFactura & "')"
+                                DescripcionMovimiento = "Pago de Planilla por acopio de Leche No" & Me.AdoProcesos.Recordset("NumPlanilla") & " Desde " & Me.AdoProcesos.Recordset("FechaInicial") & " Hasta " & Me.AdoProcesos.Recordset("FechaFinal")
                                 
-                                AdoConsultaFactura.RecordSource = "SELECT idDetallePago, CodReciboPago, Fecha_Recibo, Numero_Compra, MontoPagado, NombrePago, Descripcion, NumeroTarjeta, FechaVence From DetalleReciboPago " & _
-                                                                  "WHERE (CodReciboPago = '" & NumeroFactura & "') " 'AND (Fecha_Recibo = CONVERT(DATETIME, '2015-06-23 00:00:00', 102))
-                                Me.AdoConsultaFactura.Refresh
-                                If Not Me.AdoConsultaFactura.Recordset.EOF Then
-       
-                                        SubTotal = Format(Val(Me.AdoConsultaFactura.Recordset("MontoPagado")), "##,##0.00")
-                                        SubTotal = Format(SubTotal * TasaCambio, "##,##0.00")
-                                        Descuento = 0
-                                        Iva = 0
-                                        NetoPagar = Format(Val(Me.AdoConsultaFactura.Recordset("MontoPagado")), "##,##0.00")
-                                        Pagado = 0
+                                '///////////////////////////CREO LOS REGISTROS CONTABLES X PAGAR/////////////////////////////////
+                               
+                                Credito = 0
+                                NumeroFactura = "-"
+                                If MontoNominaPagar <> 0 Then
+                                Resultado = GrabaDetalleNomina(CtaxPagar, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaCambio, MontoNominaPagar, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                '////////////////////////////BUSCO LAS CUENTAS DE INCENTIVOS ///////////////////////////////////////
                                 End If
                              
+                                '////////////////////////////////////CUENTA DE BANCO //////////////////////////////////////////////////////////////////
+                                Debito = 0
                                 
+                                If NetoPagar <> 0 Then
+                                NumeroFactura = "#######"
+                                Resultado = GrabaDetalleNomina(Cuenta_Banco, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, NetoPagar, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, Me.AdoProcesos.Recordset("Nombres"))
+                                End If
                                 
-                                       NombreCuenta = BuscaCuenta(CodigoCuentaCliente)
-                                       MonedaFactura = "Cordobas"
-                                       
-
-
-    
-
+                                Debito = 0
+                                NumeroFactura = "-"
+                                If IR <> 0 Then
+                                Resultado = GrabaDetalleNomina(Cuenta_IR, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, IR, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                End If
                                 
-                                      If Reg = 1 Then
-                                         '////////////////////////////////////////////////////////////////
-                                         '////////AGREGO LOS INDICES DE TRANSACCIONES//////
-                                         '/////////////////////////////////////////////////////////////////
-                                         MonedaMovimiento = "Córdobas"
-                                         Resultado = GrabaEncabezado(NumeroPeriodo, NumeroTransaccion, Format(Me.DTPicker6.Value, "yyyy-mm-dd"), "Movimiento de Pagos", "Pago", MonedaMovimiento)
-                                         Reg = 2
-                                      End If
-                                      
-                                        
-                                           
-                                        '////////////////////////////////////////////////////////////////////////////////////
-                                        '////////////AGREGO LA CUENTA DEL PROVEEDOR//////////////////////////////////////
-                                        '///////////////////////////////////////////////////////////////////////////////////////
-                                           
-                                           Credito = SubTotal
-                                           Debito = 0
+                                Debito = 0
+                                NumeroFactura = "-"
+                                If Bolsa <> 0 Then
+                                Resultado = GrabaDetalleNomina(Cuenta_Bolsa, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, Bolsa, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                End If
+                                
+                                Debito = 0
+                                NumeroFactura = "-"
+                                If Anticipo <> 0 Then
+                                Resultado = GrabaDetalleNomina(Cuenta_Anticipo, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, Anticipo, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                End If
+                                
+                                Debito = 0
+                                NumeroFactura = "-"
+                                If Pulperia <> 0 Then
+                                Resultado = GrabaDetalleNomina(Cuenta_Pulperia, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, Pulperia, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                End If
+                                
+                                Debito = 0
+                                NumeroFactura = "-"
+                                If DeduccionTransporte <> 0 Then
+                                Resultado = GrabaDetalleNomina(Cuenta_Transporte, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, DeduccionTransporte, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                End If
+                                
+                                Debito = 0
+                                NumeroFactura = "-"
+                                If Inseminacion <> 0 Then
+                                Resultado = GrabaDetalleNomina(Cuenta_Inseminacion, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, Inseminacion, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                End If
+                                
+                                Debito = 0
+                                NumeroFactura = "-"
+                                If Trazabilidad <> 0 Then
+                                Resultado = GrabaDetalleNomina(Cuenta_Trazabilidad, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, Trazabilidad, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                End If
+                                
+                                Debito = 0
+                                NumeroFactura = "-"
+                                If ProductosVeterinarios <> 0 Then
+                                Resultado = GrabaDetalleNomina(Cuenta_Veterinario, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, ProductosVeterinarios, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                End If
+                                
+                                Debito = 0
+                                NumeroFactura = "-"
+                                If OtrasDeducciones <> 0 Then
+                                Resultado = GrabaDetalleNomina(Cuenta_Otras, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, OtrasDeducciones, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                End If
+                                
+                                Reg = 1
+                                 
+          
+                              Case Else
+                             
+                             
+                             
+                                                FechaFactura = Me.AdoProcesos.Recordset("Fecha_Compra")
+                                                If Not IsNull(Me.AdoProcesos.Recordset("Fecha_Vencimiento")) Then
+                                                  FechaVence = Me.AdoProcesos.Recordset("Fecha_Vencimiento")
+                                                End If
+                                                NumeroFactura = Me.AdoProcesos.Recordset("Numero_Compra")
+                                                MonedaFactura = Me.AdoProcesos.Recordset("MonedaCompra")
+                                                If Not IsNull(Me.AdoProcesos.Recordset("Su_Referencia")) Then
+                                                   NumeroReferencia = "Compra No:" & NumeroFactura & " " & "Referencia: " & Me.AdoProcesos.Recordset("Su_Referencia")
+                                                Else
+                                                   NumeroReferencia = "Compra No:" & NumeroFactura
+                                                End If
+                                                
+                                                If Not IsNull(Me.AdoProcesos.Recordset("Cod_Cuenta_Pagar")) Then
+                                                  CodigoCuentaCliente = Me.AdoProcesos.Recordset("Cod_Cuenta_Pagar")
+                                                Else
+                                                  CodigoCuentaCliente = "2121"
+                                                End If
+                                                
+                                                Select Case TipoFactura
+                                                  Case "Cuenta"
+'                                                     codigocuentacliente =
+                                                
+                                                End Select
+                                                
+                                                
+                                                    SubTotal = 0
+                                                    Descuento = 0
+                                                    Iva = 0
+                                                    NetoPagar = 0
+                                                    TasaCambio = 1
+                                                    TasaMovimiento = 1
+                                                    
+                                                    
+                                                    SqlString = "SELECT * From Detalle_Compras WHERE (Numero_Compra = '" & NumeroFactura & "') AND (Tipo_Compra = '" & TipoFactura & "')"
+                                                    Me.AdoBuscaFacturacion.RecordSource = SqlString
+                                                    Me.AdoBuscaFacturacion.Refresh
+                                                    
+                                                    If MonedaFactura = "Dolares" Then
+                                                         TasaCambio = Format(Val(Me.AdoBuscaFacturacion.Recordset("TasaCambio")), "##,##0.000000")
+                                                    Else
+                                                         TasaCambio = 1
+                                                    End If
+                                                
+                
+                                                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                '///////////////////////////////////////BUSCO LOS DETALLES DE LACOMPRA ////////////////////////////////////////////////////
+                                                '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                Me.AdoConsultaFactura.RecordSource = "SELECT SUM(Detalle_Compras.Cantidad) AS Cantidad, SUM(Detalle_Compras.Precio_Unitario) AS Precio_Unitario, SUM(Detalle_Compras.Descuento) AS Descuento, SUM(Detalle_Compras.Precio_Neto) AS Precio_Neto, SUM(Detalle_Compras.Importe) AS Importe FROM  Compras INNER JOIN Detalle_Compras ON Compras.Numero_Compra = Detalle_Compras.Numero_Compra AND Compras.Fecha_Compra = Detalle_Compras.Fecha_Compra And Compras.Tipo_Compra = Detalle_Compras.Tipo_Compra  " & _
+                                                                                      "WHERE (Compras.Numero_Compra = '" & NumeroFactura & "') AND (Compras.Nombre_Proveedor <> N'******CANCELADO') AND (Compras.Tipo_Compra = '" & TipoFactura & "')"
+                                                Me.AdoConsultaFactura.Refresh
+                                                If Not Me.AdoConsultaFactura.Recordset.EOF Then
+                                                  If Not IsNull(Me.AdoConsultaFactura.Recordset("Importe")) Then
+                                                    If Format(CDbl(Me.AdoConsultaFactura.Recordset("Importe")), "##,##0.00") = Format(CDbl(Me.AdoProcesos.Recordset("SubTotal")), "##,##0.00") Then
+                                                        SubTotal = Format(Val(Me.AdoProcesos.Recordset("SubTotal")), "##,##0.00")
+                                                        SubTotal = Format(SubTotal * TasaCambio, "##,##0.00")
+                                                        If Not IsNull(Me.AdoProcesos.Recordset("Descuento")) Then
+                                                         If IsNumeric(Me.AdoProcesos.Recordset("Descuento")) Then
+                                                          Descuento = Format(Val(Me.AdoProcesos.Recordset("Descuento")), "##,##0.00")
+                                                          Descuento = Format(Descuento * TasaCambio, "##,##0.00")
+                                                         End If
+                                                        End If
+                                                        Iva = Format(Val(Me.AdoProcesos.Recordset("IVA")), "##,##0.00")
+                                                        Iva = Format(Iva * TasaCambio, "##,##0.00")
+                                                        NetoPagar = Format(Val(Me.AdoProcesos.Recordset("NetoPagar")), "##,##0.00")
+                                                        NetoPagar = Format(NetoPagar * TasaCambio, "##,##0.00")
+                                                        Pagado = Format(Val(Me.AdoProcesos.Recordset("Pagado")), "##,##0.00")
+                                                        Pagado = Format(Pagado * TasaCambio, "##,##0.00")
+                                                    Else
+                                                        SubTotal = Format(Val(Me.AdoConsultaFactura.Recordset("Importe")), "##,##0.00")
+                                                        SubTotal = Format(SubTotal * TasaCambio, "##,##0.00")
+                                                        Descuento = 0
+                                                        Iva = 0
+                                                        NetoPagar = 0
+                                                        Pagado = 0
+                                                    End If
+                                               
+                                                
+                                                
+                                                       NombreCuenta = BuscaCuenta(CodigoCuentaCliente)
+                                                       MonedaFactura = Me.AdoProcesos.Recordset("MonedaCompra")
+                                                       
+                
+                
+                    
+                
+                                                
+                                                      If Reg = 1 Then
+                                                         '////////////////////////////////////////////////////////////////
+                                                         '////////AGREGO LOS INDICES DE TRANSACCIONES//////
+                                                         '/////////////////////////////////////////////////////////////////
+                                                         MonedaMovimiento = "Córdobas"
+                                                         Resultado = GrabaEncabezado(NumeroPeriodo, NumeroTransaccion, Format(Me.DTPicker10.Value, "yyyy-mm-dd"), "Movimiento de Compras", "Recepcion", MonedaMovimiento)
+                                                         Reg = 2
+                                                      End If
+                                                           
+                                                        '////////////////////////////////////////////////////////////////////////////////////
+                                                        '////////////AGREGO LA CUENTA DEL PROVEEDOR//////////////////////////////////////
+                                                        '///////////////////////////////////////////////////////////////////////////////////////
+                                                           
+                                                           Credito = 0
+                                                           Debito = 0
+                                                          If NetoPagar = 0 Then
+                                                            '////////////////////////////////SIGNIFICA QUE EL PAGO DE REALIZAO DE CONTADO ////
+                                                                                                      
+                                                            Me.AdoConsultaFactura.RecordSource = "SELECT Detalle_MetodoCompras.Numero_Compra, Detalle_MetodoCompras.Fecha_Compra, Detalle_MetodoCompras.Tipo_Compra, Detalle_MetodoCompras.NombrePago, Detalle_MetodoCompras.Monto, Detalle_MetodoCompras.NumeroTarjeta, Detalle_MetodoCompras.FechaVence , MetodoPago.TipoPago, MetodoPago.Cod_Cuenta, MetodoPago.Moneda FROM Detalle_MetodoCompras INNER JOIN MetodoPago ON Detalle_MetodoCompras.NombrePago = MetodoPago.NombrePago  " & _
+                                                                                                 "WHERE (Detalle_MetodoCompras.Numero_Compra = '" & NumeroFactura & "')"
+                                                            Me.AdoConsultaFactura.Refresh
+                                                            If Not Me.AdoConsultaFactura.Recordset.EOF Then
+                                                                CodigoCuentaCliente = Me.AdoConsultaFactura.Recordset("Cod_Cuenta")
+                                                                
+                                                                DescripcionCuenta = BuscaCuenta(CodigoCuentaCliente)
+                                                                NetoPagar = SubTotal + Iva - Descuento
+                                                                Select Case TipoFactura
+                                                                  Case "Transferencia Recibida"
+                                                                       DescripcionMovimiento = "Registro de Transferencia Numero " & NumeroFactura
+                                                                       Credito = Format(NetoPagar, "##,##0.00")
+                                                                       Debito = 0
+                                                                       
+                                                                  Case "Cuenta"
+                                                                        '////////////////////////////////////////////////////////////////////////////////////
+                                                                        '////////////AGREGO LA CUENTA DEL CLIENTE//////////////////////////////////////
+                                                                        '///////////////////////////////////////////////////////////////////////////////////////
+                                                                           
+                                                                        DescripcionMovimiento = ""
+                                                                        If Me.ChkDescripcionCompra.Value = 1 Then
+                                                                          Me.AdoBuscaFacturacion.RecordSource = "SELECT  * FROM  Detalle_Compras INNER JOIN Productos ON Detalle_Compras.Cod_Producto = Productos.Cod_Productos WHERE (Detalle_Compras.Numero_Compra = '" & NumeroFactura & "')"
+                                                                          Me.AdoBuscaFacturacion.Refresh
+                                                                          Do While Not Me.AdoBuscaFacturacion.Recordset.EOF
+                                                                            DescripcionMovimiento = DescripcionMovimiento & Me.AdoBuscaFacturacion.Recordset("Cantidad") & " " & Me.AdoBuscaFacturacion.Recordset("Unidad_Medida") & " " & Me.AdoBuscaFacturacion.Recordset("Descripcion_Producto") & ", "
+                                                                          
+                                                                            Me.AdoBuscaFacturacion.Recordset.MoveNext
+                                                                          Loop
+                                                                        
+                                                                        Else
+                                                                          DescripcionMovimiento = "Registro de Compra Numero " & NumeroFactura
+                                                                        End If
+                                                                  
+                                                                  
+                '                                                       DescripcionMovimiento = "Registro de Compra Numero " & NumeroFactura
+                                                                       Credito = Format(NetoPagar, "##,##0.00")
+                                                                       Debito = 0
+                                                                  Case "Recepcion"
+                                                                        '////////////////////////////////////////////////////////////////////////////////////
+                                                                        '////////////AGREGO LA CUENTA DEL CLIENTE//////////////////////////////////////
+                                                                        '///////////////////////////////////////////////////////////////////////////////////////
+                                                                           
+                                                                        DescripcionMovimiento = ""
+                                                                        If Me.ChkDescripcionCompra.Value = 1 Then
+                                                                          Me.AdoBuscaFacturacion.RecordSource = "SELECT  * FROM  Detalle_Compras INNER JOIN Productos ON Detalle_Compras.Cod_Producto = Productos.Cod_Productos WHERE (Detalle_Compras.Numero_Compra = '" & NumeroFactura & "')"
+                                                                          Me.AdoBuscaFacturacion.Refresh
+                                                                          Do While Not Me.AdoBuscaFacturacion.Recordset.EOF
+                                                                            DescripcionMovimiento = DescripcionMovimiento & Me.AdoBuscaFacturacion.Recordset("Cantidad") & " " & Me.AdoBuscaFacturacion.Recordset("Unidad_Medida") & " " & Me.AdoBuscaFacturacion.Recordset("Descripcion_Producto") & ", "
+                                                                          
+                                                                            Me.AdoBuscaFacturacion.Recordset.MoveNext
+                                                                          Loop
+                                                                        
+                                                                        Else
+                                                                          DescripcionMovimiento = "Registro de Compra Numero " & NumeroFactura
+                                                                        End If
+                                                                  
+                                                                  
+                '                                                       DescripcionMovimiento = "Registro de Compra Numero " & NumeroFactura
+                                                                       Credito = Format(NetoPagar, "##,##0.00")
+                                                                       Debito = 0
+                                                                  Case "Devolucion de Compra"
+                                                                        '////////////////////////////////////////////////////////////////////////////////////
+                                                                        '////////////AGREGO LA CUENTA DEL CLIENTE//////////////////////////////////////
+                                                                        '///////////////////////////////////////////////////////////////////////////////////////
+                                                                           
+                                                                        DescripcionMovimiento = ""
+                                                                        If Me.ChkDescripcionCompra.Value = 1 Then
+                                                                          Me.AdoBuscaFacturacion.RecordSource = "SELECT  * FROM  Detalle_Compras INNER JOIN Productos ON Detalle_Compras.Cod_Producto = Productos.Cod_Productos WHERE (Detalle_Compras.Numero_Compra = '" & NumeroFactura & "')"
+                                                                          Me.AdoBuscaFacturacion.Refresh
+                                                                          Do While Not Me.AdoBuscaFacturacion.Recordset.EOF
+                                                                            DescripcionMovimiento = DescripcionMovimiento & Me.AdoBuscaFacturacion.Recordset("Cantidad") & " " & Me.AdoBuscaFacturacion.Recordset("Unidad_Medida") & " " & Me.AdoBuscaFacturacion.Recordset("Descripcion_Producto") & ", "
+                                                                          
+                                                                            Me.AdoBuscaFacturacion.Recordset.MoveNext
+                                                                          Loop
+                                                                        
+                                                                        Else
+                                                                          DescripcionMovimiento = "Registro de Compra Numero " & NumeroFactura
+                                                                        End If
+                '                                                       DescripcionMovimiento = "Registro de Devolucion Numero " & NumeroFactura
+                                                                       Debito = Format(NetoPagar, "##,##0.00")
+                                                                       Credito = 0
+                                                                End Select
+                                                            Else
+                                                                        '////////////////////////////////////////////////////////////////////////////////////
+                                                                        '////////////AGREGO LA CUENTA DEL CLIENTE//////////////////////////////////////
+                                                                        '///////////////////////////////////////////////////////////////////////////////////////
+                                                                           
+                                                                        DescripcionMovimiento = ""
+                                                                        If Me.ChkDescripcionCompra.Value = 1 Then
+                                                                          Me.AdoBuscaFacturacion.RecordSource = "SELECT  * FROM  Detalle_Compras INNER JOIN Productos ON Detalle_Compras.Cod_Producto = Productos.Cod_Productos WHERE (Detalle_Compras.Numero_Compra = '" & NumeroFactura & "')"
+                                                                          Me.AdoBuscaFacturacion.Refresh
+                                                                          Do While Not Me.AdoBuscaFacturacion.Recordset.EOF
+                                                                            DescripcionMovimiento = DescripcionMovimiento & Me.AdoBuscaFacturacion.Recordset("Cantidad") & " " & Me.AdoBuscaFacturacion.Recordset("Unidad_Medida") & " " & Me.AdoBuscaFacturacion.Recordset("Descripcion_Producto") & ", "
+                                                                          
+                                                                            Me.AdoBuscaFacturacion.Recordset.MoveNext
+                                                                          Loop
+                                                                        
+                                                                        Else
+                                                                          DescripcionMovimiento = "Registro de Compra Numero " & NumeroFactura
+                                                                        End If
+                '                                                DescripcionCuenta = BuscaCuenta(CodigoCuentaCliente)
+                                                                NetoPagar = SubTotal + Iva - Descuento
+                                                                Debito = Format(NetoPagar, "##,##0.00")
+                                                            End If
+                                                           ElseIf NetoPagar < 0 Then
+                                                              '/////////////////AGREGO LA DIFERENICIA A OTROS INGRESOS /
+                                                               Me.AdoConsulta.RecordSource = "SELECT * From Cuentas WHERE (TipoCuenta = 'Capital')"
+                                                               Me.AdoConsulta.Refresh
+                                                               If Not Me.AdoConsulta.Recordset.EOF Then
+                                                                CodigoCuentaOtros = Me.AdoConsulta.Recordset("CodCuentas")
+                                                                DescripcionCuenta = BuscaCuenta(CodigoCuentaOtros)
+                                                               End If
+                                                               
+                                                               
+                                                               Select Case TipoFactura
+                                                                  Case "Transferencia Recibida"
+                                                                       DescripcionMovimiento = "Registro de AJUSTE Transferencia Recibida Numero " & NumeroFactura
+                                                                       Credito = Format(NetoPagar, "##,##0.00")
+                                                                       Debito = 0
+                                                                       
+                                                                  Case "Cuenta"
+                                                                        '////////////////////////////////////////////////////////////////////////////////////
+                                                                        '////////////AGREGO LA CUENTA DEL CLIENTE//////////////////////////////////////
+                                                                        '///////////////////////////////////////////////////////////////////////////////////////
+                                                                           
+                                                                        DescripcionMovimiento = ""
+                                                                        If Me.ChkDescripcionCompra.Value = 1 Then
+                                                                          Me.AdoBuscaFacturacion.RecordSource = "SELECT  * FROM  Detalle_Compras INNER JOIN Productos ON Detalle_Compras.Cod_Producto = Productos.Cod_Productos WHERE (Detalle_Compras.Numero_Compra = '" & NumeroFactura & "')"
+                                                                          Me.AdoBuscaFacturacion.Refresh
+                                                                          Do While Not Me.AdoBuscaFacturacion.Recordset.EOF
+                                                                            DescripcionMovimiento = DescripcionMovimiento & Me.AdoBuscaFacturacion.Recordset("Cantidad") & " " & Me.AdoBuscaFacturacion.Recordset("Unidad_Medida") & " " & Me.AdoBuscaFacturacion.Recordset("Descripcion_Producto") & ", "
+                                                                          
+                                                                            Me.AdoBuscaFacturacion.Recordset.MoveNext
+                                                                          Loop
+                                                                        
+                                                                        Else
+                                                                          DescripcionMovimiento = "Registro de Compra Numero " & NumeroFactura
+                                                                        End If
+                '                                                       DescripcionMovimiento = "Registro de AJUSTE Compra Numero " & NumeroFactura
+                                                                       Credito = Format(NetoPagar, "##,##0.00")
+                                                                       Debito = 0
+                                                                       
+                                                                  Case "Recepcion"
+                                                                        '////////////////////////////////////////////////////////////////////////////////////
+                                                                        '////////////AGREGO LA CUENTA DEL CLIENTE//////////////////////////////////////
+                                                                        '///////////////////////////////////////////////////////////////////////////////////////
+                                                                           
+                                                                        DescripcionMovimiento = ""
+                                                                        If Me.ChkDescripcionCompra.Value = 1 Then
+                                                                          Me.AdoBuscaFacturacion.RecordSource = "SELECT  * FROM  Detalle_Compras INNER JOIN Productos ON Detalle_Compras.Cod_Producto = Productos.Cod_Productos WHERE (Detalle_Compras.Numero_Compra = '" & NumeroFactura & "')"
+                                                                          Me.AdoBuscaFacturacion.Refresh
+                                                                          Do While Not Me.AdoBuscaFacturacion.Recordset.EOF
+                                                                            DescripcionMovimiento = DescripcionMovimiento & Me.AdoBuscaFacturacion.Recordset("Cantidad") & " " & Me.AdoBuscaFacturacion.Recordset("Unidad_Medida") & " " & Me.AdoBuscaFacturacion.Recordset("Descripcion_Producto") & ", "
+                                                                          
+                                                                            Me.AdoBuscaFacturacion.Recordset.MoveNext
+                                                                          Loop
+                                                                        
+                                                                        Else
+                                                                          DescripcionMovimiento = "Registro de Compra Numero " & NumeroFactura
+                                                                        End If
+                '                                                       DescripcionMovimiento = "Registro de AJUSTE Compra Numero " & NumeroFactura
+                                                                       Credito = Format(NetoPagar, "##,##0.00")
+                                                                       Debito = 0
+                                                                  Case "Devolucion de Compra"
+                                                                        '////////////////////////////////////////////////////////////////////////////////////
+                                                                        '////////////AGREGO LA CUENTA DEL CLIENTE//////////////////////////////////////
+                                                                        '///////////////////////////////////////////////////////////////////////////////////////
+                                                                           
+                                                                        DescripcionMovimiento = ""
+                                                                        If Me.ChkDescripcionCompra.Value = 1 Then
+                                                                          Me.AdoBuscaFacturacion.RecordSource = "SELECT  * FROM  Detalle_Compras INNER JOIN Productos ON Detalle_Compras.Cod_Producto = Productos.Cod_Productos WHERE (Detalle_Compras.Numero_Compra = '" & NumeroFactura & "')"
+                                                                          Me.AdoBuscaFacturacion.Refresh
+                                                                          Do While Not Me.AdoBuscaFacturacion.Recordset.EOF
+                                                                            DescripcionMovimiento = DescripcionMovimiento & Me.AdoBuscaFacturacion.Recordset("Cantidad") & " " & Me.AdoBuscaFacturacion.Recordset("Unidad_Medida") & " " & Me.AdoBuscaFacturacion.Recordset("Descripcion_Producto") & ", "
+                                                                          
+                                                                            Me.AdoBuscaFacturacion.Recordset.MoveNext
+                                                                          Loop
+                                                                        
+                                                                        Else
+                                                                          DescripcionMovimiento = "Registro de Compra Numero " & NumeroFactura
+                                                                        End If
+                '                                                       DescripcionMovimiento = "Registro de AJUSTE Devolucion Compra Numero " & NumeroFactura
+                                                                       Debito = Format(NetoPagar, "##,##0.00")
+                                                                       Credito = 0
+                                                                End Select
+                                                               
+                                                               
+                                                               Resultado = GrabaDetalleFactura(CodigoCuentaOtros, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaMovimiento, 0, Abs(NetoPagar), "Comp", NumeroReferencia, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "FacturaVenta")
+                                                               
+                                                            '////////////////////////////////SIGNIFICA QUE EL PAGO DE REALIZAO DE CONTADO ////
+                                                            Me.AdoConsultaFactura.RecordSource = "SELECT  * FROM Detalle_MetodoFacturas INNER JOIN MetodoPago ON Detalle_MetodoFacturas.NombrePago = MetodoPago.NombrePago  " & _
+                                                                                                 "WHERE (Detalle_MetodoFacturas.Numero_Factura = '" & NumeroFactura & "')"
+                                                            Me.AdoConsultaFactura.Refresh
+                '                                              CodigoCuentaCliente = Me.AdoConsultaFactura.Recordset("Cod_Cuenta")
+                                                              NetoPagar = SubTotal + Iva - Descuento + Abs(NetoPagar)
+                                                              
+                                                              Debito = Format(NetoPagar, "##,##0.00")
+                                                              DescripcionMovimiento = "Registro de Facturacion Factura Numero " & NumeroFactura
+                                                              DescripcionCuenta = BuscaCuenta(CodigoCuentaCliente)
+                                                              
+                                                           ElseIf NetoPagar > 0 Then
+                                                           
                                               
-''                                               CodigoCuentaOtros = Me.AdoConsultaFactura.Recordset("Cod_Cuenta_Inventario")
-                                               Resultado = GrabaDetalleFactura(CodigoCuentaCliente, Me.DTPicker6.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaMovimiento, 0, Abs(NetoPagar), "Pago", NumeroReferencia, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "PagoProveedor")
+                                                            DescripcionCuenta = BuscaCuenta(CodigoCuentaCliente)
+                                                           
+                                                           Select Case TipoFactura
  
-                                            Credito = 0
-                                            Debito = SubTotal
-                                            CodigoCuentaInventario = Me.AdoConsultaFactura.Recordset("Cod_Cuenta_Inventario")
-                                            Resultado = GrabaDetalleFactura(CodigoCuentaInventario, Me.DTPicker6.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaCambio, Debito, Credito, "Pago", NumeroReferencia, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "PagoProveedor")
-                                   
+                                                             Case "Recepcion"
+                                                                        '////////////////////////////////////////////////////////////////////////////////////
+                                                                        '////////////AGREGO LA CUENTA DEL CLIENTE//////////////////////////////////////
+                                                                        '///////////////////////////////////////////////////////////////////////////////////////
+                                                                           
+                                                                        DescripcionMovimiento = ""
+                                                                        If Me.ChkDescripcionCompra.Value = 1 Then
+                                                                          Me.AdoBuscaFacturacion.RecordSource = "SELECT  * FROM  Detalle_Compras INNER JOIN Productos ON Detalle_Compras.Cod_Producto = Productos.Cod_Productos WHERE (Detalle_Compras.Numero_Compra = '" & NumeroFactura & "')"
+                                                                          Me.AdoBuscaFacturacion.Refresh
+                                                                          Do While Not Me.AdoBuscaFacturacion.Recordset.EOF
+                                                                            DescripcionMovimiento = DescripcionMovimiento & Me.AdoBuscaFacturacion.Recordset("Cantidad") & " " & Me.AdoBuscaFacturacion.Recordset("Unidad_Medida") & " " & Me.AdoBuscaFacturacion.Recordset("Descripcion_Producto") & ", "
+                                                                          
+                                                                            Me.AdoBuscaFacturacion.Recordset.MoveNext
+                                                                          Loop
+                                                                        
+                                                                        Else
+                                                                          DescripcionMovimiento = "Registro de Compra Numero " & NumeroFactura
+                                                                        End If
+                '                                                   DescripcionMovimiento = "Registro de Facturacion Compra Numero " & NumeroFactura & "   Referencia " & NumeroReferencia
+                                                                   Debito = 0
+                                                                   Credito = Format(NetoPagar, "##,##0.00")
+                                                                   
+                                                                  DescripcionMovimiento = DescripcionMovimiento & "," & Me.AdoProcesos.Recordset("Observaciones")
+                                                                  '/////////////////////GRABO LA CUENA DEL CLIENTE////////////////////////////////////////////
+                                                                  Resultado = GrabaDetalleFactura(CodigoCuentaCliente, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaMovimiento, Debito, Credito, "Comp", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "FacturaVenta")
  
+                                                             
+                                                             Case "Devolucion de Compra"
+                                                                        '////////////////////////////////////////////////////////////////////////////////////
+                                                                        '////////////AGREGO LA CUENTA DEL CLIENTE//////////////////////////////////////
+                                                                        '///////////////////////////////////////////////////////////////////////////////////////
+                                                                           
+                                                                        DescripcionMovimiento = ""
+                                                                        If Me.ChkDescripcionCompra.Value = 1 Then
+                                                                          Me.AdoBuscaFacturacion.RecordSource = "SELECT  * FROM  Detalle_Compras INNER JOIN Productos ON Detalle_Compras.Cod_Producto = Productos.Cod_Productos WHERE (Detalle_Compras.Numero_Compra = '" & NumeroFactura & "')"
+                                                                          Me.AdoBuscaFacturacion.Refresh
+                                                                          Do While Not Me.AdoBuscaFacturacion.Recordset.EOF
+                                                                            DescripcionMovimiento = DescripcionMovimiento & Me.AdoBuscaFacturacion.Recordset("Cantidad") & " " & Me.AdoBuscaFacturacion.Recordset("Unidad_Medida") & " " & Me.AdoBuscaFacturacion.Recordset("Descripcion_Producto") & ", "
+                                                                          
+                                                                            Me.AdoBuscaFacturacion.Recordset.MoveNext
+                                                                          Loop
+                                                                        
+                                                                        Else
+                                                                          DescripcionMovimiento = "Registro de Compra Numero " & NumeroFactura
+                                                                        End If
+                '                                                   DescripcionMovimiento = "Registro de Facturacion Devolucion Numero " & NumeroFactura & "   Referencia " & NumeroReferencia
+                                                                   Debito = Format(NetoPagar, "##,##0.00")
+                                                                   Credito = 0
+                                                        '/////////////////////GRABO LA CUENA DEL CLIENTE////////////////////////////////////////////
+                                                                  Resultado = GrabaDetalleFactura(CodigoCuentaCliente, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaMovimiento, Debito, Credito, "Comp", NumeroReferencia, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "FacturaVenta")
+                                                             End Select
+                                                                
+                
+                                                           End If
+                 
+'++++++++++++++++++++++++++++++++++++++++++ DETALLE DE MOVIMIENTOS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                                                    '//////////////////////////////////////////////////////////////////////////////////////////
+                                                    '/////////////////////CARGO LOS DETALLE DE LAS FACTURAS////////////////////////////////////
+                                                    '//////////////////////////////////////////////////////////////////////////////////////////
+                                                     
+                                                     If TipoFactura = "Cuenta" Then
+                                                        SqlString = "SELECT  Numero_Compra, Fecha_Compra, Tipo_Compra, Cod_Producto, Cantidad, Precio_Unitario, Descuento, Precio_Neto, Importe, TasaCambio From Detalle_Compras WHERE (Numero_Compra = '" & NumeroFactura & "') AND (Tipo_Compra LIKE '%" & TipoFactura & "%')"
+                                                     
+                                                     Else
+                                                         SqlString = "SELECT  Detalle_Compras.Numero_Compra, Detalle_Compras.Fecha_Compra, Detalle_Compras.Tipo_Compra, Detalle_Compras.Cod_Producto, Detalle_Compras.Cantidad, Detalle_Compras.Precio_Unitario, Detalle_Compras.Descuento, Detalle_Compras.Precio_Neto, Detalle_Compras.Importe, Productos.Descripcion_Producto, Productos.Cod_Cuenta_Inventario, Productos.Cod_Cuenta_Costo, Productos.Cod_Cuenta_Ventas, Productos.Cod_Cuenta_GastoAjuste , Productos.Cod_Cuenta_IngresoAjuste, Detalle_Compras.TasaCambio, Productos.Costo_Promedio, Productos.Costo_Promedio_Dolar  FROM  Detalle_Compras INNER JOIN Productos ON Detalle_Compras.Cod_Producto = Productos.Cod_Productos  " & _
+                                                                     "WHERE (Detalle_Compras.Numero_Compra = '" & NumeroFactura & "') AND (Detalle_Compras.Tipo_Compra Like '%" & TipoFactura & "%')"
+                                                     End If
+                                                     Me.AdoProcesosFacturacion.RecordSource = SqlString
+                                                     Me.AdoProcesosFacturacion.Refresh
+                                                     Do While Not Me.AdoProcesosFacturacion.Recordset.EOF
+                                                                CodigoProducto = Me.AdoProcesosFacturacion.Recordset("Cod_Producto")
+                                                                CodigoProducto = Me.AdoProcesosFacturacion.Recordset("Cod_Producto")
+                                                                If TipoFactura = "Cuenta" Then
+                                                                  CodigoCuentaProducto = Me.AdoProcesosFacturacion.Recordset("Cod_Producto")
+                                                                Else
+                                                                  CodigoCuentaProducto = BuscaCodigoProducto(CodigoProducto)
+                                                                End If
+                                                                If MonedaFactura = "Dolares" Then
+                '                                                 TasaCambio = BuscaTasaCambio(Fecha)
+                                                                   TasaCambio = Format(Val(Me.AdoProcesosFacturacion.Recordset("TasaCambio")), "##,##0.0000")
+                                                                Else
+                                                                    TasaCambio = 1
+                                                               End If
+                                                                
+                                                                
+                                                                If MonedaFactura = "Dolares" Then
+                                                                  CostoProducto = Me.AdoProcesosFacturacion.Recordset("Importe")
+                '                                                   CostoProducto = Format(Me.AdoProcesosFacturacion.Recordset("Importe") * TasaCambio, "##,##0.00")
+                                                                Else
+                                                                   CostoProducto = Format(Me.AdoProcesosFacturacion.Recordset("Importe"), "##,##0.00")
+                                                                End If
+                                                            
+                                                               '////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                               '///////////////////////////CALCULO EL IVA DE CADA PRODUCTO//////////////////////////////////////////////
+                                                               '//////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                
+                                                                If Iva <> 0 Then
+                                                                 TasaIva = BuscaTasaIva(CodigoProducto)
+                                                                 DescripcionCuenta = BuscaCuenta(CodigoCuentaIva)
+                                                                 
+                                                                 QUIEN = ""
+                                                                 
+                                                                 If DescripcionCuenta <> "Nulo" Then
+                                                                  
+                                                                  Select Case TipoFactura
+ 
+                                                                    Case "Recepcion"
+                                                                         DescripcionMovimiento = "IVA Ventas Compra No " & NumeroFactura & " Producto " & CodigoProducto & "   Referencia " & NumeroReferencia
+                                                                         Credito = 0
+                                                                         Debito = Format(Val(Me.AdoProcesosFacturacion.Recordset("Importe")) * TasaIva, "##,##0.00")
+                                                                         Debito = Format(Debito * TasaCambio, "##,##0.00")
+                                                                            If Debito <> 0 Then
+                                                                                Resultado = GrabaDetalleFactura(CodigoCuentaIva, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaMovimiento, Debito, Credito, "Comp", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "FacturaVenta")
+                                                                            End If
+                                                                            
+
+                                                                    End Select
+                
+                
+                                                                   End If
+                                                                 End If
+                                                                
+                                                              QUIEN = ""
+                                                                
+                                                                 
+                                                                '////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                '///////////////////////////////////////BUSCO LA CUENTA DE INVENTARIO///////////////////////////////////////////
+                                                                '/////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                If TipoFactura <> "Cuenta" Then
+                                                                    If Not IsNull(Me.AdoProcesosFacturacion.Recordset("Cod_Cuenta_Inventario")) Then
+                                                                      CodigoCuentaInventario = Me.AdoProcesosFacturacion.Recordset("Cod_Cuenta_Inventario")
+                                                                    End If
+                                                                Else
+                                                                    CodigoCuentaInventario = CodigoCuentaProducto
+                                                                End If
+                                                                
+                                                                 
+                                                                 DescripcionCuenta = BuscaCuenta(CodigoCuentaProducto)
+                                                                   Select Case TipoFactura
+                                                                        
+                                                                    Case "Recepcion"
+                                                                          DescripcionMovimiento = "Costo Producto " & CodigoProducto & "   Referencia " & NumeroReferencia
+                                                                          Debito = Format(Val(CostoProducto), "##,##0.00")
+                                                                          Debito = Format(Debito * TasaCambio, "##,##0.00")
+                                                                          Credito = 0
+                                                                         'If DescripcionCuenta <> "Nulo" Then
+                                                                          Resultado = GrabaDetalleFactura(CodigoCuentaInventario, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaMovimiento, Debito, Credito, "Comp", NumeroReferencia, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "FacturaVenta")
+                                                                         'End If
+                                                                    End Select
+                            
+                            
+                                                        Me.AdoProcesosFacturacion.Recordset.MoveNext
+                                                     Loop
+                                                     
+                                                     
+                                                                 '////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                '///////////////////////////////////////BUSCO LA CUENTA DE INVENTARIO///////////////////////////////////////////
+                                                                '/////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                If Pagado <> 0 Then
+                                                                  SqlString = "SELECT Detalle_MetodoCompras.Numero_Compra, Detalle_MetodoCompras.Fecha_Compra, Detalle_MetodoCompras.NombrePago, Detalle_MetodoCompras.Monto,Detalle_MetodoCompras.NumeroTarjeta , MetodoPago.Cod_Cuenta, MetodoPago.Moneda FROM  Detalle_MetodoCompras INNER JOIN MetodoPago ON Detalle_MetodoCompras.NombrePago = MetodoPago.NombrePago " & _
+                                                                              "WHERE (Detalle_MetodoCompras.Numero_Compra = '" & NumeroFactura & "') "
+                                                                  Me.AdoConsultaFacturacion.RecordSource = SqlString
+                                                                  Me.AdoConsultaFacturacion.Refresh
+                                                                  Do While Not Me.AdoConsultaFacturacion.Recordset.EOF
+                                                                     CodigoCuentaMetodo = Me.AdoConsultaFacturacion.Recordset("Cod_Cuenta")
+                                                                     
+                                                                     DescripcionCuenta = BuscaCuenta(CodigoCuentaMetodo)
+                                                                    Select Case TipoFactura
+                                                                        Case "Recepcion"
+                                                                         DescripcionMovimiento = "PAGO DE COMPRA" & NumeroFactura & "   Referencia " & NumeroReferencia
+                                                                         Debito = 0
+                                                                         Credito = Me.AdoConsultaFacturacion.Recordset("Monto")
+                                                                             If DescripcionCuenta <> "Nulo" Then
+                                                                              Resultado = GrabaDetalleFactura(CodigoCuentaInventario, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaCambio, Debito, Credito, "Comp", NumeroReferencia, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "FacturaVenta")
+                                                                             End If
+
+                                                                    End Select
+                                                                    
+                                                                    
+                                                                
+                
+                                                                     If Debito <> 0 Then
+                                                                         Resultado = GrabaDetalleFactura(CodigoCuentaMetodo, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaCambio, Debito, Credito, "VTAS", NumeroReferencia, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "FacturaVenta")
+                                                                     End If
+                                                                 
+                                                                    Me.AdoConsultaFacturacion.Recordset.MoveNext
+                                                                  Loop
+                                                                
+                                                                End If
+                                                                
+                                                                
+                                                                
+                                                                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                '/////////////////////////////////////////////ACTUALIZO LA FACTURA COMO CONTABILIZADO //////////////////////////////////////////
+                                                                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                rs.Open "UPDATE Compras SET Contabilizado = 1 ,Activo = 0  WHERE (Numero_Compra = '" & NumeroFactura & "') ", ConexionFacturacion
+                                                     
+                                                     
+                                                     
+                                                  End If
                                                 
-                                                
-                                                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                '/////////////////////////////////////////////ACTUALIZO LA FACTURA COMO CONTABILIZADO //////////////////////////////////////////
-                                                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                rs.Open "UPDATE Recepcion SET Contabilizado = 1   WHERE (NumeroRecepcion = '" & NumeroFactura & "') ", ConexionFacturacion
-                                     
-  
+                                                End If
+                
+                                End Select
+                                                                                       
                                 Me.osProgress1.Value = Me.osProgress1.Value + 1
                                 Me.AdoProcesos.Recordset.MoveNext
-                             Loop
+                            Loop
                              
+                             If TipoFactura = "Pago Proveedor" Then
+                             
+                                   '///////////////////////////////////////////ACTUALIZO LA NOMINA ////////////////////////////////////////////////////////////
+                                Me.AdoBuscaFacturacion.RecordSource = "SELECT  * From Nomina WHERE (NumPlanilla = " & NumeroNomina & ")"
+                                Me.AdoBuscaFacturacion.Refresh
+                                If Not Me.AdoBuscaFacturacion.Recordset.EOF Then
+                                   Me.AdoBuscaFacturacion.Recordset("Contabilizado") = True
+                                   Me.AdoBuscaFacturacion.Recordset.Update
+                                   PushButton3_Click
+                                End If
+                             
+                             End If
 '
 
                          End If
@@ -5156,6 +6038,19 @@ With Me.AdoDetalleFactura
    .ConnectionString = ConexionFacturacion
 End With
 
+
+With Me.AdoRecepcion
+   .ConnectionString = ConexionFacturacion
+End With
+
+With Me.AdoNominas
+   .ConnectionString = ConexionFacturacion
+End With
+
+With Me.AdoBuscaNomina
+   .ConnectionString = ConexionFacturacion
+End With
+
 'SSTab1.TabVisible(0) = False
 'SSTab1.TabVisible(2) = False
 
@@ -5168,6 +6063,9 @@ Me.DTPicker6.Value = Now
 Me.DTPicker7.Value = Now
 Me.DTPicker8.Value = Now
 Me.DTPicker9.Value = Now
+Me.DTPicker10.Value = Now
+Me.DTPicker11.Value = Now
+Me.DTPicker12.Value = Now
 
 End Sub
 
@@ -5220,9 +6118,8 @@ Private Sub PushButton1_Click()
   Dim rs As New ADODB.Recordset, Registro As Double, NumeroCompra As String
   Dim cmd As New ADODB.Command, Ret1Porc As Double, Ret2Porc As Double, MontoRetencion1 As Double, MontoRetencion2 As Double, Ret3Porc As Double, Ret4Porc As Double, MontoRetencion3 As Double, MontoRetencion4 As Double
   Dim MontoBanco As Double
-   
- Dim SqlString As String, FechaInicio As String, FechaFin As String
- Dim TipoFactura As String
+
+
 
     If Me.OptRecepcion.Value = True Then
      TipoFactura = "Recepcion"
@@ -6113,7 +7010,7 @@ Dim TipoFactura As String
     If Me.OptRecepcion.Value = True Then
      TipoFactura = "Recepcion"
     ElseIf Me.OptPlanilla.Value = True Then
-     TipoFactura = "Planilla"
+     TipoFactura = "Pago Proveedor"
     End If
     
     
@@ -6121,37 +7018,68 @@ Dim TipoFactura As String
        
             Case "Recepcion"
         
-            Me.TDBGridCompras.Columns(0).DataField = "Fecha_Compra"
-            Me.TDBGridCompras.Columns(1).DataField = "Numero_Compra"
-            Me.TDBGridCompras.Columns(2).DataField = "Nombre_Proveedor"
-            Me.TDBGridCompras.Columns(3).DataField = "SubTotal"
-            Me.TDBGridCompras.Columns(4).DataField = "Descuento"
-            Me.TDBGridCompras.Columns(5).DataField = "IVA"
-            Me.TDBGridCompras.Columns(6).DataField = "NetoPagar"
-            Me.TDBGridCompras.Columns(7).DataField = "Marca"
-            Me.TDBGridCompras.Splits(0).Caption = "Listado de Compras"
+            Me.TDGridPlanillaLeche.Columns(0).DataField = "Fecha_Compra"
+            Me.TDGridPlanillaLeche.Columns(1).DataField = "Numero_Compra"
+            Me.TDGridPlanillaLeche.Columns(2).DataField = "Nombre_Proveedor"
+            Me.TDGridPlanillaLeche.Columns(3).DataField = "SubTotal"
+            Me.TDGridPlanillaLeche.Columns(4).DataField = "Descuento"
+            Me.TDGridPlanillaLeche.Columns(5).DataField = "IVA"
+            Me.TDGridPlanillaLeche.Columns(6).DataField = "NetoPagar"
+            Me.TDGridPlanillaLeche.Columns(7).DataField = "Marca"
+            Me.TDGridPlanillaLeche.Splits(0).Caption = "Listado de Recepcion"
             
             
-            FechaInicio = Format(Me.DTPicker3.Value, "yyyy-mm-dd")
-            FechaFin = Format(Me.DTPicker4.Value, "yyyy-mm-dd")
+            FechaInicio = Format(Me.DTPicker11.Value, "yyyy-mm-dd")
+            FechaFin = Format(Me.DTPicker12.Value, "yyyy-mm-dd")
             SqlString = "SELECT  Fecha_Compra, Numero_Compra, Nombre_Proveedor, SubTotal, Descuento,IVA, NetoPagar,Marca From Compras  " & _
                          "WHERE   (Contabilizado = 0) AND (Tipo_Compra = '" & TipoFactura & "') AND (Fecha_Compra BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME,'" & FechaFin & "', 102))"
 
+            Case "Pago Proveedor"
+        
+            Me.TDGridPlanillaLeche.Columns(0).DataField = "NumPlanilla"
+            Me.TDGridPlanillaLeche.Columns(1).DataField = "CodTipoNomina"
+            Me.TDGridPlanillaLeche.Columns(2).DataField = "FechaInicial"
+            Me.TDGridPlanillaLeche.Columns(3).DataField = "FechaFinal"
+            Me.TDGridPlanillaLeche.Columns(4).DataField = "Año"
+            Me.TDGridPlanillaLeche.Columns(5).DataField = "mes"
+            Me.TDGridPlanillaLeche.Columns(6).DataField = "Periodo"
+            Me.TDGridPlanillaLeche.Columns(7).DataField = "Marca"
+            Me.TDGridPlanillaLeche.Splits(0).Caption = "Listado de Planillas"
+            
+            
+            FechaInicio = Format(Me.DTPicker11.Value, "yyyy-mm-dd")
+            FechaFin = Format(Me.DTPicker12.Value, "yyyy-mm-dd")
+            SqlString = "SELECT   NumPlanilla, CodTipoNomina, FechaInicial, FechaFinal, Año, mes, Periodo, Marca From Nomina Where (Contabilizado = 0)"
+
+            Me.TDGridPlanillaLeche.Columns(0).Caption = "NumPlanilla"
+            Me.TDGridPlanillaLeche.Columns(1).Caption = "CodTipoNomina"
+            Me.TDGridPlanillaLeche.Columns(2).Caption = "Fecha Inicial"
+            Me.TDGridPlanillaLeche.Columns(3).Caption = "Fecha Final"
+            Me.TDGridPlanillaLeche.Columns(4).Caption = "Año"
+            Me.TDGridPlanillaLeche.Columns(5).Caption = "Mes"
+            Me.TDGridPlanillaLeche.Columns(6).Caption = "Periodo"
+            Me.TDGridPlanillaLeche.Columns(7).Caption = "Marca"
+      
+      
       End Select
       
       
- Me.AdoCompras.RecordSource = SqlString
- Me.AdoCompras.Refresh
- If Not Me.AdoCompras.Recordset.EOF Then
-    Me.CmdContabilizarCompras.Enabled = True
+ Me.AdoRecepcion.RecordSource = SqlString
+ Me.AdoRecepcion.Refresh
+ TDGridPlanillaLeche.DataSource = Me.AdoRecepcion
+ 
+ If Not Me.AdoRecepcion.Recordset.EOF Then
+    Me.CmdContabilizarPlanilla.Enabled = True
     Me.CmdRecepcion.Enabled = True
-    Me.LblFechaCompra.Visible = True
-    Me.DTPicker6.Visible = True
+    Me.LblFechaRecepcion.Visible = True
+    Me.DTPicker10.Visible = True
+    Me.CheckBox1.Visible = True
  Else
-    Me.CmdContabilizar.Enabled = False
-    Me.LblFechaCompra.Visible = False
-    Me.DTPicker6.Visible = False
+    Me.CmdContabilizarPlanilla.Enabled = False
+    Me.LblFechaRecepcion.Visible = False
+    Me.DTPicker10.Visible = False
     Me.CmdRecepcion.Enabled = False
+    Me.CheckBox1.Visible = False
  End If
 
 End Sub
@@ -6177,3 +7105,4 @@ End Sub
 Private Sub RadioButton5_Click()
 
 End Sub
+

@@ -149,6 +149,8 @@ Dim Caracter As Double, ContadorLinea As Double, CadenaDescripcion As String, Ca
 Dim Meses As Double, Monto As Double, TasaCambio As Double, FechaLetra As String, CaracteresConcepto As Double
 Dim LineaConcepto As Double, MontoDolares As Double, MontoCordobas As Double, DebitoCordobas As Double, CreditoCordobas As Double, DebitoDolares As Double, CreditoDolares As Double
 Dim TotalDebitoCordobas As Double, TotalCreditoCordobas As Double, TotalDebitoDolares As Double, TotalCreditoDolares As Double
+Dim Ciudad As String
+
 
 Page = 1
 
@@ -341,7 +343,7 @@ ElseIf Me.Check2.Value = 1 Then
         MsgBox "Coloque El Comprobante en la impresora", vbInformation, "Zeus Contable"
         
  
-        FrmCheque.AdoCordenadas.RecordSource = "SELECT CodCuenta, X1, Y1, X2, Y2, X3, Y3, X4, Y4, X5, Y5, X6, Y6, X7, Y7, X8, Y8, X9, Y9, X10, Y10, X11, Y11, X12, Y12, X13, Y13,X14, Y14,X15, Y15,X16, Y16,X17, Y17, X18, Y18, X19, Y19,X20, Y20,X21, Y21, X22, Y22, NLineas,CaracteresLineas, CaracteresConcepto From CordenadasCheque WHERE  (CodCuenta = '" & CodigoCuenta & "')"
+        FrmCheque.AdoCordenadas.RecordSource = "SELECT CodCuenta, X1, Y1, X2, Y2, X3, Y3, X4, Y4, X5, Y5, X6, Y6, X7, Y7, X8, Y8, X9, Y9, X10, Y10, X11, Y11, X12, Y12, X13, Y13,X14, Y14,X15, Y15,X16, Y16,X17, Y17, X18, Y18, X19, Y19,X20, Y20,X21, Y21, X22, Y22, NLineas,CaracteresLineas, CaracteresConcepto, Ciudad From CordenadasCheque WHERE  (CodCuenta = '" & CodigoCuenta & "')"
         FrmCheque.AdoCordenadas.Refresh
         If FrmCheque.AdoCordenadas.Recordset.EOF Then
          MsgBox "No Existen Coordenadas, para la Cuenta", vbCritical, "Sistema Contable"
@@ -396,6 +398,7 @@ ElseIf Me.Check2.Value = 1 Then
         NLineas = Val(FrmCheque.AdoCordenadas.Recordset("NLineas"))
         CaracteresLineas = Val(FrmCheque.AdoCordenadas.Recordset("CaracteresLineas"))
         CaracteresConcepto = Val(FrmCheque.AdoCordenadas.Recordset("CaracteresConcepto"))
+        Ciudad = FrmCheque.AdoCordenadas.Recordset("Ciudad")
         
        If FrmCheque.CmbMoneda.Text = "Córdobas" Then
             If FrmCheque.ChkCheque.Value = 1 Then
@@ -668,7 +671,7 @@ ElseIf Me.Check2.Value = 1 Then
                                     Printer.FontName = "Times New Roman"
                                     Printer.FontSize = 11
                                     Printer.FontBold = True
-                                    FechaLetra = "Managua          " & Format(Day(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "          " & Format(Month(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "           " & Year(FrmCheque.DtaConsulta.Recordset("FechaTransaccion"))
+                                    FechaLetra = Ciudad & "          " & Format(Day(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "          " & Format(Month(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "           " & Year(FrmCheque.DtaConsulta.Recordset("FechaTransaccion"))
                                     Printer.Print FechaLetra
                                    End If
                                 
@@ -678,7 +681,7 @@ ElseIf Me.Check2.Value = 1 Then
                                     Printer.FontName = "Times New Roman"
                                     Printer.FontSize = 11
                                     Printer.FontBold = True
-                                    FechaLetra = "Managua          " & Format(Day(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "          " & Format(Month(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "           " & Year(FrmCheque.DtaConsulta.Recordset("FechaTransaccion"))
+                                    FechaLetra = Ciudad & "          " & Format(Day(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "          " & Format(Month(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "           " & Year(FrmCheque.DtaConsulta.Recordset("FechaTransaccion"))
                                     Printer.Print FechaLetra
                                    End If
                                 
