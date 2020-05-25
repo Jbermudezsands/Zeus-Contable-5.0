@@ -451,7 +451,7 @@ Begin VB.Form FrmResponsablesAreas
             Strikethrough   =   0   'False
          EndProperty
          CalendarForeColor=   0
-         Format          =   75235329
+         Format          =   17104897
          CurrentDate     =   38651
       End
       Begin MSDataListLib.DataCombo cmdgrupo2 

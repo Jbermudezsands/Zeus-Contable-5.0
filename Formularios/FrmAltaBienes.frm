@@ -810,7 +810,7 @@ FrmResponsablesAreas.Show vbModal
 End Sub
 
 Private Sub btnreci_Click()
-FrmResponsablesAreas.Show vbModal
+FrmResponsablesAreas.Show
 End Sub
 
 Private Sub DataGrid7_Click()
@@ -838,8 +838,8 @@ If Option2.Value = True Then
         rsa2.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
         FrmBajaBienes.Text1.Text = rsa2!IdReferencia
         FrmBajaBienes.Text1.Locked = True
-        FrmBajaBienes.txtfecha.Text = rsa2!FechaGraba
-        FrmBajaBienes.txtfecha.Locked = True
+        FrmBajaBienes.TxtFecha.Text = rsa2!FechaGraba
+        FrmBajaBienes.TxtFecha.Locked = True
         FrmBajaBienes.PushButton5.Enabled = False
         FrmBajaBienes.cmdgrupo2.Text = rsa2!DescriOficina
         FrmBajaBienes.cmdgrupo2.Locked = True
@@ -937,7 +937,7 @@ ActivosDisponiblesAlta 4 'Ver traslados
 End Sub
 
 Private Sub PushButton1_Click()
-If txtfecha.Text = "" Or txtobserva.Text = "" Or dtrespo.Text = "" Or dtrespo2.Text = "" Or idactivo = "" Then
+If TxtFecha.Text = "" Or txtobserva.Text = "" Or dtrespo.Text = "" Or dtrespo2.Text = "" Or idactivo = "" Then
     MsgBox ("Informacion incompleta, por favor verifique"), vbInformation
 Else
    guardaaltabien
@@ -957,7 +957,7 @@ SQL = "select * from AltadeBienes "
 rsa.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
 rsa.AddNew
 rsa!IdReferencia = Text1.Text
-rsa!FechaGraba = Format(CDate(txtfecha.Text), "YYYY/MM/DD")
+rsa!FechaGraba = Format(CDate(TxtFecha.Text), "YYYY/MM/DD")
 rsa!IdOfiDestino = cmdgrupo2.BoundText
 rsa!DescriOficina = cmdgrupo2.Text
 rsa!Observaciones = txtobserva.Text
@@ -982,9 +982,9 @@ End Sub
 
 Private Sub PushButton5_Click()
  
-    wfecha = IIf(Len(Trim(txtfecha.Text)) = 0 Or Not IsDate(txtfecha.Text), Date, txtfecha.Text)
+    wfecha = IIf(Len(Trim(TxtFecha.Text)) = 0 Or Not IsDate(TxtFecha.Text), Date, TxtFecha.Text)
     Set wforma = Me
-    wtextc = txtfecha.Name
+    wtextc = TxtFecha.Name
     whabfe = True
     On Local Error Resume Next
     Load fcalendario

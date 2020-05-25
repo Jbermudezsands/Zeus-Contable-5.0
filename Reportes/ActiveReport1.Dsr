@@ -4,9 +4,9 @@ Begin {9EB8768B-CDFA-44DF-8F3E-857A8405E1DB} ArepBank
    ClientHeight    =   10980
    ClientLeft      =   165
    ClientTop       =   555
-   ClientWidth     =   19080
+   ClientWidth     =   20280
    StartUpPosition =   3  'Windows Default
-   _ExtentX        =   33655
+   _ExtentX        =   35772
    _ExtentY        =   19368
    SectionData     =   "ActiveReport1.dsx":0000
 End
@@ -16,7 +16,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Public TotalDebito As Double, TotalCredito As Double
-
+ 
 Private Sub ActiveReport_ReportEnd()
  On Error GoTo err:
    Unload SubDetalle.object
@@ -71,6 +71,11 @@ Set Me.SubCheques.object = New ArepSptDepositos
 TotalConDebito = 0
 TotalConCredito = 0
 
+
+
+       
+      
+       
  On Error GoTo err
 If Dir(MDIPrimero.AdoConfiguracion.Recordset!DireccionLogo) <> "" Then
         Me.Logo.Picture = LoadPicture(MDIPrimero.AdoConfiguracion.Recordset!DireccionLogo)
@@ -150,7 +155,11 @@ Me.LblIngresos.Caption = Format(TotalDebito, "##,##0.00")
 Me.LblEgresos.Caption = Format(TotalCredito, "##,##0.00")
 
 Total1 = Me.Field12.Text
-Total2 = Me.LblPaidIn.Caption
+If Me.LblPaidIn.Caption <> "" Then
+ Total2 = Me.LblPaidIn.Caption
+Else
+ Total2 = 0
+End If
 Me.LblTDebito.Caption = Format(Total1 + Total2, "##,##0.00")
 If CodigoCuenta <> "" Then
     Me.SubFlotantes.object.DataControl1.ConnectionString = ConexionReporte
@@ -178,3 +187,23 @@ SaldoFin = SaldoIni
 
 End Sub
 
+Private Sub PageHeader_Format()
+
+    If Dir(MDIPrimero.AdoConfiguracion.Recordset!DireccionLogo) <> "" Then
+        Me.Logo.Picture = LoadPicture(MDIPrimero.AdoConfiguracion.Recordset!DireccionLogo)
+    Else
+'        MsgBox "Hay un problema con la dirección del Logo de la Empresa." & Chr(13) & "Por favor revise el valor de la Direccion Logo en la Configuración del Sistema", vbInformation
+    End If
+'       Me.Logo.Picture = LoadPicture(RutaLogo)
+       Me.LblEmpresa = FrmReportes.DtaDatosEmpresa.Recordset("NombreEmpresa")
+       Me.LblEmpresa1 = FrmReportes.DtaDatosEmpresa.Recordset("Direccion")
+       Me.LblEmpresa2 = "RUC: " & FrmReportes.DtaDatosEmpresa.Recordset("NumeroRuc")
+       Me.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
+       Me.LblMoneda.Caption = FrmReportes.CmbMoneda.Text
+
+       Me.LblBalance = Format(SaldoIniBank, "##,##0.00")
+       Me.LblPaidIn.Caption = Format(SaldoIniBank, "##,##0.00")
+       Me.LblTipo.Caption = "CUENTA DE BANCO: " & CodigoBancoBank
+       Me.LblFecha1 = FechaIniBank
+       Me.LblFecha2 = FechaFinBank
+End Sub

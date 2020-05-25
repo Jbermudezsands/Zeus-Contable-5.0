@@ -87,23 +87,23 @@ Begin VB.Form FrmMantenimientoActivos
          TabCaption(1)   =   "Programacion de Mantenimientos"
          TabPicture(1)   =   "FrmMantenimientoActivos.frx":001C
          Tab(1).ControlEnabled=   0   'False
-         Tab(1).Control(0)=   "Frame10"
-         Tab(1).Control(1)=   "Command2"
+         Tab(1).Control(0)=   "Frame11"
+         Tab(1).Control(1)=   "Command4"
          Tab(1).Control(2)=   "Command3"
-         Tab(1).Control(3)=   "Command4"
-         Tab(1).Control(4)=   "Frame11"
+         Tab(1).Control(3)=   "Command2"
+         Tab(1).Control(4)=   "Frame10"
          Tab(1).ControlCount=   5
          TabCaption(2)   =   "Orden de Trabajo"
          TabPicture(2)   =   "FrmMantenimientoActivos.frx":0038
          Tab(2).ControlEnabled=   0   'False
-         Tab(2).Control(0)=   "Frame12"
-         Tab(2).Control(1)=   "Frame13"
-         Tab(2).Control(2)=   "Command1"
-         Tab(2).Control(3)=   "Command5"
-         Tab(2).Control(4)=   "Command6"
-         Tab(2).Control(5)=   "Command7"
-         Tab(2).Control(6)=   "Command8"
-         Tab(2).Control(7)=   "Command9"
+         Tab(2).Control(0)=   "Command9"
+         Tab(2).Control(1)=   "Command8"
+         Tab(2).Control(2)=   "Command7"
+         Tab(2).Control(3)=   "Command6"
+         Tab(2).Control(4)=   "Command5"
+         Tab(2).Control(5)=   "Command1"
+         Tab(2).Control(6)=   "Frame13"
+         Tab(2).Control(7)=   "Frame12"
          Tab(2).ControlCount=   8
          TabCaption(3)   =   "Piezas"
          TabPicture(3)   =   "FrmMantenimientoActivos.frx":0054
@@ -1079,7 +1079,7 @@ Begin VB.Form FrmMantenimientoActivos
                   Strikethrough   =   0   'False
                EndProperty
                CalendarForeColor=   0
-               Format          =   76611585
+               Format          =   76021761
                CurrentDate     =   38651
             End
             Begin VB.Label Label35 
@@ -1272,7 +1272,7 @@ Begin VB.Form FrmMantenimientoActivos
                   Strikethrough   =   0   'False
                EndProperty
                CalendarForeColor=   0
-               Format          =   76611585
+               Format          =   76021761
                CurrentDate     =   38651
             End
             Begin MSComCtl2.DTPicker DTPicker1 
@@ -1295,7 +1295,7 @@ Begin VB.Form FrmMantenimientoActivos
                   Strikethrough   =   0   'False
                EndProperty
                CalendarForeColor=   0
-               Format          =   76611585
+               Format          =   76021761
                CurrentDate     =   38651
             End
             Begin VB.Label Label13 
@@ -1458,7 +1458,7 @@ Begin VB.Form FrmMantenimientoActivos
                   Strikethrough   =   0   'False
                EndProperty
                CalendarForeColor=   0
-               Format          =   76611585
+               Format          =   76021761
                CurrentDate     =   38651
             End
             Begin MSComCtl2.DTPicker DTPicker4 
@@ -1481,7 +1481,7 @@ Begin VB.Form FrmMantenimientoActivos
                   Strikethrough   =   0   'False
                EndProperty
                CalendarForeColor=   0
-               Format          =   76611585
+               Format          =   76021761
                CurrentDate     =   38651
             End
             Begin VB.Label Label21 
@@ -2215,20 +2215,20 @@ Private Function getFilter(col As TrueOleDBGrid80.Column, cols As TrueOleDBGrid8
 'filter other data types.
 Dim tmp As String
 Dim n As Integer
-Dim x As Integer
+Dim X As Integer
 
 
 For Each col In cols
     If Trim(col.FilterText) <> "" Then
         n = n + 1
         If n > 1 Then tmp = tmp & " AND "
-        Select Case rs.Fields(x).Type
+        Select Case rs.Fields(X).Type
         Case adVarWChar, adVarChar: tmp = tmp & "[" & col.DataField & "] LIKE '%" & col.FilterText & "%'"
         Case adInteger, adNumeric: tmp = tmp & "[" & col.DataField & "] = " & col.FilterText
         Case adDBTimeStamp: tmp = tmp & "[" & col.DataField & "] = #" & col.FilterText & "#"
         End Select
     End If
-    x = x + 1
+    X = X + 1
 Next col
 getFilter = tmp
 
@@ -2314,7 +2314,7 @@ Private Sub cargarcatalogoAF()
 '    Adodc3.Refresh
 End Sub
 
-Private Sub Frame14_DragDrop(Source As Control, x As Single, y As Single)
+Private Sub Frame14_DragDrop(Source As Control, X As Single, Y As Single)
 
 End Sub
 

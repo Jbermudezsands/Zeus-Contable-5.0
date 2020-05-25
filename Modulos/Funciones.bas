@@ -6539,8 +6539,8 @@ Function GrabaDetalleNomina(CodCuentas As String, FechaTransaccion As Date, Nume
                                  MDIPrimero.AdoConsulta.Recordset("NombreCuenta") = NombreCuenta
                                  
                                  If TipoCuenta = "Bancos" Then
-                                  MDIPrimero.AdoConsulta.Recordset("ChequeNo") = "#######"
-                                  MDIPrimero.AdoConsulta.Recordset("DescripcionMovimiento") = TipoFactura
+                                  MDIPrimero.AdoConsulta.Recordset("ChequeNo") = NumeroFactura
+                                  MDIPrimero.AdoConsulta.Recordset("DescripcionMovimiento") = DescripcionMovimiento & " " & TipoFactura
                                  Else
                                   MDIPrimero.AdoConsulta.Recordset("ChequeNo") = "-"
                                   MDIPrimero.AdoConsulta.Recordset("DescripcionMovimiento") = DescripcionMovimiento

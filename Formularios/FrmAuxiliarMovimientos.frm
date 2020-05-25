@@ -775,7 +775,7 @@ Begin VB.Form FrmAuxiliarMovimientos
          _ExtentX        =   2778
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   78905345
+         Format          =   76349441
          CurrentDate     =   38008
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel3 
@@ -836,9 +836,9 @@ On Error GoTo TipoErrs
   Me.CmbMoneda.Enabled = False
   '//////Grabo las descripcion en los indices//////////////////////
  Me.DBGTransacciones.Enabled = True
- mes = Month(Me.txtfecha.Value)
- Año = Year(Me.txtfecha.Value)
- FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+ mes = Month(Me.TxtFecha.Value)
+ Año = Year(Me.TxtFecha.Value)
+ FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
  FechaFin = DateSerial(Año, mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
@@ -873,9 +873,9 @@ On Error GoTo TipoErrs
  Diferencia = 0
  
 If Me.TxtNTransacciones = 0 Then
- mes = Month(Me.txtfecha.Value)
- Año = Year(Me.txtfecha.Value)
- FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+ mes = Month(Me.TxtFecha.Value)
+ Año = Year(Me.TxtFecha.Value)
+ FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
  FechaFin = DateSerial(Año, mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
@@ -888,7 +888,7 @@ If Me.TxtNTransacciones = 0 Then
    'Me.DtaTransacciones.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE (((Transacciones.FechaTransaccion) Between " & NumFecha1 & " And " & NumFecha2 & ") AND ((Transacciones.NumeroMovimiento)=" & NumeroTransaccion & ")) ORDER BY Transacciones.NTransaccion"
    Me.DtaTransacciones.Refresh
    If Not DtaTransacciones.Recordset.EOF Then
-     Me.txtfecha.Value = Me.DtaTransacciones.Recordset("FechaTransaccion")
+     Me.TxtFecha.Value = Me.DtaTransacciones.Recordset("FechaTransaccion")
      Me.TxtPeriodo.Text = Me.DtaTransacciones.Recordset("Periodo")
      Me.TxtNTransacciones.Text = Me.DtaTransacciones.Recordset("NumeroMovimiento")
      NumeroTransaccion = Me.DtaTransacciones.Recordset("NumeroMovimiento")
@@ -899,7 +899,7 @@ If Me.TxtNTransacciones = 0 Then
     Credito = 0
     TotalDebito = 0
     TotalCredito = 0
-      NumFecha1 = Me.txtfecha.Value
+      NumFecha1 = Me.TxtFecha.Value
       NMovimiento = Val(Me.TxtNTransacciones)
       Me.DtaConsulta.RecordSource = "SELECT Transacciones.FechaTransaccion, Transacciones.CodCuentas, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.TCambio*Transacciones.Debito AS MDebito, Transacciones.TCambio*Transacciones.Credito AS MCredito, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito From Transacciones WHERE (((Transacciones.FechaTransaccion)=" & NumFecha1 & ") AND ((Transacciones.NumeroMovimiento)=" & NMovimiento & "))"
       Me.DtaConsulta.Refresh
@@ -921,13 +921,13 @@ If Me.TxtNTransacciones = 0 Then
 
    End If
    
-   txtfecha.Enabled = False
+   TxtFecha.Enabled = False
    Me.TxtPeriodo.Enabled = False
    Me.TxtFuente.Enabled = False
    Me.TxtNTransacciones.Enabled = False
    Else
   MsgBox "No existen Transacciones en este Periodo", vbCritical, "Sistema Contable"
-  txtfecha.Enabled = True
+  TxtFecha.Enabled = True
    Me.TxtPeriodo.Enabled = True
    Me.TxtFuente.Enabled = True
    Me.TxtNTransacciones.Enabled = True
@@ -936,9 +936,9 @@ If Me.TxtNTransacciones = 0 Then
 
 Else '////////En caso que transaccion tenga un numero en pantalla
      '////////Distinto de Cero////////////////////////
- mes = Month(Me.txtfecha.Value)
- Año = Year(Me.txtfecha.Value)
- FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+ mes = Month(Me.TxtFecha.Value)
+ Año = Year(Me.TxtFecha.Value)
+ FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
  FechaFin = DateSerial(Año, mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
@@ -999,16 +999,16 @@ Else '////////En caso que transaccion tenga un numero en pantalla
    'Me.DtaTransacciones.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE (((Transacciones.FechaTransaccion) Between " & NumFecha1 & " And " & NumFecha2 & ") AND ((Transacciones.NumeroMovimiento)=" & NumeroTransaccion & ")) ORDER BY Transacciones.NTransaccion"
    Me.DtaTransacciones.Refresh
    If Not DtaTransacciones.Recordset.EOF Then
-     Me.txtfecha.Value = Me.DtaTransacciones.Recordset("FechaTransaccion")
+     Me.TxtFecha.Value = Me.DtaTransacciones.Recordset("FechaTransaccion")
      Me.TxtPeriodo.Text = Me.DtaTransacciones.Recordset("Periodo")
      Me.TxtNTransacciones.Text = Me.DtaTransacciones.Recordset("NumeroMovimiento")
      NumeroTransaccion = Me.DtaTransacciones.Recordset("NumeroMovimiento")
      Me.TxtFuente.Text = Me.DtaTransacciones.Recordset("Fuente")
      
      '/////////////////////////Busco el tipo de moneda del movimiento////////////////
- mes = Month(Me.txtfecha.Value)
- Año = Year(Me.txtfecha.Value)
- FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+ mes = Month(Me.TxtFecha.Value)
+ Año = Year(Me.TxtFecha.Value)
+ FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
  FechaFin = DateSerial(Año, mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
@@ -1030,7 +1030,7 @@ Else '////////En caso que transaccion tenga un numero en pantalla
     Credito = 0
     TotalDebito = 0
     TotalCredito = 0
-      NumFecha1 = Me.txtfecha.Value
+      NumFecha1 = Me.TxtFecha.Value
       NMovimiento = Val(Me.TxtNTransacciones)
       Me.DtaConsulta.RecordSource = "SELECT Transacciones.FechaTransaccion, Transacciones.CodCuentas, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones-TCambio*Transacciones-Debito AS MDebito, Transacciones.TCambio*Transacciones.Credito AS MCredito, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito From Transacciones WHERE (((Transacciones.FechaTransaccion)=" & NumFecha1 & ") AND ((Transacciones.NumeroMovimiento)=" & NMovimiento & "))"
       Me.DtaConsulta.Refresh
@@ -1058,7 +1058,7 @@ Else '////////En caso que transaccion tenga un numero en pantalla
  
    End If
  End If '/////fIN DEL IF CONSULTA////
-   txtfecha.Enabled = False
+   TxtFecha.Enabled = False
    Me.TxtPeriodo.Enabled = False
    Me.TxtFuente.Enabled = False
    Me.TxtNTransacciones.Enabled = False
@@ -1076,7 +1076,7 @@ If Not CodigoUsuario = 0 Then
 Me.DtaNacceso.Refresh
 If Me.DtaNacceso.Recordset.EOF Then
    Me.CmdGrabar.Enabled = False
-   Me.txtfecha.Enabled = False
+   Me.TxtFecha.Enabled = False
    Me.Frame1.Enabled = False
    Me.DBGTransacciones.Enabled = False
 Else
@@ -1143,9 +1143,9 @@ Private Sub CmdBorrar_Click()
    If Respuesta = 6 Then
    '//////Grabo las descripcion en los indices//////////////////////
    Me.DBGTransacciones.Enabled = True
-   mes = Month(Me.txtfecha.Value)
-   Año = Year(Me.txtfecha.Value)
-   FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+   mes = Month(Me.TxtFecha.Value)
+   Año = Year(Me.TxtFecha.Value)
+   FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
    FechaFin = DateSerial(Año, mes + 1, 1 - 1)
    NumFecha1 = FechaIni
    NumFecha2 = FechaFin
@@ -1178,7 +1178,7 @@ Private Sub CmdBorrar_Click()
        
      Me.CmbMoneda.Enabled = False
     Loop
-    Me.txtfecha.Value = Format(Now, "dd/mm/yyyy")
+    Me.TxtFecha.Value = Format(Now, "dd/mm/yyyy")
     Me.DtaTransacciones.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento,Transacciones.Conciliada From Transacciones Where (((Transacciones.NumeroMovimiento) = -1))"
     Me.DtaTransacciones.Refresh
   Me.DBGTransacciones.Columns(0).Button = True
@@ -1220,11 +1220,11 @@ Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo Fr
 Me.DtaNacceso.Refresh
 If Me.DtaNacceso.Recordset.EOF Then
    Me.CmdGrabar.Enabled = False
-   Me.txtfecha.Enabled = False
+   Me.TxtFecha.Enabled = False
    Me.Frame1.Enabled = False
    Me.DBGTransacciones.Enabled = False
   ' Me.CmdBuscarEmpleado.Enabled = False
-      Me.txtfecha.Enabled = False
+      Me.TxtFecha.Enabled = False
 Else
   Me.DBGTransacciones.Enabled = True
 End If
@@ -1245,7 +1245,7 @@ End If
 
 
 
-    txtfecha.Enabled = True
+    TxtFecha.Enabled = True
     Me.TxtPeriodo.Enabled = True
     Me.TxtFuente.Enabled = True
     Me.TxtNTransacciones.Enabled = True
@@ -1255,7 +1255,7 @@ End If
     Me.TxtDiferencia.Text = "0.00"
     Me.TxtFuente.Text = ""
     Me.TxtNTransacciones.Text = "0"
-    txtfecha.Enabled = True
+    TxtFecha.Enabled = True
     Me.TxtPeriodo.Enabled = True
     Me.TxtFuente.Enabled = True
     Me.TxtNTransacciones.Enabled = True
@@ -1282,9 +1282,9 @@ Me.CmbMoneda.Enabled = True
 
 '//////Grabo las descripcion en los indices//////////////////////
  Me.DBGTransacciones.Enabled = True
- mes = Month(Me.txtfecha.Value)
- Año = Year(Me.txtfecha.Value)
- FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+ mes = Month(Me.TxtFecha.Value)
+ Año = Year(Me.TxtFecha.Value)
+ FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
  FechaFin = DateSerial(Año, mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
@@ -1312,7 +1312,7 @@ Me.TxtCredito.Text = "0.00"
 Me.TxtDiferencia.Text = "0.00"
 Me.TxtFuente.Text = ""
 Me.TxtNTransacciones.Text = "0"
-txtfecha.Enabled = True
+TxtFecha.Enabled = True
 Me.TxtPeriodo.Enabled = True
 Me.TxtFuente.Enabled = True
 Me.TxtNTransacciones.Enabled = True
@@ -1323,10 +1323,10 @@ Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo Fr
 Me.DtaNacceso.Refresh
 If Me.DtaNacceso.Recordset.EOF Then
    Me.CmdGrabar.Enabled = False
-   Me.txtfecha.Enabled = False
+   Me.TxtFecha.Enabled = False
    Me.Frame1.Enabled = False
    Me.DBGTransacciones.Enabled = False
-      Me.txtfecha.Enabled = False
+      Me.TxtFecha.Enabled = False
 Else
   Me.DBGTransacciones.Enabled = True
 End If
@@ -1399,9 +1399,9 @@ On Error GoTo TipoErrs
  
  '//////Grabo las descripcion en los indices//////////////////////
  Me.DBGTransacciones.Enabled = True
- mes = Month(Me.txtfecha.Value)
- Año = Year(Me.txtfecha.Value)
- FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+ mes = Month(Me.TxtFecha.Value)
+ Año = Year(Me.TxtFecha.Value)
+ FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
  FechaFin = DateSerial(Año, mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
@@ -1420,7 +1420,7 @@ On Error GoTo TipoErrs
         End If
        End If
        
-  txtfecha.Enabled = True
+  TxtFecha.Enabled = True
 Me.TxtPeriodo.Enabled = True
 Me.TxtFuente.Enabled = True
 Me.TxtNTransacciones.Enabled = True
@@ -1430,7 +1430,7 @@ Me.TxtCredito.Text = "0.00"
 Me.TxtDiferencia.Text = "0.00"
 Me.TxtFuente.Text = ""
 Me.TxtNTransacciones.Text = "0"
-txtfecha.Enabled = True
+TxtFecha.Enabled = True
 Me.TxtPeriodo.Enabled = True
 Me.TxtFuente.Enabled = True
 Me.TxtNTransacciones.Enabled = True
@@ -1440,10 +1440,10 @@ If Not CodigoUsuario = 0 Then
 Me.DtaNacceso.Refresh
 If Me.DtaNacceso.Recordset.EOF Then
    Me.CmdGrabar.Enabled = False
-   Me.txtfecha.Enabled = False
+   Me.TxtFecha.Enabled = False
    Me.Frame1.Enabled = False
    Me.DBGTransacciones.Enabled = False
-   Me.txtfecha.Enabled = False
+   Me.TxtFecha.Enabled = False
 Else
   Me.DBGTransacciones.Enabled = True
 End If
@@ -1509,9 +1509,9 @@ Private Sub CmdSalir_Click()
 On Error GoTo TipoErrs
 '//////Grabo las descripcion en los indices//////////////////////
  Me.DBGTransacciones.Enabled = True
- mes = Month(Me.txtfecha.Value)
- Año = Year(Me.txtfecha.Value)
- FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+ mes = Month(Me.TxtFecha.Value)
+ Año = Year(Me.TxtFecha.Value)
+ FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
  FechaFin = DateSerial(Año, mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
@@ -1556,9 +1556,9 @@ On Error GoTo TipoErrs
   
   '//////Grabo las descripcion en los indices//////////////////////
  Me.DBGTransacciones.Enabled = True
- mes = Month(Me.txtfecha.Value)
- Año = Year(Me.txtfecha.Value)
- FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+ mes = Month(Me.TxtFecha.Value)
+ Año = Year(Me.TxtFecha.Value)
+ FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
  FechaFin = DateSerial(Año, mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
@@ -1594,9 +1594,9 @@ On Error GoTo TipoErrs
  Diferencia = 0
  
 If Me.TxtNTransacciones = 0 Then
- mes = Month(Me.txtfecha.Value)
- Año = Year(Me.txtfecha.Value)
- FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+ mes = Month(Me.TxtFecha.Value)
+ Año = Year(Me.TxtFecha.Value)
+ FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
  FechaFin = DateSerial(Año, mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
@@ -1612,15 +1612,15 @@ If Me.TxtNTransacciones = 0 Then
    Me.DtaTransacciones.Refresh
    
    If Not DtaTransacciones.Recordset.EOF Then
-     Me.txtfecha.Value = Me.DtaTransacciones.Recordset("FechaTransaccion")
+     Me.TxtFecha.Value = Me.DtaTransacciones.Recordset("FechaTransaccion")
      Me.TxtPeriodo.Text = Me.DtaTransacciones.Recordset("Periodo")
      Me.TxtNTransacciones.Text = Me.DtaTransacciones.Recordset("NumeroMovimiento")
      NumeroTransaccion = Me.DtaTransacciones.Recordset("NumeroMovimiento")
      Me.TxtFuente.Text = Me.DtaTransacciones.Recordset("Fuente")
          '/////////////////////////Busco el tipo de moneda del movimiento////////////////
- mes = Month(Me.txtfecha.Value)
- Año = Year(Me.txtfecha.Value)
- FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+ mes = Month(Me.TxtFecha.Value)
+ Año = Year(Me.TxtFecha.Value)
+ FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
  FechaFin = DateSerial(Año, mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
@@ -1640,7 +1640,7 @@ If Me.TxtNTransacciones = 0 Then
     Credito = 0
     TotalDebito = 0
     TotalCredito = 0
-      NumFecha1 = Me.txtfecha.Value
+      NumFecha1 = Me.TxtFecha.Value
       NMovimiento = Val(Me.TxtNTransacciones)
       Me.DtaConsulta.RecordSource = "SELECT Transacciones.FechaTransaccion, Transacciones.CodCuentas, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.TCambio*Transacciones.Debito AS MDebito, Transacciones.TCambio*Transacciones.Credito AS MCredito, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito From Transacciones WHERE (((Transacciones.FechaTransaccion)=" & NumFecha1 & ") AND ((Transacciones.NumeroMovimiento)=" & NMovimiento & "))"
       Me.DtaConsulta.Refresh
@@ -1661,13 +1661,13 @@ If Me.TxtNTransacciones = 0 Then
    
    End If
    
-   txtfecha.Enabled = False
+   TxtFecha.Enabled = False
    Me.TxtPeriodo.Enabled = False
    Me.TxtFuente.Enabled = False
    Me.TxtNTransacciones.Enabled = False
    Else
   MsgBox "No existen Transacciones en este Periodo", vbCritical, "Sistema Contable"
-  txtfecha.Enabled = True
+  TxtFecha.Enabled = True
    Me.TxtPeriodo.Enabled = True
    Me.TxtFuente.Enabled = True
    Me.TxtNTransacciones.Enabled = True
@@ -1676,9 +1676,9 @@ If Me.TxtNTransacciones = 0 Then
 
 Else '////////En caso que transaccion tenga un numero en pantalla
      '////////Distinto de Cero////////////////////////
- mes = Month(Me.txtfecha.Value)
- Año = Year(Me.txtfecha.Value)
- FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+ mes = Month(Me.TxtFecha.Value)
+ Año = Year(Me.TxtFecha.Value)
+ FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
  FechaFin = DateSerial(Año, mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
@@ -1736,16 +1736,16 @@ Else '////////En caso que transaccion tenga un numero en pantalla
    'Me.DtaTransacciones.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE (((Transacciones.FechaTransaccion) Between " & NumFecha1 & " And " & NumFecha2 & ") AND ((Transacciones.NumeroMovimiento)=" & NumeroTransaccion & ")) ORDER BY Transacciones.NTransaccion"
    Me.DtaTransacciones.Refresh
    If Not DtaTransacciones.Recordset.EOF Then
-     Me.txtfecha.Value = Me.DtaTransacciones.Recordset("FechaTransaccion")
+     Me.TxtFecha.Value = Me.DtaTransacciones.Recordset("FechaTransaccion")
      Me.TxtPeriodo.Text = Me.DtaTransacciones.Recordset("Periodo")
      Me.TxtNTransacciones.Text = Me.DtaTransacciones.Recordset("NumeroMovimiento")
       NumeroTransaccion = Me.DtaTransacciones.Recordset("NumeroMovimiento")
      Me.TxtFuente.Text = Me.DtaTransacciones.Recordset("Fuente")
      
      '/////////////////////////Busco el tipo de moneda del movimiento////////////////
- mes = Month(Me.txtfecha.Value)
- Año = Year(Me.txtfecha.Value)
- FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+ mes = Month(Me.TxtFecha.Value)
+ Año = Year(Me.TxtFecha.Value)
+ FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
  FechaFin = DateSerial(Año, mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
@@ -1767,7 +1767,7 @@ Else '////////En caso que transaccion tenga un numero en pantalla
     Credito = 0
     TotalDebito = 0
     TotalCredito = 0
-      NumFecha1 = Me.txtfecha.Value
+      NumFecha1 = Me.TxtFecha.Value
       NMovimiento = Val(Me.TxtNTransacciones)
       Me.DtaConsulta.RecordSource = "SELECT Transacciones.FechaTransaccion, Transacciones.CodCuentas, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.TCambio*Transacciones.Debito AS MDebito, Transacciones.TCambio*Transacciones.Credito AS MCredito, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito From Transacciones WHERE (((Transacciones.FechaTransaccion)=" & NumFecha1 & ") AND ((Transacciones.NumeroMovimiento)=" & NMovimiento & "))"
       Me.DtaConsulta.Refresh
@@ -1798,7 +1798,7 @@ Else '////////En caso que transaccion tenga un numero en pantalla
    End If
    
  End If '/////////Fin del if consulta////////
-   txtfecha.Enabled = False
+   TxtFecha.Enabled = False
    Me.TxtPeriodo.Enabled = False
    Me.TxtFuente.Enabled = False
    Me.TxtNTransacciones.Enabled = False
@@ -1816,7 +1816,7 @@ If Not CodigoUsuario = 0 Then
 Me.DtaNacceso.Refresh
 If Me.DtaNacceso.Recordset.EOF Then
    Me.CmdGrabar.Enabled = False
-   Me.txtfecha.Enabled = False
+   Me.TxtFecha.Enabled = False
    Me.Frame1.Enabled = False
    Me.DBGTransacciones.Enabled = False
 Else
@@ -1908,7 +1908,7 @@ Select Case ColIndex
 
          Select Case TipoMoneda
             Case "Córdobas"
-                      Fecha = Me.txtfecha.Value
+                      Fecha = Me.TxtFecha.Value
                       Me.DtaTasas.RecordSource = "SELECT Tasas.FechaTasas, Tasas.MontoCordobas, Tasas.MontoLibras From Tasas Where (((Tasas.FechaTasas) =" & Fecha & "))"
                       Me.DtaTasas.Refresh
                 If Not DtaTasas.Recordset.EOF Then
@@ -1932,7 +1932,7 @@ Select Case ColIndex
                 End If
             
             Case "Dólares"
-             Fecha = Me.txtfecha.Value
+             Fecha = Me.TxtFecha.Value
              Me.DtaTasas.RecordSource = "SELECT Tasas.FechaTasas, Tasas.MontoCordobas, Tasas.MontoLibras From Tasas Where (((Tasas.FechaTasas) =" & Fecha & "))"
              Me.DtaTasas.Refresh
              If Not DtaTasas.Recordset.EOF Then
@@ -1957,7 +1957,7 @@ Select Case ColIndex
                End If
             
             Case "Libras"
-                      Fecha = Me.txtfecha.Value
+                      Fecha = Me.TxtFecha.Value
                       Me.DtaTasas.RecordSource = "SELECT Tasas.FechaTasas, Tasas.MontoCordobas, Tasas.MontoLibras From Tasas Where (((Tasas.FechaTasas) =" & Fecha & "))"
                       Me.DtaTasas.Refresh
                 If Not DtaTasas.Recordset.EOF Then
@@ -2003,7 +2003,7 @@ Select Case ColIndex
        ' FrmCheque.DtaTransacciones.Recordset.MoveLast
      
      End If
-        ConsecutivoVoucher = Month(FrmTransacciones.txtfecha.Value)
+        ConsecutivoVoucher = Month(FrmTransacciones.TxtFecha.Value)
         If TipoCuenta = "Caja" Then
               numero = "CASH " & NumeroVoucher & "/" & ConsecutivoVoucher
         End If
@@ -2025,10 +2025,10 @@ Select Case ColIndex
          
          Me.DBGTransacciones.Columns(2).Text = numero
          Me.DBGTransacciones.Columns(1).Text = DtaCuentas.Recordset("DescripcionCuentas")
-         Me.DBGTransacciones.Columns(10).Text = Me.txtfecha.Value
+         Me.DBGTransacciones.Columns(10).Text = Me.TxtFecha.Value
          Me.DBGTransacciones.Columns(11).Text = NumeroPeriodo
          Me.DBGTransacciones.Columns(13).Text = Me.TxtFuente.Text
-         Me.DBGTransacciones.Columns(14).Text = Me.txtfecha.Value
+         Me.DBGTransacciones.Columns(14).Text = Me.TxtFecha.Value
          Me.DBGTransacciones.Columns(15).Text = NumeroTransaccion
          Me.DBGTransacciones.Columns(6).Text = "Debito"
          'Me.DBGTransacciones.Columns(9).Locked = True
@@ -2460,9 +2460,9 @@ Dim Fechas1 As String, Fechas2 As String
 On Error GoTo TipoErrs
    Select Case ColIndex
     Case 0
-      mes = Month(Me.txtfecha.Value)
-      Año = Year(Me.txtfecha.Value)
-      FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+      mes = Month(Me.TxtFecha.Value)
+      Año = Year(Me.TxtFecha.Value)
+      FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
       FechaFin = DateSerial(Año, mes + 1, 1 - 1)
       NumFecha1 = FechaIni
       NumFecha2 = FechaFin
@@ -2493,7 +2493,7 @@ On Error GoTo TipoErrs
       '////////Edito los Datos de los indices de Transacciones//////
          
           Me.DtaIndice.Recordset.AddNew
-          Me.DtaIndice.Recordset("FechaTransaccion") = Format(Me.txtfecha.Value, "dd/mm/yyyy")
+          Me.DtaIndice.Recordset("FechaTransaccion") = Format(Me.TxtFecha.Value, "dd/mm/yyyy")
           Me.DtaIndice.Recordset("NumeroMovimiento") = NumeroTransaccion
           Me.DtaIndice.Recordset("DescripcionMovimiento") = Me.DBGTransacciones.Columns(1).Text
           Me.DtaIndice.Recordset("Fuente") = Me.TxtFuente.Text
@@ -2521,8 +2521,8 @@ Salir = False
  Credito = 0
  TotalDebito = 0
  TotalCredito = 0
-      NumFecha1 = Me.txtfecha.Value
-      Fechas1 = Format(Me.txtfecha.Value, "yyyy/mm/dd")
+      NumFecha1 = Me.TxtFecha.Value
+      Fechas1 = Format(Me.TxtFecha.Value, "yyyy/mm/dd")
       NMovimiento = Val(Me.TxtNTransacciones)
       Me.DtaConsulta.RecordSource = "SELECT FechaTransaccion, CodCuentas, NTransaccion, NumeroMovimiento, TCambio * Debito AS MDebito, TCambio * Credito AS MCredito, TCambio, Debito, Credito From Transacciones WHERE     (FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (NumeroMovimiento = " & NMovimiento & ")"
 'Me.DtaConsulta.RecordSource = "SELECT Transacciones.FechaTransaccion, Transacciones.CodCuentas, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, TCambio*Debito AS MDebito, TCambio*Credito AS MCredito, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito From Transacciones WHERE (((Transacciones.FechaTransaccion)=" & NumFecha1 & ") AND ((Transacciones.NumeroMovimiento)=" & NMovimiento & "))"
@@ -2635,9 +2635,9 @@ End Sub
 
 Private Sub DBGTransacciones_GotFocus()
 On Error GoTo TipoErrs
- mes = Month(Me.txtfecha.Value)
-      Año = Year(Me.txtfecha.Value)
-      FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+ mes = Month(Me.TxtFecha.Value)
+      Año = Year(Me.TxtFecha.Value)
+      FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
       FechaFin = DateSerial(Año, mes + 1, 1 - 1)
       NumFecha1 = FechaIni
       NumFecha2 = FechaFin
@@ -2654,7 +2654,7 @@ On Error GoTo TipoErrs
         If EstadoPeriodo = "B" Then
            MsgBox "El Periodo Esta Bloqueado", vbCritical, "Sistema Contable"
            'Me.TxtFecha.SetFocus
-           txtfecha.Enabled = True
+           TxtFecha.Enabled = True
            Me.TxtPeriodo.Enabled = True
            Me.TxtFuente.Enabled = True
            Me.TxtNTransacciones.Enabled = True
@@ -2662,8 +2662,8 @@ On Error GoTo TipoErrs
            Exit Sub
         ElseIf EstadoPeriodo = "C" Then
            MsgBox "El Periodo esta Cerrado", vbCritical, "Sistema Contable"
-           Me.txtfecha.SetFocus
-           txtfecha.Enabled = True
+           Me.TxtFecha.SetFocus
+           TxtFecha.Enabled = True
            Me.TxtPeriodo.Enabled = True
            Me.TxtFuente.Enabled = True
            Me.TxtNTransacciones.Enabled = True
@@ -2676,7 +2676,7 @@ On Error GoTo TipoErrs
       Else
         MsgBox "La Fecha esta fuera del Rango de Periodos", vbCritical, "Sistema Contable"
         Me.DBGTransacciones.Enabled = False
-        txtfecha.Enabled = True
+        TxtFecha.Enabled = True
         Me.TxtPeriodo.Enabled = True
         Me.TxtFuente.Enabled = True
         Me.TxtNTransacciones.Enabled = True
@@ -2685,7 +2685,7 @@ On Error GoTo TipoErrs
 
 
 
- txtfecha.Enabled = False
+ TxtFecha.Enabled = False
  Me.TxtPeriodo.Enabled = False
  Me.TxtFuente.Enabled = False
  Me.TxtNTransacciones.Enabled = False
@@ -2733,7 +2733,7 @@ Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo Fr
 Me.DtaNacceso.Refresh
 If Me.DtaNacceso.Recordset.EOF Then
    Me.CmdGrabar.Enabled = False
-   Me.txtfecha.Enabled = False
+   Me.TxtFecha.Enabled = False
    Me.Frame1.Enabled = False
    Me.DBGTransacciones.Enabled = False
 
@@ -2824,7 +2824,7 @@ With Me.DtaTransacciones
 End With
 
 
-Me.txtfecha.Value = Format(Now, "dd/mm/yyyy")
+Me.TxtFecha.Value = Format(Now, "dd/mm/yyyy")
 
 Me.DtaTransacciones.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento,Transacciones.Conciliada From Transacciones Where (((Transacciones.NumeroMovimiento) = -1))"
 Me.DtaTransacciones.Refresh
@@ -2995,7 +2995,7 @@ On Error GoTo TipoErrs
     
     If Not Me.DBGTransacciones.Columns(0).Text = "" Then
     CodigoCuenta = Me.DBGTransacciones.Columns(0).Text
-    FechaTransaccion = Format(Me.txtfecha.Value, "YYYY-MM-DD")
+    FechaTransaccion = Format(Me.TxtFecha.Value, "YYYY-MM-DD")
     NumeroTransaccion = Me.TxtNTransacciones.Text
     Me.AdoBuscar.RecordSource = "SELECT  * From Transacciones WHERE (CodCuentas = '" & CodigoCuenta & "') AND (FechaTransaccion = CONVERT(DATETIME, '" & FechaTransaccion & "', 102)) AND (NumeroMovimiento = " & NumeroTransaccion & ")"
     Me.AdoBuscar.Refresh
@@ -3015,11 +3015,11 @@ Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo Fr
 Me.DtaNacceso.Refresh
 If Me.DtaNacceso.Recordset.EOF Then
    Me.CmdGrabar.Enabled = False
-   Me.txtfecha.Enabled = False
+   Me.TxtFecha.Enabled = False
    Me.Frame1.Enabled = False
    Me.DBGTransacciones.Enabled = False
    
-      Me.txtfecha.Enabled = False
+      Me.TxtFecha.Enabled = False
 Else
   Me.DBGTransacciones.Enabled = True
 End If
@@ -3070,9 +3070,9 @@ End Sub
 Private Sub TxtFecha_GotFocus()
 On Error GoTo TipoErrs
  Me.DBGTransacciones.Enabled = True
- mes = Month(Me.txtfecha.Value)
- Año = Year(Me.txtfecha.Value)
- FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+ mes = Month(Me.TxtFecha.Value)
+ Año = Year(Me.TxtFecha.Value)
+ FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
  FechaFin = DateSerial(Año, mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
@@ -3086,17 +3086,17 @@ On Error GoTo TipoErrs
   EstadoPeriodo = DtaConsulta.Recordset("EstadoPeriodo")
   If EstadoPeriodo = "B" Then
    MsgBox "El Periodo Esta Bloqueado", vbCritical, "Sistema Contable"
-   Me.txtfecha.SetFocus
+   Me.TxtFecha.SetFocus
    Me.DBGTransacciones.Enabled = False
-   txtfecha.Enabled = True
+   TxtFecha.Enabled = True
    Me.TxtPeriodo.Enabled = True
    Me.TxtFuente.Enabled = True
    Me.TxtNTransacciones.Enabled = True
    Exit Sub
   ElseIf EstadoPeriodo = "C" Then
   MsgBox "El Periodo esta Cerrado", vbCritical, "Sistema Contable"
-  Me.txtfecha.SetFocus
-  txtfecha.Enabled = True
+  Me.TxtFecha.SetFocus
+  TxtFecha.Enabled = True
   Me.TxtPeriodo.Enabled = True
   Me.TxtFuente.Enabled = True
   Me.TxtNTransacciones.Enabled = True
@@ -3118,7 +3118,7 @@ On Error GoTo TipoErrs
  Else
    MsgBox "La Fecha esta fuera del Rango de Periodos", vbCritical, "Sistema Contable"
    Me.DBGTransacciones.Enabled = False
-   txtfecha.Enabled = True
+   TxtFecha.Enabled = True
    Me.TxtPeriodo.Enabled = True
    Me.TxtFuente.Enabled = True
    Me.TxtNTransacciones.Enabled = True
@@ -3127,7 +3127,7 @@ On Error GoTo TipoErrs
  
  '///////Verifico si esta registrada la fecha de la tasa//////
 
-NumFecha = Me.txtfecha.Value
+NumFecha = Me.TxtFecha.Value
 DtaTasas.RecordSource = "SELECT Tasas.FechaTasas, Tasas.MontoCordobas, Tasas.MontoLibras From Tasas Where (((Tasas.FechaTasas) = " & NumFecha & "))ORDER BY Tasas.FechaTasas"
 DtaTasas.Refresh
 
@@ -3153,9 +3153,9 @@ End Sub
 
 Private Sub TxtFecha_LostFocus()
 Dim NumFecha As Long
-mes = Month(Me.txtfecha.Value)
- Año = Year(Me.txtfecha.Value)
- FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+mes = Month(Me.TxtFecha.Value)
+ Año = Year(Me.TxtFecha.Value)
+ FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
  FechaFin = DateSerial(Año, mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
@@ -3169,7 +3169,7 @@ mes = Month(Me.txtfecha.Value)
  
  '///////Verifico si esta registrada la fecha de la tasa//////
 
-NumFecha = Me.txtfecha.Value
+NumFecha = Me.TxtFecha.Value
 DtaTasas.RecordSource = "SELECT Tasas.FechaTasas, Tasas.MontoCordobas, Tasas.MontoLibras From Tasas Where (((Tasas.FechaTasas) = " & NumFecha & "))ORDER BY Tasas.FechaTasas"
 DtaTasas.Refresh
 
@@ -3193,7 +3193,7 @@ End Sub
 
 Private Sub TxtFuente_GotFocus()
 On Error GoTo TipoErrs
- Me.txtfecha.Enabled = False
+ Me.TxtFecha.Enabled = False
  Me.TxtPeriodo.Enabled = False
  Me.TxtNTransacciones.Enabled = False
 Exit Sub
@@ -3202,9 +3202,9 @@ TipoErrs:
 End Sub
 
 Private Sub TxtFuente_LostFocus()
-mes = Month(Me.txtfecha.Value)
- Año = Year(Me.txtfecha.Value)
- FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+mes = Month(Me.TxtFecha.Value)
+ Año = Year(Me.TxtFecha.Value)
+ FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
  FechaFin = DateSerial(Año, mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
@@ -3220,7 +3220,7 @@ mes = Month(Me.txtfecha.Value)
    MsgBox "El Periodo Esta Bloqueado", vbCritical, "Sistema Contable"
    'Me.TxtFecha.SetFocus
    Me.DBGTransacciones.Enabled = False
-   txtfecha.Enabled = True
+   TxtFecha.Enabled = True
    Me.TxtPeriodo.Enabled = True
    Me.TxtFuente.Enabled = True
    Me.TxtNTransacciones.Enabled = True
@@ -3229,7 +3229,7 @@ mes = Month(Me.txtfecha.Value)
   MsgBox "El Periodo esta Cerrado", vbCritical, "Sistema Contable"
 '  Me.TxtFecha.SetFocus
   Me.DBGTransacciones.Enabled = False
-  txtfecha.Enabled = True
+  TxtFecha.Enabled = True
   Me.TxtPeriodo.Enabled = True
   Me.TxtFuente.Enabled = True
   Me.TxtNTransacciones.Enabled = True
@@ -3240,7 +3240,7 @@ mes = Month(Me.txtfecha.Value)
  Else
    MsgBox "La Fecha esta fuera del Rango de Periodos", vbCritical, "Sistema Contable"
    Me.DBGTransacciones.Enabled = False
-   txtfecha.Enabled = True
+   TxtFecha.Enabled = True
    Me.TxtPeriodo.Enabled = True
    Me.TxtFuente.Enabled = True
    Me.TxtNTransacciones.Enabled = True
@@ -3249,7 +3249,7 @@ mes = Month(Me.txtfecha.Value)
  
  '///////Verifico si esta registrada la fecha de la tasa//////
 
-NumFecha = Me.txtfecha.Value
+NumFecha = Me.TxtFecha.Value
 DtaTasas.RecordSource = "SELECT Tasas.FechaTasas, Tasas.MontoCordobas, Tasas.MontoLibras From Tasas Where (((Tasas.FechaTasas) = " & NumFecha & "))ORDER BY Tasas.FechaTasas"
 DtaTasas.Refresh
 
@@ -3270,7 +3270,7 @@ End If
 
 
 
- Me.txtfecha.Enabled = False
+ Me.TxtFecha.Enabled = False
  Me.TxtPeriodo.Enabled = False
  Me.TxtFuente.Enabled = False
  Me.TxtNTransacciones.Enabled = False
@@ -3279,9 +3279,9 @@ End Sub
 
 Private Sub TxtNTransacciones_LostFocus()
 On Error GoTo TipoErrs
- mes = Month(Me.txtfecha.Value)
- Año = Year(Me.txtfecha.Value)
- FechaIni = CDate("1/" & Month(Me.txtfecha.Value) & "/" & Year(Me.txtfecha.Value))
+ mes = Month(Me.TxtFecha.Value)
+ Año = Year(Me.TxtFecha.Value)
+ FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
  FechaFin = DateSerial(Año, mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
@@ -3295,18 +3295,18 @@ On Error GoTo TipoErrs
   EstadoPeriodo = DtaConsulta.Recordset("EstadoPeriodo")
   If EstadoPeriodo = "B" Then
    MsgBox "El Periodo Esta Bloqueado", vbCritical, "Sistema Contable"
-   Me.txtfecha.SetFocus
+   Me.TxtFecha.SetFocus
    Me.DBGTransacciones.Enabled = False
-   txtfecha.Enabled = True
+   TxtFecha.Enabled = True
    Me.TxtPeriodo.Enabled = True
    Me.TxtFuente.Enabled = True
    Me.TxtNTransacciones.Enabled = True
    Exit Sub
   ElseIf EstadoPeriodo = "C" Then
   MsgBox "El Periodo esta Cerrado", vbCritical, "Sistema Contable"
-  Me.txtfecha.SetFocus
+  Me.TxtFecha.SetFocus
   Me.DBGTransacciones.Enabled = False
-  txtfecha.Enabled = True
+  TxtFecha.Enabled = True
   Me.TxtPeriodo.Enabled = True
   Me.TxtFuente.Enabled = True
   Me.TxtNTransacciones.Enabled = True
@@ -3317,7 +3317,7 @@ On Error GoTo TipoErrs
  Else
    MsgBox "La Fecha esta fuera del Rango de Periodos", vbCritical, "Sistema Contable"
    Me.DBGTransacciones.Enabled = False
-   txtfecha.Enabled = True
+   TxtFecha.Enabled = True
    Me.TxtPeriodo.Enabled = True
    Me.TxtFuente.Enabled = True
    Me.TxtNTransacciones.Enabled = True
@@ -3326,7 +3326,7 @@ On Error GoTo TipoErrs
  
  '///////Verifico si esta registrada la fecha de la tasa//////
 
-NumFecha = Me.txtfecha.Value
+NumFecha = Me.TxtFecha.Value
 DtaTasas.RecordSource = "SELECT Tasas.FechaTasas, Tasas.MontoCordobas, Tasas.MontoLibras From Tasas Where (((Tasas.FechaTasas) = " & NumFecha & "))ORDER BY Tasas.FechaTasas"
 DtaTasas.Refresh
 
@@ -3346,7 +3346,7 @@ If Not Encontrado Then
 End If
 
 '///////////////////Bloqueo los datos ////
- Me.txtfecha.Enabled = False
+ Me.TxtFecha.Enabled = False
  Me.TxtNTransacciones.Enabled = False
 
 '//////////////////Agrego una nueva Transaccion///////////////

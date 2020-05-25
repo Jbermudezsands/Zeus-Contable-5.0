@@ -6,16 +6,16 @@ Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12
 Begin VB.Form FrmActivoFijo 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Registro de Activo Fijo"
-   ClientHeight    =   6075
+   ClientHeight    =   9300
    ClientLeft      =   45
    ClientTop       =   405
-   ClientWidth     =   11295
+   ClientWidth     =   12675
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   6075
-   ScaleWidth      =   11295
+   ScaleHeight     =   9300
+   ScaleWidth      =   12675
    Begin VB.CommandButton CmdSalir 
       Caption         =   "Salir"
       Height          =   495
@@ -67,7 +67,7 @@ Begin VB.Form FrmActivoFijo
    Begin MSAdodcLib.Adodc DtaCuentas 
       Height          =   375
       Left            =   4320
-      Top             =   8040
+      Top             =   7200
       Width           =   2655
       _ExtentX        =   4683
       _ExtentY        =   661
@@ -113,7 +113,7 @@ Begin VB.Form FrmActivoFijo
    Begin MSAdodcLib.Adodc DtaEncargado 
       Height          =   375
       Left            =   4320
-      Top             =   7800
+      Top             =   6720
       Width           =   2655
       _ExtentX        =   4683
       _ExtentY        =   661
@@ -158,8 +158,8 @@ Begin VB.Form FrmActivoFijo
    End
    Begin MSAdodcLib.Adodc DtaActivoFijo 
       Height          =   375
-      Left            =   480
-      Top             =   8160
+      Left            =   960
+      Top             =   7200
       Width           =   2415
       _ExtentX        =   4260
       _ExtentY        =   661
@@ -205,7 +205,7 @@ Begin VB.Form FrmActivoFijo
    Begin MSAdodcLib.Adodc DtaGrupoCuentas 
       Height          =   330
       Left            =   4320
-      Top             =   8160
+      Top             =   7680
       Width           =   2655
       _ExtentX        =   4683
       _ExtentY        =   582
@@ -250,8 +250,8 @@ Begin VB.Form FrmActivoFijo
    End
    Begin MSAdodcLib.Adodc DtaNacceso 
       Height          =   330
-      Left            =   480
-      Top             =   8040
+      Left            =   1080
+      Top             =   7680
       Width           =   2415
       _ExtentX        =   4260
       _ExtentY        =   582
@@ -296,8 +296,8 @@ Begin VB.Form FrmActivoFijo
    End
    Begin MSAdodcLib.Adodc DtaBusca 
       Height          =   330
-      Left            =   480
-      Top             =   7800
+      Left            =   960
+      Top             =   6720
       Width           =   2535
       _ExtentX        =   4471
       _ExtentY        =   582
@@ -606,11 +606,11 @@ Begin VB.Form FrmActivoFijo
       End
       Begin MSDataListLib.DataCombo DBCodigo 
          Height          =   315
-         Left            =   1680
+         Left            =   1800
          TabIndex        =   24
          Top             =   1320
-         Width           =   1815
-         _ExtentX        =   3201
+         Width           =   1695
+         _ExtentX        =   2990
          _ExtentY        =   556
          _Version        =   393216
          Text            =   ""
@@ -624,7 +624,7 @@ Begin VB.Form FrmActivoFijo
          _ExtentX        =   3836
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   17104897
+         Format          =   75825153
          CurrentDate     =   37992
       End
       Begin MSDataListLib.DataCombo DBGrupos 
@@ -647,7 +647,7 @@ Begin VB.Form FrmActivoFijo
          _ExtentX        =   3413
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   17104897
+         Format          =   75825153
          CurrentDate     =   37992
       End
       Begin MSComCtl2.DTPicker TxtFechaUltDep 
@@ -659,7 +659,7 @@ Begin VB.Form FrmActivoFijo
          _ExtentX        =   3413
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   17104897
+         Format          =   75825153
          CurrentDate     =   37992
       End
       Begin VB.Label Label21 
@@ -1239,7 +1239,7 @@ End Sub
 
 Private Sub Form_Activate()
 Me.DtaActivoFijo.Refresh
-Me.DtaCuentas.Refresh
+'Me.DtaCuentas.Refresh
 Me.DtaEncargado.Refresh
 If Not CodigoUsuario = 0 Then
  Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodigoUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Activo Fijo'))"
@@ -1263,9 +1263,9 @@ MDIPrimero.Skin1.ApplySkin hWnd
 'SkinFramework.ApplyWindow Me.hWnd
 'SkinFramework.ApplyOptions = SkinFramework.ApplyOptions Or xtpSkinApplyMetrics
 
-frmPane.wndTaskPanel.VisualTheme = xtpTaskPanelThemeNativeWinXP
+'frmPane.wndTaskPanel.VisualTheme = xtpTaskPanelThemeNativeWinXP
     
-Me.Shape1.BackColor = RGB(219, 226, 242)
+'Me.Shape1.BackColor = RGB(219, 226, 242)
 
 'Me.Picture = Nothing
 'Me.CmdAnterior.BackColor = RGB(208, 199, 182)
@@ -1287,11 +1287,6 @@ With Me.DtaGrupoCuentas
    .ConnectionString = Conexion
    .RecordSource = "Select * from GrupoCuentas"
    .Refresh
-End With
-LlenarDataCombos DtaGrupoCuentas, DBGrupos, "DescripcionGrupo", "CodGrupo"
-
-With Me.DtaCuentas
-   '.DatabaseName = Ruta
    .ConnectionString = Conexion
    .RecordSource = "Select * from Cuentas"
    .Refresh
@@ -1305,10 +1300,16 @@ End With
 With Me.DtaActivoFijo
    '.DatabaseName = Ruta
    .ConnectionString = Conexion
-   .RecordSource = "Select * from ActivoFijo"
+   .RecordSource = "Select * from CatalogoActivoFijo"
    .Refresh
 End With
+LlenarDataCombos DtaGrupoCuentas, DBGrupos, "DescripcionGrupo", "CodGrupo"
+
+With Me.DtaCuentas
+   '.DatabaseName = Ruta
+End With
 LlenarDataCombos DtaActivoFijo, DBCodigo, "CodCuenta", "CodCuenta"
+
 With Me.DtaEncargado
    '.DatabaseName = Ruta
    .ConnectionString = Conexion

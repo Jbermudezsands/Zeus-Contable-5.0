@@ -2162,7 +2162,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   80609281
+            Format          =   79560705
             CurrentDate     =   37837
          End
          Begin MSComCtl2.DTPicker DTFecha1 
@@ -2174,7 +2174,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   80609281
+            Format          =   79560705
             CurrentDate     =   37837
          End
          Begin VB.Label Label4 
@@ -6133,6 +6133,13 @@ SQL = "SELECT Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, SUM(Presupuesto
        ArepBank.LblFecha1 = Me.DTFecha1
        ArepBank.LblFecha2 = Me.DTFecha2
        ArepBank.DtaBanco.ConnectionString = ConexionReporte
+       
+       SaldoIniBank = Format(SaldoIni, "##,##0.00")
+       CodigoBancoBank = Me.DBCodigo.Text
+       FechaIniBank = Me.DTFecha1.Value
+       FechaFinBank = Me.DTFecha2.Value
+       
+       
        If Me.CmbMoneda.Text = "Córdobas" Then
        'ArepBank.DtaBanco.Source
          SQL = "SELECT Transacciones.NTransaccion, Transacciones.FechaTransaccion, Transacciones.VoucherNo, Transacciones.ChequeNo, Transacciones.DescripcionMovimiento, Transacciones.CodCuentas, TCambio*Debito AS Debito, TCambio*Credito AS Credito, " & SaldoIni & "+Transacciones.Debito-Transacciones.Credito AS Balance, Transacciones.TCambio, Transacciones.NumeroMovimiento,Beneficiario From Transacciones WHERE (((Transacciones.FechaTransaccion) Between '" & Format(Me.DTFecha1, "yyyymmdd") & "' And '" & Format(Me.DTFecha2, "yyyymmdd") & "') AND ((Transacciones.CodCuentas)='" & CodigoCuenta & "')) ORDER BY Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NTransaccion"

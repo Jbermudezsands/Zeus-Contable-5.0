@@ -7,14 +7,14 @@ Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12
 Begin VB.Form FrmContabilizaFacturacion 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Contabilizacion del Sistema de Factuacion"
-   ClientHeight    =   10050
+   ClientHeight    =   7785
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   13275
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   10050
+   ScaleHeight     =   7785
    ScaleWidth      =   13275
    StartUpPosition =   2  'CenterScreen
    Begin MSAdodcLib.Adodc AdoProcesosFacturacion 
@@ -387,8 +387,8 @@ Begin VB.Form FrmContabilizaFacturacion
    End
    Begin MSAdodcLib.Adodc AdoFacturacion 
       Height          =   450
-      Left            =   3960
-      Top             =   8040
+      Left            =   600
+      Top             =   8280
       Width           =   2775
       _ExtentX        =   4895
       _ExtentY        =   794
@@ -454,11 +454,10 @@ Begin VB.Form FrmContabilizaFacturacion
       _ExtentY        =   10610
       _Version        =   393216
       Tabs            =   4
-      Tab             =   3
       TabHeight       =   520
       TabCaption(0)   =   "Facturacion"
       TabPicture(0)   =   "FrmContabiliza.frx":0000
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "TDBGridFacturacion"
       Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "GroupBox1"
@@ -467,19 +466,19 @@ Begin VB.Form FrmContabilizaFacturacion
       TabCaption(1)   =   "Compras"
       TabPicture(1)   =   "FrmContabiliza.frx":001C
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "PushButton2"
+      Tab(1).Control(0)=   "GroupBox2"
       Tab(1).Control(1)=   "TDBGridCompras"
-      Tab(1).Control(2)=   "GroupBox2"
+      Tab(1).Control(2)=   "PushButton2"
       Tab(1).ControlCount=   3
       TabCaption(2)   =   "Cuentas x Cobrar y Pagar"
       TabPicture(2)   =   "FrmContabiliza.frx":0038
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "GroupBox3"
-      Tab(2).Control(1)=   "TDBGridCuentas"
+      Tab(2).Control(0)=   "TDBGridCuentas"
+      Tab(2).Control(1)=   "GroupBox3"
       Tab(2).ControlCount=   2
       TabCaption(3)   =   "Planilla Leche"
       TabPicture(3)   =   "FrmContabiliza.frx":0054
-      Tab(3).ControlEnabled=   -1  'True
+      Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "TDGridPlanillaLeche"
       Tab(3).Control(0).Enabled=   0   'False
       Tab(3).Control(1)=   "GroupBox4"
@@ -514,7 +513,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   77529089
+            Format          =   75628545
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker3 
@@ -526,7 +525,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   77529089
+            Format          =   75628545
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptCompras 
@@ -578,7 +577,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   77529089
+            Format          =   75628545
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton RadioButton4 
@@ -692,7 +691,7 @@ Begin VB.Form FrmContabilizaFacturacion
       End
       Begin XtremeSuiteControls.GroupBox GroupBox1 
          Height          =   5055
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   3
          Top             =   780
          Width           =   2295
@@ -718,7 +717,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   77529089
+            Format          =   75628545
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptFacturacion 
@@ -771,7 +770,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   77529089
+            Format          =   75628545
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecibos 
@@ -824,7 +823,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   77529089
+            Format          =   75628545
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptSalidaBodega 
@@ -869,7 +868,7 @@ Begin VB.Form FrmContabilizaFacturacion
       Begin TrueOleDBGrid80.TDBGrid TDBGridFacturacion 
          Bindings        =   "FrmContabiliza.frx":0070
          Height          =   4935
-         Left            =   -72480
+         Left            =   2520
          TabIndex        =   8
          Top             =   900
          Width           =   9975
@@ -1517,7 +1516,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   77529089
+            Format          =   75628545
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebito 
@@ -1555,7 +1554,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   77529089
+            Format          =   75628545
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.PushButton CmdContabilizarNotas 
@@ -1595,7 +1594,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   77529089
+            Format          =   75628545
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebitoProveedor 
@@ -2022,7 +2021,7 @@ Begin VB.Form FrmContabilizaFacturacion
       End
       Begin XtremeSuiteControls.GroupBox GroupBox4 
          Height          =   5055
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   56
          Top             =   840
          Width           =   2295
@@ -2050,7 +2049,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   77529089
+            Format          =   75628545
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker11 
@@ -2062,7 +2061,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   77529089
+            Format          =   75628545
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecepcion 
@@ -2088,7 +2087,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   77529089
+            Format          =   75628545
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptPlanilla 
@@ -2158,6 +2157,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentY        =   661
             _StockProps     =   79
             Caption         =   "Crear Cheque x Proveedor"
+            Enabled         =   0   'False
             UseVisualStyle  =   -1  'True
             Value           =   1
          End
@@ -2199,7 +2199,7 @@ Begin VB.Form FrmContabilizaFacturacion
       Begin TrueOleDBGrid80.TDBGrid TDGridPlanillaLeche 
          Bindings        =   "FrmContabiliza.frx":00BC
          Height          =   4815
-         Left            =   2760
+         Left            =   -72240
          TabIndex        =   70
          Top             =   960
          Width           =   9975
@@ -2518,7 +2518,7 @@ Begin VB.Form FrmContabilizaFacturacion
       BorderStyle     =   0  'None
       ForeColor       =   &H00FFFFFF&
       Height          =   1095
-      Left            =   -240
+      Left            =   0
       ScaleHeight     =   1095
       ScaleWidth      =   15495
       TabIndex        =   0
@@ -2794,6 +2794,52 @@ Begin VB.Form FrmContabilizaFacturacion
       Password        =   ""
       RecordSource    =   ""
       Caption         =   "AdoBuscaNomina"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin MSAdodcLib.Adodc AdoContraCuentaFacturacion 
+      Height          =   450
+      Left            =   3960
+      Top             =   8160
+      Width           =   2775
+      _ExtentX        =   4895
+      _ExtentY        =   794
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "AdoContraCuentaFacturacion"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -5086,7 +5132,7 @@ Private Sub CmdContabilizarPlanilla_Click()
   Dim MontoBanco As Double, Directorio As String
   Dim CtaxPagar As String, Cuenta_Banco As String, Cuenta_IR As String, Cuenta_Bolsa As String, Cuenta_Anticipo As String, Cuenta_Pulperia As String
   Dim Cuenta_Transporte As String, Cuenta_Trazabilidad As String, Cuenta_Veterinario As String, Cuenta_Inseminacion As String
-  Dim Cuenta_Otras As String, NumeroNomina As String
+  Dim Cuenta_Otras As String, NumeroNomina As String, Cuenta_Debito As String, Cuenta_Credito As String, CodigoProductor As String
   
   Reg = 1
   
@@ -5150,6 +5196,8 @@ Private Sub CmdContabilizarPlanilla_Click()
                         NumeroTransaccion = Me.AdoConsulta.Recordset("NTransacciones")
                   Else
                   
+                     ExisteCodigo = True
+                  
                      '///////////////////////////////////////VERIFICO SI LAS CUENTAS EXISTEN EN EL SISTEMA CONTABLE
                         Directorio = App.Path + "\Cuentas.txt"
                         Open Directorio For Output As #1
@@ -5170,58 +5218,49 @@ Private Sub CmdContabilizarPlanilla_Click()
                              
                              Do While Not Me.AdoBuscaFacturacion.Recordset.EOF
                             
-                                                      
+                                  CodigoProductor = Me.AdoBuscaFacturacion.Recordset("CodProductor")
                             
-                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cod_Cuenta_Pagar")) Then
-                                      CtaxPagar = Me.AdoBuscaFacturacion.Recordset("Cod_Cuenta_Pagar")
-                                 End If
-                                   If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Banco")) Then
-                                      Cuenta_Banco = Me.AdoBuscaFacturacion.Recordset("Cuenta_Banco")
-                                 End If
-                                
-                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_IR")) Then
-                                      Cuenta_IR = Me.AdoBuscaFacturacion.Recordset("Cuenta_IR")
-                                 End If
-                                 
-                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Bolsa")) Then
-                                      Cuenta_Bolsa = Me.AdoBuscaFacturacion.Recordset("Cuenta_Bolsa")
-                                 End If
-                                 
-                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Anticipo")) Then
-                                      Cuenta_Anticipo = Me.AdoBuscaFacturacion.Recordset("Cuenta_Anticipo")
-                                 End If
-                                 
-                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Pulperia")) Then
-                                      Cuenta_Pulperia = Me.AdoBuscaFacturacion.Recordset("Cuenta_Pulperia")
-                                 End If
-                                 
-                                                                  
-                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Transporte")) Then
-                                      Cuenta_Transporte = Me.AdoBuscaFacturacion.Recordset("Cuenta_Transporte")
-                                 End If
-                                 
-                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Inseminacion")) Then
-                                      Cuenta_Inseminacion = Me.AdoBuscaFacturacion.Recordset("Cuenta_Inseminacion")
-                                 End If
-                                 
-                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Trazabilidad")) Then
-                                      Cuenta_Trazabilidad = Me.AdoBuscaFacturacion.Recordset("Cuenta_Trazabilidad")
-                                 End If
-                              
-                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Veterinario")) Then
-                                      Cuenta_Veterinario = Me.AdoBuscaFacturacion.Recordset("Cuenta_Veterinario")
-                                 End If
-                                 
-                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Otras")) Then
-                                      Cuenta_Otras = Me.AdoBuscaFacturacion.Recordset("Cuenta_Otras")
-                                End If
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cod_Cuenta_Pagar")) Then CtaxPagar = Me.AdoBuscaFacturacion.Recordset("Cod_Cuenta_Pagar")
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Banco")) Then Cuenta_Banco = Me.AdoBuscaFacturacion.Recordset("Cuenta_Banco")
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_IR")) Then Cuenta_IR = Me.AdoBuscaFacturacion.Recordset("Cuenta_IR")
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Bolsa")) Then Cuenta_Bolsa = Me.AdoBuscaFacturacion.Recordset("Cuenta_Bolsa")
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Anticipo")) Then Cuenta_Anticipo = Me.AdoBuscaFacturacion.Recordset("Cuenta_Anticipo")
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Pulperia")) Then Cuenta_Pulperia = Me.AdoBuscaFacturacion.Recordset("Cuenta_Pulperia")
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Transporte")) Then Cuenta_Transporte = Me.AdoBuscaFacturacion.Recordset("Cuenta_Transporte")
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Inseminacion")) Then Cuenta_Inseminacion = Me.AdoBuscaFacturacion.Recordset("Cuenta_Inseminacion")
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Trazabilidad")) Then Cuenta_Trazabilidad = Me.AdoBuscaFacturacion.Recordset("Cuenta_Trazabilidad")
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Veterinario")) Then Cuenta_Veterinario = Me.AdoBuscaFacturacion.Recordset("Cuenta_Veterinario")
+                                 If Not IsNull(Me.AdoBuscaFacturacion.Recordset("Cuenta_Otras")) Then Cuenta_Otras = Me.AdoBuscaFacturacion.Recordset("Cuenta_Otras")
+
                            
-                           
-                               If ValidarCuentas(Cod_Cuenta_Pagar) = False Then Print #1, Cod_Cuenta_Pagar; ExisteCodigo = False
-                               If ValidarCuentas(Cuenta_Banco) = False Then Print #1, Cuenta_Banco; ExisteCodigo = False
-                               If ValidarCuentas(Cuenta_IR) = False Then Print #1, Cuenta_IR; ExisteCodigo = False
+                               If ValidarCuentas(CtaxPagar) = False Then Print #1, "CuentaXPagar " & Cod_Cuenta_Pagar & " Productor: " & CodigoProductor; ExisteCodigo = False
+                               If ValidarCuentas(Cuenta_Banco) = False Then Print #1, "CuentaBanco " & Cuenta_Banco & " Productor: " & CodigoProductor; ExisteCodigo = False
+                               If ValidarCuentas(Cuenta_IR) = False Then Print #1, "Cuenta IR " & Cuenta_IR & " Productor: " & CodigoProductor; ExisteCodigo = False
+                               If ValidarCuentas(Cuenta_Bolsa) = False Then Print #1, "Cuenta Bolsa " & Cuenta_Bolsa & " Productor: " & CodigoProductor; ExisteCodigo = False
+                               If ValidarCuentas(Cuenta_Pulperia) = False Then Print #1, "Cuenta Fondo " & Cuenta_Pulperia & " Productor: " & CodigoProductor; ExisteCodigo = False
+                               If ValidarCuentas(Cuenta_Transporte) = False Then Print #1, "CuentaTransporte: " & Cuenta_Transporte & " Productor: " & CodigoProductor; ExisteCodigo = False
+                               If ValidarCuentas(Cuenta_Inseminacion) = False Then Print #1, "Cuenta Inseminacion " & Cuenta_Inseminacion & " Productor: " & CodigoProductor; ExisteCodigo = False
+                               If ValidarCuentas(Cuenta_Trazabilidad) = False Then Print #1, "Cuenta Trazabilidad " & Cuenta_Trazabilidad & " Productor: " & CodigoProductor; ExisteCodigo = False
+                               If ValidarCuentas(Cuenta_Veterinario) = False Then Print #1, "Cuenta Veterinario " & Cuenta_Veterinario & " Productor: " & CodigoProductor; ExisteCodigo = False
+                               If ValidarCuentas(Cuenta_Otras) = False Then Print #1, "Otras Cuentas " & Cuenta_Otras & " Productor: " & CodigoProductor; ExisteCodigo = False
+                               
+                                Cuenta_Debito = ""
+                                Cuenta_Credito = ""
+                               '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<BUSCO LAS CONTRA CUENTAS DE SALDOS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<>>
+                               Me.AdoContraCuentaFacturacion.RecordSource = "SELECT CuentaCredito, CuentaDebito From ContraCuentaPlanillaLeche WHERE (CuentaDebito = '" & Cuenta_Banco & "')"
+                               Me.AdoContraCuentaFacturacion.Refresh
+                               If Not Me.AdoContraCuentaFacturacion.Recordset.EOF Then
+                               
+                                 Cuenta_Debito = Me.AdoContraCuentaFacturacion.Recordset("CuentaDebito")
+                                 Cuenta_Credito = Me.AdoContraCuentaFacturacion.Recordset("CuentaCredito")
                                  
-                           
+                                 If ValidarCuentas(Cuenta_Debito) = False Then Print #1, Cuenta_Debito & " Productor: " & CodigoProductor; ExisteCodigo = False
+                                 If ValidarCuentas(Cuenta_Credito) = False Then Print #1, Cuenta_Credito & " Productor: " & CodigoProductor; ExisteCodigo = False
+                               
+                               Else
+                                 Print #1, "No Existen las contra Cuentas " & Cuenta_Banco & " Productor: " & CodigoProductor
+                                 ExisteCodigo = False
+                               End If
                            
                            
                            
@@ -5229,6 +5268,15 @@ Private Sub CmdContabilizarPlanilla_Click()
                            Loop
                        Close #1
                               
+                              
+                         If ExisteCodigo = False Then
+                           MsgBox "No existen Cuentas", vbCritical, "Sistema Contable"
+                        
+                           Abrir = "notepad.exe " & Directorio
+                           Shell Abrir
+                           Exit Sub
+           
+                        End If
                            
                   End If
 
@@ -5319,6 +5367,15 @@ Private Sub CmdContabilizarPlanilla_Click()
                                 End If
                                 
                                 
+                               '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<BUSCO LAS CONTRA CUENTAS DE SALDOS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<>>
+                               Me.AdoContraCuentaFacturacion.RecordSource = "SELECT CuentaCredito, CuentaDebito From ContraCuentaPlanillaLeche WHERE (CuentaDebito = '" & Cuenta_Banco & "')"
+                               Me.AdoContraCuentaFacturacion.Refresh
+                               If Not Me.AdoContraCuentaFacturacion.Recordset.EOF Then
+                                 Cuenta_Debito = Me.AdoContraCuentaFacturacion.Recordset("CuentaDebito")
+                                 Cuenta_Credito = Me.AdoContraCuentaFacturacion.Recordset("CuentaCredito")
+                               End If
+                                
+                                
                               Me.AdoConsulta.Recordset("NTransacciones") = Me.AdoConsulta.Recordset("NTransacciones") + 1
                               Me.AdoConsulta.Recordset.Update
                               NumeroTransaccion = Me.AdoConsulta.Recordset("NTransacciones")
@@ -5338,7 +5395,7 @@ Private Sub CmdContabilizarPlanilla_Click()
 '                                Me.AdoBuscaNomina.RecordSource = "SELECT  * FROM  Nomina INNER JOIN  TipoNomina ON Nomina.CodTipoNomina = TipoNomina.CodTipoNomina Where (Nomina.NumNomina = " & NumNomina & ")"
 '                                Me.AdoBuscaNomina.Refresh
 '                                If Not Me.AdoBuscaNomina.Recordset.EOF Then
-                                  DescripcionMovimiento = "Registrando Nomina " & NumeroFactura
+'                                  DescripcionMovimiento = "Registrando Nomina " & NumeroFactura
 '                                  DescripcionMovimiento = "Registrando Nominas No " & NumNomina
 '                                End If
 '
@@ -5362,6 +5419,26 @@ Private Sub CmdContabilizarPlanilla_Click()
                                 NetoPagar = Format(MontoNominaPagar - IR - DeduccionPolicia - Anticipo - DeduccionTransporte - Pulperia - Inseminacion - ProductosVeterinarios - Trazabilidad - OtrasDeducciones - Bolsa, "##,##0.00")
                                 
                                 DescripcionMovimiento = "Pago de Planilla por acopio de Leche No" & Me.AdoProcesos.Recordset("NumPlanilla") & " Desde " & Me.AdoProcesos.Recordset("FechaInicial") & " Hasta " & Me.AdoProcesos.Recordset("FechaFinal")
+                                
+                                '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                '//////////////////////////CREO LAS CONTRA CUENTAS PARA FONDOS DE PLANILLA //////////////////////////////
+                                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                
+                                '////////////////////////////////////CONTRACUENTA DE BANCO //////////////////////////////////////////////////////////////////
+                                
+                                Credito = 0
+                                If NetoPagar <> 0 Then
+                                NumeroFactura = "-"
+                                Resultado = GrabaDetalleNomina(Cuenta_Debito, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaCambio, NetoPagar, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, Me.AdoProcesos.Recordset("Nombres"))
+                                End If
+                                
+                                Debito = 0
+                                If NetoPagar <> 0 Then
+                                NumeroFactura = "-"
+                                Resultado = GrabaDetalleNomina(Cuenta_Credito, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, NetoPagar, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, Me.AdoProcesos.Recordset("Nombres"))
+                                End If
+                                
+                                
                                 
                                 '///////////////////////////CREO LOS REGISTROS CONTABLES X PAGAR/////////////////////////////////
                                
@@ -6049,6 +6126,10 @@ End With
 
 With Me.AdoBuscaNomina
    .ConnectionString = ConexionFacturacion
+End With
+
+With Me.AdoContraCuentaFacturacion
+   .ConnectionString = Conexion
 End With
 
 'SSTab1.TabVisible(0) = False

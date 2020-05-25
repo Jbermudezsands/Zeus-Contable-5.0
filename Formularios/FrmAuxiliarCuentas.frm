@@ -723,7 +723,7 @@ Dim Fechas1 As String, Fechas2 As String
 If Me.DBGCuentas.Columns(1).Text = "" Then
  Exit Sub
 End If
-FrmAuxiliarMovimientos.txtfecha.Value = Me.DBGCuentas.Columns(1).Text
+FrmAuxiliarMovimientos.TxtFecha.Value = Me.DBGCuentas.Columns(1).Text
 NumeroTransaccion = Me.DBGCuentas.Columns(2).Text
   If Not Me.DBGCuentas.Columns(3).Text = "" Then
     Descripcion = Me.DBGCuentas.Columns(3).Text
@@ -736,9 +736,9 @@ NumeroTransaccion = Me.DBGCuentas.Columns(2).Text
     FrmAuxiliarMovimientos.Enabled = True
  FrmAuxiliarMovimientos.CmbMoneda.Enabled = False
    
- mes = Month(FrmAuxiliarMovimientos.txtfecha.Value)
- Año = Year(FrmAuxiliarMovimientos.txtfecha.Value)
- FechaIni = CDate("1/" & Month(FrmAuxiliarMovimientos.txtfecha.Value) & "/" & Year(FrmAuxiliarMovimientos.txtfecha.Value))
+ mes = Month(FrmAuxiliarMovimientos.TxtFecha.Value)
+ Año = Year(FrmAuxiliarMovimientos.TxtFecha.Value)
+ FechaIni = CDate("1/" & Month(FrmAuxiliarMovimientos.TxtFecha.Value) & "/" & Year(FrmAuxiliarMovimientos.TxtFecha.Value))
  FechaFin = DateSerial(Año, mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
@@ -756,7 +756,7 @@ FrmAuxiliarMovimientos.DtaConsulta.Refresh
   FrmAuxiliarMovimientos.DtaTransacciones.Refresh
    If Not FrmAuxiliarMovimientos.DtaTransacciones.Recordset.EOF Then
      
-    FrmAuxiliarMovimientos.txtfecha.Value = FrmAuxiliarMovimientos.DtaTransacciones.Recordset("FechaTransaccion")
+    FrmAuxiliarMovimientos.TxtFecha.Value = FrmAuxiliarMovimientos.DtaTransacciones.Recordset("FechaTransaccion")
     FrmAuxiliarMovimientos.TxtPeriodo.Text = FrmAuxiliarMovimientos.DtaTransacciones.Recordset("Periodo")
     FrmAuxiliarMovimientos.TxtNTransacciones.Text = FrmAuxiliarMovimientos.DtaTransacciones.Recordset("NumeroMovimiento")
      NumeroTransaccion = FrmAuxiliarMovimientos.DtaTransacciones.Recordset("NumeroMovimiento")
@@ -766,8 +766,8 @@ FrmAuxiliarMovimientos.DtaConsulta.Refresh
     Credito = 0
     TotalDebito = 0
     TotalCredito = 0
-      NumFecha1 = FrmAuxiliarMovimientos.txtfecha.Value
-      Fechas1 = Format(FrmAuxiliarMovimientos.txtfecha.Value, "yyyy/mm/dd")
+      NumFecha1 = FrmAuxiliarMovimientos.TxtFecha.Value
+      Fechas1 = Format(FrmAuxiliarMovimientos.TxtFecha.Value, "yyyy/mm/dd")
       NMovimiento = Val(FrmAuxiliarMovimientos.TxtNTransacciones)
      FrmAuxiliarMovimientos.DtaConsulta.RecordSource = "SELECT     FechaTransaccion, CodCuentas, NTransaccion, NumeroMovimiento, TCambio * Debito AS MDebito, TCambio * Credito AS MCredito, TCambio, Debito,Credito From Transacciones WHERE     (FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (NumeroMovimiento = " & NMovimiento & ")"
      'FrmAuxiliarMovimientos.DtaConsulta.RecordSource = "SELECT Transacciones.FechaTransaccion, Transacciones.CodCuentas, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, TCambio*Debito AS MDebito, TCambio*Credito AS MCredito, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito From Transacciones WHERE (((Transacciones.FechaTransaccion)=" & NumFecha1 & ") AND ((Transacciones.NumeroMovimiento)=" & NMovimiento & "))"
@@ -811,7 +811,7 @@ FrmAuxiliarMovimientos.DtaConsulta.Refresh
     FrmAuxiliarMovimientos.DBGTransacciones.Columns(14).Visible = False
     FrmAuxiliarMovimientos.DBGTransacciones.Columns(15).Visible = False
     FrmAuxiliarMovimientos.DBGTransacciones.Columns(16).Visible = False
-    FrmAuxiliarMovimientos.txtfecha.Enabled = False
+    FrmAuxiliarMovimientos.TxtFecha.Enabled = False
     FrmAuxiliarMovimientos.TxtPeriodo.Enabled = False
     FrmAuxiliarMovimientos.TxtFuente.Enabled = False
     FrmAuxiliarMovimientos.TxtNTransacciones.Enabled = False
@@ -843,7 +843,7 @@ FrmAuxiliarMovimientos.DtaConsulta.Refresh
     FrmAuxiliarMovimientos.DBGTransacciones.Columns(14).Visible = False
     FrmAuxiliarMovimientos.DBGTransacciones.Columns(15).Visible = False
     FrmAuxiliarMovimientos.DBGTransacciones.Columns(16).Visible = False
-    FrmAuxiliarMovimientos.txtfecha.Enabled = False
+    FrmAuxiliarMovimientos.TxtFecha.Enabled = False
     FrmAuxiliarMovimientos.TxtPeriodo.Enabled = False
     FrmAuxiliarMovimientos.TxtFuente.Enabled = False
     FrmAuxiliarMovimientos.TxtNTransacciones.Enabled = False
@@ -1018,7 +1018,7 @@ ControlErrores
 End Sub
 
 Private Sub DBGCuentas_DblClick()
-FrmAuxiliarMovimientos.txtfecha.Value = Me.DBGCuentas.Columns(1).Text
+FrmAuxiliarMovimientos.TxtFecha.Value = Me.DBGCuentas.Columns(1).Text
 NumeroTransaccion = Me.DBGCuentas.Columns(2).Text
   If Not Me.DBGCuentas.Columns(3).Text = "" Then
     Descripcion = Me.DBGCuentas.Columns(3).Text
@@ -1031,9 +1031,9 @@ NumeroTransaccion = Me.DBGCuentas.Columns(2).Text
     FrmAuxiliarMovimientos.Enabled = True
  FrmAuxiliarMovimientos.CmbMoneda.Enabled = False
    
- mes = Month(FrmAuxiliarMovimientos.txtfecha.Value)
- Año = Year(FrmAuxiliarMovimientos.txtfecha.Value)
- FechaIni = CDate("1/" & Month(FrmAuxiliarMovimientos.txtfecha.Value) & "/" & Year(FrmAuxiliarMovimientos.txtfecha.Value))
+ mes = Month(FrmAuxiliarMovimientos.TxtFecha.Value)
+ Año = Year(FrmAuxiliarMovimientos.TxtFecha.Value)
+ FechaIni = CDate("1/" & Month(FrmAuxiliarMovimientos.TxtFecha.Value) & "/" & Year(FrmAuxiliarMovimientos.TxtFecha.Value))
  FechaFin = DateSerial(Año, mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
@@ -1047,7 +1047,7 @@ FrmAuxiliarMovimientos.DtaConsulta.Refresh
   FrmAuxiliarMovimientos.DtaTransacciones.Refresh
    If Not FrmAuxiliarMovimientos.DtaTransacciones.Recordset.EOF Then
      
-    FrmAuxiliarMovimientos.txtfecha.Value = FrmAuxiliarMovimientos.DtaTransacciones.Recordset("FechaTransaccion")
+    FrmAuxiliarMovimientos.TxtFecha.Value = FrmAuxiliarMovimientos.DtaTransacciones.Recordset("FechaTransaccion")
     FrmAuxiliarMovimientos.TxtPeriodo.Text = FrmAuxiliarMovimientos.DtaTransacciones.Recordset("Periodo")
     FrmAuxiliarMovimientos.TxtNTransacciones.Text = FrmAuxiliarMovimientos.DtaTransacciones.Recordset("NumeroMovimiento")
      NumeroTransaccion = FrmAuxiliarMovimientos.DtaTransacciones.Recordset("NumeroMovimiento")
@@ -1057,9 +1057,9 @@ FrmAuxiliarMovimientos.DtaConsulta.Refresh
     Credito = 0
     TotalDebito = 0
     TotalCredito = 0
-      NumFecha1 = FrmAuxiliarMovimientos.txtfecha.Value
+      NumFecha1 = FrmAuxiliarMovimientos.TxtFecha.Value
       NMovimiento = Val(FrmAuxiliarMovimientos.TxtNTransacciones)
-      Fechas1 = Format(FrmAuxiliarMovimientos.txtfecha.Value, "yyyy/mm/dd")
+      Fechas1 = Format(FrmAuxiliarMovimientos.TxtFecha.Value, "yyyy/mm/dd")
       FrmAuxiliarMovimientos.DtaConsulta.RecordSource = "SELECT FechaTransaccion, CodCuentas, NTransaccion, NumeroMovimiento, TCambio * Debito AS MDebito, TCambio * Credito AS MCredito, TCambio, Debito,Credito From Transacciones WHERE     (FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (NumeroMovimiento = " & NMovimiento & ")"
 '     FrmAuxiliarMovimientos.DtaConsulta.RecordSource = "SELECT Transacciones.FechaTransaccion, Transacciones.CodCuentas, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, [Transacciones]![TCambio]*[Transacciones]![Debito] AS MDebito, [Transacciones]![TCambio]*[Transacciones]![Credito] AS MCredito, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito From Transacciones WHERE (((Transacciones.FechaTransaccion)=" & NumFecha1 & ") AND ((Transacciones.NumeroMovimiento)=" & NMovimiento & "))"
      FrmAuxiliarMovimientos.DtaConsulta.Refresh
@@ -1102,7 +1102,7 @@ FrmAuxiliarMovimientos.DtaConsulta.Refresh
     FrmAuxiliarMovimientos.DBGTransacciones.Columns(14).Visible = False
     FrmAuxiliarMovimientos.DBGTransacciones.Columns(15).Visible = False
     FrmAuxiliarMovimientos.DBGTransacciones.Columns(16).Visible = False
-    FrmAuxiliarMovimientos.txtfecha.Enabled = False
+    FrmAuxiliarMovimientos.TxtFecha.Enabled = False
     FrmAuxiliarMovimientos.TxtPeriodo.Enabled = False
     FrmAuxiliarMovimientos.TxtFuente.Enabled = False
     FrmAuxiliarMovimientos.TxtNTransacciones.Enabled = False
@@ -1134,7 +1134,7 @@ FrmAuxiliarMovimientos.DtaConsulta.Refresh
     FrmAuxiliarMovimientos.DBGTransacciones.Columns(14).Visible = False
     FrmAuxiliarMovimientos.DBGTransacciones.Columns(15).Visible = False
     FrmAuxiliarMovimientos.DBGTransacciones.Columns(16).Visible = False
-    FrmAuxiliarMovimientos.txtfecha.Enabled = False
+    FrmAuxiliarMovimientos.TxtFecha.Enabled = False
     FrmAuxiliarMovimientos.TxtPeriodo.Enabled = False
     FrmAuxiliarMovimientos.TxtFuente.Enabled = False
     FrmAuxiliarMovimientos.TxtNTransacciones.Enabled = False
@@ -1187,19 +1187,19 @@ Private Function getFilter(col As TrueOleDBGrid80.Column, cols As TrueOleDBGrid8
 'filter other data types.
 Dim tmp As String
 Dim n As Integer
-Dim x As Integer
+Dim X As Integer
 
 For Each col In cols
     If Trim(col.FilterText) <> "" Then
         n = n + 1
         If n > 1 Then tmp = tmp & " AND "
-        Select Case rs.Fields(x).Type
+        Select Case rs.Fields(X).Type
         Case adVarWChar, adVarChar: tmp = tmp & "[" & col.DataField & "] LIKE '%" & col.FilterText & "%'"
         Case adInteger, adNumeric: tmp = tmp & "[" & col.DataField & "] = " & col.FilterText
         Case adDBTimeStamp: tmp = tmp & "[" & col.DataField & "] = #" & col.FilterText & "#"
         End Select
     End If
-    x = x + 1
+    X = X + 1
 Next col
 getFilter = tmp
 

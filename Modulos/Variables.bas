@@ -85,3 +85,5 @@ Public Moneda As String, FechaCheque As String, NumeroMovimientos As String
 
 
 Public RTotalActivoCirculante As Double, RTotalActivoFijo As Double, RTotalPasivo As Double, RTotalCapital As Double, RUtilidad As Double
+
+Public SaldoIniBank As Double, CodigoBancoBank As String, FechaIniBank As Date, FechaFinBank As Date
