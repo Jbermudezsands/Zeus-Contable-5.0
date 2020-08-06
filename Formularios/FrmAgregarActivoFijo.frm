@@ -220,7 +220,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   76480513
+            Format          =   17104897
             CurrentDate     =   38651
          End
          Begin MSComCtl2.DTPicker DTPicker1 
@@ -242,7 +242,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   76480513
+            Format          =   17104897
             CurrentDate     =   38651
          End
          Begin VB.Label Label18 
@@ -432,7 +432,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   76480513
+            Format          =   17104897
             CurrentDate     =   38651
          End
          Begin MSComCtl2.DTPicker DTPicker6 
@@ -454,7 +454,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   76480513
+            Format          =   17104897
             CurrentDate     =   38651
          End
          Begin VB.Label Label28 
@@ -756,7 +756,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   76480513
+            Format          =   17104897
             CurrentDate     =   38651
          End
          Begin MSComCtl2.DTPicker DTPicker4 
@@ -778,7 +778,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   76480513
+            Format          =   17104897
             CurrentDate     =   38651
          End
          Begin VB.Label Label34 
@@ -1159,7 +1159,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   76480513
+            Format          =   17104897
             CurrentDate     =   38651
          End
          Begin MSComCtl2.DTPicker TxtFechaUltDep 
@@ -1171,7 +1171,7 @@ Begin VB.Form FrmAgregarActivoFijo
             _ExtentX        =   2566
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   76480513
+            Format          =   17104897
             CurrentDate     =   37992
          End
          Begin MSDataListLib.DataCombo DBGrupos 
@@ -1195,7 +1195,7 @@ Begin VB.Form FrmAgregarActivoFijo
             _ExtentX        =   2566
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   76480513
+            Format          =   17104897
             CurrentDate     =   37992
          End
          Begin VB.Label Label35 
@@ -1982,7 +1982,7 @@ Begin VB.Form FrmAgregarActivoFijo
             Strikethrough   =   0   'False
          EndProperty
          CalendarForeColor=   0
-         Format          =   76480513
+         Format          =   17104897
          CurrentDate     =   38651
       End
       Begin VB.Label Label49 

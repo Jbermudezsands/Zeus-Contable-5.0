@@ -46,7 +46,15 @@ Begin VB.Form FrmListadoCheques
       Left            =   2520
       TabIndex        =   3
       Top             =   4800
-      Width           =   3135
+      Width           =   3255
+      Begin VB.CheckBox ChkRetencion 
+         Caption         =   "Imprimir Contancia Retencion"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   9
+         Top             =   960
+         Width           =   2535
+      End
       Begin VB.TextBox LblConsecutivo 
          Height          =   285
          Left            =   1080
@@ -508,7 +516,7 @@ Dim UltimaLinea As Double, DiferenciaY As Double, NLineas As Double
 Dim Caracter As Double, ContadorLinea As Double, CadenaDescripcion As String, CaracteresLineas As Double
 Dim Meses As Double, ConsecutivoCheque As Double
 Dim Letras As String, Memo As String, Beneficiario As String, TipoMoneda As String, NumeroTransaccion As String, Ciudad As String
- 
+Dim CuentasContancia As String, NoConstancia As String
 
 CodigoCuenta = FrmCheque.DBCodigo.Text
 ConsecutivoCheque = Me.LblConsecutivo.Text
@@ -596,7 +604,7 @@ Do While Not Me.AdoImprime.Recordset.EOF
                    
             Monto = MontoCheque
               
-   If Me.Check1.Value = 1 Then
+        If Me.Check1.Value = 1 Then
              If Dir(RutaLogo) <> "" Then
              ArepCheque.Logo.Picture = LoadPicture(RutaLogo)
              End If
@@ -1622,72 +1630,118 @@ Do While Not Me.AdoImprime.Recordset.EOF
                     ' 'Fin del Ciclo
             
             
-             FrmCheque.DtaConsulta.Recordset.MoveNext
+                 FrmCheque.DtaConsulta.Recordset.MoveNext
              Loop
-            '  i = 4
-            '     i = 4
-            '    Printer.CurrentX = 70
-            '    Printer.CurrentY = 140 + (5 * i)
-            '    Printer.Print "Total"
+             
+             
+
+                
+              If FrmCheque.CmbMoneda.Text = "Córdobas" Then
+                 TotalDebitoCordobas = TotalDebito
+                 TotalDebitoDolares = TotalDebitoCordobas / TasaCambio
+                 
+                 TotalCreditoCordobas = TotalCredito
+                 TotalCreditoDolares = TotalCreditoCordobas / TasaCambio
+               
+              Else
+                 TotalDebitoDolares = TotalDebito
+                 TotalDebitoCordobas = TotalDebitoCordobas * TasaCambio
+                 
+                 TotalCreditoDolares = TotalCredito
+                 TotalCreditoCordobas = TotalCreditoDolares * TasaCambio
+                 
             
-          If FrmCheque.CmbMoneda.Text = "Córdobas" Then
-             TotalDebitoCordobas = TotalDebito
-             TotalDebitoDolares = TotalDebitoCordobas / TasaCambio
-             
-             TotalCreditoCordobas = TotalCredito
-             TotalCreditoDolares = TotalCreditoCordobas / TasaCambio
-           
-          Else
-             TotalDebitoDolares = TotalDebito
-             TotalDebitoCordobas = TotalDebitoCordobas * TasaCambio
-             
-             TotalCreditoDolares = TotalCredito
-             TotalCreditoCordobas = TotalCreditoDolares * TasaCambio
-             
-        
-          End If
-            
-             If X7 <> 0 Or Y7 <> 0 Then
-               Printer.CurrentX = Val(X7) '135
-               Printer.CurrentY = Val(Y7) '288
-               Printer.FontName = "Times New Roman"
-               Printer.FontSize = 9
-               Printer.FontBold = False
-               Printer.Print Format(TotalDebitoCordobas, "##,##0.00")
-             End If
-             
-            If X21 <> 0 Or Y21 <> 0 Then
-               Printer.CurrentX = Val(X21) '135
-               Printer.CurrentY = Val(Y21) '288
-               Printer.FontName = "Times New Roman"
-               Printer.FontSize = 9
-               Printer.FontBold = False
-               Printer.Print Format(TotalDebitoDolares, "##,##0.00")
-             End If
-             
-             If X8 <> 0 Or Y8 <> 0 Then
-               Printer.CurrentX = Val(X8) '165
-               Printer.CurrentY = Val(Y8) '288
-               Printer.FontName = "Times New Roman"
-               Printer.FontSize = 9
-               Printer.FontBold = False
-               Printer.Print Format(TotalCreditoCordobas, "##,##0.00")
-             End If
-             
-            If X22 <> 0 Or Y22 <> 0 Then
-               Printer.CurrentX = Val(X22) '165
-               Printer.CurrentY = Val(Y22) '288
-               Printer.FontName = "Times New Roman"
-               Printer.FontSize = 9
-               Printer.FontBold = False
-               Printer.Print Format(TotalCreditoDolares, "##,##0.00")
-             End If
+              End If
+                
+                 If X7 <> 0 Or Y7 <> 0 Then
+                   Printer.CurrentX = Val(X7) '135
+                   Printer.CurrentY = Val(Y7) '288
+                   Printer.FontName = "Times New Roman"
+                   Printer.FontSize = 9
+                   Printer.FontBold = False
+                   Printer.Print Format(TotalDebitoCordobas, "##,##0.00")
+                 End If
+                 
+                If X21 <> 0 Or Y21 <> 0 Then
+                   Printer.CurrentX = Val(X21) '135
+                   Printer.CurrentY = Val(Y21) '288
+                   Printer.FontName = "Times New Roman"
+                   Printer.FontSize = 9
+                   Printer.FontBold = False
+                   Printer.Print Format(TotalDebitoDolares, "##,##0.00")
+                 End If
+                 
+                 If X8 <> 0 Or Y8 <> 0 Then
+                   Printer.CurrentX = Val(X8) '165
+                   Printer.CurrentY = Val(Y8) '288
+                   Printer.FontName = "Times New Roman"
+                   Printer.FontSize = 9
+                   Printer.FontBold = False
+                   Printer.Print Format(TotalCreditoCordobas, "##,##0.00")
+                 End If
+                 
+                If X22 <> 0 Or Y22 <> 0 Then
+                   Printer.CurrentX = Val(X22) '165
+                   Printer.CurrentY = Val(Y22) '288
+                   Printer.FontName = "Times New Roman"
+                   Printer.FontSize = 9
+                   Printer.FontBold = False
+                   Printer.Print Format(TotalCreditoDolares, "##,##0.00")
+                 End If
             
             
              
             'termino de imprimir las facturas
             Printer.EndDoc
        End If
+       
+       
+       
+   If Me.ChkRetencion.Value = 1 Then
+     '/////////////////////////////////////////////////////////////////////////////////////////////
+     '///////////////////////////////////BUSCO EL CONSECUTIVO DE LA CONSTANCIA ///////////////////
+     '/////////////////////////////////////////////////////////////////////////////////////////////
+      CodigoCuenta = FrmCheque.DBCodigo.Text
+          FrmCheque.DtaConsulta.RecordSource = "SELECT * From NConsecutivos " 'WHERE (CodCuentas = '" & CodigoCuenta & "')
+          FrmCheque.DtaConsulta.Refresh
+                    If Not FrmCheque.DtaConsulta.Recordset.EOF Then
+                        FrmCheque.DtaConsulta.Recordset("ConstanciaRetencion") = FrmCheque.DtaConsulta.Recordset("ConstanciaRetencion") + 1
+                        FrmCheque.DtaConsulta.Recordset.Update
+                        NoConstancia = Format(FrmCheque.DtaConsulta.Recordset("ConstanciaRetencion"), "0000#")
+                    End If
+   
+   
+      FrmCheque.DtaConsulta.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo, Cuentas.CausaRetencion, CASE WHEN Cuentas.Cedula IS NULL THEN CASE WHEN Cuentas.RUC IS NULL THEN '00-000000-0000H' ELSE Cuentas.RUC END ELSE Cuentas.RUC END AS RUC,  Cuentas.DescRetencion  FROM  Periodos INNER JOIN  Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN  Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas  " & _
+                                           "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Fechas1 & "', 102) AND CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (Transacciones.NumeroMovimiento = " & NMovimiento & ") AND (Cuentas.CausaRetencion = 1) ORDER BY Transacciones.NTransaccion"
+      FrmCheque.DtaConsulta.Refresh
+      Do While Not FrmCheque.DtaConsulta.Recordset.EOF
+      
+            ArepConstanciaRetencion.LblFecha.Text = Format(Me.AdoImprime.Recordset("FechaTransaccion"), "dd/mm/yyyy")
+            ArepConstanciaRetencion.LblTransaccion.Text = NMovimiento
+            ArepConstanciaRetencion.LblNombre.Caption = Beneficiario
+            ArepConstanciaRetencion.LblMemo.Caption = Memo
+            ArepConstanciaRetencion.LblNumeroRuc.Caption = FrmCheque.DtaConsulta.Recordset("RUC")
+'            ArepConstanciaRetencion.LblMonto.Caption = MontoCheque + FrmCheque.DtaConsulta.Recordset("Credito")
+            ArepConstanciaRetencion.LblMontoRetencion.Caption = FrmCheque.DtaConsulta.Recordset("Credito")
+            
+            If TipoMoneda = "Dólares" Then
+             Letras = sw.ConvertCurrencyToSpanish(FrmCheque.DtaConsulta.Recordset("Credito"), "Dólares")
+            ElseIf TipoMoneda = "Córdobas" Then
+             Letras = sw.ConvertCurrencyToSpanish(FrmCheque.DtaConsulta.Recordset("Credito"), "Córdobas")
+             
+            End If
+            ArepConstanciaRetencion.LblConstanciaNo.Caption = NoConstancia
+            ArepConstanciaRetencion.LblDescripcionMonto.Caption = Letras
+            ArepConstanciaRetencion.LblTasaRetencion.Caption = FrmCheque.DtaConsulta.Recordset("DescRetencion")
+            ArepConstanciaRetencion.Show 1
+            
+        FrmCheque.DtaConsulta.Recordset.MoveNext
+        
+        MsgBox "Impresion Correcta", vbInformation, "Zeus Contable"
+      Loop
+   
+   End If
+       
             
               
   ConsecutivoCheque = ConsecutivoCheque + 1

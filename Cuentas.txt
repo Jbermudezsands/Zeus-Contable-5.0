@@ -1,14 +1,3 @@
 Zeus Contable
 Contabilizar Nominas
 
-CuentaXPagar  Productor: Falso
-CuentaBanco  Productor: Falso
-Cuenta IR  Productor: Falso
-Cuenta Bolsa  Productor: Falso
-Cuenta Fondo  Productor: Falso
-CuentaTransporte:  Productor: Falso
-Cuenta Inseminacion  Productor: Falso
-Cuenta Trazabilidad  Productor: Falso
-Cuenta Veterinario  Productor: Falso
-Otras Cuentas  Productor: Falso
-No Existen las contra Cuentas  Productor: 

@@ -1079,7 +1079,7 @@ Begin VB.Form FrmMantenimientoActivos
                   Strikethrough   =   0   'False
                EndProperty
                CalendarForeColor=   0
-               Format          =   76021761
+               Format          =   17104897
                CurrentDate     =   38651
             End
             Begin VB.Label Label35 
@@ -1272,7 +1272,7 @@ Begin VB.Form FrmMantenimientoActivos
                   Strikethrough   =   0   'False
                EndProperty
                CalendarForeColor=   0
-               Format          =   76021761
+               Format          =   17104897
                CurrentDate     =   38651
             End
             Begin MSComCtl2.DTPicker DTPicker1 
@@ -1295,7 +1295,7 @@ Begin VB.Form FrmMantenimientoActivos
                   Strikethrough   =   0   'False
                EndProperty
                CalendarForeColor=   0
-               Format          =   76021761
+               Format          =   17104897
                CurrentDate     =   38651
             End
             Begin VB.Label Label13 
@@ -1458,7 +1458,7 @@ Begin VB.Form FrmMantenimientoActivos
                   Strikethrough   =   0   'False
                EndProperty
                CalendarForeColor=   0
-               Format          =   76021761
+               Format          =   17104897
                CurrentDate     =   38651
             End
             Begin MSComCtl2.DTPicker DTPicker4 
@@ -1481,7 +1481,7 @@ Begin VB.Form FrmMantenimientoActivos
                   Strikethrough   =   0   'False
                EndProperty
                CalendarForeColor=   0
-               Format          =   76021761
+               Format          =   17104897
                CurrentDate     =   38651
             End
             Begin VB.Label Label21 
@@ -2215,20 +2215,20 @@ Private Function getFilter(col As TrueOleDBGrid80.Column, cols As TrueOleDBGrid8
 'filter other data types.
 Dim tmp As String
 Dim n As Integer
-Dim X As Integer
+Dim x As Integer
 
 
 For Each col In cols
     If Trim(col.FilterText) <> "" Then
         n = n + 1
         If n > 1 Then tmp = tmp & " AND "
-        Select Case rs.Fields(X).Type
+        Select Case rs.Fields(x).Type
         Case adVarWChar, adVarChar: tmp = tmp & "[" & col.DataField & "] LIKE '%" & col.FilterText & "%'"
         Case adInteger, adNumeric: tmp = tmp & "[" & col.DataField & "] = " & col.FilterText
         Case adDBTimeStamp: tmp = tmp & "[" & col.DataField & "] = #" & col.FilterText & "#"
         End Select
     End If
-    X = X + 1
+    x = x + 1
 Next col
 getFilter = tmp
 
@@ -2314,7 +2314,7 @@ Private Sub cargarcatalogoAF()
 '    Adodc3.Refresh
 End Sub
 
-Private Sub Frame14_DragDrop(Source As Control, X As Single, Y As Single)
+Private Sub Frame14_DragDrop(Source As Control, x As Single, y As Single)
 
 End Sub
 

@@ -513,7 +513,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   75628545
+            Format          =   73007105
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker3 
@@ -525,7 +525,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   75628545
+            Format          =   73007105
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptCompras 
@@ -577,7 +577,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   75628545
+            Format          =   73007105
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton RadioButton4 
@@ -717,7 +717,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   75628545
+            Format          =   73007105
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptFacturacion 
@@ -770,7 +770,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   75628545
+            Format          =   73007105
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecibos 
@@ -823,7 +823,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   75628545
+            Format          =   73007105
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptSalidaBodega 
@@ -1516,7 +1516,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   75628545
+            Format          =   73007105
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebito 
@@ -1554,7 +1554,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   75628545
+            Format          =   73007105
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.PushButton CmdContabilizarNotas 
@@ -1594,7 +1594,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   75628545
+            Format          =   73007105
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebitoProveedor 
@@ -2049,7 +2049,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   75628545
+            Format          =   73007105
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker11 
@@ -2061,14 +2061,14 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   75628545
+            Format          =   73007105
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecepcion 
             Height          =   255
             Left            =   120
             TabIndex        =   60
-            Top             =   360
+            Top             =   240
             Width           =   2055
             _Version        =   786432
             _ExtentX        =   3625
@@ -2087,14 +2087,14 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   75628545
+            Format          =   73007105
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptPlanilla 
             Height          =   255
             Left            =   120
             TabIndex        =   62
-            Top             =   720
+            Top             =   600
             Width           =   2055
             _Version        =   786432
             _ExtentX        =   3625
@@ -2160,6 +2160,19 @@ Begin VB.Form FrmContabilizaFacturacion
             Enabled         =   0   'False
             UseVisualStyle  =   -1  'True
             Value           =   1
+         End
+         Begin XtremeSuiteControls.RadioButton OptPlanillaTransportista 
+            Height          =   255
+            Left            =   120
+            TabIndex        =   72
+            Top             =   960
+            Width           =   2055
+            _Version        =   786432
+            _ExtentX        =   3625
+            _ExtentY        =   450
+            _StockProps     =   79
+            Caption         =   "Pago a Transportista"
+            UseVisualStyle  =   -1  'True
          End
          Begin VB.Label LblFechaRecepcion 
             Caption         =   "Feha:"
@@ -5129,10 +5142,14 @@ Private Sub CmdContabilizarPlanilla_Click()
   Dim cn As New ADODB.Connection, SuReferencia As String, CodigoCuentaBanco As String
   Dim rs As New ADODB.Recordset, Registro As Double, NumeroCompra As String
   Dim cmd As New ADODB.Command, Ret1Porc As Double, Ret2Porc As Double, MontoRetencion1 As Double, MontoRetencion2 As Double, Ret3Porc As Double, Ret4Porc As Double, MontoRetencion3 As Double, MontoRetencion4 As Double
-  Dim MontoBanco As Double, Directorio As String
+  Dim MontoBanco As Double, Directorio As String, NombreProductor As String
   Dim CtaxPagar As String, Cuenta_Banco As String, Cuenta_IR As String, Cuenta_Bolsa As String, Cuenta_Anticipo As String, Cuenta_Pulperia As String
   Dim Cuenta_Transporte As String, Cuenta_Trazabilidad As String, Cuenta_Veterinario As String, Cuenta_Inseminacion As String
   Dim Cuenta_Otras As String, NumeroNomina As String, Cuenta_Debito As String, Cuenta_Credito As String, CodigoProductor As String
+  
+  Dim MontoNominaPagar As Double, IR As Double, DeduccionPolicia As Double
+  Dim Anticipo As Double, DeduccionTransporte As Double, Pulperia As Double, Inseminacion As Double, ProductosVeterinarios As Double, Trazabilidad As Double
+  Dim OtrasDeducciones As Double, Bolsa As Double
   
   Reg = 1
   
@@ -5143,15 +5160,24 @@ Private Sub CmdContabilizarPlanilla_Click()
      TipoFactura = "Recepcion"
     ElseIf Me.OptPlanilla.Value = True Then
      TipoFactura = "Pago Proveedor"
+    ElseIf Me.OptPlanillaTransportista.Value = True Then
+     TipoFactura = "Pago Transportista"
     End If
 
 
                 Select Case TipoFactura
+                
+                    Case "Pago Transportista"
+                       FechaInicio = Format(Me.DTPicker11.Value, "yyyy-mm-dd")
+                       FechaFin = Format(Me.DTPicker12.Value, "yyyy-mm-dd")
+                       SqlString = "SELECT NominaTransportista.NumPlanilla, NominaTransportista.FechaFinal, NominaTransportista.FechaInicial, Conductor.Codigo As CodProductor, Conductor.Nombre As NombreProductor, Detalle_NominaTransportista.PrecioVenta,  Detalle_NominaTransportista.Total, Detalle_NominaTransportista.TotalIngresos  " & _
+                                   ", Conductor.Cuenta_Contable AS Cod_Cuenta_Pagar, Detalle_NominaTransportista.IR, Detalle_NominaTransportista.DeduccionPolicia, Detalle_NominaTransportista.Anticipo, Detalle_NominaTransportista.DeduccionTransporte, Detalle_NominaTransportista.Pulperia, Detalle_NominaTransportista.Inseminacion, Detalle_NominaTransportista.ProductosVeterinarios, Detalle_NominaTransportista.Trazabilidad, Detalle_NominaTransportista.OtrasDeducciones, Detalle_NominaTransportista.Bolsa, Detalle_NominaTransportista.Nombres,  Conductor.Cuenta_Banco, Conductor.Cuenta_IR, Conductor.Cuenta_Bolsa, Conductor.Cuenta_Anticipo, Conductor.Cuenta_Pulperia, Conductor.Cuenta_Transporte, Conductor.Cuenta_Inseminacion, Conductor.Cuenta_Trazabilidad, Conductor.Cuenta_Veterinario, Conductor.Cuenta_Otras, Conductor.Cuenta_GastoPlanilla, " & _
+                                   "Detalle_NominaTransportista.TotalIngresos - (Detalle_NominaTransportista.IR + Detalle_NominaTransportista.DeduccionPolicia + Detalle_NominaTransportista.Anticipo + Detalle_NominaTransportista.DeduccionTransporte + Detalle_NominaTransportista.Pulperia + Detalle_NominaTransportista.Inseminacion + Detalle_NominaTransportista.ProductosVeterinarios + Detalle_NominaTransportista.OtrasDeducciones + Detalle_NominaTransportista.Trazabilidad) AS NetoPagar, NominaTransportista.Marca , NominaTransportista.Contabilizado  FROM  NominaTransportista INNER JOIN  Detalle_NominaTransportista ON NominaTransportista.NumPlanilla = Detalle_NominaTransportista.NumNomina INNER JOIN Conductor ON Detalle_NominaTransportista.CodigoTransportista = Conductor.Codigo Where (NominaTransportista.Marca = 1) And (NominaTransportista.Contabilizado = 0)"
 
                     Case "Pago Proveedor"
                        FechaInicio = Format(Me.DTPicker11.Value, "yyyy-mm-dd")
                        FechaFin = Format(Me.DTPicker12.Value, "yyyy-mm-dd")
-                       SqlString = "SELECT Nomina.NumPlanilla, Nomina.FechaFinal, Nomina.FechaInicial, Productor.CodProductor, Productor.NombreProductor + ' ' + Productor.ApellidoProductor, Detalle_Nomina.PrecioVenta,  Detalle_Nomina.Total, Detalle_Nomina.TotalIngresos, Productor.Cod_Cuenta_Proveedor AS Cod_Cuenta_Pagar, Detalle_Nomina.IR, Detalle_Nomina.DeduccionPolicia, Detalle_Nomina.Anticipo, Detalle_Nomina.DeduccionTransporte, Detalle_Nomina.Pulperia, Detalle_Nomina.Inseminacion, Detalle_Nomina.ProductosVeterinarios, Detalle_Nomina.Trazabilidad, Detalle_Nomina.OtrasDeducciones, Detalle_Nomina.Bolsa, Detalle_Nomina.Nombres,  Productor.Cuenta_Banco, Productor.Cuenta_IR, Productor.Cuenta_Bolsa, Productor.Cuenta_Anticipo, Productor.Cuenta_Pulperia, Productor.Cuenta_Transporte, Productor.Cuenta_Inseminacion, Productor.Cuenta_Trazabilidad, Productor.Cuenta_Veterinario, Productor.Cuenta_Otras, Productor.Cuenta_GastoPlanilla, " & _
+                       SqlString = "SELECT Nomina.NumPlanilla, Nomina.FechaFinal, Nomina.FechaInicial, Productor.CodProductor, Productor.NombreProductor + ' ' + Productor.ApellidoProductor As NombreProductor, Detalle_Nomina.PrecioVenta,  Detalle_Nomina.Total, Detalle_Nomina.TotalIngresos, Productor.Cod_Cuenta_Proveedor AS Cod_Cuenta_Pagar, Detalle_Nomina.IR, Detalle_Nomina.DeduccionPolicia, Detalle_Nomina.Anticipo, Detalle_Nomina.DeduccionTransporte, Detalle_Nomina.Pulperia, Detalle_Nomina.Inseminacion, Detalle_Nomina.ProductosVeterinarios, Detalle_Nomina.Trazabilidad, Detalle_Nomina.OtrasDeducciones, Detalle_Nomina.Bolsa, Detalle_Nomina.Nombres,  Productor.Cuenta_Banco, Productor.Cuenta_IR, Productor.Cuenta_Bolsa, Productor.Cuenta_Anticipo, Productor.Cuenta_Pulperia, Productor.Cuenta_Transporte, Productor.Cuenta_Inseminacion, Productor.Cuenta_Trazabilidad, Productor.Cuenta_Veterinario, Productor.Cuenta_Otras, Productor.Cuenta_GastoPlanilla, " & _
                                    "Detalle_Nomina.TotalIngresos - (Detalle_Nomina.IR + Detalle_Nomina.DeduccionPolicia + Detalle_Nomina.Anticipo + Detalle_Nomina.DeduccionTransporte + Detalle_Nomina.Pulperia + Detalle_Nomina.Inseminacion + Detalle_Nomina.ProductosVeterinarios + Detalle_Nomina.OtrasDeducciones + Detalle_Nomina.Trazabilidad) AS NetoPagar, Nomina.Marca , Nomina.Contabilizado  FROM  Nomina INNER JOIN  Detalle_Nomina ON Nomina.NumPlanilla = Detalle_Nomina.NumNomina INNER JOIN Productor ON Detalle_Nomina.CodProductor = Productor.CodProductor AND Detalle_Nomina.TipoProductor = Productor.TipoProductor  Where (Nomina.Marca = 1) And (Nomina.Contabilizado = 0)"
                 
                        
@@ -5304,7 +5330,8 @@ Private Sub CmdContabilizarPlanilla_Click()
                         Do While Not Me.AdoProcesos.Recordset.EOF
                            
                            Select Case TipoFactura
-                              Case "Pago Proveedor"
+                           
+                              Case "Pago Transportista"
                               
                                 
                               
@@ -5313,7 +5340,215 @@ Private Sub CmdContabilizarPlanilla_Click()
                                 FechaVence = Me.AdoProcesos.Recordset("FechaFinal")
                                 NumeroNomina = Me.AdoProcesos.Recordset("NumPlanilla")
                                 CodigoCuentaCliente = Me.AdoProcesos.Recordset("Cod_Cuenta_Pagar")
+                                NombreProductor = Me.AdoProcesos.Recordset("NombreProductor")
                                 
+                                If CodigoCuentaCliente = "" Then
+                                  MsgBox "No existe la cuenta del productor", vbCritical, "Zeus contable"
+                                  Exit Sub
+                                End If
+                                
+                              
+                                
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cod_Cuenta_Pagar")) Then
+                                      CtaxPagar = Me.AdoProcesos.Recordset("Cod_Cuenta_Pagar")
+                                 End If
+                                   If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_Banco")) Then
+                                      Cuenta_Banco = Me.AdoProcesos.Recordset("Cuenta_Banco")
+                                 End If
+                                
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_IR")) Then
+                                      Cuenta_IR = Me.AdoProcesos.Recordset("Cuenta_IR")
+                                 End If
+                                 
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_Bolsa")) Then
+                                      Cuenta_Bolsa = Me.AdoProcesos.Recordset("Cuenta_Bolsa")
+                                 End If
+                                 
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_Anticipo")) Then
+                                      Cuenta_Anticipo = Me.AdoProcesos.Recordset("Cuenta_Anticipo")
+                                 End If
+                                 
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_Pulperia")) Then
+                                      Cuenta_Pulperia = Me.AdoProcesos.Recordset("Cuenta_Pulperia")
+                                 End If
+                                 
+                                                                  
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_Transporte")) Then
+                                      Cuenta_Transporte = Me.AdoProcesos.Recordset("Cuenta_Transporte")
+                                 End If
+                                 
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_Inseminacion")) Then
+                                      Cuenta_Inseminacion = Me.AdoProcesos.Recordset("Cuenta_Inseminacion")
+                                 End If
+                                 
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_Trazabilidad")) Then
+                                      Cuenta_Trazabilidad = Me.AdoProcesos.Recordset("Cuenta_Trazabilidad")
+                                 End If
+                              
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_Veterinario")) Then
+                                      Cuenta_Veterinario = Me.AdoProcesos.Recordset("Cuenta_Veterinario")
+                                 End If
+                                 
+                                 If Not IsNull(Me.AdoProcesos.Recordset("Cuenta_Otras")) Then
+                                      Cuenta_Otras = Me.AdoProcesos.Recordset("Cuenta_Otras")
+                                End If
+                                
+                                
+                               '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<BUSCO LAS CONTRA CUENTAS DE SALDOS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<>>
+                               Me.AdoContraCuentaFacturacion.RecordSource = "SELECT CuentaCredito, CuentaDebito From ContraCuentaPlanillaLeche WHERE (CuentaDebito = '" & Cuenta_Banco & "')"
+                               Me.AdoContraCuentaFacturacion.Refresh
+                               If Not Me.AdoContraCuentaFacturacion.Recordset.EOF Then
+                                 Cuenta_Debito = Me.AdoContraCuentaFacturacion.Recordset("CuentaDebito")
+                                 Cuenta_Credito = Me.AdoContraCuentaFacturacion.Recordset("CuentaCredito")
+                               End If
+                                
+                                
+                              Me.AdoConsulta.Recordset("NTransacciones") = Me.AdoConsulta.Recordset("NTransacciones") + 1
+                              Me.AdoConsulta.Recordset.Update
+                              NumeroTransaccion = Me.AdoConsulta.Recordset("NTransacciones")
+                                
+                                
+                               If Reg = 1 Then
+                                   '////////////////////////////////////////////////////////////////
+                                   '////////AGREGO LOS INDICES DE TRANSACCIONES//////
+                                   '///////////////////////////////////////////////////////////////
+                                   MonedaNomina = "Córdobas"
+                                    Resultado = GrabaEncabezado(NumeroPeriodo, NumeroTransaccion, Format(Me.DTPicker10.Value, "yyyy-mm-dd"), "Movimiento de Nominas Transportista", "CHEQUE", "Córdobas")
+                                    Reg = 2
+                                End If
+                                 
+                                 
+                                 
+'                                Me.AdoBuscaNomina.RecordSource = "SELECT  * FROM  Nomina INNER JOIN  TipoNomina ON Nomina.CodTipoNomina = TipoNomina.CodTipoNomina Where (Nomina.NumNomina = " & NumNomina & ")"
+'                                Me.AdoBuscaNomina.Refresh
+'                                If Not Me.AdoBuscaNomina.Recordset.EOF Then
+'                                  DescripcionMovimiento = "Registrando Nomina " & NumeroFactura
+'                                  DescripcionMovimiento = "Registrando Nominas No " & NumNomina
+'                                End If
+'
+                                 
+                                MontoNominaPagar = Format(Me.AdoProcesos.Recordset("TotalIngresos"), "##,##0.00")
+                                NetoPagar = Format(Me.AdoProcesos.Recordset("NetoPagar"), "##,##0.00")
+                                IR = Format(Me.AdoProcesos.Recordset("IR"), "##,##0.00")
+                                DeduccionPolicia = Format(Me.AdoProcesos.Recordset("DeduccionPolicia"), "##,##0.00")
+                                Anticipo = Format(Me.AdoProcesos.Recordset("Anticipo"), "##,##0.00")
+                                DeduccionTransporte = Format(Me.AdoProcesos.Recordset("DeduccionTransporte"), "##,##0.00")
+                                Pulperia = Format(Me.AdoProcesos.Recordset("Pulperia"), "##,##0.00")
+                                Inseminacion = Format(Me.AdoProcesos.Recordset("Inseminacion"), "##,##0.00")
+                                ProductosVeterinarios = Format(Me.AdoProcesos.Recordset("ProductosVeterinarios"), "##,##0.00")
+                                Trazabilidad = Format(Me.AdoProcesos.Recordset("Trazabilidad"), "##,##0.00")
+                                OtrasDeducciones = Format(Me.AdoProcesos.Recordset("OtrasDeducciones"), "##,##0.00")
+                                Bolsa = Format(Me.AdoProcesos.Recordset("Bolsa"), "##,##0.00")
+
+                                NetoPagar = Format(MontoNominaPagar - IR - DeduccionPolicia - Anticipo - DeduccionTransporte - Pulperia - Inseminacion - ProductosVeterinarios - Trazabilidad - OtrasDeducciones - Bolsa, "##,##0.00")
+                                
+                                NombreProductor = Me.AdoProcesos.Recordset("NombreProductor")
+                                DescripcionMovimiento = "Pago de Planilla Transportista No" & Me.AdoProcesos.Recordset("NumPlanilla") & " Desde " & Me.AdoProcesos.Recordset("FechaInicial") & " Hasta " & Me.AdoProcesos.Recordset("FechaFinal")
+                                
+                                '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                '//////////////////////////CREO LAS CONTRA CUENTAS PARA FONDOS DE PLANILLA //////////////////////////////
+                                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                
+                                '////////////////////////////////////CONTRACUENTA DE BANCO //////////////////////////////////////////////////////////////////
+                                
+                                Credito = 0
+                                If NetoPagar <> 0 Then
+                                NumeroFactura = "-"
+                                Resultado = GrabaDetalleNomina(Cuenta_Debito, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaCambio, NetoPagar, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, NombreProductor)
+                                End If
+                                
+                                Debito = 0
+                                If NetoPagar <> 0 Then
+                                NumeroFactura = "-"
+                                Resultado = GrabaDetalleNomina(Cuenta_Credito, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, NetoPagar, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, NombreProductor)
+                                End If
+                                
+                                
+                                
+                                '///////////////////////////CREO LOS REGISTROS CONTABLES X PAGAR/////////////////////////////////
+                               
+                                Credito = 0
+                                NumeroFactura = "-"
+                                If MontoNominaPagar <> 0 Then
+                                Resultado = GrabaDetalleNomina(CtaxPagar, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaCambio, MontoNominaPagar, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                '////////////////////////////BUSCO LAS CUENTAS DE INCENTIVOS ///////////////////////////////////////
+                                End If
+                             
+                                '////////////////////////////////////CUENTA DE BANCO //////////////////////////////////////////////////////////////////
+                                Debito = 0
+                                
+                                If NetoPagar <> 0 Then
+                                NumeroFactura = "#######"
+                                Resultado = GrabaDetalleNomina(Cuenta_Banco, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, NetoPagar, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, NombreProductor)
+                                End If
+                                
+                                Debito = 0
+                                NumeroFactura = "-"
+                                If IR <> 0 Then
+                                Resultado = GrabaDetalleNomina(Cuenta_IR, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, IR, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                End If
+                                
+                                Debito = 0
+                                NumeroFactura = "-"
+                                If Bolsa <> 0 Then
+                                Resultado = GrabaDetalleNomina(Cuenta_Bolsa, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, Bolsa, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                End If
+                                
+                                Debito = 0
+                                NumeroFactura = "-"
+                                If Anticipo <> 0 Then
+                                Resultado = GrabaDetalleNomina(Cuenta_Anticipo, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, Anticipo, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                End If
+                                
+                                Debito = 0
+                                NumeroFactura = "-"
+                                If Pulperia <> 0 Then
+                                Resultado = GrabaDetalleNomina(Cuenta_Pulperia, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, Pulperia, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                End If
+                                
+                                Debito = 0
+                                NumeroFactura = "-"
+                                If DeduccionTransporte <> 0 Then
+                                Resultado = GrabaDetalleNomina(Cuenta_Transporte, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, DeduccionTransporte, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                End If
+                                
+                                Debito = 0
+                                NumeroFactura = "-"
+                                If Inseminacion <> 0 Then
+                                Resultado = GrabaDetalleNomina(Cuenta_Inseminacion, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, Inseminacion, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                End If
+                                
+                                Debito = 0
+                                NumeroFactura = "-"
+                                If Trazabilidad <> 0 Then
+                                Resultado = GrabaDetalleNomina(Cuenta_Trazabilidad, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, Trazabilidad, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                End If
+                                
+                                Debito = 0
+                                NumeroFactura = "-"
+                                If ProductosVeterinarios <> 0 Then
+                                Resultado = GrabaDetalleNomina(Cuenta_Veterinario, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, ProductosVeterinarios, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                End If
+                                
+                                Debito = 0
+                                NumeroFactura = "-"
+                                If OtrasDeducciones <> 0 Then
+                                Resultado = GrabaDetalleNomina(Cuenta_Otras, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, OtrasDeducciones, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "-")
+                                End If
+                                
+                                Reg = 1
+                           
+                           
+                         Case "Pago Proveedor"
+                              
+                                
+                              
+                                MontoBanco = 0
+                                FechaFactura = Me.AdoProcesos.Recordset("FechaFinal")
+                                FechaVence = Me.AdoProcesos.Recordset("FechaFinal")
+                                NumeroNomina = Me.AdoProcesos.Recordset("NumPlanilla")
+                                CodigoCuentaCliente = Me.AdoProcesos.Recordset("Cod_Cuenta_Pagar")
+                                NombreProductor = Me.AdoProcesos.Recordset("NombreProductor")
                                 
                                 If CodigoCuentaCliente = "" Then
                                   MsgBox "No existe la cuenta del productor", vbCritical, "Zeus contable"
@@ -5399,9 +5634,7 @@ Private Sub CmdContabilizarPlanilla_Click()
 '                                  DescripcionMovimiento = "Registrando Nominas No " & NumNomina
 '                                End If
 '
-                                Dim MontoNominaPagar As Double, IR As Double, DeduccionPolicia As Double
-                                Dim Anticipo As Double, DeduccionTransporte As Double, Pulperia As Double, Inseminacion As Double, ProductosVeterinarios As Double, Trazabilidad As Double
-                                Dim OtrasDeducciones As Double, Bolsa As Double
+
                                 
                                 MontoNominaPagar = Format(Me.AdoProcesos.Recordset("TotalIngresos"), "##,##0.00")
                                 NetoPagar = Format(Me.AdoProcesos.Recordset("NetoPagar"), "##,##0.00")
@@ -5418,6 +5651,7 @@ Private Sub CmdContabilizarPlanilla_Click()
 
                                 NetoPagar = Format(MontoNominaPagar - IR - DeduccionPolicia - Anticipo - DeduccionTransporte - Pulperia - Inseminacion - ProductosVeterinarios - Trazabilidad - OtrasDeducciones - Bolsa, "##,##0.00")
                                 
+                                NombreProductor = Me.AdoProcesos.Recordset("NombreProductor")
                                 DescripcionMovimiento = "Pago de Planilla por acopio de Leche No" & Me.AdoProcesos.Recordset("NumPlanilla") & " Desde " & Me.AdoProcesos.Recordset("FechaInicial") & " Hasta " & Me.AdoProcesos.Recordset("FechaFinal")
                                 
                                 '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -5429,13 +5663,13 @@ Private Sub CmdContabilizarPlanilla_Click()
                                 Credito = 0
                                 If NetoPagar <> 0 Then
                                 NumeroFactura = "-"
-                                Resultado = GrabaDetalleNomina(Cuenta_Debito, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaCambio, NetoPagar, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, Me.AdoProcesos.Recordset("Nombres"))
+                                Resultado = GrabaDetalleNomina(Cuenta_Debito, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaCambio, NetoPagar, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, NombreProductor)
                                 End If
                                 
                                 Debito = 0
                                 If NetoPagar <> 0 Then
                                 NumeroFactura = "-"
-                                Resultado = GrabaDetalleNomina(Cuenta_Credito, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, NetoPagar, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, Me.AdoProcesos.Recordset("Nombres"))
+                                Resultado = GrabaDetalleNomina(Cuenta_Credito, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, NetoPagar, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, NombreProductor)
                                 End If
                                 
                                 
@@ -5454,7 +5688,7 @@ Private Sub CmdContabilizarPlanilla_Click()
                                 
                                 If NetoPagar <> 0 Then
                                 NumeroFactura = "#######"
-                                Resultado = GrabaDetalleNomina(Cuenta_Banco, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, NetoPagar, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, Me.AdoProcesos.Recordset("Nombres"))
+                                Resultado = GrabaDetalleNomina(Cuenta_Banco, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, NetoPagar, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, NombreProductor)
                                 End If
                                 
                                 Debito = 0
@@ -6040,14 +6274,19 @@ Private Sub CmdContabilizarPlanilla_Click()
                              
                              If TipoFactura = "Pago Proveedor" Then
                              
-                                   '///////////////////////////////////////////ACTUALIZO LA NOMINA ////////////////////////////////////////////////////////////
-                                Me.AdoBuscaFacturacion.RecordSource = "SELECT  * From Nomina WHERE (NumPlanilla = " & NumeroNomina & ")"
-                                Me.AdoBuscaFacturacion.Refresh
-                                If Not Me.AdoBuscaFacturacion.Recordset.EOF Then
-                                   Me.AdoBuscaFacturacion.Recordset("Contabilizado") = True
-                                   Me.AdoBuscaFacturacion.Recordset.Update
-                                   PushButton3_Click
-                                End If
+
+                                If NumeroNomina <> "" Then
+                                
+                                      '///////////////////////////////////////////ACTUALIZO LA NOMINA ////////////////////////////////////////////////////////////
+                                   Me.AdoBuscaFacturacion.RecordSource = "SELECT  * From Nomina WHERE (NumPlanilla = " & NumeroNomina & ")"
+                                   Me.AdoBuscaFacturacion.Refresh
+                                   If Not Me.AdoBuscaFacturacion.Recordset.EOF Then
+                                      Me.AdoBuscaFacturacion.Recordset("Contabilizado") = True
+                                      Me.AdoBuscaFacturacion.Recordset.Update
+                                      PushButton3_Click
+                                   End If
+                                   
+                               End If
                              
                              End If
 '
@@ -7092,10 +7331,12 @@ Dim TipoFactura As String
      TipoFactura = "Recepcion"
     ElseIf Me.OptPlanilla.Value = True Then
      TipoFactura = "Pago Proveedor"
+    ElseIf Me.OptPlanillaTransportista.Value = True Then
+     TipoFactura = "Pago Transportista"
     End If
     
     
-       Select Case TipoFactura
+   Select Case TipoFactura
        
             Case "Recepcion"
         
@@ -7115,7 +7356,7 @@ Dim TipoFactura As String
             SqlString = "SELECT  Fecha_Compra, Numero_Compra, Nombre_Proveedor, SubTotal, Descuento,IVA, NetoPagar,Marca From Compras  " & _
                          "WHERE   (Contabilizado = 0) AND (Tipo_Compra = '" & TipoFactura & "') AND (Fecha_Compra BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME,'" & FechaFin & "', 102))"
 
-            Case "Pago Proveedor"
+      Case "Pago Proveedor"
         
             Me.TDGridPlanillaLeche.Columns(0).DataField = "NumPlanilla"
             Me.TDGridPlanillaLeche.Columns(1).DataField = "CodTipoNomina"
@@ -7131,6 +7372,33 @@ Dim TipoFactura As String
             FechaInicio = Format(Me.DTPicker11.Value, "yyyy-mm-dd")
             FechaFin = Format(Me.DTPicker12.Value, "yyyy-mm-dd")
             SqlString = "SELECT   NumPlanilla, CodTipoNomina, FechaInicial, FechaFinal, Año, mes, Periodo, Marca From Nomina Where (Contabilizado = 0)"
+
+            Me.TDGridPlanillaLeche.Columns(0).Caption = "NumPlanilla"
+            Me.TDGridPlanillaLeche.Columns(1).Caption = "CodTipoNomina"
+            Me.TDGridPlanillaLeche.Columns(2).Caption = "Fecha Inicial"
+            Me.TDGridPlanillaLeche.Columns(3).Caption = "Fecha Final"
+            Me.TDGridPlanillaLeche.Columns(4).Caption = "Año"
+            Me.TDGridPlanillaLeche.Columns(5).Caption = "Mes"
+            Me.TDGridPlanillaLeche.Columns(6).Caption = "Periodo"
+            Me.TDGridPlanillaLeche.Columns(7).Caption = "Marca"
+            
+            
+      Case "Pago Transportista"
+        
+            Me.TDGridPlanillaLeche.Columns(0).DataField = "NumPlanilla"
+            Me.TDGridPlanillaLeche.Columns(1).DataField = "CodTipoNomina"
+            Me.TDGridPlanillaLeche.Columns(2).DataField = "FechaInicial"
+            Me.TDGridPlanillaLeche.Columns(3).DataField = "FechaFinal"
+            Me.TDGridPlanillaLeche.Columns(4).DataField = "Año"
+            Me.TDGridPlanillaLeche.Columns(5).DataField = "mes"
+            Me.TDGridPlanillaLeche.Columns(6).DataField = "Periodo"
+            Me.TDGridPlanillaLeche.Columns(7).DataField = "Marca"
+            Me.TDGridPlanillaLeche.Splits(0).Caption = "Listado de Planillas Transportista"
+            
+            
+            FechaInicio = Format(Me.DTPicker11.Value, "yyyy-mm-dd")
+            FechaFin = Format(Me.DTPicker12.Value, "yyyy-mm-dd")
+            SqlString = "SELECT   NumPlanilla, CodTipoNomina, FechaInicial, FechaFinal, Año, mes, Periodo, Marca From NominaTransportista Where (Contabilizado = 0)"
 
             Me.TDGridPlanillaLeche.Columns(0).Caption = "NumPlanilla"
             Me.TDGridPlanillaLeche.Columns(1).Caption = "CodTipoNomina"

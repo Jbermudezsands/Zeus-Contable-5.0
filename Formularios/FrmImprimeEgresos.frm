@@ -152,8 +152,8 @@ End If
  Credito = 0
  TotalDebito = 0
  TotalCredito = 0
-      NumFecha1 = FrmEgresos.txtfecha.Value
-      Fechas1 = Format(FrmEgresos.txtfecha.Value, "YYYY/MM/DD")
+      NumFecha1 = FrmEgresos.TxtFecha.Value
+      Fechas1 = Format(FrmEgresos.TxtFecha.Value, "YYYY/MM/DD")
       NMovimiento = Val(FrmEgresos.TxtNTransacciones)
       FrmEgresos.DtaConsulta.RecordSource = "SELECT     FechaTransaccion, CodCuentas, NTransaccion, NumeroMovimiento, TCambio * Debito AS MDebito, TCambio * Credito AS MCredito, TCambio, Debito, Credito From Transacciones WHERE     (FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (NumeroMovimiento = " & NMovimiento & ")"
 '      FrmEgresos.DtaConsulta.RecordSource = "SELECT Transacciones.FechaTransaccion, Transacciones.CodCuentas, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, [Transacciones]![TCambio]*[Transacciones]![Debito] AS MDebito, [Transacciones]![TCambio]*[Transacciones]![Credito] AS MCredito, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito From Transacciones WHERE (((Transacciones.FechaTransaccion)=" & NumFecha1 & ") AND ((Transacciones.NumeroMovimiento)=" & NMovimiento & "))"
@@ -198,7 +198,7 @@ If Me.Check1.Value = 1 Then
  If FrmEgresos.CmbMoneda.Text = "Córdobas" Then
     ArepEgresos.LblMontoSimbolo.Caption = "Monto C$"
    If FrmEgresos.ChkCheque.Value = 1 Then
-     TasaCambio = BuscaTasaCambio(FrmEgresos.txtfecha.Value)
+     TasaCambio = BuscaTasaCambio(FrmEgresos.TxtFecha.Value)
      Monto = FrmEgresos.TxtMonto.Text
      Monto = Monto / TasaCambio
      ArepEgresos.LblDescripcionMonto.Caption = sw.ConvertCurrencyToSpanish(Monto, "Dólares")
@@ -266,7 +266,7 @@ Else
         
          If FrmEgresos.CmbMoneda.Text = "Córdobas" Then
             If FrmEgresos.ChkCheque.Value = 1 Then
-              TasaCambio = BuscaTasaCambio(FrmEgresos.txtfecha.Value)
+              TasaCambio = BuscaTasaCambio(FrmEgresos.TxtFecha.Value)
               Monto = FrmEgresos.TxtMonto.Text
               Monto = Monto / TasaCambio
               FrmEgresos.TxtLetras.Text = sw.ConvertCurrencyToSpanish(Monto, "Dólares")

@@ -4,16 +4,24 @@ Object = "{E1C6DB9D-BD4A-4A61-A759-0CED75D034BF}#43.0#0"; "SmartButton.ocx"
 Begin VB.Form FrmImprimeCheque 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "FrmCheques"
-   ClientHeight    =   2700
+   ClientHeight    =   2925
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   4830
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   2700
+   ScaleHeight     =   2925
    ScaleWidth      =   4830
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CheckBox ChkRetencion 
+      Caption         =   "Imprimir Contancia Retencion"
+      Height          =   255
+      Left            =   240
+      TabIndex        =   9
+      Top             =   2640
+      Width           =   3135
+   End
    Begin ACTIVESKINLibCtl.SkinLabel LblCuenta 
       Height          =   375
       Left            =   1920
