@@ -6,7 +6,7 @@ Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12
 Begin VB.Form FrmActivoFijo 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Registro de Activo Fijo"
-   ClientHeight    =   9300
+   ClientHeight    =   6240
    ClientLeft      =   45
    ClientTop       =   405
    ClientWidth     =   12675
@@ -14,7 +14,7 @@ Begin VB.Form FrmActivoFijo
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   9300
+   ScaleHeight     =   6240
    ScaleWidth      =   12675
    Begin VB.CommandButton CmdSalir 
       Caption         =   "Salir"
@@ -624,7 +624,7 @@ Begin VB.Form FrmActivoFijo
          _ExtentX        =   3836
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   75825153
+         Format          =   78053377
          CurrentDate     =   37992
       End
       Begin MSDataListLib.DataCombo DBGrupos 
@@ -647,7 +647,7 @@ Begin VB.Form FrmActivoFijo
          _ExtentX        =   3413
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   75825153
+         Format          =   78053377
          CurrentDate     =   37992
       End
       Begin MSComCtl2.DTPicker TxtFechaUltDep 
@@ -659,7 +659,7 @@ Begin VB.Form FrmActivoFijo
          _ExtentX        =   3413
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   75825153
+         Format          =   78053377
          CurrentDate     =   37992
       End
       Begin VB.Label Label21 

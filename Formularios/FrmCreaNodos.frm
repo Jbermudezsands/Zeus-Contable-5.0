@@ -4,14 +4,14 @@ Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form FrmCreaNodos 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "                  Nuevo Grupo"
-   ClientHeight    =   2415
+   ClientHeight    =   2445
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   2895
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   2415
+   ScaleHeight     =   2445
    ScaleWidth      =   2895
    StartUpPosition =   2  'CenterScreen
    Begin VB.CommandButton CmdSalir 

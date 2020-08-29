@@ -6,7 +6,7 @@ Object = "{E1C6DB9D-BD4A-4A61-A759-0CED75D034BF}#43.0#0"; "SmartButton.ocx"
 Begin VB.Form FrmCuentasMayor 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Cuentas de Mayor y  Cuentas Auxiliares"
-   ClientHeight    =   6360
+   ClientHeight    =   6345
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   12225
@@ -15,7 +15,7 @@ Begin VB.Form FrmCuentasMayor
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   6360
+   ScaleHeight     =   6345
    ScaleWidth      =   12225
    Begin VB.CommandButton SmartButton7 
       Caption         =   "Cerrar"

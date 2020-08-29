@@ -639,7 +639,7 @@ Begin VB.Form FrmTransacciones
          _ExtentX        =   2990
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   74907649
+         Format          =   17104897
          CurrentDate     =   38918
       End
       Begin VB.TextBox TxtMonto 
@@ -659,7 +659,7 @@ Begin VB.Form FrmTransacciones
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   74907649
+         Format          =   17104897
          CurrentDate     =   38918
       End
       Begin VB.Label LblNombres 
@@ -1416,7 +1416,7 @@ Begin VB.Form FrmTransacciones
          _ExtentX        =   2778
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   74907649
+         Format          =   17104897
          CurrentDate     =   38918
       End
       Begin VB.ComboBox CmbMoneda 
@@ -2056,11 +2056,15 @@ TipoErrs:
 End Sub
 
 Private Sub CmdBorrar_Click()
+Dim Periodo As Double
+
 On Error GoTo TipoErrs
   Dim Respuesta, Rsp
   Salir = True
   
   Primero = True
+  
+  Periodo = NumeroPeriodo
   
   Set Rsp = DtaTransacciones.Recordset
   Respuesta = MsgBox("Esta seguro de Borrar la transaccion?", vbYesNo, "Transaccion No.: " & Me.TxtNTransacciones.Text)
@@ -2086,19 +2090,22 @@ On Error GoTo TipoErrs
        End If
    
    
-   Me.DtaTransacciones.Recordset.MoveFirst
-    Do While Not Me.DtaTransacciones.Recordset.EOF
+   Me.DtaConsulta.RecordSource = "SELECT Transacciones.* From Transacciones WHERE (((Transacciones.FechaTransaccion) Between " & NumFecha1 & " And " & NumFecha2 & " ) AND ((Transacciones.NumeroMovimiento)= " & NumeroTransaccion & ") )"
+   Me.DtaConsulta.Refresh
+    Do While Not Me.DtaConsulta.Recordset.EOF
 '     'Me.DtaTransacciones.Recordset.Edit
-     DtaTransacciones.Recordset("NombreCuenta") = "**********CANCELADO*************"
-     DtaTransacciones.Recordset("DescripcionMovimiento") = "**********CANCELADO*************"
-     DtaTransacciones.Recordset("Debito") = 0
-      DtaTransacciones.Recordset("Credito") = 0
-     'DtaTransacciones.Recordset.Delete
-     Me.DtaTransacciones.Recordset.Update
-     Me.DtaTransacciones.Recordset.MoveNext
+     DtaConsulta.Recordset("NombreCuenta") = "**********CANCELADO*************"
+     DtaConsulta.Recordset("DescripcionMovimiento") = "**********CANCELADO*************"
+     DtaConsulta.Recordset("Beneficiario") = "**********CANCELADO*************"
+     DtaConsulta.Recordset("Debito") = 0
+     DtaConsulta.Recordset("Credito") = 0
+
+     Me.DtaConsulta.Recordset.Update
+     Me.DtaConsulta.Recordset.MoveNext
        
      Me.CmbMoneda.Enabled = False
     Loop
+    
 '    Me.TxtFecha.Value = Format(FechaSistema, "dd/mm/yyyy")
     Me.DtaTransacciones.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento From Transacciones Where (((Transacciones.NumeroMovimiento) = -1))"
     Me.DtaTransacciones.Refresh
@@ -3002,7 +3009,7 @@ If ColIndex = 8 Or ColIndex = 9 Then
           '////BUSCO EL TIPO DE CUENTA PARA MOSTRAR FECHAS///////////
           '////////////////////////////////////////////////////////
           
-           CodigoCuenta = Me.DBGTransacciones.Columns(0).Text
+           CodigoCuenta = Me.DBGTransacciones.Columns("CodCuentas").Text
            Me.DtaConsulta.RecordSource = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo From Cuentas WHERE (CodCuentas = '" & CodigoCuenta & "')"
            Me.DtaConsulta.Refresh
            If Not Me.DtaConsulta.Recordset.EOF Then
@@ -4628,7 +4635,7 @@ SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transaccione
        "Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, " & _
        "Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, " & _
        "Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.FechaDescuento, Transacciones.DescuentoDisponible, " & _
-       "Transacciones.FechaVence,Transacciones.CodCuentaProveedor,Transacciones.TipoFactura,Transacciones.NTransaccion " & _
+       "Transacciones.FechaVence,Transacciones.CodCuentaProveedor,Transacciones.TipoFactura " & _
        "FROM         Periodos INNER JOIN " & _
        "Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo " & _
        "Where (Transacciones.NumeroMovimiento = -1) " & _
@@ -4638,45 +4645,45 @@ Me.DtaTransacciones.RecordSource = SQL
 Me.DtaTransacciones.Refresh
 Me.CmbMoneda.Text = "Córdobas"
   
-  
-  Me.DBGTransacciones.Columns(0).Button = True
-  Me.DBGTransacciones.Columns(1).Locked = True
-  Me.DBGTransacciones.Columns(1).Locked = True
-  Me.DBGTransacciones.Columns(6).Button = True
-  Me.DBGTransacciones.Columns(6).Locked = True
-  Me.DBGTransacciones.Columns(0).Width = 1500
-  Me.DBGTransacciones.Columns(2).Width = 1000
-  Me.DBGTransacciones.Columns(2).Caption = "Voucher/Dpto"
-  Me.DBGTransacciones.Columns(2).Width = 1100
-  Me.DBGTransacciones.Columns(4).Width = 1000
-  Me.DBGTransacciones.Columns(3).Caption = "Descripcion"
-  Me.DBGTransacciones.Columns(4).Width = 1000
-  Me.DBGTransacciones.Columns(4).Button = True
-  Me.DBGTransacciones.Columns(5).Width = 1000
-  Me.DBGTransacciones.Columns(5).Caption = "Cheq/Rec"
-  Me.DBGTransacciones.Columns(6).Width = 800
-  Me.DBGTransacciones.Columns(7).Caption = "Tasa Cambio"
-  Me.DBGTransacciones.Columns(7).Locked = True
-  Me.DBGTransacciones.Columns(7).NumberFormat = "##,##0.000000"
-  Me.DBGTransacciones.Columns(7).Width = 1200
-  Me.DBGTransacciones.Columns(8).Width = 1200
-  Me.DBGTransacciones.Columns(8).NumberFormat = "##,##0.00"
-  Me.DBGTransacciones.Columns(9).Width = 1200
-  Me.DBGTransacciones.Columns(9).NumberFormat = "##,##0.00"
-  Me.DBGTransacciones.Columns(10).Visible = False
-  Me.DBGTransacciones.Columns(11).Visible = False
-  Me.DBGTransacciones.Columns(12).Visible = False
-  Me.DBGTransacciones.Columns(13).Visible = False
-  Me.DBGTransacciones.Columns(14).Visible = False
-  Me.DBGTransacciones.Columns(15).Visible = False
-  Me.DBGTransacciones.Columns(16).Visible = False
-  Me.DBGTransacciones.Columns(17).Visible = False
-  Me.DBGTransacciones.Columns(18).Visible = False
-  Me.DBGTransacciones.Columns(19).Visible = False
-  FrmTransacciones.DBGTransacciones.Columns(20).Visible = False
-  FrmTransacciones.DBGTransacciones.Columns(21).Visible = False
-  FrmTransacciones.DBGTransacciones.Columns(22).Visible = False
-  Me.DBGTransacciones.Columns(7).Locked = True 'columna tasa de cambio
+  Me.DBGTransacciones.Columns("CodCuentas").Width = 1500  '0
+  Me.DBGTransacciones.Columns("CodCuentas").Button = True  '0
+  Me.DBGTransacciones.Columns("NombreCuenta").Locked = True '1
+  Me.DBGTransacciones.Columns("NombreCuenta").Locked = True '1
+  Me.DBGTransacciones.Columns("VoucherNo").Width = 1000 '2
+  Me.DBGTransacciones.Columns("VoucherNo").Caption = "Voucher/Dpto" '2
+  Me.DBGTransacciones.Columns("VoucherNo").Width = 1100 '2
+  Me.DBGTransacciones.Columns("DescripcionMovimiento").Caption = "Descripcion" '3
+  Me.DBGTransacciones.Columns("FacturaNo").Width = 1000 '4
+  Me.DBGTransacciones.Columns("FacturaNo").Width = 1000 '4
+  Me.DBGTransacciones.Columns("FacturaNo").Button = True '4
+  Me.DBGTransacciones.Columns("ChequeNo").Width = 1000
+  Me.DBGTransacciones.Columns("ChequeNo").Caption = "Cheq/Rec"
+  Me.DBGTransacciones.Columns("Clave").Button = True
+  Me.DBGTransacciones.Columns("Clave").Locked = True
+  Me.DBGTransacciones.Columns("Clave").Width = 800
+  Me.DBGTransacciones.Columns("TCambio").Caption = "Tasa Cambio"
+  Me.DBGTransacciones.Columns("TCambio").Locked = True
+  Me.DBGTransacciones.Columns("TCambio").NumberFormat = "##,##0.000000"
+  Me.DBGTransacciones.Columns("TCambio").Width = 1200
+  Me.DBGTransacciones.Columns("TCambio").Locked = True
+  Me.DBGTransacciones.Columns("Debito").Width = 1200
+  Me.DBGTransacciones.Columns("Debito").NumberFormat = "##,##0.00"
+  Me.DBGTransacciones.Columns("Credito").Width = 1200
+  Me.DBGTransacciones.Columns("Credito").NumberFormat = "##,##0.00"
+  Me.DBGTransacciones.Columns("FechaTransaccion").Visible = False
+  Me.DBGTransacciones.Columns("NPeriodo").Visible = False
+  Me.DBGTransacciones.Columns("NTransaccion").Visible = False
+  Me.DBGTransacciones.Columns("Fuente").Visible = False
+  Me.DBGTransacciones.Columns("FechaTasas").Visible = False
+  Me.DBGTransacciones.Columns("NumeroMovimiento").Visible = False
+  Me.DBGTransacciones.Columns("Periodo").Visible = False
+  Me.DBGTransacciones.Columns("FechaDescuento").Visible = False
+  Me.DBGTransacciones.Columns("DescuentoDisponible").Visible = False
+  Me.DBGTransacciones.Columns("FechaVence").Visible = False
+  Me.DBGTransacciones.Columns("CodCuentaProveedor").Visible = False
+  Me.DBGTransacciones.Columns("TipoFactura").Visible = False
+  FrmTransacciones.DBGTransacciones.Columns("NTransaccion").Visible = False
+ 'columna tasa de cambio
 Exit Sub
 TipoErrs:
  ControlErrores

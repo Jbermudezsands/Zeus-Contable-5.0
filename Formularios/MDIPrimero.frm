@@ -839,7 +839,7 @@ Begin VB.MDIForm MDIPrimero
          EndProperty
          BeginProperty Panel6 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   5
-            TextSave        =   "06:23 p.m."
+            TextSave        =   "06:28 p.m."
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -1309,6 +1309,8 @@ Private Sub CommandBars_Execute(ByVal Control As XtremeCommandBars.ICommandBarCo
              FrmtrasladoActivos.Show
        Case 1731
          FrmBajaBienes.Show
+       Case 1732
+         FrmCalcularDepreciacion.Show 1
        Case 1733
          FrmResponsablesAreas.Show
        Case 1734
@@ -1347,6 +1349,12 @@ Private Sub CommandBars_Execute(ByVal Control As XtremeCommandBars.ICommandBarCo
               
        Case 1738
               FrmSolicitudPagoLista.Show
+              
+       Case 1739: FrmListaChequeReimpresion.Show
+       Case 1740: FrmCheque.Show
+       Case 1741: FrmSolicitudPagoLista.Show
+       Case 1742: FrmEstructuraPresupuesto.Show
+
 
         End Select
 End Sub
@@ -1758,7 +1766,10 @@ Private Sub CreateRibbonBar()
     CommandBars.Icons.LoadBitmap App.Path & "\Imagenes\Money2.png", 1736, XtremeCommandBars.XTPImageState.xtpImageNormal
     CommandBars.Icons.LoadBitmap App.Path & "\Imagenes\Caja.png", 1737, XtremeCommandBars.XTPImageState.xtpImageNormal
     CommandBars.Icons.LoadBitmap App.Path & "\Imagenes\SolicitudPago.png", 1738, XtremeCommandBars.XTPImageState.xtpImageNormal
-    
+    CommandBars.Icons.LoadBitmap App.Path & "\Imagenes\Listado.png", 1739, xtpImageNormal
+    CommandBars.Icons.LoadBitmap App.Path & "\Imagenes\Cheques.png", 1740, xtpImageNormal
+    CommandBars.Icons.LoadBitmap App.Path & "\Imagenes\SolicitudPago.png", 1741, xtpImageNormal
+    CommandBars.Icons.LoadBitmap App.Path & "\Imagenes\EstructuraPresupuesto.png", 1742, xtpImageNormal
     
     
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1810,6 +1821,7 @@ Private Sub CreateRibbonBar()
      Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1738, "&Solicitud de Pago", False, False)
      Item.Style = xtpButtonIconAndCaptionBelow
      
+    
      Set GroupFile = TabHome.Groups.AddGroup("Opciones", 1)
      Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1710, "&Calculadora", False, False)
      Item.Style = xtpButtonIconAndCaptionBelow
@@ -1853,11 +1865,35 @@ Private Sub CreateRibbonBar()
      Item.Style = xtpButtonIconAndCaptionBelow
      Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1734, "&Programar Mantenimientos", False, False)
      Item.Style = xtpButtonIconAndCaptionBelow
+     
+     
+         '/////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////CREO EL TABS DE BANCOS//////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////
+    Set TabHome = RibbonBar.InsertTab(2, "&Finanzas")
+    TabHome.Id = 1500
+     Set GroupFile = TabHome.Groups.AddGroup("Chequera", 1)
+     Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1739, "&Listado Cheques", False, False)
+     Item.Style = xtpButtonIconAndCaptionBelow
+     Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1740, "&Registro de Cheques", False, False)
+     Item.Style = xtpButtonIconAndCaptionBelow
+     Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1741, "&Solicitud de Pagos", False, False)
+     Item.Style = xtpButtonIconAndCaptionBelow
+      Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1716, "&Prorrateo Cuentas", False, False)
+     Item.Style = xtpButtonIconAndCaptionBelow
+     Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1737, "&Egresos Efectivo", False, False)
+     Item.Style = xtpButtonIconAndCaptionBelow
+     Set GroupFile = TabHome.Groups.AddGroup("Presupuesto", 1)
+     Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1742, "&Estructura Presupuesto", False, False)
+     Item.Style = xtpButtonIconAndCaptionBelow
+     Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1712, "&Presupuestos", False, False)
+     Item.Style = xtpButtonIconAndCaptionBelow
+
     
     '/////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////CREO EL TABS DE REPORTES//////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    Set TabHome = RibbonBar.InsertTab(2, "&Reportes")
+    Set TabHome = RibbonBar.InsertTab(3, "&Reportes")
     TabHome.Id = 1500
      Set GroupFile = TabHome.Groups.AddGroup("Basicos", 1)
      Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1718, "Reportes &Generales", False, False)
@@ -1878,7 +1914,7 @@ Private Sub CreateRibbonBar()
     '/////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////CREO EL TABS DE CONTABILIZAR//////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////
-    Set TabHome = RibbonBar.InsertTab(3, "&Contabilizar")
+    Set TabHome = RibbonBar.InsertTab(4, "&Contabilizar")
     TabHome.Id = 1500
      Set GroupFile = TabHome.Groups.AddGroup("Sistema Facturacion", 1)
      Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1723, "Conexion Facturacion", False, False)
@@ -1891,7 +1927,7 @@ Private Sub CreateRibbonBar()
      Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1726, "Contabilizar Nomina", False, False)
      Item.Style = xtpButtonIconAndCaptionBelow
     
-    RibbonBar.QuickAccessControls.Add XtremeCommandBars.XTPControlType.xtpControlButton, ID_FILE_SAVE, "Zeus Contable 6.16", False, False
+    RibbonBar.QuickAccessControls.Add XtremeCommandBars.XTPControlType.xtpControlButton, ID_FILE_SAVE, "Zeus Contable 6.20", False, False
 
 
 End Sub

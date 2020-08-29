@@ -12,7 +12,7 @@ Begin VB.Form FrmImporta
    ClientHeight    =   5745
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   10605
+   ClientWidth     =   12450
    ForeColor       =   &H8000000D&
    Icon            =   "FrmLeer.frx":0000
    LinkTopic       =   "Form1"
@@ -20,7 +20,7 @@ Begin VB.Form FrmImporta
    MinButton       =   0   'False
    Picture         =   "FrmLeer.frx":1E72
    ScaleHeight     =   5745
-   ScaleWidth      =   10605
+   ScaleWidth      =   12450
    StartUpPosition =   2  'CenterScreen
    Begin VB.CommandButton CmdAnexarZeus 
       Caption         =   "Anexar Zeus"
@@ -33,7 +33,7 @@ Begin VB.Form FrmImporta
    Begin VB.CommandButton CmdSalir 
       Caption         =   "Salir"
       Height          =   375
-      Left            =   7440
+      Left            =   10560
       TabIndex        =   16
       Top             =   5160
       Width           =   1815
@@ -45,7 +45,7 @@ Begin VB.Form FrmImporta
       TabIndex        =   15
       Top             =   5040
       Visible         =   0   'False
-      Width           =   4935
+      Width           =   6975
    End
    Begin MSAdodcLib.Adodc AdoAnexar 
       Height          =   375
@@ -334,7 +334,7 @@ Begin VB.Form FrmImporta
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel6 
       Height          =   375
-      Left            =   8880
+      Left            =   10680
       OleObjectBlob   =   "FrmLeer.frx":2B9A
       TabIndex        =   13
       Top             =   4320
@@ -342,7 +342,7 @@ Begin VB.Form FrmImporta
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel5 
       Height          =   255
-      Left            =   7320
+      Left            =   9120
       OleObjectBlob   =   "FrmLeer.frx":2C06
       TabIndex        =   12
       Top             =   4320
@@ -422,8 +422,8 @@ Begin VB.Form FrmImporta
       Left            =   120
       TabIndex        =   1
       Top             =   1080
-      Width           =   10335
-      _ExtentX        =   18230
+      Width           =   12135
+      _ExtentX        =   21405
       _ExtentY        =   4683
       _LayoutType     =   4
       _RowHeight      =   -2147483647
@@ -435,37 +435,42 @@ Begin VB.Form FrmImporta
       Columns(0)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
       Columns(1)._VlistStyle=   0
       Columns(1)._MaxComboItems=   5
-      Columns(1).Caption=   "Descripcion Movimiento"
-      Columns(1).DataField=   "Descripcion"
+      Columns(1).Caption=   "Departamento"
+      Columns(1).DataField=   "CodDepartamento"
       Columns(1)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
       Columns(2)._VlistStyle=   0
       Columns(2)._MaxComboItems=   5
-      Columns(2).Caption=   "Transaccion No."
-      Columns(2).DataField=   "NTransaccion"
+      Columns(2).Caption=   "Descripcion Movimiento"
+      Columns(2).DataField=   "Descripcion"
       Columns(2)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
       Columns(3)._VlistStyle=   0
       Columns(3)._MaxComboItems=   5
-      Columns(3).Caption=   "Fecha Transaccion"
-      Columns(3).DataField=   "Fecha"
+      Columns(3).Caption=   "Transaccion No."
+      Columns(3).DataField=   "NTransaccion"
       Columns(3)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
       Columns(4)._VlistStyle=   0
       Columns(4)._MaxComboItems=   5
-      Columns(4).Caption=   "Debito"
-      Columns(4).DataField=   "ImporteTransaccionDebito"
+      Columns(4).Caption=   "Fecha Transaccion"
+      Columns(4).DataField=   "Fecha"
       Columns(4)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
       Columns(5)._VlistStyle=   0
       Columns(5)._MaxComboItems=   5
-      Columns(5).Caption=   "Credito"
-      Columns(5).DataField=   "ImporteTransaccionCredito"
+      Columns(5).Caption=   "Debito"
+      Columns(5).DataField=   "ImporteTransaccionDebito"
       Columns(5)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
-      Columns.Count   =   6
+      Columns(6)._VlistStyle=   0
+      Columns(6)._MaxComboItems=   5
+      Columns(6).Caption=   "Credito"
+      Columns(6).DataField=   "ImporteTransaccionCredito"
+      Columns(6)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
+      Columns.Count   =   7
       Splits(0)._UserFlags=   0
       Splits(0).RecordSelectorWidth=   1085
       Splits(0)._SavedRecordSelectors=   -1  'True
       Splits(0).DividerColor=   16315377
       Splits(0).SpringMode=   0   'False
       Splits(0)._PropDict=   "_ColumnProps,515,0;_UserFlags,518,3"
-      Splits(0)._ColumnProps(0)=   "Columns.Count=6"
+      Splits(0)._ColumnProps(0)=   "Columns.Count=7"
       Splits(0)._ColumnProps(1)=   "Column(0).Width=2725"
       Splits(0)._ColumnProps(2)=   "Column(0).DividerColor=0"
       Splits(0)._ColumnProps(3)=   "Column(0)._WidthInPix=2646"
@@ -490,6 +495,10 @@ Begin VB.Form FrmImporta
       Splits(0)._ColumnProps(22)=   "Column(5).DividerColor=0"
       Splits(0)._ColumnProps(23)=   "Column(5)._WidthInPix=2646"
       Splits(0)._ColumnProps(24)=   "Column(5).Order=6"
+      Splits(0)._ColumnProps(25)=   "Column(6).Width=2725"
+      Splits(0)._ColumnProps(26)=   "Column(6).DividerColor=0"
+      Splits(0)._ColumnProps(27)=   "Column(6)._WidthInPix=2646"
+      Splits(0)._ColumnProps(28)=   "Column(6).Order=7"
       Splits.Count    =   1
       PrintInfos(0)._StateFlags=   0
       PrintInfos(0).Name=   "piInternal 0"
@@ -547,47 +556,51 @@ Begin VB.Form FrmImporta
       _StyleDefs(31)  =   "Splits(0).Columns(0).HeadingStyle:id=59,.parent=14"
       _StyleDefs(32)  =   "Splits(0).Columns(0).FooterStyle:id=60,.parent=15"
       _StyleDefs(33)  =   "Splits(0).Columns(0).EditorStyle:id=61,.parent=17"
-      _StyleDefs(34)  =   "Splits(0).Columns(1).Style:id=58,.parent=13"
-      _StyleDefs(35)  =   "Splits(0).Columns(1).HeadingStyle:id=55,.parent=14"
-      _StyleDefs(36)  =   "Splits(0).Columns(1).FooterStyle:id=56,.parent=15"
-      _StyleDefs(37)  =   "Splits(0).Columns(1).EditorStyle:id=57,.parent=17"
-      _StyleDefs(38)  =   "Splits(0).Columns(2).Style:id=54,.parent=13"
-      _StyleDefs(39)  =   "Splits(0).Columns(2).HeadingStyle:id=51,.parent=14"
-      _StyleDefs(40)  =   "Splits(0).Columns(2).FooterStyle:id=52,.parent=15"
-      _StyleDefs(41)  =   "Splits(0).Columns(2).EditorStyle:id=53,.parent=17"
-      _StyleDefs(42)  =   "Splits(0).Columns(3).Style:id=50,.parent=13"
-      _StyleDefs(43)  =   "Splits(0).Columns(3).HeadingStyle:id=47,.parent=14"
-      _StyleDefs(44)  =   "Splits(0).Columns(3).FooterStyle:id=48,.parent=15"
-      _StyleDefs(45)  =   "Splits(0).Columns(3).EditorStyle:id=49,.parent=17"
-      _StyleDefs(46)  =   "Splits(0).Columns(4).Style:id=28,.parent=13"
-      _StyleDefs(47)  =   "Splits(0).Columns(4).HeadingStyle:id=25,.parent=14"
-      _StyleDefs(48)  =   "Splits(0).Columns(4).FooterStyle:id=26,.parent=15"
-      _StyleDefs(49)  =   "Splits(0).Columns(4).EditorStyle:id=27,.parent=17"
-      _StyleDefs(50)  =   "Splits(0).Columns(5).Style:id=46,.parent=13"
-      _StyleDefs(51)  =   "Splits(0).Columns(5).HeadingStyle:id=43,.parent=14"
-      _StyleDefs(52)  =   "Splits(0).Columns(5).FooterStyle:id=44,.parent=15"
-      _StyleDefs(53)  =   "Splits(0).Columns(5).EditorStyle:id=45,.parent=17"
-      _StyleDefs(54)  =   "Named:id=33:Normal"
-      _StyleDefs(55)  =   ":id=33,.parent=0"
-      _StyleDefs(56)  =   "Named:id=34:Heading"
-      _StyleDefs(57)  =   ":id=34,.parent=33,.valignment=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
-      _StyleDefs(58)  =   ":id=34,.wraptext=-1"
-      _StyleDefs(59)  =   "Named:id=35:Footing"
-      _StyleDefs(60)  =   ":id=35,.parent=33,.valignment=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
-      _StyleDefs(61)  =   "Named:id=36:Selected"
-      _StyleDefs(62)  =   ":id=36,.parent=33,.bgcolor=&H8000000D&,.fgcolor=&H8000000E&"
-      _StyleDefs(63)  =   "Named:id=37:Caption"
-      _StyleDefs(64)  =   ":id=37,.parent=34,.alignment=2"
-      _StyleDefs(65)  =   "Named:id=38:HighlightRow"
-      _StyleDefs(66)  =   ":id=38,.parent=33,.bgcolor=&H8000000D&,.fgcolor=&H8000000E&"
-      _StyleDefs(67)  =   "Named:id=39:EvenRow"
-      _StyleDefs(68)  =   ":id=39,.parent=33,.bgcolor=&HFFFF00&"
-      _StyleDefs(69)  =   "Named:id=40:OddRow"
-      _StyleDefs(70)  =   ":id=40,.parent=33"
-      _StyleDefs(71)  =   "Named:id=41:RecordSelector"
-      _StyleDefs(72)  =   ":id=41,.parent=34"
-      _StyleDefs(73)  =   "Named:id=42:FilterBar"
-      _StyleDefs(74)  =   ":id=42,.parent=33"
+      _StyleDefs(34)  =   "Splits(0).Columns(1).Style:id=32,.parent=13"
+      _StyleDefs(35)  =   "Splits(0).Columns(1).HeadingStyle:id=29,.parent=14"
+      _StyleDefs(36)  =   "Splits(0).Columns(1).FooterStyle:id=30,.parent=15"
+      _StyleDefs(37)  =   "Splits(0).Columns(1).EditorStyle:id=31,.parent=17"
+      _StyleDefs(38)  =   "Splits(0).Columns(2).Style:id=58,.parent=13"
+      _StyleDefs(39)  =   "Splits(0).Columns(2).HeadingStyle:id=55,.parent=14"
+      _StyleDefs(40)  =   "Splits(0).Columns(2).FooterStyle:id=56,.parent=15"
+      _StyleDefs(41)  =   "Splits(0).Columns(2).EditorStyle:id=57,.parent=17"
+      _StyleDefs(42)  =   "Splits(0).Columns(3).Style:id=54,.parent=13"
+      _StyleDefs(43)  =   "Splits(0).Columns(3).HeadingStyle:id=51,.parent=14"
+      _StyleDefs(44)  =   "Splits(0).Columns(3).FooterStyle:id=52,.parent=15"
+      _StyleDefs(45)  =   "Splits(0).Columns(3).EditorStyle:id=53,.parent=17"
+      _StyleDefs(46)  =   "Splits(0).Columns(4).Style:id=50,.parent=13"
+      _StyleDefs(47)  =   "Splits(0).Columns(4).HeadingStyle:id=47,.parent=14"
+      _StyleDefs(48)  =   "Splits(0).Columns(4).FooterStyle:id=48,.parent=15"
+      _StyleDefs(49)  =   "Splits(0).Columns(4).EditorStyle:id=49,.parent=17"
+      _StyleDefs(50)  =   "Splits(0).Columns(5).Style:id=28,.parent=13"
+      _StyleDefs(51)  =   "Splits(0).Columns(5).HeadingStyle:id=25,.parent=14"
+      _StyleDefs(52)  =   "Splits(0).Columns(5).FooterStyle:id=26,.parent=15"
+      _StyleDefs(53)  =   "Splits(0).Columns(5).EditorStyle:id=27,.parent=17"
+      _StyleDefs(54)  =   "Splits(0).Columns(6).Style:id=46,.parent=13"
+      _StyleDefs(55)  =   "Splits(0).Columns(6).HeadingStyle:id=43,.parent=14"
+      _StyleDefs(56)  =   "Splits(0).Columns(6).FooterStyle:id=44,.parent=15"
+      _StyleDefs(57)  =   "Splits(0).Columns(6).EditorStyle:id=45,.parent=17"
+      _StyleDefs(58)  =   "Named:id=33:Normal"
+      _StyleDefs(59)  =   ":id=33,.parent=0"
+      _StyleDefs(60)  =   "Named:id=34:Heading"
+      _StyleDefs(61)  =   ":id=34,.parent=33,.valignment=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+      _StyleDefs(62)  =   ":id=34,.wraptext=-1"
+      _StyleDefs(63)  =   "Named:id=35:Footing"
+      _StyleDefs(64)  =   ":id=35,.parent=33,.valignment=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+      _StyleDefs(65)  =   "Named:id=36:Selected"
+      _StyleDefs(66)  =   ":id=36,.parent=33,.bgcolor=&H8000000D&,.fgcolor=&H8000000E&"
+      _StyleDefs(67)  =   "Named:id=37:Caption"
+      _StyleDefs(68)  =   ":id=37,.parent=34,.alignment=2"
+      _StyleDefs(69)  =   "Named:id=38:HighlightRow"
+      _StyleDefs(70)  =   ":id=38,.parent=33,.bgcolor=&H8000000D&,.fgcolor=&H8000000E&"
+      _StyleDefs(71)  =   "Named:id=39:EvenRow"
+      _StyleDefs(72)  =   ":id=39,.parent=33,.bgcolor=&HFFFF00&"
+      _StyleDefs(73)  =   "Named:id=40:OddRow"
+      _StyleDefs(74)  =   ":id=40,.parent=33"
+      _StyleDefs(75)  =   "Named:id=41:RecordSelector"
+      _StyleDefs(76)  =   ":id=41,.parent=34"
+      _StyleDefs(77)  =   "Named:id=42:FilterBar"
+      _StyleDefs(78)  =   ":id=42,.parent=33"
    End
    Begin MSAdodcLib.Adodc AdoImporta 
       Height          =   375
@@ -792,12 +805,12 @@ Begin VB.Form FrmImporta
       _ExtentY        =   529
       _Version        =   393216
       Enabled         =   0   'False
-      Format          =   76480513
+      Format          =   80609281
       CurrentDate     =   37714
    End
    Begin MSMask.MaskEdBox TxtDebito 
       Height          =   375
-      Left            =   7320
+      Left            =   9120
       TabIndex        =   8
       Top             =   3840
       Width           =   1455
@@ -809,7 +822,7 @@ Begin VB.Form FrmImporta
    End
    Begin MSMask.MaskEdBox TxtCredito 
       Height          =   375
-      Left            =   8880
+      Left            =   10680
       TabIndex        =   9
       Top             =   3840
       Width           =   1575
@@ -825,9 +838,9 @@ Begin VB.Form FrmImporta
       TabIndex        =   17
       Top             =   4440
       Visible         =   0   'False
-      Width           =   5055
+      Width           =   7095
       _Version        =   786432
-      _ExtentX        =   8916
+      _ExtentX        =   12515
       _ExtentY        =   873
       _StockProps     =   93
       ForeColor       =   -2147483630
@@ -1380,6 +1393,7 @@ With Me.osProgress
 
       Me.AdoTransacciones.Recordset.AddNew
        Me.AdoTransacciones.Recordset("CodCuentas") = CodigoCuenta
+       Me.AdoTransacciones.Recordset("VoucherNo") = Me.AdoAnexar.Recordset("CodDepartamento")
        Me.AdoTransacciones.Recordset("FechaTransaccion") = FechaArchivo
        Me.AdoTransacciones.Recordset("NPeriodo") = NumeroPeriodo
        Me.AdoTransacciones.Recordset("NumeroMovimiento") = NumeroMovimiento
@@ -1522,7 +1536,7 @@ Line Input #1, Cadena
 
  
  Fuente = Mid(Cadena, 17, 4)
- CodCuenta = Mid(Cadena, 21, 19)
+ CodCuenta = Mid(Cadena, 21, 16)
  Me.Caption = "Procesando Cuenta " & CodCuenta
  CodDepartamento = Mid(Cadena, 37, 3)
  CodAcciones = Mid(Cadena, 40, 17)

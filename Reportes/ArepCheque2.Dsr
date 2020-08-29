@@ -15,7 +15,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Public TotalDebito As Double, TotalCredito As Double, TotalDebitoD As Double, TotalCreditoD As Double
+Public TotalDebito As Double, TotalCredito As Double, TotalDebitoD As Double, TotalCreditoD As Double, Memo As String, Moneda As String, ChequeNo As String
 
 
 
@@ -28,16 +28,18 @@ err:
     If err.Number <> 0 Then MsgBox "Hay un problema con la dirección del Logo de la Empresa." & Chr(13) & "Por favor revise el valor de la Direccion Logo en la Configuración del Sistema", vbInformation
     
     
-   Me.LblEmpresa = FrmReportes.DtaDatosEmpresa.Recordset("NombreEmpresa")
-   Me.LblEmpresa1 = FrmReportes.DtaDatosEmpresa.Recordset("Direccion")
-   Me.LblEmpresa2 = "RUC: " & FrmReportes.DtaDatosEmpresa.Recordset("NumeroRuc")
+   Me.LblEmpresa = MDIPrimero.AdoConfiguracion.Recordset("NombreEmpresa")
+   Me.LblEmpresa1 = MDIPrimero.AdoConfiguracion.Recordset("Direccion")
+   Me.LblEmpresa2 = "RUC: " & MDIPrimero.AdoConfiguracion.Recordset("NumeroRuc")
 '   Me.Label17.Caption = NombreUsuario
-
-If FrmCheque.TxtMemo.Text <> "" Then
- Me.LblMemo.Caption = FrmCheque.TxtMemo.Text
+'
+If Memo <> "" Then
+ Me.LblMemo.Caption = Memo
 End If
  
-Me.LblMoneda.Caption = "Expresado en: " & FrmCheque.CmbMoneda.Text
+Me.LblMoneda.Caption = "Expresado en: " & Moneda
+
+Me.LblChequeNo.Caption = ChequeNo
  
 If Val(FrmReportes.TxtTransaccion.Text) <> 0 Then
        FrmReportes.DtaConsulta.RecordSource = "SELECT Transacciones.ChequeNo, Transacciones.FechaTransaccion, Transacciones.CodCuentas, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, TCambio*Debito AS MDebito, TCambio*Credito AS MCredito, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.VoucherNo, Transacciones.ChequeNo, Beneficiario From Transacciones WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FrmReportes.DTFecha1, "yyyymmdd") & "' And '" & Format(FrmReportes.DTFecha2, "yyyymmdd") & "') AND ((Transacciones.NumeroMovimiento)=" & Val(FrmReportes.TxtTransaccion.Text) & ") AND ((Transacciones.ChequeNo) Is Not Null))"

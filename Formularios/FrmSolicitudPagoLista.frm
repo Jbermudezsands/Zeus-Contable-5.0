@@ -4,16 +4,102 @@ Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
 Begin VB.Form FrmSolicitudPagoLista 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Listado de Pagos"
-   ClientHeight    =   6375
+   ClientHeight    =   6465
    ClientLeft      =   45
    ClientTop       =   435
-   ClientWidth     =   14205
+   ClientWidth     =   14385
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   6375
-   ScaleWidth      =   14205
+   ScaleHeight     =   6465
+   ScaleWidth      =   14385
+   Begin MSAdodcLib.Adodc AdoConsulta 
+      Height          =   375
+      Left            =   1080
+      Top             =   7080
+      Width           =   2655
+      _ExtentX        =   4683
+      _ExtentY        =   661
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "AdoCosulta"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin VB.Frame Frame1 
+      Height          =   2175
+      Left            =   12840
+      TabIndex        =   5
+      Top             =   2160
+      Width           =   1455
+      Begin VB.OptionButton OptProcesados 
+         Caption         =   "Procesados"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   9
+         Top             =   1200
+         Width           =   1215
+      End
+      Begin VB.OptionButton OptAnulados 
+         Caption         =   "Anulados"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   8
+         Top             =   1680
+         Width           =   975
+      End
+      Begin VB.OptionButton OptActivos 
+         Caption         =   "Activos"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   7
+         Top             =   720
+         Value           =   -1  'True
+         Width           =   855
+      End
+      Begin VB.OptionButton OptTodos 
+         Caption         =   "Todos"
+         Height          =   375
+         Left            =   120
+         TabIndex        =   6
+         Top             =   240
+         Width           =   975
+      End
+   End
    Begin VB.CommandButton CmdSalir 
       Caption         =   "SALIR"
       Height          =   495
@@ -92,7 +178,7 @@ Begin VB.Form FrmSolicitudPagoLista
       PrintInfos(0).PageHeaderHeight=   0
       PrintInfos(0).PageFooterHeight=   0
       PrintInfos.Count=   1
-      AllowAddNew     =   -1  'True
+      AllowUpdate     =   0   'False
       Appearance      =   3
       DefColWidth     =   0
       HeadLines       =   1
@@ -263,8 +349,53 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+Private Sub CmdEditar_Click()
+ Dim Fecha As Date, NumeroSolicitud As Double
+    If Me.OptActivos.Value = False Then
+       Me.OptActivos.Value = True
+       ActualizaGrid
+    End If
+    
+    Fecha = Me.DBGTransacciones.Columns("FechaTransaccion")
+    NumeroSolicitud = Me.DBGTransacciones.Columns("NumeroSolicitud")
+    
+    Me.AdoConsulta.RecordSource = "SELECT IndiceSolicitudPago.* From IndiceSolicitudPago  " & _
+                                  "WHERE  (FechaTransaccion = CONVERT(DATETIME, '" & Format(Fecha, "yyyy-mm-dd") & "', 102)) AND (NumeroMovimiento = " & NumeroSolicitud & ")"
+    Me.AdoConsulta.Refresh
+    If Not Me.AdoConsulta.Recordset.EOF Then
+      FrmSolicitudPagos.txtfecha.Value = Fecha
+      FrmSolicitudPagos.DBCodigo.Text = Me.AdoConsulta.Recordset("CuentaBanco")
+      FrmSolicitudPagos.TxtMemo.Text = Me.AdoConsulta.Recordset("Concepto")
+      FrmSolicitudPagos.CmbMoneda.Text = Me.AdoConsulta.Recordset("TipoMoneda")
+      FrmSolicitudPagos.ChkCheque.Value = Me.AdoConsulta.Recordset("ImprimeCheque")
+      FrmSolicitudPagos.TxtSubTotal.Text = Format(Me.AdoConsulta.Recordset("SubTotal"), "##,##0.00")
+      FrmSolicitudPagos.TxtIVa.Text = Format(Me.AdoConsulta.Recordset("MontoIva"), "##,##0.00")
+      FrmSolicitudPagos.TxtRetenciones.Text = Format(Me.AdoConsulta.Recordset("MontoRetenciones"), "##,##0.00")
+      FrmSolicitudPagos.TxtMonto.Text = Format(Me.AdoConsulta.Recordset("MontoSolicitud"), "##,##0.00")
+      
+      If Me.AdoConsulta.Recordset("Anticipo") = 1 Then
+        FrmSolicitudPagos.OptAnticipo.Value = True
+      Else
+        FrmSolicitudPagos.OptCancelacion.Value = True
+      End If
+      
+       FrmSolicitudPagos.Chk1.Value = Me.AdoConsulta.Recordset("Retencion1")
+       FrmSolicitudPagos.Chk2.Value = Me.AdoConsulta.Recordset("Retencion2")
+       FrmSolicitudPagos.Chk3.Value = Me.AdoConsulta.Recordset("Retencion3")
+       FrmSolicitudPagos.Chk7.Value = Me.AdoConsulta.Recordset("Retencion4")
+       FrmSolicitudPagos.Chk10.Value = Me.AdoConsulta.Recordset("Retencion5")
+      
+    End If
+    
+    
+    FrmSolicitudPagos.Show 1
+    Me.DtaIndice.Refresh
+End Sub
+
 Private Sub CmdNuevo_Click()
 FrmSolicitudPagos.Show 1
+Me.DtaIndice.Refresh
+
 End Sub
 
 Private Sub CmdSalir_Click()
@@ -274,10 +405,52 @@ End Sub
 Private Sub Form_Load()
 MDIPrimero.Skin1.ApplySkin hWnd
 
-Me.DtaIndice.ConnectionString = Conexion
-Me.DtaIndice.RecordSource = "SELECT FechaTransaccion, NumeroMovimiento, DescripcionMovimiento, SubTotal, MontoIva, MontoRetenciones, MontoSolicitud, Anticipo From IndiceSolicitudPago Where (Activo = 1) And (Procesado = 0)"
-Me.DtaIndice.Refresh
+ Me.DBGTransacciones.EvenRowStyle.BackColor = RGB(216, 228, 248)
+ Me.DBGTransacciones.OddRowStyle.BackColor = &H80000005
+ Me.DBGTransacciones.AlternatingRowStyle = True
+
+ActualizaGrid
 
 
+Me.AdoConsulta.ConnectionString = Conexion
 
+End Sub
+
+Public Sub ActualizaGrid()
+ If Me.OptTodos.Value = True Then
+    Me.DtaIndice.ConnectionString = Conexion
+    Me.DtaIndice.RecordSource = "SELECT FechaTransaccion, NumeroMovimiento AS NumeroSolicitud, DescripcionMovimiento, SubTotal, MontoIva, MontoRetenciones, MontoSolicitud, Anticipo From IndiceSolicitudPago "
+    Me.DtaIndice.Refresh
+ ElseIf Me.OptActivos.Value = True Then
+    Me.DtaIndice.ConnectionString = Conexion
+    Me.DtaIndice.RecordSource = "SELECT FechaTransaccion, NumeroMovimiento AS NumeroSolicitud, DescripcionMovimiento, SubTotal, MontoIva, MontoRetenciones, MontoSolicitud, Anticipo From IndiceSolicitudPago Where (Activo = 1) And (Procesado = 0) And (Anulado = 0)"
+    Me.DtaIndice.Refresh
+ ElseIf Me.OptAnulados.Value = True Then
+    Me.DtaIndice.ConnectionString = Conexion
+    Me.DtaIndice.RecordSource = "SELECT FechaTransaccion, NumeroMovimiento AS NumeroSolicitud, DescripcionMovimiento, SubTotal, MontoIva, MontoRetenciones, MontoSolicitud, Anticipo From IndiceSolicitudPago Where (Anulado = 1)"
+    Me.DtaIndice.Refresh
+ ElseIf Me.OptProcesados.Value = True Then
+    Me.DtaIndice.ConnectionString = Conexion
+    Me.DtaIndice.RecordSource = "SELECT FechaTransaccion, NumeroMovimiento AS NumeroSolicitud, DescripcionMovimiento, SubTotal, MontoIva, MontoRetenciones, MontoSolicitud, Anticipo From IndiceSolicitudPago Where (Procesado = 1)"
+    Me.DtaIndice.Refresh
+ 
+ End If
+
+
+End Sub
+
+Private Sub OptActivos_Click()
+ActualizaGrid
+End Sub
+
+Private Sub OptAnulados_Click()
+ActualizaGrid
+End Sub
+
+Private Sub OptProcesados_Click()
+ActualizaGrid
+End Sub
+
+Private Sub OptTodos_Click()
+ActualizaGrid
 End Sub

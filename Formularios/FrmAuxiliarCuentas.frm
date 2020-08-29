@@ -1187,19 +1187,19 @@ Private Function getFilter(col As TrueOleDBGrid80.Column, cols As TrueOleDBGrid8
 'filter other data types.
 Dim tmp As String
 Dim n As Integer
-Dim X As Integer
+Dim x As Integer
 
 For Each col In cols
     If Trim(col.FilterText) <> "" Then
         n = n + 1
         If n > 1 Then tmp = tmp & " AND "
-        Select Case rs.Fields(X).Type
+        Select Case rs.Fields(x).Type
         Case adVarWChar, adVarChar: tmp = tmp & "[" & col.DataField & "] LIKE '%" & col.FilterText & "%'"
         Case adInteger, adNumeric: tmp = tmp & "[" & col.DataField & "] = " & col.FilterText
         Case adDBTimeStamp: tmp = tmp & "[" & col.DataField & "] = #" & col.FilterText & "#"
         End Select
     End If
-    X = X + 1
+    x = x + 1
 Next col
 getFilter = tmp
 

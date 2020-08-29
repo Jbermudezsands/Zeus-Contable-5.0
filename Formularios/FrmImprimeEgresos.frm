@@ -2,14 +2,14 @@ VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
 Begin VB.Form FrmImprimeEgresos 
    Caption         =   "Imprime Egreso"
-   ClientHeight    =   2385
+   ClientHeight    =   2415
    ClientLeft      =   60
    ClientTop       =   450
    ClientWidth     =   2715
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   2385
+   ScaleHeight     =   2415
    ScaleWidth      =   2715
    StartUpPosition =   2  'CenterScreen
    Begin VB.CommandButton CmdGrabar 

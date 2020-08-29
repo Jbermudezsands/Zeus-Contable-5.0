@@ -230,7 +230,7 @@ Begin VB.Form FrmExportacion
          _ExtentX        =   2990
          _ExtentY        =   582
          _Version        =   393216
-         Format          =   17039361
+         Format          =   79626241
          CurrentDate     =   40457
       End
       Begin MSComCtl2.DTPicker DTPFechaFin 
@@ -242,7 +242,7 @@ Begin VB.Form FrmExportacion
          _ExtentX        =   2990
          _ExtentY        =   582
          _Version        =   393216
-         Format          =   17039361
+         Format          =   79626241
          CurrentDate     =   40457
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel2 

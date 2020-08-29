@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "Comdlg32.ocx"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
@@ -913,7 +913,7 @@ Begin VB.Form FrmConsolidacion
          _ExtentX        =   4048
          _ExtentY        =   609
          _Version        =   393216
-         Format          =   79364097
+         Format          =   79495169
          CurrentDate     =   40603
       End
       Begin VB.Label Label3 
@@ -1818,7 +1818,7 @@ If Me.OptExportar.Value = True Then
                         With Barra
                            .Min = 0
                            .Value = 0
-                           .MAX = Maximo
+                           .Max = Maximo
                            J = 0
                          Do While Not AdoRegistros.Recordset.EOF
                          '////////Inicialiso las variables/////////////////
@@ -1986,7 +1986,7 @@ If Me.OptExportar.Value = True Then
                         With Barra
                            .Min = 0
                            .Value = 0
-                           .MAX = Maximo
+                           .Max = Maximo
                            J = 0
                          Do While Not AdoRegistros.Recordset.EOF
                          '////////Inicialiso las variables/////////////////
@@ -2163,7 +2163,7 @@ Else
                      
                     With Me.Barra
                      .Min = 0
-                     .MAX = CantidadRegistros
+                     .Max = CantidadRegistros
                      .Value = 0
                      J = 1
                      
@@ -2241,7 +2241,7 @@ Else
                       Me.AdoAnexar.Recordset.MoveFirst
                       With Me.Barra
                      .Min = 0
-                     .MAX = CantidadRegistros
+                     .Max = CantidadRegistros
                      .Value = 0
                       J = 1
                     

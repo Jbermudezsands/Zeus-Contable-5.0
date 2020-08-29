@@ -101,7 +101,7 @@ Begin VB.Form FrmContratistaNProyectos
       _ExtentX        =   4683
       _ExtentY        =   503
       _Version        =   393216
-      Format          =   78774273
+      Format          =   79560705
       CurrentDate     =   37992
    End
    Begin MSComCtl2.DTPicker TxtFechaContrata 
@@ -113,7 +113,7 @@ Begin VB.Form FrmContratistaNProyectos
       _ExtentX        =   4683
       _ExtentY        =   503
       _Version        =   393216
-      Format          =   78774273
+      Format          =   79560705
       CurrentDate     =   37992
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel1 

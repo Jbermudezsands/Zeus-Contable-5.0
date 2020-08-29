@@ -775,7 +775,7 @@ Begin VB.Form FrmAuxiliarMovimientos
          _ExtentX        =   2778
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   76349441
+         Format          =   79560705
          CurrentDate     =   38008
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel3 

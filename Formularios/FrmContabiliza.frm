@@ -466,9 +466,9 @@ Begin VB.Form FrmContabilizaFacturacion
       TabCaption(1)   =   "Compras"
       TabPicture(1)   =   "FrmContabiliza.frx":001C
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "GroupBox2"
+      Tab(1).Control(0)=   "PushButton2"
       Tab(1).Control(1)=   "TDBGridCompras"
-      Tab(1).Control(2)=   "PushButton2"
+      Tab(1).Control(2)=   "GroupBox2"
       Tab(1).ControlCount=   3
       TabCaption(2)   =   "Cuentas x Cobrar y Pagar"
       TabPicture(2)   =   "FrmContabiliza.frx":0038
@@ -513,7 +513,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   73007105
+            Format          =   78446593
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker3 
@@ -525,7 +525,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   73007105
+            Format          =   78446593
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptCompras 
@@ -577,7 +577,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   73007105
+            Format          =   78446593
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton RadioButton4 
@@ -717,7 +717,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   73007105
+            Format          =   78446593
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptFacturacion 
@@ -770,7 +770,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   73007105
+            Format          =   78446593
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecibos 
@@ -823,7 +823,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   73007105
+            Format          =   78446593
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptSalidaBodega 
@@ -1516,7 +1516,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   73007105
+            Format          =   78446593
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebito 
@@ -1554,7 +1554,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   73007105
+            Format          =   78446593
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.PushButton CmdContabilizarNotas 
@@ -1594,7 +1594,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   73007105
+            Format          =   78446593
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebitoProveedor 
@@ -2049,7 +2049,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   73007105
+            Format          =   78446593
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker11 
@@ -2061,7 +2061,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   73007105
+            Format          =   78446593
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecepcion 
@@ -2087,7 +2087,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   73007105
+            Format          =   78446593
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptPlanilla 
@@ -2882,7 +2882,7 @@ ElseIf Me.OptNotaCredito.Value = True Then
  TipoNota = "Credito Clientes"
 ElseIf Me.OptNotaCreditoProveedor.Value = True Then
     TipoNota = "Credito Proveedores"
-ElseIf Me.OptNotaCreditoProveedor.Value = True Then
+ElseIf Me.OptNotaDebitoProveedor.Value = True Then
     TipoNota = "Debito Proveedores"
 ElseIf Me.OptPlanillaProductor.Value = True Then
     TipoNota = "PlanillaLeche"
@@ -2890,6 +2890,28 @@ ElseIf Me.OptPlanillaProductor.Value = True Then
 End If
 
      Select Case TipoNota
+            Case "Debito Proveedores"
+
+         
+            
+            FechaInicio = Format(Me.DTPicker7.Value, "yyyy-mm-dd")
+            FechaFin = Format(Me.DTPicker8.Value, "yyyy-mm-dd")
+            SqlString = "SELECT  IndiceNota.Numero_Nota, IndiceNota.Fecha_Nota, IndiceNota.MonedaNota, IndiceNota.Nombre_Cliente, Detalle_Nota.Descripcion, Detalle_Nota.Numero_Factura, Detalle_Nota.Monto , IndiceNota.Marca, IndiceNota.Tipo_Nota AS CodTipoNota FROM IndiceNota INNER JOIN Detalle_Nota ON IndiceNota.Numero_Nota = Detalle_Nota.Numero_Nota AND IndiceNota.Fecha_Nota = Detalle_Nota.Fecha_Nota AND IndiceNota.Tipo_Nota = Detalle_Nota.Tipo_Nota INNER JOIN NotaDebito ON IndiceNota.Tipo_Nota = NotaDebito.CodigoNB  " & _
+                         "WHERE (IndiceNota.Nombre_Cliente <> '*******ANULADO*******') AND (NotaDebito.Tipo = 'Debito Proveedores') AND (IndiceNota.Contabilizado = 0) AND (IndiceNota.Fecha_Nota BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) ORDER BY IndiceNota.Fecha_Nota"
+       
+               Me.AdoNota.ConnectionString = ConexionFacturacion
+                Me.AdoNota.RecordSource = SqlString
+                Me.AdoNota.Refresh
+                 If Not Me.AdoNota.Recordset.EOF Then
+                   Me.CmdContabilizarNotas.Enabled = True
+                   Me.DTPicker9.Visible = True
+                Else
+                   Me.CmdContabilizarNotas.Enabled = False
+                   Me.DTPicker9.Visible = False
+                End If
+                
+                Me.TDBGridCuentas.Columns(8).Visible = False
+                
        Case "Debito Clientes"
 
          
@@ -2933,6 +2955,31 @@ End If
         End If
         
         Me.TDBGridCuentas.Columns(8).Visible = False
+        
+        
+       Case "Credito Proveedores"
+
+          
+            
+            FechaInicio = Format(Me.DTPicker7.Value, "yyyy-mm-dd")
+            FechaFin = Format(Me.DTPicker8.Value, "yyyy-mm-dd")
+            SqlString = "SELECT  IndiceNota.Numero_Nota, IndiceNota.Fecha_Nota, IndiceNota.MonedaNota, IndiceNota.Nombre_Cliente, Detalle_Nota.Descripcion, Detalle_Nota.Numero_Factura, Detalle_Nota.Monto , IndiceNota.Marca, IndiceNota.Tipo_Nota AS CodTipoNota FROM IndiceNota INNER JOIN Detalle_Nota ON IndiceNota.Numero_Nota = Detalle_Nota.Numero_Nota AND IndiceNota.Fecha_Nota = Detalle_Nota.Fecha_Nota AND IndiceNota.Tipo_Nota = Detalle_Nota.Tipo_Nota INNER JOIN NotaDebito ON IndiceNota.Tipo_Nota = NotaDebito.CodigoNB  " & _
+                         "WHERE (IndiceNota.Nombre_Cliente <> '*******ANULADO*******') AND (NotaDebito.Tipo = 'Credito Proveedores') AND (IndiceNota.Contabilizado = 0) AND (IndiceNota.Fecha_Nota BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) ORDER BY IndiceNota.Fecha_Nota"
+       
+        Me.AdoNota.ConnectionString = ConexionFacturacion
+        Me.AdoNota.RecordSource = SqlString
+        Me.AdoNota.Refresh
+         If Not Me.AdoNota.Recordset.EOF Then
+           Me.CmdContabilizarNotas.Enabled = True
+           Me.DTPicker9.Visible = True
+        Else
+           Me.CmdContabilizarNotas.Enabled = False
+           Me.DTPicker9.Visible = False
+        End If
+        
+        Me.TDBGridCuentas.Columns(8).Visible = False
+        
+        
        
        Case "PlanillaLeche"
            
@@ -4960,6 +5007,12 @@ If Me.OptNotaDebito.Value = True Then
  TipoNota = "Debito Clientes"
 ElseIf Me.OptNotaCredito.Value = True Then
  TipoNota = "Credito Clientes"
+ElseIf Me.OptNotaCreditoProveedor.Value = True Then
+    TipoNota = "Credito Proveedores"
+ElseIf Me.OptNotaDebitoProveedor.Value = True Then
+    TipoNota = "Debito Proveedores"
+ElseIf Me.OptPlanillaProductor.Value = True Then
+    TipoNota = "PlanillaLeche"
 End If
 
      Select Case TipoNota
@@ -4972,6 +5025,7 @@ End If
             SqlString = "SELECT IndiceNota.Numero_Nota, IndiceNota.Fecha_Nota, IndiceNota.MonedaNota, IndiceNota.Nombre_Cliente, Detalle_Nota.Descripcion, Detalle_Nota.Numero_Factura, Detalle_Nota.Monto , IndiceNota.Marca, NotaDebito.CuentaContable, Clientes.Cod_Cuenta_Cliente, IndiceNota.Tipo_Nota AS CodTipoNota, Clientes.RUC, " & _
                         "IndiceNota.Observaciones FROM IndiceNota INNER JOIN Detalle_Nota ON IndiceNota.Numero_Nota = Detalle_Nota.Numero_Nota AND IndiceNota.Fecha_Nota = Detalle_Nota.Fecha_Nota AND IndiceNota.Tipo_Nota = Detalle_Nota.Tipo_Nota INNER JOIN NotaDebito ON IndiceNota.Tipo_Nota = NotaDebito.CodigoNB INNER JOIN Clientes ON IndiceNota.Cod_Cliente = Clientes.Cod_Cliente  " & _
                         "WHERE (IndiceNota.Nombre_Cliente <> '*******ANULADO*******') AND (NotaDebito.Tipo = 'Debito Clientes') AND (IndiceNota.Marca = 1) AND (IndiceNota.Contabilizado = 0) AND (IndiceNota.Fecha_Nota BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) ORDER BY IndiceNota.Fecha_Nota"
+       
        Case "Credito Clientes"
 
           
@@ -4983,8 +5037,23 @@ End If
                                     "WHERE (IndiceNota.Nombre_Cliente <> '*******ANULADO*******') AND (NotaDebito.Tipo = 'Credito Clientes') AND (IndiceNota.Marca = 1) AND (IndiceNota.Contabilizado = 0) AND (IndiceNota.Fecha_Nota BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) ORDER BY IndiceNota.Fecha_Nota"
       
       
-       Case ""
+       Case "Debito Proveedores"
+
+         
+            
+            FechaInicio = Format(Me.DTPicker7.Value, "yyyy-mm-dd")
+            FechaFin = Format(Me.DTPicker8.Value, "yyyy-mm-dd")
+            SqlString = "SELECT  IndiceNota.Numero_Nota, IndiceNota.Fecha_Nota, IndiceNota.MonedaNota, IndiceNota.Nombre_Cliente, Detalle_Nota.Descripcion, Detalle_Nota.Numero_Factura, Detalle_Nota.Monto, IndiceNota.Marca, NotaDebito.CuentaContable, IndiceNota.Tipo_Nota AS CodTipoNota, IndiceNota.Observaciones, Proveedor.Cod_Proveedor, Proveedor.Cod_Cuenta_Proveedor , Proveedor.RUC, Proveedor.Cod_Cuenta_Pagar As Cod_Cuenta_Cliente FROM  IndiceNota INNER JOIN Detalle_Nota ON IndiceNota.Numero_Nota = Detalle_Nota.Numero_Nota AND IndiceNota.Fecha_Nota = Detalle_Nota.Fecha_Nota AND IndiceNota.Tipo_Nota = Detalle_Nota.Tipo_Nota INNER JOIN  NotaDebito ON IndiceNota.Tipo_Nota = NotaDebito.CodigoNB INNER JOIN Proveedor ON IndiceNota.Cod_Cliente = Proveedor.Cod_Proveedor  " & _
+                        "WHERE  (IndiceNota.Nombre_Cliente <> '*******ANULADO*******') AND (IndiceNota.Contabilizado = 0) AND (IndiceNota.Fecha_Nota BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) AND (NotaDebito.Tipo = 'Debito Proveedores') AND (IndiceNota.Marca = 1) ORDER BY IndiceNota.Fecha_Nota"
        
+       Case "Credito Proveedores"
+
+         
+            
+            FechaInicio = Format(Me.DTPicker7.Value, "yyyy-mm-dd")
+            FechaFin = Format(Me.DTPicker8.Value, "yyyy-mm-dd")
+            SqlString = "SELECT  IndiceNota.Numero_Nota, IndiceNota.Fecha_Nota, IndiceNota.MonedaNota, IndiceNota.Nombre_Cliente, Detalle_Nota.Descripcion, Detalle_Nota.Numero_Factura, Detalle_Nota.Monto, IndiceNota.Marca, NotaDebito.CuentaContable, IndiceNota.Tipo_Nota AS CodTipoNota, IndiceNota.Observaciones, Proveedor.Cod_Proveedor, Proveedor.Cod_Cuenta_Proveedor , Proveedor.RUC, Proveedor.Cod_Cuenta_Pagar As Cod_Cuenta_Cliente FROM  IndiceNota INNER JOIN Detalle_Nota ON IndiceNota.Numero_Nota = Detalle_Nota.Numero_Nota AND IndiceNota.Fecha_Nota = Detalle_Nota.Fecha_Nota AND IndiceNota.Tipo_Nota = Detalle_Nota.Tipo_Nota INNER JOIN  NotaDebito ON IndiceNota.Tipo_Nota = NotaDebito.CodigoNB INNER JOIN Proveedor ON IndiceNota.Cod_Cliente = Proveedor.Cod_Proveedor  " & _
+                        "WHERE  (IndiceNota.Nombre_Cliente <> '*******ANULADO*******') AND (IndiceNota.Contabilizado = 0) AND (IndiceNota.Fecha_Nota BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) AND (NotaDebito.Tipo = 'Credito Proveedores') AND (IndiceNota.Marca = 1) ORDER BY IndiceNota.Fecha_Nota"
       
       End Select
     
@@ -5059,6 +5128,26 @@ End If
                                       End If
                                       
                                  Select Case TipoNota
+                                  Case "Debito Proveedores"
+                                   '-------------------------AGREGO EL MOVIMIENTO DEBITO --------------------------------
+                                         DescripcionMovimiento = "Nota de Debito No " & NumeroNota & " RUC:" & Me.AdoProcesos.Recordset("RUC") & ", " & Me.AdoProcesos.Recordset("Observaciones")
+                                         DescripcionCuenta = BuscaCuenta(CodigoCuentaCliente)
+                                         TasaMovimiento = 1
+                                         Credito = 0
+                                         Debito = Format(Val(Me.AdoProcesos.Recordset("Monto")), "##,##0.00")
+                                         Debito = Format(Debito * TasaCambio, "##,##0.00")
+                                         If Debito <> 0 Then
+                                             Resultado = GrabaDetalleFactura(CodigoCuentaCliente, Me.DTPicker9.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaCambio, Debito, Credito, "NDB", NumeroFactura, Fecha, Descuento, Fecha, CodigoCuentaCliente, "FacturaVenta")
+                                         End If
+                                    '---------------------------AGREGO EL MOVIMIENTO CREDITO -------------------------------
+                                         DescripcionCuenta = BuscaCuenta(CodigoCuentaNota)
+                                         Credito = Format(Val(Me.AdoProcesos.Recordset("Monto")), "##,##0.00")
+                                         Debito = 0
+                                         Credito = Format(Credito * TasaCambio, "##,##0.00")
+                                         If Credito <> 0 Then
+                                             Resultado = GrabaDetalleFactura(CodigoCuentaNota, Me.DTPicker9.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, Credito, "NDB", NumeroFactura, Fecha, Descuento, Fecha, CodigoCuentaCliente, "FacturaVenta")
+                                         End If
+                                         
                                    Case "Debito Clientes"
                                    '-------------------------AGREGO EL MOVIMIENTO DEBITO --------------------------------
                                          DescripcionMovimiento = "Nota de Debito No " & NumeroNota & " RUC:" & Me.AdoProcesos.Recordset("RUC") & ", " & Me.AdoProcesos.Recordset("Observaciones")
@@ -5079,6 +5168,7 @@ End If
                                              Resultado = GrabaDetalleFactura(CodigoCuentaNota, Me.DTPicker9.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, Credito, "NDB", NumeroFactura, Fecha, Descuento, Fecha, CodigoCuentaCliente, "FacturaVenta")
                                          End If
 '                                         rs.Open "UPDATE [IndiceNota]  Set [Activo] = 0 ,[Contabilizado] = 1 WHERE (IndiceNota.Numero_Nota = '" & NumeroNota & "') AND (NotaDebito.Tipo = 'Debito Clientes')", ConexionFacturacion
+                                   
                                    Case "Credito Clientes"
                                    
                                     '-------------------------AGREGO EL MOVIMIENTO CREDITO --------------------------------
@@ -5100,6 +5190,28 @@ End If
                                              Resultado = GrabaDetalleFactura(CodigoCuentaCliente, Me.DTPicker9.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaMovimiento, Debito, Credito, "NC", NumeroFactura, Fecha, Descuento, Fecha, CodigoCuentaCliente, "FacturaVenta")
                                          End If
 '                                         rs.Open "UPDATE [IndiceNota]  Set [Activo] = 0 ,[Contabilizado] = 1 WHERE (IndiceNota.Numero_Nota = '" & NumeroNota & "') AND (NotaDebito.Tipo = 'Credito Clientes')"
+                                  
+                                   Case "Credito Proveedores"
+                                   
+                                    '-------------------------AGREGO EL MOVIMIENTO CREDITO --------------------------------
+                                         DescripcionCuenta = BuscaCuenta(CodigoCuentaNota)
+                                         TasaMovimiento = 1
+                                         DescripcionMovimiento = "Nota de Credito No " & NumeroNota & " RUC:" & Me.AdoProcesos.Recordset("RUC") & ", " & Me.AdoProcesos.Recordset("Observaciones")
+                                         Credito = 0
+                                         Debito = Format(Val(Me.AdoProcesos.Recordset("Monto")), "##,##0.00")
+                                         Debito = Format(Debito * TasaCambio, "##,##0.00")
+                                         If Debito <> 0 Then
+                                             Resultado = GrabaDetalleFactura(CodigoCuentaNota, Me.DTPicker9.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaMovimiento, Debito, Credito, "NC", NumeroFactura, Fecha, Descuento, Fecha, CodigoCuentaCliente, "FacturaVenta")
+                                         End If
+                                    '---------------------------AGREGO EL MOVIMIENTO CREDITO -------------------------------
+                                         DescripcionCuenta = BuscaCuenta(CodigoCuentaCliente)
+                                         Credito = Format(Val(Me.AdoProcesos.Recordset("Monto")), "##,##0.00")
+                                         Debito = 0
+                                         Credito = Format(Credito * TasaCambio, "##,##0.00")
+                                         If Credito <> 0 Then
+                                             Resultado = GrabaDetalleFactura(CodigoCuentaCliente, Me.DTPicker9.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaMovimiento, Debito, Credito, "NC", NumeroFactura, Fecha, Descuento, Fecha, CodigoCuentaCliente, "FacturaVenta")
+                                         End If
+                                  
                                   End Select
                              
                                '/////////////////////////////////////////////////ACTUALIZO LAS NOTAS DE DEBITOS //////////////////////////////////

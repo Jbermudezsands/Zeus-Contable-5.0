@@ -940,7 +940,7 @@ Begin VB.Form FrmProrrateo
          _ExtentX        =   2566
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   17039361
+         Format          =   79626241
          CurrentDate     =   40061
       End
       Begin VB.TextBox TxtDescripcion 
@@ -959,7 +959,7 @@ Begin VB.Form FrmProrrateo
          _ExtentX        =   2566
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   17039361
+         Format          =   79626241
          CurrentDate     =   40061
       End
       Begin VB.Frame Frame5 
@@ -1216,7 +1216,7 @@ Begin VB.Form FrmProrrateo
          _ExtentX        =   2566
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   17039361
+         Format          =   79626241
          CurrentDate     =   40061
       End
    End
@@ -1410,7 +1410,7 @@ Private Sub CmdProcesar_Click()
   On Error GoTo TipoErrs
   Dim TotalOrigen As Double, TotalDestino As Double, NumeroProrrateo As Double, Respuesta As Double
   Dim Periodo As Double, NumeroPeriodo As Double, FechaIni As String, FechaFin As String, EstadoPeriodo As String, NumeroTransaccion As Double
-  Dim Mes As Double, Año As Double
+  Dim mes As Double, Año As Double
      
       If Me.TxtProrrateo.Text <> "" Then
           NumeroProrrateo = Me.TxtProrrateo.Text
@@ -1446,10 +1446,10 @@ Private Sub CmdProcesar_Click()
                  '/////////////////////////////////////////////////////////////////////////////////////////////
                  
 
-                         Mes = Month(Me.DTPFecha.Value)
+                         mes = Month(Me.DTPFecha.Value)
                          Año = Year(Me.DTPFecha.Value)
                          FechaIni = CDate("1/" & Month(Me.DTPFecha.Value) & "/" & Year(Me.DTPFecha.Value))
-                         FechaFin = DateSerial(Año, Mes + 1, 1 - 1)
+                         FechaFin = DateSerial(Año, mes + 1, 1 - 1)
 
                  
                          Me.AdoConsulta.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.EstadoPeriodo, Periodos.NTransacciones, Periodos.Periodo From Periodos WHERE (((Periodos.FechaPeriodo) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "'))"

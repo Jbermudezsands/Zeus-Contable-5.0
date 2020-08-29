@@ -5,28 +5,28 @@ Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
 Begin VB.Form FrmListadoCheques 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Listado Cheques"
-   ClientHeight    =   6315
+   ClientHeight    =   6645
    ClientLeft      =   45
    ClientTop       =   435
-   ClientWidth     =   9150
+   ClientWidth     =   9195
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6315
-   ScaleWidth      =   9150
+   ScaleHeight     =   6645
+   ScaleWidth      =   9195
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame Frame1 
       Caption         =   "Encabezados"
       Height          =   1455
       Left            =   120
-      TabIndex        =   6
+      TabIndex        =   5
       Top             =   4800
       Width           =   2415
       Begin VB.CheckBox Check2 
          Caption         =   "Imprimir Cheque y Comprobante"
          Height          =   495
          Left            =   240
-         TabIndex        =   8
+         TabIndex        =   7
          Top             =   720
          Value           =   1  'Checked
          Width           =   1575
@@ -35,7 +35,7 @@ Begin VB.Form FrmListadoCheques
          Caption         =   "Imprimir Comprobante"
          Height          =   495
          Left            =   240
-         TabIndex        =   7
+         TabIndex        =   6
          Top             =   240
          Width           =   2055
       End
@@ -44,21 +44,21 @@ Begin VB.Form FrmListadoCheques
       Caption         =   "Consecutivo Cheque"
       Height          =   1455
       Left            =   2520
-      TabIndex        =   3
+      TabIndex        =   2
       Top             =   4800
       Width           =   3255
       Begin VB.CheckBox ChkRetencion 
          Caption         =   "Imprimir Contancia Retencion"
          Height          =   255
          Left            =   120
-         TabIndex        =   9
+         TabIndex        =   8
          Top             =   960
          Width           =   2535
       End
       Begin VB.TextBox LblConsecutivo 
          Height          =   285
          Left            =   1080
-         TabIndex        =   4
+         TabIndex        =   3
          Top             =   360
          Width           =   1335
       End
@@ -66,7 +66,7 @@ Begin VB.Form FrmListadoCheques
          Height          =   255
          Left            =   120
          OleObjectBlob   =   "FrmListadoCheques.frx":0000
-         TabIndex        =   5
+         TabIndex        =   4
          Top             =   360
          Width           =   855
       End
@@ -121,23 +121,115 @@ Begin VB.Form FrmListadoCheques
       Caption         =   "Imprimir"
       Height          =   375
       Left            =   6000
-      TabIndex        =   2
-      Top             =   5280
+      TabIndex        =   1
+      Top             =   4800
       Width           =   1455
    End
    Begin VB.CommandButton CmdSalir 
       Caption         =   "Salir"
       Height          =   375
       Left            =   7560
-      TabIndex        =   1
-      Top             =   5280
+      TabIndex        =   0
+      Top             =   4800
       Width           =   1455
+   End
+   Begin MSAdodcLib.Adodc AdoImprime 
+      Height          =   375
+      Left            =   960
+      Top             =   7800
+      Width           =   4935
+      _ExtentX        =   8705
+      _ExtentY        =   661
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "AdoImprime"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin MSAdodcLib.Adodc DtaConsulta 
+      Height          =   375
+      Left            =   960
+      Top             =   8280
+      Width           =   4935
+      _ExtentX        =   8705
+      _ExtentY        =   661
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "DtaConsulta"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
    End
    Begin TrueOleDBGrid80.TDBGrid TDBGridNominas 
       Bindings        =   "FrmListadoCheques.frx":0070
       Height          =   4575
       Left            =   120
-      TabIndex        =   0
+      TabIndex        =   9
       Top             =   120
       Width           =   8895
       _ExtentX        =   15690
@@ -401,98 +493,6 @@ Begin VB.Form FrmListadoCheques
       _StyleDefs(78)  =   "Named:id=42:FilterBar"
       _StyleDefs(79)  =   ":id=42,.parent=33"
    End
-   Begin MSAdodcLib.Adodc AdoImprime 
-      Height          =   375
-      Left            =   960
-      Top             =   7800
-      Width           =   4935
-      _ExtentX        =   8705
-      _ExtentY        =   661
-      ConnectMode     =   0
-      CursorLocation  =   3
-      IsolationLevel  =   -1
-      ConnectionTimeout=   15
-      CommandTimeout  =   30
-      CursorType      =   3
-      LockType        =   3
-      CommandType     =   8
-      CursorOptions   =   0
-      CacheSize       =   50
-      MaxRecords      =   0
-      BOFAction       =   0
-      EOFAction       =   0
-      ConnectStringType=   1
-      Appearance      =   1
-      BackColor       =   -2147483643
-      ForeColor       =   -2147483640
-      Orientation     =   0
-      Enabled         =   -1
-      Connect         =   ""
-      OLEDBString     =   ""
-      OLEDBFile       =   ""
-      DataSourceName  =   ""
-      OtherAttributes =   ""
-      UserName        =   ""
-      Password        =   ""
-      RecordSource    =   ""
-      Caption         =   "AdoImprime"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      _Version        =   393216
-   End
-   Begin MSAdodcLib.Adodc DtaConsulta 
-      Height          =   375
-      Left            =   960
-      Top             =   8280
-      Width           =   4935
-      _ExtentX        =   8705
-      _ExtentY        =   661
-      ConnectMode     =   0
-      CursorLocation  =   3
-      IsolationLevel  =   -1
-      ConnectionTimeout=   15
-      CommandTimeout  =   30
-      CursorType      =   3
-      LockType        =   3
-      CommandType     =   8
-      CursorOptions   =   0
-      CacheSize       =   50
-      MaxRecords      =   0
-      BOFAction       =   0
-      EOFAction       =   0
-      ConnectStringType=   1
-      Appearance      =   1
-      BackColor       =   -2147483643
-      ForeColor       =   -2147483640
-      Orientation     =   0
-      Enabled         =   -1
-      Connect         =   ""
-      OLEDBString     =   ""
-      OLEDBFile       =   ""
-      DataSourceName  =   ""
-      OtherAttributes =   ""
-      UserName        =   ""
-      Password        =   ""
-      RecordSource    =   ""
-      Caption         =   "DtaConsulta"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      _Version        =   393216
-   End
 End
 Attribute VB_Name = "FrmListadoCheques"
 Attribute VB_GlobalNameSpace = False
@@ -646,12 +646,16 @@ Do While Not Me.AdoImprime.Recordset.EOF
              End If
              ArepCheque.LblMemo.Caption = FrmCheque.TxtMemo.Text
              ArepCheque2.LblMemo.Caption = FrmCheque.TxtMemo.Text
+             ArepCheque2.Memo = FrmCheque.TxtMemo.Text
              
              ArepCheque.LblNombre.Caption = FrmCheque.TxtNombre.Text
              ArepCheque.LblChequeNo.Caption = Me.LblConsecutivo.Text
              
+             
              ArepCheque2.LblNombre.Caption = FrmCheque.TxtNombre.Text
              ArepCheque2.LblChequeNo.Caption = Me.LblConsecutivo.Text
+             ArepCheque2.ChequeNo = Me.LblConsecutivo.Text
+             ArepCheque2.Moneda = TipoMoneda
             
             FechaCheque = Fechas1
             NumeroMovimientos = NumeroTransaccion
@@ -714,12 +718,15 @@ Do While Not Me.AdoImprime.Recordset.EOF
          
          ArepCheque.LblMemo.Caption = Memo
          ArepCheque2.LblMemo.Caption = Memo
+         ArepCheque2.Memo = Memo
          
          ArepCheque.LblNombre.Caption = Beneficiario
          ArepCheque.LblChequeNo.Caption = Me.LblConsecutivo.Text
          
          ArepCheque2.LblNombre.Caption = Beneficiario
          ArepCheque2.LblChequeNo.Caption = Me.LblConsecutivo.Text
+         ArepCheque2.ChequeNo = Me.LblConsecutivo.Text
+         ArepCheque2.Moneda = TipoMoneda
         
         FechaCheque = Fechas1
         NumeroMovimientos = NMovimiento

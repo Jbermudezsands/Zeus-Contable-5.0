@@ -4,7 +4,7 @@ Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form FrmPresupuesto 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Registro de Presupuestos"
-   ClientHeight    =   5970
+   ClientHeight    =   5985
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   10065
@@ -12,7 +12,7 @@ Begin VB.Form FrmPresupuesto
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   5970
+   ScaleHeight     =   5985
    ScaleWidth      =   10065
    StartUpPosition =   2  'CenterScreen
    Begin VB.CommandButton SmartButton5 
@@ -1875,7 +1875,7 @@ Begin VB.Form FrmPresupuesto
       EndProperty
       ForeColor       =   &H000000C0&
       Height          =   375
-      Left            =   240
+      Left            =   360
       TabIndex        =   87
       Top             =   840
       Width           =   4575
@@ -2470,7 +2470,7 @@ Begin VB.Form FrmPresupuesto
    End
    Begin VB.Image Image1 
       Height          =   11250
-      Left            =   -240
+      Left            =   0
       Picture         =   "FrmPresupuesto.frx":030A
       Top             =   0
       Width           =   15000
@@ -2535,6 +2535,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Private Sub CmdAnterior_Click()
 On Error GoTo TipoErrs
 Dim Respuesta As Integer
@@ -2549,6 +2550,10 @@ End If
 TipoErrs:
    ControlErrores
 End Sub
+
+
+
+
 
 Private Sub CmdGrabar_Click()
 On Error GoTo TipoErrs
@@ -2931,6 +2936,8 @@ Else
  If Not IsNull(Me.DtaCuentas.Recordset("DescripcionCuentas")) Then
   Me.TxtDescripcion.Text = Me.DtaCuentas.Recordset("DescripcionCuentas")
  End If
+ 
+ 
  Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 1))"
  Me.DtaPeriodos.Refresh
  Do While Not Me.DtaPeriodos.Recordset.EOF

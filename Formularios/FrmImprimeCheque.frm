@@ -252,14 +252,19 @@ If Me.Check1.Value = 1 Then
     ArepCheque2.LblDescripcionMonto.Caption = FrmCheque.TxtLetras.Text
     ArepCheque2.LblMonto.Caption = Format(FrmCheque.TxtMonto.Text, "##,##0.00")
  End If
+ 
  ArepCheque.LblMemo.Caption = FrmCheque.TxtMemo.Text
  ArepCheque2.LblMemo.Caption = FrmCheque.TxtMemo.Text
+ ArepCheque2.Memo = FrmCheque.TxtMemo.Text
  
  ArepCheque.LblNombre.Caption = FrmCheque.TxtNombre.Text
  ArepCheque.LblChequeNo.Caption = Me.LblConsecutivo.Text
  
+ 
  ArepCheque2.LblNombre.Caption = FrmCheque.TxtNombre.Text
  ArepCheque2.LblChequeNo.Caption = Me.LblConsecutivo.Text
+ ArepCheque2.ChequeNo = Me.LblConsecutivo.Text
+ ArepCheque2.Moneda = FrmCheque.CmbMoneda.Text
 
 FechaCheque = Fechas1
 NumeroMovimientos = NumeroTransaccion
@@ -318,12 +323,15 @@ ElseIf Me.Check2.Value = 1 Then
          End If
          ArepCheque.LblMemo.Caption = FrmCheque.TxtMemo.Text
          ArepCheque2.LblMemo.Caption = FrmCheque.TxtMemo.Text
+         ArepCheque2.Memo = FrmCheque.TxtMemo.Text
          
          ArepCheque.LblNombre.Caption = FrmCheque.TxtNombre.Text
          ArepCheque.LblChequeNo.Caption = Me.LblConsecutivo.Text
          
          ArepCheque2.LblNombre.Caption = FrmCheque.TxtNombre.Text
          ArepCheque2.LblChequeNo.Caption = Me.LblConsecutivo.Text
+         ArepCheque2.ChequeNo = Me.LblConsecutivo.Text
+         ArepCheque2.Moneda = FrmCheque.CmbMoneda.Text
         
         FechaCheque = Fechas1
         NumeroMovimientos = NumeroTransaccion

@@ -9,17 +9,17 @@ Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12
 Begin VB.Form FrmCheque 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Registro de Cheques"
-   ClientHeight    =   7215
+   ClientHeight    =   7305
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   13320
+   ClientWidth     =   13305
    Icon            =   "cheque.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   7215
-   ScaleWidth      =   13320
+   ScaleHeight     =   7305
+   ScaleWidth      =   13305
    Begin MSDataListLib.DataList DtaList 
       Bindings        =   "cheque.frx":0ABA
       Height          =   1815
@@ -413,7 +413,7 @@ Begin VB.Form FrmCheque
          _ExtentX        =   2990
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   78053377
+         Format          =   79101953
          CurrentDate     =   38918
       End
       Begin MSComCtl2.DTPicker DTPFechaVence 
@@ -425,7 +425,7 @@ Begin VB.Form FrmCheque
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   78053377
+         Format          =   79101953
          CurrentDate     =   38918
       End
       Begin VB.Label LblNombres 
@@ -527,8 +527,8 @@ Begin VB.Form FrmCheque
    End
    Begin MSAdodcLib.Adodc AdoBuscar 
       Height          =   330
-      Left            =   8640
-      Top             =   7560
+      Left            =   3600
+      Top             =   7680
       Width           =   2655
       _ExtentX        =   4683
       _ExtentY        =   582
@@ -581,7 +581,7 @@ Begin VB.Form FrmCheque
       _ExtentY        =   503
       _Version        =   393216
       Enabled         =   0   'False
-      Format          =   78053377
+      Format          =   79101953
       CurrentDate     =   38008
    End
    Begin VB.CommandButton CmdSiguiente 
@@ -1591,8 +1591,8 @@ Begin VB.Form FrmCheque
       End
       Begin MSAdodcLib.Adodc AdoCordenadas 
          Height          =   375
-         Left            =   3720
-         Top             =   7560
+         Left            =   240
+         Top             =   7800
          Width           =   2895
          _ExtentX        =   5106
          _ExtentY        =   661

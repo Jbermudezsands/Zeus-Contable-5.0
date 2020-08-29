@@ -837,7 +837,7 @@ Begin VB.Form FrmPeriodos
          _ExtentX        =   3836
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   17104897
+         Format          =   78184449
          CurrentDate     =   37994
       End
       Begin VB.CommandButton CmdBuscaCuenta 

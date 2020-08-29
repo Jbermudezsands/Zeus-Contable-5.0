@@ -496,7 +496,7 @@ Begin VB.Form FrmAuditor
                _ExtentX        =   2566
                _ExtentY        =   503
                _Version        =   393216
-               Format          =   83492865
+               Format          =   79560705
                CurrentDate     =   39117
             End
             Begin MSComCtl2.DTPicker DTFechaIni 
@@ -509,7 +509,7 @@ Begin VB.Form FrmAuditor
                _ExtentX        =   2778
                _ExtentY        =   503
                _Version        =   393216
-               Format          =   83492865
+               Format          =   79560705
                CurrentDate     =   39117
             End
          End
@@ -578,7 +578,7 @@ Begin VB.Form FrmAuditor
                _ExtentY        =   503
                _Version        =   393216
                Enabled         =   0   'False
-               Format          =   83492865
+               Format          =   79560705
                CurrentDate     =   39117
             End
             Begin MSComCtl2.DTPicker DTPFechaIni 
@@ -591,7 +591,7 @@ Begin VB.Form FrmAuditor
                _ExtentY        =   503
                _Version        =   393216
                Enabled         =   0   'False
-               Format          =   83492865
+               Format          =   79560705
                CurrentDate     =   39117
             End
          End

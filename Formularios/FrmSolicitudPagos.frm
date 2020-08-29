@@ -1,5 +1,6 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
 Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
@@ -9,80 +10,25 @@ Object = "{60CCE6A8-5C61-4F30-8513-F57EED62E86A}#8.0#0"; "todl8.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
 Begin VB.Form FrmSolicitudPagos 
    Caption         =   "Solicitud de Pagos"
-   ClientHeight    =   8235
+   ClientHeight    =   8385
    ClientLeft      =   60
    ClientTop       =   450
-   ClientWidth     =   14475
+   ClientWidth     =   14640
    LinkTopic       =   "Form1"
-   ScaleHeight     =   8235
-   ScaleWidth      =   14475
+   ScaleHeight     =   8385
+   ScaleWidth      =   14640
    StartUpPosition =   3  'Windows Default
-   Begin VB.CheckBox Chk15 
-      BackColor       =   &H00F7E7DE&
-      Caption         =   "IVA 15%"
-      Height          =   375
-      Left            =   12720
-      TabIndex        =   91
-      Top             =   3840
-      Value           =   1  'Checked
-      Width           =   1455
-   End
-   Begin VB.CheckBox Chk3 
-      BackColor       =   &H00F7E7DE&
-      Caption         =   "Retencion 3%"
-      Height          =   375
-      Left            =   12720
-      TabIndex        =   90
-      Top             =   2400
-      Width           =   1455
-   End
-   Begin VB.CheckBox Chk10 
-      BackColor       =   &H00F7E7DE&
-      Caption         =   "Retencion 10%"
-      Height          =   375
-      Left            =   12720
-      TabIndex        =   80
-      Top             =   3360
-      Width           =   1455
-   End
-   Begin VB.CheckBox Chk7 
-      BackColor       =   &H00F7E7DE&
-      Caption         =   "Retencion 7%"
-      Height          =   375
-      Left            =   12720
-      TabIndex        =   79
-      Top             =   2880
-      Width           =   1455
-   End
-   Begin VB.CheckBox Chk2 
-      BackColor       =   &H00F7E7DE&
-      Caption         =   "Retencion 2%"
-      Height          =   375
-      Left            =   12720
-      TabIndex        =   78
-      Top             =   1920
-      Width           =   1455
-   End
-   Begin VB.CheckBox Chk1 
-      BackColor       =   &H00F7E7DE&
-      Caption         =   "Retencion 1%"
-      Height          =   375
-      Left            =   12720
-      TabIndex        =   77
-      Top             =   1440
-      Width           =   1455
-   End
    Begin VB.Frame Frame1 
       Height          =   1095
       Left            =   14760
-      TabIndex        =   70
+      TabIndex        =   60
       Top             =   2280
       Width           =   11415
       Begin VB.TextBox TxtNTransacciones 
          Height          =   285
          Left            =   6840
          Locked          =   -1  'True
-         TabIndex        =   73
+         TabIndex        =   63
          Text            =   "0"
          Top             =   720
          Width           =   855
@@ -90,7 +36,7 @@ Begin VB.Form FrmSolicitudPagos
       Begin VB.TextBox TxtFuente 
          Height          =   285
          Left            =   10320
-         TabIndex        =   72
+         TabIndex        =   62
          Top             =   240
          Width           =   855
       End
@@ -99,7 +45,7 @@ Begin VB.Form FrmSolicitudPagos
          Height          =   285
          Left            =   3720
          Locked          =   -1  'True
-         TabIndex        =   71
+         TabIndex        =   61
          Top             =   240
          Width           =   855
       End
@@ -107,7 +53,7 @@ Begin VB.Form FrmSolicitudPagos
          Caption         =   "Fuente"
          Height          =   255
          Left            =   9600
-         TabIndex        =   76
+         TabIndex        =   66
          Top             =   240
          Width           =   615
       End
@@ -115,7 +61,7 @@ Begin VB.Form FrmSolicitudPagos
          Caption         =   "Transaccion No."
          Height          =   255
          Left            =   5640
-         TabIndex        =   75
+         TabIndex        =   65
          Top             =   240
          Width           =   1335
       End
@@ -123,7 +69,7 @@ Begin VB.Form FrmSolicitudPagos
          Caption         =   "Periodo"
          Height          =   255
          Left            =   3000
-         TabIndex        =   74
+         TabIndex        =   64
          Top             =   240
          Width           =   735
       End
@@ -134,8 +80,8 @@ Begin VB.Form FrmSolicitudPagos
       ItemData        =   "FrmSolicitudPagos.frx":0000
       Left            =   3600
       List            =   "FrmSolicitudPagos.frx":000A
-      TabIndex        =   51
-      Top             =   5040
+      TabIndex        =   41
+      Top             =   5160
       Visible         =   0   'False
       Width           =   1335
    End
@@ -154,9 +100,9 @@ Begin VB.Form FrmSolicitudPagos
       Height          =   375
       Left            =   4440
       Locked          =   -1  'True
-      TabIndex        =   50
+      TabIndex        =   40
       Text            =   "0.00"
-      Top             =   6960
+      Top             =   7200
       Width           =   1455
    End
    Begin VB.TextBox TxtDebito 
@@ -171,11 +117,11 @@ Begin VB.Form FrmSolicitudPagos
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   11520
+      Left            =   11760
       Locked          =   -1  'True
-      TabIndex        =   49
+      TabIndex        =   39
       Text            =   "0.00"
-      Top             =   6960
+      Top             =   7200
       Width           =   1335
    End
    Begin VB.TextBox TxtCredito 
@@ -190,75 +136,75 @@ Begin VB.Form FrmSolicitudPagos
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   12960
+      Left            =   13200
       Locked          =   -1  'True
-      TabIndex        =   48
+      TabIndex        =   38
       Text            =   "0.00"
-      Top             =   6960
+      Top             =   7200
       Width           =   1335
    End
    Begin VB.CommandButton CmdGrabar 
       Caption         =   "Imprimir"
       Height          =   375
       Left            =   3840
-      TabIndex        =   47
-      Top             =   7680
+      TabIndex        =   37
+      Top             =   7920
       Width           =   1095
    End
    Begin VB.CommandButton CmdNuevo 
       Caption         =   "Nuevo"
       Height          =   375
       Left            =   5040
-      TabIndex        =   46
-      Top             =   7680
+      TabIndex        =   36
+      Top             =   7920
       Width           =   1095
    End
    Begin VB.CommandButton CmdBorrar 
       Caption         =   "Borrar"
       Height          =   375
       Left            =   7800
-      TabIndex        =   45
-      Top             =   7680
+      TabIndex        =   35
+      Top             =   7920
       Width           =   1095
    End
    Begin VB.CommandButton SmartButton1 
       Caption         =   "Borrar Linea"
       Height          =   375
       Left            =   6240
-      TabIndex        =   44
-      Top             =   7680
+      TabIndex        =   34
+      Top             =   7920
       Width           =   1095
    End
    Begin VB.CommandButton CmdSalir 
       Caption         =   "Salir"
       Height          =   375
-      Left            =   13200
-      TabIndex        =   43
-      Top             =   7680
+      Left            =   13440
+      TabIndex        =   33
+      Top             =   7920
       Width           =   1095
    End
    Begin VB.CommandButton CmdMemoriza 
       Caption         =   "Grabar"
       Height          =   375
       Left            =   120
-      TabIndex        =   42
-      Top             =   7680
+      TabIndex        =   32
+      Top             =   7920
       Width           =   1095
    End
    Begin VB.CommandButton CmdAnterior 
       Caption         =   "Anterior"
       Height          =   375
       Left            =   1320
-      TabIndex        =   41
-      Top             =   7680
+      TabIndex        =   31
+      Top             =   7920
       Width           =   1095
    End
    Begin VB.CommandButton CmdSiguiente 
       Caption         =   "Siguiente"
       Height          =   375
       Left            =   2520
-      TabIndex        =   40
-      Top             =   7680
+      TabIndex        =   30
+      Top             =   7920
       Width           =   1095
    End
    Begin VB.PictureBox TDBGridFechas 
@@ -266,14 +212,14 @@ Begin VB.Form FrmSolicitudPagos
       Left            =   4920
       ScaleHeight     =   1995
       ScaleWidth      =   6075
-      TabIndex        =   18
-      Top             =   4800
+      TabIndex        =   8
+      Top             =   4920
       Visible         =   0   'False
       Width           =   6135
       Begin VB.TextBox TxtProveedor 
          Height          =   375
          Left            =   1800
-         TabIndex        =   23
+         TabIndex        =   13
          Text            =   "Text1"
          Top             =   2280
          Visible         =   0   'False
@@ -293,7 +239,7 @@ Begin VB.Form FrmSolicitudPagos
          Left            =   3360
          Picture         =   "FrmSolicitudPagos.frx":001F
          Style           =   1  'Graphical
-         TabIndex        =   22
+         TabIndex        =   12
          Top             =   1320
          Width           =   375
       End
@@ -301,7 +247,7 @@ Begin VB.Form FrmSolicitudPagos
          Caption         =   "Cancelar"
          Height          =   375
          Left            =   4920
-         TabIndex        =   21
+         TabIndex        =   11
          Top             =   1560
          Width           =   1095
       End
@@ -309,7 +255,7 @@ Begin VB.Form FrmSolicitudPagos
          Caption         =   "Aceptar"
          Height          =   375
          Left            =   4920
-         TabIndex        =   20
+         TabIndex        =   10
          Top             =   240
          Width           =   1095
       End
@@ -317,14 +263,14 @@ Begin VB.Form FrmSolicitudPagos
          Alignment       =   1  'Right Justify
          Height          =   285
          Left            =   1920
-         TabIndex        =   19
+         TabIndex        =   9
          Top             =   240
          Width           =   1215
       End
       Begin XtremeSuiteControls.CheckBox ChkFactura 
          Height          =   255
          Left            =   240
-         TabIndex        =   24
+         TabIndex        =   14
          Top             =   2160
          Visible         =   0   'False
          Width           =   1335
@@ -338,7 +284,7 @@ Begin VB.Form FrmSolicitudPagos
       Begin XtremeSuiteControls.GroupBox GroupBox2 
          Height          =   420
          Left            =   120
-         TabIndex        =   25
+         TabIndex        =   15
          Top             =   760
          Width           =   3135
          _Version        =   786432
@@ -349,7 +295,7 @@ Begin VB.Form FrmSolicitudPagos
          Begin XtremeSuiteControls.RadioButton OptFacturaCompra 
             Height          =   255
             Left            =   120
-            TabIndex        =   26
+            TabIndex        =   16
             Top             =   120
             Width           =   1455
             _Version        =   786432
@@ -362,7 +308,7 @@ Begin VB.Form FrmSolicitudPagos
          Begin XtremeSuiteControls.RadioButton OptFacturaVenta 
             Height          =   255
             Left            =   1680
-            TabIndex        =   27
+            TabIndex        =   17
             Top             =   120
             Width           =   1335
             _Version        =   786432
@@ -377,7 +323,7 @@ Begin VB.Form FrmSolicitudPagos
          Bindings        =   "FrmSolicitudPagos.frx":016D
          Height          =   315
          Left            =   1200
-         TabIndex        =   28
+         TabIndex        =   18
          Top             =   1320
          Width           =   2055
          _ExtentX        =   3625
@@ -523,7 +469,7 @@ Begin VB.Form FrmSolicitudPagos
       Begin XtremeSuiteControls.GroupBox GroupBox1 
          Height          =   615
          Left            =   3360
-         TabIndex        =   29
+         TabIndex        =   19
          Top             =   600
          Width           =   2535
          _Version        =   786432
@@ -535,7 +481,7 @@ Begin VB.Form FrmSolicitudPagos
          Begin XtremeSuiteControls.RadioButton OptIva 
             Height          =   255
             Left            =   120
-            TabIndex        =   30
+            TabIndex        =   20
             Top             =   120
             Width           =   1095
             _Version        =   786432
@@ -548,7 +494,7 @@ Begin VB.Form FrmSolicitudPagos
          Begin XtremeSuiteControls.RadioButton OptRetencion 
             Height          =   375
             Left            =   1320
-            TabIndex        =   31
+            TabIndex        =   21
             Top             =   120
             Width           =   1095
             _Version        =   786432
@@ -562,25 +508,25 @@ Begin VB.Form FrmSolicitudPagos
       Begin MSComCtl2.DTPicker DTPFechaCredito 
          Height          =   300
          Left            =   120
-         TabIndex        =   32
+         TabIndex        =   22
          Top             =   240
          Width           =   1695
          _ExtentX        =   2990
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   75759617
+         Format          =   77725697
          CurrentDate     =   38918
       End
       Begin MSComCtl2.DTPicker DTPFechaVence 
          Height          =   300
          Left            =   3240
-         TabIndex        =   33
+         TabIndex        =   23
          Top             =   240
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   75759617
+         Format          =   77725697
          CurrentDate     =   38918
       End
       Begin VB.Label LblProveedor 
@@ -596,7 +542,7 @@ Begin VB.Form FrmSolicitudPagos
          EndProperty
          Height          =   255
          Left            =   120
-         TabIndex        =   39
+         TabIndex        =   29
          Top             =   1320
          Width           =   975
       End
@@ -614,7 +560,7 @@ Begin VB.Form FrmSolicitudPagos
          EndProperty
          Height          =   200
          Left            =   0
-         TabIndex        =   38
+         TabIndex        =   28
          Top             =   550
          Width           =   1455
       End
@@ -632,7 +578,7 @@ Begin VB.Form FrmSolicitudPagos
          EndProperty
          Height          =   255
          Left            =   3240
-         TabIndex        =   37
+         TabIndex        =   27
          Top             =   0
          Width           =   1575
       End
@@ -650,7 +596,7 @@ Begin VB.Form FrmSolicitudPagos
          EndProperty
          Height          =   255
          Left            =   120
-         TabIndex        =   36
+         TabIndex        =   26
          Top             =   0
          Width           =   1695
       End
@@ -668,14 +614,14 @@ Begin VB.Form FrmSolicitudPagos
          EndProperty
          Height          =   255
          Left            =   1680
-         TabIndex        =   35
+         TabIndex        =   25
          Top             =   0
          Width           =   1695
       End
       Begin VB.Label LblNombres 
          Height          =   255
          Left            =   120
-         TabIndex        =   34
+         TabIndex        =   24
          Top             =   1680
          Width           =   4455
       End
@@ -684,8 +630,8 @@ Begin VB.Form FrmSolicitudPagos
       Caption         =   "Mostrar Vtana Factura"
       Height          =   255
       Left            =   240
-      TabIndex        =   17
-      Top             =   6960
+      TabIndex        =   7
+      Top             =   7200
       Width           =   2295
    End
    Begin TrueOleDBList80.TDBCombo DBCodigo 
@@ -693,7 +639,7 @@ Begin VB.Form FrmSolicitudPagos
       Height          =   315
       Left            =   2640
       TabIndex        =   0
-      Top             =   360
+      Top             =   240
       Width           =   2775
       _ExtentX        =   4895
       _ExtentY        =   556
@@ -836,21 +782,21 @@ Begin VB.Form FrmSolicitudPagos
       _StyleDefs(58)  =   ":id=42,.parent=33"
    End
    Begin XtremeSuiteControls.GroupBox GroupBox5 
-      Height          =   4215
+      Height          =   4335
       Left            =   120
       TabIndex        =   1
-      Top             =   120
+      Top             =   0
       Width           =   1695
       _Version        =   786432
       _ExtentX        =   2990
-      _ExtentY        =   7435
+      _ExtentY        =   7646
       _StockProps     =   79
       Caption         =   "Informacion"
       UseVisualStyle  =   -1  'True
       Begin VB.TextBox TxtCodigoEmpleado 
          Height          =   375
          Left            =   240
-         TabIndex        =   93
+         TabIndex        =   68
          Top             =   1320
          Visible         =   0   'False
          Width           =   1335
@@ -896,226 +842,32 @@ Begin VB.Form FrmSolicitudPagos
          Top             =   1080
          Width           =   1215
       End
-   End
-   Begin XtremeSuiteControls.GroupBox GroupBox4 
-      Height          =   3015
-      Left            =   1920
-      TabIndex        =   7
-      Top             =   1320
-      Width           =   10695
-      _Version        =   786432
-      _ExtentX        =   18865
-      _ExtentY        =   5318
-      _StockProps     =   79
-      UseVisualStyle  =   -1  'True
-      Begin VB.Frame Frame2 
-         Height          =   615
+      Begin ACTIVESKINLibCtl.SkinLabel SkinLabel24 
+         Height          =   375
          Left            =   240
-         TabIndex        =   87
-         Top             =   840
-         Width           =   6255
-         Begin VB.OptionButton Option2 
-            Caption         =   "Cancelacion"
-            Height          =   255
-            Left            =   2040
-            TabIndex        =   89
-            Top             =   240
-            Width           =   1935
-         End
-         Begin VB.OptionButton Option1 
-            Caption         =   "Anticipo"
-            Height          =   255
-            Left            =   120
-            TabIndex        =   88
-            Top             =   240
-            Value           =   -1  'True
-            Width           =   1815
-         End
+         OleObjectBlob   =   "FrmSolicitudPagos.frx":0444
+         TabIndex        =   115
+         Top             =   1920
+         Width           =   1335
       End
-      Begin VB.TextBox TxtMemo 
-         Appearance      =   0  'Flat
-         BackColor       =   &H00FFC0C0&
-         Height          =   645
+      Begin ACTIVESKINLibCtl.SkinLabel LblNumeroSolicitud 
+         Height          =   255
          Left            =   240
-         MaxLength       =   255
-         MultiLine       =   -1  'True
-         ScrollBars      =   2  'Vertical
-         TabIndex        =   11
+         OleObjectBlob   =   "FrmSolicitudPagos.frx":04BA
+         TabIndex        =   116
          Top             =   2280
-         Width           =   10215
-      End
-      Begin VB.CommandButton CmdBuscarEmpleado 
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   12
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   300
-         Left            =   6600
-         Picture         =   "FrmSolicitudPagos.frx":0444
-         Style           =   1  'Graphical
-         TabIndex        =   10
-         Top             =   480
-         Width           =   375
-      End
-      Begin VB.TextBox TxtLetras 
-         Appearance      =   0  'Flat
-         BackColor       =   &H00FFC0C0&
-         Height          =   285
-         Left            =   240
-         Locked          =   -1  'True
-         TabIndex        =   9
-         Top             =   1680
-         Width           =   10215
-      End
-      Begin VB.TextBox TxtNombre 
-         Appearance      =   0  'Flat
-         BackColor       =   &H00FFC0C0&
-         Height          =   285
-         Left            =   240
-         TabIndex        =   8
-         Top             =   480
-         Width           =   6255
-      End
-      Begin MSMask.MaskEdBox TxtMonto 
-         Height          =   255
-         Left            =   8640
-         TabIndex        =   12
-         Top             =   1320
-         Width           =   1815
-         _ExtentX        =   3201
-         _ExtentY        =   450
-         _Version        =   393216
-         Appearance      =   0
-         BackColor       =   16761024
-         Enabled         =   0   'False
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Format          =   "#,##0.00;(#,##0.00)"
-         PromptChar      =   "_"
-      End
-      Begin ACTIVESKINLibCtl.SkinLabel SkinLabel7 
-         Height          =   255
-         Left            =   240
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":0592
-         TabIndex        =   13
-         Top             =   240
-         Width           =   3975
-      End
-      Begin ACTIVESKINLibCtl.SkinLabel SkinLabel8 
-         Height          =   255
-         Left            =   8040
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":0620
-         TabIndex        =   14
-         Top             =   1320
-         Width           =   615
-      End
-      Begin ACTIVESKINLibCtl.SkinLabel SkinLabel9 
-         Height          =   255
-         Left            =   240
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":0688
-         TabIndex        =   15
-         Top             =   2040
-         Width           =   1575
-      End
-      Begin MSMask.MaskEdBox TxtRetenciones 
-         Height          =   255
-         Left            =   8640
-         TabIndex        =   81
-         Top             =   960
-         Width           =   1815
-         _ExtentX        =   3201
-         _ExtentY        =   450
-         _Version        =   393216
-         Appearance      =   0
-         BackColor       =   16761024
-         Enabled         =   0   'False
-         Format          =   "#,##0.00;(#,##0.00)"
-         PromptChar      =   "_"
-      End
-      Begin ACTIVESKINLibCtl.SkinLabel SkinLabel15 
-         Height          =   255
-         Left            =   7560
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":0704
-         TabIndex        =   82
-         Top             =   960
-         Width           =   975
-      End
-      Begin MSMask.MaskEdBox TxtIVa 
-         Height          =   255
-         Left            =   8640
-         TabIndex        =   83
-         Top             =   600
-         Width           =   1815
-         _ExtentX        =   3201
-         _ExtentY        =   450
-         _Version        =   393216
-         Appearance      =   0
-         BackColor       =   16761024
-         Enabled         =   0   'False
-         Format          =   "#,##0.00;(#,##0.00)"
-         PromptChar      =   "_"
-      End
-      Begin ACTIVESKINLibCtl.SkinLabel SkinLabel16 
-         Height          =   255
-         Left            =   8160
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":0778
-         TabIndex        =   84
-         Top             =   600
-         Width           =   375
-      End
-      Begin MSMask.MaskEdBox TxtSubTotal 
-         Height          =   255
-         Left            =   8640
-         TabIndex        =   85
-         Top             =   240
-         Width           =   1815
-         _ExtentX        =   3201
-         _ExtentY        =   450
-         _Version        =   393216
-         Appearance      =   0
-         BackColor       =   16761024
-         Format          =   "#,##0.00;(#,##0.00)"
-         PromptChar      =   "_"
-      End
-      Begin ACTIVESKINLibCtl.SkinLabel SkinLabel17 
-         Height          =   255
-         Left            =   7680
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":07DC
-         TabIndex        =   86
-         Top             =   240
-         Width           =   735
-      End
-      Begin VB.Label LblSimbolo 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Monto C$"
-         Height          =   255
-         Left            =   5040
-         TabIndex        =   16
-         Top             =   480
-         Width           =   855
+         Width           =   1215
       End
    End
    Begin TrueOleDBGrid80.TDBGrid DBGTransacciones 
-      Bindings        =   "FrmSolicitudPagos.frx":084C
-      Height          =   2415
+      Bindings        =   "FrmSolicitudPagos.frx":0518
+      Height          =   2295
       Left            =   120
-      TabIndex        =   52
-      Top             =   4440
-      Width           =   14175
-      _ExtentX        =   25003
-      _ExtentY        =   4260
+      TabIndex        =   42
+      Top             =   4800
+      Width           =   14415
+      _ExtentX        =   25426
+      _ExtentY        =   4048
       _LayoutType     =   0
       _RowHeight      =   -2147483647
       _WasPersistedAsPixels=   0
@@ -1233,11 +985,11 @@ Begin VB.Form FrmSolicitudPagos
    Begin XtremeSuiteControls.GroupBox GroupBox3 
       Height          =   1095
       Left            =   1920
-      TabIndex        =   53
-      Top             =   120
-      Width           =   12375
+      TabIndex        =   43
+      Top             =   0
+      Width           =   12615
       _Version        =   786432
-      _ExtentX        =   21828
+      _ExtentX        =   22251
       _ExtentY        =   1931
       _StockProps     =   79
       UseVisualStyle  =   -1  'True
@@ -1253,18 +1005,18 @@ Begin VB.Form FrmSolicitudPagos
          EndProperty
          Height          =   300
          Left            =   3480
-         Picture         =   "FrmSolicitudPagos.frx":086B
+         Picture         =   "FrmSolicitudPagos.frx":0537
          Style           =   1  'Graphical
-         TabIndex        =   92
+         TabIndex        =   67
          Top             =   240
          Width           =   375
       End
       Begin VB.ComboBox CmbMoneda 
          Height          =   315
-         ItemData        =   "FrmSolicitudPagos.frx":09B9
+         ItemData        =   "FrmSolicitudPagos.frx":0685
          Left            =   3600
-         List            =   "FrmSolicitudPagos.frx":09C6
-         TabIndex        =   55
+         List            =   "FrmSolicitudPagos.frx":0692
+         TabIndex        =   45
          Top             =   680
          Width           =   1815
       End
@@ -1272,39 +1024,39 @@ Begin VB.Form FrmSolicitudPagos
          Height          =   285
          Left            =   5280
          Locked          =   -1  'True
-         TabIndex        =   54
+         TabIndex        =   44
          Top             =   240
          Width           =   6495
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel6 
          Height          =   255
          Left            =   2760
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":09E5
-         TabIndex        =   56
+         OleObjectBlob   =   "FrmSolicitudPagos.frx":06B1
+         TabIndex        =   46
          Top             =   720
          Width           =   735
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel5 
          Height          =   255
          Left            =   120
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":0A4F
-         TabIndex        =   57
+         OleObjectBlob   =   "FrmSolicitudPagos.frx":071B
+         TabIndex        =   47
          Top             =   1200
          Width           =   1575
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel2 
          Height          =   255
          Left            =   120
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":0ACF
-         TabIndex        =   58
+         OleObjectBlob   =   "FrmSolicitudPagos.frx":079B
+         TabIndex        =   48
          Top             =   700
          Width           =   495
       End
       Begin MSDataListLib.DataCombo DBEmpleado 
-         Bindings        =   "FrmSolicitudPagos.frx":0B37
+         Bindings        =   "FrmSolicitudPagos.frx":0803
          Height          =   315
          Left            =   1680
-         TabIndex        =   59
+         TabIndex        =   49
          Top             =   1200
          Width           =   2895
          _ExtentX        =   5106
@@ -1316,53 +1068,53 @@ Begin VB.Form FrmSolicitudPagos
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel1 
          Height          =   375
          Left            =   5040
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":0B52
-         TabIndex        =   60
+         OleObjectBlob   =   "FrmSolicitudPagos.frx":081E
+         TabIndex        =   50
          Top             =   1200
          Width           =   1815
       End
       Begin ACTIVESKINLibCtl.SkinLabel LblSaldo 
          Height          =   375
          Left            =   7080
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":0BD6
-         TabIndex        =   61
+         OleObjectBlob   =   "FrmSolicitudPagos.frx":08A2
+         TabIndex        =   51
          Top             =   1200
          Width           =   1815
       End
       Begin MSComCtl2.DTPicker TxtFecha 
          Height          =   285
          Left            =   720
-         TabIndex        =   62
+         TabIndex        =   52
          Top             =   680
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   503
          _Version        =   393216
          Enabled         =   0   'False
-         Format          =   75759617
+         Format          =   77725697
          CurrentDate     =   38008
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel4 
          Height          =   255
          Left            =   4200
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":0C34
-         TabIndex        =   63
+         OleObjectBlob   =   "FrmSolicitudPagos.frx":0900
+         TabIndex        =   53
          Top             =   240
          Width           =   1095
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel3 
          Height          =   255
          Left            =   120
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":0CA8
-         TabIndex        =   64
+         OleObjectBlob   =   "FrmSolicitudPagos.frx":0974
+         TabIndex        =   54
          Top             =   240
          Width           =   615
       End
       Begin MSDataListLib.DataCombo DBCodigo1 
-         Bindings        =   "FrmSolicitudPagos.frx":0D12
+         Bindings        =   "FrmSolicitudPagos.frx":09DE
          Height          =   315
          Left            =   5880
-         TabIndex        =   65
+         TabIndex        =   55
          Top             =   600
          Visible         =   0   'False
          Width           =   2775
@@ -1386,33 +1138,33 @@ Begin VB.Form FrmSolicitudPagos
          Height          =   375
          Index           =   0
          Left            =   7080
-         TabIndex        =   66
+         TabIndex        =   56
          Top             =   240
          Width           =   1215
       End
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel12 
       Height          =   255
-      Left            =   12960
-      OleObjectBlob   =   "FrmSolicitudPagos.frx":0D2A
-      TabIndex        =   67
-      Top             =   7320
+      Left            =   13200
+      OleObjectBlob   =   "FrmSolicitudPagos.frx":09F6
+      TabIndex        =   57
+      Top             =   7560
       Width           =   1335
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel13 
       Height          =   255
-      Left            =   11520
-      OleObjectBlob   =   "FrmSolicitudPagos.frx":0D96
-      TabIndex        =   68
-      Top             =   7320
+      Left            =   11760
+      OleObjectBlob   =   "FrmSolicitudPagos.frx":0A62
+      TabIndex        =   58
+      Top             =   7560
       Width           =   1335
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel14 
       Height          =   255
       Left            =   3000
-      OleObjectBlob   =   "FrmSolicitudPagos.frx":0E00
-      TabIndex        =   69
-      Top             =   6960
+      OleObjectBlob   =   "FrmSolicitudPagos.frx":0ACC
+      TabIndex        =   59
+      Top             =   7200
       Width           =   1335
    End
    Begin MSAdodcLib.Adodc DtaDatosEmpresa 
@@ -2106,6 +1858,619 @@ Begin VB.Form FrmSolicitudPagos
       EndProperty
       _Version        =   393216
    End
+   Begin TabDlg.SSTab SSTab1 
+      Height          =   3495
+      Left            =   1920
+      TabIndex        =   70
+      Top             =   1200
+      Width           =   12615
+      _ExtentX        =   22251
+      _ExtentY        =   6165
+      _Version        =   393216
+      Tabs            =   2
+      TabHeight       =   520
+      TabCaption(0)   =   "Generales Solicitud"
+      TabPicture(0)   =   "FrmSolicitudPagos.frx":0B3E
+      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).Control(0)=   "GroupBox4"
+      Tab(0).Control(0).Enabled=   0   'False
+      Tab(0).Control(1)=   "Chk1"
+      Tab(0).Control(1).Enabled=   0   'False
+      Tab(0).Control(2)=   "Chk2"
+      Tab(0).Control(2).Enabled=   0   'False
+      Tab(0).Control(3)=   "Chk7"
+      Tab(0).Control(3).Enabled=   0   'False
+      Tab(0).Control(4)=   "Chk10"
+      Tab(0).Control(4).Enabled=   0   'False
+      Tab(0).Control(5)=   "Chk3"
+      Tab(0).Control(5).Enabled=   0   'False
+      Tab(0).Control(6)=   "Chk15"
+      Tab(0).Control(6).Enabled=   0   'False
+      Tab(0).ControlCount=   7
+      TabCaption(1)   =   "Cuentas Contables"
+      TabPicture(1)   =   "FrmSolicitudPagos.frx":0B5A
+      Tab(1).ControlEnabled=   0   'False
+      Tab(1).Control(0)=   "GroupBox6"
+      Tab(1).ControlCount=   1
+      Begin VB.CheckBox Chk15 
+         BackColor       =   &H00F7E7DE&
+         Caption         =   "IVA 15%"
+         Height          =   375
+         Left            =   10920
+         TabIndex        =   76
+         Top             =   2880
+         Value           =   1  'Checked
+         Width           =   1455
+      End
+      Begin VB.CheckBox Chk3 
+         BackColor       =   &H00F7E7DE&
+         Caption         =   "Retencion 3%"
+         Height          =   375
+         Left            =   10920
+         TabIndex        =   75
+         Top             =   1440
+         Width           =   1455
+      End
+      Begin VB.CheckBox Chk10 
+         BackColor       =   &H00F7E7DE&
+         Caption         =   "Retencion 10%"
+         Height          =   375
+         Left            =   10920
+         TabIndex        =   74
+         Top             =   2400
+         Width           =   1455
+      End
+      Begin VB.CheckBox Chk7 
+         BackColor       =   &H00F7E7DE&
+         Caption         =   "Retencion 7%"
+         Height          =   375
+         Left            =   10920
+         TabIndex        =   73
+         Top             =   1920
+         Width           =   1455
+      End
+      Begin VB.CheckBox Chk2 
+         BackColor       =   &H00F7E7DE&
+         Caption         =   "Retencion 2%"
+         Height          =   375
+         Left            =   10920
+         TabIndex        =   72
+         Top             =   960
+         Width           =   1455
+      End
+      Begin VB.CheckBox Chk1 
+         BackColor       =   &H00F7E7DE&
+         Caption         =   "Retencion 1%"
+         Height          =   375
+         Left            =   10920
+         TabIndex        =   71
+         Top             =   480
+         Width           =   1455
+      End
+      Begin XtremeSuiteControls.GroupBox GroupBox4 
+         Height          =   3015
+         Left            =   120
+         TabIndex        =   77
+         Top             =   360
+         Width           =   10695
+         _Version        =   786432
+         _ExtentX        =   18865
+         _ExtentY        =   5318
+         _StockProps     =   79
+         UseVisualStyle  =   -1  'True
+         Begin VB.TextBox TxtNombre 
+            Appearance      =   0  'Flat
+            BackColor       =   &H00FFC0C0&
+            Height          =   285
+            Left            =   240
+            TabIndex        =   84
+            Top             =   480
+            Width           =   6255
+         End
+         Begin VB.TextBox TxtLetras 
+            Appearance      =   0  'Flat
+            BackColor       =   &H00FFC0C0&
+            Height          =   285
+            Left            =   240
+            Locked          =   -1  'True
+            TabIndex        =   83
+            Top             =   1680
+            Width           =   10215
+         End
+         Begin VB.CommandButton CmdBuscarEmpleado 
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   300
+            Left            =   6600
+            Picture         =   "FrmSolicitudPagos.frx":0B76
+            Style           =   1  'Graphical
+            TabIndex        =   82
+            Top             =   480
+            Width           =   375
+         End
+         Begin VB.TextBox TxtMemo 
+            Appearance      =   0  'Flat
+            BackColor       =   &H00FFC0C0&
+            Height          =   645
+            Left            =   240
+            MaxLength       =   255
+            MultiLine       =   -1  'True
+            ScrollBars      =   2  'Vertical
+            TabIndex        =   81
+            Top             =   2280
+            Width           =   10215
+         End
+         Begin VB.Frame Frame2 
+            Height          =   615
+            Left            =   240
+            TabIndex        =   78
+            Top             =   840
+            Width           =   6255
+            Begin VB.OptionButton OptAnticipo 
+               Caption         =   "Anticipo"
+               Height          =   255
+               Left            =   120
+               TabIndex        =   80
+               Top             =   240
+               Value           =   -1  'True
+               Width           =   1815
+            End
+            Begin VB.OptionButton OptCancelacion 
+               Caption         =   "Cancelacion"
+               Height          =   255
+               Left            =   2040
+               TabIndex        =   79
+               Top             =   240
+               Width           =   1935
+            End
+         End
+         Begin MSMask.MaskEdBox TxtMonto 
+            Height          =   255
+            Left            =   8640
+            TabIndex        =   85
+            Top             =   1320
+            Width           =   1815
+            _ExtentX        =   3201
+            _ExtentY        =   450
+            _Version        =   393216
+            Appearance      =   0
+            BackColor       =   16761024
+            Enabled         =   0   'False
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Format          =   "#,##0.00;(#,##0.00)"
+            PromptChar      =   "_"
+         End
+         Begin ACTIVESKINLibCtl.SkinLabel SkinLabel7 
+            Height          =   255
+            Left            =   240
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":0CC4
+            TabIndex        =   86
+            Top             =   240
+            Width           =   3975
+         End
+         Begin ACTIVESKINLibCtl.SkinLabel SkinLabel8 
+            Height          =   255
+            Left            =   8040
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":0D52
+            TabIndex        =   87
+            Top             =   1320
+            Width           =   615
+         End
+         Begin ACTIVESKINLibCtl.SkinLabel SkinLabel9 
+            Height          =   255
+            Left            =   240
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":0DBA
+            TabIndex        =   88
+            Top             =   2040
+            Width           =   1575
+         End
+         Begin MSMask.MaskEdBox TxtRetenciones 
+            Height          =   255
+            Left            =   8640
+            TabIndex        =   89
+            Top             =   960
+            Width           =   1815
+            _ExtentX        =   3201
+            _ExtentY        =   450
+            _Version        =   393216
+            Appearance      =   0
+            BackColor       =   16761024
+            Enabled         =   0   'False
+            Format          =   "#,##0.00;(#,##0.00)"
+            PromptChar      =   "_"
+         End
+         Begin ACTIVESKINLibCtl.SkinLabel SkinLabel15 
+            Height          =   255
+            Left            =   7560
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":0E36
+            TabIndex        =   90
+            Top             =   960
+            Width           =   975
+         End
+         Begin MSMask.MaskEdBox TxtIVa 
+            Height          =   255
+            Left            =   8640
+            TabIndex        =   91
+            Top             =   600
+            Width           =   1815
+            _ExtentX        =   3201
+            _ExtentY        =   450
+            _Version        =   393216
+            Appearance      =   0
+            BackColor       =   16761024
+            Enabled         =   0   'False
+            Format          =   "#,##0.00;(#,##0.00)"
+            PromptChar      =   "_"
+         End
+         Begin ACTIVESKINLibCtl.SkinLabel SkinLabel16 
+            Height          =   255
+            Left            =   8160
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":0EAA
+            TabIndex        =   92
+            Top             =   600
+            Width           =   375
+         End
+         Begin MSMask.MaskEdBox TxtSubTotal 
+            Height          =   255
+            Left            =   8640
+            TabIndex        =   93
+            Top             =   240
+            Width           =   1815
+            _ExtentX        =   3201
+            _ExtentY        =   450
+            _Version        =   393216
+            Appearance      =   0
+            BackColor       =   16761024
+            Format          =   "#,##0.00;(#,##0.00)"
+            PromptChar      =   "_"
+         End
+         Begin ACTIVESKINLibCtl.SkinLabel SkinLabel17 
+            Height          =   255
+            Left            =   7680
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":0F0E
+            TabIndex        =   94
+            Top             =   240
+            Width           =   735
+         End
+         Begin VB.Label LblSimbolo 
+            BackStyle       =   0  'Transparent
+            Caption         =   "Monto C$"
+            Height          =   255
+            Left            =   5040
+            TabIndex        =   95
+            Top             =   480
+            Width           =   855
+         End
+      End
+      Begin XtremeSuiteControls.GroupBox GroupBox6 
+         Height          =   3015
+         Left            =   -74880
+         TabIndex        =   96
+         Top             =   360
+         Width           =   12375
+         _Version        =   786432
+         _ExtentX        =   21828
+         _ExtentY        =   5318
+         _StockProps     =   79
+         UseVisualStyle  =   -1  'True
+         Begin VB.CommandButton Command7 
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   300
+            Left            =   3480
+            Picture         =   "FrmSolicitudPagos.frx":0F7E
+            Style           =   1  'Graphical
+            TabIndex        =   114
+            Top             =   2280
+            Width           =   375
+         End
+         Begin VB.CommandButton Command6 
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   300
+            Left            =   3480
+            Picture         =   "FrmSolicitudPagos.frx":10CC
+            Style           =   1  'Graphical
+            TabIndex        =   113
+            Top             =   1920
+            Width           =   375
+         End
+         Begin VB.CommandButton Command5 
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   300
+            Left            =   3480
+            Picture         =   "FrmSolicitudPagos.frx":121A
+            Style           =   1  'Graphical
+            TabIndex        =   112
+            Top             =   1560
+            Width           =   375
+         End
+         Begin VB.CommandButton Command4 
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   300
+            Left            =   3480
+            Picture         =   "FrmSolicitudPagos.frx":1368
+            Style           =   1  'Graphical
+            TabIndex        =   111
+            Top             =   1200
+            Width           =   375
+         End
+         Begin VB.CommandButton Command3 
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   300
+            Left            =   3480
+            Picture         =   "FrmSolicitudPagos.frx":14B6
+            Style           =   1  'Graphical
+            TabIndex        =   110
+            Top             =   840
+            Width           =   375
+         End
+         Begin VB.CommandButton Command2 
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   300
+            Left            =   3480
+            Picture         =   "FrmSolicitudPagos.frx":1604
+            Style           =   1  'Graphical
+            TabIndex        =   109
+            Top             =   480
+            Width           =   375
+         End
+         Begin MSMask.MaskEdBox TxtCtaIva 
+            Height          =   255
+            Left            =   1560
+            TabIndex        =   97
+            Top             =   480
+            Width           =   1815
+            _ExtentX        =   3201
+            _ExtentY        =   450
+            _Version        =   393216
+            Appearance      =   0
+            BackColor       =   16761024
+            Enabled         =   0   'False
+            Format          =   "#,##0.00;(#,##0.00)"
+            PromptChar      =   "_"
+         End
+         Begin ACTIVESKINLibCtl.SkinLabel SkinLabel22 
+            Height          =   255
+            Left            =   960
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":1752
+            TabIndex        =   98
+            Top             =   480
+            Width           =   375
+         End
+         Begin MSMask.MaskEdBox TxtCtaRetencion1 
+            Height          =   255
+            Left            =   1560
+            TabIndex        =   99
+            Top             =   840
+            Width           =   1815
+            _ExtentX        =   3201
+            _ExtentY        =   450
+            _Version        =   393216
+            Appearance      =   0
+            BackColor       =   16761024
+            Enabled         =   0   'False
+            Format          =   "#,##0.00;(#,##0.00)"
+            PromptChar      =   "_"
+         End
+         Begin ACTIVESKINLibCtl.SkinLabel SkinLabel18 
+            Height          =   255
+            Left            =   240
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":17B6
+            TabIndex        =   100
+            Top             =   840
+            Width           =   1335
+         End
+         Begin MSMask.MaskEdBox TxtCtaRetencion2 
+            Height          =   255
+            Left            =   1560
+            TabIndex        =   101
+            Top             =   1200
+            Width           =   1815
+            _ExtentX        =   3201
+            _ExtentY        =   450
+            _Version        =   393216
+            Appearance      =   0
+            BackColor       =   16761024
+            Enabled         =   0   'False
+            Format          =   "#,##0.00;(#,##0.00)"
+            PromptChar      =   "_"
+         End
+         Begin ACTIVESKINLibCtl.SkinLabel SkinLabel19 
+            Height          =   255
+            Left            =   240
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":182C
+            TabIndex        =   102
+            Top             =   1200
+            Width           =   1335
+         End
+         Begin MSMask.MaskEdBox TxtCtaRetencion3 
+            Height          =   255
+            Left            =   1560
+            TabIndex        =   103
+            Top             =   1560
+            Width           =   1815
+            _ExtentX        =   3201
+            _ExtentY        =   450
+            _Version        =   393216
+            Appearance      =   0
+            BackColor       =   16761024
+            Enabled         =   0   'False
+            Format          =   "#,##0.00;(#,##0.00)"
+            PromptChar      =   "_"
+         End
+         Begin ACTIVESKINLibCtl.SkinLabel SkinLabel20 
+            Height          =   255
+            Left            =   240
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":18A2
+            TabIndex        =   104
+            Top             =   1560
+            Width           =   1335
+         End
+         Begin MSMask.MaskEdBox TxtCtaRetencion4 
+            Height          =   255
+            Left            =   1560
+            TabIndex        =   105
+            Top             =   1920
+            Width           =   1815
+            _ExtentX        =   3201
+            _ExtentY        =   450
+            _Version        =   393216
+            Appearance      =   0
+            BackColor       =   16761024
+            Enabled         =   0   'False
+            Format          =   "#,##0.00;(#,##0.00)"
+            PromptChar      =   "_"
+         End
+         Begin ACTIVESKINLibCtl.SkinLabel SkinLabel21 
+            Height          =   255
+            Left            =   240
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":1918
+            TabIndex        =   106
+            Top             =   1920
+            Width           =   1335
+         End
+         Begin MSMask.MaskEdBox TxtCtaRetencion5 
+            Height          =   255
+            Left            =   1560
+            TabIndex        =   107
+            Top             =   2280
+            Width           =   1815
+            _ExtentX        =   3201
+            _ExtentY        =   450
+            _Version        =   393216
+            Appearance      =   0
+            BackColor       =   16761024
+            Enabled         =   0   'False
+            Format          =   "#,##0.00;(#,##0.00)"
+            PromptChar      =   "_"
+         End
+         Begin ACTIVESKINLibCtl.SkinLabel SkinLabel23 
+            Height          =   255
+            Left            =   240
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":198E
+            TabIndex        =   108
+            Top             =   2280
+            Width           =   1335
+         End
+         Begin ACTIVESKINLibCtl.SkinLabel LblDescripcionIva 
+            Height          =   255
+            Left            =   3960
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":1A06
+            TabIndex        =   122
+            Top             =   480
+            Width           =   4815
+         End
+         Begin VB.Label LblCtaRetencion5 
+            Caption         =   "2"
+            Height          =   255
+            Left            =   3960
+            TabIndex        =   121
+            Top             =   2280
+            Width           =   6495
+         End
+         Begin VB.Label LblCtaRetencion4 
+            Caption         =   "2"
+            Height          =   255
+            Left            =   3960
+            TabIndex        =   120
+            Top             =   1920
+            Width           =   6495
+         End
+         Begin VB.Label LblCtaRetencion3 
+            Caption         =   "2"
+            Height          =   255
+            Left            =   3960
+            TabIndex        =   119
+            Top             =   1560
+            Width           =   6495
+         End
+         Begin VB.Label LblCtaRetencion2 
+            Caption         =   "2"
+            Height          =   255
+            Left            =   3960
+            TabIndex        =   118
+            Top             =   1200
+            Width           =   6495
+         End
+         Begin VB.Label LblCtaRetencion1 
+            Height          =   255
+            Left            =   3960
+            TabIndex        =   117
+            Top             =   840
+            Width           =   6495
+         End
+      End
+   End
+   Begin VB.Label Label2 
+      Caption         =   "Label2"
+      Height          =   135
+      Left            =   2400
+      TabIndex        =   69
+      Top             =   6360
+      Width           =   135
+   End
 End
 Attribute VB_Name = "FrmSolicitudPagos"
 Attribute VB_GlobalNameSpace = False
@@ -2113,7 +2478,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-Public ChequeGrabado As Boolean
+Public ChequeGrabado As Boolean, NumeroSolicitud As Double
 Private ew As cls_NumEnglishWord
 Private sw As cls_NumSpanishWord
 
@@ -2183,13 +2548,13 @@ If Not DtaCuentas.Recordset.EOF Then
 '////////////////////////////////////////////////////////////////////////////////////////////
 '/////////////////CARGO LOS CHEQUES PENDIENTES/////////////////////////////////////////////////
 '/////////////////////////////////////////////////////////////////////////////////////////////
-SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
-"Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, " & _
-"Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, " & _
-"Transacciones.NumeroMovimiento , Periodos.Periodo, Transacciones.Beneficiario " & _
-"FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo " & _
-"WHERE (Transacciones.ChequeNo = '#######')  AND (Transacciones.CodCuentas = '" & Me.DBCodigo.Text & "' ) AND " & _
-"(Transacciones.DescripcionMovimiento <> '**********CANCELADO*************') ORDER BY Transacciones.NTransaccion"
+SQL = "SELECT TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
+"TransaccionesSolicitudPago.FacturaNo, TransaccionesSolicitudPago.ChequeNo, TransaccionesSolicitudPago.Clave, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito, " & _
+"TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.NPeriodo, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.Fuente, TransaccionesSolicitudPago.FechaTasas, " & _
+"TransaccionesSolicitudPago.NumeroMovimiento , Periodos.Periodo, TransaccionesSolicitudPago.Beneficiario " & _
+"FROM Periodos INNER JOIN TransaccionesSolicitudPago ON Periodos.NPeriodo = TransaccionesSolicitudPago.NPeriodo " & _
+"WHERE (TransaccionesSolicitudPago.ChequeNo = '#######')  AND (TransaccionesSolicitudPago.CodCuentas = '" & Me.DBCodigo.Text & "' ) AND " & _
+"(TransaccionesSolicitudPago.DescripcionMovimiento <> '**********CANCELADO*************') ORDER BY TransaccionesSolicitudPago.NTransaccion"
 
 Me.AdoPendientes.RecordSource = SQL
 Me.AdoPendientes.Refresh
@@ -2234,6 +2599,19 @@ Me.AdoPendientes.Refresh
          
          End Select
 
+'/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+'///////////////////////////////////////////////////BUSCO EL NUMERO DE SOLICITUD //////////////////////////
+'/////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Me.DtaConsulta.RecordSource = "SELECT NConsecutivos.ConsecutivoSolicitudCheque  From NConsecutivos Where (((NConsecutivos.CodCuentas) = '" & Me.DBCodigo.Text & "'))"
+        Me.DtaConsulta.Refresh
+        If DtaConsulta.Recordset.EOF Then
+          NumeroSolicitud = 1
+         
+        Else
+          NumeroSolicitud = Me.DtaConsulta.Recordset("ConsecutivoSolicitudCheque") + 1
+       End If
+       
+    Me.LblNumeroSolicitud.Caption = Format(NumeroSolicitud, "0000#")
 
 
  Me.TxtFecha.Enabled = True
@@ -2288,7 +2666,7 @@ Private Sub DBGTransacciones_ButtonClick(ByVal ColIndex As Integer)
 Dim c As Variant
 Select Case ColIndex
   Case 0
-  QueProducto = "SolicitudPagos"
+  QueProducto = "SolicitudCheques"
   FrmConsulta.Show 1
   Case 6
     Set c = DBGTransacciones.Columns(ColIndex)
@@ -2534,13 +2912,13 @@ Select Case ColIndex
    '/////////////////////////////////////////////////////////////////////////////////
    
             
-            SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta AS DescripcionCuentas, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
-            "Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, " & _
-            "Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, " & _
-            "Transacciones.NumeroMovimiento , Periodos.Periodo " & _
-            "FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo " & _
-            "WHERE  (Transacciones.FechaTransaccion BETWEEN '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "' And '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "') AND (Transacciones.NumeroMovimiento = " & Me.TxtNTransacciones.Text & ") " & _
-            "ORDER BY Transacciones.NTransaccion"
+            SQL = "SELECT TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta AS DescripcionCuentas, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
+            "TransaccionesSolicitudPago.FacturaNo, TransaccionesSolicitudPago.ChequeNo, TransaccionesSolicitudPago.Clave, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito, " & _
+            "TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.NPeriodo, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.Fuente, TransaccionesSolicitudPago.FechaTasas, " & _
+            "TransaccionesSolicitudPago.NumeroMovimiento , Periodos.Periodo " & _
+            "FROM Periodos INNER JOIN TransaccionesSolicitudPago ON Periodos.NPeriodo = TransaccionesSolicitudPago.NPeriodo " & _
+            "WHERE  (TransaccionesSolicitudPago.FechaTransaccion BETWEEN '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "' And '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "') AND (TransaccionesSolicitudPago.NumeroMovimiento = " & Me.TxtNTransacciones.Text & ") " & _
+            "ORDER BY TransaccionesSolicitudPago.NTransaccion"
               
             Me.DtaConsulta.RecordSource = SQL
             Me.DtaConsulta.Refresh
@@ -2576,8 +2954,7 @@ Select Case ColIndex
                
          MsgBox "La cuenta digitada no es correcta", vbCritical, "Sistema Contable"
          NumeroTransaccion = Me.TxtNTransacciones.Text
-         'Me.DtaTransacciones.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo,FechaDescuento,DescuentoDisponible,FechaVence FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE (((Transacciones.FechaTransaccion) Between " & NumFecha1 & " And " & NumFecha2 & ") AND ((Transacciones.NumeroMovimiento)=" & NumeroTransaccion & ")) ORDER BY Transacciones.NTransaccion"
-         'Me.DtaTransacciones.Refresh
+        
   Me.DBGTransacciones.Columns(0).Button = True
     Me.DBGTransacciones.Columns(1).Locked = True
   Me.DBGTransacciones.Columns(6).Button = True
@@ -3002,7 +3379,16 @@ TipoErrs:
 End Sub
 
 Private Sub DBGTransacciones_AfterColUpdate(ByVal ColIndex As Integer)
-'On Error GoTo TipoErrs
+
+On Error GoTo TipoErrs
+Dim TipoSolicitud As String
+
+If Me.OptAnticipo.Value = True Then
+ TipoSolicitud = "Anticipo"
+Else
+  TipoSolicitud = "Cancelacion"
+End If
+
    Select Case ColIndex
     
     Case 0
@@ -3031,15 +3417,28 @@ Private Sub DBGTransacciones_AfterColUpdate(ByVal ColIndex As Integer)
       '////////////Edito los datos del Periodo///////////
      If Val(Me.TxtNTransacciones.Text) = 0 Then
      
+        Me.DtaConsulta.RecordSource = "SELECT NConsecutivos.ConsecutivoSolicitudCheque  From NConsecutivos Where (((NConsecutivos.CodCuentas) = '" & Me.DBCodigo.Text & "'))"
+        Me.DtaConsulta.Refresh
+        If DtaConsulta.Recordset.EOF Then
+           Me.DtaConsulta.Recordset.AddNew
+             Me.DtaConsulta.Recordset("CodCuenta") = Me.DBCodigo.Text
+             Me.DtaConsulta.Recordset("ConsecutivoSolicitudCheque") = NumeroSolicitud
+           Me.DtaConsulta.Recordset.Update
+
+          
+        Else
+        
+             Me.DtaConsulta.Recordset("ConsecutivoSolicitudCheque") = NumeroSolicitud
+           Me.DtaConsulta.Recordset.Update
+
+       End If
+       
+      NumeroTransaccion = Format(NumeroSolicitud, "0000#")
+      Me.TxtNTransacciones.Text = Format(NumeroSolicitud, "0000#")
      
      
-     
-      'Me.'DtaConsulta.Recordset.Edit
-        DtaConsulta.Recordset("NTransacciones") = DtaConsulta.Recordset("NTransacciones") + 1
-      Me.DtaConsulta.Recordset.Update
-      NumeroTransaccion = DtaConsulta.Recordset("NTransacciones")
-      Me.TxtNTransacciones.Text = NumeroTransaccion
-      '////////Edito los Datos de los indices de Transacciones//////
+
+      '////////Edito los Datos de los indices de TransaccionesSolicitudPago//////
          
           Me.DtaIndice.Recordset.AddNew
           Me.DtaIndice.Recordset("FechaTransaccion") = Format(Me.TxtFecha.Value, "dd/mm/yyyy")
@@ -3053,7 +3452,55 @@ Private Sub DBGTransacciones_AfterColUpdate(ByVal ColIndex As Integer)
             Me.DtaIndice.Recordset("TipoMoneda") = "Córdobas"
           End If
           
+          If Me.ChkCheque.Value = 1 Then
+            Me.DtaIndice.Recordset("ImprimeCheque") = 1
+          Else
+            Me.DtaIndice.Recordset("ImprimeCheque") = 0
+          End If
           
+          If Me.Chk1.Value = 1 Then
+            Me.DtaIndice.Recordset("Retencion1") = 1
+          Else
+            Me.DtaIndice.Recordset("Retencion1") = 0
+          End If
+          
+          If Me.Chk2.Value = 1 Then
+            Me.DtaIndice.Recordset("Retencion2") = 1
+          Else
+            Me.DtaIndice.Recordset("Retencion2") = 0
+          End If
+          
+          If Me.Chk3.Value = 1 Then
+            Me.DtaIndice.Recordset("Retencion3") = 1
+          Else
+            Me.DtaIndice.Recordset("Retencion3") = 0
+          End If
+          
+          If Me.Chk7.Value = 1 Then
+            Me.DtaIndice.Recordset("Retencion4") = 1
+          Else
+            Me.DtaIndice.Recordset("Retencion4") = 0
+          End If
+          
+          If Me.Chk10.Value = 1 Then
+            Me.DtaIndice.Recordset("Retencion5") = 1
+          Else
+            Me.DtaIndice.Recordset("Retencion5") = 0
+          End If
+          
+          If Me.Chk15.Value = 1 Then
+            Me.DtaIndice.Recordset("Iva") = 1
+          Else
+            Me.DtaIndice.Recordset("Iva") = 0
+          End If
+          
+          Me.DtaIndice.Recordset("Concepto") = Me.TxtMemo.Text
+          Me.DtaIndice.Recordset("SubTotal") = Me.TxtSubTotal.Text
+          Me.DtaIndice.Recordset("MontoIva") = Me.TxtIVa.Text
+          Me.DtaIndice.Recordset("MontoRetenciones") = Me.TxtRetenciones.Text
+          Me.DtaIndice.Recordset("MontoSolicitud") = Me.TxtMonto.Text
+          Me.DtaIndice.Recordset("Beneficiario") = Me.TxtNombre.Text
+          Me.DtaIndice.Recordset("CuentaBanco") = Me.DBCodigo.Text
           Me.DtaIndice.Recordset.Update
       
       
@@ -3079,11 +3526,13 @@ Private Sub DBGTransacciones_AfterColUpdate(ByVal ColIndex As Integer)
       If Not DtaConsulta.Recordset.EOF Then
         NumeroPeriodo = DtaConsulta.Recordset("NPeriodo")
         If Val(Me.TxtNTransacciones.Text) = 0 Then
-         NumeroTransaccion = DtaConsulta.Recordset("NTransacciones")
+         NumeroTransaccion = Me.LblNumeroSolicitud.Caption
         End If
         EstadoPeriodo = DtaConsulta.Recordset("EstadoPeriodo")
       End If
-  Me.AdoBuscar.RecordSource = "SELECT FechaTransaccion, NumeroMovimiento, Nperiodo, DescripcionMovimiento, Fuente, TipoMoneda From IndiceTransaccion Where (NPeriodo = " & NumeroPeriodo & ") And (NumeroMovimiento = " & NumeroTransaccion & ")"
+      
+      
+  Me.AdoBuscar.RecordSource = "SELECT FechaTransaccion, NumeroMovimiento, Nperiodo, DescripcionMovimiento, Fuente, TipoMoneda From IndiceSolicitudPago Where (NPeriodo = " & NumeroPeriodo & ") And (NumeroMovimiento = " & NumeroTransaccion & ")"
   Me.AdoBuscar.Refresh
   
    If Not Me.AdoBuscar.Recordset.EOF Then
@@ -3175,7 +3624,7 @@ End With
 With Me.DtaIndice
    '.DatabaseName = Ruta
    .ConnectionString = Conexion
-   .RecordSource = "IndiceTransaccion"
+   .RecordSource = "IndiceSolicitudPago"
    .Refresh
 End With
 
@@ -3216,6 +3665,52 @@ With Me.AdoPendientes
    .ConnectionString = Conexion
 End With
 
+'//////////////////////////////////////////////////////////////////////////////////////////////
+'////////////////////////////////////BUSCO LAS CUENTAS DE RETENCION //////////////////////
+'////////////////////////////////////////////////////////////////////////////////////////////////////
+Me.DtaConsulta.RecordSource = "SELECT  Cuentas.* From Cuentas WHERE  (CausaIva = 1) AND (TipoCuenta = N'Cuentas x Pagar')"
+Me.DtaConsulta.Refresh
+If Not Me.DtaConsulta.Recordset.EOF Then
+  Me.TxtCtaIva.Text = Me.DtaConsulta.Recordset("CodCuentas")
+  Me.LblDescripcionIva.Caption = Me.DtaConsulta.Recordset("DescripcionCuentas") & "-" & Me.DtaConsulta.Recordset("DescRetencion")
+
+End If
+
+Me.DtaConsulta.RecordSource = "SELECT  Cuentas.* From Cuentas WHERE  (TipoCuenta = 'Cuentas x Pagar') AND (CausaRetencion = 1) AND (DescRetencion = '1%')"
+Me.DtaConsulta.Refresh
+If Not Me.DtaConsulta.Recordset.EOF Then
+  Me.TxtCtaRetencion1.Text = Me.DtaConsulta.Recordset("CodCuentas")
+  Me.LblCtaRetencion1.Caption = Me.DtaConsulta.Recordset("DescripcionCuentas")
+End If
+
+Me.DtaConsulta.RecordSource = "SELECT  Cuentas.* From Cuentas WHERE  (TipoCuenta = 'Cuentas x Pagar') AND (CausaRetencion = 1) AND (DescRetencion = '2%')"
+Me.DtaConsulta.Refresh
+If Not Me.DtaConsulta.Recordset.EOF Then
+  Me.TxtCtaRetencion2.Text = Me.DtaConsulta.Recordset("CodCuentas")
+  Me.LblCtaRetencion2.Caption = Me.DtaConsulta.Recordset("DescripcionCuentas")
+End If
+
+Me.DtaConsulta.RecordSource = "SELECT  Cuentas.* From Cuentas WHERE  (TipoCuenta = 'Cuentas x Pagar') AND (CausaRetencion = 1) AND (DescRetencion = '3%')"
+Me.DtaConsulta.Refresh
+If Not Me.DtaConsulta.Recordset.EOF Then
+  Me.TxtCtaRetencion3.Text = Me.DtaConsulta.Recordset("CodCuentas")
+  Me.LblCtaRetencion3.Caption = Me.DtaConsulta.Recordset("DescripcionCuentas")
+End If
+
+Me.DtaConsulta.RecordSource = "SELECT  Cuentas.* From Cuentas WHERE  (TipoCuenta = 'Cuentas x Pagar') AND (CausaRetencion = 1) AND (DescRetencion = '7%')"
+Me.DtaConsulta.Refresh
+If Not Me.DtaConsulta.Recordset.EOF Then
+  Me.TxtCtaRetencion4.Text = Me.DtaConsulta.Recordset("CodCuentas")
+  Me.LblCtaRetencion4.Caption = Me.DtaConsulta.Recordset("DescripcionCuentas")
+End If
+
+Me.DtaConsulta.RecordSource = "SELECT  Cuentas.* From Cuentas WHERE  (TipoCuenta = 'Cuentas x Pagar') AND (CausaRetencion = 1) AND (DescRetencion = '10%')"
+Me.DtaConsulta.Refresh
+If Not Me.DtaConsulta.Recordset.EOF Then
+  Me.TxtCtaRetencion5.Text = Me.DtaConsulta.Recordset("CodCuentas")
+  Me.LblCtaRetencion5.Caption = Me.DtaConsulta.Recordset("DescripcionCuentas")
+End If
+
 
     ChequeGrabado = False
 
@@ -3225,15 +3720,15 @@ Me.TxtMemo.Enabled = False
 Me.TxtMonto.Enabled = False
 Me.TxtNombre.Enabled = False
 
-SQL = "SELECT     Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
-       "Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, " & _
-       "Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, " & _
-       "Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.FechaDescuento, Transacciones.DescuentoDisponible, " & _
-       "Transacciones.FechaVence,Transacciones.CodCuentaProveedor,Transacciones.TipoFactura,Transacciones.NTransaccion " & _
+SQL = "SELECT     TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
+       "TransaccionesSolicitudPago.FacturaNo, TransaccionesSolicitudPago.ChequeNo, TransaccionesSolicitudPago.Clave, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito, " & _
+       "TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.NPeriodo, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.Fuente, TransaccionesSolicitudPago.FechaTasas, " & _
+       "TransaccionesSolicitudPago.NumeroMovimiento, Periodos.Periodo, TransaccionesSolicitudPago.FechaDescuento, TransaccionesSolicitudPago.DescuentoDisponible, " & _
+       "TransaccionesSolicitudPago.FechaVence,TransaccionesSolicitudPago.CodCuentaProveedor,TransaccionesSolicitudPago.TipoFactura,TransaccionesSolicitudPago.NTransaccion " & _
        "FROM  Periodos INNER JOIN " & _
-       "Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo " & _
-       "Where (Transacciones.NumeroMovimiento = -1) " & _
-       "ORDER BY Transacciones.NTransaccion "
+       "TransaccionesSolicitudPago ON Periodos.NPeriodo = TransaccionesSolicitudPago.NPeriodo " & _
+       "Where (TransaccionesSolicitudPago.NumeroMovimiento = -1) " & _
+       "ORDER BY TransaccionesSolicitudPago.NTransaccion "
        
 Me.DtaTransacciones.RecordSource = SQL
 Me.DtaTransacciones.Refresh
@@ -3283,10 +3778,10 @@ Me.DBCodigo.ListField = "CodCuentas"
 
 End Sub
   Private Sub Form_Initialize()
-On Error GoTo TipoErrs
-Dim SqlCheque As String
     Set ew = New cls_NumEnglishWord
     Set sw = New cls_NumSpanishWord
+On Error GoTo TipoErrs
+Dim SqlCheque As String
     'DBGdetalleCk.Columns(3).Button = True
 Exit Sub
 TipoErrs:
@@ -3365,7 +3860,7 @@ Dim Fechas1 As String
       NumFecha1 = Me.TxtFecha.Value
       NMovimiento = Val(Me.TxtNTransacciones)
       Fechas1 = Format(Me.TxtFecha.Value, "yyyy/mm/dd")
-      Me.DtaConsulta.RecordSource = "SELECT FechaTransaccion, CodCuentas, NTransaccion, NumeroMovimiento, TCambio * Debito AS MDebito, TCambio * Credito AS MCredito, TCambio, Debito,Credito From Transacciones WHERE  (FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (NumeroMovimiento = " & NMovimiento & ")"
+      Me.DtaConsulta.RecordSource = "SELECT FechaTransaccion, CodCuentas, NTransaccion, NumeroMovimiento, TCambio * Debito AS MDebito, TCambio * Credito AS MCredito, TCambio, Debito,Credito From TransaccionesSolicitudPago WHERE  (FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (NumeroMovimiento = " & NMovimiento & ")"
 
       Me.DtaConsulta.Refresh
       Do While Not DtaConsulta.Recordset.EOF
@@ -3456,8 +3951,8 @@ If Not DBCodigo.Text = "" Then
 
       NumFecha1 = Me.TxtFecha.Value
       NMovimiento = Val(Me.TxtNTransacciones)
-'      Me.DtaConsulta.RecordSource = "SELECT Transacciones.FechaTransaccion, Transacciones.CodCuentas, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, TCambio*Debito AS MDebito, TCambio*Credito AS MCredito, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito From Transacciones WHERE (((Transacciones.FechaTransaccion)=" & NumFecha1 & ") AND ((Transacciones.NumeroMovimiento)=" & NMovimiento & "))"
-      Me.DtaConsulta.RecordSource = "SELECT FechaTransaccion, CodCuentas, NTransaccion, NumeroMovimiento, TCambio * Debito AS MDebito, TCambio * Credito AS MCredito, TCambio, Debito, Credito From Transacciones  " & _
+'      Me.DtaConsulta.RecordSource = "SELECT TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.NumeroMovimiento, TCambio*Debito AS MDebito, TCambio*Credito AS MCredito, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito From TransaccionesSolicitudPago WHERE (((TransaccionesSolicitudPago.FechaTransaccion)=" & NumFecha1 & ") AND ((TransaccionesSolicitudPago.NumeroMovimiento)=" & NMovimiento & "))"
+      Me.DtaConsulta.RecordSource = "SELECT FechaTransaccion, CodCuentas, NTransaccion, NumeroMovimiento, TCambio * Debito AS MDebito, TCambio * Credito AS MCredito, TCambio, Debito, Credito From TransaccionesSolicitudPago  " & _
                                     "WHERE (FechaTransaccion = CONVERT(DATETIME, '" & Format(Me.TxtFecha.Value, "yyyy-mm-dd") & "', 102)) AND (NumeroMovimiento = " & NMovimiento & ") AND (CodCuentas <> '" & Me.DBCodigo.Text & "')"
       Me.DtaConsulta.Refresh
       Do While Not DtaConsulta.Recordset.EOF
@@ -3566,13 +4061,13 @@ If Not DtaCuentas.Recordset.EOF Then
 '////////////////////////////////////////////////////////////////////////////////////////////
 '/////////////////CARGO LOS CHEQUES PENDIENTES/////////////////////////////////////////////////
 '/////////////////////////////////////////////////////////////////////////////////////////////
-SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
-"Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, " & _
-"Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, " & _
-"Transacciones.NumeroMovimiento , Periodos.Periodo, Transacciones.Beneficiario " & _
-"FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo " & _
-"WHERE (Transacciones.ChequeNo = '#######')  AND (Transacciones.CodCuentas = '" & Me.DBCodigo.Text & "' ) AND " & _
-"(Transacciones.DescripcionMovimiento <> '**********CANCELADO*************') ORDER BY Transacciones.NTransaccion"
+SQL = "SELECT TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
+"TransaccionesSolicitudPago.FacturaNo, TransaccionesSolicitudPago.ChequeNo, TransaccionesSolicitudPago.Clave, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito, " & _
+"TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.NPeriodo, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.Fuente, TransaccionesSolicitudPago.FechaTasas, " & _
+"TransaccionesSolicitudPago.NumeroMovimiento , Periodos.Periodo, TransaccionesSolicitudPago.Beneficiario " & _
+"FROM Periodos INNER JOIN TransaccionesSolicitudPago ON Periodos.NPeriodo = TransaccionesSolicitudPago.NPeriodo " & _
+"WHERE (TransaccionesSolicitudPago.ChequeNo = '#######')  AND (TransaccionesSolicitudPago.CodCuentas = '" & Me.DBCodigo.Text & "' ) AND " & _
+"(TransaccionesSolicitudPago.DescripcionMovimiento <> '**********CANCELADO*************') ORDER BY TransaccionesSolicitudPago.NTransaccion"
 
 Me.AdoPendientes.RecordSource = SQL
 Me.AdoPendientes.Refresh
@@ -3702,7 +4197,7 @@ If Not DtaCuentas.Recordset.EOF Then
   NumeroPeriodo = DtaConsulta.Recordset("NPeriodo")
   NumeroTransaccion = DtaConsulta.Recordset("NTransacciones")
   EstadoPeriodo = DtaConsulta.Recordset("EstadoPeriodo")
-  Me.DtaHistorial.RecordSource = "SELECT Transacciones.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito From Transacciones GROUP BY Transacciones.CodCuentas Having (((Transacciones.CodCuentas) = '" & Me.DBCodigo.Text & "'))"
+  Me.DtaHistorial.RecordSource = "SELECT TransaccionesSolicitudPago.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito From TransaccionesSolicitudPago GROUP BY TransaccionesSolicitudPago.CodCuentas Having (((TransaccionesSolicitudPago.CodCuentas) = '" & Me.DBCodigo.Text & "'))"
   Me.DtaHistorial.Refresh
   If Not Me.DtaHistorial.Recordset.EOF Then
    If Not IsNull(Me.DtaHistorial.Recordset("MDebito")) Then
@@ -3837,7 +4332,7 @@ On Error GoTo TipoErrs
   NumeroPeriodo = DtaConsulta.Recordset("NPeriodo")
   NumeroTransaccion = DtaConsulta.Recordset("NTransacciones")
   EstadoPeriodo = DtaConsulta.Recordset("EstadoPeriodo")
-  Me.DtaHistorial.RecordSource = "SELECT Transacciones.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito From Transacciones GROUP BY Transacciones.CodCuentas Having (((Transacciones.CodCuentas) = '" & Me.DBCodigo.Text & "'))"
+  Me.DtaHistorial.RecordSource = "SELECT TransaccionesSolicitudPago.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito From TransaccionesSolicitudPago GROUP BY TransaccionesSolicitudPago.CodCuentas Having (((TransaccionesSolicitudPago.CodCuentas) = '" & Me.DBCodigo.Text & "'))"
   Me.DtaHistorial.Refresh
   If Not Me.DtaHistorial.Recordset.EOF Then
    If Not IsNull(Me.DtaHistorial.Recordset("MDebito")) Then
@@ -3924,7 +4419,7 @@ mes = Month(Me.TxtFecha.Value)
  
  Fechas1 = Format(FechaIni, "yyyy/mm/dd")
  Fechas2 = Format(FechaFin, "yyyy/mm/dd")
-  Me.DtaHistorial.RecordSource = "SELECT Transacciones.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito From Transacciones GROUP BY Transacciones.CodCuentas Having (((Transacciones.CodCuentas) = '" & Me.DBCodigo.Text & "'))"
+  Me.DtaHistorial.RecordSource = "SELECT TransaccionesSolicitudPago.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito From TransaccionesSolicitudPago GROUP BY TransaccionesSolicitudPago.CodCuentas Having (((TransaccionesSolicitudPago.CodCuentas) = '" & Me.DBCodigo.Text & "'))"
   Me.DtaHistorial.Refresh
   If Not Me.DtaHistorial.Recordset.EOF Then
    If Not IsNull(Me.DtaHistorial.Recordset("MDebito")) Then
@@ -3996,8 +4491,8 @@ If Not DBCodigo.Text = "" Then
 
       NumFecha1 = Me.TxtFecha.Value
       NMovimiento = Val(Me.TxtNTransacciones)
-'      Me.DtaConsulta.RecordSource = "SELECT Transacciones.FechaTransaccion, Transacciones.CodCuentas, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, TCambio*Debito AS MDebito, TCambio*Credito AS MCredito, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito From Transacciones WHERE (((Transacciones.FechaTransaccion)=" & NumFecha1 & ") AND ((Transacciones.NumeroMovimiento)=" & NMovimiento & "))"
-      Me.DtaConsulta.RecordSource = "SELECT FechaTransaccion, CodCuentas, NTransaccion, NumeroMovimiento, TCambio * Debito AS MDebito, TCambio * Credito AS MCredito, TCambio, Debito, Credito From Transacciones  " & _
+'      Me.DtaConsulta.RecordSource = "SELECT TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.NumeroMovimiento, TCambio*Debito AS MDebito, TCambio*Credito AS MCredito, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito From TransaccionesSolicitudPago WHERE (((TransaccionesSolicitudPago.FechaTransaccion)=" & NumFecha1 & ") AND ((TransaccionesSolicitudPago.NumeroMovimiento)=" & NMovimiento & "))"
+      Me.DtaConsulta.RecordSource = "SELECT FechaTransaccion, CodCuentas, NTransaccion, NumeroMovimiento, TCambio * Debito AS MDebito, TCambio * Credito AS MCredito, TCambio, Debito, Credito From TransaccionesSolicitudPago  " & _
                                     "WHERE (FechaTransaccion = CONVERT(DATETIME, '" & Format(Me.TxtFecha.Value, "yyyy-mm-dd") & "', 102)) AND (NumeroMovimiento = " & NMovimiento & ") AND (CodCuentas <> '" & Me.DBCodigo.Text & "')"
       Me.DtaConsulta.Refresh
       Do While Not DtaConsulta.Recordset.EOF
