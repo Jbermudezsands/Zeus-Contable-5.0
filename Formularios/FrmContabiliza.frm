@@ -454,10 +454,11 @@ Begin VB.Form FrmContabilizaFacturacion
       _ExtentY        =   10610
       _Version        =   393216
       Tabs            =   4
+      Tab             =   3
       TabHeight       =   520
       TabCaption(0)   =   "Facturacion"
       TabPicture(0)   =   "FrmContabiliza.frx":0000
-      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "TDBGridFacturacion"
       Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "GroupBox1"
@@ -478,7 +479,7 @@ Begin VB.Form FrmContabilizaFacturacion
       Tab(2).ControlCount=   2
       TabCaption(3)   =   "Planilla Leche"
       TabPicture(3)   =   "FrmContabiliza.frx":0054
-      Tab(3).ControlEnabled=   0   'False
+      Tab(3).ControlEnabled=   -1  'True
       Tab(3).Control(0)=   "TDGridPlanillaLeche"
       Tab(3).Control(0).Enabled=   0   'False
       Tab(3).Control(1)=   "GroupBox4"
@@ -513,7 +514,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   78446593
+            Format          =   78184449
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker3 
@@ -525,7 +526,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   78446593
+            Format          =   78184449
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptCompras 
@@ -577,7 +578,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   78446593
+            Format          =   78184449
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton RadioButton4 
@@ -691,7 +692,7 @@ Begin VB.Form FrmContabilizaFacturacion
       End
       Begin XtremeSuiteControls.GroupBox GroupBox1 
          Height          =   5055
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   3
          Top             =   780
          Width           =   2295
@@ -717,7 +718,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   78446593
+            Format          =   78184449
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptFacturacion 
@@ -770,7 +771,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   78446593
+            Format          =   78184449
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecibos 
@@ -823,7 +824,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   78446593
+            Format          =   78184449
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptSalidaBodega 
@@ -868,7 +869,7 @@ Begin VB.Form FrmContabilizaFacturacion
       Begin TrueOleDBGrid80.TDBGrid TDBGridFacturacion 
          Bindings        =   "FrmContabiliza.frx":0070
          Height          =   4935
-         Left            =   2520
+         Left            =   -72480
          TabIndex        =   8
          Top             =   900
          Width           =   9975
@@ -1516,7 +1517,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   78446593
+            Format          =   78184449
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebito 
@@ -1554,7 +1555,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   78446593
+            Format          =   78184449
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.PushButton CmdContabilizarNotas 
@@ -1594,7 +1595,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   78446593
+            Format          =   78184449
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebitoProveedor 
@@ -2021,7 +2022,7 @@ Begin VB.Form FrmContabilizaFacturacion
       End
       Begin XtremeSuiteControls.GroupBox GroupBox4 
          Height          =   5055
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   56
          Top             =   840
          Width           =   2295
@@ -2049,19 +2050,19 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   78446593
+            Format          =   78184449
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker11 
             Height          =   345
             Left            =   720
             TabIndex        =   59
-            Top             =   1440
+            Top             =   1800
             Width           =   1455
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   78446593
+            Format          =   78184449
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecepcion 
@@ -2082,12 +2083,12 @@ Begin VB.Form FrmContabilizaFacturacion
             Height          =   345
             Left            =   720
             TabIndex        =   61
-            Top             =   1800
+            Top             =   2160
             Width           =   1455
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   78446593
+            Format          =   78184449
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptPlanilla 
@@ -2107,7 +2108,7 @@ Begin VB.Form FrmContabilizaFacturacion
             Height          =   375
             Left            =   360
             TabIndex        =   63
-            Top             =   2880
+            Top             =   3000
             Width           =   1455
             _Version        =   786432
             _ExtentX        =   2566
@@ -2121,7 +2122,7 @@ Begin VB.Form FrmContabilizaFacturacion
             Height          =   375
             Left            =   360
             TabIndex        =   64
-            Top             =   2520
+            Top             =   2640
             Width           =   1455
             _Version        =   786432
             _ExtentX        =   2566
@@ -2174,6 +2175,19 @@ Begin VB.Form FrmContabilizaFacturacion
             Caption         =   "Pago a Transportista"
             UseVisualStyle  =   -1  'True
          End
+         Begin XtremeSuiteControls.RadioButton OptLiquidacion 
+            Height          =   255
+            Left            =   120
+            TabIndex        =   73
+            Top             =   1320
+            Width           =   2055
+            _Version        =   786432
+            _ExtentX        =   3625
+            _ExtentY        =   450
+            _StockProps     =   79
+            Caption         =   "Liquidacion Leche"
+            UseVisualStyle  =   -1  'True
+         End
          Begin VB.Label LblFechaRecepcion 
             Caption         =   "Feha:"
             Height          =   255
@@ -2188,7 +2202,7 @@ Begin VB.Form FrmContabilizaFacturacion
             Height          =   255
             Left            =   120
             TabIndex        =   69
-            Top             =   1800
+            Top             =   2160
             Width           =   495
          End
          Begin VB.Label Label9 
@@ -2196,7 +2210,7 @@ Begin VB.Form FrmContabilizaFacturacion
             Height          =   255
             Left            =   120
             TabIndex        =   68
-            Top             =   1440
+            Top             =   1800
             Width           =   495
          End
          Begin VB.Label Label8 
@@ -2212,7 +2226,7 @@ Begin VB.Form FrmContabilizaFacturacion
       Begin TrueOleDBGrid80.TDBGrid TDGridPlanillaLeche 
          Bindings        =   "FrmContabiliza.frx":00BC
          Height          =   4815
-         Left            =   -72240
+         Left            =   2760
          TabIndex        =   70
          Top             =   960
          Width           =   9975
@@ -5274,11 +5288,18 @@ Private Sub CmdContabilizarPlanilla_Click()
      TipoFactura = "Pago Proveedor"
     ElseIf Me.OptPlanillaTransportista.Value = True Then
      TipoFactura = "Pago Transportista"
+    ElseIf Me.OptLiquidacion.Value = True Then
+     TipoFactura = "LiquidacionLeche"
     End If
 
 
                 Select Case TipoFactura
-                
+                     Case "LiquidacionLeche"
+                       FechaInicio = Format(Me.DTPicker11.Value, "yyyy-mm-dd")
+                       FechaFin = Format(Me.DTPicker12.Value, "yyyy-mm-dd")
+                       SqlString = "SELECT DISTINCT  LiquidacionLeche.NumeroLiquidacion, LiquidacionLeche.FechaInicio, LiquidacionLeche.FechaFin, Clientes.Nombre_Cliente, Clientes.Apellido_Cliente, LiquidacionLeche.Marca, LiquidacionLeche.Cod_Bodega, LiquidacionLeche.PorcientoIR, LiquidacionLeche.PrecioUnitario, LiquidacionLeche.Contabilizado, DetalleLiquidacionLeche.Fecha, DetalleLiquidacionLeche.Cantidad_Enviada, DetalleLiquidacionLeche.Cantidad_Recibida, DetalleLiquidacionLeche.Diferencia, DetalleLiquidacionLeche.Agua, DetalleLiquidacionLeche.Litros_Agua, DetalleLiquidacionLeche.Ajuste_Cordobas, DetalleLiquidacionLeche.TotalLitros, DetalleLiquidacionLeche.Total_Ingresos - DetalleLiquidacionLeche.Total_Deducciones AS NetoPagar, DetalleLiquidacionLeche.Pagos_Ant_Retenidos, DetalleLiquidacionLeche.Reembolso, DetalleLiquidacionLeche.Anticipos, DetalleLiquidacionLeche.Bolsa, DetalleLiquidacionLeche.Productos_Veterinarios " & _
+                                   "DetalleLiquidacionLeche.Retencion, DetalleLiquidacionLeche.Ir, DetalleLiquidacionLeche.Transporte, DetalleLiquidacionLeche.Enfriamiento, DetalleLiquidacionLeche.Precio_Unitario FROM LiquidacionLeche INNER JOIN Clientes ON LiquidacionLeche.Cod_Proveedor = Clientes.Cod_Cliente INNER JOIN DetalleLiquidacionLeche ON LiquidacionLeche.NumeroLiquidacion = DetalleLiquidacionLeche.NumeroLiquidacion Where (LiquidacionLeche.Contabilizado = 0) AND (LiquidacionLeche.Marca = 1)"
+                                   
                     Case "Pago Transportista"
                        FechaInicio = Format(Me.DTPicker11.Value, "yyyy-mm-dd")
                        FechaFin = Format(Me.DTPicker12.Value, "yyyy-mm-dd")
@@ -7445,6 +7466,8 @@ Dim TipoFactura As String
      TipoFactura = "Pago Proveedor"
     ElseIf Me.OptPlanillaTransportista.Value = True Then
      TipoFactura = "Pago Transportista"
+    ElseIf Me.OptLiquidacion.Value = True Then
+     TipoFactura = "LiquidacionLeche"
     End If
     
     
@@ -7519,6 +7542,33 @@ Dim TipoFactura As String
             Me.TDGridPlanillaLeche.Columns(4).Caption = "Año"
             Me.TDGridPlanillaLeche.Columns(5).Caption = "Mes"
             Me.TDGridPlanillaLeche.Columns(6).Caption = "Periodo"
+            Me.TDGridPlanillaLeche.Columns(7).Caption = "Marca"
+                        
+                        
+      Case "LiquidacionLeche"
+        
+            Me.TDGridPlanillaLeche.Columns(0).DataField = "NumeroLiquidacion"
+            Me.TDGridPlanillaLeche.Columns(1).DataField = "FechaInicio"
+            Me.TDGridPlanillaLeche.Columns(2).DataField = "FechaFin"
+            Me.TDGridPlanillaLeche.Columns(3).DataField = "Nombre_Cliente"
+            Me.TDGridPlanillaLeche.Columns(4).DataField = "Apellido_Cliente"
+            Me.TDGridPlanillaLeche.Columns(5).DataField = "PrecioUnitario"
+            Me.TDGridPlanillaLeche.Columns(6).DataField = "PorcientoIR"
+            Me.TDGridPlanillaLeche.Columns(7).DataField = "Marca"
+            Me.TDGridPlanillaLeche.Splits(0).Caption = "Listado de Planillas Transportista"
+            
+            
+            FechaInicio = Format(Me.DTPicker11.Value, "yyyy-mm-dd")
+            FechaFin = Format(Me.DTPicker12.Value, "yyyy-mm-dd")
+            SqlString = "SELECT  LiquidacionLeche.NumeroLiquidacion, LiquidacionLeche.FechaInicio, LiquidacionLeche.FechaFin, Clientes.Nombre_Cliente, Clientes.Apellido_Cliente, LiquidacionLeche.Marca , LiquidacionLeche.Cod_Bodega, LiquidacionLeche.PorcientoIR, LiquidacionLeche.PrecioUnitario, LiquidacionLeche.Contabilizado FROM LiquidacionLeche INNER JOIN Clientes ON LiquidacionLeche.Cod_Proveedor = Clientes.Cod_Cliente Where (LiquidacionLeche.Contabilizado = 0)"
+
+            Me.TDGridPlanillaLeche.Columns(0).Caption = "NumeroLiquidacion"
+            Me.TDGridPlanillaLeche.Columns(1).Caption = "Fecha Inicio"
+            Me.TDGridPlanillaLeche.Columns(2).Caption = "Fecha Fin"
+            Me.TDGridPlanillaLeche.Columns(3).Caption = "Nombre Cliente"
+            Me.TDGridPlanillaLeche.Columns(4).Caption = "Apellido Cliente"
+            Me.TDGridPlanillaLeche.Columns(5).Caption = "PrecioUnitario"
+            Me.TDGridPlanillaLeche.Columns(6).Caption = "PorcientoIR"
             Me.TDGridPlanillaLeche.Columns(7).Caption = "Marca"
       
       

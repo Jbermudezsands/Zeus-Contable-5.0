@@ -102,35 +102,35 @@ Begin VB.Form FrmSolicitudPagoLista
    End
    Begin VB.CommandButton CmdSalir 
       Caption         =   "SALIR"
-      Height          =   495
+      Height          =   375
       Left            =   12840
       TabIndex        =   4
       Top             =   5760
-      Width           =   1335
+      Width           =   1215
    End
    Begin VB.CommandButton CmdEliminar 
       Caption         =   "ELMINAR"
-      Height          =   495
+      Height          =   375
       Left            =   12840
       TabIndex        =   3
-      Top             =   1320
-      Width           =   1335
+      Top             =   1080
+      Width           =   1215
    End
    Begin VB.CommandButton CmdEditar 
       Caption         =   "EDITAR"
-      Height          =   495
+      Height          =   375
       Left            =   12840
       TabIndex        =   2
-      Top             =   720
-      Width           =   1335
+      Top             =   600
+      Width           =   1215
    End
    Begin VB.CommandButton CmdNuevo 
       Caption         =   "NUEVO"
-      Height          =   495
+      Height          =   375
       Left            =   12840
       TabIndex        =   1
       Top             =   120
-      Width           =   1335
+      Width           =   1215
    End
    Begin TrueOleDBGrid80.TDBGrid DBGTransacciones 
       Bindings        =   "FrmSolicitudPagoLista.frx":0000
@@ -348,9 +348,14 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Option Explicit
+Private ew As cls_NumEnglishWord
+Private sw As cls_NumSpanishWord
 
 Private Sub CmdEditar_Click()
- Dim Fecha As Date, NumeroSolicitud As Double
+  Dim Fecha As Date, NumeroSolicitud As Double, Nperiodo As Double, SQL As String
+  Dim TotalDebito As Double, TotalCredito As Double, Monto As Double
+  
     If Me.OptActivos.Value = False Then
        Me.OptActivos.Value = True
        ActualizaGrid
@@ -363,8 +368,9 @@ Private Sub CmdEditar_Click()
                                   "WHERE  (FechaTransaccion = CONVERT(DATETIME, '" & Format(Fecha, "yyyy-mm-dd") & "', 102)) AND (NumeroMovimiento = " & NumeroSolicitud & ")"
     Me.AdoConsulta.Refresh
     If Not Me.AdoConsulta.Recordset.EOF Then
-      FrmSolicitudPagos.txtfecha.Value = Fecha
+      FrmSolicitudPagos.TxtFecha.Value = Fecha
       FrmSolicitudPagos.DBCodigo.Text = Me.AdoConsulta.Recordset("CuentaBanco")
+      FrmSolicitudPagos.DBCodigo_ItemChange
       FrmSolicitudPagos.TxtMemo.Text = Me.AdoConsulta.Recordset("Concepto")
       FrmSolicitudPagos.CmbMoneda.Text = Me.AdoConsulta.Recordset("TipoMoneda")
       FrmSolicitudPagos.ChkCheque.Value = Me.AdoConsulta.Recordset("ImprimeCheque")
@@ -372,7 +378,18 @@ Private Sub CmdEditar_Click()
       FrmSolicitudPagos.TxtIVa.Text = Format(Me.AdoConsulta.Recordset("MontoIva"), "##,##0.00")
       FrmSolicitudPagos.TxtRetenciones.Text = Format(Me.AdoConsulta.Recordset("MontoRetenciones"), "##,##0.00")
       FrmSolicitudPagos.TxtMonto.Text = Format(Me.AdoConsulta.Recordset("MontoSolicitud"), "##,##0.00")
+      FrmSolicitudPagos.TxtNombre.Text = Format(Me.AdoConsulta.Recordset("Beneficiario"), "##,##0.00")
       
+      Monto = Me.AdoConsulta.Recordset("MontoSolicitud")
+      
+      Nperiodo = Me.AdoConsulta.Recordset("NPeriodo")
+
+       If Me.AdoConsulta.Recordset("TipoMoneda") = "Dólares" Then
+         FrmSolicitudPagos.TxtLetras.Text = sw.ConvertCurrencyToSpanish(CDbl(FrmSolicitudPagos.TxtMonto.Text), "Dólares")
+        ElseIf Me.AdoConsulta.Recordset("TipoMoneda") = "Córdobas" Then
+         FrmSolicitudPagos.TxtLetras.Text = sw.ConvertCurrencyToSpanish(CDbl(FrmSolicitudPagos.TxtMonto.Text), "Córdobas")
+        End If
+
       If Me.AdoConsulta.Recordset("Anticipo") = 1 Then
         FrmSolicitudPagos.OptAnticipo.Value = True
       Else
@@ -384,12 +401,88 @@ Private Sub CmdEditar_Click()
        FrmSolicitudPagos.Chk3.Value = Me.AdoConsulta.Recordset("Retencion3")
        FrmSolicitudPagos.Chk7.Value = Me.AdoConsulta.Recordset("Retencion4")
        FrmSolicitudPagos.Chk10.Value = Me.AdoConsulta.Recordset("Retencion5")
+       FrmSolicitudPagos.TxtNTransacciones.Text = NumeroSolicitud
+       
+       
+       '//////////////////////////////////////////////////////////////////////////////////////////////
+       '////////////////////////CONSULTO TRANSACCIONES DE PAGO //////////////////////////////////7////
+       '///////////////////////////////////////////////////////////////////////////////////////////////
+       SQL = "SELECT     TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
+       "TransaccionesSolicitudPago.FacturaNo, TransaccionesSolicitudPago.ChequeNo, TransaccionesSolicitudPago.Clave, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito, " & _
+       "TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.NPeriodo, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.Fuente, TransaccionesSolicitudPago.FechaTasas, " & _
+       "TransaccionesSolicitudPago.NumeroMovimiento, Periodos.Periodo, TransaccionesSolicitudPago.FechaDescuento, TransaccionesSolicitudPago.DescuentoDisponible, " & _
+       "TransaccionesSolicitudPago.FechaVence,TransaccionesSolicitudPago.CodCuentaProveedor,TransaccionesSolicitudPago.TipoFactura,TransaccionesSolicitudPago.NTransaccion " & _
+       "FROM  Periodos INNER JOIN " & _
+       "TransaccionesSolicitudPago ON Periodos.NPeriodo = TransaccionesSolicitudPago.NPeriodo " & _
+       "WHERE  (TransaccionesSolicitudPago.FechaTransaccion = CONVERT(DATETIME, '" & Format(Fecha, "yyyy-mm-dd") & "', 102)) AND (TransaccionesSolicitudPago.NumeroMovimiento = " & NumeroSolicitud & ") AND (TransaccionesSolicitudPago.NPeriodo = " & Nperiodo & ")" & _
+       "ORDER BY TransaccionesSolicitudPago.NTransaccion "
+       
+        FrmSolicitudPagos.DtaTransacciones.RecordSource = SQL
+        FrmSolicitudPagos.DtaTransacciones.Refresh
+        
+        FrmSolicitudPagos.DtaBancos.RecordSource = "SELECT Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta From Cuentas WHERE (TipoCuenta = 'Caja') OR (TipoCuenta = N'Bancos') ORDER BY Cuentas.CodCuentas"
+        FrmSolicitudPagos.DtaBancos.Refresh
+        FrmSolicitudPagos.DBCodigo.ListField = "CodCuentas"
+        
+    
+        SQL = "SELECT  MAX(TransaccionesSolicitudPago.CodCuentas) AS CodCuentas, SUM(TransaccionesSolicitudPago.Debito) AS Debito, SUM(TransaccionesSolicitudPago.Credito) AS Credito, SUM(TransaccionesSolicitudPago.DebitoD) AS DebitoD, SUM(TransaccionesSolicitudPago.CreditoD) AS CreditoD FROM  Periodos INNER JOIN  TransaccionesSolicitudPago ON Periodos.NPeriodo = TransaccionesSolicitudPago.NPeriodo  " & _
+              "WHERE  (TransaccionesSolicitudPago.FechaTransaccion = CONVERT(DATETIME, '" & Format(Fecha, "yyyy-mm-dd") & "', 102)) AND (TransaccionesSolicitudPago.NumeroMovimiento = " & NumeroSolicitud & ") AND (TransaccionesSolicitudPago.NPeriodo = " & Nperiodo & ")"
+        FrmSolicitudPagos.AdoBuscar.RecordSource = SQL
+        FrmSolicitudPagos.AdoBuscar.Refresh
+        If Not FrmSolicitudPagos.AdoBuscar.Recordset.EOF Then
+          TotalDebito = FrmSolicitudPagos.AdoBuscar.Recordset("Debito")
+          TotalCredito = FrmSolicitudPagos.AdoBuscar.Recordset("Credito") + Monto
+          FrmSolicitudPagos.TxtDebito.Text = Format(TotalDebito, "##,##0.00")
+          FrmSolicitudPagos.TxtCredito.Text = Format(TotalCredito, "##,##0.00")
+          FrmSolicitudPagos.TxtDiferencia.Text = Format(TotalDebito - TotalCredito, "##,##0.00")
+        End If
+         
+        
+          FrmSolicitudPagos.DBGTransacciones.Columns("CodCuentas").Button = True
+          FrmSolicitudPagos.DBGTransacciones.Columns("NombreCuenta").Locked = True
+          FrmSolicitudPagos.DBGTransacciones.Columns("NombreCuenta").Locked = True
+          FrmSolicitudPagos.DBGTransacciones.Columns(5).Caption = "Cheq/Rec"
+          FrmSolicitudPagos.DBGTransacciones.Columns(6).Button = True
+          FrmSolicitudPagos.DBGTransacciones.Columns(6).Locked = True
+          FrmSolicitudPagos.DBGTransacciones.Columns(0).Width = 1500
+          FrmSolicitudPagos.DBGTransacciones.Columns(2).Width = 1000
+          FrmSolicitudPagos.DBGTransacciones.Columns(3).Caption = "Descripcion"
+          FrmSolicitudPagos.DBGTransacciones.Columns(4).Width = 1000
+          FrmSolicitudPagos.DBGTransacciones.Columns(4).Button = True
+          FrmSolicitudPagos.DBGTransacciones.Columns(5).Width = 1000
+          FrmSolicitudPagos.DBGTransacciones.Columns(5).Caption = "Cheq/Rec"
+          FrmSolicitudPagos.DBGTransacciones.Columns(6).Width = 800
+          FrmSolicitudPagos.DBGTransacciones.Columns(7).Caption = "Tasa Cambio"
+          FrmSolicitudPagos.DBGTransacciones.Columns(7).Locked = True
+          FrmSolicitudPagos.DBGTransacciones.Columns(7).NumberFormat = "##,##0.000000"
+          FrmSolicitudPagos.DBGTransacciones.Columns(7).Width = 1200
+          FrmSolicitudPagos.DBGTransacciones.Columns(8).Width = 1200
+          FrmSolicitudPagos.DBGTransacciones.Columns(8).NumberFormat = "##,##0.00"
+          FrmSolicitudPagos.DBGTransacciones.Columns(9).Width = 1200
+          FrmSolicitudPagos.DBGTransacciones.Columns(9).NumberFormat = "##,##0.00"
+          FrmSolicitudPagos.DBGTransacciones.Columns(10).Visible = False
+          FrmSolicitudPagos.DBGTransacciones.Columns(11).Visible = False
+          FrmSolicitudPagos.DBGTransacciones.Columns(12).Visible = False
+          FrmSolicitudPagos.DBGTransacciones.Columns(13).Visible = False
+          FrmSolicitudPagos.DBGTransacciones.Columns(14).Visible = False
+          FrmSolicitudPagos.DBGTransacciones.Columns(15).Visible = False
+          FrmSolicitudPagos.DBGTransacciones.Columns(16).Visible = False
+          FrmSolicitudPagos.DBGTransacciones.Columns(17).Visible = False
+          FrmSolicitudPagos.DBGTransacciones.Columns(18).Visible = False
+          FrmSolicitudPagos.DBGTransacciones.Columns(19).Visible = False
+          FrmSolicitudPagos.DBGTransacciones.Columns(20).Visible = False
+          FrmSolicitudPagos.DBGTransacciones.Columns(21).Visible = False
+          FrmSolicitudPagos.DBGTransacciones.Columns(22).Visible = False
+          FrmSolicitudPagos.DBGTransacciones.Columns(7).Locked = True 'columna tasa de cambio
+       
+       
+       
       
     End If
     
     
     FrmSolicitudPagos.Show 1
-    Me.DtaIndice.Refresh
+    FrmSolicitudPagos.DtaIndice.Refresh
 End Sub
 
 Private Sub CmdNuevo_Click()
@@ -400,6 +493,11 @@ End Sub
 
 Private Sub CmdSalir_Click()
 Unload Me
+End Sub
+
+Private Sub Form_Initialize()
+    Set ew = New cls_NumEnglishWord
+    Set sw = New cls_NumSpanishWord
 End Sub
 
 Private Sub Form_Load()

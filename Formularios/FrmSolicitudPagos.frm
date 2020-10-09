@@ -146,7 +146,7 @@ Begin VB.Form FrmSolicitudPagos
    Begin VB.CommandButton CmdGrabar 
       Caption         =   "Imprimir"
       Height          =   375
-      Left            =   3840
+      Left            =   9360
       TabIndex        =   37
       Top             =   7920
       Width           =   1095
@@ -154,7 +154,7 @@ Begin VB.Form FrmSolicitudPagos
    Begin VB.CommandButton CmdNuevo 
       Caption         =   "Nuevo"
       Height          =   375
-      Left            =   5040
+      Left            =   1320
       TabIndex        =   36
       Top             =   7920
       Width           =   1095
@@ -162,7 +162,7 @@ Begin VB.Form FrmSolicitudPagos
    Begin VB.CommandButton CmdBorrar 
       Caption         =   "Borrar"
       Height          =   375
-      Left            =   7800
+      Left            =   3720
       TabIndex        =   35
       Top             =   7920
       Width           =   1095
@@ -170,7 +170,7 @@ Begin VB.Form FrmSolicitudPagos
    Begin VB.CommandButton SmartButton1 
       Caption         =   "Borrar Linea"
       Height          =   375
-      Left            =   6240
+      Left            =   2520
       TabIndex        =   34
       Top             =   7920
       Width           =   1095
@@ -194,17 +194,19 @@ Begin VB.Form FrmSolicitudPagos
    Begin VB.CommandButton CmdAnterior 
       Caption         =   "Anterior"
       Height          =   375
-      Left            =   1320
+      Left            =   9000
       TabIndex        =   31
-      Top             =   7920
+      Top             =   7200
+      Visible         =   0   'False
       Width           =   1095
    End
    Begin VB.CommandButton CmdSiguiente 
       Caption         =   "Siguiente"
       Height          =   375
-      Left            =   2520
+      Left            =   10200
       TabIndex        =   30
-      Top             =   7920
+      Top             =   7200
+      Visible         =   0   'False
       Width           =   1095
    End
    Begin VB.PictureBox TDBGridFechas 
@@ -514,7 +516,7 @@ Begin VB.Form FrmSolicitudPagos
          _ExtentX        =   2990
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   77725697
+         Format          =   78118913
          CurrentDate     =   38918
       End
       Begin MSComCtl2.DTPicker DTPFechaVence 
@@ -526,7 +528,7 @@ Begin VB.Form FrmSolicitudPagos
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   77725697
+         Format          =   78118913
          CurrentDate     =   38918
       End
       Begin VB.Label LblProveedor 
@@ -1091,7 +1093,7 @@ Begin VB.Form FrmSolicitudPagos
          _ExtentY        =   503
          _Version        =   393216
          Enabled         =   0   'False
-         Format          =   77725697
+         Format          =   78118913
          CurrentDate     =   38008
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel4 
@@ -2530,11 +2532,155 @@ TipoErrs:
 MsgBox err.Description
 End Sub
 
+Private Sub CmdMemoriza_Click()
+
+End Sub
+
+Private Sub CmdNuevo_Click()
+
+    'On Error GoTo TipoErrs
+      If Not Val(Me.TxtDiferencia.Text) = 0 Then
+       MsgBox "El Movimiento esta Desbalanceado", vbCritical, "Sistema Contable"
+       Exit Sub
+      End If
+      
+     ChequeGrabado = False
+      
+     Me.DBCodigo.Enabled = True
+     Me.TxtFecha.Enabled = True
+     
+     Me.CmdNuevo.Enabled = True
+     
+     '//////Grabo las descripcion en los indices//////////////////////
+     Me.DBGTransacciones.Enabled = True
+     mes = Month(Me.TxtFecha.Value)
+     Año = Year(Me.TxtFecha.Value)
+     FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
+     FechaFin = DateSerial(Año, mes + 1, 1 - 1)
+     NumFecha1 = FechaIni
+     NumFecha2 = FechaFin
+     
+     Me.DtaConsulta.RecordSource = "SELECT IndiceSolicitudPago.FechaTransaccion, IndiceSolicitudPago.NumeroMovimiento, IndiceSolicitudPago.DescripcionMovimiento, IndiceSolicitudPago.Fuente, IndiceSolicitudPago.Fuente From IndiceSolicitudPago WHERE (((IndiceSolicitudPago.FechaTransaccion) Between " & NumFecha1 & " And " & NumFecha2 & " ) AND ((IndiceSolicitudPago.NumeroMovimiento)= " & NumeroTransaccion & "))"
+     Me.DtaConsulta.Refresh
+     If Not DtaTransacciones.Recordset.EOF Then
+     Me.DtaTransacciones.Recordset.MoveFirst
+     End If
+           
+           If Not DtaConsulta.Recordset.EOF Then
+            If Not Me.DBGTransacciones.Columns(3).Text = "" Then
+              'Me.'DtaConsulta.Recordset.Edit
+              Me.DtaConsulta.Recordset("DescripcionMovimiento") = Me.DBGTransacciones.Columns(3).Text
+              Me.DtaConsulta.Recordset.Update
+            End If
+           End If
+     
+     TxtFecha.Enabled = True
+    Me.TxtPeriodo.Enabled = True
+    Me.TxtFuente.Enabled = True
+    Me.TxtNTransacciones.Enabled = True
+    Primero = True
+    Me.TxtDebito.Text = "0.00"
+    Me.TxtCredito.Text = "0.00"
+    Me.TxtDiferencia.Text = "0.00"
+    Me.TxtFuente.Text = ""
+    Me.TxtNTransacciones.Text = "0"
+    TxtFecha.Enabled = True
+    Me.TxtPeriodo.Enabled = True
+    Me.TxtFuente.Enabled = True
+    Me.TxtNTransacciones.Enabled = True
+    Me.TxtSubTotal.Text = "0.00"
+    Me.TxtIVa.Text = "0.00"
+    Me.TxtRetenciones.Text = "0.00"
+    Me.TxtMonto.Text = "0.00"
+    
+    Me.TxtMemo.Text = ""
+    Me.TxtLetras.Text = ""
+    Me.TxtNombre.Text = ""
+    
+    Me.Chk1.Value = 0
+    Me.Chk2.Value = 0
+    Me.Chk3.Value = 0
+    Me.Chk7.Value = 0
+    Me.Chk10.Value = 0
+    Me.Chk15.Value = 0
+    
+       
+     
+     
+    Me.DtaTransacciones.RecordSource = "SELECT TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, TransaccionesSolicitudPago.FacturaNo, TransaccionesSolicitudPago.ChequeNo, TransaccionesSolicitudPago.Clave, TransaccionesSolicitudPago.TCambio,  TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito, TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.NPeriodo, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.Fuente, TransaccionesSolicitudPago.FechaTasas, TransaccionesSolicitudPago.NumeroMovimiento,FechaDescuento,DescuentoDisponible,FechaVence,Beneficiario From TransaccionesSolicitudPago Where (((TransaccionesSolicitudPago.NumeroMovimiento) = -1))"
+    Me.DtaTransacciones.Refresh
+    
+      Me.DBGTransacciones.Columns("CodCuentas").Width = 1500    '0
+      Me.DBGTransacciones.Columns("CodCuentas").Button = True   '0
+      Me.DBGTransacciones.Columns("NombreCuenta").Locked = True '1
+      Me.DBGTransacciones.Columns("VoucherNo").Width = 1000     '2
+      Me.DBGTransacciones.Columns("DescripcionMovimiento").Caption = "Descripcion"  '3
+      Me.DBGTransacciones.Columns("FacturaNo").Width = 1000 '4
+      Me.DBGTransacciones.Columns("FacturaNo").Button = True '4
+      Me.DBGTransacciones.Columns("ChequeNo").Width = 1000 '5
+      Me.DBGTransacciones.Columns("Clave").Width = 800 '6
+      Me.DBGTransacciones.Columns("Clave").Button = True        '6
+      Me.DBGTransacciones.Columns("Clave").Locked = True        '6
+      Me.DBGTransacciones.Columns("TCambio").Caption = "Tasa Cambio"    '7
+      Me.DBGTransacciones.Columns("TCambio").Locked = True '7
+      Me.DBGTransacciones.Columns("TCambio").Width = 1200  '7
+      Me.DBGTransacciones.Columns("TCambio").NumberFormat = "##,##0.000000" '7
+      Me.DBGTransacciones.Columns("Debito").Width = 1200 '8
+      Me.DBGTransacciones.Columns("Debito").NumberFormat = "##,##0.00" '8
+      Me.DBGTransacciones.Columns("Credito").Width = 1200 '9
+      Me.DBGTransacciones.Columns("Credito").NumberFormat = "##,##0.00" '9
+      Me.DBGTransacciones.Columns("FechaTransaccion").Visible = False '10
+      Me.DBGTransacciones.Columns("NPeriodo").Visible = False  '11
+      Me.DBGTransacciones.Columns(12).Visible = False
+      Me.DBGTransacciones.Columns(11).Visible = False
+      Me.DBGTransacciones.Columns(12).Visible = False
+      Me.DBGTransacciones.Columns(13).Visible = False
+      Me.DBGTransacciones.Columns(14).Visible = False
+      Me.DBGTransacciones.Columns(15).Visible = False
+      Me.DBGTransacciones.Columns(16).Visible = False
+        Me.DBGTransacciones.Columns(17).Visible = False
+      Me.DBGTransacciones.Columns(18).Visible = False
+      Me.DBGTransacciones.Columns(19).Visible = False
+      
+      If Not CodigoUsuario = 0 Then
+    
+     Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodigoUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Cheques'))"
+     Me.DtaNacceso.Refresh
+     If Me.DtaNacceso.Recordset.EOF Then
+       Me.CmdGrabar.Enabled = False
+       Me.DBCodigo.Enabled = False
+       Me.TxtFecha.Enabled = False
+       Me.DBGTransacciones.Enabled = False
+     End If
+     Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodigoUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Cheques'))"
+     Me.DtaNacceso.Refresh
+     If Me.DtaNacceso.Recordset.EOF Then
+       Me.CmdBorrar.Enabled = False
+       Me.SmartButton1.Enabled = False
+     End If
+    End If
+    
+    TotalCredito = 0
+    TotalDebito = 0
+    Debito = 0
+    Credito = 0
+    TotalDiferencia = 0
+    Diferencia = 0
+    
+
+Me.SkinLabel24.Caption = "No.Solicitud"
+
+ 
+ Exit Sub
+TipoErrs:
+ MsgBox err.Description
+End Sub
+
 Private Sub CmdSalir_Click()
 Unload Me
 End Sub
 
-Private Sub DBCodigo_ItemChange()
+Public Sub DBCodigo_ItemChange()
 On Error GoTo TipoErrs
 Dim MontoTasa As Double, Fecha As Long
 Dim SQL As String
@@ -3750,6 +3896,7 @@ Me.DBCodigo.ListField = "CodCuentas"
   Me.DBGTransacciones.Columns(3).Caption = "Descripcion"
   Me.DBGTransacciones.Columns(4).Width = 1000
   Me.DBGTransacciones.Columns(4).Button = True
+  Me.DBGTransacciones.Columns(5).Caption = "Factura/Presp"
   Me.DBGTransacciones.Columns(5).Width = 1000
   Me.DBGTransacciones.Columns(5).Caption = "Cheq/Rec"
   Me.DBGTransacciones.Columns(6).Width = 800
@@ -4044,6 +4191,117 @@ End If
 Exit Sub
 TipoErrs:
 ControlErrores
+
+End Sub
+
+Private Sub SmartButton1_Click()
+
+
+    On Error GoTo TipoErrs
+      Dim Respuesta, Rsp, CodigoCuenta As String, FechaTransaccion As String, NumeroTransaccion As Double
+      Dim NTransaccion As Double
+      
+       NTransaccion = Me.DBGTransacciones.Columns(12).Text
+      
+      Set Rsp = DtaTransacciones.Recordset
+      Respuesta = MsgBox("Esta seguro de Borrar la Linea?", vbYesNo, "Transaccion No.: " & Me.TxtNTransacciones.Text)
+       If Respuesta = 6 Then
+         If Me.DBGTransacciones.Columns(6).Text = "Debito" Then
+           Debito = Me.DBGTransacciones.Columns(8).Text
+           TotalDebito = TotalDebito - Debito
+           Me.TxtDebito.Text = Format(TotalDebito, "##,##0.00")
+           TotalDiferencia = TotalDebito - TotalCredito
+           Me.TxtDiferencia.Text = Format(TotalDiferencia, "##,##0.00")
+         Else
+           Credito = Me.DBGTransacciones.Columns(9).Text
+           TotalCredito = TotalCredito - Credito
+           Me.TxtCredito.Text = Format(TotalCredito, "##,##0.00")
+           TotalDiferencia = TotalDebito - TotalCredito
+           Me.TxtDiferencia.Text = Format(TotalDiferencia, "##,##0.00")
+         End If
+       
+       If Not Me.DBGTransacciones.Columns(0).Text = "" Then
+        CodigoCuenta = Me.DBGTransacciones.Columns(0).Text
+        FechaTransaccion = Format(Me.TxtFecha.Value, "YYYY-MM-DD")
+        NumeroTransaccion = Me.TxtNTransacciones.Text
+        Me.AdoBuscar.RecordSource = "SELECT  * From Transacciones WHERE (CodCuentas = '" & CodigoCuenta & "') AND (FechaTransaccion = CONVERT(DATETIME, '" & FechaTransaccion & "', 102)) AND (NumeroMovimiento = " & NumeroTransaccion & ") AND (NTransaccion = " & NTransaccion & ")"
+        Me.AdoBuscar.Refresh
+        If Not Me.AdoBuscar.Recordset.EOF Then
+         Me.AdoBuscar.Recordset.Delete
+        
+        End If
+        
+        
+       End If
+      End If
+      
+      
+      If Not CodigoUsuario = 0 Then
+    Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodigoUsuario & ") AND ((Accesos.AccesoModulo)='Grabar Transacciones'))"
+    Me.DtaNacceso.Refresh
+    If Me.DtaNacceso.Recordset.EOF Then
+       Me.CmdGrabar.Enabled = False
+       Me.TxtFecha.Enabled = False
+       Me.Frame1.Enabled = False
+       Me.DBGTransacciones.Enabled = False
+       Me.CmdBuscarEmpleado.Enabled = False
+          Me.TxtFecha.Enabled = False
+    Else
+      Me.DBGTransacciones.Enabled = True
+    End If
+    Me.DtaNacceso.RecordSource = "SELECT Accesos.CodUsuario, Accesos.AccesoModulo From Accesos WHERE (((Accesos.CodUsuario)= " & CodigoUsuario & ") AND ((Accesos.AccesoModulo)='Borrar Transacciones'))"
+    Me.DtaNacceso.Refresh
+    If Me.DtaNacceso.Recordset.EOF Then
+       Me.CmdBorrar.Enabled = False
+       Me.SmartButton1.Enabled = False
+    End If
+    End If
+      
+      DtaTransacciones.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.FechaDescuento, Transacciones.DescuentoDisponible, Transacciones.FechaVence, Transacciones.CodCuentaProveedor, Transacciones.TipoFactura, Transacciones.NTransaccion AS Expr1  FROM  Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo  " & _
+                                      "WHERE (FechaTransaccion = CONVERT(DATETIME, '" & FechaTransaccion & "', 102)) AND (NumeroMovimiento = " & NumeroTransaccion & ") ORDER BY Transacciones.NTransaccion"
+      
+      DtaTransacciones.Refresh
+      Me.DBGTransacciones.Columns(0).Button = True
+      Me.DBGTransacciones.Columns(1).Locked = True
+      Me.DBGTransacciones.Columns(1).Locked = True
+      Me.DBGTransacciones.Columns(5).Caption = "Cheq/Rec"
+      Me.DBGTransacciones.Columns(6).Button = True
+      Me.DBGTransacciones.Columns(6).Locked = True
+      Me.DBGTransacciones.Columns(0).Width = 1500
+      Me.DBGTransacciones.Columns(2).Width = 1000
+      Me.DBGTransacciones.Columns(2).Caption = "Voucher/Dpto"
+      Me.DBGTransacciones.Columns(3).Caption = "Descripcion"
+      Me.DBGTransacciones.Columns(4).Width = 1000
+      Me.DBGTransacciones.Columns(4).Button = True
+      Me.DBGTransacciones.Columns(5).Width = 1000
+      Me.DBGTransacciones.Columns(5).Caption = "Cheq/Rec"
+      Me.DBGTransacciones.Columns(6).Width = 800
+      Me.DBGTransacciones.Columns(7).Caption = "Tasa Cambio"
+      Me.DBGTransacciones.Columns(7).Locked = True
+      Me.DBGTransacciones.Columns(7).NumberFormat = "##,##0.000000"
+      Me.DBGTransacciones.Columns(7).Width = 1200
+      Me.DBGTransacciones.Columns(8).Width = 1200
+      Me.DBGTransacciones.Columns(8).NumberFormat = "##,##0.00"
+      Me.DBGTransacciones.Columns(9).Width = 1200
+      Me.DBGTransacciones.Columns(9).NumberFormat = "##,##0.00"
+      Me.DBGTransacciones.Columns(10).Visible = False
+      Me.DBGTransacciones.Columns(11).Visible = False
+      Me.DBGTransacciones.Columns(12).Visible = False
+      Me.DBGTransacciones.Columns(13).Visible = False
+      Me.DBGTransacciones.Columns(14).Visible = False
+      Me.DBGTransacciones.Columns(15).Visible = False
+      Me.DBGTransacciones.Columns(16).Visible = False
+      Me.DBGTransacciones.Columns(17).Visible = False
+      Me.DBGTransacciones.Columns(18).Visible = False
+      Me.DBGTransacciones.Columns(19).Visible = False
+      Me.DBGTransacciones.Columns(20).Visible = False
+      Me.DBGTransacciones.Columns(21).Visible = False
+      Me.DBGTransacciones.Columns(22).Visible = False
+      Me.DBGTransacciones.Columns(7).Locked = True 'columna tasa de cambio
+      
+     Exit Sub
+TipoErrs:
+     ControlErrores
 
 End Sub
 
@@ -4473,7 +4731,7 @@ TipoErrs:
  MsgBox err.Description
 End Sub
 
-Private Sub TxtMonto_Change()
+Public Sub TxtMonto_Change()
 'On Error GoTo TipoErrs
 Dim SqlContratista As String, Fecha As Long
 

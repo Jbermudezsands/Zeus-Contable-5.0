@@ -117,7 +117,7 @@ Private Sub Detail_Format()
 Dim Descripcion As String, Monto As Double
 Descripcion = Me.Field1.Text
 Monto = Val(Me.Field3.Text)
- If Me.FLdKeyGrupo.Text = "A" Or Me.FLdKeyGrupo.Text = "PC" Then
+ If Me.FldKeyGrupo.Text = "A" Or Me.FldKeyGrupo.Text = "PC" Then
   If Val(Monto) <> 0 Then
    Me.Line1.Visible = True
    Me.Line2.Visible = True
@@ -192,6 +192,3 @@ Monto = Val(Me.Field3.Text)
  
 End Sub
 
-Private Sub PageHeader_Format()
-
-End Sub
