@@ -2049,10 +2049,13 @@ ElseIf QUIEN = "Nivel" Then
      FrmReportes.DtaConsulta.Recordset.MoveLast
      numero = FrmReportes.DtaConsulta.Recordset.RecordCount
      FrmReportes.DtaConsulta.Recordset.MoveFirst
-     Do While Not FrmReportes.DtaConsulta.Recordset.EOF
-        FrmReportes.DtaConsulta.Recordset.Delete
-        FrmReportes.DtaConsulta.Recordset.MoveNext
-     Loop
+'     Do While Not FrmReportes.DtaConsulta.Recordset.EOF
+'        FrmReportes.DtaConsulta.Recordset.Delete
+'        FrmReportes.DtaConsulta.Recordset.MoveNext
+'     Loop
+
+'///////////////////////////ELIMINO TODOS LOS REGISTROS MAYORES AL NIVEL SELECCIONADO ////////////////////
+      rs.Open "DELETE FROM Reportes WHERE (((Reportes.Nivel) > " & Niveles & "))", Conexion
      FrmReportes.DtaConsulta.Refresh
   End If
   
@@ -2895,7 +2898,11 @@ Dim CodDepartamentoAnt As String, CodigoGrupoAnt As String, UltimoCodigoGrupo As
            
                CodigoGrupoAnt = CodigoGrupo
                CodDepartamentoAnt = CodDepartamento
-               CodDepartamento = FrmReportes.DtaConsulta.Recordset("VoucherNo")
+               If Not IsNull(FrmReportes.DtaConsulta.Recordset("VoucherNo")) Then
+                 CodDepartamento = FrmReportes.DtaConsulta.Recordset("VoucherNo")
+               Else
+                 CodDepartamento = "-"
+               End If
                If CodDepartamento <> CodDepartamentoAnt Then
                   MDIPrimero.AdoConsulta.RecordSource = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, Nivel, CodCuentas, CodDepartamento From Reportes " & _
                                                         "WHERE  (KeyGrupo = '" & CodigoGrupoAnt & "') AND (CodDepartamento = '" & CodDepartamentoAnt & "') AND  (Descripcion LIKE '%Total%') ORDER BY Orden"
@@ -4750,7 +4757,11 @@ Dim TotalDebitoDpto As Double, TotalCreditoDpto As Double
                     '////////Consulto los registros del periodo seleccionado.///////////
                     CodigoCuenta = FrmReportes.DtaHistorial.Recordset("CodCuentas")
                     If QUIEN = "Resultado" Or QUIEN = "UtilidadResultado" Then
+                     If Not IsNull(FrmReportes.DtaHistorial.Recordset("VoucherNo")) Then
                       CodDepartamento = FrmReportes.DtaHistorial.Recordset("VoucherNo")
+                      Else
+                      CodDepartamento = "-"
+                     End If
                       CodigoGrupo = FrmReportes.DtaHistorial.Recordset("KeyGrupo")
                     End If
                     
@@ -8073,9 +8084,9 @@ Function ConfiguracionReportesBalance()
     End If
 End Function
 
-Public Function SumasDebitos(NumeroMovimiento As Double, NPeriodo As Double)
+Public Function SumasDebitos(NumeroMovimiento As Double, Nperiodo As Double)
  Dim SQL As String, Debito As Double, Credito As Double
-  SQL = "SELECT  FechaTransaccion AS FechaTransaccion, TCambio AS TCambio, Debito AS Debito, Credito AS Credito From Transacciones Where (NumeroMovimiento = " & NumeroMovimiento & ") And (NPeriodo = " & NPeriodo & ")"
+  SQL = "SELECT  FechaTransaccion AS FechaTransaccion, TCambio AS TCambio, Debito AS Debito, Credito AS Credito From Transacciones Where (NumeroMovimiento = " & NumeroMovimiento & ") And (NPeriodo = " & Nperiodo & ")"
   MDIPrimero.AdoConsulta.RecordSource = SQL
   MDIPrimero.AdoConsulta.Refresh
   Do While Not MDIPrimero.AdoConsulta.Recordset.EOF

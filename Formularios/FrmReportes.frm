@@ -517,14 +517,14 @@ Begin VB.Form FrmReportes
       TabCaption(1)   =   "Configuracion Reportes"
       TabPicture(1)   =   "FrmReportes.frx":17E4E
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame10"
-      Tab(1).Control(1)=   "Frame11"
+      Tab(1).Control(0)=   "Frame11"
+      Tab(1).Control(1)=   "Frame10"
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "Configuracion Reportes "
       TabPicture(2)   =   "FrmReportes.frx":17E6A
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame12"
-      Tab(2).Control(1)=   "Frame13"
+      Tab(2).Control(0)=   "Frame13"
+      Tab(2).Control(1)=   "Frame12"
       Tab(2).ControlCount=   2
       Begin VB.Frame FrmDepartamento 
          BackColor       =   &H00E0E0E0&
@@ -2162,7 +2162,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   79298561
+            Format          =   17104897
             CurrentDate     =   37837
          End
          Begin MSComCtl2.DTPicker DTFecha1 
@@ -2174,7 +2174,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   79298561
+            Format          =   17104897
             CurrentDate     =   37837
          End
          Begin VB.Label Label4 
@@ -6579,9 +6579,9 @@ Case "COMPARATIVO INGRESOS VRS GASTOS"
          
             ArepGraficosIngresos.Chart2D.ChartGroups(1).Data.NumPoints(1) = CantRegistros
             ArepGraficosIngresos.Chart2D.ChartGroups(1).Data.NumPoints(2) = CantRegistros
-            ArepGraficosIngresos.Chart2D.ChartGroups(1).Data.X(1, i) = i
-            ArepGraficosIngresos.Chart2D.ChartGroups(1).Data.Y(1, i) = TotalCosto + TotalGastos
-            ArepGraficosIngresos.Chart2D.ChartGroups(1).Data.Y(2, i) = Totalingresos
+            ArepGraficosIngresos.Chart2D.ChartGroups(1).Data.x(1, i) = i
+            ArepGraficosIngresos.Chart2D.ChartGroups(1).Data.y(1, i) = TotalCosto + TotalGastos
+            ArepGraficosIngresos.Chart2D.ChartGroups(1).Data.y(2, i) = Totalingresos
          
          ArepGraficosIngresos.MSFlexGrid.cols = CantRegistros + 1
          ArepGraficosIngresos.MSFlexGrid.ColWidth(i) = 1500
@@ -7707,7 +7707,7 @@ Dim rs As New ADODB.Recordset
 Dim Parche As ADODB.Connection
 
 
-On Error GoTo TipoErrs
+'On Error GoTo TipoErrs
 Me.Frame6.Visible = True
 Me.CmdVerReporte2.Enabled = False
 Me.CmdSalir.Enabled = False
@@ -8214,30 +8214,30 @@ Case "PUNTO DE EQUILIBRIO"
          ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.NumPoints(3) = CantRegistros + 1
          
          If i = 1 Then
-         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.X(1, 1) = 0
-         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.Y(1, 1) = TotalCostoFijo + TotalGastoFijo
-         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.X(2, 1) = 0
-         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.Y(2, 1) = 0
-         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.X(3, 1) = 0
-         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.Y(3, 1) = TotalCostoFijo + TotalGastoFijo
+         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.x(1, 1) = 0
+         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.y(1, 1) = TotalCostoFijo + TotalGastoFijo
+         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.x(2, 1) = 0
+         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.y(2, 1) = 0
+         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.x(3, 1) = 0
+         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.y(3, 1) = TotalCostoFijo + TotalGastoFijo
          
          
-         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.X(1, 2) = 1
-         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.Y(1, 2) = TotalCostoFijo + TotalGastoFijo
-         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.X(2, 2) = 1
-         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.Y(2, 2) = Totalingresos
-         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.X(3, 2) = 1
-         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.Y(3, 2) = TotalCosto + TotalGastos
+         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.x(1, 2) = 1
+         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.y(1, 2) = TotalCostoFijo + TotalGastoFijo
+         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.x(2, 2) = 1
+         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.y(2, 2) = Totalingresos
+         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.x(3, 2) = 1
+         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.y(3, 2) = TotalCosto + TotalGastos
          
          J = 2
          Else
          
-         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.X(1, J) = J - 1
-         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.Y(1, J) = TotalCostoFijo + TotalGastoFijo
-         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.X(2, J) = J - 1
-         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.Y(2, J) = Totalingresos
-         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.X(3, J) = J - 1
-         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.Y(3, J) = TotalCosto + TotalGastos
+         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.x(1, J) = J - 1
+         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.y(1, J) = TotalCostoFijo + TotalGastoFijo
+         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.x(2, J) = J - 1
+         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.y(2, J) = Totalingresos
+         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.x(3, J) = J - 1
+         ArepPuntoEquilibrio.Chart2D.ChartGroups(1).Data.y(3, J) = TotalCosto + TotalGastos
          End If
          ArepPuntoEquilibrio.MSFlexGrid.cols = CantRegistros + 1
          ArepPuntoEquilibrio.MSFlexGrid.ColWidth(i) = 1500
