@@ -18,6 +18,60 @@ Begin VB.Form FrmEstructuraPresupuesto
    MinButton       =   0   'False
    ScaleHeight     =   5520
    ScaleWidth      =   15645
+   Begin MSAdodcLib.Adodc AdoPresupuestoAnual 
+      Height          =   375
+      Left            =   480
+      Top             =   5880
+      Width           =   2655
+      _ExtentX        =   4683
+      _ExtentY        =   661
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "AdoPresupuestoAnual"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin VB.CommandButton Command3 
+      Caption         =   "Grabar"
+      Height          =   375
+      Left            =   14280
+      TabIndex        =   200
+      Top             =   4320
+      Width           =   1215
+   End
    Begin VB.CommandButton Command2 
       Caption         =   "Distribuir"
       Height          =   375
@@ -46,10 +100,10 @@ Begin VB.Form FrmEstructuraPresupuesto
       EndProperty
       ForeColor       =   &H00800000&
       Height          =   285
-      Left            =   11160
+      Left            =   10680
       TabIndex        =   120
       Top             =   3840
-      Width           =   1215
+      Width           =   1455
    End
    Begin VB.TextBox TxtTotal2 
       BeginProperty Font 
@@ -63,10 +117,10 @@ Begin VB.Form FrmEstructuraPresupuesto
       EndProperty
       ForeColor       =   &H00800000&
       Height          =   285
-      Left            =   12720
+      Left            =   12360
       TabIndex        =   119
       Top             =   3840
-      Width           =   1215
+      Width           =   1455
    End
    Begin VB.TextBox TxtTotal3 
       BeginProperty Font 
@@ -80,10 +134,10 @@ Begin VB.Form FrmEstructuraPresupuesto
       EndProperty
       ForeColor       =   &H00800000&
       Height          =   285
-      Left            =   14280
+      Left            =   14040
       TabIndex        =   118
       Top             =   3840
-      Width           =   1215
+      Width           =   1455
    End
    Begin ACTIVESKINLibCtl.SkinLabel Lbl1 
       Height          =   255
@@ -96,7 +150,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   11160
+      Left            =   10920
       TabIndex        =   98
       Text            =   "0.00"
       Top             =   840
@@ -105,7 +159,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text2 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   11160
+      Left            =   10920
       TabIndex        =   97
       Text            =   "0.00"
       Top             =   1080
@@ -114,7 +168,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text3 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   11160
+      Left            =   10920
       TabIndex        =   96
       Text            =   "0.00"
       Top             =   1320
@@ -123,7 +177,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text4 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   11160
+      Left            =   10920
       TabIndex        =   95
       Text            =   "0.00"
       Top             =   1560
@@ -132,7 +186,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text5 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   11160
+      Left            =   10920
       TabIndex        =   94
       Text            =   "0.00"
       Top             =   1800
@@ -141,7 +195,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text6 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   11160
+      Left            =   10920
       TabIndex        =   93
       Text            =   "0.00"
       Top             =   2040
@@ -150,7 +204,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text7 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   11160
+      Left            =   10920
       TabIndex        =   92
       Text            =   "0.00"
       Top             =   2280
@@ -159,7 +213,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text8 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   11160
+      Left            =   10920
       TabIndex        =   91
       Text            =   "0.00"
       Top             =   2520
@@ -168,7 +222,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text9 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   11160
+      Left            =   10920
       TabIndex        =   90
       Text            =   "0.00"
       Top             =   2760
@@ -177,7 +231,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text10 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   11160
+      Left            =   10920
       TabIndex        =   89
       Text            =   "0.00"
       Top             =   3000
@@ -186,7 +240,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text11 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   11160
+      Left            =   10920
       TabIndex        =   88
       Text            =   "0.00"
       Top             =   3240
@@ -195,7 +249,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text12 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   11160
+      Left            =   10920
       TabIndex        =   87
       Text            =   "0.00"
       Top             =   3480
@@ -204,7 +258,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text13 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   86
       Text            =   "0.00"
       Top             =   840
@@ -213,7 +267,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text14 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   85
       Text            =   "0.00"
       Top             =   1080
@@ -222,7 +276,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text15 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   84
       Text            =   "0.00"
       Top             =   1320
@@ -231,7 +285,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text16 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   83
       Text            =   "0.00"
       Top             =   1560
@@ -240,7 +294,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text17 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   82
       Text            =   "0.00"
       Top             =   1800
@@ -249,7 +303,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text18 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   81
       Text            =   "0.00"
       Top             =   2040
@@ -258,7 +312,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text19 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   80
       Text            =   "0.00"
       Top             =   2280
@@ -267,7 +321,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text20 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   79
       Text            =   "0.00"
       Top             =   2520
@@ -276,7 +330,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text21 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   78
       Text            =   "0.00"
       Top             =   2760
@@ -285,7 +339,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text22 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   77
       Text            =   "0.00"
       Top             =   3000
@@ -294,7 +348,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text23 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   76
       Text            =   "0.00"
       Top             =   3240
@@ -303,7 +357,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    Begin VB.TextBox Text24 
       Alignment       =   1  'Right Justify
       Height          =   285
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   75
       Text            =   "0.00"
       Top             =   3480
@@ -798,6 +852,7 @@ Begin VB.Form FrmEstructuraPresupuesto
          Left            =   4320
          TabIndex        =   198
          Top             =   240
+         Visible         =   0   'False
          Width           =   975
       End
       Begin VB.CommandButton SmartButton1 
@@ -1333,7 +1388,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel Lbl4 
       Height          =   255
-      Left            =   11160
+      Left            =   10920
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":4F9F
       TabIndex        =   115
       Top             =   600
@@ -1341,7 +1396,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel Lbl5 
       Height          =   255
-      Left            =   12720
+      Left            =   12600
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":500D
       TabIndex        =   116
       Top             =   600
@@ -1669,7 +1724,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel39 
       Height          =   255
-      Left            =   10800
+      Left            =   10560
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":5FAD
       TabIndex        =   160
       Top             =   840
@@ -1677,7 +1732,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel40 
       Height          =   255
-      Left            =   10800
+      Left            =   10560
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":600D
       TabIndex        =   161
       Top             =   1080
@@ -1685,7 +1740,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel41 
       Height          =   255
-      Left            =   10800
+      Left            =   10560
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":606D
       TabIndex        =   162
       Top             =   1320
@@ -1693,7 +1748,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel42 
       Height          =   255
-      Left            =   10800
+      Left            =   10560
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":60CD
       TabIndex        =   163
       Top             =   1560
@@ -1701,7 +1756,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel43 
       Height          =   255
-      Left            =   10800
+      Left            =   10560
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":612D
       TabIndex        =   164
       Top             =   1800
@@ -1709,7 +1764,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel44 
       Height          =   255
-      Left            =   10800
+      Left            =   10560
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":618D
       TabIndex        =   165
       Top             =   2040
@@ -1717,7 +1772,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel45 
       Height          =   255
-      Left            =   10800
+      Left            =   10560
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":61ED
       TabIndex        =   166
       Top             =   2280
@@ -1725,7 +1780,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel46 
       Height          =   255
-      Left            =   10800
+      Left            =   10560
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":624D
       TabIndex        =   167
       Top             =   2520
@@ -1733,7 +1788,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel47 
       Height          =   255
-      Left            =   10800
+      Left            =   10560
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":62AD
       TabIndex        =   168
       Top             =   2760
@@ -1741,7 +1796,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel48 
       Height          =   255
-      Left            =   10800
+      Left            =   10560
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":630D
       TabIndex        =   169
       Top             =   3000
@@ -1749,7 +1804,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel49 
       Height          =   255
-      Left            =   10800
+      Left            =   10560
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":636F
       TabIndex        =   170
       Top             =   3240
@@ -1757,7 +1812,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel50 
       Height          =   255
-      Left            =   10800
+      Left            =   10560
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":63D1
       TabIndex        =   171
       Top             =   3480
@@ -1765,7 +1820,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel51 
       Height          =   255
-      Left            =   12360
+      Left            =   12240
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":6433
       TabIndex        =   172
       Top             =   840
@@ -1773,7 +1828,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel52 
       Height          =   255
-      Left            =   12360
+      Left            =   12240
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":6493
       TabIndex        =   173
       Top             =   1080
@@ -1781,7 +1836,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel53 
       Height          =   255
-      Left            =   12360
+      Left            =   12240
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":64F3
       TabIndex        =   174
       Top             =   1320
@@ -1789,7 +1844,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel54 
       Height          =   255
-      Left            =   12360
+      Left            =   12240
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":6553
       TabIndex        =   175
       Top             =   1560
@@ -1797,7 +1852,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel55 
       Height          =   255
-      Left            =   12360
+      Left            =   12240
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":65B3
       TabIndex        =   176
       Top             =   1800
@@ -1805,7 +1860,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel56 
       Height          =   255
-      Left            =   12360
+      Left            =   12240
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":6613
       TabIndex        =   177
       Top             =   2040
@@ -1813,7 +1868,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel57 
       Height          =   255
-      Left            =   12360
+      Left            =   12240
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":6673
       TabIndex        =   178
       Top             =   2280
@@ -1821,7 +1876,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel58 
       Height          =   255
-      Left            =   12360
+      Left            =   12240
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":66D3
       TabIndex        =   179
       Top             =   2520
@@ -1829,7 +1884,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel59 
       Height          =   255
-      Left            =   12360
+      Left            =   12240
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":6733
       TabIndex        =   180
       Top             =   2760
@@ -1837,7 +1892,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel60 
       Height          =   255
-      Left            =   12360
+      Left            =   12240
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":6793
       TabIndex        =   181
       Top             =   3000
@@ -1845,7 +1900,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel61 
       Height          =   255
-      Left            =   12360
+      Left            =   12240
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":67F5
       TabIndex        =   182
       Top             =   3240
@@ -1853,7 +1908,7 @@ Begin VB.Form FrmEstructuraPresupuesto
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel62 
       Height          =   255
-      Left            =   12360
+      Left            =   12240
       OleObjectBlob   =   "FrmEstructuraPresupuesto.frx":6857
       TabIndex        =   183
       Top             =   3480
@@ -2252,13 +2307,60 @@ Begin VB.Form FrmEstructuraPresupuesto
       Scrolling       =   1
       Appearance      =   6
    End
+   Begin MSAdodcLib.Adodc AdoPresupuesto 
+      Height          =   330
+      Left            =   4920
+      Top             =   7800
+      Visible         =   0   'False
+      Width           =   2655
+      _ExtentX        =   4683
+      _ExtentY        =   582
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "AdoPresupuesto"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
    Begin VB.Label Label53 
       Alignment       =   2  'Center
       BackStyle       =   0  'Transparent
       BorderStyle     =   1  'Fixed Single
       Caption         =   "01/01/2004"
       Height          =   255
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   110
       Top             =   3480
       Width           =   1215
@@ -2269,7 +2371,7 @@ Begin VB.Form FrmEstructuraPresupuesto
       BorderStyle     =   1  'Fixed Single
       Caption         =   "01/01/2004"
       Height          =   255
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   109
       Top             =   3240
       Width           =   1215
@@ -2280,7 +2382,7 @@ Begin VB.Form FrmEstructuraPresupuesto
       BorderStyle     =   1  'Fixed Single
       Caption         =   "01/01/2004"
       Height          =   255
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   108
       Top             =   3000
       Width           =   1215
@@ -2291,7 +2393,7 @@ Begin VB.Form FrmEstructuraPresupuesto
       BorderStyle     =   1  'Fixed Single
       Caption         =   "01/01/2004"
       Height          =   255
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   107
       Top             =   2760
       Width           =   1215
@@ -2302,7 +2404,7 @@ Begin VB.Form FrmEstructuraPresupuesto
       BorderStyle     =   1  'Fixed Single
       Caption         =   "01/01/2004"
       Height          =   255
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   106
       Top             =   2520
       Width           =   1215
@@ -2313,7 +2415,7 @@ Begin VB.Form FrmEstructuraPresupuesto
       BorderStyle     =   1  'Fixed Single
       Caption         =   "01/01/2004"
       Height          =   255
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   105
       Top             =   2280
       Width           =   1215
@@ -2324,7 +2426,7 @@ Begin VB.Form FrmEstructuraPresupuesto
       BorderStyle     =   1  'Fixed Single
       Caption         =   "01/01/2004"
       Height          =   255
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   104
       Top             =   2040
       Width           =   1215
@@ -2335,7 +2437,7 @@ Begin VB.Form FrmEstructuraPresupuesto
       BorderStyle     =   1  'Fixed Single
       Caption         =   "01/01/2004"
       Height          =   255
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   103
       Top             =   1800
       Width           =   1215
@@ -2346,7 +2448,7 @@ Begin VB.Form FrmEstructuraPresupuesto
       BorderStyle     =   1  'Fixed Single
       Caption         =   "01/01/2004"
       Height          =   255
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   102
       Top             =   1560
       Width           =   1215
@@ -2357,7 +2459,7 @@ Begin VB.Form FrmEstructuraPresupuesto
       BorderStyle     =   1  'Fixed Single
       Caption         =   "01/01/2004"
       Height          =   255
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   101
       Top             =   1320
       Width           =   1215
@@ -2368,7 +2470,7 @@ Begin VB.Form FrmEstructuraPresupuesto
       BorderStyle     =   1  'Fixed Single
       Caption         =   "01/01/2004"
       Height          =   255
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   100
       Top             =   1080
       Width           =   1215
@@ -2379,7 +2481,7 @@ Begin VB.Form FrmEstructuraPresupuesto
       BorderStyle     =   1  'Fixed Single
       Caption         =   "01/01/2004"
       Height          =   255
-      Left            =   12720
+      Left            =   12600
       TabIndex        =   99
       Top             =   840
       Width           =   1215
@@ -2523,6 +2625,44 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Public Enfoque As Double, TotalAño1 As Double, TotalAño2 As Double, TotalAño3 As Double
+
+Private Sub CmdBorrar_Click()
+   Dim NodX As Node
+Dim Respuesta As Integer
+Dim Relatives As String, RelationsShips As String
+Dim LLave As String, Texto As String, Imagen1 As Integer
+Dim Imagen2 As Integer
+  If KeyPrincipal = "B" Or KeyPrincipal = "A" Or KeyPrincipal = "C" Or KeyPrincipal = "G" Or KeyPrincipal = "D" Or KeyPrincipal = "O" Then
+      MsgBox "No se Puede Borrar el Grupo Principal", vbCritical, "Sistema Contable"
+      Exit Sub
+   Else
+     Me.DtaConsulta.RecordSource = "SELECT EstructuraPresupuesto.KeyGrupo, EstructuraPresupuesto.KeyGrupoSuperior, EstructuraPresupuesto.Child, EstructuraPresupuesto.DescripcionGrupo, EstructuraPresupuesto.Imagen1, EstructuraPresupuesto.Imagen2 From EstructuraPresupuesto Where (((EstructuraPresupuesto.KeyGrupoSuperior) = '" & KeyPrincipal & "'))ORDER BY EstructuraPresupuesto.DescripcionGrupo"
+     Me.DtaConsulta.Refresh
+        If Not Me.DtaConsulta.Recordset.EOF Then
+          MsgBox "Este Grupo tiene SubGrupos, no se puede Borrar", vbCritical, "Sistema Contable"
+          Exit Sub
+        Else
+         Me.DtaConsulta.RecordSource = "SELECT Cuentas.CodCuentas, Cuentas.DescripcionCuentas From Cuentas Where (((Cuentas.KeyGrupo) = '" & KeyPrincipal & "')) ORDER BY Cuentas.CodCuentas"
+         Me.DtaConsulta.Refresh
+          If Not DtaConsulta.Recordset.EOF Then
+           '   MsgBox "Este Grupo tiene Cuentas, no se puede Borrar", vbCritical, "Sistema Contable"
+           '   Exit Sub
+             Else
+               Respuesta = MsgBox("Esta seguro de Borrar este Grupo", vbYesNo, "Sistema Contable")
+               If Respuesta = 6 Then
+           
+                   Me.DtaConsulta.RecordSource = "SELECT EstructuraPresupuesto.KeyGrupo, EstructuraPresupuesto.DescripcionGrupo From EstructuraPresupuesto Where (((EstructuraPresupuesto.KeyGrupo) = '" & KeyPrincipal & "'))"
+                   Me.DtaConsulta.Refresh
+                   If Not DtaConsulta.Recordset.EOF Then
+                     Me.DtaConsulta.Recordset.Delete
+                   End If
+                   Me.TreeView1.Nodes.Remove (KeyPrincipal)
+                   
+              End If
+          End If
+      End If
+ End If
+End Sub
 
 Private Sub CmdCopiar_Click()
  Dim i As Double, Cc As Double, Monto As Double, c As String
@@ -2673,21 +2813,21 @@ Dim Saldo As Double
   Me.DtaConsulta.Refresh
   If Me.DtaConsulta.Recordset.EOF Then
      Me.DtaPresupuesto.Recordset.AddNew
-      Me.DtaPresupuesto.Recordset!NPeriodo = NumeroPeriodo
+      Me.DtaPresupuesto.Recordset!Nperiodo = NumeroPeriodo
       Me.DtaPresupuesto.Recordset!CodCuenta = KeyPrincipal
       Select Case Periodo
-             Case 1: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text1.Text
-             Case 2: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text2.Text
-             Case 3: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text3.Text
-             Case 4: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text4.Text
-             Case 5: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text5.Text
-             Case 6: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text6.Text
-             Case 7: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text7.Text
-             Case 8: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text8.Text
-             Case 9: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text9.Text
-             Case 10: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text10.Text
-             Case 11: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text11.Text
-             Case 12: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text12.Text
+             Case 1: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text1.Text)
+             Case 2: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text2.Text)
+             Case 3: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text3.Text)
+             Case 4: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text4.Text)
+             Case 5: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text5.Text)
+             Case 6: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text6.Text)
+             Case 7: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text7.Text)
+             Case 8: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text8.Text)
+             Case 9: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text9.Text)
+             Case 10: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text10.Text)
+             Case 11: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text11.Text)
+             Case 12: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text12.Text)
           End Select
       
      Me.DtaPresupuesto.Recordset.Update
@@ -2695,18 +2835,18 @@ Dim Saldo As Double
     'Me.DtaConsulta.Recordset.Edit
       
       Select Case Periodo
-             Case 1: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text1.Text
-             Case 2: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text2.Text
-             Case 3: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text3.Text
-             Case 4: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text4.Text
-             Case 5: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text5.Text
-             Case 6: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text6.Text
-             Case 7: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text7.Text
-             Case 8: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text8.Text
-             Case 9: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text9.Text
-             Case 10: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text10.Text
-             Case 11: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text11.Text
-             Case 12: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text12.Text
+             Case 1: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text1.Text)
+             Case 2: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text2.Text)
+             Case 3: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text3.Text)
+             Case 4: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text4.Text)
+             Case 5: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text5.Text)
+             Case 6: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text6.Text)
+             Case 7: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text7.Text)
+             Case 8: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text8.Text)
+             Case 9: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text9.Text)
+             Case 10: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text10.Text)
+             Case 11: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text11.Text)
+             Case 12: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text12.Text)
           End Select
       
     Me.DtaConsulta.Recordset.Update
@@ -2731,14 +2871,14 @@ Dim Saldo As Double
  Me.DtaPeriodos.Refresh
  
  Do While Not Me.DtaPeriodos.Recordset.EOF
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
 '  CodigoCuenta = Me.DBCliente.Text
   Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & KeyPrincipal & "'))"
   Me.DtaConsulta.Refresh
   If Me.DtaConsulta.Recordset.EOF Then
      Me.DtaPresupuesto.Recordset.AddNew
-      Me.DtaPresupuesto.Recordset!NPeriodo = NumeroPeriodo
+      Me.DtaPresupuesto.Recordset!Nperiodo = NumeroPeriodo
       Me.DtaPresupuesto.Recordset!CodCuenta = KeyPrincipal
       Select Case Periodo
              Case 1: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text13.Text)
@@ -2760,18 +2900,18 @@ Dim Saldo As Double
     'Me.DtaConsulta.Recordset.Edit
       
       Select Case Periodo
-             Case 1: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text13.Text
-             Case 2: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text14.Text
-             Case 3: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text15.Text
-             Case 4: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text16.Text
-             Case 5: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text17.Text
-             Case 6: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text18.Text
-             Case 7: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text19.Text
-             Case 8: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text20.Text
-             Case 9: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text21.Text
-             Case 10: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text22.Text
-             Case 11: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text23.Text
-             Case 12: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text24.Text
+             Case 1: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text13.Text)
+             Case 2: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text14.Text)
+             Case 3: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text15.Text)
+             Case 4: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text16.Text)
+             Case 5: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text17.Text)
+             Case 6: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text18.Text)
+             Case 7: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text19.Text)
+             Case 8: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text20.Text)
+             Case 9: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text21.Text)
+             Case 10: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text22.Text)
+             Case 11: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text23.Text)
+             Case 12: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text24.Text)
           End Select
       
     Me.DtaConsulta.Recordset.Update
@@ -2795,28 +2935,28 @@ Dim Saldo As Double
  
  
  Do While Not Me.DtaPeriodos.Recordset.EOF
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
 '  CodigoCuenta = Me.DBCliente.Text
   Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & KeyPrincipal & "'))"
   Me.DtaConsulta.Refresh
   If Me.DtaConsulta.Recordset.EOF Then
      Me.DtaPresupuesto.Recordset.AddNew
-      Me.DtaPresupuesto.Recordset!NPeriodo = NumeroPeriodo
+      Me.DtaPresupuesto.Recordset!Nperiodo = NumeroPeriodo
       Me.DtaPresupuesto.Recordset!CodCuenta = KeyPrincipal
       Select Case Periodo
-             Case 1: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text25.Text
-             Case 2: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text26.Text
-             Case 3: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text27.Text
-             Case 4: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text28.Text
-             Case 5: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text29.Text
-             Case 6: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text30.Text
-             Case 7: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text31.Text
-             Case 8: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text32.Text
-             Case 9: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text33.Text
-             Case 10: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text34.Text
-             Case 11: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text35.Text
-             Case 12: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text36.Text
+             Case 1: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text25.Text)
+             Case 2: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text26.Text)
+             Case 3: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text27.Text)
+             Case 4: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text28.Text)
+             Case 5: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text29.Text)
+             Case 6: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text30.Text)
+             Case 7: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text31.Text)
+             Case 8: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text32.Text)
+             Case 9: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text33.Text)
+             Case 10: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text34.Text)
+             Case 11: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text35.Text)
+             Case 12: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text36.Text)
           End Select
       
      Me.DtaPresupuesto.Recordset.Update
@@ -2824,18 +2964,18 @@ Dim Saldo As Double
     'Me.DtaConsulta.Recordset.Edit
       
       Select Case Periodo
-             Case 1: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text25.Text
-             Case 2: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text26.Text
-             Case 3: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text27.Text
-             Case 4: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text28.Text
-             Case 5: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text29.Text
-             Case 6: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text30.Text
-             Case 7: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text31.Text
-             Case 8: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text32.Text
-             Case 9: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text33.Text
-             Case 10: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text34.Text
-             Case 11: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text35.Text
-             Case 12: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text36.Text
+             Case 1: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text25.Text)
+             Case 2: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text26.Text)
+             Case 3: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text27.Text)
+             Case 4: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text28.Text)
+             Case 5: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text29.Text)
+             Case 6: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text30.Text)
+             Case 7: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text31.Text)
+             Case 8: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text32.Text)
+             Case 9: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text33.Text)
+             Case 10: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text34.Text)
+             Case 11: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text35.Text)
+             Case 12: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text36.Text)
           End Select
       
     Me.DtaConsulta.Recordset.Update
@@ -2851,17 +2991,17 @@ Dim Saldo As Double
 End Sub
 
 Private Sub Command2_Click()
- Dim Monto As Double, Cadena As String
+ Dim Monto As Double, cadena As String
  
-Cadena = InputBox("Digito el Monto a Distribuir", "Zeus Contable")
+cadena = InputBox("Digito el Monto a Distribuir", "Zeus Contable")
  
  
- If Not IsNumeric(Cadena) Then
+ If Not IsNumeric(cadena) Then
    MsgBox "Lo digitado no es numerico", vbCritical, "Zeus Contable"
    Exit Sub
  End If
  
- Monto = Cadena
+ Monto = cadena
  
  Monto = Distribuir(Monto, Enfoque)
  
@@ -2909,14 +3049,727 @@ End Function
 
 
 Private Sub Command3_Click()
+On Error GoTo TipoErrs
+Dim NumeroPeriodo As Integer, Periodo As Integer
+Dim Saldo As Double
+ 
+ Me.Command3.Enabled = False
+ 
+ '//////////////////////////////////////////////////////////////
+ '//////////////Datos del primer  periodo////////////////////////
+ '//////////////////////////////////////////////////////////////
+ Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 1))"
+ Me.DtaPeriodos.Refresh
+ 
+ Do While Not Me.DtaPeriodos.Recordset.EOF
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  Periodo = Me.DtaPeriodos.Recordset!Periodo
+  CodigoCuenta = KeyPrincipal
+  Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & CodigoCuenta & "'))"
+  Me.DtaConsulta.Refresh
+  If Me.DtaConsulta.Recordset.EOF Then
+     Me.AdoPresupuesto.Recordset.AddNew
+      Me.AdoPresupuesto.Recordset!Nperiodo = NumeroPeriodo
+      Me.AdoPresupuesto.Recordset!CodCuenta = CodigoCuenta
+      Select Case Periodo
+             Case 1: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text1.Text)
+             Case 2: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text2.Text)
+             Case 3: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text3.Text)
+             Case 4: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text4.Text)
+             Case 5: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text5.Text)
+             Case 6: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text6.Text)
+             Case 7: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text7.Text)
+             Case 8: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text8.Text)
+             Case 9: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text9.Text)
+             Case 10: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text10.Text)
+             Case 11: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text11.Text)
+             Case 12: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text12.Text)
+          End Select
+      
+     Me.AdoPresupuesto.Recordset.Update
+   Else '//////En caso que existan datos del presupuesto solo edito el monto
+    'Me.DtaConsulta.Recordset.Edit
+      
+      Select Case Periodo
+             Case 1: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text1.Text)
+             Case 2: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text2.Text)
+             Case 3: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text3.Text)
+             Case 4: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text4.Text)
+             Case 5: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text5.Text)
+             Case 6: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text6.Text)
+             Case 7: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text7.Text)
+             Case 8: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text8.Text)
+             Case 9: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text9.Text)
+             Case 10: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text10.Text)
+             Case 11: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text11.Text)
+             Case 12: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text12.Text)
+          End Select
+      
+    Me.DtaConsulta.Recordset.Update
+   
+   End If
+  Me.DtaPeriodos.Recordset.MoveNext
+ Loop
+ 
+ 
+  '//////////////////////////////////////////////////////////////
+ '//////////////Datos del Segundo  periodo presupuestado////////////////////////
+ '//////////////////////////////////////////////////////////////
+ Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 2))"
+ Me.DtaPeriodos.Refresh
+ Do While Not Me.DtaPeriodos.Recordset.EOF
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  Periodo = Me.DtaPeriodos.Recordset!Periodo
+  CodigoCuenta = KeyPrincipal
+  Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & CodigoCuenta & "'))"
+  Me.DtaConsulta.Refresh
+  If Me.DtaConsulta.Recordset.EOF Then
+     Me.AdoPresupuesto.Recordset.AddNew
+      Me.AdoPresupuesto.Recordset!Nperiodo = NumeroPeriodo
+      Me.AdoPresupuesto.Recordset!CodCuenta = CodigoCuenta
+      Select Case Periodo
+             Case 1: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text13.Text)
+             Case 2: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text14.Text)
+             Case 3: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text15.Text)
+             Case 4: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text16.Text)
+             Case 5: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text17.Text)
+             Case 6: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text18.Text)
+             Case 7: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text18.Text)
+             Case 8: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text20.Text)
+             Case 9: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text21.Text)
+             Case 10: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text22.Text)
+             Case 11: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text23.Text)
+             Case 12: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text24.Text)
+          End Select
+      
+     Me.AdoPresupuesto.Recordset.Update
+   Else '//////En caso que existan datos del presupuesto solo edito el monto
+    'Me.DtaConsulta.Recordset.Edit
+      
+      Select Case Periodo
+             Case 1: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text13.Text)
+             Case 2: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text14.Text)
+             Case 3: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text15.Text)
+             Case 4: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text16.Text)
+             Case 5: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text17.Text)
+             Case 6: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text18.Text)
+             Case 7: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text19.Text)
+             Case 8: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text20.Text)
+             Case 9: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text21.Text)
+             Case 10: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text22.Text)
+             Case 11: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text23.Text)
+             Case 12: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text24.Text)
+          End Select
+      
+    Me.DtaConsulta.Recordset.Update
+   
+   End If
+  Me.DtaPeriodos.Recordset.MoveNext
+ Loop
+ 
+   '//////////////////////////////////////////////////////////////
+ '//////////////Datos del tercer  periodo presupuestado////////////////////////
+ '//////////////////////////////////////////////////////////////
+ Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 3))"
+ Me.DtaPeriodos.Refresh
+ Do While Not Me.DtaPeriodos.Recordset.EOF
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  Periodo = Me.DtaPeriodos.Recordset!Periodo
+  CodigoCuenta = KeyPrincipal
+  Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & CodigoCuenta & "'))"
+  Me.DtaConsulta.Refresh
+  If Me.DtaConsulta.Recordset.EOF Then
+     Me.AdoPresupuesto.Recordset.AddNew
+      Me.AdoPresupuesto.Recordset!Nperiodo = NumeroPeriodo
+      Me.AdoPresupuesto.Recordset!CodCuenta = CodigoCuenta
+      Select Case Periodo
+             Case 1: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text25.Text)
+             Case 2: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text26.Text)
+             Case 3: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text27.Text)
+             Case 4: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text28.Text)
+             Case 5: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text29.Text)
+             Case 6: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text30.Text)
+             Case 7: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text31.Text)
+             Case 8: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text32.Text)
+             Case 9: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text33.Text)
+             Case 10: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text34.Text)
+             Case 11: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text35.Text)
+             Case 12: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text36.Text)
+          End Select
+      
+     Me.AdoPresupuesto.Recordset.Update
+   Else '//////En caso que existan datos del presupuesto solo edito el monto
+    'Me.DtaConsulta.Recordset.Edit
+      
+      Select Case Periodo
+             Case 1: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text25.Text)
+             Case 2: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text26.Text)
+             Case 3: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text27.Text)
+             Case 4: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text28.Text)
+             Case 5: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text29.Text)
+             Case 6: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text30.Text)
+             Case 7: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text31.Text)
+             Case 8: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text32.Text)
+             Case 9: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text33.Text)
+             Case 10: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text34.Text)
+             Case 11: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text35.Text)
+             Case 12: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text36.Text)
+          End Select
+      
+    Me.DtaConsulta.Recordset.Update
+   
+   End If
+  Me.DtaPeriodos.Recordset.MoveNext
+ Loop
+ 
+ 
+ 
+ 
+ 
+ 
+ '//////si existen datos grabo el monto anual////////////
+ If Not Me.TxtTotal1.Text = "" Then
+ 
+ Me.AdoPresupuestoAnual.RecordSource = "SELECT PresupuestoAnual.NumeroTabla, PresupuestoAnual.CodigoCuenta, PresupuestoAnual.MontoAnual From PresupuestoAnual Where (((PresupuestoAnual.NumeroTabla) = 1) And ((PresupuestoAnual.CodigoCuenta) = '" & KeyPrincipal & "'))"
+ Me.AdoPresupuestoAnual.Refresh
+ If AdoPresupuestoAnual.Recordset.EOF Then
+  AdoPresupuestoAnual.Recordset.AddNew
+    AdoPresupuestoAnual.Recordset!NumeroTabla = 1
+    AdoPresupuestoAnual.Recordset!CodigoCuenta = KeyPrincipal
+    AdoPresupuestoAnual.Recordset!MontoAnual = Me.TxtTotal1.Text
+  AdoPresupuestoAnual.Recordset.Update
+ Else
+  'AdoPresupuestoAnual.Recordset.Edit
+    AdoPresupuestoAnual.Recordset!MontoAnual = Me.TxtTotal1.Text
+  AdoPresupuestoAnual.Recordset.Update
+ End If
+ End If
+ 
+  If Not Me.TxtTotal2.Text = "" Then
+ Me.AdoPresupuestoAnual.RecordSource = "SELECT PresupuestoAnual.NumeroTabla, PresupuestoAnual.CodigoCuenta, PresupuestoAnual.MontoAnual From PresupuestoAnual Where (((PresupuestoAnual.NumeroTabla) = 2) And ((PresupuestoAnual.CodigoCuenta) = '" & KeyPrincipal & "'))"
+ Me.AdoPresupuestoAnual.Refresh
+ If AdoPresupuestoAnual.Recordset.EOF Then
+  AdoPresupuestoAnual.Recordset.AddNew
+    AdoPresupuestoAnual.Recordset!NumeroTabla = 2
+    AdoPresupuestoAnual.Recordset!CodigoCuenta = KeyPrincipal
+    AdoPresupuestoAnual.Recordset!MontoAnual = Me.TxtTotal2.Text
+  AdoPresupuestoAnual.Recordset.Update
+ Else
+  'AdoPresupuestoAnual.Recordset.Edit
+    AdoPresupuestoAnual.Recordset!MontoAnual = Me.TxtTotal2.Text
+  AdoPresupuestoAnual.Recordset.Update
+ End If
+ End If
+ 
+ If Not Me.TxtTotal3.Text = "" Then
+ Me.AdoPresupuestoAnual.RecordSource = "SELECT PresupuestoAnual.NumeroTabla, PresupuestoAnual.CodigoCuenta, PresupuestoAnual.MontoAnual From PresupuestoAnual Where (((PresupuestoAnual.NumeroTabla) = 3) And ((PresupuestoAnual.CodigoCuenta) = '" & KeyPrincipal & "'))"
+ Me.AdoPresupuestoAnual.Refresh
+ If AdoPresupuestoAnual.Recordset.EOF Then
+  AdoPresupuestoAnual.Recordset.AddNew
+    AdoPresupuestoAnual.Recordset!NumeroTabla = 3
+    AdoPresupuestoAnual.Recordset!CodigoCuenta = KeyPrincipal
+    AdoPresupuestoAnual.Recordset!MontoAnual = Me.TxtTotal3.Text
+  AdoPresupuestoAnual.Recordset.Update
+ Else
+  'AdoPresupuestoAnual.Recordset.Edit
+    AdoPresupuestoAnual.Recordset!MontoAnual = Me.TxtTotal3.Text
+  AdoPresupuestoAnual.Recordset.Update
+ End If
+ End If
+ 
+ 
+ MsgBox "Presupuesto Grabado con Exito!!", vbExclamation, "Sistema Contable"
+ Me.Command3.Enabled = True
+ 
+ Exit Sub
+TipoErrs:
+ MsgBox err.Description
+ Exit Sub
+End Sub
 
+
+Public Sub Cargar_Presupuesto()
+
+On Error GoTo TipoErrs
+Dim NumeroPeriodo As Integer, Periodo As Integer, TipoCuenta As String
+Dim Saldo As Double, Total1 As Double, Total2 As Double, Total3 As Double, Total4 As Double, Total5 As Double, Total6 As Double
+Dim Monto1 As Double, Monto2 As Double, Monto3 As Double, Monto4 As Double, Monto5 As Double, Monto6 As Double
+Dim FechaInicio As Date, FechaFin As Date
+
+'Criterio = "KeyGrupo='" & KeyPrincipal & "'"
+'If DtaCuentas.Recordset.RecordCount <> 0 Then DtaCuentas.Recordset.MoveFirst
+'Me.DtaCuentas.Recordset.Find (Criterio)
+Me.DtaCuentas.RecordSource = "SELECT KeyGrupo, CodGrupo, KeyGrupoSuperior, Child, DescripcionGrupo, Imagen1, Imagen2 From EstructuraPresupuesto WHERE (EstructuraPresupuesto.KeyGrupo='" & KeyPrincipal & "')"
+Me.DtaCuentas.Refresh
+If DtaCuentas.Recordset.EOF Then
+
+       
+
+'  Me.TxtDescripcion.Text = ""
+  Me.LblTotal1.Caption = "0.00"
+  Me.LblTotal2.Caption = "0.00"
+  Me.LblTotal3.Caption = "0.00"
+'  Me.LblTotal4.Caption = "0.00"
+'  Me.LblTotal5.Caption = "0.00"
+'  Me.LblTotal6.Caption = "0.00"
+  Total1 = 0
+  Total2 = 0
+  Total3 = 0
+  Total4 = 0
+  Total5 = 0
+  Total6 = 0
+  
+  Saldo = 0
+      Me.Txt1.Text = Format(Saldo, "##,##0.00")
+      Me.Txt2.Text = Format(Saldo, "##,##0.00")
+      Me.Txt3.Text = Format(Saldo, "##,##0.00")
+      Me.Txt4.Text = Format(Saldo, "##,##0.00")
+      Me.Txt5.Text = Format(Saldo, "##,##0.00")
+      Me.Txt6.Text = Format(Saldo, "##,##0.00")
+      Me.Txt7.Text = Format(Saldo, "##,##0.00")
+      Me.Txt8.Text = Format(Saldo, "##,##0.00")
+      Me.Txt9.Text = Format(Saldo, "##,##0.00")
+      Me.Txt10.Text = Format(Saldo, "##,##0.00")
+      Me.Txt11.Text = Format(Saldo, "##,##0.00")
+      Me.Txt12.Text = Format(Saldo, "##,##0.00")
+      
+      Me.Txt13.Text = Format(Saldo, "##,##0.00")
+      Me.Txt14.Text = Format(Saldo, "##,##0.00")
+      Me.Txt15.Text = Format(Saldo, "##,##0.00")
+      Me.Txt16.Text = Format(Saldo, "##,##0.00")
+      Me.Txt17.Text = Format(Saldo, "##,##0.00")
+      Me.Txt18.Text = Format(Saldo, "##,##0.00")
+      Me.Txt19.Text = Format(Saldo, "##,##0.00")
+      Me.Txt20.Text = Format(Saldo, "##,##0.00")
+      Me.Txt21.Text = Format(Saldo, "##,##0.00")
+      Me.Txt22.Text = Format(Saldo, "##,##0.00")
+      Me.Txt23.Text = Format(Saldo, "##,##0.00")
+      Me.Txt24.Text = Format(Saldo, "##,##0.00")
+      
+      Me.Txt25.Text = Format(Saldo, "##,##0.00")
+      Me.Txt26.Text = Format(Saldo, "##,##0.00")
+      Me.Txt27.Text = Format(Saldo, "##,##0.00")
+      Me.Txt28.Text = Format(Saldo, "##,##0.00")
+      Me.Txt29.Text = Format(Saldo, "##,##0.00")
+      Me.Txt30.Text = Format(Saldo, "##,##0.00")
+      Me.Txt31.Text = Format(Saldo, "##,##0.00")
+      Me.Txt32.Text = Format(Saldo, "##,##0.00")
+      Me.Txt33.Text = Format(Saldo, "##,##0.00")
+      Me.Txt34.Text = Format(Saldo, "##,##0.00")
+      Me.Txt35.Text = Format(Saldo, "##,##0.00")
+      Me.Txt36.Text = Format(Saldo, "##,##0.00")
+      
+     Me.Text1 = Format(Saldo, "##,##0.00")
+     Me.Text2 = Format(Saldo, "##,##0.00")
+     Me.Text3 = Format(Saldo, "##,##0.00")
+     Me.Text4 = Format(Saldo, "##,##0.00")
+     Me.Text5 = Format(Saldo, "##,##0.00")
+     Me.Text6 = Format(Saldo, "##,##0.00")
+     Me.Text7 = Format(Saldo, "##,##0.00")
+     Me.Text8 = Format(Saldo, "##,##0.00")
+     Me.Text9 = Format(Saldo, "##,##0.00")
+     Me.Text10 = Format(Saldo, "##,##0.00")
+     Me.Text11 = Format(Saldo, "##,##0.00")
+     Me.Text12 = Format(Saldo, "##,##0.00")
+  
+     
+     Me.Text13 = Format(Saldo, "##,##0.00")
+     Me.Text14 = Format(Saldo, "##,##0.00")
+     Me.Text15 = Format(Saldo, "##,##0.00")
+     Me.Text16 = Format(Saldo, "##,##0.00")
+     Me.Text17 = Format(Saldo, "##,##0.00")
+     Me.Text18 = Format(Saldo, "##,##0.00")
+     Me.Text19 = Format(Saldo, "##,##0.00")
+     Me.Text20 = Format(Saldo, "##,##0.00")
+     Me.Text21 = Format(Saldo, "##,##0.00")
+     Me.Text22 = Format(Saldo, "##,##0.00")
+     Me.Text23 = Format(Saldo, "##,##0.00")
+     Me.Text24 = Format(Saldo, "##,##0.00")
+  
+     Me.Text25 = Format(Saldo, "##,##0.00")
+     Me.Text26 = Format(Saldo, "##,##0.00")
+     Me.Text27 = Format(Saldo, "##,##0.00")
+     Me.Text28 = Format(Saldo, "##,##0.00")
+     Me.Text29 = Format(Saldo, "##,##0.00")
+     Me.Text30 = Format(Saldo, "##,##0.00")
+     Me.Text31 = Format(Saldo, "##,##0.00")
+     Me.Text32 = Format(Saldo, "##,##0.00")
+     Me.Text33 = Format(Saldo, "##,##0.00")
+     Me.Text34 = Format(Saldo, "##,##0.00")
+     Me.Text35 = Format(Saldo, "##,##0.00")
+     Me.Text36 = Format(Saldo, "##,##0.00")
+  
+  
+  
+  
+Else
+    TipoMoneda = "Córdobas"  'DtaCuentas.Recordset("TipoMoneda")
+    TipoCuenta = "Gastos" 'DtaCuentas.Recordset("TipoCuenta")
+   Select Case TipoMoneda
+      Case "Dólares"
+         Fecha = Format(Now, "DD/MM/YYYY")
+         NumFecha1 = Fecha
+         Me.DtaConsulta.RecordSource = "SELECT Tasas.FechaTasas, Tasas.MontoCordobas, Tasas.MontoLibras From Tasas Where (((Tasas.FechaTasas) = " & NumFecha1 & "))"
+         Me.DtaConsulta.Refresh
+         If Not DtaConsulta.Recordset.EOF Then
+           MontoTasa = Me.DtaConsulta.Recordset!MontoLibras
+         End If
+      Case "Libras"
+         MontoTasa = 1
+   End Select
+
+' If Not IsNull(Me.DtaCuentas.Recordset("DescripcionCuentas")) Then
+'  Me.TxtDescripcion.Text = Me.DtaCuentas.Recordset("DescripcionCuentas")
+' End If
+ 
+ 
+ Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 1))"
+ Me.DtaPeriodos.Refresh
+ Do While Not Me.DtaPeriodos.Recordset.EOF
+  FechaIni = "01/" & Month(Me.DtaPeriodos.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaPeriodos.Recordset("FechaPeriodo"))
+  FechaFin = Me.DtaPeriodos.Recordset("FechaPeriodo")
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  Periodo = Me.DtaPeriodos.Recordset!Periodo
+  CodigoCuenta = KeyPrincipal
+'  Me.DtaConsulta.RecordSource = "SELECT CodCuentas, SUM(Debito * TCambio) AS MDebito, SUM(TCambio * Credito) AS MCredito From Transacciones WHERE (FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "YYYY-MM-DD") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "YYYY-MM-DD") & "', 102)) GROUP BY FacturaNo HAVING (FacturaNo = '" & CodigoCuenta & "') "
+  Me.DtaConsulta.RecordSource = "SELECT SUM(Debito * TCambio) AS MDebito, SUM(TCambio * Credito) AS MCredito From Transacciones WHERE   (FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "YYYY-MM-DD") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "YYYY-MM-DD") & "', 102)) GROUP BY FacturaNo HAVING (FacturaNo = '" & CodigoCuenta & "')"
+  Me.DtaConsulta.Refresh
+'InputBox "", "", Me.DtaConsulta.RecordSource
+  If Not Me.DtaConsulta.Recordset.EOF Then
+    If Not IsNull(Me.DtaConsulta.Recordset("MDebito")) Then
+    Debito = Me.DtaConsulta.Recordset("MDebito")
+    Else
+     Debito = 0
+   End If
+  If Not IsNull(Me.DtaConsulta.Recordset("MCredito")) Then
+   Credito = Me.DtaConsulta.Recordset("MCredito")
+  Else
+   Credito = 0
+  End If
+   Select Case TipoMoneda
+     Case "Dólares"
+        If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Bancos" Or TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Or TipoCuenta = "Papeleria - Utiles" Or TipoCuenta = "Inventario" Then
+         Saldo = (Debito - Credito) / MontoTasa
+        Else
+         Saldo = (Credito - Debito) / MontoTasa
+        End If
+     Case "Libras"
+         If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Bancos" Or TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Or TipoCuenta = "Papeleria - Utiles" Or TipoCuenta = "Inventario" Then
+            Saldo = (Debito - Credito)
+         Else
+            Saldo = (Credito - Debito)
+         End If
+     Case "Córdobas"
+         If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Bancos" Or TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Or TipoCuenta = "Papeleria - Utiles" Or TipoCuenta = "Inventario" Then
+            Saldo = (Debito - Credito)
+         Else
+            Saldo = (Credito - Debito)
+         End If
+   End Select
+   Total1 = Total1 + Saldo
+  Else
+   Saldo = 0#
+ End If
+    Select Case Periodo
+      Case 1: Me.Txt1.Text = Format(Saldo, "##,##0.00")
+      Case 2: Me.Txt2.Text = Format(Saldo, "##,##0.00")
+      Case 3: Me.Txt3.Text = Format(Saldo, "##,##0.00")
+      Case 4: Me.Txt4.Text = Format(Saldo, "##,##0.00")
+      Case 5: Me.Txt5.Text = Format(Saldo, "##,##0.00")
+      Case 6: Me.Txt6.Text = Format(Saldo, "##,##0.00")
+      Case 7: Me.Txt7.Text = Format(Saldo, "##,##0.00")
+      Case 8: Me.Txt8.Text = Format(Saldo, "##,##0.00")
+      Case 9: Me.Txt9.Text = Format(Saldo, "##,##0.00")
+      Case 10: Me.Txt10.Text = Format(Saldo, "##,##0.00")
+      Case 11: Me.Txt11.Text = Format(Saldo, "##,##0.00")
+      Case 12: Me.Txt12.Text = Format(Saldo, "##,##0.00")
+ 
+   
+    End Select
+
+  Me.DtaPeriodos.Recordset.MoveNext
+ Loop
+
+ Me.LblTotal1.Caption = Format(Total1, "##,##0.00")
+ '//////////////////////////////////////////////////////////////
+ '//////////////Datos del segundo periodo////////////////////////
+ '//////////////////////////////////////////////////////////////
+  Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 2))"
+ Me.DtaPeriodos.Refresh
+ Do While Not Me.DtaPeriodos.Recordset.EOF
+  FechaIni = "01/" & Month(Me.DtaPeriodos.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaPeriodos.Recordset("FechaPeriodo"))
+  FechaFin = Me.DtaPeriodos.Recordset("FechaPeriodo")
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  Periodo = Me.DtaPeriodos.Recordset!Periodo
+  CodigoCuenta = KeyPrincipal
+  
+  
+  Me.DtaConsulta.RecordSource = "SELECT SUM(Debito * TCambio) AS MDebito, SUM(TCambio * Credito) AS MCredito From Transacciones WHERE   (FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "YYYY-MM-DD") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "YYYY-MM-DD") & "', 102)) GROUP BY FacturaNo HAVING (FacturaNo = '" & CodigoCuenta & "')"
+  Me.DtaConsulta.Refresh
+
+  If Not Me.DtaConsulta.Recordset.EOF Then
+    If Not IsNull(Me.DtaConsulta.Recordset("MDebito")) Then
+    Debito = Me.DtaConsulta.Recordset("MDebito")
+    Else
+     Debito = 0
+   End If
+  If Not IsNull(Me.DtaConsulta.Recordset("MCredito")) Then
+   Credito = Me.DtaConsulta.Recordset("MCredito")
+  Else
+   Credito = 0
+  End If
+   Select Case TipoMoneda
+     Case "Dólares"
+        If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Bancos" Or TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Or TipoCuenta = "Papeleria - Utiles" Or TipoCuenta = "Inventario" Then
+         Saldo = (Debito - Credito) / MontoTasa
+        Else
+         Saldo = (Credito - Debito) / MontoTasa
+        End If
+     Case "Libras"
+         If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Bancos" Or TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Or TipoCuenta = "Papeleria - Utiles" Or TipoCuenta = "Inventario" Then
+            Saldo = (Debito - Credito)
+         Else
+            Saldo = (Credito - Debito)
+         End If
+     Case "Córdobas"
+         If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Bancos" Or TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Or TipoCuenta = "Papeleria - Utiles" Or TipoCuenta = "Inventario" Then
+            Saldo = (Debito - Credito)
+         Else
+            Saldo = (Credito - Debito)
+         End If
+   End Select
+   Total1 = Total1 + Saldo
+  Else
+   Saldo = 0#
+ End If
+    Select Case Periodo
+      Case 1: Me.Txt13.Text = Format(Saldo, "##,##0.00")
+      Case 2: Me.Txt14.Text = Format(Saldo, "##,##0.00")
+      Case 3: Me.Txt15.Text = Format(Saldo, "##,##0.00")
+      Case 4: Me.Txt16.Text = Format(Saldo, "##,##0.00")
+      Case 5: Me.Txt17.Text = Format(Saldo, "##,##0.00")
+      Case 6: Me.Txt18.Text = Format(Saldo, "##,##0.00")
+      Case 7: Me.Txt19.Text = Format(Saldo, "##,##0.00")
+      Case 8: Me.Txt20.Text = Format(Saldo, "##,##0.00")
+      Case 9: Me.Txt21.Text = Format(Saldo, "##,##0.00")
+      Case 10: Me.Txt22.Text = Format(Saldo, "##,##0.00")
+      Case 11: Me.Txt23.Text = Format(Saldo, "##,##0.00")
+      Case 12: Me.Txt24.Text = Format(Saldo, "##,##0.00")
+ 
+   
+    End Select
+    
+  Me.DtaPeriodos.Recordset.MoveNext
+ Loop
+
+ Me.LblTotal2 = Format(Total2, "##,##0.00")
+ '//////////////////////////////////////////////////////////////
+ '//////////////Datos del tercer periodo////////////////////////
+ '//////////////////////////////////////////////////////////////
+  Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 3))"
+ Me.DtaPeriodos.Refresh
+ Do While Not Me.DtaPeriodos.Recordset.EOF
+  FechaIni = "01/" & Month(Me.DtaPeriodos.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaPeriodos.Recordset("FechaPeriodo"))
+  FechaFin = Me.DtaPeriodos.Recordset("FechaPeriodo")
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  Periodo = Me.DtaPeriodos.Recordset!Periodo
+  CodigoCuenta = KeyPrincipal
+'  Me.DtaConsulta.RecordSource = "SELECT Transacciones.CodCuentas, Sum(Transacciones.Debito*Transacciones.TCambio) AS MDebito, Sum(Transacciones.TCambio*Transacciones.Credito) AS MCredito, Transacciones.NPeriodo From Transacciones GROUP BY Transacciones.CodCuentas, Transacciones.NPeriodo HAVING (((Transacciones.CodCuentas)='" & CodigoCuenta & "') AND ((Transacciones.NPeriodo)=" & NumeroPeriodo & "))"
+  Me.DtaConsulta.RecordSource = "SELECT SUM(Debito * TCambio) AS MDebito, SUM(TCambio * Credito) AS MCredito From Transacciones WHERE (FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "YYYY-MM-DD") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "YYYY-MM-DD") & "', 102)) GROUP BY FacturaNo HAVING (FacturaNo = '" & CodigoCuenta & "') "
+  Me.DtaConsulta.Refresh
+
+  If Not Me.DtaConsulta.Recordset.EOF Then
+    If Not IsNull(Me.DtaConsulta.Recordset("MDebito")) Then
+    Debito = Me.DtaConsulta.Recordset("MDebito")
+    Else
+     Debito = 0
+   End If
+  If Not IsNull(Me.DtaConsulta.Recordset("MCredito")) Then
+   Credito = Me.DtaConsulta.Recordset("MCredito")
+  Else
+   Credito = 0
+  End If
+   Select Case TipoMoneda
+     Case "Dólares"
+         Saldo = (Debito - Credito) / MontoTasa
+     Case "Libras"
+         Saldo = (Debito - Credito)
+   End Select
+   Total1 = Total1 + Saldo
+  Else
+   Saldo = 0#
+ End If
+    Select Case Periodo
+      Case 1: Me.Txt25.Text = Format(Saldo, "##,##0.00")
+      Case 2: Me.Txt26.Text = Format(Saldo, "##,##0.00")
+      Case 3: Me.Txt27.Text = Format(Saldo, "##,##0.00")
+      Case 4: Me.Txt28.Text = Format(Saldo, "##,##0.00")
+      Case 5: Me.Txt29.Text = Format(Saldo, "##,##0.00")
+      Case 6: Me.Txt30.Text = Format(Saldo, "##,##0.00")
+      Case 7: Me.Txt31.Text = Format(Saldo, "##,##0.00")
+      Case 8: Me.Txt32.Text = Format(Saldo, "##,##0.00")
+      Case 9: Me.Txt33.Text = Format(Saldo, "##,##0.00")
+      Case 10: Me.Txt34.Text = Format(Saldo, "##,##0.00")
+      Case 11: Me.Txt35.Text = Format(Saldo, "##,##0.00")
+      Case 12: Me.Txt36.Text = Format(Saldo, "##,##0.00")
+ 
+   
+    End Select
+    
+  Me.DtaPeriodos.Recordset.MoveNext
+ Loop
+ Me.LblTotal3.Caption = Format(Total3, "##,##0.00")
+ '//////////////////////////////////////////////////////////////
+ '//////////////Datos del PRIMER periodo PRESUPUESTO////////////////////////
+ '//////////////////////////////////////////////////////////////
+ Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 1))"
+ Me.DtaPeriodos.Refresh
+ Do While Not Me.DtaPeriodos.Recordset.EOF
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  Periodo = Me.DtaPeriodos.Recordset!Periodo
+  CodigoCuenta = KeyPrincipal
+  Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & CodigoCuenta & "'))"
+  Me.DtaConsulta.Refresh
+  If Not Me.DtaConsulta.Recordset.EOF Then
+   Saldo = Me.DtaConsulta.Recordset!MontoPresupuestado
+   Total4 = Total4 + Saldo
+  Else
+   Saldo = 0#
+ End If
+    Select Case Periodo
+      Case 1: Me.Text1 = Format(Saldo, "##,##0.00")
+      Case 2: Me.Text2 = Format(Saldo, "##,##0.00")
+      Case 3: Me.Text3 = Format(Saldo, "##,##0.00")
+      Case 4: Me.Text4 = Format(Saldo, "##,##0.00")
+      Case 5: Me.Text5 = Format(Saldo, "##,##0.00")
+      Case 6: Me.Text6 = Format(Saldo, "##,##0.00")
+      Case 7: Me.Text7 = Format(Saldo, "##,##0.00")
+      Case 8: Me.Text8 = Format(Saldo, "##,##0.00")
+      Case 9: Me.Text9 = Format(Saldo, "##,##0.00")
+      Case 10: Me.Text10 = Format(Saldo, "##,##0.00")
+      Case 11: Me.Text11 = Format(Saldo, "##,##0.00")
+      Case 12: Me.Text12 = Format(Saldo, "##,##0.00")
+ 
+   
+    End Select
+    
+  Me.DtaPeriodos.Recordset.MoveNext
+ Loop
+ 
+' Me.LblTotal4.Caption = Format(Total4, "##,##0.00")
+ 
+  '//////////////////////////////////////////////////////////////
+ '//////////////Datos del SEGUNDO periodo PRESUPUESTO////////////////////////
+ '//////////////////////////////////////////////////////////////
+ Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 2))"
+ Me.DtaPeriodos.Refresh
+ Do While Not Me.DtaPeriodos.Recordset.EOF
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  Periodo = Me.DtaPeriodos.Recordset!Periodo
+  CodigoCuenta = KeyPrincipal
+  Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & CodigoCuenta & "'))"
+  Me.DtaConsulta.Refresh
+  If Not Me.DtaConsulta.Recordset.EOF Then
+   Saldo = Me.DtaConsulta.Recordset!MontoPresupuestado
+   Total5 = Total5 + Saldo
+  Else
+   Saldo = 0#
+ End If
+    Select Case Periodo
+      Case 1: Me.Text13 = Format(Saldo, "##,##0.00")
+      Case 2: Me.Text14 = Format(Saldo, "##,##0.00")
+      Case 3: Me.Text15 = Format(Saldo, "##,##0.00")
+      Case 4: Me.Text16 = Format(Saldo, "##,##0.00")
+      Case 5: Me.Text17 = Format(Saldo, "##,##0.00")
+      Case 6: Me.Text18 = Format(Saldo, "##,##0.00")
+      Case 7: Me.Text19 = Format(Saldo, "##,##0.00")
+      Case 8: Me.Text20 = Format(Saldo, "##,##0.00")
+      Case 9: Me.Text21 = Format(Saldo, "##,##0.00")
+      Case 10: Me.Text22 = Format(Saldo, "##,##0.00")
+      Case 11: Me.Text23 = Format(Saldo, "##,##0.00")
+      Case 12: Me.Text24 = Format(Saldo, "##,##0.00")
+ 
+   
+    End Select
+    
+  Me.DtaPeriodos.Recordset.MoveNext
+ Loop
+' Me.LblTotal5.Caption = Format(Total5, "##,##0.00")
+ 
+   '//////////////////////////////////////////////////////////////
+ '//////////////Datos del TERCER periodo PRESUPUESTO////////////////////////
+ '//////////////////////////////////////////////////////////////
+ Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 3))"
+ Me.DtaPeriodos.Refresh
+ Do While Not Me.DtaPeriodos.Recordset.EOF
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  Periodo = Me.DtaPeriodos.Recordset!Periodo
+  CodigoCuenta = KeyPrincipal
+  Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & CodigoCuenta & "'))"
+  Me.DtaConsulta.Refresh
+  If Not Me.DtaConsulta.Recordset.EOF Then
+   Saldo = Me.DtaConsulta.Recordset!MontoPresupuestado
+   Total6 = Total6 + Saldo
+  Else
+   Saldo = 0#
+ End If
+    Select Case Periodo
+      Case 1: Me.Text25 = Format(Saldo, "##,##0.00")
+      Case 2: Me.Text26 = Format(Saldo, "##,##0.00")
+      Case 3: Me.Text27 = Format(Saldo, "##,##0.00")
+      Case 4: Me.Text28 = Format(Saldo, "##,##0.00")
+      Case 5: Me.Text29 = Format(Saldo, "##,##0.00")
+      Case 6: Me.Text30 = Format(Saldo, "##,##0.00")
+      Case 7: Me.Text31 = Format(Saldo, "##,##0.00")
+      Case 8: Me.Text32 = Format(Saldo, "##,##0.00")
+      Case 9: Me.Text33 = Format(Saldo, "##,##0.00")
+      Case 10: Me.Text34 = Format(Saldo, "##,##0.00")
+      Case 11: Me.Text35 = Format(Saldo, "##,##0.00")
+      Case 12: Me.Text36 = Format(Saldo, "##,##0.00")
+ 
+   
+    End Select
+    
+  Me.DtaPeriodos.Recordset.MoveNext
+ Loop
+ 
+' Me.LblTotal6.Caption = Format(Total6, "##,##0.00")
+ 
+ Me.DtaPresupuestoAnual.RecordSource = "SELECT PresupuestoAnual.NumeroTabla, PresupuestoAnual.CodigoCuenta, PresupuestoAnual.MontoAnual From PresupuestoAnual Where (((PresupuestoAnual.NumeroTabla) = 1) And ((PresupuestoAnual.CodigoCuenta) = '" & KeyPrincipal & "'))"
+ Me.DtaPresupuestoAnual.Refresh
+ If Not DtaPresupuestoAnual.Recordset.EOF Then
+   Me.TxtTotal1.Text = Format(DtaPresupuestoAnual.Recordset!MontoAnual, "##,##0.00")
+
+ End If
+ 
+  Me.DtaPresupuestoAnual.RecordSource = "SELECT PresupuestoAnual.NumeroTabla, PresupuestoAnual.CodigoCuenta, PresupuestoAnual.MontoAnual From PresupuestoAnual Where (((PresupuestoAnual.NumeroTabla) = 2) And ((PresupuestoAnual.CodigoCuenta) = '" & KeyPrincipal & "'))"
+ Me.DtaPresupuestoAnual.Refresh
+ If Not DtaPresupuestoAnual.Recordset.EOF Then
+   Me.TxtTotal2.Text = Format(DtaPresupuestoAnual.Recordset!MontoAnual, "##,##0.00")
+
+ End If
+ 
+  Me.DtaPresupuestoAnual.RecordSource = "SELECT PresupuestoAnual.NumeroTabla, PresupuestoAnual.CodigoCuenta, PresupuestoAnual.MontoAnual From PresupuestoAnual Where (((PresupuestoAnual.NumeroTabla) = 3) And ((PresupuestoAnual.CodigoCuenta) = '" & KeyPrincipal & "'))"
+ Me.DtaPresupuestoAnual.Refresh
+ If Not DtaPresupuestoAnual.Recordset.EOF Then
+   Me.TxtTotal3.Text = Format(DtaPresupuestoAnual.Recordset!MontoAnual, "##,##0.00")
+
+ End If
+ 
+ 
+End If 'IF FINAL
+
+
+Exit Sub
+TipoErrs:
+MsgBox err.Description
 End Sub
 
 Private Sub Form_Load()
 MDIPrimero.Skin1.ApplySkin hWnd
 
 Enfoque = 1
-
+QUIEN = "Load"
 TotalAño1 = 0
 TotalAño2 = 0
 TotalAño3 = 0
@@ -2939,7 +3792,6 @@ With Me.DtaConsulta
 End With
 
 With Me.DtaCuentas
-   '.DatabaseName = Ruta
    .ConnectionString = Conexion
 End With
 
@@ -2947,6 +3799,8 @@ With Me.DtaSaldoCuenta
    '.DatabaseName = Ruta
    .ConnectionString = Conexion
 End With
+
+
  Me.TDBGridCuentas.EvenRowStyle.BackColor = RGB(216, 228, 248)
  Me.TDBGridCuentas.OddRowStyle.BackColor = &H80000005
  Me.TDBGridCuentas.AlternatingRowStyle = True
@@ -2985,8 +3839,8 @@ i = 1
 KeyPrincipal = "A"
 Me.TreeView1.Nodes(Me.TreeView1.Nodes.Count).EnsureVisible
 NodoBase = True
-Me.DtaCuentas.RecordSource = "SELECT Cuentas.CodCuentas, Cuentas.DescripcionCuentas From Cuentas Where (((Cuentas.KeyGrupo) = '" & KeyPrincipal & "')) ORDER BY Cuentas.CodCuentas"
-Me.DtaCuentas.Refresh
+'Me.DtaCuentas.RecordSource = "SELECT Cuentas.CodCuentas, Cuentas.DescripcionCuentas From Cuentas Where (((Cuentas.KeyGrupo) = '" & KeyPrincipal & "')) ORDER BY Cuentas.CodCuentas"
+'Me.DtaCuentas.Refresh
 Me.TDBGridCuentas.Columns(0).Caption = "Còdigo Cuentas"
 Me.TDBGridCuentas.Columns(0).Width = 2000
 Me.TDBGridCuentas.Columns(1).Caption = "Descripcion Cuentas"
@@ -3044,12 +3898,23 @@ End With
 With Me.DtaPresupuesto
    '.DatabaseName = Ruta
    .ConnectionString = Conexion
-   .RecordSource = "Select * from PresupuestoEstructura"
+   .RecordSource = "Select * from EstructuraPresupuesto"
    .Refresh
 End With
 
-'Me.DtaCuentas.RecordSource = "SELECT Cuentas.TipoMoneda,Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta From Cuentas Where (((Cuentas.TipoCuenta) = 'Gastos' Or (Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos')) ORDER BY Cuentas.CodCuentas"
-Me.DtaCuentas.RecordSource = "SELECT Cuentas.TipoMoneda,Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta From Cuentas ORDER BY Cuentas.CodCuentas"
+With Me.AdoPresupuesto
+   '.DatabaseName = Ruta
+   .ConnectionString = Conexion
+   .RecordSource = "SELECT  Presupuesto.* From Presupuesto"
+   .Refresh
+End With
+
+With Me.AdoPresupuestoAnual
+   .ConnectionString = Conexion
+End With
+
+'Me.DtaCuentas.RecordSource = "SELECT Cuentas.TipoMoneda,Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta From Cuentas ORDER BY Cuentas.CodCuentas"
+Me.DtaCuentas.RecordSource = "SELECT KeyGrupo, CodGrupo, KeyGrupoSuperior, Child, DescripcionGrupo, Imagen1, Imagen2 From EstructuraPresupuesto"
 Me.DtaCuentas.Refresh
 'LlenarDataCombos DtaCuentas, DBCliente, "CodCuentas", "CodCuentas"
 'Me.DBCliente.ListField = "CodCuentas"
@@ -3072,6 +3937,8 @@ Do While Not Me.DtaConsulta.Recordset.EOF
  Me.DtaConsulta.Recordset.MoveNext
  i = i + 1
 Loop
+
+QUIEN = "NoLoad"
 
 Exit Sub
 TipoErrs:
@@ -3605,6 +4472,11 @@ Else
     KeyPadre = Node.Parent.Key
 End If
 
+If QUIEN <> "Load" Then
+  Me.Cargar_Presupuesto
+End If
+
+
 'SaldosPeriodos (KeyPrincipal)
 
 End Sub
@@ -3616,7 +4488,7 @@ Private Sub SaldosPeriodos(KeyPrincipal As String)
       '////////////////////////////////SELECCIONO EL PERIODO ///////////////////////////////////////
       FechaIni = "01/" & Month(Me.DtaPeriodos.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaPeriodos.Recordset("FechaPeriodo"))
       FechaFin = Me.DtaPeriodos.Recordset("FechaPeriodo")
-      NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
+      NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
       Periodo = Me.DtaPeriodos.Recordset!Periodo
       
       CodigoCuenta = KeyPrincipal
@@ -3709,8 +4581,8 @@ Else
     NodoBase = False
     KeyPadre = Node.Parent.Key
 End If
-  
 
+  Me.Cargar_Presupuesto
 
 
 End Sub

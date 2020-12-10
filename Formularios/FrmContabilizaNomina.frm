@@ -375,7 +375,7 @@ Begin VB.Form FrmContabilizaNomina
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   77529089
+            Format          =   78577665
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton RadioButton1 
@@ -1956,7 +1956,9 @@ Private Sub CmdContabilizar_Click()
                                 Me.AdoCuentas.RecordSource = SqlString
                                 Me.AdoCuentas.Refresh
                                 If Not Me.AdoCuentas.Recordset.EOF Then
+                                If Not IsNull(Me.AdoCuentas.Recordset("CuentaSueldos")) Then
                                     CtaSueldos = Me.AdoCuentas.Recordset("CuentaSueldos")
+                                End If
                                     CtaProvAguinaldo = Me.AdoCuentas.Recordset("ProvAguinaldo")
                                     CtaProvVacaciones = Me.AdoCuentas.Recordset("ProvVacaciones")
                                     CtaOtrosIngresos = Me.AdoCuentas.Recordset("CuentaOtrosIngresos")

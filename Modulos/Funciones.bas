@@ -239,7 +239,7 @@ Public Function ConvertirMovimiento(NumeroMovimiento As Double, Fecha As Date, M
 End Function
 
 
-Public Function LeeCadena(Cadena As String, numero As Double) As String
+Public Function LeeCadena(cadena As String, numero As Double) As String
   Dim i As Double
   Dim A() As String, Can As String, J As Double
   
@@ -247,14 +247,14 @@ Public Function LeeCadena(Cadena As String, numero As Double) As String
    ReDim A(5)
 
     J = 1
-    For i = 1 To Len(Cadena)
-     If Mid(Cadena, i, 1) = ";" Then
+    For i = 1 To Len(cadena)
+     If Mid(cadena, i, 1) = ";" Then
       J = J + 1
       i = i + 1
       Can = ""
      End If
      
-        Can = Can & Mid(Cadena, i, 1)
+        Can = Can & Mid(cadena, i, 1)
         A(J) = Can
          
 
@@ -346,9 +346,9 @@ End Function
 
 Public Function ValidarCuentas(CodigoCuentas As String) As Boolean
            
-           SQL = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo " & _
+           SQl = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo " & _
                  "From Cuentas WHERE (CodCuentas = '" & CodigoCuentas & "')"
-           MDIPrimero.AdoConsulta.RecordSource = SQL
+           MDIPrimero.AdoConsulta.RecordSource = SQl
            MDIPrimero.AdoConsulta.Refresh
            If MDIPrimero.AdoConsulta.Recordset.EOF Then
               ValidarCuentas = False
@@ -400,11 +400,11 @@ Sub HayUtilidadBruta()
 End Sub
 Public Sub Demo(FechaSalida As Date)
  Dim Horas As Double, HorasEncriptadas As String
- Dim Cadena As String, Cadena2 As String, Cadena3 As String  ' Cadena3 its an decrypted value from cadena2
+ Dim cadena As String, Cadena2 As String, Cadena3 As String  ' Cadena3 its an decrypted value from cadena2
  Dim result As Double
  
 ' Cadena = Encrypt("Siempre")
- Cadena = "ABC"
+ cadena = "ABC"
  
     '---------------------------LEER DATOS EMPRESA ------------------------
     MDIPrimero.AdoConsulta.ConnectionString = Conexion
@@ -424,8 +424,8 @@ Public Sub Demo(FechaSalida As Date)
       Horas = DateDiff("n", FechaIngreso, FechaSalida)
       result = CDbl(Mid(Cadena2, 4, 9)) + Horas
      
-      Cadena = Cadena & result
-      HorasEncriptadas = Encrypt(Cadena)
+      cadena = cadena & result
+      HorasEncriptadas = Encrypt(cadena)
 '      Cadena2 = Decrypt(HorasEncriptadas)
       
       MDIPrimero.AdoConsulta.Recordset("Valor") = HorasEncriptadas
@@ -433,8 +433,8 @@ Public Sub Demo(FechaSalida As Date)
     
     ElseIf Not Cadena2 = "Siempre" Then
     
-      Cadena = "ABC3600"
-      HorasEncriptadas = Encrypt(Cadena)
+      cadena = "ABC3600"
+      HorasEncriptadas = Encrypt(cadena)
       MDIPrimero.AdoConsulta.Recordset("Valor") = HorasEncriptadas
       MDIPrimero.AdoConsulta.Recordset.Update
     
@@ -885,7 +885,7 @@ End If 'fin del si hay utilidad bruta
 
 End Sub
 Public Sub SaldoReportesAcumulado(QUIEN As String)
-Dim CodigoGrupo As String, SQL As String, Fechas As Date
+Dim CodigoGrupo As String, SQl As String, Fechas As Date
 Dim Nivel As Integer, Longitud As Integer, Fecha1 As String
 Dim TotalMayor() As String, TotalDescripcion As String
 Dim KeySuperior As String, NumeroHijos As Double, NumeroHijosTotales As Double
@@ -911,30 +911,30 @@ Dim DescripCuenta As String, DescripcionPadre As String, KeyUltimo As String, Aj
 
 'Busco que cuentas tienen saldo
  If QUIEN = "Balance" Then
-  SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
-  SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Otros Activos' Or (Cuentas.TipoCuenta) = 'Caja' Or (Cuentas.TipoCuenta) = 'Bancos' Or (Cuentas.TipoCuenta) = 'Cuentas x Cobrar' Or (Cuentas.TipoCuenta) = 'Inventario' Or (Cuentas.TipoCuenta) = 'Papeleria - Utiles' Or (Cuentas.TipoCuenta) = 'Activo Fijo' Or (Cuentas.TipoCuenta) = 'Otros Pasivos' Or (Cuentas.TipoCuenta) = 'Cuentas x Pagar' Or (Cuentas.TipoCuenta) = 'Pasivo' Or (Cuentas.TipoCuenta) = 'Capital')) ORDER BY Cuentas.CodCuentas"
-  FrmReportes.DtaHistorial.RecordSource = SQL
+  SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
+  SQl = SQl & "Having (((Cuentas.TipoCuenta) = 'Otros Activos' Or (Cuentas.TipoCuenta) = 'Caja' Or (Cuentas.TipoCuenta) = 'Bancos' Or (Cuentas.TipoCuenta) = 'Cuentas x Cobrar' Or (Cuentas.TipoCuenta) = 'Inventario' Or (Cuentas.TipoCuenta) = 'Papeleria - Utiles' Or (Cuentas.TipoCuenta) = 'Activo Fijo' Or (Cuentas.TipoCuenta) = 'Otros Pasivos' Or (Cuentas.TipoCuenta) = 'Cuentas x Pagar' Or (Cuentas.TipoCuenta) = 'Pasivo' Or (Cuentas.TipoCuenta) = 'Capital')) ORDER BY Cuentas.CodCuentas"
+  FrmReportes.DtaHistorial.RecordSource = SQl
   FrmReportes.DtaHistorial.Refresh
  ElseIf QUIEN = "Utilidad" Then
-  SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
-  SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
-  FrmReportes.DtaHistorial.RecordSource = SQL
+  SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
+  SQl = SQl & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
+  FrmReportes.DtaHistorial.RecordSource = SQl
   FrmReportes.DtaHistorial.Refresh
  ElseIf QUIEN = "Resultado" Then
-  SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
-  SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
-  FrmReportes.DtaHistorial.RecordSource = SQL
+  SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
+  SQl = SQl & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
+  FrmReportes.DtaHistorial.RecordSource = SQl
   FrmReportes.DtaHistorial.Refresh
  ElseIf QUIEN = "UtilidadResultado" Then
-  SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
-  SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
-  FrmReportes.DtaHistorial.RecordSource = SQL
+  SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
+  SQl = SQl & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
+  FrmReportes.DtaHistorial.RecordSource = SQl
   FrmReportes.DtaHistorial.Refresh
  ElseIf QUIEN = "UtilidadAnterior" Then
 '   SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
 '  SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
-  SQL = "SELECT  Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta , Cuentas.TipoMoneda FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE  (Transacciones.FechaTransaccion < CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102)) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda HAVING (Cuentas.TipoCuenta = 'Ingresos - Ventas') OR (Cuentas.TipoCuenta = 'Costos') OR (Cuentas.TipoCuenta = 'Gastos') ORDER BY Cuentas.CodCuentas"
-  FrmReportes.DtaHistorial.RecordSource = SQL
+  SQl = "SELECT  Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta , Cuentas.TipoMoneda FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE  (Transacciones.FechaTransaccion < CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102)) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda HAVING (Cuentas.TipoCuenta = 'Ingresos - Ventas') OR (Cuentas.TipoCuenta = 'Costos') OR (Cuentas.TipoCuenta = 'Gastos') ORDER BY Cuentas.CodCuentas"
+  FrmReportes.DtaHistorial.RecordSource = SQl
   FrmReportes.DtaHistorial.Refresh
 '  QUIEN = "Utilidad"
  
@@ -1016,10 +1016,10 @@ Dim DescripCuenta As String, DescripcionPadre As String, KeyUltimo As String, Aj
       FrmReportes.DtaTasas2.Refresh
       TasaCambio = FrmReportes.DtaTasas2.Recordset("MontoCordobas")
      If TasaCambio = 0 Then
-      Cadena = "La tasa de Cambio con Fecha: " & Fechas1 & vbLf
-      Cadena = Cadena & "no puede ser igual a Cero, el Sistema Contable" & vbLf
-      Cadena = Cadena & "no contiuara el proceso......"
-      MsgBox Cadena, vbCritical, "Sistema Contable"
+      cadena = "La tasa de Cambio con Fecha: " & Fechas1 & vbLf
+      cadena = cadena & "no puede ser igual a Cero, el Sistema Contable" & vbLf
+      cadena = cadena & "no contiuara el proceso......"
+      MsgBox cadena, vbCritical, "Sistema Contable"
       Exit Sub
      End If
       If Not IsNull(FrmReportes.DtaConsulta.Recordset("DescripcionCuentas")) Then
@@ -1380,21 +1380,21 @@ Dim DescripCuenta As String, DescripcionPadre As String, KeyUltimo As String, Aj
   TotalGastos = 0
   'Busco que cuentas tienen saldo
  If QUIEN = "Utilidad" Then
-   SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
-   SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
+   SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
+   SQl = SQl & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
  ElseIf QUIEN = "Resultado" Then
-   SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
-   SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
+   SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
+   SQl = SQl & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
  ElseIf QUIEN = "UtilidadResultado" Then
-  SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
-  SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
-  FrmReportes.DtaHistorial.RecordSource = SQL
+  SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
+  SQl = SQl & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
+  FrmReportes.DtaHistorial.RecordSource = SQl
   FrmReportes.DtaHistorial.Refresh
  Else
-  SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
-  SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Otros Activos' Or (Cuentas.TipoCuenta) = 'Caja' Or (Cuentas.TipoCuenta) = 'Bancos' Or (Cuentas.TipoCuenta) = 'Cuentas x Cobrar' Or (Cuentas.TipoCuenta) = 'Inventario' Or (Cuentas.TipoCuenta) = 'Papeleria - Utiles' Or (Cuentas.TipoCuenta) = 'Activo Fijo' Or (Cuentas.TipoCuenta) = 'Otros Pasivos' Or (Cuentas.TipoCuenta) = 'Cuentas x Pagar' Or (Cuentas.TipoCuenta) = 'Pasivo' Or (Cuentas.TipoCuenta) = 'Capital')) ORDER BY Cuentas.CodCuentas"
+  SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
+  SQl = SQl & "Having (((Cuentas.TipoCuenta) = 'Otros Activos' Or (Cuentas.TipoCuenta) = 'Caja' Or (Cuentas.TipoCuenta) = 'Bancos' Or (Cuentas.TipoCuenta) = 'Cuentas x Cobrar' Or (Cuentas.TipoCuenta) = 'Inventario' Or (Cuentas.TipoCuenta) = 'Papeleria - Utiles' Or (Cuentas.TipoCuenta) = 'Activo Fijo' Or (Cuentas.TipoCuenta) = 'Otros Pasivos' Or (Cuentas.TipoCuenta) = 'Cuentas x Pagar' Or (Cuentas.TipoCuenta) = 'Pasivo' Or (Cuentas.TipoCuenta) = 'Capital')) ORDER BY Cuentas.CodCuentas"
  End If
- FrmReportes.DtaHistorial.RecordSource = SQL
+ FrmReportes.DtaHistorial.RecordSource = SQl
 
 'InputBox "", "", FrmReportes.DtaHistorial.RecordSource
  FrmReportes.DtaHistorial.Refresh
@@ -1428,10 +1428,10 @@ FrmReportes.osProgress1.Value = 0
       Fechas1 = FrmReportes.DtaConsulta.Recordset("FechaTransaccion")
       TasaCambio = FrmReportes.DtaConsulta.Recordset("MontoCordobas")
      If TasaCambio = 0 Then
-      Cadena = "La tasa de Cambio de Cambio con Fecha: " & Fechas1 & vbLf
-      Cadena = Cadena & "no puede ser igual a Cero, el Sistema Contable" & vbLf
-      Cadena = Cadena & "no contiuara el proceso......"
-      MsgBox Cadena, vbCritical, "Sistema Contable"
+      cadena = "La tasa de Cambio de Cambio con Fecha: " & Fechas1 & vbLf
+      cadena = cadena & "no puede ser igual a Cero, el Sistema Contable" & vbLf
+      cadena = cadena & "no contiuara el proceso......"
+      MsgBox cadena, vbCritical, "Sistema Contable"
       Exit Sub
      End If
       
@@ -2015,7 +2015,7 @@ Debug.Print FrmReportes.DtaHistorial.RecordSource
 End Sub
 Public Sub EliminaRegistroCeroDpto(QUIEN As String)
 Dim KeyGrupo As String, Niveles As Integer
-Dim rs As New ADODB.Recordset, Cadena As String
+Dim rs As New ADODB.Recordset, cadena As String
 
 If QUIEN = "Balanza" Then
 'FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.Debe3-Reportes.Haber3 AS Diferencia From Reportes Where (((Reportes.Descripcion) Like '*Total*') And ((Reportes.Debe3 - Reportes.Haber3) = 0))"
@@ -2121,7 +2121,7 @@ End Sub
 
 Public Sub EliminaRegistroCero(QUIEN As String)
 Dim KeyGrupo As String, Niveles As Integer
-Dim rs As New ADODB.Recordset, Cadena As String
+Dim rs As New ADODB.Recordset, cadena As String
 
 If QUIEN = "Balanza" Then
 'FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.Debe3-Reportes.Haber3 AS Diferencia From Reportes Where (((Reportes.Descripcion) Like '*Total*') And ((Reportes.Debe3 - Reportes.Haber3) = 0))"
@@ -3138,7 +3138,7 @@ End Sub
 
 
 Public Sub SaldoReportes(QUIEN As String)
-Dim CodigoGrupo As String, SQL As String, Fechas As Date
+Dim CodigoGrupo As String, SQl As String, Fechas As Date
 Dim Nivel As Integer, Longitud As Integer, Fecha1 As String
 Dim TotalMayor() As String, TotalDescripcion As String
 Dim KeySuperior As String, NumeroHijos As Double, NumeroHijosTotales As Double
@@ -3163,24 +3163,24 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
  
                 'Busco que cuentas tienen saldo
                 If QUIEN = "Balance" Then
-                 SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
-                 SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Otros Activos' Or (Cuentas.TipoCuenta) = 'Caja' Or (Cuentas.TipoCuenta) = 'Bancos' Or (Cuentas.TipoCuenta) = 'Cuentas x Cobrar' Or (Cuentas.TipoCuenta) = 'Inventario' Or (Cuentas.TipoCuenta) = 'Papeleria - Utiles' Or (Cuentas.TipoCuenta) = 'Activo Fijo' Or (Cuentas.TipoCuenta) = 'Otros Pasivos' Or (Cuentas.TipoCuenta) = 'Cuentas x Pagar' Or (Cuentas.TipoCuenta) = 'Pasivo' Or (Cuentas.TipoCuenta) = 'Capital')) ORDER BY Cuentas.CodCuentas"
-                 FrmReportes.DtaHistorial.RecordSource = SQL
+                 SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
+                 SQl = SQl & "Having (((Cuentas.TipoCuenta) = 'Otros Activos' Or (Cuentas.TipoCuenta) = 'Caja' Or (Cuentas.TipoCuenta) = 'Bancos' Or (Cuentas.TipoCuenta) = 'Cuentas x Cobrar' Or (Cuentas.TipoCuenta) = 'Inventario' Or (Cuentas.TipoCuenta) = 'Papeleria - Utiles' Or (Cuentas.TipoCuenta) = 'Activo Fijo' Or (Cuentas.TipoCuenta) = 'Otros Pasivos' Or (Cuentas.TipoCuenta) = 'Cuentas x Pagar' Or (Cuentas.TipoCuenta) = 'Pasivo' Or (Cuentas.TipoCuenta) = 'Capital')) ORDER BY Cuentas.CodCuentas"
+                 FrmReportes.DtaHistorial.RecordSource = SQl
                  FrmReportes.DtaHistorial.Refresh
                 ElseIf QUIEN = "Utilidad" Then
-                 SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
-                 SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
-                 FrmReportes.DtaHistorial.RecordSource = SQL
+                 SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
+                 SQl = SQl & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
+                 FrmReportes.DtaHistorial.RecordSource = SQl
                  FrmReportes.DtaHistorial.Refresh
                 ElseIf QUIEN = "Resultado" Then
-                 SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
-                 SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
-                 FrmReportes.DtaHistorial.RecordSource = SQL
+                 SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
+                 SQl = SQl & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
+                 FrmReportes.DtaHistorial.RecordSource = SQl
                  FrmReportes.DtaHistorial.Refresh
                 ElseIf QUIEN = "ResultadoDpto" Then
-                 SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Transacciones.VoucherNo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Transacciones.VoucherNo " & vbLf
-                 SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas, Transacciones.VoucherNo"
-                 FrmReportes.DtaHistorial.RecordSource = SQL
+                 SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Transacciones.VoucherNo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Transacciones.VoucherNo " & vbLf
+                 SQl = SQl & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas, Transacciones.VoucherNo"
+                 FrmReportes.DtaHistorial.RecordSource = SQl
                  FrmReportes.DtaHistorial.Refresh
                  
                 ElseIf QUIEN = "Balanza" Then
@@ -3475,10 +3475,10 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                      If TasaCambio = 0 Then
                       FrmReportes.osProgress2.Visible = False
                       FrmReportes.osProgress1.Visible = False
-                      Cadena = "La tasa de Cambio con Fecha: " & Fechas & vbLf
-                      Cadena = Cadena & "no puede ser igual a Cero, el Sistema Contable" & vbLf
-                      Cadena = Cadena & "no contiuara el proceso......"
-                      MsgBox Cadena, vbCritical, "Sistema Contable"
+                      cadena = "La tasa de Cambio con Fecha: " & Fechas & vbLf
+                      cadena = cadena & "no puede ser igual a Cero, el Sistema Contable" & vbLf
+                      cadena = cadena & "no contiuara el proceso......"
+                      MsgBox cadena, vbCritical, "Sistema Contable"
                       Exit Sub
                      End If
                       If Not IsNull(FrmReportes.DtaConsulta.Recordset("DescripcionCuentas")) Then
@@ -4035,31 +4035,31 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
             TotalGastos = 0
             'Busco que cuentas tienen saldo
             If QUIEN = "Utilidad" Then
-                SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
-                SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
+                SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
+                SQl = SQl & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
             ElseIf QUIEN = "BalanzaCodigo" Then
 '                SQL = "SELECT Cuentas.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio,5)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito,5)) AS MCredito, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio,5)) - SUM(ROUND(Transacciones.Credito * Transacciones.TCambio,5)) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM  Cuentas INNER JOIN  Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas " & _
 '                      "WHERE (Transacciones.FechaTransaccion < '" & Format(FechaIni, "yyyymmdd") & "') GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda Having (SUM(Round(Transacciones.Debito * Transacciones.TCambio,5)) - SUM(Round(Transacciones.Credito * Transacciones.TCambio,5)) <> 0) ORDER BY Cuentas.CodCuentas"
-                 SQL = "SELECT Transacciones.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio, 2)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito, 2)) AS MCredito, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda FROM Transacciones INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas  " & _
+                 SQl = "SELECT Transacciones.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio, 2)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito, 2)) AS MCredito, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda FROM Transacciones INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas  " & _
                        "WHERE (Transacciones.FechaTransaccion < '" & Format(FechaIni, "yyyymmdd") & "') GROUP BY Transacciones.CodCuentas HAVING  (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "')"
             ElseIf QUIEN = "SaldoCuentas" Then
                  QUIEN = "BalanzaCodigo"
-                 SQL = "SELECT Transacciones.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio, 2)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito, 2)) AS MCredito, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda FROM Transacciones INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas  " & _
+                 SQl = "SELECT Transacciones.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio, 2)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito, 2)) AS MCredito, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda FROM Transacciones INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas  " & _
                        "WHERE (Transacciones.FechaTransaccion < '" & Format(FechaIni, "yyyymmdd") & "') GROUP BY Transacciones.CodCuentas HAVING  (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') ORDER BY Transacciones.CodCuentas"  'AND (MAX(Cuentas.TipoCuenta) = 'Cuentas x Cobrar')
             
             ElseIf QUIEN = "Balanza" Then
 '                SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
 '                SQl = SQl & "ORDER BY Cuentas.CodCuentas"
         
-                SQL = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, MAX(Cuentas.KeyGrupo) AS KeyGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (Transacciones.FechaTransaccion < '" & Format(FechaIni, "yyyymmdd") & "') GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda HAVING (MAX(Cuentas.KeyGrupo) BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') ORDER BY Cuentas.CodCuentas"
+                SQl = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, MAX(Cuentas.KeyGrupo) AS KeyGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (Transacciones.FechaTransaccion < '" & Format(FechaIni, "yyyymmdd") & "') GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda HAVING (MAX(Cuentas.KeyGrupo) BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') ORDER BY Cuentas.CodCuentas"
             Else
               
                 
-                SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
-                SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Otros Activos' Or (Cuentas.TipoCuenta) = 'Caja' Or (Cuentas.TipoCuenta) = 'Bancos' Or (Cuentas.TipoCuenta) = 'Cuentas x Cobrar' Or (Cuentas.TipoCuenta) = 'Inventario' Or (Cuentas.TipoCuenta) = 'Papeleria - Utiles' Or (Cuentas.TipoCuenta) = 'Activo Fijo' Or (Cuentas.TipoCuenta) = 'Otros Pasivos' Or (Cuentas.TipoCuenta) = 'Cuentas x Pagar' Or (Cuentas.TipoCuenta) = 'Pasivo' Or (Cuentas.TipoCuenta) = 'Capital')) ORDER BY Cuentas.CodCuentas"
+                SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
+                SQl = SQl & "Having (((Cuentas.TipoCuenta) = 'Otros Activos' Or (Cuentas.TipoCuenta) = 'Caja' Or (Cuentas.TipoCuenta) = 'Bancos' Or (Cuentas.TipoCuenta) = 'Cuentas x Cobrar' Or (Cuentas.TipoCuenta) = 'Inventario' Or (Cuentas.TipoCuenta) = 'Papeleria - Utiles' Or (Cuentas.TipoCuenta) = 'Activo Fijo' Or (Cuentas.TipoCuenta) = 'Otros Pasivos' Or (Cuentas.TipoCuenta) = 'Cuentas x Pagar' Or (Cuentas.TipoCuenta) = 'Pasivo' Or (Cuentas.TipoCuenta) = 'Capital')) ORDER BY Cuentas.CodCuentas"
             End If
             
-                FrmReportes.DtaHistorial.RecordSource = SQL
+                FrmReportes.DtaHistorial.RecordSource = SQl
         
                 FrmReportes.DtaHistorial.Refresh
         
@@ -4119,10 +4119,10 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
 '                    Fechas1 = FrmReportes.DtaConsulta.Recordset("FechaTransaccion")
                     TasaCambio = FrmReportes.DtaConsulta.Recordset("MontoCordobas")
                     If TasaCambio = 0 Then
-                        Cadena = "La tasa de Cambio de Cambio con Fecha: " & Fechas1 & vbLf
-                        Cadena = Cadena & "no puede ser igual a Cero, el Sistema Contable" & vbLf
-                        Cadena = Cadena & "no contiuara el proceso......"
-                        MsgBox Cadena, vbCritical, "Sistema Contable"
+                        cadena = "La tasa de Cambio de Cambio con Fecha: " & Fechas1 & vbLf
+                        cadena = cadena & "no puede ser igual a Cero, el Sistema Contable" & vbLf
+                        cadena = cadena & "no contiuara el proceso......"
+                        MsgBox cadena, vbCritical, "Sistema Contable"
                         Exit Sub
                     End If
                     If Not IsNull(FrmReportes.DtaConsulta.Recordset("DescripcionCuentas")) Then
@@ -4520,7 +4520,7 @@ End Sub
 
 
 Public Sub SaldoReportesDpto(QUIEN As String)
-Dim CodigoGrupo As String, SQL As String, Fechas As Date
+Dim CodigoGrupo As String, SQl As String, Fechas As Date
 Dim Nivel As Integer, Longitud As Integer, Fecha1 As String
 Dim TotalMayor() As String, TotalDescripcion As String
 Dim KeySuperior As String, NumeroHijos As Double, NumeroHijosTotales As Double
@@ -4541,25 +4541,25 @@ Dim TotalDebitoDpto As Double, TotalCreditoDpto As Double
             
                 'Busco que cuentas tienen saldo
                 If QUIEN = "Balance" Then
-                 SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
-                 SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Otros Activos' Or (Cuentas.TipoCuenta) = 'Caja' Or (Cuentas.TipoCuenta) = 'Bancos' Or (Cuentas.TipoCuenta) = 'Cuentas x Cobrar' Or (Cuentas.TipoCuenta) = 'Inventario' Or (Cuentas.TipoCuenta) = 'Papeleria - Utiles' Or (Cuentas.TipoCuenta) = 'Activo Fijo' Or (Cuentas.TipoCuenta) = 'Otros Pasivos' Or (Cuentas.TipoCuenta) = 'Cuentas x Pagar' Or (Cuentas.TipoCuenta) = 'Pasivo' Or (Cuentas.TipoCuenta) = 'Capital')) ORDER BY Cuentas.CodCuentas"
-                 FrmReportes.DtaHistorial.RecordSource = SQL
+                 SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
+                 SQl = SQl & "Having (((Cuentas.TipoCuenta) = 'Otros Activos' Or (Cuentas.TipoCuenta) = 'Caja' Or (Cuentas.TipoCuenta) = 'Bancos' Or (Cuentas.TipoCuenta) = 'Cuentas x Cobrar' Or (Cuentas.TipoCuenta) = 'Inventario' Or (Cuentas.TipoCuenta) = 'Papeleria - Utiles' Or (Cuentas.TipoCuenta) = 'Activo Fijo' Or (Cuentas.TipoCuenta) = 'Otros Pasivos' Or (Cuentas.TipoCuenta) = 'Cuentas x Pagar' Or (Cuentas.TipoCuenta) = 'Pasivo' Or (Cuentas.TipoCuenta) = 'Capital')) ORDER BY Cuentas.CodCuentas"
+                 FrmReportes.DtaHistorial.RecordSource = SQl
                  FrmReportes.DtaHistorial.Refresh
                 ElseIf QUIEN = "Utilidad" Then
-                 SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
-                 SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
-                 FrmReportes.DtaHistorial.RecordSource = SQL
+                 SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
+                 SQl = SQl & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
+                 FrmReportes.DtaHistorial.RecordSource = SQl
                  FrmReportes.DtaHistorial.Refresh
                 ElseIf QUIEN = "Resultado" Then
 
                     If FrmReportes.TxtDptoDesde.Text = "" And FrmReportes.TxtDptoHasta.Text = "" Then
-                        SQL = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta , Cuentas.TipoMoneda, Transacciones.VoucherNo,Cuentas.KeyGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas  " & _
+                        SQl = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta , Cuentas.TipoMoneda, Transacciones.VoucherNo,Cuentas.KeyGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas  " & _
                               "WHERE (Transacciones.FechaTransaccion BETWEEN  '" & Format(FechaIni, "yyyymmdd") & "' AND  '" & Format(FechaFin, "yyyymmdd") & "') GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Transacciones.VoucherNo,Cuentas.KeyGrupo HAVING (Cuentas.TipoCuenta = 'Ingresos - Ventas') OR (Cuentas.TipoCuenta = 'Costos') OR (Cuentas.TipoCuenta = 'Gastos') ORDER BY Cuentas.CodCuentas, Transacciones.VoucherNo"
                     Else
-                        SQL = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total, Cuentas.DescripcionCuentas,  Cuentas.TipoCuenta, Cuentas.TipoMoneda, Cuentas.KeyGrupo, ((CASE WHEN Transacciones.VoucherNo = '-' THEN '00' ELSE Transacciones.VoucherNo END)) AS VoucherNo  FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas  " & _
+                        SQl = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total, Cuentas.DescripcionCuentas,  Cuentas.TipoCuenta, Cuentas.TipoMoneda, Cuentas.KeyGrupo, ((CASE WHEN Transacciones.VoucherNo = '-' THEN '00' ELSE Transacciones.VoucherNo END)) AS VoucherNo  FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas  " & _
                               "WHERE (Transacciones.FechaTransaccion BETWEEN '" & Format(FechaIni, "yyyymmdd") & "' AND '" & Format(FechaFin, "yyyymmdd") & "') AND (((CASE WHEN Transacciones.VoucherNo = '-' THEN '00' ELSE Transacciones.VoucherNo END)) BETWEEN '" & FrmReportes.TxtDptoDesde.Text & "' AND '" & FrmReportes.TxtDptoHasta.Text & "') GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Transacciones.VoucherNo, Cuentas.KeyGrupo HAVING (Cuentas.TipoCuenta = 'Ingresos - Ventas') OR (Cuentas.TipoCuenta = 'Costos') OR (Cuentas.TipoCuenta = 'Gastos') ORDER BY Cuentas.CodCuentas"
                     End If
-                        FrmReportes.DtaHistorial.RecordSource = SQL
+                        FrmReportes.DtaHistorial.RecordSource = SQl
                         FrmReportes.DtaHistorial.Refresh
                  
                 ElseIf QUIEN = "Balanza" Then
@@ -4694,13 +4694,13 @@ Dim TotalDebitoDpto As Double, TotalCreditoDpto As Double
                 ElseIf QUIEN = "UtilidadResultado" Then
                 
                  If FrmReportes.TxtDptoDesde.Text = "" And FrmReportes.TxtDptoHasta.Text = "" Then
-                    SQL = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta , Cuentas.TipoMoneda, Transacciones.VoucherNo, MAX(Cuentas.KeyGrupo) AS KeyGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas  " & _
+                    SQl = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta , Cuentas.TipoMoneda, Transacciones.VoucherNo, MAX(Cuentas.KeyGrupo) AS KeyGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas  " & _
                           "WHERE (Transacciones.FechaTransaccion BETWEEN  '" & Format(FechaIni, "yyyymmdd") & "' AND  '" & Format(FechaFin, "yyyymmdd") & "') GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Transacciones.VoucherNo HAVING (Cuentas.TipoCuenta = 'Ingresos - Ventas') OR (Cuentas.TipoCuenta = 'Costos') OR (Cuentas.TipoCuenta = 'Gastos') ORDER BY Cuentas.CodCuentas, Transacciones.VoucherNo"
                  Else
-                    SQL = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Transacciones.VoucherNo, MAX(Cuentas.KeyGrupo) AS KeyGrupo FROM Cuentas INNER JOIN  Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas " & _
+                    SQl = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Transacciones.VoucherNo, MAX(Cuentas.KeyGrupo) AS KeyGrupo FROM Cuentas INNER JOIN  Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas " & _
                           "WHERE     (Transacciones.FechaTransaccion BETWEEN '" & Format(FechaIni, "yyyymmdd") & "' AND '" & Format(FechaFin, "yyyymmdd") & "') AND (Transacciones.VoucherNo BETWEEN '" & FrmReportes.TxtDptoDesde.Text & "' AND '" & FrmReportes.TxtDptoHasta.Text & "') GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Transacciones.VoucherNo HAVING (Cuentas.TipoCuenta = 'Ingresos - Ventas') OR (Cuentas.TipoCuenta = 'Costos') OR (Cuentas.TipoCuenta = 'Gastos') ORDER BY Cuentas.CodCuentas, Transacciones.VoucherNo"
                  End If
-                 FrmReportes.DtaHistorial.RecordSource = SQL
+                 FrmReportes.DtaHistorial.RecordSource = SQl
                  FrmReportes.DtaHistorial.Refresh
               
                 
@@ -4874,10 +4874,10 @@ Dim TotalDebitoDpto As Double, TotalCreditoDpto As Double
                      If TasaCambio = 0 Then
                       FrmReportes.osProgress2.Visible = False
                       FrmReportes.osProgress1.Visible = False
-                      Cadena = "La tasa de Cambio con Fecha: " & Fechas & vbLf
-                      Cadena = Cadena & "no puede ser igual a Cero, el Sistema Contable" & vbLf
-                      Cadena = Cadena & "no contiuara el proceso......"
-                      MsgBox Cadena, vbCritical, "Sistema Contable"
+                      cadena = "La tasa de Cambio con Fecha: " & Fechas & vbLf
+                      cadena = cadena & "no puede ser igual a Cero, el Sistema Contable" & vbLf
+                      cadena = cadena & "no contiuara el proceso......"
+                      MsgBox cadena, vbCritical, "Sistema Contable"
                       Exit Sub
                      End If
                       If Not IsNull(FrmReportes.DtaConsulta.Recordset("DescripcionCuentas")) Then
@@ -5433,35 +5433,35 @@ Dim TotalDebitoDpto As Double, TotalCreditoDpto As Double
             Credito = 0
             Totalingresos = 0
             TotalGastos = 0
-            SQL = ""
+            SQl = ""
             'Busco que cuentas tienen saldo
             If QUIEN = "Utilidad" Then
-                SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
-                SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
+                SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
+                SQl = SQl & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
             ElseIf QUIEN = "BalanzaCodigo" Then
 '                SQL = "SELECT Cuentas.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio,5)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito,5)) AS MCredito, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio,5)) - SUM(ROUND(Transacciones.Credito * Transacciones.TCambio,5)) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM  Cuentas INNER JOIN  Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas " & _
 '                      "WHERE (Transacciones.FechaTransaccion < '" & Format(FechaIni, "yyyymmdd") & "') GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda Having (SUM(Round(Transacciones.Debito * Transacciones.TCambio,5)) - SUM(Round(Transacciones.Credito * Transacciones.TCambio,5)) <> 0) ORDER BY Cuentas.CodCuentas"
-                 SQL = "SELECT Transacciones.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio, 2)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito, 2)) AS MCredito, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda FROM Transacciones INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas  " & _
+                 SQl = "SELECT Transacciones.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio, 2)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito, 2)) AS MCredito, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda FROM Transacciones INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas  " & _
                        "WHERE (Transacciones.FechaTransaccion < '" & Format(FechaIni, "yyyymmdd") & "') GROUP BY Transacciones.CodCuentas HAVING  (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "')"
             ElseIf QUIEN = "SaldoCuentas" Then
                  QUIEN = "BalanzaCodigo"
-                 SQL = "SELECT Transacciones.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio, 2)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito, 2)) AS MCredito, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda FROM Transacciones INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas  " & _
+                 SQl = "SELECT Transacciones.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio, 2)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito, 2)) AS MCredito, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda FROM Transacciones INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas  " & _
                        "WHERE (Transacciones.FechaTransaccion < '" & Format(FechaIni, "yyyymmdd") & "') GROUP BY Transacciones.CodCuentas HAVING  (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') ORDER BY Transacciones.CodCuentas"  'AND (MAX(Cuentas.TipoCuenta) = 'Cuentas x Cobrar')
             
             ElseIf QUIEN = "Balanza" Then
 '                SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
 '                SQl = SQl & "ORDER BY Cuentas.CodCuentas"
         
-                SQL = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, MAX(Cuentas.KeyGrupo) AS KeyGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (Transacciones.FechaTransaccion < '" & Format(FechaIni, "yyyymmdd") & "') GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda HAVING (MAX(Cuentas.KeyGrupo) BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') ORDER BY Cuentas.CodCuentas"
+                SQl = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, MAX(Cuentas.KeyGrupo) AS KeyGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (Transacciones.FechaTransaccion < '" & Format(FechaIni, "yyyymmdd") & "') GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda HAVING (MAX(Cuentas.KeyGrupo) BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') ORDER BY Cuentas.CodCuentas"
             ElseIf QUIEN = "Balance" Then
               
                 
-                SQL = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
-                SQL = SQL & "Having (((Cuentas.TipoCuenta) = 'Otros Activos' Or (Cuentas.TipoCuenta) = 'Caja' Or (Cuentas.TipoCuenta) = 'Bancos' Or (Cuentas.TipoCuenta) = 'Cuentas x Cobrar' Or (Cuentas.TipoCuenta) = 'Inventario' Or (Cuentas.TipoCuenta) = 'Papeleria - Utiles' Or (Cuentas.TipoCuenta) = 'Activo Fijo' Or (Cuentas.TipoCuenta) = 'Otros Pasivos' Or (Cuentas.TipoCuenta) = 'Cuentas x Pagar' Or (Cuentas.TipoCuenta) = 'Pasivo' Or (Cuentas.TipoCuenta) = 'Capital')) ORDER BY Cuentas.CodCuentas"
+                SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
+                SQl = SQl & "Having (((Cuentas.TipoCuenta) = 'Otros Activos' Or (Cuentas.TipoCuenta) = 'Caja' Or (Cuentas.TipoCuenta) = 'Bancos' Or (Cuentas.TipoCuenta) = 'Cuentas x Cobrar' Or (Cuentas.TipoCuenta) = 'Inventario' Or (Cuentas.TipoCuenta) = 'Papeleria - Utiles' Or (Cuentas.TipoCuenta) = 'Activo Fijo' Or (Cuentas.TipoCuenta) = 'Otros Pasivos' Or (Cuentas.TipoCuenta) = 'Cuentas x Pagar' Or (Cuentas.TipoCuenta) = 'Pasivo' Or (Cuentas.TipoCuenta) = 'Capital')) ORDER BY Cuentas.CodCuentas"
             End If
             
-              If SQL <> "" Then
-                FrmReportes.DtaHistorial.RecordSource = SQL
+              If SQl <> "" Then
+                FrmReportes.DtaHistorial.RecordSource = SQl
                 FrmReportes.DtaHistorial.Refresh
               End If
         
@@ -5519,10 +5519,10 @@ Dim TotalDebitoDpto As Double, TotalCreditoDpto As Double
                     Fechas1 = FrmReportes.DtaConsulta.Recordset("FechaTransaccion")
                     TasaCambio = FrmReportes.DtaConsulta.Recordset("MontoCordobas")
                     If TasaCambio = 0 Then
-                        Cadena = "La tasa de Cambio de Cambio con Fecha: " & Fechas1 & vbLf
-                        Cadena = Cadena & "no puede ser igual a Cero, el Sistema Contable" & vbLf
-                        Cadena = Cadena & "no contiuara el proceso......"
-                        MsgBox Cadena, vbCritical, "Sistema Contable"
+                        cadena = "La tasa de Cambio de Cambio con Fecha: " & Fechas1 & vbLf
+                        cadena = cadena & "no puede ser igual a Cero, el Sistema Contable" & vbLf
+                        cadena = cadena & "no contiuara el proceso......"
+                        MsgBox cadena, vbCritical, "Sistema Contable"
                         Exit Sub
                     End If
                     If Not IsNull(FrmReportes.DtaConsulta.Recordset("DescripcionCuentas")) Then
@@ -6070,42 +6070,42 @@ End Sub
 
 
 Public Sub ControlErrores()
-     Dim Cadena As String
+     Dim cadena As String
      Select Case err
         Case 53
-             Cadena = Cadena & "No se ha encontrado el Archivo" & vbLf
-             Cadena = Cadena & "que se espicifico inicialmente " & vbLf
-             MsgBox Prompt:=Cadena, Buttons:=vbExclamation, Title:="Sistema Contable"
-             Cadena = ""
+             cadena = cadena & "No se ha encontrado el Archivo" & vbLf
+             cadena = cadena & "que se espicifico inicialmente " & vbLf
+             MsgBox Prompt:=cadena, Buttons:=vbExclamation, Title:="Sistema Contable"
+             cadena = ""
         Case 3464
-             Cadena = Cadena & "A ocurrido un Error de Criterios" & vbLf
-             Cadena = Cadena & "En el Tipo de Datos, No Coinciden " & vbLf
-             Cadena = Cadena & "Los Tipos con la Expresion de Criterios."
-             MsgBox Prompt:=Cadena, Buttons:=vbExclamation, Title:="Sistema Contable"
-             Cadena = ""
+             cadena = cadena & "A ocurrido un Error de Criterios" & vbLf
+             cadena = cadena & "En el Tipo de Datos, No Coinciden " & vbLf
+             cadena = cadena & "Los Tipos con la Expresion de Criterios."
+             MsgBox Prompt:=cadena, Buttons:=vbExclamation, Title:="Sistema Contable"
+             cadena = ""
         Case 6
-             Cadena = Cadena & "Desbordamiento de Datos en el sistema" & vbLf
-             Cadena = Cadena & "Este error se debe por que  digito muchos Datos " & vbLf
-             Cadena = Cadena & "Consulte su Soporte Tecnico 07788301"
-             MsgBox Prompt:=Cadena, Buttons:=vbExclamation, Title:="Sistema Contable"
-             Cadena = ""
+             cadena = cadena & "Desbordamiento de Datos en el sistema" & vbLf
+             cadena = cadena & "Este error se debe por que  digito muchos Datos " & vbLf
+             cadena = cadena & "Consulte su Soporte Tecnico 07788301"
+             MsgBox Prompt:=cadena, Buttons:=vbExclamation, Title:="Sistema Contable"
+             cadena = ""
         Case 94
-             Cadena = Cadena & "El Registro tiene un Datos que es Nulo" & vbLf
-             Cadena = Cadena & "Debe corregir este error desde las Base " & vbLf
-             Cadena = Cadena & "de Datos, Consulte su Soporte Tecnico 07788301"
-             MsgBox Prompt:=Cadena, Buttons:=vbExclamation, Title:="Sistema Contable"
-             Cadena = ""
+             cadena = cadena & "El Registro tiene un Datos que es Nulo" & vbLf
+             cadena = cadena & "Debe corregir este error desde las Base " & vbLf
+             cadena = cadena & "de Datos, Consulte su Soporte Tecnico 07788301"
+             MsgBox Prompt:=cadena, Buttons:=vbExclamation, Title:="Sistema Contable"
+             cadena = ""
         Case 76
-             Cadena = Cadena & "La ruta de la Base de Datos no esta" & vbLf
-             Cadena = Cadena & "en el Disco Duro, Esto puede causar " & vbLf
-             Cadena = Cadena & "Conflicto, la Ruta es: C:\facturacion"
-             MsgBox Prompt:=Cadena, Buttons:=vbExclamation, Title:="Zeus  Facturacion"
-             Cadena = ""
+             cadena = cadena & "La ruta de la Base de Datos no esta" & vbLf
+             cadena = cadena & "en el Disco Duro, Esto puede causar " & vbLf
+             cadena = cadena & "Conflicto, la Ruta es: C:\facturacion"
+             MsgBox Prompt:=cadena, Buttons:=vbExclamation, Title:="Zeus  Facturacion"
+             cadena = ""
         Case 3022
-             Cadena = Cadena & "Se estan Creando PK Dupliacados, por Fabor" & vbLf
-             Cadena = Cadena & "Si esta en facturacion, verifique el " & vbLf
-             Cadena = Cadena & "el numero consecutivo."
-             MsgBox Cadena, vbInformation, "Error 3022:Zeus Facturacion"
+             cadena = cadena & "Se estan Creando PK Dupliacados, por Fabor" & vbLf
+             cadena = cadena & "Si esta en facturacion, verifique el " & vbLf
+             cadena = cadena & "el numero consecutivo."
+             MsgBox cadena, vbInformation, "Error 3022:Zeus Facturacion"
         Case 13
              MsgBox "No se Continuara el Proceso", vbInformation, "Error 13:Zeus Facturacion"
                           
@@ -6126,11 +6126,11 @@ Public Sub ControlErrores()
         Case 364
              MsgBox "No se Puede abrir esta Ventana", vbCritical, "Error de Registro 364:Zeus Facturacion"
         Case 380
-             Cadena = Cadena & "       El tipo de Dato No es Correcto,Verifique" & vbLf
-             Cadena = Cadena & "   Por fabor la Configuracion Regional de Windows" & vbLf
-             Cadena = Cadena & "Consulte su Soporte Tecnico, Soluciones Informaticas"
-             MsgBox Prompt:=Cadena, Buttons:=vbExclamation, Title:="Error de Registro 380:Zeus Facturacion"
-             Cadena = ""
+             cadena = cadena & "       El tipo de Dato No es Correcto,Verifique" & vbLf
+             cadena = cadena & "   Por fabor la Configuracion Regional de Windows" & vbLf
+             cadena = cadena & "Consulte su Soporte Tecnico, Soluciones Informaticas"
+             MsgBox Prompt:=cadena, Buttons:=vbExclamation, Title:="Error de Registro 380:Zeus Facturacion"
+             cadena = ""
         Case 3163
              MsgBox "Desvordamiento de Datos", vbCritical, "Error de Registro 3163:Zeus Facturacion"
         Case 3021
@@ -6162,12 +6162,12 @@ Public Sub ControlErrores()
         Case 76
             MsgBox Prompt:="No se Ha encontrado la Ruta Indicada.", Buttons:=vbExclamation, Title:="Sistema Contable"
         Case Else
-            Cadena = Cadena & "Un error Desconocido ocurrió en este momento, Por Favor" & vbCrLf
-            Cadena = Cadena & "si el problema persiste debe llamar al distribuidor del sistema" & vbCrLf
-            Cadena = Cadena & "Error en la aplicación.Consulte al Soporte Tecnico Juan G. Bermúdez Tef:8502372" & vbCrLf
-            MsgBox Prompt:=Cadena, Buttons:=vbExclamation, Title:="Sistema Contable"
+            cadena = cadena & "Un error Desconocido ocurrió en este momento, Por Favor" & vbCrLf
+            cadena = cadena & "si el problema persiste debe llamar al distribuidor del sistema" & vbCrLf
+            cadena = cadena & "Error en la aplicación.Consulte al Soporte Tecnico Juan G. Bermúdez Tef:8502372" & vbCrLf
+            MsgBox Prompt:=cadena, Buttons:=vbExclamation, Title:="Sistema Contable"
     End Select
-Cadena = ""
+cadena = ""
 End Sub
 
 Public Sub ColorForm(ByVal frmForm As Form)
@@ -6561,7 +6561,7 @@ Function GrabaDetalleNomina(CodCuentas As String, FechaTransaccion As Date, Nume
                                  MDIPrimero.AdoConsulta.Recordset("Debito") = Format(Debito, "####0.00")
                                  MDIPrimero.AdoConsulta.Recordset("Credito") = Format(Credito, "####0.00")
                                  MDIPrimero.AdoConsulta.Recordset("Fuente") = Fuente
-                                 MDIPrimero.AdoConsulta.Recordset("VoucherNo") = Cadena
+                                 MDIPrimero.AdoConsulta.Recordset("VoucherNo") = cadena
                                  MDIPrimero.AdoConsulta.Recordset("FechaTasas") = Format(FechaTransaccion, "dd/mm/yyyy")
                                  MDIPrimero.AdoConsulta.Recordset("Beneficiario") = TipoFactura
                                 MDIPrimero.AdoConsulta.Recordset.Update
@@ -6630,6 +6630,167 @@ Function GrabaDetalleNomina(CodCuentas As String, FechaTransaccion As Date, Nume
                                 
 
 End Function
+Function GrabaDetalleCheque(CodCuentas As String, FechaTransaccion As Date, NumeroTransaccion As Double, NumeroPeriodo As Double, NombreCuenta As String, DescripcionMovimiento As String, Clave As String, TasaCambio As Double, Debito As Double, Credito As Double, Fuente As String, NumeroFactura As String, FechaDescuento As Date, Descuento As Double, FechaVence As Date, CodCuentaProveedor As String, TipoFactura As String, VoucherNo As String) As Boolean
+   Dim TipoCuenta As String, NombreEmpleado As String, TipoMoneda As String
+   
+   MDIPrimero.AdoConsulta.RecordSource = "SELECT * From Cuentas WHERE (CodCuentas = '" & CodCuentas & "')"
+   MDIPrimero.AdoConsulta.Refresh
+   If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
+    NombreCuenta = MDIPrimero.AdoConsulta.Recordset("DescripcionCuentas")
+    TipoCuenta = MDIPrimero.AdoConsulta.Recordset("TipoCuenta")
+   End If
+   
+   
+   If Debito = 0 And Credito = 0 Then
+     Exit Function
+   End If
+   
+   
+   If Fuente = "CHEQUE" Then
+            
+'            NumeroFactura = "-"
+'            TipoMoneda = "Córdobas"
+
+   
+   
+            '///////////si el cheque no se ha grabado, guardo el numero Voucher/////////////////
+
+              cadena = VoucherNo
+   
+              If TipoCuenta = "Bancos" Then
+            
+                    MDIPrimero.AdoConsulta.RecordSource = "SELECT NConsecutivoVoucher.CodCuenta, NConsecutivoVoucher.ConsecutivoVoucher, NConsecutivoVoucher.NPeriodo From NConsecutivoVoucher Where (((NConsecutivoVoucher.CodCuenta) = '" & CodigoCuenta & "') And ((NConsecutivoVoucher.NPeriodo) = " & NumeroPeriodo & "))"
+                    MDIPrimero.AdoConsulta.Refresh
+                    If MDIPrimero.AdoConsulta.Recordset.EOF Then
+                       MDIPrimero.AdoConsulta.Recordset.AddNew
+                         MDIPrimero.AdoConsulta.Recordset("CodCuenta") = CodigoCuenta
+                         MDIPrimero.AdoConsulta.Recordset("NPeriodo") = NumeroPeriodo
+                         MDIPrimero.AdoConsulta.Recordset("ConsecutivoVoucher") = 1
+                       MDIPrimero.AdoConsulta.Recordset.Update
+                       NumeroVoucher = 1
+                    Else
+                       'MDIPrimero.'AdoConsulta.Recordset.Edit
+                        MDIPrimero.AdoConsulta.Recordset("ConsecutivoVoucher") = MDIPrimero.AdoConsulta.Recordset("ConsecutivoVoucher") + 1
+                       MDIPrimero.AdoConsulta.Recordset.Update
+                     NumeroVoucher = MDIPrimero.AdoConsulta.Recordset("ConsecutivoVoucher")
+                    End If
+
+                    ConsecutivoVoucher = Month(FechaTransaccion)
+                    If TipoCuenta = "Caja" Then
+                          numero = "CASH " & NumeroVoucher & "/" & ConsecutivoVoucher
+                    End If
+                    Select Case TipoMoneda
+                       Case "Córdobas"
+                        If TipoCuenta = "Bancos" Then
+                          numero = "BC " & NumeroVoucher & "/" & ConsecutivoVoucher
+                        End If
+                       Case "Dólares"
+                        If TipoCuenta = "Bancos" Then
+                          numero = "BD " & NumeroVoucher & "/" & ConsecutivoVoucher
+                        End If
+                    
+                     End Select
+                    
+                 End If
+
+             
+                              '///////////////////////////////////////////////////////////////////////////////////////////
+                              '/////////////////////AGREGO EL DETALLE TRANSACCION ORIGEN////////////////////////////////
+                              '////////////////////////////////////////////////////////////////////////////////////////////
+                              MDIPrimero.AdoConsulta.RecordSource = "SELECT * From Transacciones WHERE (CodCuentas = '" & CodCuentas & "') AND (FechaTransaccion = CONVERT(DATETIME, '" & Format(FechaTransaccion, "yyyy-mm-dd") & "', 102)) AND (NumeroMovimiento = " & NumeroTransaccion & ")  AND (Clave = '" & Clave & "')"
+                              MDIPrimero.AdoConsulta.Refresh
+
+                              If MDIPrimero.AdoConsulta.Recordset.EOF Then
+                                MDIPrimero.AdoConsulta.Recordset.AddNew
+                                 MDIPrimero.AdoConsulta.Recordset("CodCuentas") = CodCuentas
+                                 MDIPrimero.AdoConsulta.Recordset("FechaTransaccion") = Format(FechaTransaccion, "dd/mm/yyyy")
+                                 MDIPrimero.AdoConsulta.Recordset("NPeriodo") = NumeroPeriodo
+                                 MDIPrimero.AdoConsulta.Recordset("NumeroMovimiento") = NumeroTransaccion
+                                 MDIPrimero.AdoConsulta.Recordset("NombreCuenta") = NombreCuenta
+                                 
+                                 If TipoCuenta = "Bancos" Then
+                                  MDIPrimero.AdoConsulta.Recordset("ChequeNo") = NumeroFactura
+                                  MDIPrimero.AdoConsulta.Recordset("DescripcionMovimiento") = DescripcionMovimiento & " " & TipoFactura
+                                 Else
+                                  MDIPrimero.AdoConsulta.Recordset("ChequeNo") = "-"
+                                  MDIPrimero.AdoConsulta.Recordset("DescripcionMovimiento") = DescripcionMovimiento
+                                 End If
+                                 MDIPrimero.AdoConsulta.Recordset("Clave") = Clave
+                                 MDIPrimero.AdoConsulta.Recordset("TCambio") = TasaCambio
+                                 MDIPrimero.AdoConsulta.Recordset("Debito") = Format(Debito, "####0.00")
+                                 MDIPrimero.AdoConsulta.Recordset("Credito") = Format(Credito, "####0.00")
+                                 MDIPrimero.AdoConsulta.Recordset("Fuente") = Fuente
+                                 MDIPrimero.AdoConsulta.Recordset("VoucherNo") = cadena
+                                 MDIPrimero.AdoConsulta.Recordset("FechaTasas") = Format(FechaTransaccion, "dd/mm/yyyy")
+                                 MDIPrimero.AdoConsulta.Recordset("Beneficiario") = TipoFactura
+                                MDIPrimero.AdoConsulta.Recordset.Update
+                              End If
+                              
+    Else
+                              
+                              
+                              
+                              '///////////////////////////////////////////////////////////////////////////////////////////
+                              '/////////////////////AGREGO EL DETALLE TRANSACCION ORIGEN////////////////////////////////
+                              '////////////////////////////////////////////////////////////////////////////////////////////
+                              MDIPrimero.AdoConsulta.RecordSource = "SELECT * From Transacciones WHERE (CodCuentas = '" & CodCuentas & "') AND (FechaTransaccion = CONVERT(DATETIME, '" & Format(FechaTransaccion, "yyyy-mm-dd") & "', 102)) AND (NumeroMovimiento = " & NumeroTransaccion & ")  AND (Clave = '" & Clave & "')"
+                              MDIPrimero.AdoConsulta.Refresh
+
+                              If MDIPrimero.AdoConsulta.Recordset.EOF Then
+                                MDIPrimero.AdoConsulta.Recordset.AddNew
+                                 MDIPrimero.AdoConsulta.Recordset("CodCuentas") = CodCuentas
+                                 MDIPrimero.AdoConsulta.Recordset("FechaTransaccion") = Format(FechaTransaccion, "dd/mm/yyyy")
+                                 MDIPrimero.AdoConsulta.Recordset("NPeriodo") = NumeroPeriodo
+                                 MDIPrimero.AdoConsulta.Recordset("NumeroMovimiento") = NumeroTransaccion
+                                 MDIPrimero.AdoConsulta.Recordset("NombreCuenta") = NombreCuenta
+                                 MDIPrimero.AdoConsulta.Recordset("DescripcionMovimiento") = DescripcionMovimiento
+                                 MDIPrimero.AdoConsulta.Recordset("Clave") = Clave
+                                 MDIPrimero.AdoConsulta.Recordset("TCambio") = TasaCambio
+                                 MDIPrimero.AdoConsulta.Recordset("Debito") = Debito
+                                 MDIPrimero.AdoConsulta.Recordset("Credito") = Credito
+                                 MDIPrimero.AdoConsulta.Recordset("Fuente") = Fuente
+                                 MDIPrimero.AdoConsulta.Recordset("FechaTasas") = Format(FechaTransaccion, "dd/mm/yyyy")
+                                 If NumeroFactura = "#######" Then
+                                   MDIPrimero.AdoConsulta.Recordset("ChequeNo") = NumeroFactura
+                                   NumeroFactura = "-"
+                                 End If
+                                 MDIPrimero.AdoConsulta.Recordset("FacturaNo") = NumeroFactura
+                                 If FechaDescuento <> "12:00:00 a.m." Then
+                                  MDIPrimero.AdoConsulta.Recordset("FechaDescuento") = FechaDescuento
+                                 End If
+                                 MDIPrimero.AdoConsulta.Recordset("DescuentoDisponible") = Descuento
+                                 If FechaVence <> "12:00:00 a.m." Then
+                                  MDIPrimero.AdoConsulta.Recordset("FechaVence") = FechaVence
+                                 End If
+                                 MDIPrimero.AdoConsulta.Recordset("CodCuentaProveedor") = CodCuentaProveedor
+                                 MDIPrimero.AdoConsulta.Recordset("TipoFactura") = TipoFactura
+                                MDIPrimero.AdoConsulta.Recordset.Update
+                              Else
+'                                 MDIPrimero.AdoConsulta.Recordset("DescripcionMovimiento") = DescripcionMovimiento
+'                                 MDIPrimero.AdoConsulta.Recordset("Clave") = Clave
+'                                 MDIPrimero.AdoConsulta.Recordset("TCambio") = TasaCambio
+'                                 MDIPrimero.AdoConsulta.Recordset("Debito") = Debito
+'                                 MDIPrimero.AdoConsulta.Recordset("Credito") = Credito
+'                                 MDIPrimero.AdoConsulta.Recordset("Fuente") = Fuente
+'                                 MDIPrimero.AdoConsulta.Recordset("FechaTasas") = FechaTransaccion
+'                                 MDIPrimero.AdoConsulta.Recordset("FacturaNo") = NumeroFactura
+'                                 MDIPrimero.AdoConsulta.Recordset("FechaDescuento") = FechaDescuento
+'                                 MDIPrimero.AdoConsulta.Recordset("DescuentoDisponible") = Descuento
+'                                 MDIPrimero.AdoConsulta.Recordset("FechaVence") = FechaVence
+'                                 MDIPrimero.AdoConsulta.Recordset("CodCuentaProveedor") = CodCuentaProveedor
+'                                 MDIPrimero.AdoConsulta.Recordset("TipoFactura") = TipoFactura
+                                 MDIPrimero.AdoConsulta.Recordset("Debito") = Format(Debito, "##,##0.00") + MDIPrimero.AdoConsulta.Recordset("Debito")
+                                 MDIPrimero.AdoConsulta.Recordset("Credito") = Format(Credito, "##,##0.00") + MDIPrimero.AdoConsulta.Recordset("Credito")
+                                 MDIPrimero.AdoConsulta.Recordset.Update
+                              End If
+                              
+                              
+     End If
+                                
+
+End Function
+
+
 
 
 Function BuscaCuenta(CodigoCuenta As String) As String
@@ -7517,7 +7678,7 @@ End Function
 
 
 Function ReporteResumenAnexos(FechaIni As Date, FechaFin As Date)
-Dim Fechas1 As String, Fechas2 As String, Orden As Integer, SQL As String, i As Double
+Dim Fechas1 As String, Fechas2 As String, Orden As Integer, SQl As String, i As Double
 Dim UltimoOrden As Integer, RegIngresos  As Integer, PrimReg As Integer, UltReg As Integer
 Dim Utilidad As Double, Utilidad2 As Double, Utilidad3 As Double, RegTCostosOper As Integer
 Dim Decrementador As Integer, TotalActivoCirculante As Double, TotalActivoFijo As Double, TotalActivoDiferido As Double
@@ -7648,7 +7809,7 @@ End Function
 
 Function AnexosReporteResumen(FechaIni As Date, FechaFin As Date)
   Dim EncabezadoConsulta As String, Condiciones As String
-  Dim SQL As String
+  Dim SQl As String
   
   '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   '/////////////////////////////GUARDO EL ENZABEZADO DE LA CONSULTA/////////////////////////////////////////////////////
@@ -7835,7 +7996,7 @@ Function AnexosReporteResumen(FechaIni As Date, FechaFin As Date)
    End If
    
 If Condiciones <> "" Then
- SQL = EncabezadoConsulta & Condiciones & " ORDER BY Reportes.Orden"
+ SQl = EncabezadoConsulta & Condiciones & " ORDER BY Reportes.Orden"
     ArepAnexosBalances.Logo.Picture = LoadPicture(RutaLogo)
 '    ArepAnexosBalances.LblMoneda.Caption = "Expresado en " & FrmReportes.CmbMoneda.Text
     ArepAnexosBalances.LblEmpresa = FrmReportes.DtaDatosEmpresa.Recordset("NombreEmpresa")
@@ -7845,7 +8006,7 @@ If Condiciones <> "" Then
     ArepAnexosBalances.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
     ArepAnexosBalances.LblFechaIni = Format(FechaIni, "dd/mm/yyyy")
     ArepAnexosBalances.DataControl1.ConnectionString = ConexionReporte
-    ArepAnexosBalances.DataControl1.Source = SQL
+    ArepAnexosBalances.DataControl1.Source = SQl
     ArepAnexosBalances.Show 1
 End If
 
@@ -8085,9 +8246,9 @@ Function ConfiguracionReportesBalance()
 End Function
 
 Public Function SumasDebitos(NumeroMovimiento As Double, Nperiodo As Double)
- Dim SQL As String, Debito As Double, Credito As Double
-  SQL = "SELECT  FechaTransaccion AS FechaTransaccion, TCambio AS TCambio, Debito AS Debito, Credito AS Credito From Transacciones Where (NumeroMovimiento = " & NumeroMovimiento & ") And (NPeriodo = " & Nperiodo & ")"
-  MDIPrimero.AdoConsulta.RecordSource = SQL
+ Dim SQl As String, Debito As Double, Credito As Double
+  SQl = "SELECT  FechaTransaccion AS FechaTransaccion, TCambio AS TCambio, Debito AS Debito, Credito AS Credito From Transacciones Where (NumeroMovimiento = " & NumeroMovimiento & ") And (NPeriodo = " & Nperiodo & ")"
+  MDIPrimero.AdoConsulta.RecordSource = SQl
   MDIPrimero.AdoConsulta.Refresh
   Do While Not MDIPrimero.AdoConsulta.Recordset.EOF
    Debito = Debito + MDIPrimero.AdoConsulta.Recordset("Debito")
@@ -8105,51 +8266,51 @@ Public Sub CargaADODC(TablaMaestra As String, ByRef nombreADODC As Adodc, xsinon
     nombreADODC.ConnectionString = Conexion
     
     If TablaMaestra = "CatCombus" Then
-            SQL = "select (descripcombus)," & TablaMaestra & ".idcombus from " & TablaMaestra & " " & sqlOrd
+            SQl = "select (descripcombus)," & TablaMaestra & ".idcombus from " & TablaMaestra & " " & sqlOrd
     End If
     
     If TablaMaestra = "CataVH" Then
-            SQL = "select (descricpcion)," & TablaMaestra & ".idvh from " & TablaMaestra & " " & sqlOrd
+            SQl = "select (descricpcion)," & TablaMaestra & ".idvh from " & TablaMaestra & " " & sqlOrd
     End If
     
     If TablaMaestra = "_Sede" Then
-            SQL = "select (Descripcion)," & TablaMaestra & ".IdSede from " & TablaMaestra & " where activo=" & xsinonimo & " " & sqlOrd
+            SQl = "select (Descripcion)," & TablaMaestra & ".IdSede from " & TablaMaestra & " where activo=" & xsinonimo & " " & sqlOrd
     End If
     
     If TablaMaestra = "ControlSeccionFinca" Then
-        SQL = "select IdReg, NoSeccion from ControlSeccionFinca where IdFinca=" & FrmPlanificaActividad.cmdfinca.BoundText & " and  anoplanta=" & Trim(FrmPlanificaActividad.txtplantado.Text) & " "
+        SQl = "select IdReg, NoSeccion from ControlSeccionFinca where IdFinca=" & FrmPlanificaActividad.cmdfinca.BoundText & " and  anoplanta=" & Trim(FrmPlanificaActividad.txtplantado.Text) & " "
     End If
     
      If TablaMaestra = "TipoNomina" Then
-        SQL = "select CodTipoNomina, Nomina from TipoNomina where activa='True'"
+        SQl = "select CodTipoNomina, Nomina from TipoNomina where activa='True'"
     End If
         
     If TablaMaestra = "_Finca" Then
         If apliTrim = "" Then
-            SQL = "select ((Finca))," & TablaMaestra & ".IdFinca from " & TablaMaestra & " where IdSede=" & FrmRegSeccion.sede.BoundText & " " & sqlOrd
+            SQl = "select ((Finca))," & TablaMaestra & ".IdFinca from " & TablaMaestra & " where IdSede=" & FrmRegSeccion.sede.BoundText & " " & sqlOrd
         Else
             If apliTrim = "2" Then
-                SQL = "select ((Finca))," & TablaMaestra & ".IdFinca from " & TablaMaestra & " where IdSede=" & FrmPlanificaActividad.cmdsede.BoundText & " " & sqlOrd
+                SQl = "select ((Finca))," & TablaMaestra & ".IdFinca from " & TablaMaestra & " where IdSede=" & FrmPlanificaActividad.cmdsede.BoundText & " " & sqlOrd
             Else
-                SQL = "select ((Finca))," & TablaMaestra & ".IdFinca from " & TablaMaestra & "  " & sqlOrd
+                SQl = "select ((Finca))," & TablaMaestra & ".IdFinca from " & TablaMaestra & "  " & sqlOrd
             End If
         End If
     End If
     
     If TablaMaestra = "_Plantacion" Then
-            SQL = "select (Plantacion)," & TablaMaestra & ".IdPlantacion from " & TablaMaestra & "  " & sqlOrd
+            SQl = "select (Plantacion)," & TablaMaestra & ".IdPlantacion from " & TablaMaestra & "  " & sqlOrd
     End If
     If TablaMaestra = "DatosEmpresa" Then
-            SQL = "select NombreEmpresa,ConexionSistemaContable, " & TablaMaestra & ".Numero from " & TablaMaestra & " where  Numero=2 " & sqlOrd
+            SQl = "select NombreEmpresa,ConexionSistemaContable, " & TablaMaestra & ".Numero from " & TablaMaestra & " where  Numero=2 " & sqlOrd
     End If
     If TablaMaestra = "Cargo" Then
-            SQL = "select Cargo, " & TablaMaestra & ".CodCargo from " & TablaMaestra & "  " & sqlOrd
+            SQl = "select Cargo, " & TablaMaestra & ".CodCargo from " & TablaMaestra & "  " & sqlOrd
     End If
     If TablaMaestra = "tab_units" Then
-            SQL = "select name, " & TablaMaestra & ".id_unit from " & TablaMaestra & "  " & sqlOrd
+            SQl = "select name, " & TablaMaestra & ".id_unit from " & TablaMaestra & "  " & sqlOrd
     End If
     If TablaMaestra = "Productos" Then
-            SQL = "select Descripcion_Producto, " & TablaMaestra & ".Cod_Productos from " & TablaMaestra & " WHERE Cod_Cuenta_Inventario LIKE '" & wcodbodega & "%'" & sqlOrd
+            SQl = "select Descripcion_Producto, " & TablaMaestra & ".Cod_Productos from " & TablaMaestra & " WHERE Cod_Cuenta_Inventario LIKE '" & wcodbodega & "%'" & sqlOrd
     End If
     If TablaMaestra = "Tareas" Then
         If wregNuSede = 0 Then
@@ -8157,11 +8318,11 @@ Public Sub CargaADODC(TablaMaestra As String, ByRef nombreADODC As Adodc, xsinon
                 wregNuSede = FrmPlanificaActividad.cmdsede.BoundText
             End If
         End If
-            SQL = "select CodigoTarea as No_Tarea, (LOWER (Nombre_Tarea)) as Nombre_Tarea , QuienPaga,UnidMedida, DH from  " & TablaMaestra & " where CodigoTarea like '" & wregNuSede & "%'"
+            SQl = "select CodigoTarea as No_Tarea, (LOWER (Nombre_Tarea)) as Nombre_Tarea , QuienPaga,UnidMedida, DH from  " & TablaMaestra & " where CodigoTarea like '" & wregNuSede & "%'"
     End If
     
     If TablaMaestra = "Empleado" Then
-            SQL = "select (nombre1 +' '+ nombre2 +' '+ apellido1 +' '+ apellido2) as nombrecompleto, Empleado.CodEmpleado from Empleado where (activo=1 or activo='True') "
+            SQl = "select (nombre1 +' '+ nombre2 +' '+ apellido1 +' '+ apellido2) as nombrecompleto, Empleado.CodEmpleado from Empleado where (activo=1 or activo='True') "
     End If
 
     On Local Error Resume Next
@@ -8175,11 +8336,11 @@ Public Sub CargaADODC(TablaMaestra As String, ByRef nombreADODC As Adodc, xsinon
             nombreADODC.ConnectionString = Conexion
         End If
     End If
-    nombreADODC.RecordSource = SQL
+    nombreADODC.RecordSource = SQl
     nombreADODC.Refresh
     If err <> 0 Then
         nombreADODC.ConnectionString = Conexion
-        nombreADODC.RecordSource = SQL
+        nombreADODC.RecordSource = SQl
         nombreADODC.Refresh
     End If
     
@@ -8187,8 +8348,8 @@ Public Sub CargaADODC(TablaMaestra As String, ByRef nombreADODC As Adodc, xsinon
 End Sub
 Public Function tienepermiso(usu As Integer, aplica As String, oper As String) As Boolean
 Set rsa = Nothing
-SQL = "select permitido from mapermisos where cci_rif=" & usu & " and aplicacion='" & aplica & "' and operacion='" & oper & "' "
-rsa.Open SQL, Conexion, adOpenForwardOnly, adLockReadOnly
+SQl = "select permitido from mapermisos where cci_rif=" & usu & " and aplicacion='" & aplica & "' and operacion='" & oper & "' "
+rsa.Open SQl, Conexion, adOpenForwardOnly, adLockReadOnly
 If rsa.EOF = True Then
     tienepermiso = False
 Else
@@ -8203,21 +8364,21 @@ End Function
 Public Sub CargaADODCConta(TablaMaestra As String, ByRef nombreADODC As Adodc, xsinonimo, nombreCombo As String, apliTrim As String, conex As String, f As Form, sqlOrd As String, Optional estado As String)
 nombreADODC.ConnectionString = Conexion
 If TablaMaestra = "Oficinas" Then
-    SQL = "select (Descripcion)," & TablaMaestra & ".Idreg from " & TablaMaestra & "  " & sqlOrd
+    SQl = "select (Descripcion)," & TablaMaestra & ".Idreg from " & TablaMaestra & "  " & sqlOrd
 End If
 
 If TablaMaestra = "ResponsablesAreas" Then
-    SQL = "select (NombreResponsable)," & TablaMaestra & ".Idreg from " & TablaMaestra & "  " & sqlOrd
+    SQl = "select (NombreResponsable)," & TablaMaestra & ".Idreg from " & TablaMaestra & "  " & sqlOrd
 End If
 
 On Local Error Resume Next
     err = 0
     nombreADODC.ConnectionString = Conexion
-    nombreADODC.RecordSource = SQL
+    nombreADODC.RecordSource = SQl
     nombreADODC.Refresh
     If err <> 0 Then
         nombreADODC.ConnectionString = Conexion
-        nombreADODC.RecordSource = SQL
+        nombreADODC.RecordSource = SQl
         nombreADODC.Refresh
     End If
 End Sub
@@ -8282,7 +8443,7 @@ Next ind
 ArchivoActual = Mid(d, pleca + 1, AactL)
 End Function
 
-Function Mod2(Cadena, num) As Long
+Function Mod2(cadena, num) As Long
    Dim Texto As String
    Dim num1, num2 As Long
 
@@ -8290,8 +8451,8 @@ Function Mod2(Cadena, num) As Long
    num1 = 0
    num2 = num
 
-   For i = 1 To Len(Cadena)
-      Texto = Texto & Mid(Cadena, i, 1)
+   For i = 1 To Len(cadena)
+      Texto = Texto & Mid(cadena, i, 1)
       num1 = Val(Texto)
       Res = num1 Mod num2
       Texto = Str(Res)
@@ -8301,25 +8462,25 @@ Function Mod2(Cadena, num) As Long
 End Function
 
 Function ObtenerLetra(cedula As String) As String
-   Dim Cadena As String
+   Dim cadena As String
    Dim posicion As Long
-   Cadena = "ABCDEFGHJKLMNPQRSTUVWXY"
+   cadena = "ABCDEFGHJKLMNPQRSTUVWXY"
    posicion = Mod2(cedula, 23) + 1
-   ObtenerLetra = Mid(Cadena, posicion, 1)
+   ObtenerLetra = Mid(cadena, posicion, 1)
 End Function
 
 Public Function DameNombreEmpleado(codempl) As String
 Set rsa1 = Nothing
 If codempl <> 0 Then
-    SQL = "select nombre1, nombre2, apellido1, apellido2, codtiponomina, codgrupo, codcargo, SueldoPeriodo, dolarizado from empleado where codempleado=" & codempl & ""
+    SQl = "select nombre1, nombre2, apellido1, apellido2, codtiponomina, codgrupo, codcargo, SueldoPeriodo, dolarizado from empleado where codempleado=" & codempl & ""
 Else
-    SQL = "select nombre1, nombre2, apellido1, apellido2, codtiponomina, codgrupo, codcargo, SueldoPeriodo,dolarizado from empleado where codempleado=" & FrmFormulario.AdoHist.Recordset!idsoli & ""
+    SQl = "select nombre1, nombre2, apellido1, apellido2, codtiponomina, codgrupo, codcargo, SueldoPeriodo,dolarizado from empleado where codempleado=" & FrmFormulario.AdoHist.Recordset!idsoli & ""
 End If
-rsa1.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+rsa1.Open SQl, Conexion, adOpenForwardOnly, adLockOptimistic
 If rsa1.EOF = True Then
     Set rsa1 = Nothing
-    SQL = "select nombre1, nombre2, apellido1, apellido2, codtiponomina, codgrupo, codcargo, SueldoPeriodo,dolarizado from empleado where codempleado1=" & codempl & ""
-    rsa1.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+    SQl = "select nombre1, nombre2, apellido1, apellido2, codtiponomina, codgrupo, codcargo, SueldoPeriodo,dolarizado from empleado where codempleado1=" & codempl & ""
+    rsa1.Open SQl, Conexion, adOpenForwardOnly, adLockOptimistic
 End If
 DameNombreEmpleado = rsa1!Nombre1 & " " & rsa1!Nombre2 & " " & rsa1!Apellido1 & " " & rsa1!Apellido2
 idnomina = rsa1!CodTipoNomina
@@ -8342,28 +8503,28 @@ isaldolar = rsa1!dolarizado
 End Function
 Public Function NombreNominaC(Cod As String) As String
 Set rsa2 = Nothing
-SQL = "select nomina from dbo.TipoNomina where codtiponomina = '" & Cod & "'"
-rsa2.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+SQl = "select nomina from dbo.TipoNomina where codtiponomina = '" & Cod & "'"
+rsa2.Open SQl, Conexion, adOpenForwardOnly, adLockOptimistic
 NombreNominaC = rsa2!Nomina
 End Function
 
 Public Function NombreGrupo(Cod As String) As String
 Set rsa2 = Nothing
-SQL = "select grupo from grupo where codgrupo= '" & Cod & "'"
+SQl = "select grupo from grupo where codgrupo= '" & Cod & "'"
 
-rsa2.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+rsa2.Open SQl, Conexion, adOpenForwardOnly, adLockOptimistic
 NombreGrupo = rsa2!grupo
 End Function
 
 Public Function DepartamentoID(Descripcion As String) As String
 Set rsa2 = Nothing
-SQL = "SELECT  * From Oficinas WHERE (Descripcion = '" & Descripcion & " ')"
-rsa2.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+SQl = "SELECT  * From Oficinas WHERE (Descripcion = '" & Descripcion & " ')"
+rsa2.Open SQl, Conexion, adOpenForwardOnly, adLockOptimistic
 DepartamentoID = rsa2!idreg
 End Function
 Public Function ResponsableID(Descripcion As String) As String
 Set rsa2 = Nothing
-SQL = "SELECT  * From ResponsablesAreas WHERE  (NombreResponsable = '" & Descripcion & " ')"
-rsa2.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+SQl = "SELECT  * From ResponsablesAreas WHERE  (NombreResponsable = '" & Descripcion & " ')"
+rsa2.Open SQl, Conexion, adOpenForwardOnly, adLockOptimistic
 ResponsableID = rsa2!idreg
 End Function

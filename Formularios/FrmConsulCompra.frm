@@ -875,7 +875,7 @@ Dim valor1 As String, Valor As String, PrecioCosto As Integer
 Dim Cantidad, Subtotal0, Subtotal1, Producto, Valores, Costo As Double
 Dim CodigoP As String, Candena As String, Fecha As Long
 Dim PrecioC As Double, CantidadC As Double, SubT As Double, Fechas1 As String, Fechas2 As String
-Dim AnteriorSub As Double, Cadena As String, Fechas As String, DescripcionMovimiento As String
+Dim AnteriorSub As Double, cadena As String, Fechas As String, DescripcionMovimiento As String
 Dim SqlDetalle As String, numero As String, TipoCuenta As String, ClaveMovimiento As String
 Dim FechaIni As String, FechaFin As String, CodCuenta As String, NumeroProrrateo As Double
 Dim mes As Double, Año As Double
@@ -885,6 +885,15 @@ Dim mes As Double, Año As Double
   Codigo = ""
  'Busco el numero consecutivo de la Recepcion
   Select Case QueProducto
+  
+      Case "Presupuesto"
+        If Not IsNull(rs("DescripcionGrupo")) Then
+          If Not rs.EOF Then
+           cadena = rs("DescripcionGrupo")
+          End If
+        End If
+        
+        Codigo = CadenaNumeros(cadena)
   
       Case "CuentaContable"
        If Not IsNull(rs("CodCuentas")) Then
@@ -1219,7 +1228,7 @@ Dim mes As Double, Año As Double
             End If
         
         FrmEgresos.DBGTransacciones.Columns(3).Text = DescripcionMovimiento
-        FrmEgresos.DBGTransacciones.Columns(2).Text = Cadena
+        FrmEgresos.DBGTransacciones.Columns(2).Text = cadena
         If ClaveMovimiento = "" Then
          FrmEgresos.DBGTransacciones.Columns(6).Text = "Debito"
         Else
@@ -1694,7 +1703,7 @@ Dim mes As Double, Año As Double
             End If
         
         FrmCheque.DBGTransacciones.Columns(3).Text = DescripcionMovimiento
-        FrmCheque.DBGTransacciones.Columns(2).Text = Cadena
+        FrmCheque.DBGTransacciones.Columns(2).Text = cadena
         If ClaveMovimiento = "" Then
          FrmCheque.DBGTransacciones.Columns(6).Text = "Debito"
         Else
@@ -3837,6 +3846,34 @@ Private Sub DbgrProducto_KeyDown(KeyCode As Integer, Shift As Integer)
 
 
 End Sub
+Public Function CadenaNumeros(cadena As String) As Double
+  Dim Index As Integer, caracteres As Integer, numeros As String, Codigo As String
+
+    Index = 1
+    caracteres = Len(cadena)
+    While Not Index = caracteres
+        numeros = Mid(cadena, Index, 1)
+            If IsNumeric(numeros) Then
+                Codigo = Codigo & numeros
+            End If
+            If IsNumeric(numeros) = False Then
+'                Label5.Caption = Label5.Caption & numeros
+            End If
+        Index = Index + 1
+    Wend
+    
+'    Label6.Caption = Len(cadena)
+  
+  If Codigo <> "" Then
+    CadenaNumeros = Codigo
+    
+  End If
+
+
+End Function
+
+
+
 
 
 Private Sub Form_Load()
@@ -3890,6 +3927,21 @@ Dim sqlconsulta As String
  'CmdX.Visible = True
 Orden = True
 Select Case QueProducto
+
+      Case "Presupuesto"
+          sqlconsulta = "SELECT KeyGrupo, DescripcionGrupo From EstructuraPresupuesto"
+        
+                With rs
+                  .CursorLocation = adUseClient
+                  .Open sqlconsulta, Conexion, adOpenDynamic, adLockOptimistic
+                End With
+                
+                Me.DbgrProducto.DataSource = rs
+        
+         Respuesta = ""
+         Me.DbgrProducto.Columns(1).Caption = "Codigo Pres."
+         Me.DbgrProducto.Columns(0).Width = 1000
+         DbgrProducto.Columns(0).Width = 5200
 
       Case "CuentaContable"
           sqlconsulta = "SELECT Cuentas.DescripcionCuentas, Cuentas.CodCuentas, Cuentas.TipoCuenta, Grupos.DescripcionGrupo FROM Cuentas INNER JOIN  Grupos ON Cuentas.KeyGrupo = Grupos.KeyGrupo ORDER BY Cuentas.DescripcionCuentas"
@@ -4858,7 +4910,7 @@ Private Sub PegarSolicitudPago()
             End If
         
         FrmSolicitudPagos.DBGTransacciones.Columns(3).Text = DescripcionMovimiento
-        FrmSolicitudPagos.DBGTransacciones.Columns(2).Text = Cadena
+        FrmSolicitudPagos.DBGTransacciones.Columns(2).Text = cadena
         If ClaveMovimiento = "" Then
          FrmSolicitudPagos.DBGTransacciones.Columns(6).Text = "Debito"
         Else
@@ -4923,7 +4975,7 @@ Private Sub PegarSolicitudCheque()
                         Me.AdoBusca.Refresh
                         If Me.AdoBusca.Recordset.EOF Then
                            Me.AdoBusca.Recordset.AddNew
-                             Me.AdoBusca.Recordset("CodCuenta") = FrmSolicitudPagos.DBCodigo.Text
+                             Me.AdoBusca.Recordset("CodCuentas") = FrmSolicitudPagos.DBCodigo.Text
                              Me.AdoBusca.Recordset("ConsecutivoSolicitudCheque") = NumeroTransaccion
                            Me.AdoBusca.Recordset.Update
                 
@@ -5252,7 +5304,7 @@ Private Sub PegarSolicitudCheque()
             End If
         
         FrmSolicitudPagos.DBGTransacciones.Columns(3).Text = DescripcionMovimiento
-        FrmSolicitudPagos.DBGTransacciones.Columns(2).Text = Cadena
+        FrmSolicitudPagos.DBGTransacciones.Columns(2).Text = cadena
         If ClaveMovimiento = "" Then
          FrmSolicitudPagos.DBGTransacciones.Columns(6).Text = "Debito"
         Else

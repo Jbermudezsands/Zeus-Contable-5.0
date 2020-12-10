@@ -143,8 +143,8 @@ If Me.Option1.Value = False Then
       KeyNodoUltimo = Me.DtaGrupos.Recordset("KeyGrupo")
       KeyPadre = Me.DtaGrupos.Recordset("KeyGrupoSuperior")
      LongitudNodo = Len(KeyNodoUltimo)
-     Cadena1 = Val((Mid(KeyNodoUltimo, LongitudNodo - 1, LongitudNodo))) + 1
-     Cadena2 = Mid(KeyNodoUltimo, 1, LongitudNodo - 2)
+     Cadena1 = Val((Mid(KeyNodoUltimo, LongitudNodo - 2, LongitudNodo))) + 1
+     Cadena2 = Mid(KeyNodoUltimo, 1, LongitudNodo - 3)
      If Len(Cadena2) = 1 Then
       Cadena2 = Cadena2 & "01"
       
