@@ -220,7 +220,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   78315521
+            Format          =   77725697
             CurrentDate     =   38651
          End
          Begin MSComCtl2.DTPicker DTPicker1 
@@ -242,7 +242,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   78315521
+            Format          =   77725697
             CurrentDate     =   38651
          End
          Begin VB.Label Label18 
@@ -432,7 +432,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   78315521
+            Format          =   77725697
             CurrentDate     =   38651
          End
          Begin MSComCtl2.DTPicker DTPicker6 
@@ -454,7 +454,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   78315521
+            Format          =   77725697
             CurrentDate     =   38651
          End
          Begin VB.Label Label28 
@@ -756,7 +756,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   78315521
+            Format          =   77725697
             CurrentDate     =   38651
          End
          Begin MSComCtl2.DTPicker DTPicker4 
@@ -778,7 +778,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   78315521
+            Format          =   77725697
             CurrentDate     =   38651
          End
          Begin VB.Label Label34 
@@ -1159,7 +1159,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   78315521
+            Format          =   77725697
             CurrentDate     =   38651
          End
          Begin MSComCtl2.DTPicker TxtFechaUltDep 
@@ -1171,7 +1171,7 @@ Begin VB.Form FrmAgregarActivoFijo
             _ExtentX        =   2566
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   78315521
+            Format          =   77725697
             CurrentDate     =   37992
          End
          Begin MSDataListLib.DataCombo DBGrupos 
@@ -1195,7 +1195,7 @@ Begin VB.Form FrmAgregarActivoFijo
             _ExtentX        =   2566
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   78315521
+            Format          =   77725697
             CurrentDate     =   37992
          End
          Begin VB.Label Label35 
@@ -1982,7 +1982,7 @@ Begin VB.Form FrmAgregarActivoFijo
             Strikethrough   =   0   'False
          EndProperty
          CalendarForeColor=   0
-         Format          =   78315521
+         Format          =   77725697
          CurrentDate     =   38651
       End
       Begin VB.Label Label49 
@@ -2636,8 +2636,13 @@ Text4.Text = rsa!Color
 Text5.Text = rsa!Serie
 Text24.Text = rsa!DescripcionAF
 Text20.Text = rsa!CNTACONTABLE
+If Not IsNull(rsa!CuentaGastos) Then
 Text7.Text = rsa!CuentaGastos
+End If
+
+If Not IsNull(rsa!CuentaDepreciacion) Then
 Text23.Text = rsa!CuentaDepreciacion
+End If
 
 
     With Me.DtaEncargado
@@ -2660,13 +2665,24 @@ Text23.Text = rsa!CuentaDepreciacion
   If Not IsNull(rsa!Localizacion) Then
      Me.DBCodigo.Text = rsa!CodCuenta
   End If
+  If Not IsNull(rsa!Localizacion) Then
   Me.TxtLocalizacion.Text = rsa!Localizacion
+  End If
+  
   If Not IsNull(rsa!NumeroMarbete) Then
     Me.TxtMarbete.Text = rsa!NumeroMarbete
   End If
+  If Not IsNull(rsa!FechaUltimaDepre) Then
   Me.TxtFechaUltDep.Value = rsa!FechaUltimaDepre
+  End If
+  
+  If Not IsNull(rsa!ValorEstimadoMeses) Then
   Me.TxtValorEstMeses.Text = rsa!ValorEstimadoMeses
+  End If
+  
+  If Not IsNull(rsa!ValorRescate) Then
   Me.TxtValorRescate.Text = rsa!ValorRescate
+  End If
   If Not IsNull(rsa!FechaBaja) Then
    Me.TxtFechaBaja.Value = rsa!FechaBaja
   End If

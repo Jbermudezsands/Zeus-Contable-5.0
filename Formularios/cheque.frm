@@ -413,7 +413,7 @@ Begin VB.Form FrmCheque
          _ExtentX        =   2990
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   77922305
+         Format          =   78315521
          CurrentDate     =   38918
       End
       Begin MSComCtl2.DTPicker DTPFechaVence 
@@ -425,7 +425,7 @@ Begin VB.Form FrmCheque
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   77922305
+         Format          =   78315521
          CurrentDate     =   38918
       End
       Begin VB.Label LblNombres 
@@ -581,7 +581,7 @@ Begin VB.Form FrmCheque
       _ExtentY        =   503
       _Version        =   393216
       Enabled         =   0   'False
-      Format          =   77922305
+      Format          =   78315521
       CurrentDate     =   38008
    End
    Begin VB.CommandButton CmdSiguiente 
@@ -2570,7 +2570,7 @@ Dim TasaCambio As Double, Fecha As Date, Fechas As Date
 Dim Registros As Double, Cod As Variant, MonedaConvertir As String
 
 'On Error GoTo TipoErrs
-Dim Voucher As String, Cadena As String, Consecutivo As Variant
+Dim Voucher As String, cadena As String, Consecutivo As Variant
 Dim SQL As String
 
  If Not Val(Me.TxtDiferencia.Text) = 0 Then
@@ -3125,7 +3125,7 @@ End Sub
 
 Private Sub CmdMemoriza_Click()
 On Error GoTo TipoErrs
-Dim Voucher As String, Cadena As String, Consecutivo As Variant
+Dim Voucher As String, cadena As String, Consecutivo As Variant
 Dim SQL As String, Fecha As Date, Fechas As Date, TasaCambio As Double
 
 
@@ -3348,7 +3348,7 @@ Me.DtaTransacciones.RecordSource = "SELECT Transacciones.CodCuentas, Transaccion
    Me.DtaTransacciones.Recordset("Clave") = "Credito"
    Me.DtaTransacciones.Recordset("Credito") = MontoCheque
    Me.DtaTransacciones.Recordset("Fuente") = "CHEQUE"
-   Me.DtaTransacciones.Recordset("VoucherNo") = Cadena
+   Me.DtaTransacciones.Recordset("VoucherNo") = cadena
    Me.DtaTransacciones.Recordset("FechaTasas") = Format(Me.TxtFecha.Value, "yyyy/mm/dd")
    Me.DtaTransacciones.Recordset("Beneficiario") = Me.TxtNombre.Text
   Me.DtaTransacciones.Recordset.Update
@@ -4023,7 +4023,7 @@ End Sub
 
 Private Sub DBGTransacciones_AfterColEdit(ByVal ColIndex As Integer)
 On Error GoTo TipoErrs
-Dim Descripcion As String, Cadena As String, MontoTasa As Double, Fecha As Long
+Dim Descripcion As String, cadena As String, MontoTasa As Double, Fecha As Long
 Dim ClaveMovimiento As String, DescripcionMovimiento As String, SQL As String
 Dim c As Variant
 'Este Procedimiento es solo cuando se ejecuta directamente de Recepcion
@@ -4269,7 +4269,7 @@ Select Case ColIndex
             End If
           
 
-         Me.DBGTransacciones.Columns(2).Text = Cadena
+         Me.DBGTransacciones.Columns(2).Text = cadena
          Me.DBGTransacciones.Columns(3).Text = DescripcionMovimiento
          Me.DBGTransacciones.Columns(10).Text = Format(Me.TxtFecha.Value, "dd/mm/yyyy")
          Me.DBGTransacciones.Columns(11).Text = NumeroPeriodo
@@ -5805,7 +5805,7 @@ TipoErrs:
 End Sub
 
 Private Sub DBGTransacciones_ButtonClick(ByVal ColIndex As Integer)
-'On Error GoTo TipoErrs
+On Error GoTo TipoErrs
 Dim c As Variant
 Select Case ColIndex
   Case 0
@@ -5816,6 +5816,11 @@ Select Case ColIndex
    QueProducto = "Departamento"
    FrmConsulta.Show 1
    Me.DBGTransacciones.Columns(2).Text = FrmConsulta.Codigo
+   
+  Case 4
+   QueProducto = "Presupuesto"
+   FrmConsulta.Show 1
+   Me.DBGTransacciones.Columns(4).Text = FrmConsulta.Codigo
    
   Case 6
     Set c = DBGTransacciones.Columns(ColIndex)
@@ -6165,7 +6170,7 @@ End Sub
 
 
 Private Sub TxtNombre_KeyDown(KeyCode As Integer, Shift As Integer)
-Dim Cadena As String
+Dim cadena As String
 
 On Error GoTo TipoErrs
  
