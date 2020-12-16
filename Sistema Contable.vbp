@@ -203,6 +203,7 @@ Form=Formularios\FrmListaChequeReimpresion.frm
 Form=Formularios\FrmEstructuraPresupuesto.frm
 Form=Formularios\FrmEditaPresupuesto.frm
 Form=Formularios\FrmCreaNodosPresupuesto.frm
+Designer=Reportes\ArepSolicitudCheque.Dsr
 IconForm="MDIPrimero"
 Startup="frmSplash"
 HelpFile=""

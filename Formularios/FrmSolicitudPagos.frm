@@ -516,7 +516,7 @@ Begin VB.Form FrmSolicitudPagos
          _ExtentX        =   2990
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   82837505
+         Format          =   17104897
          CurrentDate     =   38918
       End
       Begin MSComCtl2.DTPicker DTPFechaVence 
@@ -528,7 +528,7 @@ Begin VB.Form FrmSolicitudPagos
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   82837505
+         Format          =   17104897
          CurrentDate     =   38918
       End
       Begin VB.Label LblProveedor 
@@ -1093,7 +1093,7 @@ Begin VB.Form FrmSolicitudPagos
          _ExtentY        =   503
          _Version        =   393216
          Enabled         =   0   'False
-         Format          =   82837505
+         Format          =   17104897
          CurrentDate     =   38008
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel4 
@@ -2713,6 +2713,9 @@ End Sub
 
 Private Sub CmdMemoriza_Click()
 GrabaIndiceSolicitud (NumeroSolicitud)
+
+MsgBox "Grabado con Existo!!!", vbCritical, "Zeus Contable"
+Unload Me
 
 End Sub
 
