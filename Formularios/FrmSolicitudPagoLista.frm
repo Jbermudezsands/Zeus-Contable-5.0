@@ -32,7 +32,7 @@ Begin VB.Form FrmSolicitudPagoLista
       _ExtentX        =   2566
       _ExtentY        =   661
       _Version        =   393216
-      Format          =   17104897
+      Format          =   83165185
       CurrentDate     =   44168
    End
    Begin VB.CommandButton Command1 
@@ -428,7 +428,7 @@ Private ew As cls_NumEnglishWord
 Private sw As cls_NumSpanishWord
 
 Private Sub CmdEditar_Click()
-  Dim Fecha As Date, NumeroSolicitud As Double, Nperiodo As Double, SQL As String
+  Dim Fecha As Date, NumeroSolicitud As Double, Nperiodo As Double, Sql As String
   Dim TotalDebito As Double, TotalCredito As Double, Monto As Double
   
     If Me.OptActivos.Value = False Then
@@ -509,7 +509,7 @@ Private Sub CmdEditar_Click()
        '//////////////////////////////////////////////////////////////////////////////////////////////
        '////////////////////////CONSULTO TRANSACCIONES DE PAGO //////////////////////////////////7////
        '///////////////////////////////////////////////////////////////////////////////////////////////
-       SQL = "SELECT     TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
+       Sql = "SELECT     TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
        "TransaccionesSolicitudPago.FacturaNo, TransaccionesSolicitudPago.ChequeNo, TransaccionesSolicitudPago.Clave, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito, " & _
        "TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.NPeriodo, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.Fuente, TransaccionesSolicitudPago.FechaTasas, " & _
        "TransaccionesSolicitudPago.NumeroMovimiento, Periodos.Periodo, TransaccionesSolicitudPago.FechaDescuento, TransaccionesSolicitudPago.DescuentoDisponible, " & _
@@ -519,7 +519,7 @@ Private Sub CmdEditar_Click()
        "WHERE  (TransaccionesSolicitudPago.FechaTransaccion = CONVERT(DATETIME, '" & Format(Fecha, "yyyy-mm-dd") & "', 102)) AND (TransaccionesSolicitudPago.NumeroMovimiento = " & NumeroSolicitud & ") AND (TransaccionesSolicitudPago.NPeriodo = " & Nperiodo & ")" & _
        "ORDER BY TransaccionesSolicitudPago.NTransaccion "
        
-        FrmSolicitudPagos.DtaTransacciones.RecordSource = SQL
+        FrmSolicitudPagos.DtaTransacciones.RecordSource = Sql
         FrmSolicitudPagos.DtaTransacciones.Refresh
         
         FrmSolicitudPagos.DtaBancos.RecordSource = "SELECT Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta From Cuentas WHERE (TipoCuenta = 'Caja') OR (TipoCuenta = N'Bancos') ORDER BY Cuentas.CodCuentas"
@@ -527,9 +527,9 @@ Private Sub CmdEditar_Click()
         FrmSolicitudPagos.DBCodigo.ListField = "CodCuentas"
         
     
-        SQL = "SELECT  MAX(TransaccionesSolicitudPago.CodCuentas) AS CodCuentas, SUM(TransaccionesSolicitudPago.Debito) AS Debito, SUM(TransaccionesSolicitudPago.Credito) AS Credito, SUM(TransaccionesSolicitudPago.DebitoD) AS DebitoD, SUM(TransaccionesSolicitudPago.CreditoD) AS CreditoD FROM  Periodos INNER JOIN  TransaccionesSolicitudPago ON Periodos.NPeriodo = TransaccionesSolicitudPago.NPeriodo  " & _
+        Sql = "SELECT  MAX(TransaccionesSolicitudPago.CodCuentas) AS CodCuentas, SUM(TransaccionesSolicitudPago.Debito) AS Debito, SUM(TransaccionesSolicitudPago.Credito) AS Credito, SUM(TransaccionesSolicitudPago.DebitoD) AS DebitoD, SUM(TransaccionesSolicitudPago.CreditoD) AS CreditoD FROM  Periodos INNER JOIN  TransaccionesSolicitudPago ON Periodos.NPeriodo = TransaccionesSolicitudPago.NPeriodo  " & _
               "WHERE  (TransaccionesSolicitudPago.FechaTransaccion = CONVERT(DATETIME, '" & Format(Fecha, "yyyy-mm-dd") & "', 102)) AND (TransaccionesSolicitudPago.NumeroMovimiento = " & NumeroSolicitud & ") AND (TransaccionesSolicitudPago.NPeriodo = " & Nperiodo & ")"
-        FrmSolicitudPagos.AdoBuscar.RecordSource = SQL
+        FrmSolicitudPagos.AdoBuscar.RecordSource = Sql
         FrmSolicitudPagos.AdoBuscar.Refresh
         If Not FrmSolicitudPagos.AdoBuscar.Recordset.EOF Then
           If Not IsNull(FrmSolicitudPagos.AdoBuscar.Recordset("Debito")) Then
@@ -592,7 +592,7 @@ Private Sub CmdEditar_Click()
 End Sub
 
 Private Sub CmdEliminar_Click()
-  Dim Fecha As Date, NumeroSolicitud As Double, Nperiodo As Double, SQL As String
+  Dim Fecha As Date, NumeroSolicitud As Double, Nperiodo As Double, Sql As String
   Dim TotalDebito As Double, TotalCredito As Double, Monto As Double, Respuesta As Double
   
     If MsgBox("¿Esta Seguro de Anular la solicitud?", vbYesNo, "Zeus Contable") = vbNo Then
@@ -636,7 +636,7 @@ End Sub
 Private Sub Command1_Click()
   Dim NumeroTransaccion As Double
   Dim mes As Double, Año As Double, FechaIni As Date, FechaFin As Date
-  Dim Periodo As Double, NumeroPeriodo As Double, EstadoPeriodo As String, SQL As String, TipoMoneda As String
+  Dim Periodo As Double, NumeroPeriodo As Double, EstadoPeriodo As String, Sql As String, TipoMoneda As String
   Dim Retencion1 As Boolean, Retencion2 As Boolean, Retencion3 As Boolean, Retencion4 As Boolean, Retencion5 As Boolean
   Dim CuentaContable As String, NumeroSolicitud As Double, Reg As Double, MonedaNomina As String, Resultado As Double
   Dim CuentaBanco As String, CuentaIva As String, CuentaRetencion1 As String, CuentaRetencion2 As String, CuentaRetencion3 As String, CuentaRetencion4 As String, CuentaRetencion5 As String
@@ -790,7 +790,7 @@ Private Sub Command1_Click()
                         '//////////////////////////////////////////////////////////////////////////////////////////////
                         '////////////////////////CONSULTO TRANSACCIONES DE PAGO //////////////////////////////////7////
                         '///////////////////////////////////////////////////////////////////////////////////////////////
-                        SQL = "SELECT     TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
+                        Sql = "SELECT     TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
                         "TransaccionesSolicitudPago.FacturaNo, TransaccionesSolicitudPago.ChequeNo, TransaccionesSolicitudPago.Clave, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito, " & _
                         "TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.NPeriodo, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.Fuente, TransaccionesSolicitudPago.FechaTasas, " & _
                         "TransaccionesSolicitudPago.NumeroMovimiento, Periodos.Periodo, TransaccionesSolicitudPago.FechaDescuento, TransaccionesSolicitudPago.DescuentoDisponible, " & _
@@ -799,7 +799,7 @@ Private Sub Command1_Click()
                         "TransaccionesSolicitudPago ON Periodos.NPeriodo = TransaccionesSolicitudPago.NPeriodo " & _
                         "WHERE  (TransaccionesSolicitudPago.FechaTransaccion = CONVERT(DATETIME, '" & Format(Fecha, "yyyy-mm-dd") & "', 102)) AND (TransaccionesSolicitudPago.NumeroMovimiento = " & NumeroSolicitud & ") " & _
                         "ORDER BY TransaccionesSolicitudPago.NTransaccion "
-                        Me.AdoDetalleCheque.RecordSource = SQL
+                        Me.AdoDetalleCheque.RecordSource = Sql
                         Me.AdoDetalleCheque.Refresh
                         Do While Not Me.AdoDetalleCheque.Recordset.EOF
                                 
@@ -934,6 +934,42 @@ Private Sub Command1_Click()
     
     
     
+End Sub
+
+Private Sub Command2_Click()
+Dim Sql As String, Fecha As Date, NumeroSolicitud As Double
+
+    Fecha = Me.DBGTransacciones.Columns("FechaTransaccion")
+    NumeroSolicitud = Me.DBGTransacciones.Columns("NumeroSolicitud")
+
+     Sql = "SELECT * FROM  IndiceSolicitudPago INNER JOIN TransaccionesSolicitudPago ON IndiceSolicitudPago.FechaTransaccion = TransaccionesSolicitudPago.FechaTransaccion AND IndiceSolicitudPago.NumeroMovimiento = TransaccionesSolicitudPago.NumeroMovimiento  " & _
+           "WHERE  (IndiceSolicitudPago.NumeroMovimiento = " & NumeroSolicitud & ") AND (IndiceSolicitudPago.FechaTransaccion = CONVERT(DATETIME, '" & Format(Fecha, "yyyy-mm-dd") & "', 102))"
+
+    
+            
+'            If TipoMoneda = "Dólares" Then
+'             Letras = sw.ConvertCurrencyToSpanish(FrmCheque.DtaConsulta.Recordset("Credito"), "Dólares")
+'            ElseIf TipoMoneda = "Córdobas" Then
+'             Letras = sw.ConvertCurrencyToSpanish(FrmCheque.DtaConsulta.Recordset("Credito"), "Córdobas")
+'
+'            End If
+ 
+    ArepSolicitudCheque.TipoMoneda = "Cordobas"
+ 
+    MDIPrimero.AdoConsulta.RecordSource = Sql
+    MDIPrimero.AdoConsulta.Refresh
+    If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
+      ArepSolicitudCheque.TipoMoneda = MDIPrimero.AdoConsulta.Recordset("TipoMoneda")
+    End If
+    
+    
+    ArepSolicitudCheque.DtaCheque.ConnectionString = Conexion
+    ArepSolicitudCheque.DtaCheque.Source = Sql
+'            ArepConstanciaRetencion.LblDescripcionMonto.Caption = Letras
+            
+    ArepSolicitudCheque.Show 1
+
+
 End Sub
 
 Private Sub Form_Initialize()

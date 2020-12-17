@@ -516,7 +516,7 @@ Begin VB.Form FrmSolicitudPagos
          _ExtentX        =   2990
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   17104897
+         Format          =   82903041
          CurrentDate     =   38918
       End
       Begin MSComCtl2.DTPicker DTPFechaVence 
@@ -528,7 +528,7 @@ Begin VB.Form FrmSolicitudPagos
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   17104897
+         Format          =   82903041
          CurrentDate     =   38918
       End
       Begin VB.Label LblProveedor 
@@ -1093,7 +1093,7 @@ Begin VB.Form FrmSolicitudPagos
          _ExtentY        =   503
          _Version        =   393216
          Enabled         =   0   'False
-         Format          =   17104897
+         Format          =   82903041
          CurrentDate     =   38008
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel4 
@@ -2867,7 +2867,7 @@ End Sub
 Public Sub DBCodigo_ItemChange()
 On Error GoTo TipoErrs
 Dim MontoTasa As Double, Fecha As Long
-Dim SQL As String
+Dim Sql As String
 Criterio = "CodCuentas='" & Me.DBCodigo.Text & "'"
 If Me.DtaCuentas.Recordset.RecordCount > 0 Then Me.DtaCuentas.Recordset.MoveFirst
 Me.DtaCuentas.Recordset.Find (Criterio)
@@ -2878,7 +2878,7 @@ If Not DtaCuentas.Recordset.EOF Then
 '////////////////////////////////////////////////////////////////////////////////////////////
 '/////////////////CARGO LOS CHEQUES PENDIENTES/////////////////////////////////////////////////
 '/////////////////////////////////////////////////////////////////////////////////////////////
-SQL = "SELECT TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
+Sql = "SELECT TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
 "TransaccionesSolicitudPago.FacturaNo, TransaccionesSolicitudPago.ChequeNo, TransaccionesSolicitudPago.Clave, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito, " & _
 "TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.NPeriodo, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.Fuente, TransaccionesSolicitudPago.FechaTasas, " & _
 "TransaccionesSolicitudPago.NumeroMovimiento , Periodos.Periodo, TransaccionesSolicitudPago.Beneficiario " & _
@@ -2886,7 +2886,7 @@ SQL = "SELECT TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.
 "WHERE (TransaccionesSolicitudPago.ChequeNo = '#######')  AND (TransaccionesSolicitudPago.CodCuentas = '" & Me.DBCodigo.Text & "' ) AND " & _
 "(TransaccionesSolicitudPago.DescripcionMovimiento <> '**********CANCELADO*************') ORDER BY TransaccionesSolicitudPago.NTransaccion"
 
-Me.AdoPendientes.RecordSource = SQL
+Me.AdoPendientes.RecordSource = Sql
 Me.AdoPendientes.Refresh
 
 
@@ -3030,7 +3030,7 @@ End Sub
 Private Sub DBGTransacciones_AfterColEdit(ByVal ColIndex As Integer)
 On Error GoTo TipoErrs
 Dim Descripcion As String, cadena As String, MontoTasa As Double, Fecha As Long
-Dim ClaveMovimiento As String, DescripcionMovimiento As String, SQL As String
+Dim ClaveMovimiento As String, DescripcionMovimiento As String, Sql As String
 Dim c As Variant
 'Este Procedimiento es solo cuando se ejecuta directamente de Recepcion
 QueProducto = "Egreso"
@@ -3253,7 +3253,7 @@ Select Case ColIndex
    '/////////////////////////////////////////////////////////////////////////////////
    
             
-            SQL = "SELECT TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta AS DescripcionCuentas, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
+            Sql = "SELECT TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta AS DescripcionCuentas, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
             "TransaccionesSolicitudPago.FacturaNo, TransaccionesSolicitudPago.ChequeNo, TransaccionesSolicitudPago.Clave, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito, " & _
             "TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.NPeriodo, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.Fuente, TransaccionesSolicitudPago.FechaTasas, " & _
             "TransaccionesSolicitudPago.NumeroMovimiento , Periodos.Periodo " & _
@@ -3261,7 +3261,7 @@ Select Case ColIndex
             "WHERE  (TransaccionesSolicitudPago.FechaTransaccion BETWEEN '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "' And '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "') AND (TransaccionesSolicitudPago.NumeroMovimiento = " & Me.TxtNTransacciones.Text & ") " & _
             "ORDER BY TransaccionesSolicitudPago.NTransaccion"
               
-            Me.DtaConsulta.RecordSource = SQL
+            Me.DtaConsulta.RecordSource = Sql
             Me.DtaConsulta.Refresh
             If Not Me.DtaConsulta.Recordset.EOF Then
               Me.DtaConsulta.Recordset.MoveLast
@@ -3891,7 +3891,7 @@ TipoErrs:
 End Sub
 
 Private Sub Form_Load()
-Dim SQL As String
+Dim Sql As String
 
 MDIPrimero.Skin1.ApplySkin hWnd
 'Me.TxtFecha.Value = Format(FechaSistema, "dd/mm/yyyy")
@@ -4061,7 +4061,7 @@ Me.TxtMemo.Enabled = False
 Me.TxtMonto.Enabled = False
 Me.TxtNombre.Enabled = False
 
-SQL = "SELECT     TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
+Sql = "SELECT     TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
        "TransaccionesSolicitudPago.FacturaNo, TransaccionesSolicitudPago.ChequeNo, TransaccionesSolicitudPago.Clave, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito, " & _
        "TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.NPeriodo, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.Fuente, TransaccionesSolicitudPago.FechaTasas, " & _
        "TransaccionesSolicitudPago.NumeroMovimiento, Periodos.Periodo, TransaccionesSolicitudPago.FechaDescuento, TransaccionesSolicitudPago.DescuentoDisponible, " & _
@@ -4071,7 +4071,7 @@ SQL = "SELECT     TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudP
        "Where (TransaccionesSolicitudPago.NumeroMovimiento = -1) " & _
        "ORDER BY TransaccionesSolicitudPago.NTransaccion "
        
-Me.DtaTransacciones.RecordSource = SQL
+Me.DtaTransacciones.RecordSource = Sql
 Me.DtaTransacciones.Refresh
 
 Me.DtaBancos.RecordSource = "SELECT Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta From Cuentas WHERE (TipoCuenta = 'Caja') OR (TipoCuenta = N'Bancos') ORDER BY Cuentas.CodCuentas"
@@ -4504,7 +4504,7 @@ End Sub
 Private Sub TxtCodigoEmpleado_Change()
 On Error GoTo TipoErrs
 Dim MontoTasa As Double, Fecha As Long
-Dim SQL As String
+Dim Sql As String
 Criterio = "CodCuentas='" & Me.TxtCodigoEmpleado.Text & "'"
 If Me.DtaCuentas.Recordset.RecordCount > 0 Then Me.DtaCuentas.Recordset.MoveFirst
 Me.DtaCuentas.Recordset.Find (Criterio)
@@ -4515,7 +4515,7 @@ If Not DtaCuentas.Recordset.EOF Then
 '////////////////////////////////////////////////////////////////////////////////////////////
 '/////////////////CARGO LOS CHEQUES PENDIENTES/////////////////////////////////////////////////
 '/////////////////////////////////////////////////////////////////////////////////////////////
-SQL = "SELECT TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
+Sql = "SELECT TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
 "TransaccionesSolicitudPago.FacturaNo, TransaccionesSolicitudPago.ChequeNo, TransaccionesSolicitudPago.Clave, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito, " & _
 "TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.NPeriodo, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.Fuente, TransaccionesSolicitudPago.FechaTasas, " & _
 "TransaccionesSolicitudPago.NumeroMovimiento , Periodos.Periodo, TransaccionesSolicitudPago.Beneficiario " & _
@@ -4523,7 +4523,7 @@ SQL = "SELECT TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.
 "WHERE (TransaccionesSolicitudPago.ChequeNo = '#######')  AND (TransaccionesSolicitudPago.CodCuentas = '" & Me.DBCodigo.Text & "' ) AND " & _
 "(TransaccionesSolicitudPago.DescripcionMovimiento <> '**********CANCELADO*************') ORDER BY TransaccionesSolicitudPago.NTransaccion"
 
-Me.AdoPendientes.RecordSource = SQL
+Me.AdoPendientes.RecordSource = Sql
 Me.AdoPendientes.Refresh
 
 
