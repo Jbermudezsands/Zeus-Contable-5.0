@@ -32,7 +32,7 @@ Begin VB.Form FrmSolicitudPagoLista
       _ExtentX        =   2566
       _ExtentY        =   661
       _Version        =   393216
-      Format          =   83165185
+      Format          =   80871425
       CurrentDate     =   44168
    End
    Begin VB.CommandButton Command1 
@@ -461,6 +461,12 @@ Private Sub CmdEditar_Click()
       Monto = Me.AdoConsulta.Recordset("MontoSolicitud")
       
       Nperiodo = Me.AdoConsulta.Recordset("NPeriodo")
+      
+      If Format(Me.AdoConsulta.Recordset("MontoIva"), "##,##0.00") = "0.00" Then
+         FrmSolicitudPagos.Chk15.Value = 0
+      Else
+         FrmSolicitudPagos.Chk15.Value = 1
+      End If
 
        If Me.AdoConsulta.Recordset("TipoMoneda") = "Dólares" Then
          FrmSolicitudPagos.TxtLetras.Text = sw.ConvertCurrencyToSpanish(CDbl(FrmSolicitudPagos.TxtMonto.Text), "Dólares")
@@ -624,6 +630,7 @@ End Sub
 
 Private Sub CmdNuevo_Click()
 QUIEN = "Nuevo"
+FrmSolicitudPagos.Chk15.Value = 1
 FrmSolicitudPagos.Show 1
 ActualizaGrid
 
@@ -643,7 +650,7 @@ Private Sub Command1_Click()
   Dim MontoBanco As Double, MontoRetencion1 As Double, MontoRetencion2 As Double, MontoRetencion3 As Double, MontoRetencion4 As Double, MontoRetencion5 As Double
   Dim DescripcionCuenta As String, DescripcionMovimiento As String, TipoMovimiento As String, NumeroFactura As String, Debito As Double, Credito As Double
   Dim TasaCambio As Double, FechaFactura As Date, Descuento As Double, VoucherNo As String, MontoCheque As Double, SubTotal As Double, MontoIva As Double, MontoRetenciones As Double
-  Dim Iva As Boolean, ConceptoSolicitud As String, MontoIva2 As Double, MontoRetenciones2 As Double
+  Dim Iva As Boolean, ConceptoSolicitud As String, MontoIva2 As Double, MontoRetenciones2 As Double, Concepto As String
 
   
     If MsgBox("¿Esta Seguro de querer PROCESAR?", vbYesNo, "Zeus Contable") = vbNo Then
@@ -680,6 +687,10 @@ Private Sub Command1_Click()
                         Retencion4 = Me.AdoConsulta.Recordset("Retencion4")  'Reteciion 4%
                         Retencion5 = Me.AdoConsulta.Recordset("Retencion5")  'Retencion 10%
                         Iva = Me.AdoConsulta.Recordset("Iva")
+                        
+                        If Not IsNull(Me.AdoConsulta.Recordset("Beneficiario")) Then
+                          Beneficiario = Me.AdoConsulta.Recordset("Beneficiario")
+                        End If
                         
                         If Not IsNull(Me.AdoConsulta.Recordset("Concepto")) Then
                           ConceptoSolicitud = Me.AdoConsulta.Recordset("Concepto")
@@ -903,7 +914,7 @@ Private Sub Command1_Click()
                         Debito = 0
                         Credito = MontoCheque
                         TipoMovimiento = "Credito"
-                        Resultado = GrabaDetalleCheque(CuentaBanco, Me.DTPFecha.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, TipoMovimiento, TasaCambio, Debito, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CuentaContable, DescripcionCuenta, VoucherNo)
+                        Resultado = GrabaDetalleCheque(CuentaBanco, Me.DTPFecha.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, ConceptoSolicitud, TipoMovimiento, TasaCambio, Debito, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CuentaContable, Beneficiario, VoucherNo)
                         
                         
                         
@@ -915,6 +926,9 @@ Private Sub Command1_Click()
                         Me.AdoConsulta.Refresh
                         If Not Me.AdoConsulta.Recordset.EOF Then
                           Me.AdoConsulta.Recordset("Activo") = 0
+                          Me.AdoConsulta.Recordset("Procesado") = 1
+                          Me.AdoConsulta.Recordset("NumeroTransaccion") = NumeroTransaccion
+                          Me.AdoConsulta.Recordset("NPeriodoTransaccion") = NumeroPeriodo
                           Me.AdoConsulta.Recordset.Update
                         End If
     

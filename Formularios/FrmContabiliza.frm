@@ -454,10 +454,11 @@ Begin VB.Form FrmContabilizaFacturacion
       _ExtentY        =   10610
       _Version        =   393216
       Tabs            =   4
+      Tab             =   3
       TabHeight       =   520
       TabCaption(0)   =   "Facturacion"
       TabPicture(0)   =   "FrmContabiliza.frx":0000
-      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "TDBGridFacturacion"
       Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "GroupBox1"
@@ -466,21 +467,23 @@ Begin VB.Form FrmContabilizaFacturacion
       TabCaption(1)   =   "Compras"
       TabPicture(1)   =   "FrmContabiliza.frx":001C
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "GroupBox2"
+      Tab(1).Control(0)=   "PushButton2"
       Tab(1).Control(1)=   "TDBGridCompras"
-      Tab(1).Control(2)=   "PushButton2"
+      Tab(1).Control(2)=   "GroupBox2"
       Tab(1).ControlCount=   3
       TabCaption(2)   =   "Cuentas x Cobrar y Pagar"
       TabPicture(2)   =   "FrmContabiliza.frx":0038
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "TDBGridCuentas"
-      Tab(2).Control(1)=   "GroupBox3"
+      Tab(2).Control(0)=   "GroupBox3"
+      Tab(2).Control(1)=   "TDBGridCuentas"
       Tab(2).ControlCount=   2
       TabCaption(3)   =   "Planilla Leche"
       TabPicture(3)   =   "FrmContabiliza.frx":0054
-      Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "GroupBox4"
-      Tab(3).Control(1)=   "TDGridPlanillaLeche"
+      Tab(3).ControlEnabled=   -1  'True
+      Tab(3).Control(0)=   "TDGridPlanillaLeche"
+      Tab(3).Control(0).Enabled=   0   'False
+      Tab(3).Control(1)=   "GroupBox4"
+      Tab(3).Control(1).Enabled=   0   'False
       Tab(3).ControlCount=   2
       Begin XtremeSuiteControls.GroupBox GroupBox2 
          Height          =   5055
@@ -511,7 +514,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   82575361
+            Format          =   80412673
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker3 
@@ -523,7 +526,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   82575361
+            Format          =   80412673
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptCompras 
@@ -575,7 +578,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   82575361
+            Format          =   80412673
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton RadioButton4 
@@ -689,7 +692,7 @@ Begin VB.Form FrmContabilizaFacturacion
       End
       Begin XtremeSuiteControls.GroupBox GroupBox1 
          Height          =   5055
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   3
          Top             =   780
          Width           =   2295
@@ -715,7 +718,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   82575361
+            Format          =   80412673
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptFacturacion 
@@ -768,7 +771,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   82575361
+            Format          =   80412673
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecibos 
@@ -821,7 +824,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   82575361
+            Format          =   80412673
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptSalidaBodega 
@@ -866,7 +869,7 @@ Begin VB.Form FrmContabilizaFacturacion
       Begin TrueOleDBGrid80.TDBGrid TDBGridFacturacion 
          Bindings        =   "FrmContabiliza.frx":0070
          Height          =   4935
-         Left            =   2520
+         Left            =   -72480
          TabIndex        =   8
          Top             =   900
          Width           =   9975
@@ -1514,7 +1517,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   82575361
+            Format          =   80412673
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebito 
@@ -1552,7 +1555,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   82575361
+            Format          =   80412673
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.PushButton CmdContabilizarNotas 
@@ -1592,7 +1595,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   82575361
+            Format          =   80412673
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebitoProveedor 
@@ -2019,7 +2022,7 @@ Begin VB.Form FrmContabilizaFacturacion
       End
       Begin XtremeSuiteControls.GroupBox GroupBox4 
          Height          =   5055
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   56
          Top             =   840
          Width           =   2295
@@ -2047,7 +2050,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   82575361
+            Format          =   80412673
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker11 
@@ -2059,7 +2062,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   82575361
+            Format          =   80412673
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecepcion 
@@ -2085,7 +2088,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   82575361
+            Format          =   80412673
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptPlanilla 
@@ -2223,7 +2226,7 @@ Begin VB.Form FrmContabilizaFacturacion
       Begin TrueOleDBGrid80.TDBGrid TDGridPlanillaLeche 
          Bindings        =   "FrmContabiliza.frx":00BC
          Height          =   4815
-         Left            =   -72240
+         Left            =   2760
          TabIndex        =   70
          Top             =   960
          Width           =   9975
