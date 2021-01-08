@@ -32,10 +32,10 @@ Begin VB.Form FrmSolicitudPagoLista
       _ExtentX        =   2566
       _ExtentY        =   661
       _Version        =   393216
-      Format          =   80871425
+      Format          =   80805889
       CurrentDate     =   44168
    End
-   Begin VB.CommandButton Command1 
+   Begin VB.CommandButton CmdProcesar 
       Caption         =   "PROCESAR"
       Height          =   375
       Left            =   12840
@@ -457,6 +457,7 @@ Private Sub CmdEditar_Click()
       FrmSolicitudPagos.TxtRetenciones.Text = Format(Me.AdoConsulta.Recordset("MontoRetenciones"), "##,##0.00")
       FrmSolicitudPagos.TxtMonto.Text = Format(Me.AdoConsulta.Recordset("MontoSolicitud"), "##,##0.00")
       FrmSolicitudPagos.TxtNombre.Text = Format(Me.AdoConsulta.Recordset("Beneficiario"), "##,##0.00")
+      FrmSolicitudPagos.DtaList.Visible = False
       
       Monto = Me.AdoConsulta.Recordset("MontoSolicitud")
       
@@ -636,11 +637,7 @@ ActualizaGrid
 
 End Sub
 
-Private Sub CmdSalir_Click()
-Unload Me
-End Sub
-
-Private Sub Command1_Click()
+Private Sub CmdProcesar_Click()
   Dim NumeroTransaccion As Double
   Dim mes As Double, Año As Double, FechaIni As Date, FechaFin As Date
   Dim Periodo As Double, NumeroPeriodo As Double, EstadoPeriodo As String, Sql As String, TipoMoneda As String
@@ -945,6 +942,14 @@ Private Sub Command1_Click()
     
     
     End If
+End Sub
+
+Private Sub CmdSalir_Click()
+Unload Me
+End Sub
+
+Private Sub Command1_Click()
+
     
     
     
@@ -994,6 +999,8 @@ End Sub
 Private Sub Form_Load()
 MDIPrimero.Skin1.ApplySkin hWnd
 
+Me.DTPFecha.Value = Now
+
  Me.DBGTransacciones.EvenRowStyle.BackColor = RGB(216, 228, 248)
  Me.DBGTransacciones.OddRowStyle.BackColor = &H80000005
  Me.DBGTransacciones.AlternatingRowStyle = True
@@ -1032,14 +1039,25 @@ Public Sub ActualizaGrid()
 End Sub
 
 Private Sub OptActivos_Click()
+Me.CmdEditar.Enabled = True
+Me.CmdEliminar.Enabled = True
+Me.CmdProcesar.Enabled = True
+Me.CmdEditar.Enabled = True
 ActualizaGrid
 End Sub
 
 Private Sub OptAnulados_Click()
+Me.CmdEditar.Enabled = False
+Me.CmdEliminar.Enabled = False
+Me.CmdProcesar.Enabled = False
 ActualizaGrid
 End Sub
 
 Private Sub OptProcesados_Click()
+Me.CmdEditar.Enabled = False
+Me.CmdEliminar.Enabled = False
+Me.CmdProcesar.Enabled = False
+
 ActualizaGrid
 End Sub
 

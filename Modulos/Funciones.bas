@@ -15,6 +15,64 @@ For x = 1 To Ilen
 Next
 Encrypt = sFrase
 End Function
+Public Function SaldoCuenta(Periodo As Double, Fecha As Date, Cuenta As String, KeyPresupuesto As Double) As Double
+      Dim TipoMoneda As String, TipoCuenta As String, MontoTasa As Double
+      
+       TipoMoneda = "Córdobas"  'DtaCuentas.Recordset("TipoMoneda")
+       TipoCuenta = "Gastos" 'DtaCuentas.Recordset("TipoCuenta")
+       MontoTasa = BuscaTasaCambio(Fecha)
+      
+      
+      '////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      '//////////////////////////CONSULTO LOS SALDOS ACUMULADO REAL DE LAS CUENTAS PARA PRESUPUESTO //////////////////
+      '/////////////////////////////////////////////////////////////////////////////////////////////////
+      MDIPrimero.AdoConsulta.RecordSource = "SELECT SUM(Debito * TCambio) AS MDebito, SUM(TCambio * Credito) AS MCredito From Transacciones WHERE   (FechaTransaccion  < CONVERT(DATETIME, '" & Format(Fecha, "YYYY-MM-DD") & "', 102)) GROUP BY FacturaNo HAVING (FacturaNo = '" & KeyPresupuesto & "')"
+      MDIPrimero.AdoConsulta.Refresh
+
+      If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
+        If Not IsNull(MDIPrimero.AdoConsulta.Recordset("MDebito")) Then
+        Debito = MDIPrimero.AdoConsulta.Recordset("MDebito")
+        Else
+         Debito = 0
+       End If
+      If Not IsNull(MDIPrimero.AdoConsulta.Recordset("MCredito")) Then
+       Credito = MDIPrimero.AdoConsulta.Recordset("MCredito")
+      Else
+       Credito = 0
+      End If
+      
+       Select Case TipoMoneda
+         Case "Dólares"
+            If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Bancos" Or TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Or TipoCuenta = "Papeleria - Utiles" Or TipoCuenta = "Inventario" Then
+             Saldo = (Debito - Credito)
+            Else
+             Saldo = (Credito - Debito)
+            End If
+         Case "Libras"
+             If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Bancos" Or TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Or TipoCuenta = "Papeleria - Utiles" Or TipoCuenta = "Inventario" Then
+                Saldo = (Debito - Credito)
+             Else
+                Saldo = (Credito - Debito)
+             End If
+         Case "Córdobas"
+             If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Bancos" Or TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Or TipoCuenta = "Papeleria - Utiles" Or TipoCuenta = "Inventario" Then
+                Saldo = (Debito - Credito)
+             Else
+                Saldo = (Credito - Debito)
+             End If
+       End Select
+
+
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////BUSCO EL MONTO TOTAL PRESUPUESTADO ///////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////
+    
+    
+
+End Function
+
+
+
 Public Sub ConvertirReporte(Fecha As Date)
   Dim TasaCambio As Double, Debe1 As Double, Debe2 As Double, Debe3 As Double, Haber1 As Double, Haber2 As Double, Haber3 As Double
   

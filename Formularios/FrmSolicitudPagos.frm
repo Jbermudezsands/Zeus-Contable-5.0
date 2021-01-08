@@ -530,7 +530,7 @@ Begin VB.Form FrmSolicitudPagos
          _ExtentX        =   2990
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   80871425
+         Format          =   80478209
          CurrentDate     =   38918
       End
       Begin MSComCtl2.DTPicker DTPFechaVence 
@@ -542,7 +542,7 @@ Begin VB.Form FrmSolicitudPagos
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   80871425
+         Format          =   80478209
          CurrentDate     =   38918
       End
       Begin VB.Label LblProveedor 
@@ -1107,7 +1107,7 @@ Begin VB.Form FrmSolicitudPagos
          _ExtentY        =   503
          _Version        =   393216
          Enabled         =   0   'False
-         Format          =   80871425
+         Format          =   80478209
          CurrentDate     =   38008
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel4 
@@ -4117,7 +4117,7 @@ Sql = "SELECT     TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudP
 Me.DtaTransacciones.RecordSource = Sql
 Me.DtaTransacciones.Refresh
 
-Me.DtaBancos.RecordSource = "SELECT Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta From Cuentas WHERE (TipoCuenta = 'Caja') OR (TipoCuenta = N'Bancos') ORDER BY Cuentas.CodCuentas"
+Me.DtaBancos.RecordSource = "SELECT Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta From Cuentas WHERE (TipoCuenta = N'Bancos') ORDER BY Cuentas.CodCuentas"
 Me.DtaBancos.Refresh
 Me.DBCodigo.ListField = "CodCuentas"
 
@@ -4431,6 +4431,45 @@ Exit Sub
 TipoErrs:
 ControlErrores
 
+End Sub
+
+Private Sub List1_Click()
+Me.DBGTransacciones.Columns(6).Text = Me.List1.Text
+If QUIEN <> "Grid" Then
+    Select Case List1.Text
+      Case "Debito"
+            Me.DBGTransacciones.PostMsg (3)
+         
+      Case "Credito"
+          Me.DBGTransacciones.PostMsg (4)
+      
+    End Select
+ End If
+ 
+ '////////Verifico la clave del movimiento//////////
+ Clave = Me.DBGTransacciones.Columns(6).Text
+     If Not ClaveAnt = Clave Then
+       If ClaveAnt = "Debito" Then
+         Debito = Val(Me.DBGTransacciones.Columns(8).Text)
+         TotalDebito = TotalDebito - Debito
+         Me.TxtDebito.Text = Format(TotalDebito, "##,##0.00")
+         TotalDiferencia = TotalDebito - TotalCredito
+         Me.TxtDiferencia.Text = Format(TotalDiferencia, "##,##0.00")
+         Me.DBGTransacciones.Columns(8).Text = "0.00"
+
+       ElseIf ClaveAnt = "Credito" Then
+         Credito = Val(Me.DBGTransacciones.Columns(9).Text)
+         TotalCredito = TotalCredito - Credito
+         Me.TxtCredito.Text = Format(TotalCredito, "##,##0.00")
+         TotalDiferencia = TotalDebito - TotalCredito
+         Me.TxtDiferencia.Text = Format(TotalDiferencia, "##,##0.00")
+        Me.DBGTransacciones.Columns(9).Text = "0.00"
+
+       End If
+     End If
+ 
+ 
+List1.Visible = False
 End Sub
 
 Private Sub SmartButton1_Click()
