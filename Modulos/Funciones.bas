@@ -31,10 +31,12 @@ Public Function SaldoCuenta(Periodo As Double, Fecha As Date, Cuenta As String, 
 
       If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
         If Not IsNull(MDIPrimero.AdoConsulta.Recordset("MDebito")) Then
-        Debito = MDIPrimero.AdoConsulta.Recordset("MDebito")
-        Else
+          Debito = MDIPrimero.AdoConsulta.Recordset("MDebito")
+        End If
+      Else
          Debito = 0
-       End If
+      End If
+      
       If Not IsNull(MDIPrimero.AdoConsulta.Recordset("MCredito")) Then
        Credito = MDIPrimero.AdoConsulta.Recordset("MCredito")
       Else
@@ -67,7 +69,7 @@ Public Function SaldoCuenta(Periodo As Double, Fecha As Date, Cuenta As String, 
     '////////////////////////////BUSCO EL MONTO TOTAL PRESUPUESTADO ///////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////
     
-    
+    SaldoCuenta = Saldo
 
 End Function
 
@@ -6855,7 +6857,7 @@ Function GrabaDetalleCheque(CodCuentas As String, FechaTransaccion As Date, Nume
 End Function
 
 
-Function GrabaDetalleChequeSolicitud(CodCuentas As String, FechaTransaccion As Date, NumeroTransaccion As Double, NumeroPeriodo As Double, NombreCuenta As String, DescripcionMovimiento As String, Clave As String, TasaCambio As Double, Debito As Double, Credito As Double, Fuente As String, NumeroFactura As String, FechaDescuento As Date, Descuento As Double, FechaVence As Date, CodCuentaProveedor As String, TipoFactura As String, VoucherNo As String, NumeroSolcitud As String) As Boolean
+Function GrabaDetalleChequeSolicitud(CodCuentas As String, FechaTransaccion As Date, NumeroTransaccion As Double, NumeroPeriodo As Double, NombreCuenta As String, DescripcionMovimiento As String, Clave As String, TasaCambio As Double, Debito As Double, Credito As Double, Fuente As String, NumeroFactura As String, FechaDescuento As Date, Descuento As Double, FechaVence As Date, CodCuentaProveedor As String, TipoFactura As String, VoucherNo As String, KeyPresupuesto As String, Presupuesto As String) As Boolean
    Dim TipoCuenta As String, NombreEmpleado As String, TipoMoneda As String
    
    MDIPrimero.AdoConsulta.RecordSource = "SELECT * From Cuentas WHERE (CodCuentas = '" & CodCuentas & "')"
@@ -6957,6 +6959,8 @@ Function GrabaDetalleChequeSolicitud(CodCuentas As String, FechaTransaccion As D
                                  MDIPrimero.AdoConsulta.Recordset("VoucherNo") = cadena
                                  MDIPrimero.AdoConsulta.Recordset("FechaTasas") = Format(FechaTransaccion, "dd/mm/yyyy")
                                  MDIPrimero.AdoConsulta.Recordset("Beneficiario") = TipoFactura
+                                 MDIPrimero.AdoConsulta.Recordset("KeyPresupuesto") = KeyPresupuesto
+                                 MDIPrimero.AdoConsulta.Recordset("Presupuesto") = Presupuesto
                                 MDIPrimero.AdoConsulta.Recordset.Update
                               End If
                               
@@ -6998,6 +7002,8 @@ Function GrabaDetalleChequeSolicitud(CodCuentas As String, FechaTransaccion As D
                                  End If
                                  MDIPrimero.AdoConsulta.Recordset("CodCuentaProveedor") = CodCuentaProveedor
                                  MDIPrimero.AdoConsulta.Recordset("TipoFactura") = TipoFactura
+                                 MDIPrimero.AdoConsulta.Recordset("KeyPresupuesto") = KeyPresupuesto
+                                 MDIPrimero.AdoConsulta.Recordset("Presupuesto") = Presupuesto
                                 MDIPrimero.AdoConsulta.Recordset.Update
                               Else
 '                                 MDIPrimero.AdoConsulta.Recordset("DescripcionMovimiento") = DescripcionMovimiento
@@ -8480,9 +8486,9 @@ Function ConfiguracionReportesBalance()
     End If
 End Function
 
-Public Function SumasDebitos(NumeroMovimiento As Double, Nperiodo As Double)
+Public Function SumasDebitos(NumeroMovimiento As Double, NPeriodo As Double)
  Dim Sql As String, Debito As Double, Credito As Double
-  Sql = "SELECT  FechaTransaccion AS FechaTransaccion, TCambio AS TCambio, Debito AS Debito, Credito AS Credito From Transacciones Where (NumeroMovimiento = " & NumeroMovimiento & ") And (NPeriodo = " & Nperiodo & ")"
+  Sql = "SELECT  FechaTransaccion AS FechaTransaccion, TCambio AS TCambio, Debito AS Debito, Credito AS Credito From Transacciones Where (NumeroMovimiento = " & NumeroMovimiento & ") And (NPeriodo = " & NPeriodo & ")"
   MDIPrimero.AdoConsulta.RecordSource = Sql
   MDIPrimero.AdoConsulta.Refresh
   Do While Not MDIPrimero.AdoConsulta.Recordset.EOF

@@ -360,11 +360,11 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private cnx As New ADODB.Connection
 Private rs As New ADODB.Recordset, rsConexion As New ADODB.Recordset
-Private SQL As String
+Private Sql As String
 Private modal As Boolean
 Private getVal As Boolean
 Private Id As Integer
-Public Codigo As String, Cuenta As String
+Public Codigo As String, Cuenta As String, KeyPresupuesto As String
 
 
 Private Sub DbgrProducto_PostEvent(ByVal MsgId As Integer)
@@ -391,7 +391,7 @@ Private Sub DbgrProducto_PostEvent(ByVal MsgId As Integer)
         
             c = DbgrProducto.col
             DbgrProducto.HoldFields
-            SQL = rs.Filter
+            Sql = rs.Filter
             rs.Filter = getFilter(col, cols)
 '            If rs.EOF Then
 '              MsgBox "No Existen Registros", vbInformation, "Zeus Contabilidad"
@@ -893,6 +893,7 @@ Dim mes As Double, Año As Double
           End If
         End If
         
+        KeyPresupuesto = rs("KeyGrupo")
         Codigo = CadenaNumeros(cadena)
   
       Case "CuentaContable"
@@ -1206,7 +1207,7 @@ Dim mes As Double, Año As Double
    '/////////////////////////////////////////////////////////////////////////////////
    
             
-            SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta AS DescripcionCuentas, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
+            Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta AS DescripcionCuentas, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
             "Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, " & _
             "Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, " & _
             "Transacciones.NumeroMovimiento , Periodos.Periodo " & _
@@ -1214,7 +1215,7 @@ Dim mes As Double, Año As Double
             "WHERE  (Transacciones.FechaTransaccion BETWEEN '" & Format(FrmEgresos.TxtFecha.Value, "yyyymmdd") & "' And '" & Format(FrmEgresos.TxtFecha.Value, "yyyymmdd") & "') AND (Transacciones.NumeroMovimiento = " & NumeroTransaccion & ") " & _
             "ORDER BY Transacciones.NTransaccion"
               
-            Me.DtaConsulta.RecordSource = SQL
+            Me.DtaConsulta.RecordSource = Sql
             Me.DtaConsulta.Refresh
             If Not Me.DtaConsulta.Recordset.EOF Then
               Me.DtaConsulta.Recordset.MoveLast
@@ -1681,7 +1682,7 @@ Dim mes As Double, Año As Double
    '/////////////////////////////////////////////////////////////////////////////////
    
             
-            SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta AS DescripcionCuentas, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
+            Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta AS DescripcionCuentas, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
             "Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, " & _
             "Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, " & _
             "Transacciones.NumeroMovimiento , Periodos.Periodo " & _
@@ -1689,7 +1690,7 @@ Dim mes As Double, Año As Double
             "WHERE  (Transacciones.FechaTransaccion BETWEEN '" & Format(FrmCheque.TxtFecha.Value, "yyyymmdd") & "' And '" & Format(FrmCheque.TxtFecha.Value, "yyyymmdd") & "') AND (Transacciones.NumeroMovimiento = " & NumeroTransaccion & ") " & _
             "ORDER BY Transacciones.NTransaccion"
               
-            Me.DtaConsulta.RecordSource = SQL
+            Me.DtaConsulta.RecordSource = Sql
             Me.DtaConsulta.Refresh
             If Not Me.DtaConsulta.Recordset.EOF Then
               Me.DtaConsulta.Recordset.MoveLast
@@ -2119,7 +2120,7 @@ Dim mes As Double, Año As Double
    '/////////////////////////////////////////////////////////////////////////////////
    
             
-            SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta AS DescripcionCuentas, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
+            Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta AS DescripcionCuentas, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
             "Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, " & _
             "Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, " & _
             "Transacciones.NumeroMovimiento , Periodos.Periodo " & _
@@ -2127,7 +2128,7 @@ Dim mes As Double, Año As Double
             "WHERE  (Transacciones.FechaTransaccion BETWEEN '" & Format(FrmTransacciones.TxtFecha.Value, "yyyymmdd") & "' And '" & Format(FrmTransacciones.TxtFecha.Value, "yyyymmdd") & "') AND (Transacciones.NumeroMovimiento = " & NumeroTransaccion & ") " & _
             "ORDER BY Transacciones.NTransaccion"
               
-            FrmTransacciones.DtaConsulta.RecordSource = SQL
+            FrmTransacciones.DtaConsulta.RecordSource = Sql
             FrmTransacciones.DtaConsulta.Refresh
             If Not FrmTransacciones.DtaConsulta.Recordset.EOF Then
               FrmTransacciones.DtaConsulta.Recordset.MoveLast
@@ -3941,7 +3942,7 @@ Select Case QueProducto
          Respuesta = ""
          Me.DbgrProducto.Columns(1).Caption = "Codigo Pres."
          Me.DbgrProducto.Columns(0).Width = 1000
-         DbgrProducto.Columns(0).Width = 5200
+         DbgrProducto.Columns(1).Width = 3000
 
       Case "CuentaContable"
           sqlconsulta = "SELECT Cuentas.DescripcionCuentas, Cuentas.CodCuentas, Cuentas.TipoCuenta, Grupos.DescripcionGrupo FROM Cuentas INNER JOIN  Grupos ON Cuentas.KeyGrupo = Grupos.KeyGrupo ORDER BY Cuentas.DescripcionCuentas"
@@ -4115,7 +4116,7 @@ Select Case QueProducto
             
             c = DbgrProducto.col
             DbgrProducto.HoldFields
-            SQL = rs.Filter
+            Sql = rs.Filter
             rs.Filter = getFilter(col, cols)
             DbgrProducto.col = c
             DbgrProducto.EditActive = True
@@ -4167,7 +4168,7 @@ Select Case QueProducto
             
             c = DbgrProducto.col
             DbgrProducto.HoldFields
-            SQL = rs.Filter
+            Sql = rs.Filter
             rs.Filter = getFilter(col, cols)
             DbgrProducto.col = c
             DbgrProducto.EditActive = True
@@ -4209,7 +4210,7 @@ Select Case QueProducto
             
             c = DbgrProducto.col
             DbgrProducto.HoldFields
-            SQL = rs.Filter
+            Sql = rs.Filter
             rs.Filter = getFilter(col, cols)
             DbgrProducto.col = c
             DbgrProducto.EditActive = True
@@ -4250,7 +4251,7 @@ Select Case QueProducto
             
             c = DbgrProducto.col
             DbgrProducto.HoldFields
-            SQL = rs.Filter
+            Sql = rs.Filter
             rs.Filter = getFilter(col, cols)
             DbgrProducto.col = c
             DbgrProducto.EditActive = True
@@ -4473,7 +4474,7 @@ Select Case QueProducto
             
             c = DbgrProducto.col
             DbgrProducto.HoldFields
-            SQL = rs.Filter
+            Sql = rs.Filter
             rs.Filter = getFilter(col, cols)
             DbgrProducto.col = c
             DbgrProducto.EditActive = True
@@ -4888,7 +4889,7 @@ Private Sub PegarSolicitudPago()
    '/////////////////////////////////////////////////////////////////////////////////
    
             
-            SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta AS DescripcionCuentas, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
+            Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta AS DescripcionCuentas, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
             "Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, " & _
             "Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, " & _
             "Transacciones.NumeroMovimiento , Periodos.Periodo " & _
@@ -4896,7 +4897,7 @@ Private Sub PegarSolicitudPago()
             "WHERE  (Transacciones.FechaTransaccion BETWEEN '" & Format(FrmSolicitudPagos.TxtFecha.Value, "yyyymmdd") & "' And '" & Format(FrmSolicitudPagos.TxtFecha.Value, "yyyymmdd") & "') AND (Transacciones.NumeroMovimiento = " & NumeroTransaccion & ") " & _
             "ORDER BY Transacciones.NTransaccion"
               
-            Me.DtaConsulta.RecordSource = SQL
+            Me.DtaConsulta.RecordSource = Sql
             Me.DtaConsulta.Refresh
             If Not Me.DtaConsulta.Recordset.EOF Then
               Me.DtaConsulta.Recordset.MoveLast
@@ -5282,7 +5283,7 @@ Private Sub PegarSolicitudCheque()
    '/////////////////////////////////////////////////////////////////////////////////
    
             
-            SQL = "SELECT TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta AS DescripcionCuentas, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
+            Sql = "SELECT TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta AS DescripcionCuentas, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
             "TransaccionesSolicitudPago.FacturaNo, TransaccionesSolicitudPago.ChequeNo, TransaccionesSolicitudPago.Clave, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito, " & _
             "TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.NPeriodo, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.Fuente, TransaccionesSolicitudPago.FechaTasas, " & _
             "TransaccionesSolicitudPago.NumeroMovimiento , Periodos.Periodo " & _
@@ -5290,7 +5291,7 @@ Private Sub PegarSolicitudCheque()
             "WHERE  (TransaccionesSolicitudPago.FechaTransaccion BETWEEN '" & Format(FrmSolicitudPagos.TxtFecha.Value, "yyyymmdd") & "' And '" & Format(FrmSolicitudPagos.TxtFecha.Value, "yyyymmdd") & "') AND (TransaccionesSolicitudPago.NumeroMovimiento = " & NumeroTransaccion & ") " & _
             "ORDER BY TransaccionesSolicitudPago.NTransaccion"
               
-            Me.DtaConsulta.RecordSource = SQL
+            Me.DtaConsulta.RecordSource = Sql
             Me.DtaConsulta.Refresh
             If Not Me.DtaConsulta.Recordset.EOF Then
               Me.DtaConsulta.Recordset.MoveLast

@@ -168,9 +168,9 @@ Begin VB.Form FrmSolicitudPagos
    Begin VB.CommandButton CmdNuevo 
       Caption         =   "Nuevo"
       Height          =   375
-      Left            =   1320
+      Left            =   6360
       TabIndex        =   36
-      Top             =   7920
+      Top             =   7800
       Width           =   1095
    End
    Begin VB.CommandButton CmdBorrar 
@@ -530,7 +530,7 @@ Begin VB.Form FrmSolicitudPagos
          _ExtentX        =   2990
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   80478209
+         Format          =   78249985
          CurrentDate     =   38918
       End
       Begin MSComCtl2.DTPicker DTPFechaVence 
@@ -542,7 +542,7 @@ Begin VB.Form FrmSolicitudPagos
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   80478209
+         Format          =   78249985
          CurrentDate     =   38918
       End
       Begin VB.Label LblProveedor 
@@ -1107,7 +1107,7 @@ Begin VB.Form FrmSolicitudPagos
          _ExtentY        =   503
          _Version        =   393216
          Enabled         =   0   'False
-         Format          =   80478209
+         Format          =   78249985
          CurrentDate     =   38008
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel4 
@@ -2726,6 +2726,13 @@ MsgBox err.Description
 End Sub
 
 Private Sub CmdMemoriza_Click()
+
+      If Not Val(Me.TxtDiferencia.Text) = 0 Then
+       MsgBox "El Movimiento esta Desbalanceado", vbCritical, "Sistema Contable"
+       Exit Sub
+      End If
+      
+      
 GrabaIndiceSolicitud (NumeroSolicitud)
 
 MsgBox "Grabado con Existo!!!", vbCritical, "Zeus Contable"
@@ -2750,10 +2757,10 @@ Private Sub CmdNuevo_Click()
      
      '//////Grabo las descripcion en los indices//////////////////////
      Me.DBGTransacciones.Enabled = True
-     mes = Month(Me.TxtFecha.Value)
+     Mes = Month(Me.TxtFecha.Value)
      Año = Year(Me.TxtFecha.Value)
      FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
-     FechaFin = DateSerial(Año, mes + 1, 1 - 1)
+     FechaFin = DateSerial(Año, Mes + 1, 1 - 1)
      NumFecha1 = FechaIni
      NumFecha2 = FechaFin
      
@@ -3021,6 +3028,8 @@ Select Case ColIndex
    QueProducto = "Presupuesto"
    FrmConsulta.Show 1
    Me.DBGTransacciones.Columns(4).Text = FrmConsulta.Codigo
+   Me.DBGTransacciones.Columns(23).Text = FrmConsulta.KeyPresupuesto
+   Me.DBGTransacciones.Columns(24).Text = FrmConsulta.Codigo
    
    
   Case 6
@@ -3752,10 +3761,10 @@ End If
     
     
     
-      mes = Month(Me.TxtFecha.Value)
+      Mes = Month(Me.TxtFecha.Value)
       Año = Year(Me.TxtFecha.Value)
       FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
-      FechaFin = DateSerial(Año, mes + 1, 1 - 1)
+      FechaFin = DateSerial(Año, Mes + 1, 1 - 1)
       NumFecha1 = FechaIni
       NumFecha2 = FechaFin
  
@@ -3867,10 +3876,10 @@ End If
    End If
    
       Case 3
-      mes = Month(Me.TxtFecha.Value)
+      Mes = Month(Me.TxtFecha.Value)
       Año = Year(Me.TxtFecha.Value)
       FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
-      FechaFin = DateSerial(Año, mes + 1, 1 - 1)
+      FechaFin = DateSerial(Año, Mes + 1, 1 - 1)
       NumFecha1 = FechaIni
       NumFecha2 = FechaFin
       Fechas1 = FechaIni
@@ -4104,11 +4113,11 @@ Me.TxtMemo.Enabled = False
 Me.TxtMonto.Enabled = False
 Me.TxtNombre.Enabled = False
 
-Sql = "SELECT     TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
+Sql = "SELECT TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
        "TransaccionesSolicitudPago.FacturaNo, TransaccionesSolicitudPago.ChequeNo, TransaccionesSolicitudPago.Clave, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito, " & _
        "TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.NPeriodo, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.Fuente, TransaccionesSolicitudPago.FechaTasas, " & _
        "TransaccionesSolicitudPago.NumeroMovimiento, Periodos.Periodo, TransaccionesSolicitudPago.FechaDescuento, TransaccionesSolicitudPago.DescuentoDisponible, " & _
-       "TransaccionesSolicitudPago.KeyPresupuesto, TransaccionesSolicitudPago.FechaVence,TransaccionesSolicitudPago.CodCuentaProveedor,TransaccionesSolicitudPago.TipoFactura,TransaccionesSolicitudPago.NTransaccion " & _
+       "TransaccionesSolicitudPago.FechaVence,TransaccionesSolicitudPago.CodCuentaProveedor,TransaccionesSolicitudPago.TipoFactura,TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.KeyPresupuesto, TransaccionesSolicitudPago.Presupuesto " & _
        "FROM  Periodos INNER JOIN " & _
        "TransaccionesSolicitudPago ON Periodos.NPeriodo = TransaccionesSolicitudPago.NPeriodo " & _
        "Where (TransaccionesSolicitudPago.NumeroMovimiento = -1) " & _
@@ -4159,7 +4168,9 @@ Me.DBCodigo.ListField = "CodCuentas"
   DBGTransacciones.Columns(20).Visible = False
   DBGTransacciones.Columns(21).Visible = False
   DBGTransacciones.Columns(22).Visible = False
-  DBGTransacciones.Columns(23).Visible = False
+  DBGTransacciones.Columns("KeyPresupuesto").Visible = False
+  DBGTransacciones.Columns("Presupuesto").Visible = False
+
   DBGTransacciones.Columns(7).Locked = True 'columna tasa de cambio
 
 End Sub
@@ -4715,10 +4726,10 @@ If Not DtaCuentas.Recordset.EOF Then
          End Select
   End If
  Me.DBGTransacciones.Enabled = True
- mes = Month(Me.TxtFecha.Value)
+ Mes = Month(Me.TxtFecha.Value)
  Año = Year(Me.TxtFecha.Value)
  FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
- FechaFin = DateSerial(Año, mes + 1, 1 - 1)
+ FechaFin = DateSerial(Año, Mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
  
@@ -4847,10 +4858,10 @@ Private Sub TxtFecha_GotFocus()
 Dim Fechas1 As String
 On Error GoTo TipoErrs
  Me.DBGTransacciones.Enabled = True
- mes = Month(Me.TxtFecha.Value)
+ Mes = Month(Me.TxtFecha.Value)
  Año = Year(Me.TxtFecha.Value)
  FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
- FechaFin = DateSerial(Año, mes + 1, 1 - 1)
+ FechaFin = DateSerial(Año, Mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
  
@@ -4946,10 +4957,10 @@ End Sub
 Private Sub TxtFecha_LostFocus()
 On Error GoTo TipoErrs
 Dim NumFecha As Long, Fechas1 As String, Fechas2 As String
-mes = Month(Me.TxtFecha.Value)
+Mes = Month(Me.TxtFecha.Value)
  Año = Year(Me.TxtFecha.Value)
  FechaIni = CDate("1/" & Month(Me.TxtFecha.Value) & "/" & Year(Me.TxtFecha.Value))
- FechaFin = DateSerial(Año, mes + 1, 1 - 1)
+ FechaFin = DateSerial(Año, Mes + 1, 1 - 1)
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
  
