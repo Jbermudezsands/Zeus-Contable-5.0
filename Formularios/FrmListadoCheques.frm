@@ -521,9 +521,9 @@ Dim CuentasContancia As String, NoConstancia As String
 CodigoCuenta = FrmCheque.DBCodigo.Text
 ConsecutivoCheque = Me.LblConsecutivo.Text
 
-SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.Beneficiario, Transacciones.FechaVence, IndiceTransaccion.FechaTransaccion AS Expr1, IndiceTransaccion.NumeroMovimiento AS Expr2, IndiceTransaccion.ImprimeCheque,IndiceTransaccion.TipoMoneda FROM Periodos INNER JOIN  Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
+Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.Beneficiario, Transacciones.FechaVence, IndiceTransaccion.FechaTransaccion AS Expr1, IndiceTransaccion.NumeroMovimiento AS Expr2, IndiceTransaccion.ImprimeCheque,IndiceTransaccion.TipoMoneda FROM Periodos INNER JOIN  Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
       "WHERE (Transacciones.ChequeNo = '#######') AND (Transacciones.CodCuentas = '" & CodigoCuenta & "') AND (IndiceTransaccion.ImprimeCheque = 1) AND (Transacciones.NombreCuenta <> '**********CANCELADO*************') ORDER BY Transacciones.FechaTransaccion,Transacciones.NumeroMovimiento"
-Me.AdoImprime.RecordSource = SQL
+Me.AdoImprime.RecordSource = Sql
 Me.AdoImprime.Refresh
 
 Do While Not Me.AdoImprime.Recordset.EOF
@@ -1760,9 +1760,9 @@ Do While Not Me.AdoImprime.Recordset.EOF
 '--------------------------------ACTUALIZACION DEL GRID //////////////////////////////////////////////
 CodigoCuenta = FrmCheque.DBCodigo.Text
 
-SQL = "SELECT  Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo,Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.Beneficiario, Transacciones.FechaVence, IndiceTransaccion.FechaTransaccion AS Expr1, IndiceTransaccion.NumeroMovimiento AS Expr2, IndiceTransaccion.ImprimeCheque FROM  Periodos INNER JOIN  Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  " & _
+Sql = "SELECT  Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo,Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.Beneficiario, Transacciones.FechaVence, IndiceTransaccion.FechaTransaccion AS Expr1, IndiceTransaccion.NumeroMovimiento AS Expr2, IndiceTransaccion.ImprimeCheque FROM  Periodos INNER JOIN  Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  " & _
       "WHERE (Transacciones.ChequeNo = N'#######') AND (Transacciones.CodCuentas = '" & CodigoCuenta & "') ORDER BY Transacciones.FechaTransaccion,Transacciones.NumeroMovimiento"
-Me.AdoCheques.RecordSource = SQL
+Me.AdoCheques.RecordSource = Sql
 Me.AdoCheques.Refresh
 
 Me.TDBGridNominas.Columns(0).Button = False
@@ -1792,7 +1792,7 @@ ControlErrores
 End Sub
 
 Private Sub Form_Load()
-Dim SQL As String, CodigoCuenta As String
+Dim Sql As String, CodigoCuenta As String
 
 With Me.AdoCheques
    .ConnectionString = Conexion
@@ -1806,9 +1806,9 @@ MDIPrimero.Skin1.ApplySkin hWnd
 
 CodigoCuenta = FrmCheque.DBCodigo.Text
 
-SQL = "SELECT  Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo,Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.Beneficiario, Transacciones.FechaVence, IndiceTransaccion.FechaTransaccion AS Expr1, IndiceTransaccion.NumeroMovimiento AS Expr2, IndiceTransaccion.ImprimeCheque FROM  Periodos INNER JOIN  Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  " & _
+Sql = "SELECT  Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo,Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.Beneficiario, Transacciones.FechaVence, IndiceTransaccion.FechaTransaccion AS Expr1, IndiceTransaccion.NumeroMovimiento AS Expr2, IndiceTransaccion.ImprimeCheque FROM  Periodos INNER JOIN  Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  " & _
       "WHERE (Transacciones.ChequeNo = N'#######') AND (Transacciones.CodCuentas = '" & CodigoCuenta & "') AND (Transacciones.NombreCuenta <> '**********CANCELADO*************') ORDER BY Transacciones.FechaTransaccion,Transacciones.NumeroMovimiento"
-Me.AdoCheques.RecordSource = SQL
+Me.AdoCheques.RecordSource = Sql
 Me.AdoCheques.Refresh
 
 Me.TDBGridNominas.Columns(0).Button = False

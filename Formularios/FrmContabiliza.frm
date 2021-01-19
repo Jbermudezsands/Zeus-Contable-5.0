@@ -511,7 +511,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   79036417
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker3 
@@ -523,7 +523,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   79036417
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptCompras 
@@ -575,7 +575,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   79036417
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton RadioButton4 
@@ -715,7 +715,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   79036417
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptFacturacion 
@@ -768,7 +768,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   79036417
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecibos 
@@ -821,7 +821,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   79036417
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptSalidaBodega 
@@ -1514,7 +1514,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   79036417
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebito 
@@ -1552,7 +1552,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   79036417
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.PushButton CmdContabilizarNotas 
@@ -1592,7 +1592,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   79036417
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebitoProveedor 
@@ -2047,7 +2047,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   79036417
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker11 
@@ -2059,7 +2059,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   79036417
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecepcion 
@@ -2085,7 +2085,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   79036417
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptPlanilla 
@@ -5418,8 +5418,8 @@ Private Sub CmdContabilizarPlanilla_Click()
                                   If ValidarCuentas(Cuenta_Credito) = False Then Print #1, Cuenta_Credito & " Productor: " & CodigoProductor; ExisteCodigo = False
                                 
                                 Else
-                                  Print #1, "No Existen las contra Cuentas " & Cuenta_Banco & " Productor: " & CodigoProductor
-                                  ExisteCodigo = False
+'                                  Print #1, "No Existen las contra Cuentas " & Cuenta_Banco & " Productor: " & CodigoProductor
+'                                  ExisteCodigo = False
                                 End If
                            
                              End If
@@ -5499,17 +5499,28 @@ Private Sub CmdContabilizarPlanilla_Click()
                                 
                                '////////////////////////////////////CONTRACUENTA DE BANCO //////////////////////////////////////////////////////////////////
                               
-                                Credito = 0
-                                If NetoPagar <> 0 Then
-                                NumeroFactura = "-"
-                                Resultado = GrabaDetalleNomina(Cuenta_Banco, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaCambio, NetoPagar, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, NombreProductor)
-                                End If
+                                Me.AdoContraCuentaFacturacion.RecordSource = "SELECT CuentaCredito, CuentaDebito From ContraCuentaPlanillaLeche WHERE (CuentaDebito = '" & Cuenta_Banco & "')"
+                                Me.AdoContraCuentaFacturacion.Refresh
+                                If Not Me.AdoContraCuentaFacturacion.Recordset.EOF Then
                                 
-                                Debito = 0
-                                If NetoPagar <> 0 Then
-                                NumeroFactura = "-"
-                                Resultado = GrabaDetalleNomina(CodigoCuentaCliente, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, NetoPagar, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, NombreProductor)
+                                  Cuenta_Debito = Me.AdoContraCuentaFacturacion.Recordset("CuentaDebito")
+                                  Cuenta_Credito = Me.AdoContraCuentaFacturacion.Recordset("CuentaCredito")
+                                  
+                               
+                                    Credito = 0
+                                    If NetoPagar <> 0 Then
+                                    NumeroFactura = "-"
+                                    Resultado = GrabaDetalleNomina(Cuenta_Banco, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaCambio, NetoPagar, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, NombreProductor)
+                                    End If
+                                
+                                    Debito = 0
+                                    If NetoPagar <> 0 Then
+                                    NumeroFactura = "-"
+                                    Resultado = GrabaDetalleNomina(CodigoCuentaCliente, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, NetoPagar, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, NombreProductor)
+                                    End If
                                 End If
+
+
                                 
                                 Me.AdoConsultaFacturacion.RecordSource = "SELECT DISTINCT NumeroLiquidacion, Contabilizado From LiquidacionLeche WHERE  (NumeroLiquidacion = '" & NumeroNomina & "')"
                                 Me.AdoConsultaFacturacion.Refresh
@@ -5642,6 +5653,13 @@ Private Sub CmdContabilizarPlanilla_Click()
                                 
                                 '////////////////////////////////////CONTRACUENTA DE BANCO //////////////////////////////////////////////////////////////////
                                 
+                                                               '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<BUSCO LAS CONTRA CUENTAS DE SALDOS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<>>
+                               Me.AdoContraCuentaFacturacion.RecordSource = "SELECT CuentaCredito, CuentaDebito From ContraCuentaPlanillaLeche WHERE (CuentaDebito = '" & Cuenta_Banco & "')"
+                               Me.AdoContraCuentaFacturacion.Refresh
+                               If Not Me.AdoContraCuentaFacturacion.Recordset.EOF Then
+                                 Cuenta_Debito = Me.AdoContraCuentaFacturacion.Recordset("CuentaDebito")
+                                 Cuenta_Credito = Me.AdoContraCuentaFacturacion.Recordset("CuentaCredito")
+                                
                                 Credito = 0
                                 If NetoPagar <> 0 Then
                                 NumeroFactura = "-"
@@ -5653,6 +5671,10 @@ Private Sub CmdContabilizarPlanilla_Click()
                                 NumeroFactura = "-"
                                 Resultado = GrabaDetalleNomina(Cuenta_Credito, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, NetoPagar, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, NombreProductor)
                                 End If
+                               
+                               
+                              End If
+
                                 
                                 
                                 
@@ -5860,18 +5882,29 @@ Private Sub CmdContabilizarPlanilla_Click()
                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 
                                 '////////////////////////////////////CONTRACUENTA DE BANCO //////////////////////////////////////////////////////////////////
-                                
-                                Credito = 0
-                                If NetoPagar <> 0 Then
-                                NumeroFactura = "-"
-                                Resultado = GrabaDetalleNomina(Cuenta_Debito, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaCambio, NetoPagar, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, NombreProductor)
-                                End If
-                                
-                                Debito = 0
-                                If NetoPagar <> 0 Then
-                                NumeroFactura = "-"
-                                Resultado = GrabaDetalleNomina(Cuenta_Credito, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, NetoPagar, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, NombreProductor)
-                                End If
+                                                               '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<BUSCO LAS CONTRA CUENTAS DE SALDOS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<>>
+                               Me.AdoContraCuentaFacturacion.RecordSource = "SELECT CuentaCredito, CuentaDebito From ContraCuentaPlanillaLeche WHERE (CuentaDebito = '" & Cuenta_Banco & "')"
+                               Me.AdoContraCuentaFacturacion.Refresh
+                               If Not Me.AdoContraCuentaFacturacion.Recordset.EOF Then
+                                 Cuenta_Debito = Me.AdoContraCuentaFacturacion.Recordset("CuentaDebito")
+                                 Cuenta_Credito = Me.AdoContraCuentaFacturacion.Recordset("CuentaCredito")
+                               
+                                    Credito = 0
+                                    If NetoPagar <> 0 Then
+                                    NumeroFactura = "-"
+                                    Resultado = GrabaDetalleNomina(Cuenta_Debito, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaCambio, NetoPagar, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, NombreProductor)
+                                    End If
+                                    
+                                    Debito = 0
+                                    If NetoPagar <> 0 Then
+                                    NumeroFactura = "-"
+                                    Resultado = GrabaDetalleNomina(Cuenta_Credito, Me.DTPicker10.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaCambio, Debito, NetoPagar, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, NombreProductor)
+                                    End If
+                               
+                               End If
+                               
+                               
+
                                 
                                 
                                 

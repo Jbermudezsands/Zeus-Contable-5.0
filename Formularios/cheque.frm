@@ -9,7 +9,7 @@ Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12
 Begin VB.Form FrmCheque 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Registro de Cheques"
-   ClientHeight    =   7305
+   ClientHeight    =   7245
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   13305
@@ -18,7 +18,7 @@ Begin VB.Form FrmCheque
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   7305
+   ScaleHeight     =   7245
    ScaleWidth      =   13305
    Begin MSDataListLib.DataList DtaList 
       Bindings        =   "cheque.frx":0ABA
@@ -413,7 +413,7 @@ Begin VB.Form FrmCheque
          _ExtentX        =   2990
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   78315521
+         Format          =   17104897
          CurrentDate     =   38918
       End
       Begin MSComCtl2.DTPicker DTPFechaVence 
@@ -425,7 +425,7 @@ Begin VB.Form FrmCheque
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   78315521
+         Format          =   17104897
          CurrentDate     =   38918
       End
       Begin VB.Label LblNombres 
@@ -581,7 +581,7 @@ Begin VB.Form FrmCheque
       _ExtentY        =   503
       _Version        =   393216
       Enabled         =   0   'False
-      Format          =   78315521
+      Format          =   17104897
       CurrentDate     =   38008
    End
    Begin VB.CommandButton CmdSiguiente 
@@ -2221,7 +2221,7 @@ TipoErrs:
 End Sub
 
 Private Sub CmdAnterior_Click()
-Dim SQL As String, Fechas1 As Date, Fechas2 As Date, NTransaccion As Double
+Dim Sql As String, Fechas1 As Date, Fechas2 As Date, NTransaccion As Double
 Dim Debito As Double, Credito As Double
 Dim TotalDebito As Double, TotalCredito As Double
 
@@ -2240,8 +2240,8 @@ If Me.AdoPendientes.Recordset.BOF Then
     NTransaccion = Me.AdoPendientes.Recordset("NumeroMovimiento")
     NumeroPeriodo = Me.AdoPendientes.Recordset("NPeriodo")
     Me.TxtNTransacciones.Text = NTransaccion
-    SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo,Transacciones.Beneficiario,FechaVence FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE Transacciones.FechaTransaccion>='" & Format(Fechas1, "yyyymmdd") & "' And transacciones.fechatransaccion<='" & Format(Fechas2, "yyyymmdd") & "' AND Transacciones.NumeroMovimiento=" & NTransaccion & "  AND (Transacciones.ChequeNo <> '#######')ORDER BY Transacciones.NTransaccion"
-    Me.DtaTransacciones.RecordSource = SQL
+    Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo,Transacciones.Beneficiario,FechaVence FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE Transacciones.FechaTransaccion>='" & Format(Fechas1, "yyyymmdd") & "' And transacciones.fechatransaccion<='" & Format(Fechas2, "yyyymmdd") & "' AND Transacciones.NumeroMovimiento=" & NTransaccion & "  AND (Transacciones.ChequeNo <> '#######')ORDER BY Transacciones.NTransaccion"
+    Me.DtaTransacciones.RecordSource = Sql
     Me.DtaTransacciones.Refresh
     Debito = 0
     Credito = 0
@@ -2321,8 +2321,8 @@ Else
     Fechas2 = Me.AdoPendientes.Recordset("FechaTransaccion")
     NTransaccion = Me.AdoPendientes.Recordset("NumeroMovimiento")
     Me.TxtNTransacciones.Text = NTransaccion
-    SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo,Transacciones.Beneficiario,FechaVence FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE Transacciones.FechaTransaccion>='" & Format(Fechas1, "yyyymmdd") & "' And transacciones.fechatransaccion<='" & Format(Fechas2, "yyyymmdd") & "' AND Transacciones.NumeroMovimiento=" & NTransaccion & "  AND (Transacciones.ChequeNo <> '#######')ORDER BY Transacciones.NTransaccion"
-    Me.DtaTransacciones.RecordSource = SQL
+    Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo,Transacciones.Beneficiario,FechaVence FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE Transacciones.FechaTransaccion>='" & Format(Fechas1, "yyyymmdd") & "' And transacciones.fechatransaccion<='" & Format(Fechas2, "yyyymmdd") & "' AND Transacciones.NumeroMovimiento=" & NTransaccion & "  AND (Transacciones.ChequeNo <> '#######')ORDER BY Transacciones.NTransaccion"
+    Me.DtaTransacciones.RecordSource = Sql
     Me.DtaTransacciones.Refresh
     Debito = 0
     Credito = 0
@@ -2411,7 +2411,7 @@ Private Sub CmdBorrar_Click()
 On Error GoTo TipoErrs
   Dim Respuesta, Rsp
   Dim Fechas1 As Date, Fechas2 As Date, NTransaccion As Double
-  Dim SQL As String
+  Dim Sql As String
   
   
   
@@ -2446,8 +2446,8 @@ On Error GoTo TipoErrs
    Fechas1 = Me.TxtFecha.Value
    Fechas2 = Me.TxtFecha.Value
    
-   SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo,Transacciones.Beneficiario,FechaVence FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE Transacciones.FechaTransaccion>='" & Format(Fechas1, "yyyymmdd") & "' And transacciones.fechatransaccion<='" & Format(Fechas2, "yyyymmdd") & "' AND Transacciones.NumeroMovimiento=" & NTransaccion & " ORDER BY Transacciones.NTransaccion"
-   Me.DtaConsulta.RecordSource = SQL
+   Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo,Transacciones.Beneficiario,FechaVence FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE Transacciones.FechaTransaccion>='" & Format(Fechas1, "yyyymmdd") & "' And transacciones.fechatransaccion<='" & Format(Fechas2, "yyyymmdd") & "' AND Transacciones.NumeroMovimiento=" & NTransaccion & " ORDER BY Transacciones.NTransaccion"
+   Me.DtaConsulta.RecordSource = Sql
    Me.DtaConsulta.Refresh
     Do While Not Me.DtaConsulta.Recordset.EOF
      DtaConsulta.Recordset("NombreCuenta") = "**********CANCELADO*************"
@@ -2571,7 +2571,7 @@ Dim Registros As Double, Cod As Variant, MonedaConvertir As String
 
 'On Error GoTo TipoErrs
 Dim Voucher As String, cadena As String, Consecutivo As Variant
-Dim SQL As String
+Dim Sql As String
 
  If Not Val(Me.TxtDiferencia.Text) = 0 Then
    MsgBox "El Movimiento esta Desbalanceado", vbCritical, "Sistema Contable"
@@ -2833,14 +2833,14 @@ If ChequeGrabado = False Then
    Me.DtaTransacciones.Recordset("Beneficiario") = Me.TxtNombre.Text
   Me.DtaTransacciones.Recordset.Update
   Else
-   SQL = "SELECT     Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
+   Sql = "SELECT     Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
          "Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, " & _
          "Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, " & _
          "Transacciones.NumeroMovimiento , Periodos.Periodo, Transacciones.Beneficiario " & _
          "FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo " & _
          "WHERE (Transacciones.ChequeNo = '#######') AND (Transacciones.CodCuentas = '" & Me.DBCodigo.Text & "') AND (Transacciones.NumeroMovimiento = " & NumeroTransaccion & ") " & _
          "ORDER BY Transacciones.NTransaccion"
-   Me.DtaConsulta.RecordSource = SQL
+   Me.DtaConsulta.RecordSource = Sql
    Me.DtaConsulta.Refresh
    If Not Me.DtaConsulta.Recordset.EOF Then
     Me.DtaTransacciones.Recordset("ChequeNo") = Consecutivo
@@ -2993,7 +2993,7 @@ If Not DtaConsulta.Recordset.EOF Then
 End If
 
 
-SQL = "SELECT     Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
+Sql = "SELECT     Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
        "Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, " & _
        "Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, " & _
        "Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.FechaDescuento, Transacciones.DescuentoDisponible, " & _
@@ -3003,7 +3003,7 @@ SQL = "SELECT     Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacc
        "Where (Transacciones.NumeroMovimiento = -1) " & _
        "ORDER BY Transacciones.NTransaccion "
        
-Me.DtaTransacciones.RecordSource = SQL
+Me.DtaTransacciones.RecordSource = Sql
 Me.DtaTransacciones.Refresh
 
   Salir = True
@@ -3126,7 +3126,7 @@ End Sub
 Private Sub CmdMemoriza_Click()
 On Error GoTo TipoErrs
 Dim Voucher As String, cadena As String, Consecutivo As Variant
-Dim SQL As String, Fecha As Date, Fechas As Date, TasaCambio As Double
+Dim Sql As String, Fecha As Date, Fechas As Date, TasaCambio As Double
 
 
 
@@ -3740,7 +3740,7 @@ End Sub
 
 Private Sub CmdSiguiente_Click()
 On Error GoTo TipoErrs
-Dim SQL As String, Fechas1 As Date, Fechas2 As Date, NTransaccion As Double
+Dim Sql As String, Fechas1 As Date, Fechas2 As Date, NTransaccion As Double
 Dim Debito As Double, Credito As Double
 Dim TotalDebito As Double, TotalCredito As Double
   
@@ -3757,8 +3757,8 @@ If Me.AdoPendientes.Recordset.EOF Then
     Me.TxtNTransacciones.Text = NTransaccion
 
 
-    SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo,Transacciones.Beneficiario,FechaVence FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE Transacciones.FechaTransaccion>='" & Format(Fechas1, "yyyymmdd") & "' And transacciones.fechatransaccion<='" & Format(Fechas2, "yyyymmdd") & "' AND Transacciones.NumeroMovimiento=" & NTransaccion & "  AND (Transacciones.ChequeNo <> '#######')ORDER BY Transacciones.NTransaccion"
-    Me.DtaTransacciones.RecordSource = SQL
+    Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo,Transacciones.Beneficiario,FechaVence FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE Transacciones.FechaTransaccion>='" & Format(Fechas1, "yyyymmdd") & "' And transacciones.fechatransaccion<='" & Format(Fechas2, "yyyymmdd") & "' AND Transacciones.NumeroMovimiento=" & NTransaccion & "  AND (Transacciones.ChequeNo <> '#######')ORDER BY Transacciones.NTransaccion"
+    Me.DtaTransacciones.RecordSource = Sql
     Me.DtaTransacciones.Refresh
     Debito = 0
     Credito = 0
@@ -3838,8 +3838,8 @@ Else
     Fechas2 = Me.AdoPendientes.Recordset("FechaTransaccion")
     NTransaccion = Me.AdoPendientes.Recordset("NumeroMovimiento")
     Me.TxtNTransacciones.Text = NTransaccion
-    SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo,Transacciones.Beneficiario,FechaVence FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE Transacciones.FechaTransaccion>='" & Format(Fechas1, "yyyymmdd") & "' And transacciones.fechatransaccion<='" & Format(Fechas2, "yyyymmdd") & "' AND Transacciones.NumeroMovimiento=" & NTransaccion & "  AND (Transacciones.ChequeNo <> '#######')ORDER BY Transacciones.NTransaccion"
-    Me.DtaTransacciones.RecordSource = SQL
+    Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo,Transacciones.Beneficiario,FechaVence FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE Transacciones.FechaTransaccion>='" & Format(Fechas1, "yyyymmdd") & "' And transacciones.fechatransaccion<='" & Format(Fechas2, "yyyymmdd") & "' AND Transacciones.NumeroMovimiento=" & NTransaccion & "  AND (Transacciones.ChequeNo <> '#######')ORDER BY Transacciones.NTransaccion"
+    Me.DtaTransacciones.RecordSource = Sql
     Me.DtaTransacciones.Refresh
     Debito = 0
     Credito = 0
@@ -3934,7 +3934,7 @@ End Sub
 Private Sub DBCodigo_Change()
 On Error GoTo TipoErrs
 Dim MontoTasa As Double, Fecha As Long
-Dim SQL As String
+Dim Sql As String
 Criterio = "CodCuentas='" & Me.DBCodigo.Text & "'"
 If Me.DtaCuentas.Recordset.RecordCount > 0 Then Me.DtaCuentas.Recordset.MoveFirst
 Me.DtaCuentas.Recordset.Find (Criterio)
@@ -3945,7 +3945,7 @@ If Not DtaCuentas.Recordset.EOF Then
 '////////////////////////////////////////////////////////////////////////////////////////////
 '/////////////////CARGO LOS CHEQUES PENDIENTES/////////////////////////////////////////////////
 '/////////////////////////////////////////////////////////////////////////////////////////////
-SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
+Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
 "Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, " & _
 "Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, " & _
 "Transacciones.NumeroMovimiento , Periodos.Periodo, Transacciones.Beneficiario " & _
@@ -3953,7 +3953,7 @@ SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transaccione
 "WHERE (Transacciones.ChequeNo = '#######')  AND (Transacciones.CodCuentas = '" & Me.DBCodigo.Text & "' ) AND " & _
 "(Transacciones.DescripcionMovimiento <> '**********CANCELADO*************') ORDER BY Transacciones.NTransaccion"
 
-Me.AdoPendientes.RecordSource = SQL
+Me.AdoPendientes.RecordSource = Sql
 Me.AdoPendientes.Refresh
 
 
@@ -4024,7 +4024,7 @@ End Sub
 Private Sub DBGTransacciones_AfterColEdit(ByVal ColIndex As Integer)
 On Error GoTo TipoErrs
 Dim Descripcion As String, cadena As String, MontoTasa As Double, Fecha As Long
-Dim ClaveMovimiento As String, DescripcionMovimiento As String, SQL As String
+Dim ClaveMovimiento As String, DescripcionMovimiento As String, Sql As String
 Dim c As Variant
 'Este Procedimiento es solo cuando se ejecuta directamente de Recepcion
 QueProducto = "Cheque"
@@ -4247,7 +4247,7 @@ Select Case ColIndex
    '/////////////////////////////////////////////////////////////////////////////////
    
             
-            SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta AS DescripcionCuentas, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
+            Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta AS DescripcionCuentas, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
             "Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, " & _
             "Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, " & _
             "Transacciones.NumeroMovimiento , Periodos.Periodo " & _
@@ -4255,7 +4255,7 @@ Select Case ColIndex
             "WHERE  (Transacciones.FechaTransaccion BETWEEN '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "' And '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "') AND (Transacciones.NumeroMovimiento = " & Me.TxtNTransacciones.Text & ") " & _
             "ORDER BY Transacciones.NTransaccion"
               
-            Me.DtaConsulta.RecordSource = SQL
+            Me.DtaConsulta.RecordSource = Sql
             Me.DtaConsulta.Refresh
             If Not Me.DtaConsulta.Recordset.EOF Then
               Me.DtaConsulta.Recordset.MoveLast
@@ -4849,7 +4849,7 @@ MsgBox err.Description
 End Sub
 
 Private Sub Form_Load()
-Dim SQL As String
+Dim Sql As String
 
 'Me.TxtFecha.Value = Format(FechaSistema, "dd/mm/yyyy")
 
@@ -4969,7 +4969,7 @@ Me.TxtMemo.Enabled = False
 Me.TxtMonto.Enabled = False
 Me.TxtNombre.Enabled = False
 
-SQL = "SELECT     Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
+Sql = "SELECT     Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
        "Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, " & _
        "Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, " & _
        "Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.FechaDescuento, Transacciones.DescuentoDisponible, " & _
@@ -4979,7 +4979,7 @@ SQL = "SELECT     Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacc
        "Where (Transacciones.NumeroMovimiento = -1) " & _
        "ORDER BY Transacciones.NTransaccion "
        
-Me.DtaTransacciones.RecordSource = SQL
+Me.DtaTransacciones.RecordSource = Sql
 Me.DtaTransacciones.Refresh
 
 Me.DtaBancos.RecordSource = "SELECT Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta From Cuentas Where (((Cuentas.TipoCuenta) = 'Bancos' Or (Cuentas.TipoCuenta) = 'Bancos')) ORDER BY Cuentas.CodCuentas"

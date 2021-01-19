@@ -711,7 +711,7 @@ Private sw As cls_NumSpanishWord
 
 Private cnx As New ADODB.Connection
 Private rs As New ADODB.Recordset, rsConexion As New ADODB.Recordset
-Private SQL As String
+Private Sql As String
 
 Private Sub CmdAnular_Click()
   Dim ConsecutivoCheque As String, CodigoCuenta As String, Fecha As Date, NumeroMovimiento As Double
@@ -782,19 +782,19 @@ MsgBox err.Description
 End Sub
 
 Private Sub CmdConsultar_Click()
-Dim SQL As String, CodigoCuenta As String
+Dim Sql As String, CodigoCuenta As String
 
 CodigoCuenta = Me.DBCodigo.Text
 
 'AND (Transacciones.NombreCuenta <> '**********CANCELADO*************')
 
-SQL = "SELECT  Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo,Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.Beneficiario, Transacciones.FechaVence, IndiceTransaccion.FechaTransaccion AS Expr1, IndiceTransaccion.NumeroMovimiento AS Expr2, IndiceTransaccion.ImprimeCheque, IndiceTransaccion.TipoMoneda FROM  Periodos INNER JOIN  Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  " & _
+Sql = "SELECT  Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo,Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.Beneficiario, Transacciones.FechaVence, IndiceTransaccion.FechaTransaccion AS Expr1, IndiceTransaccion.NumeroMovimiento AS Expr2, IndiceTransaccion.ImprimeCheque, IndiceTransaccion.TipoMoneda FROM  Periodos INNER JOIN  Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  " & _
       "WHERE (Transacciones.Fuente = 'CHEQUE') AND (Transacciones.CodCuentas = '" & CodigoCuenta & "') ORDER BY Transacciones.FechaTransaccion,Transacciones.NumeroMovimiento"
 
         With rs
           .Close
           .CursorLocation = adUseClient
-          .Open SQL, Conexion, adOpenDynamic, adLockOptimistic
+          .Open Sql, Conexion, adOpenDynamic, adLockOptimistic
         End With
         
        Me.TDBGridNominas.DataSource = rs
@@ -810,7 +810,7 @@ Dim CodigoCuenta As String, Concepto As String
 Dim x, y, H, V, Page As Integer, Dia As String, mes As String, Año As String
 Dim i, J As Integer, Fechass As Date
 Dim TotalDebito, TotalCredito, Totalpag As Double
-Dim SubTotal, Total, IGV As Double, Cadena As String
+Dim SubTotal, Total, IGV As Double, cadena As String
 Dim X1 As Double, Y1 As Double, X2 As Double, Y2 As Double, X3 As Double, Y3 As Double, X4 As Double, Y4 As Double, X5 As Double, Y5 As Double, X6 As Double, Y6 As Double, X7 As Double, Y7 As Double, X8 As Double, Y8 As Double, X9 As Double, Y9 As Double, X10 As Double, Y10 As Double, X11 As Double, Y11 As Double, X12 As Double, Y12 As Double, X13 As Double, Y13 As Double
 Dim UltimaLinea As Double, DiferenciaY As Double, NLineas As Double
 Dim Caracter As Double, ContadorLinea As Double, CadenaDescripcion As String, CaracteresLineas As Double
@@ -823,9 +823,9 @@ ConsecutivoCheque = Me.TDBGridNominas.Columns("ChequeNo").Text
 CodigoCuenta = Me.DBCodigo.Text
 Monto = Me.TDBGridNominas.Columns("Monto").Text
 
-SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.Beneficiario, Transacciones.FechaVence, IndiceTransaccion.FechaTransaccion AS Expr1, IndiceTransaccion.NumeroMovimiento AS Expr2, IndiceTransaccion.ImprimeCheque,IndiceTransaccion.TipoMoneda FROM Periodos INNER JOIN  Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
+Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.Beneficiario, Transacciones.FechaVence, IndiceTransaccion.FechaTransaccion AS Expr1, IndiceTransaccion.NumeroMovimiento AS Expr2, IndiceTransaccion.ImprimeCheque,IndiceTransaccion.TipoMoneda FROM Periodos INNER JOIN  Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
       "WHERE (Transacciones.ChequeNo = '" & ConsecutivoCheque & "') AND (Transacciones.CodCuentas = '" & CodigoCuenta & "') AND (Transacciones.NombreCuenta <> '**********CANCELADO*************') AND (Transacciones.ChequeNo <> '#######') ORDER BY Transacciones.FechaTransaccion,Transacciones.NumeroMovimiento"
-Me.AdoImprime.RecordSource = SQL
+Me.AdoImprime.RecordSource = Sql
 Me.AdoImprime.Refresh
 
 Do While Not Me.AdoImprime.Recordset.EOF
@@ -1150,9 +1150,9 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                    If X5 <> 0 Or Y5 <> 0 Then
                                      Caracter = 1
                                      LineaConcepto = 1
-                                     Cadena = Concepto
-                                     If Len(Cadena) > CaracteresConcepto Then
-                                          Do While Len(Cadena) >= CaracteresConcepto
+                                     cadena = Concepto
+                                     If Len(cadena) > CaracteresConcepto Then
+                                          Do While Len(cadena) >= CaracteresConcepto
                                                  If Caracter = 1 Then
                 '                                    Printer.CurrentX = Val(X5) '5
                 '                                    Printer.CurrentY = Val(Y5) + (5 * i) '120
@@ -1162,19 +1162,19 @@ Do While Not Me.AdoImprime.Recordset.EOF
                 '                                    Printer.Print Concepto
                                                     
                                                            
-                                                                 Cadena = Mid(Concepto, 1, CaracteresConcepto)
+                                                                 cadena = Mid(Concepto, 1, CaracteresConcepto)
                                                                  Printer.CurrentX = Val(X5) '25
                                                                  Printer.CurrentY = Val(Y5) + (5 * LineaConcepto)
                                                                  Printer.FontName = "Times New Roman"
                                                                  Printer.FontSize = 11
                                                                  Printer.FontBold = True
-                                                                 Printer.Print Cadena
+                                                                 Printer.Print cadena
                                                                  Caracter = Caracter + CaracteresConcepto
                                                                  
                                                                  '//////////////////VERIFICO SI LO QUE SOBRE ES MAYOR DE LA LINEA SIGUIENTE/////////////////
                                                                  
-                                                                 Cadena = Mid(Concepto, Caracter, CaracteresConcepto)
-                                                                 If Len(Cadena) < CaracteresConcepto Then
+                                                                 cadena = Mid(Concepto, Caracter, CaracteresConcepto)
+                                                                 If Len(cadena) < CaracteresConcepto Then
                                                                   '///////////////////////SI ES MENOR IMPRIMO/////////////////////////
                                                                      LineaConcepto = LineaConcepto + 1
                                                                      Printer.CurrentX = Val(X5) '25
@@ -1182,7 +1182,7 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                                                      Printer.FontName = "Times New Roman"
                                                                      Printer.FontSize = 11
                                                                      Printer.FontBold = True
-                                                                     Printer.Print Cadena
+                                                                     Printer.Print cadena
                                                                      
                                                                      Caracter = Caracter + CaracteresConcepto
                                                                  End If
@@ -1190,19 +1190,19 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                                  Else
                                                                  
                                                                  LineaConcepto = LineaConcepto + 1
-                                                                 Cadena = Mid(Concepto, Caracter, CaracteresConcepto)
+                                                                 cadena = Mid(Concepto, Caracter, CaracteresConcepto)
                                                                  Printer.CurrentX = Val(X5) '25
                                                                  Printer.CurrentY = Val(Y5) + (5 * LineaConcepto)
                                                                  Printer.FontName = "Times New Roman"
                                                                  Printer.FontSize = 11
                                                                  Printer.FontBold = True
-                                                                 Printer.Print Cadena
+                                                                 Printer.Print cadena
                                                                  
                                                                  Caracter = Caracter + CaracteresConcepto
                                                                  
                                                                  '//////////////////VERIFICO SI LO QUE SOBRE ES MAYOR DE LA LINEA/////////////////
-                                                                 Cadena = Mid(Concepto, Caracter, CaracteresConcepto)
-                                                                 If Len(Cadena) < CaracteresConcepto Then
+                                                                 cadena = Mid(Concepto, Caracter, CaracteresConcepto)
+                                                                 If Len(cadena) < CaracteresConcepto Then
                                                                   '///////////////////////SI ES MENOR IMPRIMO/////////////////////////
                                                                      LineaConcepto = LineaConcepto + 1
                                                                      Printer.CurrentX = Val(X5) '25
@@ -1210,7 +1210,7 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                                                      Printer.FontName = "Times New Roman"
                                                                      Printer.FontSize = 11
                                                                      Printer.FontBold = True
-                                                                     Printer.Print Cadena
+                                                                     Printer.Print cadena
                                                                      
                                                                      Caracter = Caracter + CaracteresConcepto
                                                                  End If
@@ -1232,9 +1232,9 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                   If X18 <> 0 Or Y18 <> 0 Then
                                      Caracter = 1
                                      LineaConcepto = 1
-                                     Cadena = Memo
-                                     If Len(Cadena) > CaracteresConcepto Then
-                                          Do While Len(Cadena) >= CaracteresConcepto
+                                     cadena = Memo
+                                     If Len(cadena) > CaracteresConcepto Then
+                                          Do While Len(cadena) >= CaracteresConcepto
                                                  If Caracter = 1 Then
                 '                                    Printer.CurrentX = Val(X5) '5
                 '                                    Printer.CurrentY = Val(Y5) + (5 * i) '120
@@ -1244,19 +1244,19 @@ Do While Not Me.AdoImprime.Recordset.EOF
                 '                                    Printer.Print Concepto
                                                     
                                                            
-                                                                 Cadena = Mid(Concepto, 1, CaracteresConcepto)
+                                                                 cadena = Mid(Concepto, 1, CaracteresConcepto)
                                                                  Printer.CurrentX = Val(X18) '25
                                                                  Printer.CurrentY = Val(Y18) + (5 * LineaConcepto)
                                                                  Printer.FontName = "Times New Roman"
                                                                  Printer.FontSize = 11
                                                                  Printer.FontBold = True
-                                                                 Printer.Print Cadena
+                                                                 Printer.Print cadena
                                                                  Caracter = Caracter + CaracteresConcepto
                                                                  
                                                                  '//////////////////VERIFICO SI LO QUE SOBRE ES MAYOR DE LA LINEA SIGUIENTE/////////////////
                                                                  
-                                                                 Cadena = Mid(Concepto, Caracter, CaracteresConcepto)
-                                                                 If Len(Cadena) < CaracteresConcepto Then
+                                                                 cadena = Mid(Concepto, Caracter, CaracteresConcepto)
+                                                                 If Len(cadena) < CaracteresConcepto Then
                                                                   '///////////////////////SI ES MENOR IMPRIMO/////////////////////////
                                                                      LineaConcepto = LineaConcepto + 1
                                                                      Printer.CurrentX = Val(X18) '25
@@ -1264,7 +1264,7 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                                                      Printer.FontName = "Times New Roman"
                                                                      Printer.FontSize = 11
                                                                      Printer.FontBold = True
-                                                                     Printer.Print Cadena
+                                                                     Printer.Print cadena
                                                                      
                                                                      Caracter = Caracter + CaracteresConcepto
                                                                  End If
@@ -1272,19 +1272,19 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                                  Else
                                                                  
                                                                  LineaConcepto = LineaConcepto + 1
-                                                                 Cadena = Mid(Concepto, Caracter, CaracteresConcepto)
+                                                                 cadena = Mid(Concepto, Caracter, CaracteresConcepto)
                                                                  Printer.CurrentX = Val(X18) '25
                                                                  Printer.CurrentY = Val(Y18) + (5 * LineaConcepto)
                                                                  Printer.FontName = "Times New Roman"
                                                                  Printer.FontSize = 11
                                                                  Printer.FontBold = True
-                                                                 Printer.Print Cadena
+                                                                 Printer.Print cadena
                                                                  
                                                                  Caracter = Caracter + CaracteresConcepto
                                                                  
                                                                  '//////////////////VERIFICO SI LO QUE SOBRE ES MAYOR DE LA LINEA/////////////////
-                                                                 Cadena = Mid(Concepto, Caracter, CaracteresConcepto)
-                                                                 If Len(Cadena) < CaracteresConcepto Then
+                                                                 cadena = Mid(Concepto, Caracter, CaracteresConcepto)
+                                                                 If Len(cadena) < CaracteresConcepto Then
                                                                   '///////////////////////SI ES MENOR IMPRIMO/////////////////////////
                                                                      LineaConcepto = LineaConcepto + 1
                                                                      Printer.CurrentX = Val(X18) '25
@@ -1292,7 +1292,7 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                                                      Printer.FontName = "Times New Roman"
                                                                      Printer.FontSize = 11
                                                                      Printer.FontBold = True
-                                                                     Printer.Print Cadena
+                                                                     Printer.Print cadena
                                                                      
                                                                      Caracter = Caracter + CaracteresConcepto
                                                                  End If
@@ -1508,9 +1508,9 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                        If X5 <> 0 Or Y5 <> 0 Then
                                          Caracter = 1
                                          LineaConcepto = 1
-                                         Cadena = Concepto
-                                         If Len(Cadena) > CaracteresConcepto Then
-                                              Do While Len(Cadena) >= CaracteresConcepto
+                                         cadena = Concepto
+                                         If Len(cadena) > CaracteresConcepto Then
+                                              Do While Len(cadena) >= CaracteresConcepto
                                                      If Caracter = 1 Then
                     '                                    Printer.CurrentX = Val(X5) '5
                     '                                    Printer.CurrentY = Val(Y5) + (5 * i) '120
@@ -1520,19 +1520,19 @@ Do While Not Me.AdoImprime.Recordset.EOF
                     '                                    Printer.Print Concepto
                                                         
                                                                
-                                                                     Cadena = Mid(Concepto, 1, CaracteresConcepto)
+                                                                     cadena = Mid(Concepto, 1, CaracteresConcepto)
                                                                      Printer.CurrentX = Val(X5) '25
                                                                      Printer.CurrentY = Val(Y5) + (5 * LineaConcepto)
                                                                      Printer.FontName = "Times New Roman"
                                                                      Printer.FontSize = 11
                                                                      Printer.FontBold = True
-                                                                     Printer.Print Cadena
+                                                                     Printer.Print cadena
                                                                      Caracter = Caracter + CaracteresConcepto
                                                                      
                                                                      '//////////////////VERIFICO SI LO QUE SOBRE ES MAYOR DE LA LINEA SIGUIENTE/////////////////
                                                                      
-                                                                     Cadena = Mid(Concepto, Caracter, CaracteresConcepto)
-                                                                     If Len(Cadena) < CaracteresConcepto Then
+                                                                     cadena = Mid(Concepto, Caracter, CaracteresConcepto)
+                                                                     If Len(cadena) < CaracteresConcepto Then
                                                                       '///////////////////////SI ES MENOR IMPRIMO/////////////////////////
                                                                          LineaConcepto = LineaConcepto + 1
                                                                          Printer.CurrentX = Val(X5) '25
@@ -1540,7 +1540,7 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                                                          Printer.FontName = "Times New Roman"
                                                                          Printer.FontSize = 11
                                                                          Printer.FontBold = True
-                                                                         Printer.Print Cadena
+                                                                         Printer.Print cadena
                                                                          
                                                                          Caracter = Caracter + CaracteresConcepto
                                                                      End If
@@ -1548,19 +1548,19 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                                      Else
                                                                      
                                                                      LineaConcepto = LineaConcepto + 1
-                                                                     Cadena = Mid(Concepto, Caracter, CaracteresConcepto)
+                                                                     cadena = Mid(Concepto, Caracter, CaracteresConcepto)
                                                                      Printer.CurrentX = Val(X5) '25
                                                                      Printer.CurrentY = Val(Y5) + (5 * LineaConcepto)
                                                                      Printer.FontName = "Times New Roman"
                                                                      Printer.FontSize = 11
                                                                      Printer.FontBold = True
-                                                                     Printer.Print Cadena
+                                                                     Printer.Print cadena
                                                                      
                                                                      Caracter = Caracter + CaracteresConcepto
                                                                      
                                                                      '//////////////////VERIFICO SI LO QUE SOBRE ES MAYOR DE LA LINEA/////////////////
-                                                                     Cadena = Mid(Concepto, Caracter, CaracteresConcepto)
-                                                                     If Len(Cadena) < CaracteresConcepto Then
+                                                                     cadena = Mid(Concepto, Caracter, CaracteresConcepto)
+                                                                     If Len(cadena) < CaracteresConcepto Then
                                                                       '///////////////////////SI ES MENOR IMPRIMO/////////////////////////
                                                                          LineaConcepto = LineaConcepto + 1
                                                                          Printer.CurrentX = Val(X5) '25
@@ -1568,7 +1568,7 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                                                          Printer.FontName = "Times New Roman"
                                                                          Printer.FontSize = 11
                                                                          Printer.FontBold = True
-                                                                         Printer.Print Cadena
+                                                                         Printer.Print cadena
                                                                          
                                                                          Caracter = Caracter + CaracteresConcepto
                                                                      End If
@@ -1590,9 +1590,9 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                       If X18 <> 0 Or Y18 <> 0 Then
                                                      Caracter = 1
                                                      LineaConcepto = 1
-                                                     Cadena = Concepto
-                                                     If Len(Cadena) > CaracteresConcepto Then
-                                                          Do While Len(Cadena) >= CaracteresConcepto
+                                                     cadena = Concepto
+                                                     If Len(cadena) > CaracteresConcepto Then
+                                                          Do While Len(cadena) >= CaracteresConcepto
                                                                  If Caracter = 1 Then
                                 '                                    Printer.CurrentX = Val(X5) '5
                                 '                                    Printer.CurrentY = Val(Y5) + (5 * i) '120
@@ -1602,19 +1602,19 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                 '                                    Printer.Print Concepto
                                                                     
                                                                            
-                                                                                 Cadena = Mid(Concepto, 1, CaracteresConcepto)
+                                                                                 cadena = Mid(Concepto, 1, CaracteresConcepto)
                                                                                  Printer.CurrentX = Val(X18) '25
                                                                                  Printer.CurrentY = Val(Y18) + (5 * LineaConcepto)
                                                                                  Printer.FontName = "Times New Roman"
                                                                                  Printer.FontSize = 11
                                                                                  Printer.FontBold = True
-                                                                                 Printer.Print Cadena
+                                                                                 Printer.Print cadena
                                                                                  Caracter = Caracter + CaracteresConcepto
                                                                                  
                                                                                  '//////////////////VERIFICO SI LO QUE SOBRE ES MAYOR DE LA LINEA SIGUIENTE/////////////////
                                                                                  
-                                                                                 Cadena = Mid(Concepto, Caracter, CaracteresConcepto)
-                                                                                 If Len(Cadena) < CaracteresConcepto Then
+                                                                                 cadena = Mid(Concepto, Caracter, CaracteresConcepto)
+                                                                                 If Len(cadena) < CaracteresConcepto Then
                                                                                   '///////////////////////SI ES MENOR IMPRIMO/////////////////////////
                                                                                      LineaConcepto = LineaConcepto + 1
                                                                                      Printer.CurrentX = Val(X18) '25
@@ -1622,7 +1622,7 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                                                                      Printer.FontName = "Times New Roman"
                                                                                      Printer.FontSize = 11
                                                                                      Printer.FontBold = True
-                                                                                     Printer.Print Cadena
+                                                                                     Printer.Print cadena
                                                                                      
                                                                                      Caracter = Caracter + CaracteresConcepto
                                                                                  End If
@@ -1630,19 +1630,19 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                                                  Else
                                                                                  
                                                                                  LineaConcepto = LineaConcepto + 1
-                                                                                 Cadena = Mid(Concepto, Caracter, CaracteresConcepto)
+                                                                                 cadena = Mid(Concepto, Caracter, CaracteresConcepto)
                                                                                  Printer.CurrentX = Val(X18) '25
                                                                                  Printer.CurrentY = Val(Y18) + (5 * LineaConcepto)
                                                                                  Printer.FontName = "Times New Roman"
                                                                                  Printer.FontSize = 11
                                                                                  Printer.FontBold = True
-                                                                                 Printer.Print Cadena
+                                                                                 Printer.Print cadena
                                                                                  
                                                                                  Caracter = Caracter + CaracteresConcepto
                                                                                  
                                                                                  '//////////////////VERIFICO SI LO QUE SOBRE ES MAYOR DE LA LINEA/////////////////
-                                                                                 Cadena = Mid(Concepto, Caracter, CaracteresConcepto)
-                                                                                 If Len(Cadena) < CaracteresConcepto Then
+                                                                                 cadena = Mid(Concepto, Caracter, CaracteresConcepto)
+                                                                                 If Len(cadena) < CaracteresConcepto Then
                                                                                   '///////////////////////SI ES MENOR IMPRIMO/////////////////////////
                                                                                      LineaConcepto = LineaConcepto + 1
                                                                                      Printer.CurrentX = Val(X18) '25
@@ -1650,7 +1650,7 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                                                                      Printer.FontName = "Times New Roman"
                                                                                      Printer.FontSize = 11
                                                                                      Printer.FontBold = True
-                                                                                     Printer.Print Cadena
+                                                                                     Printer.Print cadena
                                                                                      
                                                                                      Caracter = Caracter + CaracteresConcepto
                                                                                  End If
@@ -1776,15 +1776,15 @@ Do While Not Me.AdoImprime.Recordset.EOF
                        If X6 <> 0 Or Y6 <> 0 Then
                         Printer.CurrentX = Val(X6) '5
                         Printer.CurrentY = Val(Y6) + (5 * i)
-                        Cadena = Me.DtaConsulta.Recordset("CodCuentas")
-                        If Len(Cadena) > 20 Then
-                         Cadena = Mid(Cadena, 1, 20)
+                        cadena = Me.DtaConsulta.Recordset("CodCuentas")
+                        If Len(cadena) > 20 Then
+                         cadena = Mid(cadena, 1, 20)
                         End If
                         
                         Printer.FontName = "Times New Roman"
                         Printer.FontSize = 9
                         Printer.FontBold = False
-                        Printer.Print Cadena
+                        Printer.Print cadena
                        End If
                     
                     
@@ -1793,39 +1793,39 @@ Do While Not Me.AdoImprime.Recordset.EOF
                       If X10 <> 0 Or Y10 <> 0 Then
                         Printer.CurrentX = Val(X10) '25
                         Printer.CurrentY = Val(Y10) + (5 * i)
-                        Cadena = Me.DtaConsulta.Recordset("NombreCuenta")
-                        If Len(Cadena) > 24 Then
-                         Cadena = Mid(Cadena, 1, 24)
+                        cadena = Me.DtaConsulta.Recordset("NombreCuenta")
+                        If Len(cadena) > 24 Then
+                         cadena = Mid(cadena, 1, 24)
                         End If
                         
                         Printer.FontName = "Times New Roman"
                         Printer.FontSize = 9
                         Printer.FontBold = False
-                        Printer.Print Cadena
+                        Printer.Print cadena
                       End If
                     
                      
                         If X11 <> 0 Or Y11 <> 0 Then
                                  CadenaDescripcion = Me.DtaConsulta.Recordset("DescripcionMovimiento")
-                                 Cadena = Me.DtaConsulta.Recordset("DescripcionMovimiento")
+                                 cadena = Me.DtaConsulta.Recordset("DescripcionMovimiento")
                                  Caracter = 1
                                  ContadorLinea = i
                                  
-                                 If Len(Cadena) > CaracteresLineas Then
-                                          Do While Len(Cadena) >= CaracteresLineas
+                                 If Len(cadena) > CaracteresLineas Then
+                                          Do While Len(cadena) >= CaracteresLineas
                                                    If Caracter = 1 Then
-                                                             Cadena = Mid(Cadena, 1, CaracteresLineas)
+                                                             cadena = Mid(cadena, 1, CaracteresLineas)
                                                              Printer.CurrentX = Val(X11) '25
                                                              Printer.CurrentY = Val(Y11) + (5 * i)
                                                              Printer.FontName = "Times New Roman"
                                                              Printer.FontSize = 9
                                                              Printer.FontBold = False
-                                                             Printer.Print Cadena
+                                                             Printer.Print cadena
                                                              Caracter = Caracter + CaracteresLineas
                                                              
                                                              '//////////////////VERIFICO SI LO QUE SOBRE ES MAYOR DE LA LINEA SIGUIENTE/////////////////
-                                                             Cadena = Mid(CadenaDescripcion, Caracter, CaracteresLineas)
-                                                             If Len(Cadena) < CaracteresLineas Then
+                                                             cadena = Mid(CadenaDescripcion, Caracter, CaracteresLineas)
+                                                             If Len(cadena) < CaracteresLineas Then
                                                               '///////////////////////SI ES MENOR IMPRIMO/////////////////////////
                                                                  ContadorLinea = ContadorLinea + 1
                                                                  Printer.CurrentX = Val(X11) '25
@@ -1833,25 +1833,25 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                                                  Printer.FontName = "Times New Roman"
                                                                  Printer.FontSize = 9
                                                                  Printer.FontBold = False
-                                                                 Printer.Print Cadena
+                                                                 Printer.Print cadena
                                                                  
                                                                  Caracter = Caracter + CaracteresLineas
                                                              End If
                                                      Else
                                                              ContadorLinea = ContadorLinea + 1
-                                                             Cadena = Mid(CadenaDescripcion, Caracter, CaracteresLineas)
+                                                             cadena = Mid(CadenaDescripcion, Caracter, CaracteresLineas)
                                                              Printer.CurrentX = Val(X11) '25
                                                              Printer.CurrentY = Val(Y11) + (5 * ContadorLinea)
                                                              Printer.FontName = "Times New Roman"
                                                              Printer.FontSize = 9
                                                              Printer.FontBold = False
-                                                             Printer.Print Cadena
+                                                             Printer.Print cadena
                                                              
                                                              Caracter = Caracter + CaracteresLineas
                                                              
                                                              '//////////////////VERIFICO SI LO QUE SOBRE ES MAYOR DE LA LINEA/////////////////
-                                                             Cadena = Mid(CadenaDescripcion, Caracter, CaracteresLineas)
-                                                             If Len(Cadena) < CaracteresLineas Then
+                                                             cadena = Mid(CadenaDescripcion, Caracter, CaracteresLineas)
+                                                             If Len(cadena) < CaracteresLineas Then
                                                               '///////////////////////SI ES MENOR IMPRIMO/////////////////////////
                                                                  ContadorLinea = ContadorLinea + 1
                                                                  Printer.CurrentX = Val(X11) '25
@@ -1859,7 +1859,7 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                                                  Printer.FontName = "Times New Roman"
                                                                  Printer.FontSize = 9
                                                                  Printer.FontBold = False
-                                                                 Printer.Print Cadena
+                                                                 Printer.Print cadena
                                                                  
                                                                  Caracter = Caracter + CaracteresLineas
                                                              End If
@@ -1876,7 +1876,7 @@ Do While Not Me.AdoImprime.Recordset.EOF
                                          Printer.FontName = "Times New Roman"
                                          Printer.FontSize = 9
                                          Printer.FontBold = False
-                                         Printer.Print Cadena
+                                         Printer.Print cadena
                                                        
                                  End If
                               
@@ -2091,7 +2091,7 @@ Private Sub DBCodigo_Change()
 End Sub
 
 Private Sub Form_Load()
-Dim SQL As String, CodigoCuenta As String
+Dim Sql As String, CodigoCuenta As String
 
 With Me.AdoCheques
    .ConnectionString = Conexion
@@ -2109,13 +2109,13 @@ With Me.AdoCordenadas
    .ConnectionString = Conexion
 End With
 
-    SQL = "SELECT  Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo,Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.Beneficiario, Transacciones.FechaVence, IndiceTransaccion.FechaTransaccion AS Expr1, IndiceTransaccion.NumeroMovimiento AS Expr2, IndiceTransaccion.ImprimeCheque, IndiceTransaccion.TipoMoneda FROM  Periodos INNER JOIN  Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  " & _
+    Sql = "SELECT  Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo,Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.Beneficiario, Transacciones.FechaVence, IndiceTransaccion.FechaTransaccion AS Expr1, IndiceTransaccion.NumeroMovimiento AS Expr2, IndiceTransaccion.ImprimeCheque, IndiceTransaccion.TipoMoneda FROM  Periodos INNER JOIN  Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  " & _
           "WHERE (Transacciones.Fuente = '0033333333') AND (Transacciones.CodCuentas = '" & CodigoCuenta & "') AND (Transacciones.NombreCuenta <> '**********CANCELADO*************') ORDER BY Transacciones.FechaTransaccion,Transacciones.NumeroMovimiento"
  
 
         With rs
           .CursorLocation = adUseClient
-          .Open SQL, Conexion, adOpenDynamic, adLockOptimistic
+          .Open Sql, Conexion, adOpenDynamic, adLockOptimistic
         End With
         
        Me.TDBGridNominas.DataSource = rs
@@ -2230,7 +2230,7 @@ Private Sub TDBGridNominas_FilterChange()
     
     c = TDBGridNominas.col
     TDBGridNominas.HoldFields
-    SQL = rs.Filter
+    Sql = rs.Filter
     rs.Filter = getFilter(col, cols)
     TDBGridNominas.col = c
     TDBGridNominas.EditActive = True

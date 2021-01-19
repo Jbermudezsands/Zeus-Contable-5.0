@@ -2556,7 +2556,7 @@ End Sub
 
 
 Private Sub CmdGrabar_Click()
-On Error GoTo TipoErrs
+'On Error GoTo TipoErrs
 Dim NumeroPeriodo As Integer, Periodo As Integer
 Dim Saldo As Double
  
@@ -2566,28 +2566,28 @@ Dim Saldo As Double
  Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 1))"
  Me.DtaPeriodos.Refresh
  Do While Not Me.DtaPeriodos.Recordset.EOF
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
   CodigoCuenta = Me.DBCliente.Text
   Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & CodigoCuenta & "'))"
   Me.DtaConsulta.Refresh
   If Me.DtaConsulta.Recordset.EOF Then
      Me.DtaPresupuesto.Recordset.AddNew
-      Me.DtaPresupuesto.Recordset!Nperiodo = NumeroPeriodo
+      Me.DtaPresupuesto.Recordset!NPeriodo = NumeroPeriodo
       Me.DtaPresupuesto.Recordset!CodCuenta = CodigoCuenta
       Select Case Periodo
-             Case 1: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text1.Text
-             Case 2: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text2.Text
-             Case 3: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text3.Text
-             Case 4: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text4.Text
-             Case 5: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text5.Text
-             Case 6: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text6.Text
-             Case 7: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text7.Text
-             Case 8: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text8.Text
-             Case 9: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text9.Text
-             Case 10: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text10.Text
-             Case 11: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text11.Text
-             Case 12: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text12.Text
+             Case 1: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text1.Text)
+             Case 2: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text2.Text)
+             Case 3: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text3.Text)
+             Case 4: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text4.Text)
+             Case 5: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text5.Text)
+             Case 6: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text6.Text)
+             Case 7: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text7.Text)
+             Case 8: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text8.Text)
+             Case 9: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text9.Text)
+             Case 10: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text10.Text)
+             Case 11: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text11.Text)
+             Case 12: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text12.Text)
           End Select
       
      Me.DtaPresupuesto.Recordset.Update
@@ -2595,18 +2595,18 @@ Dim Saldo As Double
     'Me.DtaConsulta.Recordset.Edit
       
       Select Case Periodo
-             Case 1: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text1.Text
-             Case 2: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text2.Text
-             Case 3: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text3.Text
-             Case 4: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text4.Text
-             Case 5: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text5.Text
-             Case 6: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text6.Text
-             Case 7: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text7.Text
-             Case 8: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text8.Text
-             Case 9: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text9.Text
-             Case 10: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text10.Text
-             Case 11: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text11.Text
-             Case 12: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text12.Text
+             Case 1: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text1.Text)
+             Case 2: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text2.Text)
+             Case 3: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text3.Text)
+             Case 4: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text4.Text)
+             Case 5: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text5.Text)
+             Case 6: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text6.Text)
+             Case 7: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text7.Text)
+             Case 8: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text8.Text)
+             Case 9: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text9.Text)
+             Case 10: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text10.Text)
+             Case 11: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text11.Text)
+             Case 12: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text12.Text)
           End Select
       
     Me.DtaConsulta.Recordset.Update
@@ -2622,28 +2622,28 @@ Dim Saldo As Double
  Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 2))"
  Me.DtaPeriodos.Refresh
  Do While Not Me.DtaPeriodos.Recordset.EOF
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
   CodigoCuenta = Me.DBCliente.Text
   Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & CodigoCuenta & "'))"
   Me.DtaConsulta.Refresh
   If Me.DtaConsulta.Recordset.EOF Then
      Me.DtaPresupuesto.Recordset.AddNew
-      Me.DtaPresupuesto.Recordset!Nperiodo = NumeroPeriodo
+      Me.DtaPresupuesto.Recordset!NPeriodo = NumeroPeriodo
       Me.DtaPresupuesto.Recordset!CodCuenta = CodigoCuenta
       Select Case Periodo
-             Case 1: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text13.Text
-             Case 2: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text14.Text
-             Case 3: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text15.Text
-             Case 4: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text16.Text
-             Case 5: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text17.Text
-             Case 6: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text18.Text
-             Case 7: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text18.Text
-             Case 8: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text20.Text
-             Case 9: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text21.Text
-             Case 10: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text22.Text
-             Case 11: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text23.Text
-             Case 12: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text24.Text
+             Case 1: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text13.Text)
+             Case 2: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text14.Text)
+             Case 3: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text15.Text)
+             Case 4: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text16.Text)
+             Case 5: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text17.Text)
+             Case 6: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text18.Text)
+             Case 7: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text18.Text)
+             Case 8: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text20.Text)
+             Case 9: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text21.Text)
+             Case 10: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text22.Text)
+             Case 11: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text23.Text)
+             Case 12: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text24.Text)
           End Select
       
      Me.DtaPresupuesto.Recordset.Update
@@ -2651,18 +2651,18 @@ Dim Saldo As Double
     'Me.DtaConsulta.Recordset.Edit
       
       Select Case Periodo
-             Case 1: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text13.Text
-             Case 2: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text14.Text
-             Case 3: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text15.Text
-             Case 4: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text16.Text
-             Case 5: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text17.Text
-             Case 6: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text18.Text
-             Case 7: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text19.Text
-             Case 8: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text20.Text
-             Case 9: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text21.Text
-             Case 10: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text22.Text
-             Case 11: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text23.Text
-             Case 12: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text24.Text
+             Case 1: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text13.Text)
+             Case 2: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text14.Text)
+             Case 3: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text15.Text)
+             Case 4: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text16.Text)
+             Case 5: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text17.Text)
+             Case 6: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text18.Text)
+             Case 7: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text19.Text)
+             Case 8: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text20.Text)
+             Case 9: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text21.Text)
+             Case 10: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text22.Text)
+             Case 11: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text23.Text)
+             Case 12: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text24.Text)
           End Select
       
     Me.DtaConsulta.Recordset.Update
@@ -2677,28 +2677,28 @@ Dim Saldo As Double
  Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 3))"
  Me.DtaPeriodos.Refresh
  Do While Not Me.DtaPeriodos.Recordset.EOF
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
   CodigoCuenta = Me.DBCliente.Text
   Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & CodigoCuenta & "'))"
   Me.DtaConsulta.Refresh
   If Me.DtaConsulta.Recordset.EOF Then
      Me.DtaPresupuesto.Recordset.AddNew
-      Me.DtaPresupuesto.Recordset!Nperiodo = NumeroPeriodo
+      Me.DtaPresupuesto.Recordset!NPeriodo = NumeroPeriodo
       Me.DtaPresupuesto.Recordset!CodCuenta = CodigoCuenta
       Select Case Periodo
-             Case 1: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text25.Text
-             Case 2: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text26.Text
-             Case 3: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text27.Text
-             Case 4: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text28.Text
-             Case 5: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text29.Text
-             Case 6: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text30.Text
-             Case 7: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text31.Text
-             Case 8: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text32.Text
-             Case 9: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text33.Text
-             Case 10: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text34.Text
-             Case 11: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text35.Text
-             Case 12: Me.DtaPresupuesto.Recordset!MontoPresupuestado = Me.Text36.Text
+             Case 1: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text25.Text)
+             Case 2: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text26.Text)
+             Case 3: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text27.Text)
+             Case 4: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text28.Text)
+             Case 5: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text29.Text)
+             Case 6: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text30.Text)
+             Case 7: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text31.Text)
+             Case 8: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text32.Text)
+             Case 9: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text33.Text)
+             Case 10: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text34.Text)
+             Case 11: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text35.Text)
+             Case 12: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text36.Text)
           End Select
       
      Me.DtaPresupuesto.Recordset.Update
@@ -2706,18 +2706,18 @@ Dim Saldo As Double
     'Me.DtaConsulta.Recordset.Edit
       
       Select Case Periodo
-             Case 1: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text25.Text
-             Case 2: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text26.Text
-             Case 3: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text27.Text
-             Case 4: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text28.Text
-             Case 5: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text29.Text
-             Case 6: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text30.Text
-             Case 7: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text31.Text
-             Case 8: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text32.Text
-             Case 9: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text33.Text
-             Case 10: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text34.Text
-             Case 11: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text35.Text
-             Case 12: Me.DtaConsulta.Recordset!MontoPresupuestado = Me.Text36.Text
+             Case 1: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text25.Text)
+             Case 2: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text26.Text)
+             Case 3: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text27.Text)
+             Case 4: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text28.Text)
+             Case 5: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text29.Text)
+             Case 6: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text30.Text)
+             Case 7: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text31.Text)
+             Case 8: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text32.Text)
+             Case 9: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text33.Text)
+             Case 10: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text34.Text)
+             Case 11: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text35.Text)
+             Case 12: Me.DtaConsulta.Recordset!MontoPresupuestado = CDbl(Me.Text36.Text)
           End Select
       
     Me.DtaConsulta.Recordset.Update
@@ -2943,7 +2943,7 @@ Else
  Do While Not Me.DtaPeriodos.Recordset.EOF
   FechaIni = "01/" & Month(Me.DtaPeriodos.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaPeriodos.Recordset("FechaPeriodo"))
   FechaFin = Me.DtaPeriodos.Recordset("FechaPeriodo")
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
   CodigoCuenta = Me.DBCliente.Text
 '  Me.DtaConsulta.RecordSource = "SELECT Transacciones.CodCuentas, Sum(Transacciones.Debito*Transacciones.TCambio) AS MDebito, Sum(Transacciones.TCambio*Transacciones.Credito) AS MCredito, Transacciones.NPeriodo From Transacciones GROUP BY Transacciones.CodCuentas, Transacciones.NPeriodo HAVING (((Transacciones.CodCuentas)='" & CodigoCuenta & "') AND ((Transacciones.NPeriodo)=" & NumeroPeriodo & "))"
@@ -3014,7 +3014,7 @@ Else
  Do While Not Me.DtaPeriodos.Recordset.EOF
   FechaIni = "01/" & Month(Me.DtaPeriodos.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaPeriodos.Recordset("FechaPeriodo"))
   FechaFin = Me.DtaPeriodos.Recordset("FechaPeriodo")
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
   CodigoCuenta = Me.DBCliente.Text
 '  Me.DtaConsulta.RecordSource = "SELECT Transacciones.CodCuentas, Sum(Transacciones.Debito*Transacciones.TCambio) AS MDebito, Sum(Transacciones.TCambio*Transacciones.Credito) AS MCredito, Transacciones.NPeriodo From Transacciones GROUP BY Transacciones.CodCuentas, Transacciones.NPeriodo HAVING (((Transacciones.CodCuentas)='" & CodigoCuenta & "') AND ((Transacciones.NPeriodo)=" & NumeroPeriodo & "))"
@@ -3086,7 +3086,7 @@ Else
  Do While Not Me.DtaPeriodos.Recordset.EOF
   FechaIni = "01/" & Month(Me.DtaPeriodos.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaPeriodos.Recordset("FechaPeriodo"))
   FechaFin = Me.DtaPeriodos.Recordset("FechaPeriodo")
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
   CodigoCuenta = Me.DBCliente.Text
 '  Me.DtaConsulta.RecordSource = "SELECT Transacciones.CodCuentas, Sum(Transacciones.Debito*Transacciones.TCambio) AS MDebito, Sum(Transacciones.TCambio*Transacciones.Credito) AS MCredito, Transacciones.NPeriodo From Transacciones GROUP BY Transacciones.CodCuentas, Transacciones.NPeriodo HAVING (((Transacciones.CodCuentas)='" & CodigoCuenta & "') AND ((Transacciones.NPeriodo)=" & NumeroPeriodo & "))"
@@ -3140,7 +3140,7 @@ Else
  Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 1))"
  Me.DtaPeriodos.Refresh
  Do While Not Me.DtaPeriodos.Recordset.EOF
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
   CodigoCuenta = Me.DBCliente.Text
   Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & CodigoCuenta & "'))"
@@ -3179,7 +3179,7 @@ Else
  Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 2))"
  Me.DtaPeriodos.Refresh
  Do While Not Me.DtaPeriodos.Recordset.EOF
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
   CodigoCuenta = Me.DBCliente.Text
   Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & CodigoCuenta & "'))"
@@ -3217,7 +3217,7 @@ Else
  Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 3))"
  Me.DtaPeriodos.Refresh
  Do While Not Me.DtaPeriodos.Recordset.EOF
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
   CodigoCuenta = Me.DBCliente.Text
   Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & CodigoCuenta & "'))"

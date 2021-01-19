@@ -846,7 +846,7 @@ Begin VB.MDIForm MDIPrimero
          EndProperty
          BeginProperty Panel6 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   5
-            TextSave        =   "02:15 p.m."
+            TextSave        =   "01:42 p.m."
             Key             =   ""
             Object.Tag             =   ""
          EndProperty
@@ -1935,7 +1935,7 @@ Private Sub CreateRibbonBar()
      Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1726, "Contabilizar Nomina", False, False)
      Item.Style = xtpButtonIconAndCaptionBelow
     
-    RibbonBar.QuickAccessControls.Add XtremeCommandBars.XTPControlType.xtpControlButton, ID_FILE_SAVE, "Zeus Contable 6.24", False, False
+    RibbonBar.QuickAccessControls.Add XtremeCommandBars.XTPControlType.xtpControlButton, ID_FILE_SAVE, "Zeus Contable 6.30", False, False
 
 
 End Sub
