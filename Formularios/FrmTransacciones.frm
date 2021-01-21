@@ -639,7 +639,7 @@ Begin VB.Form FrmTransacciones
          _ExtentX        =   2990
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   80805889
+         Format          =   17104897
          CurrentDate     =   38918
       End
       Begin VB.TextBox TxtMonto 
@@ -659,7 +659,7 @@ Begin VB.Form FrmTransacciones
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   80805889
+         Format          =   17104897
          CurrentDate     =   38918
       End
       Begin VB.Label LblNombres 
@@ -1416,7 +1416,7 @@ Begin VB.Form FrmTransacciones
          _ExtentX        =   2778
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   80805889
+         Format          =   17104897
          CurrentDate     =   38918
       End
       Begin VB.ComboBox CmbMoneda 
@@ -2056,7 +2056,8 @@ TipoErrs:
 End Sub
 
 Private Sub CmdBorrar_Click()
-Dim Periodo As Double
+Dim Periodo As Double, NumeroMovimiento As Double
+
 
 On Error GoTo TipoErrs
   Dim Respuesta, Rsp
@@ -2065,6 +2066,7 @@ On Error GoTo TipoErrs
   Primero = True
   
   Periodo = NumeroPeriodo
+  NumeroMovimiento = Me.TxtNTransacciones.Text
   
   Set Rsp = DtaTransacciones.Recordset
   Respuesta = MsgBox("Esta seguro de Borrar la transaccion?", vbYesNo, "Transaccion No.: " & Me.TxtNTransacciones.Text)
@@ -2105,6 +2107,21 @@ On Error GoTo TipoErrs
        
      Me.CmbMoneda.Enabled = False
     Loop
+    
+    
+    
+    Me.DtaConsulta.RecordSource = "SELECT IndiceSolicitudPago.* From IndiceSolicitudPago  " & _
+                                  "WHERE (NumeroTransaccion = " & NumeroMovimiento & ") AND (NPeriodoTransaccion = " & Periodo & ")"
+    Me.DtaConsulta.Refresh
+    If Not Me.DtaConsulta.Recordset.EOF Then
+      Me.DtaConsulta.Recordset("DescripcionMovimiento") = "****ANULADO****·"
+      Me.DtaConsulta.Recordset("Activo") = 0
+      Me.DtaConsulta.Recordset("Anulado") = 1
+      Me.DtaConsulta.Recordset.Update
+    End If
+    
+    
+    
     
 '    Me.TxtFecha.Value = Format(FechaSistema, "dd/mm/yyyy")
     Me.DtaTransacciones.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento From Transacciones Where (((Transacciones.NumeroMovimiento) = -1))"
