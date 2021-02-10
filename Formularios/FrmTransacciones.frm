@@ -2117,6 +2117,7 @@ On Error GoTo TipoErrs
       Me.DtaConsulta.Recordset("DescripcionMovimiento") = "****ANULADO****·"
       Me.DtaConsulta.Recordset("Activo") = 0
       Me.DtaConsulta.Recordset("Anulado") = 1
+      Me.DtaConsulta.Recordset("Procesado") = 0
       Me.DtaConsulta.Recordset.Update
     End If
     

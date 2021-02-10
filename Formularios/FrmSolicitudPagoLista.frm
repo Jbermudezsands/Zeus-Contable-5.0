@@ -32,7 +32,7 @@ Begin VB.Form FrmSolicitudPagoLista
       _ExtentX        =   2566
       _ExtentY        =   661
       _Version        =   393216
-      Format          =   80674817
+      Format          =   83165185
       CurrentDate     =   44168
    End
    Begin VB.CommandButton CmdProcesar 
@@ -818,15 +818,39 @@ Private Sub CmdProcesar_Click()
                                 DescripcionCuenta = Me.AdoDetalleCheque.Recordset("NombreCuenta")
                                 DescripcionMovimiento = Me.AdoDetalleCheque.Recordset("DescripcionMovimiento")
                                 TipoMovimiento = Me.AdoDetalleCheque.Recordset("Clave")
-                                NumeroFactura = Me.AdoDetalleCheque.Recordset("FacturaNo")
+                                If Not IsNull(Me.AdoDetalleCheque.Recordset("FacturaNo")) Then
+                                 NumeroFactura = Me.AdoDetalleCheque.Recordset("FacturaNo")
+                                Else
+                                 NumeroFactura = "-"
+                                End If
                                 Debito = Me.AdoDetalleCheque.Recordset("Debito")
                                 Credito = Me.AdoDetalleCheque.Recordset("Credito")
                                 TasaCambio = Me.AdoDetalleCheque.Recordset("TCambio")
                                 FechaFactura = Me.AdoDetalleCheque.Recordset("FechaDescuento")
                                 VoucherNo = Me.AdoDetalleCheque.Recordset("VoucherNo")
                                 Descuento = 0
-                                KeyPresupuesto = Me.AdoDetalleCheque.Recordset("KeyPresupuesto")
-                                Presupuesto = Me.AdoDetalleCheque.Recordset("Presupuesto")
+                                
+                                
+                                If Not IsNull(Me.AdoDetalleCheque.Recordset("KeyPresupuesto")) Then
+                                  KeyPresupuesto = Me.AdoDetalleCheque.Recordset("KeyPresupuesto")
+                                Else
+                                  MDIPrimero.AdoConsulta.RecordSource = "SELECT  KeyGrupo, CodGrupo, KeyGrupoSuperior, Child, DescripcionGrupo, Imagen1, Imagen2 From EstructuraPresupuesto WHERE (DescripcionGrupo LIKE '%" & NumeroFactura & "%')"
+                                  MDIPrimero.AdoConsulta.Refresh
+                                  If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
+                                    KeyPresupuesto = MDIPrimero.AdoConsulta.Recordset("KeyGrupo")
+                                    Presupuesto = NumeroFactura
+                                    
+                                  Else
+                                     MsgBox "El tiene Seleccionado el presupuesto"
+                                  End If
+                                
+                                
+                                 
+                                End If
+                                
+                                If Not IsNull(Me.AdoDetalleCheque.Recordset("Presupuesto")) Then
+                                  Presupuesto = Me.AdoDetalleCheque.Recordset("Presupuesto")
+                                End If
                                 
                                 
                                 '///////////////////////////////VERIFICO EL MONTO DEL DEBITO ////////////////////////
@@ -838,7 +862,7 @@ Private Sub CmdProcesar_Click()
 '                                       Resultado = GrabaDetalleCheque(CuentaContable, Me.DTPFecha.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, TipoMovimiento, TasaCambio, Debito, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CuentaContable, DescripcionCuenta, VoucherNo)
                                         Resultado = GrabaDetalleChequeSolicitud(CuentaContable, Me.DTPFecha.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, TipoMovimiento, TasaCambio, Debito, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CuentaContable, DescripcionCuenta, VoucherNo, KeyPresupuesto, Presupuesto)
                                    Else
-                                   
+                                        Resultado = GrabaDetalleChequeSolicitud(CuentaContable, Me.DTPFecha.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, TipoMovimiento, TasaCambio, Debito, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CuentaContable, DescripcionCuenta, VoucherNo, KeyPresupuesto, Presupuesto)
                                    End If
                                    
                                 End If

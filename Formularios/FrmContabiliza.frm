@@ -7,14 +7,14 @@ Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12
 Begin VB.Form FrmContabilizaFacturacion 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Contabilizacion del Sistema de Factuacion"
-   ClientHeight    =   7785
+   ClientHeight    =   7980
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   13275
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7785
+   ScaleHeight     =   7980
    ScaleWidth      =   13275
    StartUpPosition =   2  'CenterScreen
    Begin MSAdodcLib.Adodc AdoProcesosFacturacion 
@@ -435,7 +435,7 @@ Begin VB.Form FrmContabilizaFacturacion
       Height          =   375
       Left            =   11520
       TabIndex        =   7
-      Top             =   7320
+      Top             =   7560
       Width           =   1215
       _Version        =   786432
       _ExtentX        =   2143
@@ -445,13 +445,13 @@ Begin VB.Form FrmContabilizaFacturacion
       UseVisualStyle  =   -1  'True
    End
    Begin TabDlg.SSTab SSTab1 
-      Height          =   6015
+      Height          =   6255
       Left            =   120
       TabIndex        =   2
       Top             =   1200
       Width           =   13095
       _ExtentX        =   23098
-      _ExtentY        =   10610
+      _ExtentY        =   11033
       _Version        =   393216
       Tabs            =   4
       TabHeight       =   520
@@ -466,9 +466,9 @@ Begin VB.Form FrmContabilizaFacturacion
       TabCaption(1)   =   "Compras"
       TabPicture(1)   =   "FrmContabiliza.frx":001C
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "GroupBox2"
+      Tab(1).Control(0)=   "PushButton2"
       Tab(1).Control(1)=   "TDBGridCompras"
-      Tab(1).Control(2)=   "PushButton2"
+      Tab(1).Control(2)=   "GroupBox2"
       Tab(1).ControlCount=   3
       TabCaption(2)   =   "Cuentas x Cobrar y Pagar"
       TabPicture(2)   =   "FrmContabiliza.frx":0038
@@ -479,8 +479,8 @@ Begin VB.Form FrmContabilizaFacturacion
       TabCaption(3)   =   "Planilla Leche"
       TabPicture(3)   =   "FrmContabiliza.frx":0054
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "GroupBox4"
-      Tab(3).Control(1)=   "TDGridPlanillaLeche"
+      Tab(3).Control(0)=   "TDGridPlanillaLeche"
+      Tab(3).Control(1)=   "GroupBox4"
       Tab(3).ControlCount=   2
       Begin XtremeSuiteControls.GroupBox GroupBox2 
          Height          =   5055
@@ -511,7 +511,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80674817
+            Format          =   81264641
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker3 
@@ -523,7 +523,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80674817
+            Format          =   81264641
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptCompras 
@@ -575,7 +575,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80674817
+            Format          =   81264641
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton RadioButton4 
@@ -688,16 +688,24 @@ Begin VB.Form FrmContabilizaFacturacion
          End
       End
       Begin XtremeSuiteControls.GroupBox GroupBox1 
-         Height          =   5055
+         Height          =   5295
          Left            =   120
          TabIndex        =   3
          Top             =   780
          Width           =   2295
          _Version        =   786432
          _ExtentX        =   4048
-         _ExtentY        =   8916
+         _ExtentY        =   9340
          _StockProps     =   79
          UseVisualStyle  =   -1  'True
+         Begin VB.CheckBox ChkCtaCtoProducto 
+            Caption         =   "Utilizar Cta Cto Prodto"
+            Height          =   375
+            Left            =   120
+            TabIndex        =   74
+            Top             =   5040
+            Width           =   2055
+         End
          Begin VB.CheckBox ChkDescripcion 
             Caption         =   "Anexar Desc Prod Clientes"
             Height          =   375
@@ -715,7 +723,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80674817
+            Format          =   81264641
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptFacturacion 
@@ -768,7 +776,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80674817
+            Format          =   81264641
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecibos 
@@ -821,7 +829,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80674817
+            Format          =   81264641
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptSalidaBodega 
@@ -865,13 +873,13 @@ Begin VB.Form FrmContabilizaFacturacion
       End
       Begin TrueOleDBGrid80.TDBGrid TDBGridFacturacion 
          Bindings        =   "FrmContabiliza.frx":0070
-         Height          =   4935
+         Height          =   5175
          Left            =   2520
          TabIndex        =   8
          Top             =   900
          Width           =   9975
          _ExtentX        =   17595
-         _ExtentY        =   8705
+         _ExtentY        =   9128
          _LayoutType     =   4
          _RowHeight      =   19
          _WasPersistedAsPixels=   0
@@ -1514,7 +1522,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80674817
+            Format          =   81264641
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebito 
@@ -1552,7 +1560,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80674817
+            Format          =   81264641
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.PushButton CmdContabilizarNotas 
@@ -1592,7 +1600,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80674817
+            Format          =   81264641
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebitoProveedor 
@@ -2047,7 +2055,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80674817
+            Format          =   81264641
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker11 
@@ -2059,7 +2067,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80674817
+            Format          =   81264641
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecepcion 
@@ -2085,7 +2093,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   80674817
+            Format          =   81264641
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptPlanilla 
@@ -2588,7 +2596,7 @@ Begin VB.Form FrmContabilizaFacturacion
       Height          =   375
       Left            =   120
       TabIndex        =   32
-      Top             =   7320
+      Top             =   7560
       Visible         =   0   'False
       Width           =   11295
       _Version        =   786432
@@ -2900,6 +2908,8 @@ ElseIf Me.OptPlanillaProductor.Value = True Then
     
 End If
 
+Me.DTPicker9.Value = Me.DTPicker8.Value
+
      Select Case TipoNota
             Case "Debito Proveedores"
 
@@ -3043,6 +3053,8 @@ ElseIf Me.OptSalidaBodega.Value = True Then
 ElseIf Me.OptDevolucion.Value = True Then
  TipoFactura = "Devolucion de Venta"
 End If
+
+Me.DTPicker5.Value = Me.DTPicker2.Value
 
      Select Case TipoFactura
           Case "Salida Bodega"
@@ -3200,6 +3212,8 @@ ElseIf Me.OptCuenta.Value = True Then
  
 End If
 
+Me.DTPicker6.Value = Me.DTPicker4.Value
+
      Select Case TipoFactura
              Case "Cuenta"
         
@@ -3353,7 +3367,7 @@ Private Sub CmdContabilizar_Click()
   Dim CostoProducto As Double, CodigoCuentaCostos As String, CodigoCuentaInventario As String, CodigoCuentaOtros As String
   Dim CodigoCuentaMetodo As String, Pagado As Double, TotalRetencion As Double, Fuente As String, MonedaMovimiento As String
   Dim cn As New ADODB.Connection, TasaMovimiento As Double, TipoProducto As String, DescripcionProducto As String, UnidadMedida As String
-  Dim rs As New ADODB.Recordset, DescripcionRecibo As String
+  Dim rs As New ADODB.Recordset, DescripcionRecibo As String, SqlStringAnuladas As String
   Dim cmd As New ADODB.Command
   
   CmdContabilizar.Enabled = False
@@ -3377,12 +3391,16 @@ Private Sub CmdContabilizar_Click()
                        FechaFin = Format(Me.DTPicker2.Value, "yyyy-mm-dd")
                         SqlString = "SELECT Facturas.Fecha_Factura, Facturas.Fecha_Vencimiento, Facturas.MonedaFactura, Facturas.Numero_Factura, Facturas.Cod_Cliente, Facturas.Nombre_Cliente, Facturas.Apellido_Cliente, Facturas.SubTotal, Facturas.IVA, Facturas.Pagado, Facturas.NetoPagar, Facturas.Descuentos, Facturas.Marca, Clientes.Cod_Cuenta_Cliente , Facturas.Contabilizado, Facturas.Tipo_Factura,Facturas.Observaciones FROM  Facturas INNER JOIN Clientes ON Facturas.Cod_Cliente = Clientes.Cod_Cliente  " & _
                                     "WHERE (Facturas.Nombre_Cliente <> N'******CANCELADO') AND (Facturas.Contabilizado = 0) AND (Facturas.Tipo_Factura = '" & TipoFactura & "') AND (Facturas.Fecha_Factura BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) AND (Facturas.Marca = 1) ORDER BY Facturas.Fecha_Factura"
+                        SqlStringAnuladas = "SELECT Facturas.Fecha_Factura, Facturas.Fecha_Vencimiento, Facturas.MonedaFactura, Facturas.Numero_Factura, Facturas.Cod_Cliente, Facturas.Nombre_Cliente, Facturas.Apellido_Cliente, Facturas.SubTotal, Facturas.IVA, Facturas.Pagado, Facturas.NetoPagar, Facturas.Descuentos, Facturas.Marca, Clientes.Cod_Cuenta_Cliente , Facturas.Contabilizado, Facturas.Tipo_Factura,Facturas.Observaciones FROM  Facturas INNER JOIN Clientes ON Facturas.Cod_Cliente = Clientes.Cod_Cliente  " & _
+                                    "WHERE (Facturas.Nombre_Cliente = '******CANCELADO') AND (Facturas.Contabilizado = 0) AND (Facturas.Tipo_Factura = '" & TipoFactura & "') AND (Facturas.Fecha_Factura BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) AND (Facturas.Marca = 1) ORDER BY Facturas.Fecha_Factura"
                        DescripcionMovimiento = "Movimientos Contables de Salida de Bodega"
                        Fuente = "SalidaBodega"
                    Case "Recibos de Caja"
                         FechaInicio = Format(Me.DTPicker1.Value, "yyyy-mm-dd")
                         FechaFin = Format(Me.DTPicker2.Value, "yyyy-mm-dd")
                         SqlString = "SELECT  Recibo.Fecha_Recibo, Recibo.CodReciboPago, Recibo.NombreCliente, Cajeros.Nombre_Cajero, Recibo.Sub_Total, Recibo.Descuento, Recibo.Total, Recibo.Marca, Recibo.Contabilizado , Clientes.Cod_Cuenta_Cliente,Recibo.MonedaRecibo FROM Recibo INNER JOIN Cajeros ON Recibo.Cod_Cajero = Cajeros.Cod_Cajero INNER JOIN Clientes ON Recibo.Cod_Cliente = Clientes.Cod_Cliente  " & _
+                                    "WHERE (Recibo.Fecha_Recibo BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) AND (Recibo.Contabilizado = 0) AND (Recibo.Marca = 1) ORDER BY Recibo.Fecha_Recibo"
+                        SqlStringAnuladas = "SELECT  Recibo.Fecha_Recibo, Recibo.CodReciboPago, Recibo.NombreCliente, Cajeros.Nombre_Cajero, Recibo.Sub_Total, Recibo.Descuento, Recibo.Total, Recibo.Marca, Recibo.Contabilizado , Clientes.Cod_Cuenta_Cliente,Recibo.MonedaRecibo FROM Recibo INNER JOIN Cajeros ON Recibo.Cod_Cajero = Cajeros.Cod_Cajero INNER JOIN Clientes ON Recibo.Cod_Cliente = Clientes.Cod_Cliente  " & _
                                     "WHERE (Recibo.Fecha_Recibo BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) AND (Recibo.Contabilizado = 0) AND (Recibo.Marca = 1) ORDER BY Recibo.Fecha_Recibo"
                         DescripcionMovimiento = "Movimientos Contables Recibos de Caja"
                         Fuente = "Recibo"
@@ -3391,12 +3409,15 @@ Private Sub CmdContabilizar_Click()
                        FechaFin = Format(Me.DTPicker2.Value, "yyyy-mm-dd")
                         SqlString = "SELECT Facturas.Fecha_Factura, Facturas.Fecha_Vencimiento, Facturas.MonedaFactura, Facturas.Numero_Factura, Facturas.Cod_Cliente, Facturas.Nombre_Cliente, Facturas.Apellido_Cliente, Facturas.SubTotal, Facturas.IVA, Facturas.Pagado, Facturas.NetoPagar, Facturas.Descuentos, Facturas.Marca, Clientes.Cod_Cuenta_Cliente , Facturas.Contabilizado, Facturas.Tipo_Factura, Facturas.Observaciones FROM  Facturas INNER JOIN Clientes ON Facturas.Cod_Cliente = Clientes.Cod_Cliente  " & _
                                     "WHERE (Facturas.Nombre_Cliente <> N'******CANCELADO') AND (Facturas.Contabilizado = 0) AND (Facturas.Tipo_Factura = '" & TipoFactura & "') AND (Facturas.Fecha_Factura BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) AND (Facturas.Marca = 1) ORDER BY Facturas.Fecha_Factura"
+                        SqlStringAnuladas = "SELECT Facturas.Fecha_Factura, Facturas.Fecha_Vencimiento, Facturas.MonedaFactura, Facturas.Numero_Factura, Facturas.Cod_Cliente, Facturas.Nombre_Cliente, Facturas.Apellido_Cliente, Facturas.SubTotal, Facturas.IVA, Facturas.Pagado, Facturas.NetoPagar, Facturas.Descuentos, Facturas.Marca, Clientes.Cod_Cuenta_Cliente , Facturas.Contabilizado, Facturas.Tipo_Factura, Facturas.Observaciones FROM  Facturas INNER JOIN Clientes ON Facturas.Cod_Cliente = Clientes.Cod_Cliente  " & _
+                                            "WHERE (Facturas.Nombre_Cliente = '******CANCELADO') AND (Facturas.Contabilizado = 0) AND (Facturas.Tipo_Factura = '" & TipoFactura & "') AND (Facturas.Fecha_Factura BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) AND (Facturas.Marca = 1) ORDER BY Facturas.Fecha_Factura"
                    Case "Devolucion de Venta"
                        FechaInicio = Format(Me.DTPicker1.Value, "yyyy-mm-dd")
                        FechaFin = Format(Me.DTPicker2.Value, "yyyy-mm-dd")
                        SqlString = "SELECT Facturas.Fecha_Factura, Facturas.Fecha_Vencimiento, Facturas.MonedaFactura, Facturas.Numero_Factura, Facturas.Cod_Cliente, Facturas.Nombre_Cliente, Facturas.Apellido_Cliente, Facturas.SubTotal, Facturas.IVA, Facturas.Pagado, Facturas.NetoPagar, Facturas.Descuentos, Facturas.Marca, Clientes.Cod_Cuenta_Cliente , Facturas.Contabilizado, Facturas.Tipo_Factura FROM  Facturas INNER JOIN Clientes ON Facturas.Cod_Cliente = Clientes.Cod_Cliente  " & _
                                     "WHERE (Facturas.Nombre_Cliente <> N'******CANCELADO') AND (Facturas.Contabilizado = 0) AND (Facturas.Tipo_Factura = '" & TipoFactura & "') AND (Facturas.Fecha_Factura BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) AND (Facturas.Marca = 1) ORDER BY Facturas.Fecha_Factura"
-                 
+                       SqlStringAnuladas = "SELECT Facturas.Fecha_Factura, Facturas.Fecha_Vencimiento, Facturas.MonedaFactura, Facturas.Numero_Factura, Facturas.Cod_Cliente, Facturas.Nombre_Cliente, Facturas.Apellido_Cliente, Facturas.SubTotal, Facturas.IVA, Facturas.Pagado, Facturas.NetoPagar, Facturas.Descuentos, Facturas.Marca, Clientes.Cod_Cuenta_Cliente , Facturas.Contabilizado, Facturas.Tipo_Factura FROM  Facturas INNER JOIN Clientes ON Facturas.Cod_Cliente = Clientes.Cod_Cliente  " & _
+                                       "WHERE (Facturas.Nombre_Cliente = N'******CANCELADO') AND (Facturas.Contabilizado = 0) AND (Facturas.Tipo_Factura = '" & TipoFactura & "') AND (Facturas.Fecha_Factura BETWEEN CONVERT(DATETIME, '" & FechaInicio & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) AND (Facturas.Marca = 1) ORDER BY Facturas.Fecha_Factura"
                  
                  End Select
 
@@ -3436,6 +3457,8 @@ Private Sub CmdContabilizar_Click()
                          Me.AdoProcesos.Recordset.MoveFirst
                          Me.osProgress1.Max = Me.AdoProcesos.Recordset.RecordCount
                        End If
+                       
+                       
                        Me.AdoProcesos.Refresh
                        Do While Not Me.AdoProcesos.Recordset.EOF
                              
@@ -3663,13 +3686,22 @@ Private Sub CmdContabilizar_Click()
                                           Me.AdoBuscaFacturacion.RecordSource = "SELECT  * FROM Detalle_Facturas INNER JOIN Productos ON Detalle_Facturas.Cod_Producto = Productos.Cod_Productos WHERE (Detalle_Facturas.Numero_Factura = '" & NumeroFactura & "')"
                                           Me.AdoBuscaFacturacion.Refresh
                                           Do While Not Me.AdoBuscaFacturacion.Recordset.EOF
-                                            DescripcionMovimiento = DescripcionMovimiento & Me.AdoBuscaFacturacion.Recordset("Cantidad") & " " & Me.AdoBuscaFacturacion.Recordset("Unidad_Medida") & " " & Me.AdoBuscaFacturacion.Recordset("Descripcion_Producto") & ", "
-                                          
+                                                 DescripcionMovimiento = DescripcionMovimiento & Me.AdoBuscaFacturacion.Recordset("Cantidad") & " " & Me.AdoBuscaFacturacion.Recordset("Unidad_Medida") & " " & Me.AdoBuscaFacturacion.Recordset("Descripcion_Producto") & ", "
                                             Me.AdoBuscaFacturacion.Recordset.MoveNext
                                           Loop
                                         
                                         Else
-                                          DescripcionMovimiento = "Registro Facturacion Factura Numero " & NumeroFactura
+                                        
+                                          Select Case TipoFactura
+                                            Case "Factura"
+                                              DescripcionMovimiento = "Contabilizando Factura Numero " & NumeroFactura
+                                            Case "Salida Bodega"
+                                              DescripcionMovimiento = "Contabilizando Salida Bodega Numero " & NumeroFactura
+                                            Case "Devolucion de Venta"
+                                              DescripcionMovimiento = "Contabilizando Devolucion Venta Numero " & NumeroFactura
+                                          
+                                          End Select
+                                          
                                         End If
                                         
 '                                        DescripcionMovimiento = DescripcionMovimiento & " " & Me.AdoProcesos.Recordset("Observaciones")
@@ -3816,7 +3848,9 @@ Private Sub CmdContabilizar_Click()
                                                     Debito = Format(NetoPagar, "##,##0.00")
                                                     Debito = Format(Debito * TasaCambio, "##,##0.00")
                                                     Credito = 0
-                                                    Resultado = GrabaDetalleFactura(CodigoCuentaCliente, Me.DTPicker5.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaMovimiento, Debito, Credito, Fuente, NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "FacturaVenta")
+                                                    If Me.ChkCtaCtoProducto.Value = 0 Then
+                                                      Resultado = GrabaDetalleFactura(CodigoCuentaCliente, Me.DTPicker5.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaMovimiento, Debito, Credito, Fuente, NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "FacturaVenta")
+                                                    End If
                                                   Case "Factura"
                                                     Debito = Format(NetoPagar, "##,##0.00")
                                                     Debito = Format(Debito * TasaCambio, "##,##0.00")
@@ -4005,6 +4039,13 @@ Private Sub CmdContabilizar_Click()
 '                                                    If DescripcionCuenta <> "Nulo" Then
                                                      Resultado = GrabaDetalleFactura(CodigoCuentaInventario, Me.DTPicker5.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Credito", TasaMovimiento, Debito, Credito, Fuente, NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "FacturaVenta")
 '                                                    End If
+                                                     If Me.ChkCtaCtoProducto.Value = 1 Then
+                                                        If Not IsNull(Me.AdoProcesosFacturacion.Recordset("Cod_Cuenta_Costo")) Then
+                                                          CodigoCuentaCostos = Me.AdoProcesosFacturacion.Recordset("Cod_Cuenta_Costo")
+                                                        End If
+                                                        Resultado = GrabaDetalleFactura(CodigoCuentaCostos, Me.DTPicker5.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, "Debito", TasaMovimiento, Credito, Debito, Fuente, NumeroFactura, FechaFactura, Descuento, FechaVence, CodigoCuentaCliente, "FacturaVenta")
+                                                        
+                                                     End If
                                                   Case "Factura"
                                                     Debito = 0
                                                     Credito = Format(Val(CostoProducto), "##,##0.00")
@@ -4051,10 +4092,67 @@ Private Sub CmdContabilizar_Click()
                         Me.osProgress1.Value = Me.osProgress1.Value + 1
                         Me.AdoProcesos.Recordset.MoveNext
                     Loop
+                    
+                    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////CAMBIO EL VALOR DE CONTABILIZADO PARA LOS ANULADOS ///////////////////////////////////////////////
+                    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    
+                       Me.AdoProcesos.RecordSource = SqlStringAnuladas
+                       Me.AdoProcesos.Refresh
+                       Me.osProgress1.Visible = True
+                       Me.osProgress1.Min = 0
+                       Me.osProgress1.Value = 0
+                       If Not Me.AdoProcesos.Recordset.EOF Then
+                         Me.AdoProcesos.Recordset.MoveFirst
+                         Me.osProgress1.Max = Me.AdoProcesos.Recordset.RecordCount
+                       End If
+                       
+                       
+                       Me.AdoProcesos.Refresh
+                       Do While Not Me.AdoProcesos.Recordset.EOF
+                       
+                         
+                       
+                        Select Case TipoFactura
+                           Case "Salida Bodega"
+                                 NumeroFactura = Me.AdoProcesos.Recordset("Numero_Factura")
+                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                 '/////////////////////////////////////////////ACTUALIZO LA FACTURA COMO CONTABILIZADO //////////////////////////////////////////
+                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                  rs.Open "UPDATE Facturas SET Contabilizado = 1 ,Activo = 0  WHERE (Numero_Factura = '" & NumeroFactura & "') AND (Facturas.Tipo_Factura = '" & TipoFactura & "')", ConexionFacturacion
+                           Case "Recibos de Caja"
+                               NumeroFactura = Me.AdoProcesos.Recordset("CodReciboPago")
+                               '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                               '/////////////////////////////////////////////ACTUALIZO LA FACTURA COMO CONTABILIZADO //////////////////////////////////////////
+                               '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                 rs.Open "UPDATE Recibo SET Contabilizado = 1 ,Activo = 0  WHERE (CodReciboPago = '" & NumeroFactura & "') ", ConexionFacturacion
+                          Case "Factura"
+                                NumeroFactura = Me.AdoProcesos.Recordset("Numero_Factura")
+                                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                 '/////////////////////////////////////////////ACTUALIZO LA FACTURA COMO CONTABILIZADO //////////////////////////////////////////
+                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                  rs.Open "UPDATE Facturas SET Contabilizado = 1 ,Activo = 0  WHERE (Numero_Factura = '" & NumeroFactura & "') AND (Facturas.Tipo_Factura = '" & TipoFactura & "')", ConexionFacturacion
+                          Case "Devolucion de Venta"
+                                 NumeroFactura = Me.AdoProcesos.Recordset("Numero_Factura")
+                                  '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                 '/////////////////////////////////////////////ACTUALIZO LA FACTURA COMO CONTABILIZADO //////////////////////////////////////////
+                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                  rs.Open "UPDATE Facturas SET Contabilizado = 1 ,Activo = 0  WHERE (Numero_Factura = '" & NumeroFactura & "') AND (Facturas.Tipo_Factura = '" & TipoFactura & "')", ConexionFacturacion
+                        End Select
+                       
+                       
+                            
+                           Me.osProgress1.Value = Me.osProgress1.Value + 1
+                          Me.AdoProcesos.Recordset.MoveNext
+                       Loop
+
                              
 '
 
                End If
+               
+               
+               CmdConsultar_Click
 
 End Sub
 
@@ -6654,6 +6752,7 @@ End Sub
 Private Sub OptSalidaBodega_Click()
   If Me.OptSalidaBodega.Value = True Then
     Me.ChkDescripcion.Visible = True
+    
   End If
 End Sub
 
@@ -7571,6 +7670,7 @@ Dim TipoFactura As String
      TipoFactura = "LiquidacionLeche"
     End If
     
+    Me.DTPicker10.Value = Me.DTPicker12.Value
     
    Select Case TipoFactura
        
