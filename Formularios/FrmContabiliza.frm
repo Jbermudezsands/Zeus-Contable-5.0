@@ -466,21 +466,21 @@ Begin VB.Form FrmContabilizaFacturacion
       TabCaption(1)   =   "Compras"
       TabPicture(1)   =   "FrmContabiliza.frx":001C
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "PushButton2"
+      Tab(1).Control(0)=   "GroupBox2"
       Tab(1).Control(1)=   "TDBGridCompras"
-      Tab(1).Control(2)=   "GroupBox2"
+      Tab(1).Control(2)=   "PushButton2"
       Tab(1).ControlCount=   3
       TabCaption(2)   =   "Cuentas x Cobrar y Pagar"
       TabPicture(2)   =   "FrmContabiliza.frx":0038
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "TDBGridCuentas"
-      Tab(2).Control(1)=   "GroupBox3"
+      Tab(2).Control(0)=   "GroupBox3"
+      Tab(2).Control(1)=   "TDBGridCuentas"
       Tab(2).ControlCount=   2
       TabCaption(3)   =   "Planilla Leche"
       TabPicture(3)   =   "FrmContabiliza.frx":0054
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "TDGridPlanillaLeche"
-      Tab(3).Control(1)=   "GroupBox4"
+      Tab(3).Control(0)=   "GroupBox4"
+      Tab(3).Control(1)=   "TDGridPlanillaLeche"
       Tab(3).ControlCount=   2
       Begin XtremeSuiteControls.GroupBox GroupBox2 
          Height          =   5055
@@ -511,7 +511,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   81264641
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker3 
@@ -523,7 +523,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   81264641
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptCompras 
@@ -575,7 +575,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   81264641
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton RadioButton4 
@@ -723,7 +723,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   81264641
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptFacturacion 
@@ -776,7 +776,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   81264641
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecibos 
@@ -829,7 +829,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   81264641
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptSalidaBodega 
@@ -1522,7 +1522,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   81264641
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebito 
@@ -1560,7 +1560,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   81264641
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.PushButton CmdContabilizarNotas 
@@ -1600,7 +1600,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   81264641
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebitoProveedor 
@@ -2055,7 +2055,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   81264641
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker11 
@@ -2067,7 +2067,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   81264641
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecepcion 
@@ -2093,7 +2093,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   81264641
+            Format          =   80674817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptPlanilla 
@@ -3368,7 +3368,7 @@ Private Sub CmdContabilizar_Click()
   Dim CodigoCuentaMetodo As String, Pagado As Double, TotalRetencion As Double, Fuente As String, MonedaMovimiento As String
   Dim cn As New ADODB.Connection, TasaMovimiento As Double, TipoProducto As String, DescripcionProducto As String, UnidadMedida As String
   Dim rs As New ADODB.Recordset, DescripcionRecibo As String, SqlStringAnuladas As String
-  Dim cmd As New ADODB.Command
+  Dim cmd As New ADODB.Command, TasaCambioFacturacion As Double
   
   CmdContabilizar.Enabled = False
   
@@ -3621,7 +3621,16 @@ Private Sub CmdContabilizar_Click()
                                         If Not Me.AdoBuscaFacturacion.Recordset.EOF Then
                                           If MonedaFactura = "Dolares" Then
 '                                              TasaCambio = Format(Val(Me.AdoBuscaFacturacion.Recordset("TasaCambio")), "##,##0.0000")
-                                               TasaCambio = BuscaTasaCambio(FechaFactura)
+                                               
+                                               
+                                               TasaCambioFacturacion = BuscaTasaCambioFacturacion(FechaFactura, ConexionFacturacion)
+                                               
+                                               If TasaCambioFacturacion = 0 Then
+                                                 TasaCambio = BuscaTasaCambio(FechaFactura)
+                                               Else
+                                                 TasaCambio = TasaCambioFacturacion
+                                               End If
+                                               
                                           Else
                                               TasaCambio = 1
                                           End If
