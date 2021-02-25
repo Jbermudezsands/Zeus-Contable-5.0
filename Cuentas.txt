@@ -1,3 +1,7 @@
 Zeus Contable
 Contabilizar Nominas
 
+False
+False
+False
+600-09-01False

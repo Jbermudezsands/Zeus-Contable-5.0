@@ -517,14 +517,14 @@ Begin VB.Form FrmReportes
       TabCaption(1)   =   "Configuracion Reportes"
       TabPicture(1)   =   "FrmReportes.frx":17E4E
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame11"
-      Tab(1).Control(1)=   "Frame10"
+      Tab(1).Control(0)=   "Frame10"
+      Tab(1).Control(1)=   "Frame11"
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "Configuracion Reportes "
       TabPicture(2)   =   "FrmReportes.frx":17E6A
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame13"
-      Tab(2).Control(1)=   "Frame12"
+      Tab(2).Control(0)=   "Frame12"
+      Tab(2).Control(1)=   "Frame13"
       Tab(2).ControlCount=   2
       Begin VB.Frame FrmDepartamento 
          BackColor       =   &H00E0E0E0&
@@ -2162,7 +2162,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   17104897
+            Format          =   81461249
             CurrentDate     =   37837
          End
          Begin MSComCtl2.DTPicker DTFecha1 
@@ -2174,7 +2174,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   17104897
+            Format          =   81461249
             CurrentDate     =   37837
          End
          Begin VB.Label Label4 
@@ -4369,7 +4369,7 @@ End Sub
 
 
 Private Sub CmdVerReporte_Click()
-Dim Fechas1 As String, Fechas2 As String, Orden As Integer, SQL As String
+Dim Fechas1 As String, Fechas2 As String, Orden As Integer, Sql As String
 Dim UltimoOrden As Integer, RegIngresos  As Integer, PrimReg As Integer, UltReg As Integer
 Dim Utilidad As Double, Utilidad2 As Double, Utilidad3 As Double, RegTCostosOper As Integer
 Dim Decrementador As Integer
@@ -4415,7 +4415,7 @@ If Me.DBCodigo.Text = "" Then
 '     "ORDER BY Transacciones.FacturaNo "
 
 Fecha2 = Format(FechaFin, "yyyy-mm-dd")
-SQL = "SELECT Transacciones.CodCuentas AS CodCuentas, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Transacciones.FechaVence) AS FechaVence, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Transacciones.FacturaNo) AS FacturaNo, SUM(Transacciones.Debito * Transacciones.TCambio) AS Debito, SUM(Transacciones.Credito * Transacciones.TCambio) AS Credito, SUM((Transacciones.Debito - Transacciones.Credito) * Transacciones.TCambio) AS Saldo, AVG(Transacciones.TCambio) AS TCambio, Cuentas.DescripcionCuentas  " & _
+Sql = "SELECT Transacciones.CodCuentas AS CodCuentas, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Transacciones.FechaVence) AS FechaVence, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Transacciones.FacturaNo) AS FacturaNo, SUM(Transacciones.Debito * Transacciones.TCambio) AS Debito, SUM(Transacciones.Credito * Transacciones.TCambio) AS Credito, SUM((Transacciones.Debito - Transacciones.Credito) * Transacciones.TCambio) AS Saldo, AVG(Transacciones.TCambio) AS TCambio, Cuentas.DescripcionCuentas  " & _
       "FROM   Transacciones INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas GROUP BY Transacciones.CodCuentas, Cuentas.DescripcionCuentas  " & _
       "HAVING (MAX(Transacciones.FechaTransaccion) < CONVERT(DATETIME, '" & Fecha2 & "', 102)) AND (MAX(Cuentas.TipoCuenta) = 'Cuentas x Cobrar') AND (SUM((Transacciones.Debito - Transacciones.Credito) * Transacciones.TCambio) <> 0) AND (MAX(Transacciones.FacturaNo) <> N'-') AND (MAX(Transacciones.FacturaNo) <> N'.') ORDER BY MAX(Transacciones.FacturaNo)"
 
@@ -4428,7 +4428,7 @@ Fecha2 = Format(FechaFin, "yyyy-mm-dd")
 'SQL = "SELECT Transacciones.CodCuentas AS CodCuentas, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Transacciones.FechaVence) AS FechaVence, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Transacciones.FacturaNo) AS FacturaNo, SUM(Transacciones.Debito * Transacciones.TCambio) AS Debito, SUM(Transacciones.Credito * Transacciones.TCambio) AS Credito, SUM((Transacciones.Debito - Transacciones.Credito) * Transacciones.TCambio) AS Saldo, AVG(Transacciones.TCambio) AS TCambio, Cuentas.DescripcionCuentas  " & _
 '      "FROM Transacciones INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas GROUP BY Transacciones.CodCuentas, Cuentas.DescripcionCuentas  " & _
 '      "HAVING (MAX(Transacciones.FechaTransaccion) < CONVERT(DATETIME, '" & Fecha2 & "', 102)) AND (MAX(Cuentas.TipoCuenta) = 'Cuentas x Cobrar') AND (SUM((Transacciones.Debito - Transacciones.Credito) * Transacciones.TCambio) <> 0) AND (MAX(Transacciones.FacturaNo) <> N'-') AND (MAX(Transacciones.FacturaNo) <> N'.') AND (Transacciones.CodCuentas = '" & CodigoCuenta & "') ORDER BY MAX(Transacciones.FacturaNo)"
-SQL = "SELECT Transacciones.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS Debito, SUM(Transacciones.Credito * Transacciones.TCambio) AS Credito, SUM((Transacciones.Debito - Transacciones.Credito) * Transacciones.TCambio) AS Saldo, SUM(Transacciones.TCambio) AS Expr5 " & _
+Sql = "SELECT Transacciones.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS Debito, SUM(Transacciones.Credito * Transacciones.TCambio) AS Credito, SUM((Transacciones.Debito - Transacciones.Credito) * Transacciones.TCambio) AS Saldo, SUM(Transacciones.TCambio) AS Expr5 " & _
       "FROM  Transacciones INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas " & _
       "WHERE (Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & Format(FechaFin, "yyyy-mm-dd") & "', 102)) AND (Cuentas.TipoCuenta = 'Cuentas x Cobrar') GROUP BY Transacciones.CodCuentas HAVING (Transacciones.CodCuentas BETWEEN '" & CodigoCuenta & "' AND '" & Me.DBCodigoHasta.Text & "')"
 
@@ -4436,7 +4436,7 @@ End If
   
 
   EstadoCuenta.AdoEstadoCuenta.ConnectionString = ConexionReporte
-  EstadoCuenta.AdoEstadoCuenta.Source = SQL
+  EstadoCuenta.AdoEstadoCuenta.Source = Sql
   EstadoCuenta.LblFecha1.Caption = Me.DTFecha1.Value
   EstadoCuenta.LblFecha.Caption = Me.DTFecha2.Value
 
@@ -4452,7 +4452,7 @@ End If
 
      Set rpt = New EstadoCuenta
      rpt.AdoEstadoCuenta.ConnectionString = ConexionReporte
-     rpt.AdoEstadoCuenta.Source = SQL
+     rpt.AdoEstadoCuenta.Source = Sql
      fPreview.RunReport rpt
      fPreview.Show 1
 
@@ -4870,11 +4870,11 @@ Case "RESULTADO HISTORICO"
     
     ArepResultadoHistorico.DataControl1.ConnectionString = ConexionReporte
     ArepResultadoHistorico.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
-    SQL = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
+    Sql = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
    
      Set rpt = New ArepResultadoHistorico
      rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = SQL
+     rpt.DataControl1.Source = Sql
      fPreview.RunReport rpt
      fPreview.Show 1
    
@@ -5131,7 +5131,7 @@ Case "BALANCE ACUMULADO"
     ArepBalanceComparativo.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
     ArepBalanceComparativo.LblFechaIni = FechaIni
     ArepBalanceComparativo.DataControl1.ConnectionString = ConexionReporte
-    SQL = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, Debe1 + Debe2 AS TotalDebe, Haber1 + Haber2 AS TotalHaber, KeyGrupo,KeyGrupoSuperior , KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
+    Sql = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, Debe1 + Debe2 AS TotalDebe, Haber1 + Haber2 AS TotalHaber, KeyGrupo,KeyGrupoSuperior , KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
     ArepBalanceComparativo.LblBalance.Caption = "BALANCE GENERAL ACUMULADO"
     ArepBalanceComparativo.LblActual.Caption = "ACTIVIDAD PERIODO"
     ArepBalanceComparativo.LblAcumulado.Caption = "SALDO HASTA " & FechaFin
@@ -5141,7 +5141,7 @@ Case "BALANCE ACUMULADO"
 
      Set rpt = New ArepBalanceComparativo
      rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = SQL
+     rpt.DataControl1.Source = Sql
      fPreview.RunReport rpt
      fPreview.Show 1
     
@@ -5243,13 +5243,13 @@ Case "BALANCE ACUMULADO"
     ArepBalanceHistorico.DataControl1.ConnectionString = ConexionReporte
     ArepBalanceHistorico.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, Debe1 + Debe2 AS TotalDebe, Haber1 + Haber2 AS TotalHaber, KeyGrupo,KeyGrupoSuperior , KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
 
-    SQL = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, Debe1 + Debe2 AS TotalDebe, Haber1 + Haber2 AS TotalHaber, KeyGrupo,KeyGrupoSuperior , KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
+    Sql = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, Debe1 + Debe2 AS TotalDebe, Haber1 + Haber2 AS TotalHaber, KeyGrupo,KeyGrupoSuperior , KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
 'Dim rpt As Object
 'Dim fPreview As New FrmPreview
 
      Set rpt = New ArepBalanceHistorico
      rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = SQL
+     rpt.DataControl1.Source = Sql
      fPreview.RunReport rpt
      fPreview.Show 1
 
@@ -5401,13 +5401,13 @@ Case "BALANZA DE COMPROBACION"
 '        ArepBalanza.Field11.Visible = False
 '        ArepBalanza.FldTDebe3.Visible = False
 '        ArepBalanza.FldTHaber3.Visible = False
-        SQL = "SELECT * From Reportes ORDER BY Orden"
+        Sql = "SELECT * From Reportes ORDER BY Orden"
         QUIEN = "Balanza"
 '        ArepBalanza.Show 1
 
             Set rpt = New ArepBalanza
             rpt.DataControl1.ConnectionString = ConexionReporte
-            rpt.DataControl1.Source = SQL
+            rpt.DataControl1.Source = Sql
             fPreview.RunReport rpt
             fPreview.Show 1
             
@@ -5452,13 +5452,13 @@ Parche.Execute "Update [Reportes] SET [Debe3] =  CASE WHEN (Debe1 + Debe2) > (Ha
 '    "ORDER BY Cuentas.KeyGrupo "
 '    "WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) " & _
 
-    SQL = "SELECT MAX(Transacciones.CodCuentas) AS CodCuentas, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, SUM(Transacciones.Debito) AS Debito,SUM(Transacciones.Credito) AS Credito, Cuentas.KeyGrupo, Cuentas.DescripcionGrupo, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas FROM Transacciones INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas GROUP BY Cuentas.KeyGrupo, Cuentas.DescripcionGrupo " & _
+    Sql = "SELECT MAX(Transacciones.CodCuentas) AS CodCuentas, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, SUM(Transacciones.Debito) AS Debito,SUM(Transacciones.Credito) AS Credito, Cuentas.KeyGrupo, Cuentas.DescripcionGrupo, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas FROM Transacciones INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas GROUP BY Cuentas.KeyGrupo, Cuentas.DescripcionGrupo " & _
           "HAVING (MAX(Transacciones.FechaTransaccion) <= CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) ORDER BY Cuentas.KeyGrupo"
 
 
     If Me.OptTradicional.Value = True Then
         ArepBalanzaMayor.DataControl1.ConnectionString = ConexionReporte
-        ArepBalanzaMayor.DataControl1.Source = SQL
+        ArepBalanzaMayor.DataControl1.Source = Sql
         ArepBalanzaMayor.Logo.Picture = LoadPicture(RutaLogo)
         ArepBalanzaMayor.LblEmpresa.Caption = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
         ArepBalanzaMayor.LblEmpresa1.Caption = Me.DtaDatosEmpresa.Recordset("Direccion")
@@ -5471,7 +5471,7 @@ Parche.Execute "Update [Reportes] SET [Debe3] =  CASE WHEN (Debe1 + Debe2) > (Ha
 '         fPreview.Show 1
     Else
         ArepBalanzaMayorColumna.DataControl1.ConnectionString = ConexionReporte
-        ArepBalanzaMayorColumna.DataControl1.Source = SQL
+        ArepBalanzaMayorColumna.DataControl1.Source = Sql
         ArepBalanzaMayorColumna.Logo.Picture = LoadPicture(RutaLogo)
         ArepBalanzaMayorColumna.LblEmpresa.Caption = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
         ArepBalanzaMayorColumna.LblEmpresa1.Caption = Me.DtaDatosEmpresa.Recordset("Direccion")
@@ -5672,12 +5672,12 @@ Case "AUXILIAR x GRUPO"
  
  ArepCheque.LblChequeNo.Caption = CkNo
  ArepCheque.Field15.Visible = False
- SQL = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE (((Transacciones.FechaTransaccion) Between '" & Format(Me.DTFecha1, "yyyymmdd") & "' And '" & Format(Me.DTFecha2, "yyyymmdd") & "') AND ((Transacciones.NumeroMovimiento)=" & NumeroTransaccion & ")) ORDER BY Transacciones.NTransaccion"
+ Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE (((Transacciones.FechaTransaccion) Between '" & Format(Me.DTFecha1, "yyyymmdd") & "' And '" & Format(Me.DTFecha2, "yyyymmdd") & "') AND ((Transacciones.NumeroMovimiento)=" & NumeroTransaccion & ")) ORDER BY Transacciones.NTransaccion"
 ' ArepCheque.Show 1
 
             Set rpt = New ArepCheque
             rpt.DtaCheque.ConnectionString = ConexionReporte
-            rpt.DtaCheque.Source = SQL
+            rpt.DtaCheque.Source = Sql
             fPreview.RunReport rpt
             fPreview.Show 1
             
@@ -5740,8 +5740,8 @@ Case "AUXILIAR x GRUPO"
      ArepPresupuesto.Label13.Caption = "PRESUPUESTO PARA EL AÑO " & Year(Fecha1)
 '     ArepPresupuesto.DataControl1.Source = "SELECT PresupuestoAnual.NumeroTabla, PresupuestoAnual.CodigoCuenta AS CodCuenta, Sum(PresupuestoAnual.MontoAnual) AS SumaDeMontoPresupuestado, Cuentas.DescripcionCuentas, GrupoCuentas.DescripcionGrupo, GrupoCuentas.CodGrupo FROM GrupoCuentas INNER JOIN (Cuentas INNER JOIN PresupuestoAnual ON Cuentas.CodCuentas = PresupuestoAnual.CodigoCuenta) ON GrupoCuentas.CodGrupo = Cuentas.CodGrupo GROUP BY PresupuestoAnual.NumeroTabla, PresupuestoAnual.CodigoCuenta, Cuentas.DescripcionCuentas, GrupoCuentas.DescripcionGrupo, GrupoCuentas.CodGrupo Having (((PresupuestoAnual.NumeroTabla) = " & Tabla & ")) ORDER BY GrupoCuentas.CodGrupo,PresupuestoAnual.CodigoCuenta"
 '     SQL = "SELECT Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, SUM(Presupuesto.MontoPresupuestado) AS SumaDeMontoPresupuestado, GrupoCuentas.CodGrupo, GrupoCuentas.DescripcionGrupo , Periodos.NumeroTabla FROM Periodos INNER JOIN GrupoCuentas INNER JOIN  Cuentas INNER JOIN Presupuesto ON Cuentas.CodCuentas = Presupuesto.CodCuenta ON GrupoCuentas.CodGrupo = Cuentas.CodGrupo ON  Periodos.NPeriodo = Presupuesto.NPeriodo  GROUP BY Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, GrupoCuentas.CodGrupo, GrupoCuentas.DescripcionGrupo, Periodos.NumeroTabla  Having (Periodos.NumeroTabla = " & Tabla & ") ORDER BY Presupuesto.CodCuenta"
-SQL = "SELECT Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, SUM(Presupuesto.MontoPresupuestado) AS SumaDeMontoPresupuestado, GrupoCuentas.CodGrupo, GrupoCuentas.DescripcionGrupo , Periodos.NumeroTabla FROM GrupoCuentas RIGHT OUTER JOIN Periodos INNER JOIN  Cuentas INNER JOIN Presupuesto ON Cuentas.CodCuentas = Presupuesto.CodCuenta ON Periodos.NPeriodo = Presupuesto.NPeriodo ON  GrupoCuentas.CodGrupo = Cuentas.CodGrupo GROUP BY Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, GrupoCuentas.CodGrupo, GrupoCuentas.DescripcionGrupo, Periodos.NumeroTabla Having (Periodos.NumeroTabla = " & Tabla & ") ORDER BY Presupuesto.CodCuenta "
-     ArepPresupuesto.DataControl1.Source = SQL
+Sql = "SELECT Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, SUM(Presupuesto.MontoPresupuestado) AS SumaDeMontoPresupuestado, GrupoCuentas.CodGrupo, GrupoCuentas.DescripcionGrupo , Periodos.NumeroTabla FROM GrupoCuentas RIGHT OUTER JOIN Periodos INNER JOIN  Cuentas INNER JOIN Presupuesto ON Cuentas.CodCuentas = Presupuesto.CodCuenta ON Periodos.NPeriodo = Presupuesto.NPeriodo ON  GrupoCuentas.CodGrupo = Cuentas.CodGrupo GROUP BY Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, GrupoCuentas.CodGrupo, GrupoCuentas.DescripcionGrupo, Periodos.NumeroTabla Having (Periodos.NumeroTabla = " & Tabla & ") ORDER BY Presupuesto.CodCuenta "
+     ArepPresupuesto.DataControl1.Source = Sql
      ArepPresupuesto.Logo.Picture = LoadPicture(RutaLogo)
      ArepPresupuesto.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
      ArepPresupuesto.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
@@ -5804,12 +5804,12 @@ SQL = "SELECT Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, SUM(Presupuesto
              If Me.CmbMoneda.Text = "Córdobas" Then
              
                Moneda = "Cordobas"
-               SQL = "SELECT Transacciones.CodCuentas, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Transacciones.NPeriodo) AS NPeriodo, MAX(Transacciones.NTransaccion) AS NTransaccion, MAX(Transacciones.NumeroMovimiento) AS NumeroMovimiento, MAX(Transacciones.VoucherNo) AS VoucherNo, MAX(Transacciones.DescripcionMovimiento) AS DescripcionMovimiento, MAX(Transacciones.Clave) AS Clave, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * Tasas.MontoCordobas END) AS Debito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * Tasas.MontoCordobas END) AS Credito, MAX(Transacciones.FacturaNo) AS FacturaNo, MAX(Transacciones.ChequeNo) AS ChequeNo, MAX(Transacciones.Fuente) AS Fuente, MAX(Cuentas.TipoCuenta) AS TipoCuenta, SUM(Transacciones.Debito + Transacciones.Credito) AS Saldo FROM  Cuentas INNER JOIN " & _
+               Sql = "SELECT Transacciones.CodCuentas, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Transacciones.NPeriodo) AS NPeriodo, MAX(Transacciones.NTransaccion) AS NTransaccion, MAX(Transacciones.NumeroMovimiento) AS NumeroMovimiento, MAX(Transacciones.VoucherNo) AS VoucherNo, MAX(Transacciones.DescripcionMovimiento) AS DescripcionMovimiento, MAX(Transacciones.Clave) AS Clave, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * Tasas.MontoCordobas END) AS Debito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * Tasas.MontoCordobas END) AS Credito, MAX(Transacciones.FacturaNo) AS FacturaNo, MAX(Transacciones.ChequeNo) AS ChequeNo, MAX(Transacciones.Fuente) AS Fuente, MAX(Cuentas.TipoCuenta) AS TipoCuenta, SUM(Transacciones.Debito + Transacciones.Credito) AS Saldo FROM  Cuentas INNER JOIN " & _
                      "Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN Tasas ON IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas  " & _
                      "WHERE (Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) AND (IndiceTransaccion.Ajuste <> 'Dólares') GROUP BY Transacciones.CodCuentas HAVING (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (SUM(Transacciones.Debito + Transacciones.Credito) <> 0) ORDER BY Transacciones.CodCuentas"
              Else
                Moneda = "Dolares"
-               SQL = "SELECT Transacciones.CodCuentas, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Transacciones.NPeriodo) AS NPeriodo, MAX(Transacciones.NTransaccion) AS NTransaccion, MAX(Transacciones.NumeroMovimiento) AS NumeroMovimiento, MAX(Transacciones.VoucherNo) AS VoucherNo, MAX(Transacciones.DescripcionMovimiento) AS DescripcionMovimiento, MAX(Transacciones.Clave) AS Clave, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito ELSE Transacciones.Debito / Tasas.MontoCordobas END) AS Debito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito ELSE Transacciones.Credito / Tasas.MontoCordobas END) AS Credito, MAX(Transacciones.FacturaNo) AS FacturaNo, MAX(Transacciones.ChequeNo) AS ChequeNo, MAX(Transacciones.Fuente) AS Fuente, MAX(Cuentas.TipoCuenta) AS TipoCuenta, SUM(Transacciones.Debito + Transacciones.Credito) AS Saldo FROM  Cuentas INNER JOIN " & _
+               Sql = "SELECT Transacciones.CodCuentas, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Transacciones.NPeriodo) AS NPeriodo, MAX(Transacciones.NTransaccion) AS NTransaccion, MAX(Transacciones.NumeroMovimiento) AS NumeroMovimiento, MAX(Transacciones.VoucherNo) AS VoucherNo, MAX(Transacciones.DescripcionMovimiento) AS DescripcionMovimiento, MAX(Transacciones.Clave) AS Clave, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito ELSE Transacciones.Debito / Tasas.MontoCordobas END) AS Debito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito ELSE Transacciones.Credito / Tasas.MontoCordobas END) AS Credito, MAX(Transacciones.FacturaNo) AS FacturaNo, MAX(Transacciones.ChequeNo) AS ChequeNo, MAX(Transacciones.Fuente) AS Fuente, MAX(Cuentas.TipoCuenta) AS TipoCuenta, SUM(Transacciones.Debito + Transacciones.Credito) AS Saldo FROM  Cuentas INNER JOIN " & _
                      "Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN Tasas ON IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas  " & _
                      "WHERE (Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) AND (IndiceTransaccion.Ajuste <> 'Córdobas') GROUP BY Transacciones.CodCuentas HAVING (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (SUM(Transacciones.Debito + Transacciones.Credito) <> 0) ORDER BY Transacciones.CodCuentas"
             
@@ -5832,7 +5832,7 @@ SQL = "SELECT Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, SUM(Presupuesto
              
             Set rpt = New ArepAuxiliar
             rpt.DataControl1.ConnectionString = ConexionReporte
-            rpt.DataControl1.Source = SQL
+            rpt.DataControl1.Source = Sql
             fPreview.RunReport rpt
             fPreview.Show 1
 '             ArepAuxiliar.Show 1
@@ -5867,12 +5867,12 @@ SQL = "SELECT Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, SUM(Presupuesto
                CodigoCuentaHasta = Me.TxtKeyGrupoHasta.Text
             End If
        
-             SQL = "SELECT  Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.TCambio, Transacciones.FacturaNo,Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTransaccion, Cuentas.TipoCuenta, Transacciones.TCambio AS Expr1, Transacciones.TCambio * Transacciones.Debito AS Debito, Transacciones.TCambio * Transacciones.Credito AS Credito, Grupos.KeyGrupo, Grupos.DescripcionGrupo " & _
+             Sql = "SELECT  Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.TCambio, Transacciones.FacturaNo,Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTransaccion, Cuentas.TipoCuenta, Transacciones.TCambio AS Expr1, Transacciones.TCambio * Transacciones.Debito AS Debito, Transacciones.TCambio * Transacciones.Credito AS Credito, Grupos.KeyGrupo, Grupos.DescripcionGrupo " & _
                     "FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Grupos ON Cuentas.KeyGrupo = Grupos.KeyGrupo " & _
                     "WHERE  (Transacciones.FechaTransaccion BETWEEN '" & Format(Me.DTFecha1, "yyyymmdd") & "' AND '" & Format(Me.DTFecha2, "yyyymmdd") & "') AND (Grupos.KeyGrupo BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') " & _
                     "ORDER BY Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NTransaccion "
        
-             ArepAuxiliarMayor.DataControl1.Source = SQL
+             ArepAuxiliarMayor.DataControl1.Source = Sql
              ArepAuxiliarMayor.LblCodigo.Caption = "Mis Code:" & Me.DBCodigo.Text
              ArepAuxiliarMayor.LblRango.Caption = "Filtrado Desde: " & CodigoCuentaDesde & " Hasta " & CodigoCuentaHasta
              ArepAuxiliarMayor.Logo.Picture = LoadPicture(RutaLogo)
@@ -5884,7 +5884,7 @@ SQL = "SELECT Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, SUM(Presupuesto
            
             Set rpt = New ArepAuxiliar
             rpt.DataControl1.ConnectionString = ConexionReporte
-            rpt.DataControl1.Source = SQL
+            rpt.DataControl1.Source = Sql
             fPreview.RunReport rpt
             fPreview.Show 1
        
@@ -5899,7 +5899,7 @@ SQL = "SELECT Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, SUM(Presupuesto
     NumFecha1 = Me.DTFecha1.Value
     NumFecha2 = Me.DTFecha2.Value
     ArepTransacciones.DataControl1.ConnectionString = ConexionReporte
-    SQL = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FacturaNo , Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTransaccion FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas  " & _
+    Sql = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FacturaNo , Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTransaccion FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas  " & _
           "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(Me.DTFecha1.Value, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) ORDER BY Transacciones.NumeroMovimiento, Transacciones.NTransaccion"
 '   SQL = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTransaccion FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between " & NumFecha1 & "  And " & NumFecha2 & " )) ORDER BY Transacciones.NumeroMovimiento, Transacciones.NTransaccion"
 '    ArepTransacciones.Logo.Picture = LoadPicture(RutaLogo)
@@ -5910,7 +5910,7 @@ SQL = "SELECT Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, SUM(Presupuesto
 
      Set rpt = New ArepTransacciones
      rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = SQL
+     rpt.DataControl1.Source = Sql
      fPreview.RunReport rpt
 
 
@@ -6142,11 +6142,11 @@ SQL = "SELECT Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, SUM(Presupuesto
        
        If Me.CmbMoneda.Text = "Córdobas" Then
        'ArepBank.DtaBanco.Source
-         SQL = "SELECT Transacciones.NTransaccion, Transacciones.FechaTransaccion, Transacciones.VoucherNo, Transacciones.ChequeNo, Transacciones.DescripcionMovimiento, Transacciones.CodCuentas, TCambio*Debito AS Debito, TCambio*Credito AS Credito, " & SaldoIni & "+Transacciones.Debito-Transacciones.Credito AS Balance, Transacciones.TCambio, Transacciones.NumeroMovimiento,Beneficiario From Transacciones WHERE (((Transacciones.FechaTransaccion) Between '" & Format(Me.DTFecha1, "yyyymmdd") & "' And '" & Format(Me.DTFecha2, "yyyymmdd") & "') AND ((Transacciones.CodCuentas)='" & CodigoCuenta & "')) ORDER BY Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NTransaccion"
+         Sql = "SELECT Transacciones.NTransaccion, Transacciones.FechaTransaccion, Transacciones.VoucherNo, Transacciones.ChequeNo, Transacciones.DescripcionMovimiento, Transacciones.CodCuentas, TCambio*Debito AS Debito, TCambio*Credito AS Credito, " & SaldoIni & "+Transacciones.Debito-Transacciones.Credito AS Balance, Transacciones.TCambio, Transacciones.NumeroMovimiento,Beneficiario From Transacciones WHERE (((Transacciones.FechaTransaccion) Between '" & Format(Me.DTFecha1, "yyyymmdd") & "' And '" & Format(Me.DTFecha2, "yyyymmdd") & "') AND ((Transacciones.CodCuentas)='" & CodigoCuenta & "')) ORDER BY Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NTransaccion"
        Else
        
        'ArepBank.DtaBanco.Source
-         SQL = "SELECT Transacciones.NTransaccion, Transacciones.FechaTransaccion, Transacciones.VoucherNo, Transacciones.ChequeNo,Transacciones.DescripcionMovimiento, Transacciones.CodCuentas, ROUND(Transacciones.TCambio / Tasas.MontoCordobas * Transacciones.Debito,2) AS Debito, ROUND(Transacciones.TCambio / Tasas.MontoCordobas * Transacciones.Credito, 2) AS Credito,ROUND((2750.03 + Transacciones.Debito * (Transacciones.TCambio / Tasas.MontoCordobas)) - Transacciones.Credito * (Transacciones.TCambio / Tasas.MontoCordobas), 2) AS Balance, Transacciones.TCambio, Transacciones.NumeroMovimiento , Transacciones.Beneficiario FROM Transacciones INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas WHERE (Transacciones.FechaTransaccion BETWEEN '" & Format(Me.DTFecha1, "yyyymmdd") & "' And '" & Format(Me.DTFecha2, "yyyymmdd") & "') AND (Transacciones.CodCuentas = '" & CodigoCuenta & "') ORDER BY Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NTransaccion"
+         Sql = "SELECT Transacciones.NTransaccion, Transacciones.FechaTransaccion, Transacciones.VoucherNo, Transacciones.ChequeNo,Transacciones.DescripcionMovimiento, Transacciones.CodCuentas, ROUND(Transacciones.TCambio / Tasas.MontoCordobas * Transacciones.Debito,2) AS Debito, ROUND(Transacciones.TCambio / Tasas.MontoCordobas * Transacciones.Credito, 2) AS Credito,ROUND((2750.03 + Transacciones.Debito * (Transacciones.TCambio / Tasas.MontoCordobas)) - Transacciones.Credito * (Transacciones.TCambio / Tasas.MontoCordobas), 2) AS Balance, Transacciones.TCambio, Transacciones.NumeroMovimiento , Transacciones.Beneficiario FROM Transacciones INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas WHERE (Transacciones.FechaTransaccion BETWEEN '" & Format(Me.DTFecha1, "yyyymmdd") & "' And '" & Format(Me.DTFecha2, "yyyymmdd") & "') AND (Transacciones.CodCuentas = '" & CodigoCuenta & "') ORDER BY Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NTransaccion"
        End If
        ArepBank.Logo.Picture = LoadPicture(RutaLogo)
        ArepBank.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
@@ -6159,7 +6159,7 @@ SQL = "SELECT Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, SUM(Presupuesto
 
         Set rpt = New ArepBank
         rpt.DtaBanco.ConnectionString = ConexionReporte
-        rpt.DtaBanco.Source = SQL
+        rpt.DtaBanco.Source = Sql
         fPreview.RunReport rpt
          fPreview.Show 1
 
@@ -6179,7 +6179,7 @@ End Sub
 
 
 Private Sub CmdVerReporte2_Click()
-Dim Fechas1 As String, Fechas2 As String, Orden As Integer, SQL As String, i As Double
+Dim Fechas1 As String, Fechas2 As String, Orden As Integer, Sql As String, i As Double
 Dim UltimoOrden As Integer, RegIngresos  As Integer, PrimReg As Integer, UltReg As Integer
 Dim Utilidad As Double, Utilidad2 As Double, Utilidad3 As Double, RegTCostosOper As Integer
 Dim Decrementador As Integer, TotalActivoCirculante As Double, TotalActivoFijo As Double, TotalActivoDiferido As Double
@@ -6277,15 +6277,15 @@ Case "RETENCIONES EN LA FUENTE I.R X COBRAR"
    ArepRetencionesIR.LblPeriodo.Caption = ListaMeses(NumeroPeriodo1 - 1) & " " & Year(FechaIni)
    ArepRetencionesIR.LblTelefono.Caption = MDIPrimero.AdoConfiguracion.Recordset("Telefono")
    ArepRetencionesIR.LblBalance.Caption = Me.CmbReportes.Text
-   SQL = "SELECT Cuentas.RUC, Cuentas.Cedula, Cuentas.Apellido1, Cuentas.Apellido2, Cuentas.Nombre1 + ' ' + Cuentas.Nombre2 AS Nombres,Transacciones.DescripcionMovimiento, Transacciones.TCambio * Transacciones.Debito + Transacciones.TCambio * Transacciones.Credito AS Monto, Transacciones.CodCuentaProveedor, Cuentas.CausaRetencion, Cuentas.DescRetencion, Transacciones.TipoFactura, Cuentas.TipoCuenta, Cuentas.CodCuentas , Transacciones.FacturaNo, Transacciones.FechaTransaccion  " & _
+   Sql = "SELECT Cuentas.RUC, Cuentas.Cedula, Cuentas.Apellido1, Cuentas.Apellido2, Cuentas.Nombre1 + ' ' + Cuentas.Nombre2 AS Nombres,Transacciones.DescripcionMovimiento, Transacciones.TCambio * Transacciones.Debito + Transacciones.TCambio * Transacciones.Credito AS Monto, Transacciones.CodCuentaProveedor, Cuentas.CausaRetencion, Cuentas.DescRetencion, Transacciones.TipoFactura, Cuentas.TipoCuenta, Cuentas.CodCuentas , Transacciones.FacturaNo, Transacciones.FechaTransaccion  " & _
          "FROM  Transacciones INNER JOIN  Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas  " & _
          "WHERE (Cuentas.CausaRetencion = 1) AND (Cuentas.TipoCuenta = 'Cuentas x Cobrar') AND (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Fecha1 & "', 102) AND CONVERT(DATETIME, '" & Fecha2 & "', 102)) "
-         ArepRetencionesIR.DataControl1.Source = SQL
+         ArepRetencionesIR.DataControl1.Source = Sql
          
          
      Set rpt = New ArepRetencionesIR
      rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = SQL
+     rpt.DataControl1.Source = Sql
      fPreview.RunReport rpt
 
      fPreview.Show 1
@@ -6346,14 +6346,14 @@ Case "RETENCIONES EN LA FUENTE I.R X PAGAR"
    ArepRetencionesIR.LblPeriodo.Caption = ListaMeses(NumeroPeriodo1 - 1) & " " & Year(FechaIni)
    ArepRetencionesIR.LblTelefono.Caption = MDIPrimero.AdoConfiguracion.Recordset("Telefono")
    ArepRetencionesIR.LblBalance.Caption = Me.CmbReportes.Text
-   SQL = "SELECT Cuentas.RUC, Cuentas.Cedula, Cuentas.Apellido1, Cuentas.Apellido2, Cuentas.Nombre1 + ' ' + Cuentas.Nombre2 AS Nombres,Transacciones.DescripcionMovimiento, Transacciones.TCambio * Transacciones.Debito + Transacciones.TCambio * Transacciones.Credito AS Monto, Transacciones.CodCuentaProveedor, Cuentas.CausaRetencion, Cuentas.DescRetencion, Transacciones.TipoFactura, Cuentas.TipoCuenta, Cuentas.CodCuentas , Transacciones.FacturaNo, Transacciones.FechaTransaccion  " & _
+   Sql = "SELECT Cuentas.RUC, Cuentas.Cedula, Cuentas.Apellido1, Cuentas.Apellido2, Cuentas.Nombre1 + ' ' + Cuentas.Nombre2 AS Nombres,Transacciones.DescripcionMovimiento, Transacciones.TCambio * Transacciones.Debito + Transacciones.TCambio * Transacciones.Credito AS Monto, Transacciones.CodCuentaProveedor, Cuentas.CausaRetencion, Cuentas.DescRetencion, Transacciones.TipoFactura, Cuentas.TipoCuenta, Cuentas.CodCuentas , Transacciones.FacturaNo, Transacciones.FechaTransaccion  " & _
          "FROM  Transacciones INNER JOIN  Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas  " & _
          "WHERE (Cuentas.CausaRetencion = 1) AND (Cuentas.TipoCuenta = 'Cuentas x Pagar') AND (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Fecha1 & "', 102) AND CONVERT(DATETIME, '" & Fecha2 & "', 102)) "
-         ArepRetencionesIR.DataControl1.Source = SQL
+         ArepRetencionesIR.DataControl1.Source = Sql
          
      Set rpt = New ArepRetencionesIR
      rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = SQL
+     rpt.DataControl1.Source = Sql
      fPreview.RunReport rpt
 
      fPreview.Show 1
@@ -6416,17 +6416,17 @@ Case "ANEXO FISCAL IVA CLIENTES"
               ArepCreditoProveedor.LblCompañia.Caption = MDIPrimero.AdoConfiguracion.Recordset("NombreEmpresa")
 
 
- SQL = "SELECT Transacciones.FechaTransaccion, Transacciones.FacturaNo, Cuentas.RUC,Cuentas.Nombre1 + ' ' + Cuentas.Nombre2 + ' ' + Cuentas.Apellido1 + ' ' + Cuentas.Apellido2 AS Nombres, Transacciones.DescripcionMovimiento, Transacciones.TCambio * Transacciones.Debito + Transacciones.TCambio * Transacciones.Credito AS SubTotal, Transacciones.TipoFactura, Cuentas.TipoCuenta, Cuentas.CausaIva, Cuentas.CausaRetencion, Cuentas.DescRetencion, Cuentas.CodCuentas, Transacciones.CodCuentaProveedor " & _
+ Sql = "SELECT Transacciones.FechaTransaccion, Transacciones.FacturaNo, Cuentas.RUC,Cuentas.Nombre1 + ' ' + Cuentas.Nombre2 + ' ' + Cuentas.Apellido1 + ' ' + Cuentas.Apellido2 AS Nombres, Transacciones.DescripcionMovimiento, Transacciones.TCambio * Transacciones.Debito + Transacciones.TCambio * Transacciones.Credito AS SubTotal, Transacciones.TipoFactura, Cuentas.TipoCuenta, Cuentas.CausaIva, Cuentas.CausaRetencion, Cuentas.DescRetencion, Cuentas.CodCuentas, Transacciones.CodCuentaProveedor " & _
        "FROM Transacciones INNER JOIN  Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas  " & _
        "WHERE (Transacciones.TipoFactura = 'FacturaVenta') AND (Cuentas.CausaIva <> 1) AND (Cuentas.CausaRetencion <> 1) AND (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Fecha1 & "', 102) AND CONVERT(DATETIME, '" & Fecha2 & "', 102)) " & _
        "ORDER BY Transacciones.FechaTransaccion"
        
- ArepCreditoProveedor.DataControl1.Source = SQL
+ ArepCreditoProveedor.DataControl1.Source = Sql
 
 
      Set rpt = New ArepCreditoProveedor
      rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = SQL
+     rpt.DataControl1.Source = Sql
      fPreview.RunReport rpt
      fPreview.Show 1
 
@@ -6493,15 +6493,15 @@ Case "ANEXO FISCAL IVA PROVEEDOR"
 '       "WHERE (Transacciones.TipoFactura = 'FacturaCompra') AND (Cuentas.CausaIva <> 1) AND (Cuentas.CausaRetencion <> 1) AND (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Fecha1 & "', 102) AND CONVERT(DATETIME, '" & Fecha2 & "', 102)) " & _
 '       "ORDER BY Transacciones.FechaTransaccion"
 
-SQL = "SELECT  Transacciones.FechaTransaccion, Transacciones.FacturaNo, Cuentas.RUC,Cuentas.Nombre1 + ' ' + Cuentas.Nombre2 + ' ' + Cuentas.Apellido1 + ' ' + Cuentas.Apellido2 AS Nombres, Transacciones.DescripcionMovimiento, Transacciones.TCambio * Transacciones.Debito + Transacciones.TCambio * Transacciones.Credito AS SubTotal, Transacciones.TipoFactura, Cuentas.TipoCuenta, Cuentas.CausaIva, Cuentas.CausaRetencion, Cuentas.DescRetencion, Cuentas.CodCuentas, Transacciones.CodCuentaProveedor " & _
+Sql = "SELECT  Transacciones.FechaTransaccion, Transacciones.FacturaNo, Cuentas.RUC,Cuentas.Nombre1 + ' ' + Cuentas.Nombre2 + ' ' + Cuentas.Apellido1 + ' ' + Cuentas.Apellido2 AS Nombres, Transacciones.DescripcionMovimiento, Transacciones.TCambio * Transacciones.Debito + Transacciones.TCambio * Transacciones.Credito AS SubTotal, Transacciones.TipoFactura, Cuentas.TipoCuenta, Cuentas.CausaIva, Cuentas.CausaRetencion, Cuentas.DescRetencion, Cuentas.CodCuentas, Transacciones.CodCuentaProveedor " & _
       "FROM Transacciones INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas  " & _
       "WHERE (Cuentas.CausaIva = 1) AND (Cuentas.CausaRetencion <> 1) AND (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Fecha1 & "',102) AND CONVERT(DATETIME, '" & Fecha2 & "', 102)) AND (Cuentas.TipoCuenta = 'Cuentas x Pagar')  ORDER BY Transacciones.TipoFactura DESC, Transacciones.FechaTransaccion"
        
- ArepCreditoProveedor.DataControl1.Source = SQL
+ ArepCreditoProveedor.DataControl1.Source = Sql
 
      Set rpt = New ArepCreditoProveedor
      rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = SQL
+     rpt.DataControl1.Source = Sql
      fPreview.RunReport rpt
      fPreview.Show 1
 
@@ -7476,10 +7476,10 @@ Case "LIBRO MAYOR"
                 
             Parche.Execute "Update Reportes set debe3=debe1+debe2,haber3=haber1+haber2"
 '            SQL = "SELECT  MAX(Reportes.CodCuentas) AS CodCuentas, MAX(Cuentas.DescripcionCuentas) AS NombreCuenta, Cuentas.KeyGrupo, SUM(Reportes.Debe2) AS Debito, SUM(Reportes.Haber2) AS Credito, Cuentas.DescripcionGrupo FROM  Reportes INNER JOIN Cuentas ON Reportes.CodCuentas = Cuentas.CodCuentas GROUP BY Cuentas.KeyGrupo, Cuentas.DescripcionGrupo ORDER BY MAX(Reportes.CodCuentas) "
-            SQL = "SELECT  MAX(Reportes.CodCuentas) AS CodCuentas, MAX(Cuentas.DescripcionCuentas) AS NombreCuenta, Cuentas.KeyGrupo, SUM(Reportes.Debe2) AS Debe2, SUM(Reportes.Haber2) AS Haber2, Cuentas.DescripcionGrupo AS Descripcion, SUM(Reportes.Debe1) AS Debe1, SUM(Reportes.Haber1) AS Haber1, SUM(Reportes.Debe3) AS Debe3, SUM(Reportes.Haber3) AS Haber3 FROM Reportes INNER JOIN Cuentas ON Reportes.CodCuentas = Cuentas.CodCuentas GROUP BY Cuentas.KeyGrupo, Cuentas.DescripcionGrupo ORDER BY CodCuentas"
+            Sql = "SELECT  MAX(Reportes.CodCuentas) AS CodCuentas, MAX(Cuentas.DescripcionCuentas) AS NombreCuenta, Cuentas.KeyGrupo, SUM(Reportes.Debe2) AS Debe2, SUM(Reportes.Haber2) AS Haber2, Cuentas.DescripcionGrupo AS Descripcion, SUM(Reportes.Debe1) AS Debe1, SUM(Reportes.Haber1) AS Haber1, SUM(Reportes.Debe3) AS Debe3, SUM(Reportes.Haber3) AS Haber3 FROM Reportes INNER JOIN Cuentas ON Reportes.CodCuentas = Cuentas.CodCuentas GROUP BY Cuentas.KeyGrupo, Cuentas.DescripcionGrupo ORDER BY CodCuentas"
        
        
-            ArepLibroMayorSNiveles.DataControl1.Source = SQL
+            ArepLibroMayorSNiveles.DataControl1.Source = Sql
             ArepLibroMayorSNiveles.Logo.Picture = LoadPicture(RutaLogo)
             ArepLibroMayorSNiveles.LblEmpresa.Caption = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
             ArepLibroMayorSNiveles.LblEmpresa1.Caption = Me.DtaDatosEmpresa.Recordset("Direccion")
@@ -7584,10 +7584,10 @@ Case "LIBRO DIARIO"
 
             Parche.Execute "Update Reportes set debe3=debe1+debe2,haber3=haber1+haber2"
 ''            SQL = "SELECT  MAX(Reportes.CodCuentas) AS CodCuentas, MAX(Cuentas.DescripcionCuentas) AS NombreCuenta, Cuentas.KeyGrupo, SUM(Reportes.Debe2) AS Debito, SUM(Reportes.Haber2) AS Credito, Cuentas.DescripcionGrupo FROM  Reportes INNER JOIN Cuentas ON Reportes.CodCuentas = Cuentas.CodCuentas GROUP BY Cuentas.KeyGrupo, Cuentas.DescripcionGrupo ORDER BY MAX(Reportes.CodCuentas) "
-            SQL = "SELECT  MAX(Reportes.CodCuentas) AS CodCuentas, MAX(Cuentas.DescripcionCuentas) AS NombreCuenta, Cuentas.KeyGrupo, SUM(Reportes.Debe2) AS Debe2, SUM(Reportes.Haber2) AS Haber2, Cuentas.DescripcionGrupo AS Descripcion, SUM(Reportes.Debe1) AS Debe1, SUM(Reportes.Haber1) AS Haber1, SUM(Reportes.Debe3) AS Debe3, SUM(Reportes.Haber3) AS Haber3 FROM Reportes INNER JOIN Cuentas ON Reportes.CodCuentas = Cuentas.CodCuentas GROUP BY Cuentas.KeyGrupo, Cuentas.DescripcionGrupo ORDER BY CodCuentas"
+            Sql = "SELECT  MAX(Reportes.CodCuentas) AS CodCuentas, MAX(Cuentas.DescripcionCuentas) AS NombreCuenta, Cuentas.KeyGrupo, SUM(Reportes.Debe2) AS Debe2, SUM(Reportes.Haber2) AS Haber2, Cuentas.DescripcionGrupo AS Descripcion, SUM(Reportes.Debe1) AS Debe1, SUM(Reportes.Haber1) AS Haber1, SUM(Reportes.Debe3) AS Debe3, SUM(Reportes.Haber3) AS Haber3 FROM Reportes INNER JOIN Cuentas ON Reportes.CodCuentas = Cuentas.CodCuentas GROUP BY Cuentas.KeyGrupo, Cuentas.DescripcionGrupo ORDER BY CodCuentas"
     
     
-        ArepLibroDiarioSNiveles.DataControl1.Source = SQL
+        ArepLibroDiarioSNiveles.DataControl1.Source = Sql
         ArepLibroDiarioSNiveles.Logo.Picture = LoadPicture(RutaLogo)
         ArepLibroDiarioSNiveles.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
         ArepLibroDiarioSNiveles.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
@@ -7625,7 +7625,7 @@ Case "LIBRO DIARIO"
         
         
 '            SQL = "SELECT  * From Reportes WHERE (Nivel = " & Me.CmbNivel2.Text & ") AND (Descripcion LIKE N'%Total%') AND (Debe2 + Haber2 <> 0) ORDER BY Orden"
-             SQL = "SELECT  * From Reportes WHERE (Nivel = '-100') AND (Descripcion LIKE N'%Total%') AND (Debe2 + Haber2 <> 0) ORDER BY Orden"
+             Sql = "SELECT  * From Reportes WHERE (Nivel = '-100') AND (Descripcion LIKE N'%Total%') AND (Debe2 + Haber2 <> 0) ORDER BY Orden"
     
 '    ArepLibroDiario.DataControl1.Source = SQL
     ArepLibroDiario.Logo.Picture = LoadPicture(RutaLogo)
@@ -7650,13 +7650,13 @@ Case "LIBRO DIARIO"
  Case "DETALLE DIARIO MAYOR"
     NumFecha1 = FechaIni
     NumFecha2 = FechaFin
-    SQL = "SELECT MAX(Transacciones.CodCuentas) AS CodCuentas, Transacciones.FechaTransaccion, MAX(Transacciones.NumeroMovimiento) AS NumeroMovimiento, MAX(Transacciones.NombreCuenta) AS NombreCuenta, Avg(Transacciones.TCambio) AS TCambio, Sum(Transacciones.TCambio*Transacciones.Debito) AS Debito, Sum(Transacciones.TCambio*Transacciones.Credito) AS Credito, Cuentas.KeyGrupo, Cuentas.DescripcionGrupo " & _
+    Sql = "SELECT MAX(Transacciones.CodCuentas) AS CodCuentas, Transacciones.FechaTransaccion, MAX(Transacciones.NumeroMovimiento) AS NumeroMovimiento, MAX(Transacciones.NombreCuenta) AS NombreCuenta, Avg(Transacciones.TCambio) AS TCambio, Sum(Transacciones.TCambio*Transacciones.Debito) AS Debito, Sum(Transacciones.TCambio*Transacciones.Credito) AS Credito, Cuentas.KeyGrupo, Cuentas.DescripcionGrupo " & _
     "FROM (Grupos INNER JOIN Cuentas ON Grupos.KeyGrupo = Cuentas.KeyGrupo) INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas " & _
     "GROUP BY Transacciones.FechaTransaccion, Cuentas.KeyGrupo, Cuentas.DescripcionGrupo " & _
     "HAVING (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) " & _
     "ORDER BY Cuentas.KeyGrupo, Transacciones.FechaTransaccion "
 
-    ArepLibroDiarioMayor.DataControl1.Source = SQL
+    ArepLibroDiarioMayor.DataControl1.Source = Sql
     ArepLibroDiarioMayor.Logo.Picture = LoadPicture(RutaLogo)
     ArepLibroDiarioMayor.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
     ArepLibroDiarioMayor.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
@@ -7698,7 +7698,7 @@ Dim TotalSalidas As Double, TotalGastoOperacion As Double, TotalPasivo As Double
 Dim TotalCostos As Double, ListaActivos As Variant, TotalInventario As Double, TotalCuentaxCobrar As Double
 Dim TotalCuentasxPagar As Double, TotalActivos As Double, UtilidadBrutas As Double, UtilidadNetas As Double
 Dim UltimoOrden As Integer, RegIngresos  As Integer, PrimReg As Integer, UltReg As Integer
-Dim Fechas1 As String, Fechas2 As String, Orden As Integer, SQL As String, i As Double
+Dim Fechas1 As String, Fechas2 As String, Orden As Integer, Sql As String, i As Double
 Dim ListaMeses As Variant, CantRegistros As Double, ComboIni As Double, ComboFin As Double, TotstoFijo As Double, TotalGastoFijo As Double
 Dim mes As Double, J As Double, TotalDebito As Double, TotalCredito As Double
 Dim rpt As Object, TotalCostoFijo As Double, Ajuste As String
@@ -7878,12 +7878,12 @@ Case "COMPROBANTE DE DIARIO"
     End If
     
    If Me.TxtDptoDesde.Text = "" And Me.TxtDptoHasta.Text = "" Then
-        SQL = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * Tasas.MontoCordobas END) AS Debito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito ELSE Transacciones.Debito / Tasas.MontoCordobas END) AS DebitoD, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * Tasas.MontoCordobas END) AS Credito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito ELSE Transacciones.Credito / Tasas.MontoCordobas END) AS CreditoD, Transacciones.FechaTransaccion, Cuentas.DescripcionGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN " & _
+        Sql = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * Tasas.MontoCordobas END) AS Debito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito ELSE Transacciones.Debito / Tasas.MontoCordobas END) AS DebitoD, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * Tasas.MontoCordobas END) AS Credito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito ELSE Transacciones.Credito / Tasas.MontoCordobas END) AS CreditoD, Transacciones.FechaTransaccion, Cuentas.DescripcionGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN " & _
               "Tasas ON IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas " & _
               "GROUP BY Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.FechaTransaccion, IndiceTransaccion.TipoMoneda, Transacciones.NumeroMovimiento, Tasas.MontoCordobas , Cuentas.DescripcionGrupo HAVING (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(Me.DTFecha1.Value, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
     Else
 
-        SQL = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * Tasas.MontoCordobas END) AS Debito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito ELSE Transacciones.Debito / Tasas.MontoCordobas END) AS DebitoD, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * Tasas.MontoCordobas END) AS Credito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito ELSE Transacciones.Credito / Tasas.MontoCordobas END) AS CreditoD, Transacciones.FechaTransaccion, Cuentas.DescripcionGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN " & _
+        Sql = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * Tasas.MontoCordobas END) AS Debito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito ELSE Transacciones.Debito / Tasas.MontoCordobas END) AS DebitoD, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * Tasas.MontoCordobas END) AS Credito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito ELSE Transacciones.Credito / Tasas.MontoCordobas END) AS CreditoD, Transacciones.FechaTransaccion, Cuentas.DescripcionGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN " & _
               "Tasas ON IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas " & _
               "WHERE  (IndiceTransaccion.Fuente BETWEEN '" & Me.TxtDptoDesde.Text & "' AND '" & Me.TxtDptoHasta.Text & "') GROUP BY Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.FechaTransaccion, IndiceTransaccion.TipoMoneda, Transacciones.NumeroMovimiento, Tasas.MontoCordobas, Cuentas.DescripcionGrupo HAVING (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(Me.DTFecha1.Value, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
 
@@ -7891,7 +7891,7 @@ Case "COMPROBANTE DE DIARIO"
 
      Set rpt = New ArepComprobanteDiario
      rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = SQL
+     rpt.DataControl1.Source = Sql
      fPreview.RunReport rpt
 
 
@@ -8639,10 +8639,10 @@ TipoErrs:
  MsgBox err.Description
 End Sub
 
-Function ExtraerCodigo(Cadena As String) As String
+Function ExtraerCodigo(cadena As String) As String
     Dim Caracter As String
-    For i = 1 To Len(Cadena) 'busca algun caracter que no sea numero ni punto
-        Caracter = Mid(Cadena, i, 1)
+    For i = 1 To Len(cadena) 'busca algun caracter que no sea numero ni punto
+        Caracter = Mid(cadena, i, 1)
         If Asc(Caracter) < vbKey0 Or Asc(Caracter) > vbKey9 Then
             If Asc(Caracter) <> vbKeyDecimal Then
                 Exit For

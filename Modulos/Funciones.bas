@@ -348,6 +348,17 @@ Public Function BuscaTasaCambio(FechaTasa As Date) As Double
       
 End Function
 
+Public Function BuscaTasaCambioFacturacion(FechaTasa As Date, ConexionFactura As String) As Double
+      MDIPrimero.AdoConsultaFacturacion.ConnectionString = ConexionFactura
+      MDIPrimero.AdoConsultaFacturacion.RecordSource = "SELECT   FechaTasa, MontoTasa From TasaCambio WHERE (FechaTasa = CONVERT(DATETIME, '" & Format(FechaTasa, "yyyymmdd") & "', 102))"
+      MDIPrimero.AdoConsultaFacturacion.Refresh
+      If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
+         BuscaTasaCambioFacturacion = MDIPrimero.AdoConsultaFacturacion.Recordset("MontoTasa")
+      Else
+         BuscaTasaCambioFacturacion = 0
+      End If
+End Function
+
 
 Public Function CalcularCostoPromedio(CodigoProducto As String, Conexion As String) As Double
  Dim MonedaCompra As String, PrecioUnitario As Double, Cantidad As Double, TotalImporte As Double, TasaCambio As Double, FechaCompra As Date
