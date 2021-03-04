@@ -810,6 +810,7 @@ Begin VB.MDIForm MDIPrimero
             Object.Width           =   1773
             MinWidth        =   1764
             Picture         =   "MDIPrimero.frx":65898
+            TextSave        =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
@@ -822,6 +823,7 @@ Begin VB.MDIForm MDIPrimero
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   3528
             MinWidth        =   3528
+            TextSave        =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
@@ -839,7 +841,7 @@ Begin VB.MDIForm MDIPrimero
          EndProperty
          BeginProperty Panel6 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   5
-            TextSave        =   "08:51 a.m."
+            TextSave        =   "03:01 p.m."
             Object.Tag             =   ""
          EndProperty
       EndProperty
