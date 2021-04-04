@@ -2162,7 +2162,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   81461249
+            Format          =   79364097
             CurrentDate     =   37837
          End
          Begin MSComCtl2.DTPicker DTFecha1 
@@ -2174,7 +2174,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   81461249
+            Format          =   79364097
             CurrentDate     =   37837
          End
          Begin VB.Label Label4 

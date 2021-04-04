@@ -1323,7 +1323,7 @@ Dim DescripCuenta As String, DescripcionPadre As String, KeyUltimo As String, Aj
        FrmReportes.DtaConsulta2.Refresh
        If Not FrmReportes.DtaConsulta2.Recordset.EOF Then
            'FrmReportes.DtaConsulta2.Recordset.Edit
-               FrmReportes.DtaConsulta2.Recordset("Haber1") = Totalingresos - TotalGastos
+'               FrmReportes.DtaConsulta2.Recordset("Haber1") = Totalingresos - TotalGastos
                FrmReportes.DtaConsulta2.Recordset("Haber2") = Totalingresos - TotalGastos
            FrmReportes.DtaConsulta2.Recordset.Update
        End If
