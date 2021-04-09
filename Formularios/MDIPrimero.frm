@@ -14,7 +14,7 @@ Begin VB.MDIForm MDIPrimero
    ClientHeight    =   8370
    ClientLeft      =   165
    ClientTop       =   555
-   ClientWidth     =   11880
+   ClientWidth     =   11400
    Icon            =   "MDIPrimero.frx":0000
    LinkTopic       =   "MDIForm1"
    Picture         =   "MDIPrimero.frx":57E2
@@ -29,11 +29,11 @@ Begin VB.MDIForm MDIPrimero
       Left            =   0
       ScaleHeight     =   305.455
       ScaleMode       =   0  'User
-      ScaleWidth      =   11850
+      ScaleWidth      =   11370
       TabIndex        =   0
       Top             =   0
       Visible         =   0   'False
-      Width           =   11880
+      Width           =   11400
       Begin VB.CommandButton Command1 
          Caption         =   "Command1"
          Height          =   195
@@ -604,8 +604,8 @@ Begin VB.MDIForm MDIPrimero
       Left            =   0
       Top             =   6090
       Visible         =   0   'False
-      Width           =   11880
-      _ExtentX        =   20955
+      Width           =   11400
+      _ExtentX        =   20108
       _ExtentY        =   794
       ConnectMode     =   0
       CursorLocation  =   3
@@ -652,8 +652,8 @@ Begin VB.MDIForm MDIPrimero
       Left            =   0
       Top             =   6540
       Visible         =   0   'False
-      Width           =   11880
-      _ExtentX        =   20955
+      Width           =   11400
+      _ExtentX        =   20108
       _ExtentY        =   979
       ConnectMode     =   0
       CursorLocation  =   3
@@ -700,8 +700,8 @@ Begin VB.MDIForm MDIPrimero
       Left            =   0
       Top             =   7095
       Visible         =   0   'False
-      Width           =   11880
-      _ExtentX        =   20955
+      Width           =   11400
+      _ExtentX        =   20108
       _ExtentY        =   873
       ConnectMode     =   0
       CursorLocation  =   3
@@ -748,8 +748,8 @@ Begin VB.MDIForm MDIPrimero
       Left            =   0
       Top             =   7590
       Visible         =   0   'False
-      Width           =   11880
-      _ExtentX        =   20955
+      Width           =   11400
+      _ExtentX        =   20108
       _ExtentY        =   661
       ConnectMode     =   0
       CursorLocation  =   3
@@ -797,8 +797,8 @@ Begin VB.MDIForm MDIPrimero
       TabIndex        =   18
       Top             =   7965
       WhatsThisHelpID =   1
-      Width           =   11880
-      _ExtentX        =   20955
+      Width           =   11400
+      _ExtentX        =   20108
       _ExtentY        =   714
       SimpleText      =   "Programa Bajo Licencia de Juan"
       _Version        =   327682
@@ -846,7 +846,7 @@ Begin VB.MDIForm MDIPrimero
          EndProperty
          BeginProperty Panel6 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   5
-            TextSave        =   "03:13 p.m."
+            TextSave        =   "10:52"
             Key             =   ""
             Object.Tag             =   ""
          EndProperty
@@ -1029,8 +1029,8 @@ Begin VB.MDIForm MDIPrimero
       Left            =   0
       Top             =   5640
       Visible         =   0   'False
-      Width           =   11880
-      _ExtentX        =   20955
+      Width           =   11400
+      _ExtentX        =   20108
       _ExtentY        =   794
       ConnectMode     =   0
       CursorLocation  =   3
@@ -1189,22 +1189,22 @@ Private Sub CommandBars_Execute(ByVal Control As XtremeCommandBars.ICommandBarCo
         Case 1718
                 QUIEN = "ReporteGenerales"
                 FrmReportes.Label10.Caption = "Reportes Generales"
-                FrmReportes.Image2.Picture = LoadPicture(App.Path & "\Imagenes\ReporteGeneral.bmp")
+                'FrmReportes.Image2.Picture = LoadPicture(App.Path & "\Imagenes\ReporteGeneral.bmp")
                 FrmReportes.Show 1
         Case 1719
               QUIEN = "ReporteMovimientos"
               FrmReportes.Label10.Caption = "Reporte de Movimientos"
-              FrmReportes.Image2.Picture = LoadPicture(App.Path & "\Imagenes\ReporteMovimientos.bmp")
+              'FrmReportes.Image2.Picture = LoadPicture(App.Path & "\Imagenes\ReporteMovimientos.bmp")
               FrmReportes.Show 1
         Case 1720
              QUIEN = "ReporteBancos"
              FrmReportes.Label10.Caption = "Reporte de Bancos"
-             FrmReportes.Image2.Picture = LoadPicture(App.Path & "\Imagenes\ReportesBancos.bmp")
+             'FrmReportes.Image2.Picture = LoadPicture(App.Path & "\Imagenes\ReportesBancos.bmp")
              FrmReportes.Show 1
         Case 1721
              QUIEN = "EstadosFinancieros"
              FrmReportes.Label10.Caption = "Estados Financieros"
-             FrmReportes.Image2.Picture = LoadPicture(App.Path & "\Imagenes\EstadosFinancieros.bmp")
+             'FrmReportes.Image2.Picture = LoadPicture(App.Path & "\Imagenes\EstadosFinancieros.bmp")
              FrmReportes.CmbNivel.AddItem ("0")
              FrmReportes.CmbNivel.AddItem ("1")
              FrmReportes.CmbNivel.AddItem ("2")
@@ -1250,7 +1250,7 @@ Private Sub CommandBars_Execute(ByVal Control As XtremeCommandBars.ICommandBarCo
          Case 1722
                  QUIEN = "Analisis Financieros"
                  FrmReportes.Label10.Caption = "Analisis Financieros"
-                 FrmReportes.Image2.Picture = LoadPicture(App.Path & "\Imagenes\AnalisisFinanciero2.bmp")
+                 'FrmReportes.Image2.Picture = LoadPicture(App.Path & "\Imagenes\AnalisisFinanciero2.bmp")
                  FrmReportes.CmbMoneda.Visible = True
                  FrmReportes.Frame1.Visible = False
                  FrmReportes.Frame4.Visible = True
@@ -1286,7 +1286,7 @@ Private Sub CommandBars_Execute(ByVal Control As XtremeCommandBars.ICommandBarCo
   
               FrmConexiones.Option2.Value = True
               FrmConexiones.Image2 = LoadPicture(App.Path & "\Imagenes\ConexionFacturacion.bmp")
-              FrmConexiones.lbltitulo.Caption = "Conexion Sistema Facturacion"
+              FrmConexiones.LblTitulo.Caption = "Conexion Sistema Facturacion"
               FrmConexiones.Show
        
        Case 1724
@@ -1303,7 +1303,7 @@ Private Sub CommandBars_Execute(ByVal Control As XtremeCommandBars.ICommandBarCo
               
               FrmConexiones.Option1.Value = True
               FrmConexiones.Image2 = LoadPicture(App.Path & "\Imagenes\ConexionContabilidad.bmp")
-              FrmConexiones.lbltitulo.Caption = "Conexion Sistema Nominas"
+              FrmConexiones.LblTitulo.Caption = "Conexion Sistema Nominas"
               FrmConexiones.Show
               
               
@@ -1349,7 +1349,7 @@ Private Sub CommandBars_Execute(ByVal Control As XtremeCommandBars.ICommandBarCo
        Case 1736
               QUIEN = "ReporteCxC"
               FrmReportes.Label10.Caption = "Reportes CxC y CxP"
-              FrmReportes.Image2.Picture = LoadPicture(App.Path & "\Imagenes\ReporteMovimientos.bmp")
+              'FrmReportes.Image2.Picture = LoadPicture(App.Path & "\Imagenes\ReporteMovimientos.bmp")
               FrmReportes.Show 1
         
        Case 1737

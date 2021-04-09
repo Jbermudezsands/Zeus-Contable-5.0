@@ -70,7 +70,7 @@ Begin VB.Form FrmListaChequeReimpresion
    Begin VB.CommandButton CmdSalir 
       Caption         =   "Salir"
       BeginProperty Font 
-         Name            =   "Book Antiqua"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -735,7 +735,7 @@ Private Sub CmdAnular_Click()
            NumFecha1 = FechaIni
            NumFecha2 = FechaFin
          
-           Me.DtaConsulta.RecordSource = "SELECT IndiceTransaccion.FechaTransaccion, IndiceTransaccion.NumeroMovimiento, IndiceTransaccion.DescripcionMovimiento, IndiceTransaccion.Fuente, IndiceTransaccion.Fuente From IndiceTransaccion WHERE (((IndiceTransaccion.FechaTransaccion) Between " & NumFecha1 & " And " & NumFecha2 & " ) AND ((IndiceTransaccion.NumeroMovimiento)= " & NumeroMovimiento & ") AND ((IndiceTransaccion.NPeriodo)= " & Periodo & "))"
+           Me.DtaConsulta.RecordSource = "SELECT IndiceTransaccion.FechaTransaccion, IndiceTransaccion.NumeroMovimiento, IndiceTransaccion.DescripcionMovimiento, IndiceTransaccion.Fuente, IndiceTransaccion.Fuente From IndiceTransaccion WHERE (((IndiceTransaccion.NumeroMovimiento)= " & NumeroMovimiento & ") AND ((IndiceTransaccion.NPeriodo)= " & Periodo & "))"
            Me.DtaConsulta.Refresh
                  
                If Not DtaConsulta.Recordset.EOF Then
@@ -746,9 +746,8 @@ Private Sub CmdAnular_Click()
                 
                End If
            
-           Me.DtaConsulta.RecordSource = "SELECT Transacciones.* From Transacciones WHERE (((Transacciones.FechaTransaccion) Between " & NumFecha1 & " And " & NumFecha2 & " ) AND ((Transacciones.NumeroMovimiento)= " & NumeroMovimiento & ") AND ((Transacciones.NPeriodo)= " & Periodo & "))"
+           Me.DtaConsulta.RecordSource = "SELECT Transacciones.* From Transacciones WHERE (((Transacciones.NumeroMovimiento)= " & NumeroMovimiento & ") AND ((Transacciones.NPeriodo)= " & Periodo & "))"
            Me.DtaConsulta.Refresh
-           Me.DtaConsulta.Recordset.MoveFirst
             Do While Not Me.DtaConsulta.Recordset.EOF
 
              DtaConsulta.Recordset("NombreCuenta") = "**********CANCELADO*************"

@@ -32,7 +32,7 @@ Begin VB.Form FrmSolicitudPagoLista
       _ExtentX        =   2566
       _ExtentY        =   661
       _Version        =   393216
-      Format          =   83165185
+      Format          =   68616193
       CurrentDate     =   44168
    End
    Begin VB.CommandButton CmdProcesar 

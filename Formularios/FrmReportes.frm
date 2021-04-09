@@ -14,12 +14,12 @@ Begin VB.Form FrmReportes
    ClientHeight    =   8115
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   9480
+   ClientWidth     =   9390
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   8115
-   ScaleWidth      =   9480
+   ScaleWidth      =   9390
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame Frame6 
       BackColor       =   &H00E0E0E0&
@@ -379,16 +379,6 @@ Begin VB.Form FrmReportes
          Width           =   495
       End
    End
-   Begin VB.CheckBox ChkQuitarMovimiento 
-      BackColor       =   &H00E0E0E0&
-      Caption         =   "Quitar Movimientos de Cierre"
-      Height          =   255
-      Left            =   4080
-      TabIndex        =   210
-      Top             =   5280
-      Visible         =   0   'False
-      Width           =   2895
-   End
    Begin MSAdodcLib.Adodc AdoConsultas 
       Height          =   375
       Left            =   1680
@@ -513,7 +503,11 @@ Begin VB.Form FrmReportes
       Tab(0).Control(26).Enabled=   0   'False
       Tab(0).Control(27)=   "FrmDepartamento"
       Tab(0).Control(27).Enabled=   0   'False
-      Tab(0).ControlCount=   28
+      Tab(0).Control(28)=   "ChkQuitarMovimiento"
+      Tab(0).Control(28).Enabled=   0   'False
+      Tab(0).Control(29)=   "ChkMostrarMovxMes"
+      Tab(0).Control(29).Enabled=   0   'False
+      Tab(0).ControlCount=   30
       TabCaption(1)   =   "Configuracion Reportes"
       TabPicture(1)   =   "FrmReportes.frx":17E4E
       Tab(1).ControlEnabled=   0   'False
@@ -526,25 +520,44 @@ Begin VB.Form FrmReportes
       Tab(2).Control(0)=   "Frame12"
       Tab(2).Control(1)=   "Frame13"
       Tab(2).ControlCount=   2
+      Begin VB.CheckBox ChkMostrarMovxMes 
+         Caption         =   "Mostrar mov x mes"
+         Height          =   375
+         Left            =   960
+         TabIndex        =   231
+         Top             =   4320
+         Visible         =   0   'False
+         Width           =   2895
+      End
+      Begin VB.CheckBox ChkQuitarMovimiento 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "Quitar Movimientos de Cierre"
+         Height          =   255
+         Left            =   4080
+         TabIndex        =   230
+         Top             =   4080
+         Visible         =   0   'False
+         Width           =   2415
+      End
       Begin VB.Frame FrmDepartamento 
          BackColor       =   &H00E0E0E0&
          Caption         =   "Departamento"
          Height          =   1215
          Left            =   9840
-         TabIndex        =   224
+         TabIndex        =   223
          Top             =   3480
          Width           =   4575
          Begin VB.TextBox TxtDptoHasta 
             Height          =   285
             Left            =   1320
-            TabIndex        =   230
+            TabIndex        =   229
             Top             =   720
             Width           =   2535
          End
          Begin VB.TextBox TxtDptoDesde 
             Height          =   285
             Left            =   1320
-            TabIndex        =   227
+            TabIndex        =   226
             Top             =   360
             Width           =   2535
          End
@@ -562,7 +575,7 @@ Begin VB.Form FrmReportes
             Left            =   3960
             Picture         =   "FrmReportes.frx":17E86
             Style           =   1  'Graphical
-            TabIndex        =   226
+            TabIndex        =   225
             Top             =   720
             Width           =   375
          End
@@ -580,7 +593,7 @@ Begin VB.Form FrmReportes
             Left            =   3960
             Picture         =   "FrmReportes.frx":17FD4
             Style           =   1  'Graphical
-            TabIndex        =   225
+            TabIndex        =   224
             Top             =   360
             Width           =   375
          End
@@ -589,7 +602,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Hasta"
             Height          =   255
             Left            =   240
-            TabIndex        =   229
+            TabIndex        =   228
             Top             =   720
             Width           =   855
          End
@@ -598,7 +611,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Desde"
             Height          =   255
             Left            =   240
-            TabIndex        =   228
+            TabIndex        =   227
             Top             =   360
             Width           =   975
          End
@@ -608,7 +621,7 @@ Begin VB.Form FrmReportes
          ItemData        =   "FrmReportes.frx":18122
          Left            =   10560
          List            =   "FrmReportes.frx":18162
-         TabIndex        =   218
+         TabIndex        =   217
          Text            =   "2"
          Top             =   3000
          Width           =   615
@@ -618,7 +631,7 @@ Begin VB.Form FrmReportes
          ItemData        =   "FrmReportes.frx":181AD
          Left            =   10560
          List            =   "FrmReportes.frx":181ED
-         TabIndex        =   217
+         TabIndex        =   216
          Text            =   "2"
          Top             =   2520
          Width           =   615
@@ -628,7 +641,7 @@ Begin VB.Form FrmReportes
          ItemData        =   "FrmReportes.frx":18238
          Left            =   10560
          List            =   "FrmReportes.frx":18278
-         TabIndex        =   216
+         TabIndex        =   215
          Text            =   "2"
          Top             =   2040
          Width           =   615
@@ -638,7 +651,7 @@ Begin VB.Form FrmReportes
          ItemData        =   "FrmReportes.frx":182C3
          Left            =   10560
          List            =   "FrmReportes.frx":18303
-         TabIndex        =   215
+         TabIndex        =   214
          Text            =   "3"
          Top             =   1560
          Width           =   615
@@ -648,7 +661,7 @@ Begin VB.Form FrmReportes
          ItemData        =   "FrmReportes.frx":1834E
          Left            =   10560
          List            =   "FrmReportes.frx":1838E
-         TabIndex        =   214
+         TabIndex        =   213
          Text            =   "3"
          Top             =   1080
          Width           =   615
@@ -657,7 +670,7 @@ Begin VB.Form FrmReportes
          Caption         =   "Movimientos sin Niveles"
          Height          =   255
          Left            =   6360
-         TabIndex        =   213
+         TabIndex        =   212
          Top             =   4440
          Visible         =   0   'False
          Width           =   2295
@@ -667,7 +680,7 @@ Begin VB.Form FrmReportes
          ItemData        =   "FrmReportes.frx":183D9
          Left            =   5280
          List            =   "FrmReportes.frx":18419
-         TabIndex        =   211
+         TabIndex        =   210
          Text            =   "3"
          Top             =   4440
          Visible         =   0   'False
@@ -2128,14 +2141,13 @@ Begin VB.Form FrmReportes
          End
       End
       Begin VB.CheckBox ChkBalanza 
-         BackColor       =   &H00E0E0E0&
          Caption         =   "Solo Historial Periodo Selecionado"
          Height          =   255
-         Left            =   3960
+         Left            =   4080
          TabIndex        =   116
          Top             =   4080
          Visible         =   0   'False
-         Width           =   2895
+         Width           =   2775
       End
       Begin VB.ListBox CmbReportes 
          Height          =   3180
@@ -2162,7 +2174,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   79364097
+            Format          =   70713345
             CurrentDate     =   37837
          End
          Begin MSComCtl2.DTPicker DTFecha1 
@@ -2174,7 +2186,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   79364097
+            Format          =   70713345
             CurrentDate     =   37837
          End
          Begin VB.Label Label4 
@@ -2573,7 +2585,7 @@ Begin VB.Form FrmReportes
          Caption         =   "Nivel Gastos"
          Height          =   255
          Left            =   9480
-         TabIndex        =   223
+         TabIndex        =   222
          Top             =   3000
          Width           =   1095
       End
@@ -2582,7 +2594,7 @@ Begin VB.Form FrmReportes
          Caption         =   "Nivel Costos"
          Height          =   255
          Left            =   9480
-         TabIndex        =   222
+         TabIndex        =   221
          Top             =   2520
          Width           =   1095
       End
@@ -2591,7 +2603,7 @@ Begin VB.Form FrmReportes
          Caption         =   "Nivel Ingresos"
          Height          =   255
          Left            =   9480
-         TabIndex        =   221
+         TabIndex        =   220
          Top             =   2040
          Width           =   1095
       End
@@ -2600,7 +2612,7 @@ Begin VB.Form FrmReportes
          Caption         =   "Nivel Capital"
          Height          =   255
          Left            =   9480
-         TabIndex        =   220
+         TabIndex        =   219
          Top             =   1560
          Width           =   1095
       End
@@ -2609,7 +2621,7 @@ Begin VB.Form FrmReportes
          Caption         =   "Nivel Pasivo"
          Height          =   255
          Left            =   9480
-         TabIndex        =   219
+         TabIndex        =   218
          Top             =   1080
          Width           =   1095
       End
@@ -2618,7 +2630,7 @@ Begin VB.Form FrmReportes
          Caption         =   "Nivel Activos"
          Height          =   255
          Left            =   4200
-         TabIndex        =   212
+         TabIndex        =   211
          Top             =   4440
          Visible         =   0   'False
          Width           =   1095
@@ -2682,14 +2694,6 @@ Begin VB.Form FrmReportes
       TabIndex        =   71
       Top             =   -120
       Width           =   9495
-      Begin VB.Image Image2 
-         Height          =   960
-         Left            =   360
-         Picture         =   "FrmReportes.frx":187FB
-         Stretch         =   -1  'True
-         Top             =   80
-         Width           =   1080
-      End
       Begin VB.Line Line1 
          BorderColor     =   &H00800000&
          BorderWidth     =   2
@@ -2697,12 +2701,6 @@ Begin VB.Form FrmReportes
          X2              =   9480
          Y1              =   1080
          Y2              =   1080
-      End
-      Begin VB.Image Image1 
-         Height          =   645
-         Left            =   480
-         Top             =   120
-         Width           =   645
       End
       Begin VB.Label Label10 
          Alignment       =   2  'Center
@@ -2735,7 +2733,7 @@ Begin VB.Form FrmReportes
       _ExtentY        =   1508
       ForeColor       =   8388608
       Caption         =   "Ver Reporte"
-      Picture         =   "FrmReportes.frx":18F27
+      Picture         =   "FrmReportes.frx":187FB
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -2821,7 +2819,7 @@ Begin VB.Form FrmReportes
       _ExtentY        =   1508
       ForeColor       =   8388608
       Caption         =   "Ver Reporte"
-      Picture         =   "FrmReportes.frx":1A239
+      Picture         =   "FrmReportes.frx":19B0D
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -3427,7 +3425,7 @@ Begin VB.Form FrmReportes
       _ExtentY        =   1508
       ForeColor       =   8388608
       Caption         =   "Salir"
-      Picture         =   "FrmReportes.frx":1B54B
+      Picture         =   "FrmReportes.frx":1AE1F
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -3456,7 +3454,7 @@ Begin VB.Form FrmReportes
       _ExtentY        =   1508
       ForeColor       =   8388608
       Caption         =   "Ver Reporte"
-      Picture         =   "FrmReportes.frx":1C85D
+      Picture         =   "FrmReportes.frx":1C131
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -3566,6 +3564,15 @@ Private Sub ChkExportar_Click()
 ' End If
 End Sub
 
+Private Sub ChkMostrarMovxMes_Click()
+ If Me.ChkMostrarMovxMes.Value = 1 Then
+   Me.ChkSinNiveles.Value = 0
+   Me.ChkSinNiveles.Enabled = False
+ Else
+   Me.ChkSinNiveles.Enabled = True
+ End If
+End Sub
+
 Private Sub ChkSinNiveles_Click()
  If Me.ChkSinNiveles.Value = 1 Then
    Me.CmbNivel2.Enabled = False
@@ -3606,6 +3613,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
  
  Me.ChkSinNiveles.Visible = False
  Me.Frame1.Visible = True
+ Me.ChkMostrarMovxMes.Visible = False
  Me.CmbNivel2.Visible = False
  Me.LblNivel2.Visible = False
  Me.CmbNivel3.Visible = False
@@ -4019,6 +4027,14 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
 '
          
          Me.ChkSinNiveles.Visible = True
+         
+         Me.ChkMostrarMovxMes.Visible = True
+         Me.ChkMostrarMovxMes.top = 1900
+         Me.ChkMostrarMovxMes.Left = 6360
+         Me.ChkMostrarMovxMes.Visible = True
+         Me.ChkMostrarMovxMes.Caption = "Mostrar Mov x Mes"
+         
+         
     Case "DETALLE DIARIO MAYOR"
          Me.CmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
@@ -7502,9 +7518,15 @@ Case "LIBRO MAYOR"
             Parche.Execute "DELETE FROM Reportes"
             Parche.Close
         
+           
+            If Me.ChkMostrarMovxMes.Value = 1 Then
+             CreaEstructura ("BalanzaLibroMayor")
+             SaldoReportes ("BalanzaLibroMayor")
+            Else
+             CreaEstructura ("Balanza")
+             SaldoReportes ("Balanza")
+            End If
             
-            CreaEstructura ("Balanza")
-            SaldoReportes ("Balanza")
             EliminaRegistroCero ("Balanza")
             
             '-----------------------BORRO TODAS LAS CUENTAS QUE NO SUMAN NINGUN VALOR ------------------
