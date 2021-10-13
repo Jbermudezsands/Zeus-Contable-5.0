@@ -2174,7 +2174,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   70713345
+            Format          =   16711681
             CurrentDate     =   37837
          End
          Begin MSComCtl2.DTPicker DTFecha1 
@@ -2186,7 +2186,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   70713345
+            Format          =   16711681
             CurrentDate     =   37837
          End
          Begin VB.Label Label4 
@@ -4595,9 +4595,9 @@ Case "ESTADO DE RESULTADO"
        FrmReportes.DtaReportes.Recordset("Orden") = Orden
     FrmReportes.DtaReportes.Recordset.Update
     
-    SaldoReportes ("Resultado")
+    SaldoReportes ("UtilidadResultado")
 '    SaldoReportes ("UtilidadResultado")
-    SaldoReportesAcumulado ("UtilidadResultado")
+'    SaldoReportesAcumulado ("UtilidadResultado")
 '    '------------------------------------------------------------------------------
 '    '----------------IGUALO LOS SALDOS DEL RESULTADO ACUMULADO --------------------
 '    '------------------------------------------------------------------------------
@@ -4606,7 +4606,7 @@ Case "ESTADO DE RESULTADO"
     
 
 '    SaldoReportesAcumulado ("Resultado")
-'    SaldoReportes ("UtilidadResultado")
+    SaldoReportes ("Utilidad")
     
     If Me.CmbNivel.Text = 0 Then
      EliminaRegistroCero ("Resultado")
@@ -8519,7 +8519,7 @@ Select Case QUIEN
   Me.CmbReportes.AddItem ("BALANCE HISTORICO")
   Me.CmbReportes.AddItem ("BALANCE GENERAL RESUMEN")
   Me.CmbReportes.AddItem ("BALANCE GENERAL RESUMEN ANEXOS")
-  Me.CmbReportes.AddItem ("BALANCE GENERAL TRADICIONAL")
+'  Me.CmbReportes.AddItem ("BALANCE GENERAL TRADICIONAL")
   Me.CmbReportes.AddItem ("ESTADO DE RESULTADO")
   Me.CmbReportes.AddItem ("ESTADO DE RESULTADO DPTO")
   Me.CmbReportes.AddItem ("RESULTADO ACUMULADO")

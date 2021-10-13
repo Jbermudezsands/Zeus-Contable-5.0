@@ -1050,6 +1050,10 @@ Dim DescripCuenta As String, DescripcionPadre As String, KeyUltimo As String, Aj
     '///////////////////////////////////////////////////////////////////////////
     
     CodigoCuenta = FrmReportes.DtaHistorial.Recordset("CodCuentas")
+    
+    If CodigoCuenta = "6-51 " Then
+      CodigoCuenta = "6-51 "
+    End If
 '    FrmReportes.DtaConsulta.RecordSource = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Transacciones.FechaTransaccion, Tasas.MontoCordobas, Tasas.MontoLibras, Transacciones.NTransaccion FROM Tasas INNER JOIN (Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas) ON Tasas.FechaTasas = Transacciones.FechaTasas GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Transacciones.FechaTransaccion, Tasas.MontoCordobas, Tasas.MontoLibras, Transacciones.NTransaccion HAVING (((Cuentas.CodCuentas)='" & CodigoCuenta & "') AND ((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) ORDER BY Cuentas.CodCuentas"
     FrmReportes.DtaConsulta.RecordSource = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta , Cuentas.TipoMoneda, Transacciones.FechaTransaccion, Tasas.MontoCordobas, Tasas.MontoLibras, Transacciones.NTransaccion FROM  Tasas INNER JOIN Cuentas INNER JOIN  Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas ON Tasas.FechaTasas = Transacciones.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento And Transacciones.NPeriodo = IndiceTransaccion.NPeriodo GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Transacciones.FechaTransaccion, Tasas.MontoCordobas, " & _
                                            "Tasas.MontoLibras , Transacciones.NTransaccion, IndiceTransaccion.Ajuste HAVING (Cuentas.CodCuentas = '" & CodigoCuenta & "') AND (Transacciones.FechaTransaccion BETWEEN '" & Format(FechaIni, "yyyymmdd") & "' AND '" & Format(FechaFin, "yyyymmdd") & "') AND (IndiceTransaccion.Ajuste <> '" & Ajuste & "') ORDER BY Cuentas.CodCuentas"
@@ -3339,7 +3343,11 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                  Sql = Sql & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas, Transacciones.VoucherNo"
                  FrmReportes.DtaHistorial.RecordSource = Sql
                  FrmReportes.DtaHistorial.Refresh
-                 
+                ElseIf QUIEN = "UtilidadResultado" Then
+                 Sql = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
+                 Sql = Sql & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
+                 FrmReportes.DtaHistorial.RecordSource = Sql
+                 FrmReportes.DtaHistorial.Refresh
                  
                  
                  
@@ -3572,8 +3580,8 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                     '////////Consulto los registros del periodo seleccionado.///////////
                     CodigoCuenta = FrmReportes.DtaHistorial.Recordset("CodCuentas")
                     
-                    If CodigoCuenta = "6500" Then
-                      CodigoCuenta = "6500"
+                    If CodigoCuenta = "6-51 " Then
+                      CodigoCuenta = "6-51"
                     End If
                     
                     
@@ -3665,7 +3673,7 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                         
                        TotalDebito = 0
                        TotalCredito = 0
-                      TipoCuenta = FrmReportes.DtaConsulta.Recordset("TipoCuenta")
+                       TipoCuenta = FrmReportes.DtaConsulta.Recordset("TipoCuenta")
                      
                       TipoMoneda = FrmReportes.DtaConsulta.Recordset("TipoMoneda")
                       FechaTransaccion = FrmReportes.DtaConsulta.Recordset("FechaTransaccion")
@@ -4083,6 +4091,7 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                               Respuesta = FrmReportes.DtaConsulta.Recordset("KeyGrupoSuperior")
                            End If
                        Next
+                       
                 '//UTILIDAD
                     ElseIf QUIEN = "UtilidadResultado" Then
                        If TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Then
@@ -4102,6 +4111,7 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                        End If
                       
                     
+                    '//////////UTILIDAD DEL BALANCE GENERAL ////////////
                     ElseIf QUIEN = "Utilidad" Then
                        If TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Then
                          TotalGastos = TotalGastos + TotalCuenta
@@ -4159,8 +4169,11 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                 '           End If
                 '       Next
                       End If
+                      
+                      
+                      
                     ElseIf QUIEN = "Resultado" Then
-                '//////////////////////////Busco la Cuenta en Reportes/////////////////////////////////
+                        '//////////////////////////Busco la Cuenta en Reportes/////////////////////////////////
                        FrmReportes.DtaConsulta2.RecordSource = "SELECT Reportes.KeyGrupoCuenta,Reportes.KeyGrupoSuperior,Reportes.KeyGrupo,Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3 From Reportes Where (((Reportes.KeyGrupo) = '" & CodigoCuenta & "'))"
                        FrmReportes.DtaConsulta2.Refresh
                        If Not FrmReportes.DtaConsulta2.Recordset.EOF Then
@@ -4170,7 +4183,7 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                           FrmReportes.DtaConsulta2.Recordset.Update
                 '       End If
                        
-                '//////////////////////IDENTIFICO EL NIVEL DEL PADRE////////////////////////////////////////////////////
+                        '//////////////////////IDENTIFICO EL NIVEL DEL PADRE////////////////////////////////////////////////////
                               Longitud = Len(FrmReportes.DtaConsulta2.Recordset("KeyGrupoCuenta"))
                               If Longitud > 1 Then
                                  If Longitud = 5 Then
@@ -4183,16 +4196,16 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                                     Nivel = 1
                               End If
                        
-                '///////////////////////////Ahora le Sumo el Saldo a los Grupos Superiores/////////////////
-                       Respuesta = FrmReportes.DtaConsulta2.Recordset("KeyGrupoCuenta")
+                         '///////////////////////////Ahora le Sumo el Saldo a los Grupos Superiores/////////////////
+                         Respuesta = FrmReportes.DtaConsulta2.Recordset("KeyGrupoCuenta")
                        Else
                        
-                       MsgBox "La cuenta Tiene Saldo y no aparece en la Estructura, Cuenta: " & CodigoCuenta, vbCritical
+                         MsgBox "La cuenta Tiene Saldo y no aparece en la Estructura, Cuenta: " & CodigoCuenta, vbCritical
                         
                        End If
                        'Nivel = Nivel - 1
                        For i = Nivel To 1 Step -1
-                '/////////Busco el Grupo para Sumar los Totaldes
+                           '/////////Busco el Grupo para Sumar los Totaldes
                            FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior From Reportes Where (((Reportes.KeyGrupo) = '" & Respuesta & "')) ORDER BY Orden"
                 '           InputBox "", "", DtaConsulta.RecordSource
                            FrmReportes.DtaConsulta.Refresh
@@ -4207,7 +4220,8 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                            If Not IsNull(FrmReportes.DtaConsulta.Recordset("KeyGrupoSuperior")) Then
                               Respuesta = FrmReportes.DtaConsulta.Recordset("KeyGrupoSuperior")
                            End If
-                       Next
+                         Next
+                    
                     End If
                     
                 
@@ -4243,6 +4257,9 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
             If QUIEN = "Utilidad" Then
                 Sql = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
                 Sql = Sql & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
+            If QUIEN = "UtilidadResultado" Then
+                Sql = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
+                Sql = Sql & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
             ElseIf QUIEN = "BalanzaCodigo" Then
 '                SQL = "SELECT Cuentas.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio,5)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito,5)) AS MCredito, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio,5)) - SUM(ROUND(Transacciones.Credito * Transacciones.TCambio,5)) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM  Cuentas INNER JOIN  Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas " & _
 '                      "WHERE (Transacciones.FechaTransaccion < '" & Format(FechaIni, "yyyymmdd") & "') GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda Having (SUM(Round(Transacciones.Debito * Transacciones.TCambio,5)) - SUM(Round(Transacciones.Credito * Transacciones.TCambio,5)) <> 0) ORDER BY Cuentas.CodCuentas"
@@ -4258,6 +4275,17 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
 '                SQl = SQl & "ORDER BY Cuentas.CodCuentas"
         
                 Sql = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, MAX(Cuentas.KeyGrupo) AS KeyGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (Transacciones.FechaTransaccion < '" & Format(FechaIni, "yyyymmdd") & "') GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda HAVING (MAX(Cuentas.KeyGrupo) BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') ORDER BY Cuentas.CodCuentas"
+            
+            ElseIf QUIEN = "Resultado" Then
+                 Sql = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE ((Transacciones.FechaTransaccion) < '" & Format(FechaIni, "yyyymmdd") & "') GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda " & vbLf
+                 Sql = Sql & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas"
+                 FrmReportes.DtaHistorial.RecordSource = Sql
+                 FrmReportes.DtaHistorial.Refresh
+            ElseIf QUIEN = "ResultadoDpto" Then
+                 Sql = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Transacciones.VoucherNo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE ((Transacciones.FechaTransaccion) < '" & Format(FechaIni, "yyyymmdd") & "') GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Transacciones.VoucherNo " & vbLf
+                 Sql = Sql & "Having (((Cuentas.TipoCuenta) = 'Ingresos - Ventas' Or (Cuentas.TipoCuenta) = 'Costos' Or (Cuentas.TipoCuenta) = 'Gastos')) ORDER BY Cuentas.CodCuentas, Transacciones.VoucherNo"
+                 FrmReportes.DtaHistorial.RecordSource = Sql
+                 FrmReportes.DtaHistorial.Refresh
             Else
               
                 
@@ -4285,8 +4313,8 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                 CodigoCuenta = FrmReportes.DtaHistorial.Recordset("CodCuentas")
                 
 
-                    If CodigoCuenta = "314-05" Then
-                      CodigoCuenta = "314-05"
+                    If CodigoCuenta = "6-51 " Then
+                      CodigoCuenta = "6-51 "
                     End If
                 
                 FrmReportes.LblProgreso.Caption = "Consultando Registros del Periodo Anterior para la Cuenta " & CodigoCuenta
@@ -4649,9 +4677,73 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
             '       Next
                   End If
               
-             
+               ElseIf QUIEN = "UtilidadResultado" Then
+                   If TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Then
+                     TotalGastos = TotalCuenta
+                     Totalingresos = 0
+                   ElseIf TipoCuenta = "Ingresos - Ventas" Then
+                     Totalingresos = TotalCuenta
+                     TotalGastos = 0
+                   End If
+                   
+                   FrmReportes.DtaConsulta2.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.KeyGrupoCuenta From Reportes Where (((Reportes.Descripcion) Like '%Resultado Periodo%'))"
+                   FrmReportes.DtaConsulta2.Refresh
+                   If Not FrmReportes.DtaConsulta2.Recordset.EOF Then
+                           FrmReportes.DtaConsulta2.Recordset("Haber1") = Totalingresos - TotalGastos + FrmReportes.DtaConsulta2.Recordset("Haber1")
+                       FrmReportes.DtaConsulta2.Recordset.Update
+                   End If
              
                 ElseIf QUIEN = "Resultado" Then
+                
+                                        '//////////////////////////Busco la Cuenta en Reportes/////////////////////////////////
+                       FrmReportes.DtaConsulta2.RecordSource = "SELECT Reportes.KeyGrupoCuenta,Reportes.KeyGrupoSuperior,Reportes.KeyGrupo,Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3 From Reportes Where (((Reportes.KeyGrupo) = '" & CodigoCuenta & "'))"
+                       FrmReportes.DtaConsulta2.Refresh
+                       If Not FrmReportes.DtaConsulta2.Recordset.EOF Then
+                
+                          'FrmReportes.DtaConsulta2.Recordset.Edit
+                            FrmReportes.DtaConsulta2.Recordset("Debe1") = TotalCuenta + FrmReportes.DtaConsulta2.Recordset("Debe1")
+                          FrmReportes.DtaConsulta2.Recordset.Update
+                '       End If
+                       
+                        '//////////////////////IDENTIFICO EL NIVEL DEL PADRE////////////////////////////////////////////////////
+                              Longitud = Len(FrmReportes.DtaConsulta2.Recordset("KeyGrupoCuenta"))
+                              If Longitud > 1 Then
+                                 If Longitud = 5 Then
+                                     Nivel = 2
+                                 Else
+                                     Nivel = (Longitud - 5) / 2
+                                     Nivel = Nivel + 2
+                                 End If
+                              Else
+                                    Nivel = 1
+                              End If
+                       
+                         '///////////////////////////Ahora le Sumo el Saldo a los Grupos Superiores/////////////////
+                         Respuesta = FrmReportes.DtaConsulta2.Recordset("KeyGrupoCuenta")
+                       Else
+                       
+                         MsgBox "La cuenta Tiene Saldo y no aparece en la Estructura, Cuenta: " & CodigoCuenta, vbCritical
+                        
+                       End If
+                       'Nivel = Nivel - 1
+                       For i = Nivel To 1 Step -1
+                           '/////////Busco el Grupo para Sumar los Totaldes
+                           FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior From Reportes Where (((Reportes.KeyGrupo) = '" & Respuesta & "')) ORDER BY Orden"
+                '           InputBox "", "", DtaConsulta.RecordSource
+                           FrmReportes.DtaConsulta.Refresh
+                           If Not FrmReportes.DtaConsulta.Recordset.EOF Then
+                              FrmReportes.DtaConsulta.Recordset.MoveLast
+                              'FrmReportes.'DtaConsulta.Recordset.Edit
+                                 FrmReportes.DtaConsulta.Recordset("Haber1") = FrmReportes.DtaConsulta.Recordset("Haber1") + TotalCuenta
+                              FrmReportes.DtaConsulta.Recordset.Update
+                
+                           End If
+                
+                           If Not IsNull(FrmReportes.DtaConsulta.Recordset("KeyGrupoSuperior")) Then
+                              Respuesta = FrmReportes.DtaConsulta.Recordset("KeyGrupoSuperior")
+                           End If
+                         Next
+
             
                 End If
             

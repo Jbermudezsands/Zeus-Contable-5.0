@@ -1,7 +1,7 @@
 Attribute VB_Name = "Variables"
 Public Ejecutar As ADODB.Connection, QuienReporte As String, FechaIngreso As Date
 
-Public SaldoFinalAuxiliar As Double
+Public SaldoFinalAuxiliar As Double, TotalDebitoAux As Double, TotalCreditoAux As Double
 
 Public TotalConDebito As Double, TotalConCredito As Double, NumeroFact As String
 Public TotalInicial As Double, TotalFinal As Double

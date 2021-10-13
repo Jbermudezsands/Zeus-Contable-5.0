@@ -257,13 +257,19 @@ Else
       Me.DtaConsulta.Recordset.Servidor = Me.TxtConexionString.Text
       Me.DtaConsulta.Recordset.NombreBD = Me.TxtNombreBD.Text
     Me.DtaConsulta.Recordset.Update
+    
+   MsgBox "Se ha Grabado con Exito!!", vbExclamation, "Zeus Servidor"
   Else
     Me.DtaConsulta.Recordset.AddNew
       Me.DtaConsulta.Recordset.Servidor = Me.TxtConexionString.Text
       Me.DtaConsulta.Recordset.NombreBD = Me.TxtNombreBD.Text
     Me.DtaConsulta.Recordset.Update
+    MsgBox "Se ha Grabado con Exito!!", vbExclamation, "Zeus Servidor"
   End If
 End If
+
+Me.DtaServidor.Refresh
+
 End Sub
 
 Private Sub CmdBorrar_Click()
@@ -293,6 +299,9 @@ Else
 
   MsgBox "Registro Eliminado con Exito!!!", vbExclamation, "Sistema Contable"
 End If
+
+Me.DtaServidor.Refresh
+
 End Sub
 
 Private Sub CmdCancelar_Click()
@@ -309,7 +318,7 @@ Me.TxtConexionString.Text = mydlg.PromptNew
 
 Exit Sub
 TipoErrs:
- MsgBox err.Description
+ MsgBox Err.Description
 End Sub
 
 Private Sub Form_Load()
@@ -321,6 +330,17 @@ Me.Skin1.ApplySkin hWnd
 
 
 RutaServer = App.Path + "\CntConta.dll"
+
+If Dir(RutaServer) = "" Then
+  RutaServer = App.Path + "\CntCredito.dll"
+  
+  If Dir(RutaServer) = "" Then
+    RutaServer = App.Path + "\CntNominas.dll"
+  End If
+
+End If
+
+
 If Dir(RutaServer) <> "" Then
 
   

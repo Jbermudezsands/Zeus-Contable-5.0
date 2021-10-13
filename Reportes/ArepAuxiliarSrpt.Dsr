@@ -3,9 +3,9 @@ Begin {9EB8768B-CDFA-44DF-8F3E-857A8405E1DB} ArepAuxiliarSrpt
    ClientHeight    =   10980
    ClientLeft      =   165
    ClientTop       =   555
-   ClientWidth     =   19080
+   ClientWidth     =   11400
    StartUpPosition =   3  'Windows Default
-   _ExtentX        =   33655
+   _ExtentX        =   20108
    _ExtentY        =   19368
    SectionData     =   "ArepAuxiliarSrpt.dsx":0000
 End
@@ -14,7 +14,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Dim TransaccionNo As String, FechaTransaccion As Date, Saldo As Double
+Dim TransaccionNo As String, FechaTransaccion As Date, Saldo As Double, TotalDebito As Double, TotalCredito As Double
 Private Sub ActiveReport_FetchData(EOF As Boolean)
     If Not EOF Then
     'Gets the current records SupplierID
@@ -34,11 +34,17 @@ Dim Mov1 As Double, Mov2 As Double
    Mov1 = Me.Field26.Text
  End If
  
+ TotalDebitoAux = TotalDebitoAux + Mov1
+ 
+
+ 
   If Me.Field27.Text = "0.00" Or Me.Field27.Text = "" Then
    Mov2 = 0
  Else
    Mov2 = Me.Field27.Text
  End If
+ 
+ TotalCreditoAux = TotalCreditoAux + Mov2
  
       TipoCuenta = Me.FldTipoCuenta.Text
     

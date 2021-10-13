@@ -402,7 +402,7 @@ End With
 End Sub
 
 Private Sub PushButton1_Click()
-Dim TasaCambio As Double, FechaTasa As String, Cadena As String
+Dim TasaCambio As Double, FechaTasa As String, cadena As String
 On Error GoTo TipoErrs
 Dim Directorio As String, i As Double
 Dim cn As ADODB.Connection
@@ -435,13 +435,13 @@ Directorio = Me.CommonDialog1.FileName
         
         While Not EOF(1)
         Salir = False
-        Line Input #1, Cadena
+        Line Input #1, cadena
         
          If i <> 0 Then
        
             Identificador = Mid("A", 1, 1)
-            FechaTasa = Mid(Cadena, 1, 10)
-            TasaCambio = Mid(Cadena, 11, 18)
+            FechaTasa = Mid(cadena, 1, 10)
+            TasaCambio = Mid(cadena, 11, 18)
             
             
             

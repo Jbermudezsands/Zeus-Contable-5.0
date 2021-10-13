@@ -1,6 +1,6 @@
 Type=Exe
-Reference=*\G{A31CC8EF-A0BE-11D2-ACA7-00C04FA372BC}#1.0#0#C:\WINDOWS\System32\exclexpt.dll#ActiveReports Excel Export Filter
-Reference=*\G{013A8BB0-A25B-11D1-8BB6-00A0C98CD92B}#1.0#0#C:\WINDOWS\System32\pdfexpt.dll#ActiveReports PDF Export Filter
+Reference=*\G{A31CC8EF-A0BE-11D2-ACA7-00C04FA372BC}#1.0#0#C:\WINDOWS\system32\exclexpt.dll#ActiveReports Excel Export Filter
+Reference=*\G{013A8BB0-A25B-11D1-8BB6-00A0C98CD92B}#1.0#0#C:\WINDOWS\system32\pdfexpt.dll#ActiveReports PDF Export Filter
 Reference=*\G{00025E01-0000-0000-C000-000000000046}#4.0#0#C:\Archivos de programa\Archivos comunes\Microsoft Shared\DAO\DAO350.DLL#Microsoft DAO 3.51 Object Library
 Reference=*\G{00000205-0000-0010-8000-00AA006D2EA4}#2.5#0#C:\Archivos de programa\Archivos comunes\system\ado\msado25.tlb#Microsoft ActiveX Data Objects 2.0 Library
 Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINDOWS\system32\STDOLE2.TLB#OLE Automation
@@ -216,7 +216,7 @@ HelpContextID="0"
 CompatibleMode="0"
 MajorVer=5
 MinorVer=0
-RevisionVer=179
+RevisionVer=180
 AutoIncrementVer=1
 ServerSupportFiles=0
 VersionCompanyName="Company"

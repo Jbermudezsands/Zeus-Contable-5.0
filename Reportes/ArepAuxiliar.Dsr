@@ -15,8 +15,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Dim TransaccionNo As String, FechaTransaccion As Date, Saldo As Double
-
+Dim TransaccionNo As String, FechaTransaccion As Date, Saldo As Double, TotalDebito As Double, TotalCredito As Double
 
 Private Sub ActiveReport_Activate()
 QuienReporte = Me.Name
@@ -100,17 +99,22 @@ Private Sub Detail_Format()
 Dim Mov1 As Double, Mov2 As Double
 
 
+
  If Me.Field26.Text = "0.00" Or Me.Field26.Text = "" Then
    Mov1 = 0
  Else
    Mov1 = Me.Field26.Text
  End If
  
+ TotalDebito = Mov1 + TotalDebito
+ 
   If Me.Field27.Text = "0.00" Or Me.Field27.Text = "" Then
    Mov2 = 0
  Else
    Mov2 = Me.Field27.Text
  End If
+ 
+ TotalCredito = Mov2 + TotalCredito
  
       TipoCuenta = Me.FldTipoCuenta.Text
     
@@ -133,8 +137,6 @@ End Sub
 
 Private Sub GroupFooter1_Format()
 Dim CodigoCuenta As String, TipoCuenta As String
-
-
 
 
 
@@ -190,6 +192,8 @@ Dim CodigoCuenta As String, TipoCuenta As String
 '
 ' SaldoFin = SaldoIni + SaldoFin
 ' Me.LblFinal = Format(SaldoFin, "##,##0.00")
+ Me.LblTotalDebitto.Caption = Format(TotalDebitoAux, "##,##0.00")
+ Me.LblTotalCredito.Caption = Format(TotalCreditoAux, "##,##0.00")
  Me.LblFinal = Format(SaldoFinalAuxiliar, "##,##0.00")
 End Sub
 
@@ -197,6 +201,9 @@ Private Sub GroupHeader1_Format()
 On Error GoTo TipoErrs
 
 Dim CodigoCuenta As String, FechaIni As String, FechaFin As String
+
+TotalDebito = 0
+TotalCredito = 0
 
 '      Me.Field16.Visible = True
 '      Me.Field17.Visible = True
@@ -213,6 +220,8 @@ Dim CodigoCuenta As String, FechaIni As String, FechaFin As String
     Debito = 0
     Credito = 0
     SaldoFinalAuxiliar = 0
+    TotalDebitoAux = 0
+    TotalCreditoAux = 0
     
     NumFecha1 = FrmReportes.DTFecha1.Value
     NumFecha2 = FrmReportes.DTFecha2.Value
@@ -303,7 +312,7 @@ Dim CodigoCuenta As String, FechaIni As String, FechaFin As String
 
  If Moneda = "Cordobas" Then
  
- SQL = "SELECT  Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.TCambio, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTransaccion, Cuentas.TipoCuenta, Transacciones.TCambio AS Expr1, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * Tasas.MontoCordobas END AS Debito, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * Tasas.MontoCordobas END AS Credito, IndiceTransaccion.Nperiodo AS Expr2, Tasas.MontoCordobas FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND " & _
+ Sql = "SELECT  Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.TCambio, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTransaccion, Cuentas.TipoCuenta, Transacciones.TCambio AS Expr1, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * Tasas.MontoCordobas END AS Debito, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * Tasas.MontoCordobas END AS Credito, IndiceTransaccion.Nperiodo AS Expr2, Tasas.MontoCordobas FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND " & _
        "Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo INNER JOIN Tasas ON IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas " & _
        "WHERE (Transacciones.CodCuentas = '" & CodigoCuenta & "') AND (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & FechaIni & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) ORDER BY Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NTransaccion"
 
@@ -312,7 +321,7 @@ Dim CodigoCuenta As String, FechaIni As String, FechaFin As String
 '          "WHERE (Transacciones.CodCuentas = '" & CodigoCuenta & "') AND (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & FechaIni & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) ORDER BY Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NTransaccion"
  
  Else
-    SQL = "SELECT  Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.TCambio, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTransaccion, Cuentas.TipoCuenta, Transacciones.TCambio AS Expr1, CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN ROUND(Transacciones.Debito,2) ELSE ROUND(Transacciones.Debito / Tasas.MontoCordobas,2) END AS Debito, CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN ROUND(Transacciones.Credito,2) ELSE ROUND(Transacciones.Credito / Tasas.MontoCordobas,2) END AS Credito, IndiceTransaccion.Nperiodo AS Expr2, Tasas.MontoCordobas FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND " & _
+    Sql = "SELECT  Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.TCambio, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTransaccion, Cuentas.TipoCuenta, Transacciones.TCambio AS Expr1, CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN ROUND(Transacciones.Debito,2) ELSE ROUND(Transacciones.Debito / Tasas.MontoCordobas,2) END AS Debito, CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN ROUND(Transacciones.Credito,2) ELSE ROUND(Transacciones.Credito / Tasas.MontoCordobas,2) END AS Credito, IndiceTransaccion.Nperiodo AS Expr2, Tasas.MontoCordobas FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND " & _
            "Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo INNER JOIN Tasas ON IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas " & _
            "WHERE (Transacciones.CodCuentas = '" & CodigoCuenta & "') AND (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & FechaIni & "', 102) AND CONVERT(DATETIME, '" & FechaFin & "', 102)) ORDER BY Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NTransaccion"
      
@@ -320,7 +329,7 @@ Dim CodigoCuenta As String, FechaIni As String, FechaFin As String
    
        Set Me.SubReportAuxiliar.object = New ArepAuxiliarSrpt
        Me.SubReportAuxiliar.object.DataControl1.ConnectionString = ConexionReporte
-       Me.SubReportAuxiliar.object.DataControl1.Source = SQL
+       Me.SubReportAuxiliar.object.DataControl1.Source = Sql
       
        
 '    Else
