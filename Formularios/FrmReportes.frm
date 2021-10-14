@@ -511,14 +511,14 @@ Begin VB.Form FrmReportes
       TabCaption(1)   =   "Configuracion Reportes"
       TabPicture(1)   =   "FrmReportes.frx":17E4E
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame10"
-      Tab(1).Control(1)=   "Frame11"
+      Tab(1).Control(0)=   "Frame11"
+      Tab(1).Control(1)=   "Frame10"
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "Configuracion Reportes "
       TabPicture(2)   =   "FrmReportes.frx":17E6A
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame12"
-      Tab(2).Control(1)=   "Frame13"
+      Tab(2).Control(0)=   "Frame13"
+      Tab(2).Control(1)=   "Frame12"
       Tab(2).ControlCount=   2
       Begin VB.CheckBox ChkMostrarMovxMes 
          Caption         =   "Mostrar mov x mes"
@@ -2174,7 +2174,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   16711681
+            Format          =   65732609
             CurrentDate     =   37837
          End
          Begin MSComCtl2.DTPicker DTFecha1 
@@ -2186,7 +2186,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   16711681
+            Format          =   65732609
             CurrentDate     =   37837
          End
          Begin VB.Label Label4 
@@ -4595,7 +4595,7 @@ Case "ESTADO DE RESULTADO"
        FrmReportes.DtaReportes.Recordset("Orden") = Orden
     FrmReportes.DtaReportes.Recordset.Update
     
-    SaldoReportes ("UtilidadResultado")
+    SaldoReportes ("Resultado")
 '    SaldoReportes ("UtilidadResultado")
 '    SaldoReportesAcumulado ("UtilidadResultado")
 '    '------------------------------------------------------------------------------
@@ -4606,7 +4606,7 @@ Case "ESTADO DE RESULTADO"
     
 
 '    SaldoReportesAcumulado ("Resultado")
-    SaldoReportes ("Utilidad")
+    SaldoReportes ("UtilidadResultado")
     
     If Me.CmbNivel.Text = 0 Then
      EliminaRegistroCero ("Resultado")
