@@ -2813,7 +2813,7 @@ Dim Saldo As Double
   Me.DtaConsulta.Refresh
   If Me.DtaConsulta.Recordset.EOF Then
      Me.DtaPresupuesto.Recordset.AddNew
-      Me.DtaPresupuesto.Recordset!Nperiodo = NumeroPeriodo
+      Me.DtaPresupuesto.Recordset!NPeriodo = NumeroPeriodo
       Me.DtaPresupuesto.Recordset!CodCuenta = KeyPrincipal
       Select Case Periodo
              Case 1: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text1.Text)
@@ -2871,14 +2871,14 @@ Dim Saldo As Double
  Me.DtaPeriodos.Refresh
  
  Do While Not Me.DtaPeriodos.Recordset.EOF
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
 '  CodigoCuenta = Me.DBCliente.Text
   Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & KeyPrincipal & "'))"
   Me.DtaConsulta.Refresh
   If Me.DtaConsulta.Recordset.EOF Then
      Me.DtaPresupuesto.Recordset.AddNew
-      Me.DtaPresupuesto.Recordset!Nperiodo = NumeroPeriodo
+      Me.DtaPresupuesto.Recordset!NPeriodo = NumeroPeriodo
       Me.DtaPresupuesto.Recordset!CodCuenta = KeyPrincipal
       Select Case Periodo
              Case 1: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text13.Text)
@@ -2935,14 +2935,14 @@ Dim Saldo As Double
  
  
  Do While Not Me.DtaPeriodos.Recordset.EOF
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
 '  CodigoCuenta = Me.DBCliente.Text
   Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & KeyPrincipal & "'))"
   Me.DtaConsulta.Refresh
   If Me.DtaConsulta.Recordset.EOF Then
      Me.DtaPresupuesto.Recordset.AddNew
-      Me.DtaPresupuesto.Recordset!Nperiodo = NumeroPeriodo
+      Me.DtaPresupuesto.Recordset!NPeriodo = NumeroPeriodo
       Me.DtaPresupuesto.Recordset!CodCuenta = KeyPrincipal
       Select Case Periodo
              Case 1: Me.DtaPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text25.Text)
@@ -3062,14 +3062,14 @@ Dim Saldo As Double
  Me.DtaPeriodos.Refresh
  
  Do While Not Me.DtaPeriodos.Recordset.EOF
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
   CodigoCuenta = KeyPrincipal
   Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & CodigoCuenta & "'))"
   Me.DtaConsulta.Refresh
   If Me.DtaConsulta.Recordset.EOF Then
      Me.AdoPresupuesto.Recordset.AddNew
-      Me.AdoPresupuesto.Recordset!Nperiodo = NumeroPeriodo
+      Me.AdoPresupuesto.Recordset!NPeriodo = NumeroPeriodo
       Me.AdoPresupuesto.Recordset!CodCuenta = CodigoCuenta
       Select Case Periodo
              Case 1: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text1.Text)
@@ -3118,14 +3118,14 @@ Dim Saldo As Double
  Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 2))"
  Me.DtaPeriodos.Refresh
  Do While Not Me.DtaPeriodos.Recordset.EOF
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
   CodigoCuenta = KeyPrincipal
   Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & CodigoCuenta & "'))"
   Me.DtaConsulta.Refresh
   If Me.DtaConsulta.Recordset.EOF Then
      Me.AdoPresupuesto.Recordset.AddNew
-      Me.AdoPresupuesto.Recordset!Nperiodo = NumeroPeriodo
+      Me.AdoPresupuesto.Recordset!NPeriodo = NumeroPeriodo
       Me.AdoPresupuesto.Recordset!CodCuenta = CodigoCuenta
       Select Case Periodo
              Case 1: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text13.Text)
@@ -3173,14 +3173,14 @@ Dim Saldo As Double
  Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 3))"
  Me.DtaPeriodos.Refresh
  Do While Not Me.DtaPeriodos.Recordset.EOF
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
   CodigoCuenta = KeyPrincipal
   Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & CodigoCuenta & "'))"
   Me.DtaConsulta.Refresh
   If Me.DtaConsulta.Recordset.EOF Then
      Me.AdoPresupuesto.Recordset.AddNew
-      Me.AdoPresupuesto.Recordset!Nperiodo = NumeroPeriodo
+      Me.AdoPresupuesto.Recordset!NPeriodo = NumeroPeriodo
       Me.AdoPresupuesto.Recordset!CodCuenta = CodigoCuenta
       Select Case Periodo
              Case 1: Me.AdoPresupuesto.Recordset!MontoPresupuestado = CDbl(Me.Text25.Text)
@@ -3428,7 +3428,7 @@ Else
  Do While Not Me.DtaPeriodos.Recordset.EOF
   FechaIni = "01/" & Month(Me.DtaPeriodos.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaPeriodos.Recordset("FechaPeriodo"))
   FechaFin = Me.DtaPeriodos.Recordset("FechaPeriodo")
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
   CodigoCuenta = KeyPrincipal
 '  Me.DtaConsulta.RecordSource = "SELECT CodCuentas, SUM(Debito * TCambio) AS MDebito, SUM(TCambio * Credito) AS MCredito From Transacciones WHERE (FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "YYYY-MM-DD") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "YYYY-MM-DD") & "', 102)) GROUP BY FacturaNo HAVING (FacturaNo = '" & CodigoCuenta & "') "
@@ -3499,7 +3499,7 @@ Else
  Do While Not Me.DtaPeriodos.Recordset.EOF
   FechaIni = "01/" & Month(Me.DtaPeriodos.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaPeriodos.Recordset("FechaPeriodo"))
   FechaFin = Me.DtaPeriodos.Recordset("FechaPeriodo")
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
   CodigoCuenta = KeyPrincipal
   
@@ -3571,7 +3571,7 @@ Else
  Do While Not Me.DtaPeriodos.Recordset.EOF
   FechaIni = "01/" & Month(Me.DtaPeriodos.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaPeriodos.Recordset("FechaPeriodo"))
   FechaFin = Me.DtaPeriodos.Recordset("FechaPeriodo")
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
   CodigoCuenta = KeyPrincipal
 '  Me.DtaConsulta.RecordSource = "SELECT Transacciones.CodCuentas, Sum(Transacciones.Debito*Transacciones.TCambio) AS MDebito, Sum(Transacciones.TCambio*Transacciones.Credito) AS MCredito, Transacciones.NPeriodo From Transacciones GROUP BY Transacciones.CodCuentas, Transacciones.NPeriodo HAVING (((Transacciones.CodCuentas)='" & CodigoCuenta & "') AND ((Transacciones.NPeriodo)=" & NumeroPeriodo & "))"
@@ -3625,7 +3625,7 @@ Else
  Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 1))"
  Me.DtaPeriodos.Refresh
  Do While Not Me.DtaPeriodos.Recordset.EOF
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
   CodigoCuenta = KeyPrincipal
   Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & CodigoCuenta & "'))"
@@ -3664,7 +3664,7 @@ Else
  Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 2))"
  Me.DtaPeriodos.Refresh
  Do While Not Me.DtaPeriodos.Recordset.EOF
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
   CodigoCuenta = KeyPrincipal
   Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & CodigoCuenta & "'))"
@@ -3702,7 +3702,7 @@ Else
  Me.DtaPeriodos.RecordSource = "SELECT Periodos.NPeriodo, Periodos.NumeroTabla, Periodos.FechaPeriodo, Periodos.Periodo From Periodos Where (((Periodos.NumeroTabla) = 3))"
  Me.DtaPeriodos.Refresh
  Do While Not Me.DtaPeriodos.Recordset.EOF
-  NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+  NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
   Periodo = Me.DtaPeriodos.Recordset!Periodo
   CodigoCuenta = KeyPrincipal
   Me.DtaConsulta.RecordSource = "SELECT Presupuesto.NPeriodo, Presupuesto.CodCuenta, Presupuesto.MontoPresupuestado, Presupuesto.SaldoReal From Presupuesto Where (((Presupuesto.NPeriodo) = " & NumeroPeriodo & " ) And ((Presupuesto.CodCuenta) = '" & CodigoCuenta & "'))"
@@ -4488,7 +4488,7 @@ Private Sub SaldosPeriodos(KeyPrincipal As String)
       '////////////////////////////////SELECCIONO EL PERIODO ///////////////////////////////////////
       FechaIni = "01/" & Month(Me.DtaPeriodos.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaPeriodos.Recordset("FechaPeriodo"))
       FechaFin = Me.DtaPeriodos.Recordset("FechaPeriodo")
-      NumeroPeriodo = Me.DtaPeriodos.Recordset!Nperiodo
+      NumeroPeriodo = Me.DtaPeriodos.Recordset!NPeriodo
       Periodo = Me.DtaPeriodos.Recordset!Periodo
       
       CodigoCuenta = KeyPrincipal

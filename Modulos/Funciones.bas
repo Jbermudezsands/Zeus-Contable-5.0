@@ -1040,7 +1040,7 @@ Dim DescripCuenta As String, DescripcionPadre As String, KeyUltimo As String, Aj
    
    End If
    
-       FrmReportes.LblProgreso.Caption = "Consultando Registros del periodo seleccionado para la cuenta " & CodigoCuenta
+       FrmReportes.lblProgreso.Caption = "Consultando Registros del periodo seleccionado para la cuenta " & CodigoCuenta
 
           FrmReportes.osProgress1.Value = FrmReportes.osProgress1.Value + 1
 
@@ -1474,7 +1474,7 @@ Dim DescripCuenta As String, DescripcionPadre As String, KeyUltimo As String, Aj
 'InputBox "", "", FrmReportes.DtaHistorial.RecordSource
  FrmReportes.DtaHistorial.Refresh
 
-FrmReportes.LblProgreso.Caption = "Consultando Registros del Periodo Anterior para " & QUIEN
+FrmReportes.lblProgreso.Caption = "Consultando Registros del Periodo Anterior para " & QUIEN
 FrmReportes.osProgress1.Value = 0
 
  If Not FrmReportes.DtaHistorial.Recordset.EOF Then
@@ -1974,7 +1974,7 @@ Debug.Print FrmReportes.DtaHistorial.RecordSource
     FrmReportes.DtaHistorial.Recordset.MoveFirst
    End If
    
-       FrmReportes.LblProgreso.Caption = "Creando Estructura"
+       FrmReportes.lblProgreso.Caption = "Creando Estructura"
        FrmReportes.osProgress1.Value = 0
        FrmReportes.osProgress1.Visible = True
        FrmReportes.osProgress1.Max = CantRegistros
@@ -2055,7 +2055,7 @@ Debug.Print FrmReportes.DtaHistorial.RecordSource
        End If
        CodigoCuenta = FrmReportes.DtaConsulta.Recordset("CodCuentas")
        
-       FrmReportes.LblProgreso.Caption = "Agregando la Cuenta " & CodigoCuenta
+       FrmReportes.lblProgreso.Caption = "Agregando la Cuenta " & CodigoCuenta
        DoEvents
        
 '/////////////Lleno de Espacios el codigo de la cuenta//////////////////////////////
@@ -2375,7 +2375,7 @@ Dim CodDepartamento As String, NPeriodo As Double, NumeroPeriodo() As Double, i 
     Orden = 0
      FrmReportes.DtaHistorial.Refresh
 '     InputBox "", "", FrmReportes.DtaHistorial.RecordSource
-        FrmReportes.LblProgreso.Caption = "Creando Estructura"
+        FrmReportes.lblProgreso.Caption = "Creando Estructura"
         FrmReportes.osProgress1.Value = 0
         FrmReportes.osProgress1.Visible = True
        FrmReportes.osProgress1.Max = FrmReportes.DtaHistorial.Recordset.RecordCount
@@ -2818,7 +2818,7 @@ Dim CodDepartamentoAnt As String, CodigoGrupoAnt As String, UltimoCodigoGrupo As
     Orden = 0
      FrmReportes.DtaHistorial.Refresh
 '     InputBox "", "", FrmReportes.DtaHistorial.RecordSource
-        FrmReportes.LblProgreso.Caption = "Creando Estructura"
+        FrmReportes.lblProgreso.Caption = "Creando Estructura"
         FrmReportes.osProgress1.Value = 0
         FrmReportes.osProgress1.Visible = True
        FrmReportes.osProgress1.Max = FrmReportes.DtaHistorial.Recordset.RecordCount
@@ -3472,13 +3472,13 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                                 
                                 If FrmReportes.CmbMoneda.Text = "Córdobas" Then
                                     If FrmReportes.ChkQuitarMovimiento.Value = 1 Then
-                                      ConsultaTotalesMovimientos = "SELECT Transacciones.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio, 3)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito, 3)) AS MCredito, MAX(IndiceTransaccion.Fuente) AS Fuente FROM  Transacciones INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) GROUP BY Transacciones.CodCuentas HAVING (MAX(IndiceTransaccion.Fuente) <> 'Cierre') AND (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') ORDER BY Transacciones.CodCuentas"
+                                      ConsultaTotalesMovimientos = "SELECT Transacciones.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio, 3)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito, 3)) AS MCredito, MAX(IndiceTransaccion.Fuente) AS Fuente FROM  Transacciones INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) GROUP BY Transacciones.CodCuentas, IndiceTransaccion.Ajuste HAVING (MAX(IndiceTransaccion.Fuente) <> 'Cierre') AND (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (IndiceTransaccion.Ajuste <> '" & Ajuste & "') ORDER BY Transacciones.CodCuentas"
                                     Else
-                                      ConsultaTotalesMovimientos = "SELECT CodCuentas, SUM(ROUND(Debito * TCambio, 3)) AS MDebito, SUM(ROUND(TCambio * Credito, 3)) AS MCredito From Transacciones  WHERE (FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) GROUP BY CodCuentas HAVING (CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') "
+                                      ConsultaTotalesMovimientos = "SELECT CodCuentas, SUM(ROUND(Debito * TCambio, 3)) AS MDebito, SUM(ROUND(TCambio * Credito, 3)) AS MCredito From  Transacciones INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  WHERE (FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) GROUP BY CodCuentas, IndiceTransaccion.Ajuste HAVING (CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (IndiceTransaccion.Ajuste <> '" & Ajuste & "')"
                                     End If
                                 Else
-                                     ConsultaTotalesMovimientos = "SELECT Cuentas.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio / Tasas.MontoCordobas, 5)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito / Tasas.MontoCordobas, 5)) AS MCredito,SUM(ROUND(Transacciones.Debito * Transacciones.TCambio / Tasas.MontoCordobas, 5) - ROUND(Transacciones.TCambio * Transacciones.Credito / Tasas.MontoCordobas, 5)) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTransaccion = Tasas.FechaTasas " & _
-                                                                 "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) GROUP BY Cuentas.CodCuentas HAVING (Cuentas.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') "
+                                     ConsultaTotalesMovimientos = "SELECT Cuentas.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio / Tasas.MontoCordobas, 5)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito / Tasas.MontoCordobas, 5)) AS MCredito,SUM(ROUND(Transacciones.Debito * Transacciones.TCambio / Tasas.MontoCordobas, 5) - ROUND(Transacciones.TCambio * Transacciones.Credito / Tasas.MontoCordobas, 5)) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTransaccion = Tasas.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo " & _
+                                                                 "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) GROUP BY Cuentas.CodCuentas, IndiceTransaccion.Ajuste HAVING (Cuentas.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (IndiceTransaccion.Ajuste <> '" & Ajuste & "')"
                                 End If
                 
                 
@@ -3585,14 +3585,14 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                     
                     
                     
-                     FrmReportes.LblProgreso.Caption = "Consultando Registros del periodo seleccionado para la cuenta " & CodigoCuenta
+                     FrmReportes.lblProgreso.Caption = "Consultando Registros del periodo seleccionado para la cuenta " & CodigoCuenta
                      FrmReportes.osProgress1.Value = FrmReportes.osProgress1.Value + 1
                      DoEvents
                      If FrmReportes.ChkQuitarMovimiento.Value = 1 Then
 '                       FrmReportes.DtaConsulta.RecordSource = "SELECT  Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio - Transacciones.TCambio * Transacciones.Credito) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Transacciones.NTransaccion) AS Transaccion, MAX(IndiceTransaccion.Fuente) AS Fuente  FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN  IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion  " & _
 '                                                              "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) GROUP BY Cuentas.CodCuentas HAVING  (Cuentas.CodCuentas = '" & CodigoCuenta & "') AND (MAX(IndiceTransaccion.Fuente) <> 'Cierre')"
                                                FrmReportes.DtaConsulta.RecordSource = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio - Transacciones.TCambio * Transacciones.Credito) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Transacciones.FechaTransaccion)  AS FechaTransaccion, MAX(Transacciones.NTransaccion) AS Transaccion, MAX(IndiceTransaccion.Fuente) AS Fuente FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
-                                                              "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) AND (IndiceTransaccion.Ajuste <> '" & Ajuste & "') GROUP BY Cuentas.CodCuentas HAVING   (Cuentas.CodCuentas = '" & CodigoCuenta & "') AND (MAX(IndiceTransaccion.Fuente) <> 'Cierre')"
+                                                              "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) GROUP BY Cuentas.CodCuentas, IndiceTransaccion.Ajuste HAVING   (Cuentas.CodCuentas = '" & CodigoCuenta & "') AND (MAX(IndiceTransaccion.Fuente) <> 'Cierre') AND (IndiceTransaccion.Ajuste <> '" & Ajuste & "')"
                      Else
 '                       FrmReportes.DtaConsulta.RecordSource = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio - Transacciones.TCambio * Transacciones.Credito) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Transacciones.NTransaccion) As Transaccion FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas  " & _
 '                                                           "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) GROUP BY Cuentas.CodCuentas HAVING (Cuentas.CodCuentas = '" & CodigoCuenta & "')"
@@ -3600,8 +3600,8 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
 '                       FrmReportes.DtaConsulta.RecordSource = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio - Transacciones.TCambio * Transacciones.Credito) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Transacciones.FechaTransaccion)  AS FechaTransaccion, MAX(Transacciones.NTransaccion) AS Transaccion FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
 '                                                              "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) AND (IndiceTransaccion.Ajuste <> '" & Ajuste & "') GROUP BY Cuentas.CodCuentas HAVING   (Cuentas.CodCuentas = '" & CodigoCuenta & "')"
                      
-                        FrmReportes.DtaConsulta.RecordSource = "SELECT Cuentas.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio,5)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito,5)) AS MCredito, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio,5) - ROUND(Transacciones.TCambio * Transacciones.Credito,5)) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Transacciones.NTransaccion) As Transaccion FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas  " & _
-                                                           "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) GROUP BY Cuentas.CodCuentas HAVING (Cuentas.CodCuentas = '" & CodigoCuenta & "')"
+                        FrmReportes.DtaConsulta.RecordSource = "SELECT Cuentas.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio,5)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito,5)) AS MCredito, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio,5) - ROUND(Transacciones.TCambio * Transacciones.Credito,5)) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Transacciones.NTransaccion) As Transaccion FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  " & _
+                                                           "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) GROUP BY Cuentas.CodCuentas,IndiceTransaccion.Ajuste HAVING (Cuentas.CodCuentas = '" & CodigoCuenta & "') AND (IndiceTransaccion.Ajuste <> '" & Ajuste & "')"
 
                      End If
 
@@ -3620,8 +3620,8 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                      TotalCreditoH = 0
                      If FrmReportes.ChkBalanza.Value = 1 Then
 '                         FrmReportes.AdoHistorial.RecordSource = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total,Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, MAX(Transacciones.NTransaccion) AS Transaccion FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (Transacciones.FechaTransaccion < '" & Format(FechaIni, "yyyymmdd") & "') GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda HAVING (Cuentas.CodCuentas = '" & CodigoCuenta & "') ORDER BY Cuentas.CodCuentas"
-                        FrmReportes.AdoHistorial.RecordSource = "SELECT Cuentas.CodCuentas, ROUND(Transacciones.Debito * Transacciones.TCambio,5) AS MDebito, ROUND(Transacciones.TCambio * Transacciones.Credito,5) AS MCredito, ROUND(Transacciones.Debito * Transacciones.TCambio,5) - ROUND(Transacciones.TCambio * Transacciones.Credito,5) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Transacciones.NTransaccion AS Transaccion FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas  " & _
-                                                                "WHERE (Transacciones.FechaTransaccion < '" & Format(FechaIni, "yyyy-mm-dd") & "') AND (Cuentas.CodCuentas = '" & CodigoCuenta & "') ORDER BY Cuentas.CodCuentas"
+                        FrmReportes.AdoHistorial.RecordSource = "SELECT Cuentas.CodCuentas, ROUND(Transacciones.Debito * Transacciones.TCambio,5) AS MDebito, ROUND(Transacciones.TCambio * Transacciones.Credito,5) AS MCredito, ROUND(Transacciones.Debito * Transacciones.TCambio,5) - ROUND(Transacciones.TCambio * Transacciones.Credito,5) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Transacciones.NTransaccion AS Transaccion FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  " & _
+                                                                "WHERE (Transacciones.FechaTransaccion < '" & Format(FechaIni, "yyyy-mm-dd") & "') AND (Cuentas.CodCuentas = '" & CodigoCuenta & "') AND (IndiceTransaccion.Ajuste <> '" & Ajuste & "') ORDER BY Cuentas.CodCuentas"
                         FrmReportes.AdoHistorial.Refresh
                         If Not FrmReportes.AdoHistorial.Recordset.EOF Then
                             If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Bancos" Or TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Or TipoCuenta = "Papeleria - Utiles" Or TipoCuenta = "Inventario" Then
@@ -3709,18 +3709,18 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
 '                         FrmReportes.AdoConsultas.RecordSource = "SELECT Transacciones.NTransaccion, Transacciones.FechaTransaccion, Transacciones.VoucherNo, Transacciones.ChequeNo, Transacciones.DescripcionMovimiento, Transacciones.CodCuentas, Transacciones.TCambio * Transacciones.Debito AS MDebito, Transacciones.TCambio * Transacciones.Credito AS MCredito, Transacciones.Debito - Transacciones.Credito AS Balance, Transacciones.TCambio, Transacciones.NumeroMovimiento, Transacciones.Beneficiario, IndiceTransaccion.Fuente FROM  Transacciones INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  " & _
 '                                                                 "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyy-mm-dd") & "', 102)) AND (Transacciones.CodCuentas = '" & CodigoCuenta & "') AND (IndiceTransaccion.Fuente <> 'Cierre') ORDER BY Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NTransaccion"
                           FrmReportes.AdoConsultas.RecordSource = "SELECT Transacciones.CodCuentas, SUM(ROUND(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * Tasas.MontoCordobas END, 2)) AS MDebito, SUM(ROUND(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * Tasas.MontoCordobas END, 2)) AS MCredito, SUM(ROUND(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito ELSE Transacciones.Debito / Tasas.MontoCordobas END, 2)) AS DebitoD, SUM(ROUND(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito ELSE Transacciones.Credito / Tasas.MontoCordobas END, 2)) " & _
-                                                                 "AS CreditoD FROM Transacciones INNER JOIN  IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN Tasas ON Transacciones.FechaTransaccion = Tasas.FechaTasas WHERE  (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyy-mm-dd") & "', 102)) AND (IndiceTransaccion.Fuente <> 'Cierre') AND (IndiceTransaccion.Ajuste <> '" & Ajuste & "') GROUP BY Transacciones.CodCuentas HAVING (Transacciones.CodCuentas = '" & CodigoCuenta & "') ORDER BY Transacciones.CodCuentas "
+                                                                 "AS CreditoD FROM Transacciones INNER JOIN  IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN Tasas ON Transacciones.FechaTransaccion = Tasas.FechaTasas WHERE  (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyy-mm-dd") & "', 102))  AND (IndiceTransaccion.Fuente <> 'Cierre') GROUP BY Transacciones.CodCuentas, IndiceTransaccion.Ajuste HAVING (Transacciones.CodCuentas = '" & CodigoCuenta & "') AND (IndiceTransaccion.Ajuste <> '" & Ajuste & "') ORDER BY Transacciones.CodCuentas "
                         Else
 '                        FrmReportes.AdoConsultas.RecordSource = "SELECT  NTransaccion, FechaTransaccion, VoucherNo, ChequeNo, DescripcionMovimiento, CodCuentas, TCambio * Debito AS MDebito, TCambio * Credito AS MCredito, Debito - Credito AS Balance, TCambio, NumeroMovimiento, Beneficiario From Transacciones  " & _
 '                                                              "WHERE (FechaTransaccion BETWEEN '" & Format(FechaIni, "yyyymmdd") & "' AND '" & Format(FechaFin, "yyyymmdd") & "') AND (CodCuentas = '" & CodigoCuenta & "') ORDER BY CodCuentas, FechaTransaccion, NTransaccion "
                          FrmReportes.AdoConsultas.RecordSource = "SELECT Transacciones.CodCuentas, SUM(ROUND(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * Tasas.MontoCordobas END, 2)) AS MDebito, SUM(ROUND(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * Tasas.MontoCordobas END, 2)) AS MCredito, SUM(ROUND(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito ELSE Transacciones.Debito / Tasas.MontoCordobas END, 2)) AS DebitoD, SUM(ROUND(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito ELSE Transacciones.Credito / Tasas.MontoCordobas END, 2)) " & _
-                                                                 "AS CreditoD FROM Transacciones INNER JOIN  IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN Tasas ON Transacciones.FechaTransaccion = Tasas.FechaTasas WHERE  (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyy-mm-dd") & "', 102)) AND (IndiceTransaccion.Ajuste <> '" & Ajuste & "') GROUP BY Transacciones.CodCuentas HAVING (Transacciones.CodCuentas = '" & CodigoCuenta & "') ORDER BY Transacciones.CodCuentas "
+                                                                 "AS CreditoD FROM Transacciones INNER JOIN  IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN Tasas ON Transacciones.FechaTransaccion = Tasas.FechaTasas WHERE  (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyy-mm-dd") & "', 102)) GROUP BY Transacciones.CodCuentas, IndiceTransaccion.Ajuste HAVING (Transacciones.CodCuentas = '" & CodigoCuenta & "') AND (IndiceTransaccion.Ajuste <> '" & Ajuste & "') ORDER BY Transacciones.CodCuentas "
                         End If
                       Else
 '                          FrmReportes.AdoConsultas.RecordSource = "SELECT Transacciones.CodCuentas, SUM(Transacciones.Debito * (Transacciones.TCambio / Tasas.MontoCordobas)) AS MDebito, SUM(Transacciones.Credito * (Transacciones.TCambio / Tasas.MontoCordobas)) AS MCredito, SUM(Transacciones.Debito - Transacciones.Credito) AS Balance FROM Transacciones INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas  " & _
 '                                                                  "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyy-mm-dd") & "', 102)) GROUP BY Transacciones.CodCuentas HAVING (Transacciones.CodCuentas = '" & CodigoCuenta & "') ORDER BY Transacciones.CodCuentas"
                          FrmReportes.AdoConsultas.RecordSource = "SELECT Transacciones.CodCuentas, SUM(ROUND(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * Tasas.MontoCordobas END, 2)) AS MDebitoC, SUM(ROUND(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * Tasas.MontoCordobas END, 2)) AS MCreditoC, SUM(ROUND(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito ELSE Transacciones.Debito / Tasas.MontoCordobas END, 2)) AS MDebito, SUM(ROUND(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito ELSE Transacciones.Credito / Tasas.MontoCordobas END, 2)) AS MCredito  FROM  Transacciones INNER JOIN  IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN " & _
-                                                                 "Tasas ON Transacciones.FechaTransaccion = Tasas.FechaTasas WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyy-mm-dd") & "', 102)) AND (IndiceTransaccion.Ajuste <> '" & Ajuste & "') GROUP BY Transacciones.CodCuentas HAVING (Transacciones.CodCuentas = '" & CodigoCuenta & "') ORDER BY Transacciones.CodCuentas"
+                                                                 "Tasas ON Transacciones.FechaTransaccion = Tasas.FechaTasas WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyy-mm-dd") & "', 102)) GROUP BY Transacciones.CodCuentas, IndiceTransaccion.Ajuste HAVING (Transacciones.CodCuentas = '" & CodigoCuenta & "') AND (IndiceTransaccion.Ajuste <> '" & Ajuste & "') ORDER BY Transacciones.CodCuentas"
                     End If
                       
                       
@@ -4289,7 +4289,7 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
         
                 FrmReportes.DtaHistorial.Refresh
         
-                FrmReportes.LblProgreso.Caption = "Consultando Registros del Periodo Anterior para " & QUIEN
+                FrmReportes.lblProgreso.Caption = "Consultando Registros del Periodo Anterior para " & QUIEN
                 FrmReportes.osProgress1.Value = 0
             
             If Not FrmReportes.DtaHistorial.Recordset.EOF Then
@@ -4309,7 +4309,7 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                       CodigoCuenta = "314-05"
                     End If
                 
-                FrmReportes.LblProgreso.Caption = "Consultando Registros del Periodo Anterior para la Cuenta " & CodigoCuenta
+                FrmReportes.lblProgreso.Caption = "Consultando Registros del Periodo Anterior para la Cuenta " & CodigoCuenta
                 DoEvents
             
 '                FrmReportes.DtaConsulta.RecordSource = "SELECT Cuentas.CodCuentas, Transacciones.FechaTransaccion, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio - Transacciones.TCambio * Transacciones.Credito) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Tasas.MontoCordobas) AS MontoCordobas, MAX(Tasas.MontoLibras) AS MontoLibras, MAX(Transacciones.NTransaccion) AS NTransaccion FROM  Tasas INNER JOIN  Cuentas INNER JOIN  Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas ON Tasas.FechaTasas = Transacciones.FechaTasas GROUP BY Cuentas.CodCuentas, Transacciones.FechaTransaccion  " & _
@@ -5072,7 +5072,7 @@ Dim TotalDebitoDpto As Double, TotalCreditoDpto As Double
 
                     
                     
-                     FrmReportes.LblProgreso.Caption = "Consultando Registros del periodo seleccionado para la cuenta " & CodigoCuenta
+                     FrmReportes.lblProgreso.Caption = "Consultando Registros del periodo seleccionado para la cuenta " & CodigoCuenta
                      FrmReportes.osProgress1.Value = FrmReportes.osProgress1.Value + 1
                      DoEvents
                      If FrmReportes.ChkQuitarMovimiento.Value = 1 Then
@@ -5762,7 +5762,7 @@ Dim TotalDebitoDpto As Double, TotalCreditoDpto As Double
                 FrmReportes.DtaHistorial.Refresh
               End If
         
-                FrmReportes.LblProgreso.Caption = "Consultando Registros del Periodo Anterior para " & QUIEN
+                FrmReportes.lblProgreso.Caption = "Consultando Registros del Periodo Anterior para " & QUIEN
                 FrmReportes.osProgress1.Value = 0
             
             If Not FrmReportes.DtaHistorial.Recordset.EOF Then
@@ -5780,7 +5780,7 @@ Dim TotalDebitoDpto As Double, TotalCreditoDpto As Double
 
 
                 
-                FrmReportes.LblProgreso.Caption = "Consultando Registros del Periodo Anterior para la Cuenta " & CodigoCuenta
+                FrmReportes.lblProgreso.Caption = "Consultando Registros del Periodo Anterior para la Cuenta " & CodigoCuenta
                 DoEvents
             
                 FrmReportes.DtaConsulta.RecordSource = "SELECT Cuentas.CodCuentas, Transacciones.FechaTransaccion, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio - Transacciones.TCambio * Transacciones.Credito) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Tasas.MontoCordobas) AS MontoCordobas, MAX(Tasas.MontoLibras) AS MontoLibras, MAX(Transacciones.NTransaccion) AS NTransaccion FROM  Tasas INNER JOIN  Cuentas INNER JOIN  Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas ON Tasas.FechaTasas = Transacciones.FechaTasas GROUP BY Cuentas.CodCuentas, Transacciones.FechaTransaccion  " & _

@@ -375,7 +375,7 @@ Begin VB.Form FrmContabilizaNomina
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   78577665
+            Format          =   69271553
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton RadioButton1 

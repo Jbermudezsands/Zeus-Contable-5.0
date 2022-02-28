@@ -511,14 +511,14 @@ Begin VB.Form FrmReportes
       TabCaption(1)   =   "Configuracion Reportes"
       TabPicture(1)   =   "FrmReportes.frx":17E4E
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame11"
-      Tab(1).Control(1)=   "Frame10"
+      Tab(1).Control(0)=   "Frame10"
+      Tab(1).Control(1)=   "Frame11"
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "Configuracion Reportes "
       TabPicture(2)   =   "FrmReportes.frx":17E6A
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame13"
-      Tab(2).Control(1)=   "Frame12"
+      Tab(2).Control(0)=   "Frame12"
+      Tab(2).Control(1)=   "Frame13"
       Tab(2).ControlCount=   2
       Begin VB.CheckBox ChkMostrarMovxMes 
          Caption         =   "Mostrar mov x mes"
@@ -2174,7 +2174,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   65732609
+            Format          =   16711681
             CurrentDate     =   37837
          End
          Begin MSComCtl2.DTPicker DTFecha1 
@@ -2186,7 +2186,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   65732609
+            Format          =   16711681
             CurrentDate     =   37837
          End
          Begin VB.Label Label4 
@@ -5701,6 +5701,9 @@ Case "AUXILIAR x GRUPO"
                     
 
    Case "PRESUPUESTO ANUAL"
+   
+   Dim SqlString As String
+   
    If Me.Option1.Value = True Then
 '///////Busco fecha Inicial///////////////////
     DtaConsulta.RecordSource = "SELECT Periodos.Periodo, Periodos.FechaPeriodo, Periodos.NumeroTabla From Periodos Where (((Periodos.Periodo) = 1) And ((Periodos.NumeroTabla) = 1))"
@@ -5751,19 +5754,54 @@ Case "AUXILIAR x GRUPO"
     NumFecha1 = Fecha1
 '    NumFecha2 = Fecha2
     
+     ArepPresupuestoGeneral.DataControl1.ConnectionString = ConexionReporte
+     ArepPresupuestoGeneral.Label13.Caption = "PRESUPUESTO PARA EL AÑO " & Year(Fecha1)
+     SqlString = "SELECT  DescripcionGrupo, KeyGrupo,  ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 1)),0) As Enero , ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 2)),0) As Febrero, ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 3)),0) As Marzo, ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN  Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 4)),0) As Abril, ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 5)),0) As Mayo, ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 6)),0) As Junio, ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 7)),0) As Julio, ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 8)),0) As Agosto, ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 9)),0) As Septiembre, ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo  " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 10)),0) As Octubre, ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo  " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 11)),0) As Noviembre, ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo  " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 12)),0) As Diciembre, ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 1)),0) + ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 2)),0) + ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 3)),0) + ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN  Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 4)),0) + ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 5)),0) + ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 6)),0) + ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 7)),0) + ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 8)),0) + ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 9)),0) + ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo  " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 10)),0) + ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo  " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 11)),0) + ISNULL((SELECT Presupuesto.MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo  " & _
+                 "WHERE (Presupuesto.CodCuenta =  dbo.EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & Tabla & ") AND (MONTH(Periodos.FechaPeriodo) = 12)),0) As Acumulado From EstructuraPresupuesto ORDER BY KeyGrupo"
+'
+'     ArepPresupuestoGeneral.DataControl1.ConnectionString = ConexionReporte
+'     ArepPresupuestoGeneral.Label13.Caption = "PRESUPUESTO PARA EL AÑO " & Year(Fecha1)
+'    ArepPresupuesto.DataControl1.Source = SqlString
  
-     ArepPresupuesto.DataControl1.ConnectionString = ConexionReporte
-     ArepPresupuesto.Label13.Caption = "PRESUPUESTO PARA EL AÑO " & Year(Fecha1)
-'     ArepPresupuesto.DataControl1.Source = "SELECT PresupuestoAnual.NumeroTabla, PresupuestoAnual.CodigoCuenta AS CodCuenta, Sum(PresupuestoAnual.MontoAnual) AS SumaDeMontoPresupuestado, Cuentas.DescripcionCuentas, GrupoCuentas.DescripcionGrupo, GrupoCuentas.CodGrupo FROM GrupoCuentas INNER JOIN (Cuentas INNER JOIN PresupuestoAnual ON Cuentas.CodCuentas = PresupuestoAnual.CodigoCuenta) ON GrupoCuentas.CodGrupo = Cuentas.CodGrupo GROUP BY PresupuestoAnual.NumeroTabla, PresupuestoAnual.CodigoCuenta, Cuentas.DescripcionCuentas, GrupoCuentas.DescripcionGrupo, GrupoCuentas.CodGrupo Having (((PresupuestoAnual.NumeroTabla) = " & Tabla & ")) ORDER BY GrupoCuentas.CodGrupo,PresupuestoAnual.CodigoCuenta"
-'     SQL = "SELECT Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, SUM(Presupuesto.MontoPresupuestado) AS SumaDeMontoPresupuestado, GrupoCuentas.CodGrupo, GrupoCuentas.DescripcionGrupo , Periodos.NumeroTabla FROM Periodos INNER JOIN GrupoCuentas INNER JOIN  Cuentas INNER JOIN Presupuesto ON Cuentas.CodCuentas = Presupuesto.CodCuenta ON GrupoCuentas.CodGrupo = Cuentas.CodGrupo ON  Periodos.NPeriodo = Presupuesto.NPeriodo  GROUP BY Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, GrupoCuentas.CodGrupo, GrupoCuentas.DescripcionGrupo, Periodos.NumeroTabla  Having (Periodos.NumeroTabla = " & Tabla & ") ORDER BY Presupuesto.CodCuenta"
-Sql = "SELECT Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, SUM(Presupuesto.MontoPresupuestado) AS SumaDeMontoPresupuestado, GrupoCuentas.CodGrupo, GrupoCuentas.DescripcionGrupo , Periodos.NumeroTabla FROM GrupoCuentas RIGHT OUTER JOIN Periodos INNER JOIN  Cuentas INNER JOIN Presupuesto ON Cuentas.CodCuentas = Presupuesto.CodCuenta ON Periodos.NPeriodo = Presupuesto.NPeriodo ON  GrupoCuentas.CodGrupo = Cuentas.CodGrupo GROUP BY Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, GrupoCuentas.CodGrupo, GrupoCuentas.DescripcionGrupo, Periodos.NumeroTabla Having (Periodos.NumeroTabla = " & Tabla & ") ORDER BY Presupuesto.CodCuenta "
-     ArepPresupuesto.DataControl1.Source = Sql
-     ArepPresupuesto.Logo.Picture = LoadPicture(RutaLogo)
-     ArepPresupuesto.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
-     ArepPresupuesto.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
-     ArepPresupuesto.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
-     ArepPresupuesto.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
-     ArepPresupuesto.Show 1
+            Set rpt = New ArepPresupuestoGeneral
+            rpt.DataControl1.ConnectionString = ConexionReporte
+            rpt.DataControl1.Source = SqlString
+            fPreview.RunReport rpt
+            fPreview.Show 1
+ 
+'     ArepPresupuesto.DataControl1.ConnectionString = ConexionReporte
+'     ArepPresupuesto.Label13.Caption = "PRESUPUESTO PARA EL AÑO " & Year(Fecha1)
+'     Sql = "SELECT Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, SUM(Presupuesto.MontoPresupuestado) AS SumaDeMontoPresupuestado, GrupoCuentas.CodGrupo, GrupoCuentas.DescripcionGrupo , Periodos.NumeroTabla FROM GrupoCuentas RIGHT OUTER JOIN Periodos INNER JOIN  Cuentas INNER JOIN Presupuesto ON Cuentas.CodCuentas = Presupuesto.CodCuenta ON Periodos.NPeriodo = Presupuesto.NPeriodo ON  GrupoCuentas.CodGrupo = Cuentas.CodGrupo GROUP BY Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, GrupoCuentas.CodGrupo, GrupoCuentas.DescripcionGrupo, Periodos.NumeroTabla Having (Periodos.NumeroTabla = " & Tabla & ") ORDER BY Presupuesto.CodCuenta "
+'     ArepPresupuesto.DataControl1.Source = Sql
+'     ArepPresupuesto.Logo.Picture = LoadPicture(RutaLogo)
+'     ArepPresupuesto.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
+'     ArepPresupuesto.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
+'     ArepPresupuesto.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
+'     ArepPresupuesto.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
+'     ArepPresupuesto.Show 1
 '            Set rpt = New ArepPresupuesto
 '            rpt.DataControl1.ConnectionString = ConexionReporte
 '            rpt.DataControl1.Source = SQL

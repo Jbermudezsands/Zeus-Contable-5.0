@@ -1103,9 +1103,9 @@ Do While Not Me.AdoImprime.Recordset.EOF
         
         Printer.EndDoc
         
-        ConsecutivoCheque = Me.LblConsecutivo.Text
-        ConsecutivoCheque = ConsecutivoCheque + 1
-        Me.LblConsecutivo.Text = ConsecutivoCheque
+'        ConsecutivoCheque = Me.LblConsecutivo.Text
+'        ConsecutivoCheque = ConsecutivoCheque + 1
+'        Me.LblConsecutivo.Text = ConsecutivoCheque
 '         FrmCheque.DtaConsulta.Recordset.MoveNext
 '        Loop
              
@@ -1751,7 +1751,9 @@ Do While Not Me.AdoImprime.Recordset.EOF
        
             
               
-  ConsecutivoCheque = ConsecutivoCheque + 1
+ ConsecutivoCheque = Me.LblConsecutivo.Text
+ ConsecutivoCheque = ConsecutivoCheque + 1
+ Me.LblConsecutivo.Text = ConsecutivoCheque
   Me.AdoImprime.Recordset.MoveNext
   Loop
 
