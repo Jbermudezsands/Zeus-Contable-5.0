@@ -13,6 +13,8 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
+
+
 'devuelve un objeto Recordset con los datos de la hoja
 Public Function Leer_Excel(ByVal PathXls As String, Hoja As String) As ADODB.Recordset
 
@@ -34,8 +36,8 @@ Public Function Leer_Excel(ByVal PathXls As String, Hoja As String) As ADODB.Rec
       Set rs = Nothing
       Exit Function
 ErrorFunction:
-      MsgBox Err.Description, vbCritical
-      Err.Clear
+      MsgBox err.Description, vbCritical
+      err.Clear
 End Function
 
 'devuelve un objeto Recordset con los datos del txt
@@ -59,8 +61,8 @@ Public Function LeerTxt(Directorio As String) As ADODB.Recordset
       
       Exit Function
 ErrorFunction:
-      MsgBox Err.Description, vbCritical
-      Err.Clear
+      MsgBox err.Description, vbCritical
+      err.Clear
 End Function
 
 
