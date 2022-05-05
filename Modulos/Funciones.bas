@@ -16,8 +16,9 @@ Next
 Encrypt = sFrase
 End Function
 Public Function Inicio_Excel() As Boolean
+
 Dim i As Integer
-Dim j As Integer
+Dim J As Integer
 
 Set objExcel = New Excel.Application
  
@@ -314,21 +315,21 @@ End Function
 
 Public Function LeeCadena(cadena As String, numero As Double) As String
   Dim i As Double
-  Dim A() As String, Can As String, j As Double
+  Dim A() As String, Can As String, J As Double
   
 '  ReDim A(Len(Cadena))
    ReDim A(5)
 
-    j = 1
+    J = 1
     For i = 1 To Len(cadena)
      If Mid(cadena, i, 1) = ";" Then
-      j = j + 1
+      J = J + 1
       i = i + 1
       Can = ""
      End If
      
         Can = Can & Mid(cadena, i, 1)
-        A(j) = Can
+        A(J) = Can
          
 
     Next
@@ -1971,7 +1972,7 @@ Dim Mayor() As String, CodGrupo() As String, DescripcionBalance As String
 Dim TotalMayor() As String, TotalDescripcion As String
 Dim KeySuperior As String, NumeroHijos As Double, NumeroHijosTotales As Double
 Dim DescripCuenta As String, DescripcionPadre As String, KeyUltimo As String
-Dim TipoCuenta As String, TipoMoneda As String, i As Double, j As Double, k As Double, NumRegistros As Double
+Dim TipoCuenta As String, TipoMoneda As String, i As Double, J As Double, k As Double, NumRegistros As Double
 
 Dim Orden As Long
 Orden = 1
@@ -1991,7 +1992,7 @@ Debug.Print FrmReportes.DtaHistorial.RecordSource
        FrmReportes.osProgress1.Value = 0
        FrmReportes.osProgress1.Visible = True
        FrmReportes.osProgress1.Max = CantRegistros
-       j = 0
+       J = 0
    
      Do While Not FrmReportes.DtaHistorial.Recordset.EOF
       If Not IsNull(FrmReportes.DtaHistorial.Recordset("KeyGrupoSuperior")) Then
@@ -2090,8 +2091,8 @@ Debug.Print FrmReportes.DtaHistorial.RecordSource
            FrmReportes.DtaConsulta.Recordset.MoveNext
          Loop
        
-       j = j + 1
-       FrmReportes.osProgress1.Value = j
+       J = J + 1
+       FrmReportes.osProgress1.Value = J
        DoEvents
        FrmReportes.DtaHistorial.Recordset.MoveNext
        
@@ -2719,7 +2720,7 @@ Dim CodDepartamento As String, NPeriodo As Double, NumeroPeriodo() As Double, i 
               DescripcionPadre = "Total " + FrmReportes.DtaConsulta2.Recordset("DescripcionGrupo")
 
 '////////////////////Lleno de Espacios la Descripcion del padre///////////////////////////////////
-             For j = 2 To i
+             For J = 2 To i
                DescripcionPadre = " " + DescripcionPadre
              Next
            
@@ -3244,7 +3245,7 @@ Dim CodDepartamentoAnt As String, CodigoGrupoAnt As String, UltimoCodigoGrupo As
               DescripcionPadre = "Total " + FrmReportes.DtaConsulta2.Recordset("DescripcionGrupo")
 
 '////////////////////Lleno de Espacios la Descripcion del padre///////////////////////////////////
-             For j = 2 To i
+             For J = 2 To i
                DescripcionPadre = " " + DescripcionPadre
              Next
            

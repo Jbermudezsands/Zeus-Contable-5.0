@@ -842,7 +842,7 @@ Begin VB.MDIForm MDIPrimero
          EndProperty
          BeginProperty Panel6 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   5
-            TextSave        =   "11:17 a.m."
+            TextSave        =   "12:10 p.m."
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -1427,7 +1427,7 @@ End With
 
 
 Dim Rutas As String
-Dim NombreEmpresa As String, RUC As String
+
 
 If Not Me.AdoConfiguracion.Recordset.EOF Then
  NombreEmpresa = Me.AdoConfiguracion.Recordset("NombreEmpresa")
@@ -1677,6 +1677,8 @@ Public Sub CargarInterfaz()
     Set Workspace = CommandBars.ShowTabWorkspace(True)
     Workspace.ThemedBackColor = False
     Workspace.PaintManager.ShowIcons = False
+    
+    
     
     
     

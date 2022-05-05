@@ -2197,7 +2197,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   65142785
+            Format          =   60293121
             CurrentDate     =   37837
          End
          Begin MSComCtl2.DTPicker DTFecha1 
@@ -2209,7 +2209,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   65142785
+            Format          =   60293121
             CurrentDate     =   37837
          End
          Begin VB.Label Label4 
@@ -3551,6 +3551,8 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
+
 Option Explicit
 
 Public CodDesde As String, CodHasta As String
@@ -3632,37 +3634,37 @@ Select Case Me.CmbReportes.Text
          End If
          
          
-           Call Inicio_Excel 'Llamamos a la funcion que abre el workbook en excel
-    
-            V = 4
-            H = 0
-            i = 1
-             
-          '///////////////////////////////////////////////////////////////////////////////////////
-          '////////////////////ENCABEZADOS//////////////////////////////////////////////////////
-          '///////////////////////////////////////////////////////////////////////////////////
-            objExcel.ActiveSheet.Cells(1, 1) = NombreEmpresa
-            objExcel.ActiveSheet.Range("A1:J1").Merge
-            objExcel.ActiveSheet.Range("A1", "J1").HorizontalAlignment = xlHAlignCenter
-            With objExcel.ActiveSheet.Cells(1, 1)
-                  .Font.Size = 20             ' tamaño de letra
-                  .Font.Bold = True           ' Fuente en negrita
-            End With
-            objExcel.ActiveSheet.Cells(2, 1) = "RUC " & RUC
-            objExcel.ActiveSheet.Cells(3, 1) = "EXPORTACION DESDE " & Me.DTFecha1.Value & " HASTA " & Me.DTFecha1.Value
-            objExcel.ActiveSheet.Range("A3:J3").Merge
-            objExcel.ActiveSheet.Range("A3", "J3").HorizontalAlignment = xlHAlignCenter
-            With objExcel.ActiveSheet.Cells(3, 1)
-                  .Font.Size = 14             ' tamaño de letra
-                  .Font.Bold = True           ' Fuente en negrita
-            End With
-            
-            objExcel.ActiveSheet.Cells(4, 1) = "CodEmpleado"
-            objExcel.ActiveSheet.Cells(4, 2) = "Nombre y Apellido"
-            objExcel.ActiveSheet.Cells(4, 3) = "NumerCedula"
-            objExcel.ActiveSheet.Cells(4, 4) = "Devengado"
-            objExcel.ActiveSheet.Cells(4, 5) = "MontoInss"
-            objExcel.ActiveSheet.Cells(4, 6) = "MontoIr"
+'           Call Inicio_Excel 'Llamamos a la funcion que abre el workbook en excel
+'
+'            V = 4
+'            H = 0
+'            i = 1
+'
+'          '///////////////////////////////////////////////////////////////////////////////////////
+'          '////////////////////ENCABEZADOS//////////////////////////////////////////////////////
+'          '///////////////////////////////////////////////////////////////////////////////////
+'            objExcel.ActiveSheet.Cells(1, 1) = NombreEmpresa
+'            objExcel.ActiveSheet.Range("A1:J1").Merge
+'            objExcel.ActiveSheet.Range("A1", "J1").HorizontalAlignment = xlHAlignCenter
+'            With objExcel.ActiveSheet.Cells(1, 1)
+'                  .Font.Size = 20             ' tamaño de letra
+'                  .Font.Bold = True           ' Fuente en negrita
+'            End With
+'            objExcel.ActiveSheet.Cells(2, 1) = "RUC " & RUC
+'            objExcel.ActiveSheet.Cells(3, 1) = "EXPORTACION DESDE " & Me.DTFecha1.Value & " HASTA " & Me.DTFecha1.Value
+'            objExcel.ActiveSheet.Range("A3:J3").Merge
+'            objExcel.ActiveSheet.Range("A3", "J3").HorizontalAlignment = xlHAlignCenter
+'            With objExcel.ActiveSheet.Cells(3, 1)
+'                  .Font.Size = 14             ' tamaño de letra
+'                  .Font.Bold = True           ' Fuente en negrita
+'            End With
+'
+'            objExcel.ActiveSheet.Cells(4, 1) = "CodEmpleado"
+'            objExcel.ActiveSheet.Cells(4, 2) = "Nombre y Apellido"
+'            objExcel.ActiveSheet.Cells(4, 3) = "NumerCedula"
+'            objExcel.ActiveSheet.Cells(4, 4) = "Devengado"
+'            objExcel.ActiveSheet.Cells(4, 5) = "MontoInss"
+'            objExcel.ActiveSheet.Cells(4, 6) = "MontoIr"
             
             
          If Option4.Value = True Then
