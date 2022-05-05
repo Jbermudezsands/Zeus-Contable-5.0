@@ -21,6 +21,29 @@ Begin VB.Form FrmReportes
    ScaleHeight     =   8115
    ScaleWidth      =   9390
    StartUpPosition =   2  'CenterScreen
+   Begin SmartButtonProject.SmartButton BtnExcel 
+      Height          =   855
+      Left            =   120
+      TabIndex        =   232
+      Top             =   6720
+      Visible         =   0   'False
+      Width           =   1215
+      _ExtentX        =   2143
+      _ExtentY        =   1508
+      ForeColor       =   8388608
+      Caption         =   "Exportar"
+      Picture         =   "FrmReportes.frx":0000
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      PictureLayout   =   7
+   End
    Begin VB.Frame Frame6 
       BackColor       =   &H00E0E0E0&
       Height          =   5325
@@ -365,7 +388,7 @@ Begin VB.Form FrmReportes
       Begin VB.Image Img2 
          Height          =   480
          Left            =   960
-         Picture         =   "FrmReportes.frx":0000
+         Picture         =   "FrmReportes.frx":183C
          Stretch         =   -1  'True
          Top             =   1560
          Width           =   495
@@ -373,7 +396,7 @@ Begin VB.Form FrmReportes
       Begin VB.Image img1 
          Height          =   480
          Left            =   1920
-         Picture         =   "FrmReportes.frx":A487
+         Picture         =   "FrmReportes.frx":BCC3
          Stretch         =   -1  'True
          Top             =   1560
          Width           =   495
@@ -445,7 +468,7 @@ Begin VB.Form FrmReportes
       TabHeight       =   520
       BackColor       =   13225935
       TabCaption(0)   =   "Reportes"
-      TabPicture(0)   =   "FrmReportes.frx":17E32
+      TabPicture(0)   =   "FrmReportes.frx":1966E
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Label3"
       Tab(0).Control(0).Enabled=   0   'False
@@ -509,13 +532,13 @@ Begin VB.Form FrmReportes
       Tab(0).Control(29).Enabled=   0   'False
       Tab(0).ControlCount=   30
       TabCaption(1)   =   "Configuracion Reportes"
-      TabPicture(1)   =   "FrmReportes.frx":17E4E
+      TabPicture(1)   =   "FrmReportes.frx":1968A
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Frame10"
       Tab(1).Control(1)=   "Frame11"
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "Configuracion Reportes "
-      TabPicture(2)   =   "FrmReportes.frx":17E6A
+      TabPicture(2)   =   "FrmReportes.frx":196A6
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Frame12"
       Tab(2).Control(1)=   "Frame13"
@@ -573,7 +596,7 @@ Begin VB.Form FrmReportes
             EndProperty
             Height          =   300
             Left            =   3960
-            Picture         =   "FrmReportes.frx":17E86
+            Picture         =   "FrmReportes.frx":196C2
             Style           =   1  'Graphical
             TabIndex        =   225
             Top             =   720
@@ -591,7 +614,7 @@ Begin VB.Form FrmReportes
             EndProperty
             Height          =   300
             Left            =   3960
-            Picture         =   "FrmReportes.frx":17FD4
+            Picture         =   "FrmReportes.frx":19810
             Style           =   1  'Graphical
             TabIndex        =   224
             Top             =   360
@@ -618,9 +641,9 @@ Begin VB.Form FrmReportes
       End
       Begin VB.ComboBox CmbNivel7 
          Height          =   315
-         ItemData        =   "FrmReportes.frx":18122
+         ItemData        =   "FrmReportes.frx":1995E
          Left            =   10560
-         List            =   "FrmReportes.frx":18162
+         List            =   "FrmReportes.frx":1999E
          TabIndex        =   217
          Text            =   "2"
          Top             =   3000
@@ -628,9 +651,9 @@ Begin VB.Form FrmReportes
       End
       Begin VB.ComboBox CmbNivel6 
          Height          =   315
-         ItemData        =   "FrmReportes.frx":181AD
+         ItemData        =   "FrmReportes.frx":199E9
          Left            =   10560
-         List            =   "FrmReportes.frx":181ED
+         List            =   "FrmReportes.frx":19A29
          TabIndex        =   216
          Text            =   "2"
          Top             =   2520
@@ -638,9 +661,9 @@ Begin VB.Form FrmReportes
       End
       Begin VB.ComboBox CmbNivel5 
          Height          =   315
-         ItemData        =   "FrmReportes.frx":18238
+         ItemData        =   "FrmReportes.frx":19A74
          Left            =   10560
-         List            =   "FrmReportes.frx":18278
+         List            =   "FrmReportes.frx":19AB4
          TabIndex        =   215
          Text            =   "2"
          Top             =   2040
@@ -648,9 +671,9 @@ Begin VB.Form FrmReportes
       End
       Begin VB.ComboBox CmbNivel4 
          Height          =   315
-         ItemData        =   "FrmReportes.frx":182C3
+         ItemData        =   "FrmReportes.frx":19AFF
          Left            =   10560
-         List            =   "FrmReportes.frx":18303
+         List            =   "FrmReportes.frx":19B3F
          TabIndex        =   214
          Text            =   "3"
          Top             =   1560
@@ -658,9 +681,9 @@ Begin VB.Form FrmReportes
       End
       Begin VB.ComboBox CmbNivel3 
          Height          =   315
-         ItemData        =   "FrmReportes.frx":1834E
+         ItemData        =   "FrmReportes.frx":19B8A
          Left            =   10560
-         List            =   "FrmReportes.frx":1838E
+         List            =   "FrmReportes.frx":19BCA
          TabIndex        =   213
          Text            =   "3"
          Top             =   1080
@@ -677,9 +700,9 @@ Begin VB.Form FrmReportes
       End
       Begin VB.ComboBox CmbNivel2 
          Height          =   315
-         ItemData        =   "FrmReportes.frx":183D9
+         ItemData        =   "FrmReportes.frx":19C15
          Left            =   5280
-         List            =   "FrmReportes.frx":18419
+         List            =   "FrmReportes.frx":19C55
          TabIndex        =   210
          Text            =   "3"
          Top             =   4440
@@ -2151,9 +2174,9 @@ Begin VB.Form FrmReportes
       End
       Begin VB.ListBox CmbReportes 
          Height          =   3180
-         ItemData        =   "FrmReportes.frx":18464
+         ItemData        =   "FrmReportes.frx":19CA0
          Left            =   120
-         List            =   "FrmReportes.frx":18466
+         List            =   "FrmReportes.frx":19CA2
          TabIndex        =   115
          Top             =   840
          Width           =   3735
@@ -2174,7 +2197,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   16711681
+            Format          =   65142785
             CurrentDate     =   37837
          End
          Begin MSComCtl2.DTPicker DTFecha1 
@@ -2186,7 +2209,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   16711681
+            Format          =   65142785
             CurrentDate     =   37837
          End
          Begin VB.Label Label4 
@@ -2286,6 +2309,7 @@ Begin VB.Form FrmReportes
             Left            =   1440
             TabIndex        =   104
             Top             =   240
+            Value           =   -1  'True
             Width           =   1215
          End
          Begin VB.OptionButton Option5 
@@ -2295,7 +2319,6 @@ Begin VB.Form FrmReportes
             Left            =   120
             TabIndex        =   103
             Top             =   240
-            Value           =   -1  'True
             Width           =   1095
          End
          Begin VB.OptionButton Option9 
@@ -2355,9 +2378,9 @@ Begin VB.Form FrmReportes
          End
          Begin VB.ComboBox CmbIni 
             Height          =   315
-            ItemData        =   "FrmReportes.frx":18468
+            ItemData        =   "FrmReportes.frx":19CA4
             Left            =   1320
-            List            =   "FrmReportes.frx":18490
+            List            =   "FrmReportes.frx":19CCC
             TabIndex        =   93
             Text            =   "1"
             Top             =   240
@@ -2365,9 +2388,9 @@ Begin VB.Form FrmReportes
          End
          Begin VB.ComboBox CmbFin 
             Height          =   315
-            ItemData        =   "FrmReportes.frx":184BB
+            ItemData        =   "FrmReportes.frx":19CF7
             Left            =   1320
-            List            =   "FrmReportes.frx":184E3
+            List            =   "FrmReportes.frx":19D1F
             TabIndex        =   92
             Text            =   "1"
             Top             =   600
@@ -2411,9 +2434,9 @@ Begin VB.Form FrmReportes
       End
       Begin VB.ComboBox CmbMoneda 
          Height          =   315
-         ItemData        =   "FrmReportes.frx":1850E
+         ItemData        =   "FrmReportes.frx":19D4A
          Left            =   5520
-         List            =   "FrmReportes.frx":18518
+         List            =   "FrmReportes.frx":19D54
          TabIndex        =   89
          Text            =   "Córdobas"
          Top             =   3720
@@ -2441,7 +2464,7 @@ Begin VB.Form FrmReportes
             EndProperty
             Height          =   300
             Left            =   3960
-            Picture         =   "FrmReportes.frx":1852F
+            Picture         =   "FrmReportes.frx":19D6B
             Style           =   1  'Graphical
             TabIndex        =   84
             Top             =   240
@@ -2459,7 +2482,7 @@ Begin VB.Form FrmReportes
             EndProperty
             Height          =   300
             Left            =   3960
-            Picture         =   "FrmReportes.frx":1867D
+            Picture         =   "FrmReportes.frx":19EB9
             Style           =   1  'Graphical
             TabIndex        =   83
             Top             =   600
@@ -2510,7 +2533,7 @@ Begin VB.Form FrmReportes
             Width           =   3015
          End
          Begin MSDataListLib.DataCombo DBCodigo 
-            Bindings        =   "FrmReportes.frx":187CB
+            Bindings        =   "FrmReportes.frx":1A007
             Height          =   315
             Left            =   840
             TabIndex        =   85
@@ -2522,7 +2545,7 @@ Begin VB.Form FrmReportes
             Text            =   ""
          End
          Begin MSDataListLib.DataCombo DBCodigoHasta 
-            Bindings        =   "FrmReportes.frx":187E3
+            Bindings        =   "FrmReportes.frx":1A01F
             Height          =   315
             Left            =   840
             TabIndex        =   86
@@ -2688,7 +2711,7 @@ Begin VB.Form FrmReportes
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
       Height          =   1095
-      Left            =   0
+      Left            =   -120
       ScaleHeight     =   1095
       ScaleWidth      =   9495
       TabIndex        =   71
@@ -2733,7 +2756,7 @@ Begin VB.Form FrmReportes
       _ExtentY        =   1508
       ForeColor       =   8388608
       Caption         =   "Ver Reporte"
-      Picture         =   "FrmReportes.frx":187FB
+      Picture         =   "FrmReportes.frx":1A037
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -2819,7 +2842,7 @@ Begin VB.Form FrmReportes
       _ExtentY        =   1508
       ForeColor       =   8388608
       Caption         =   "Ver Reporte"
-      Picture         =   "FrmReportes.frx":19B0D
+      Picture         =   "FrmReportes.frx":1B349
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -3425,7 +3448,7 @@ Begin VB.Form FrmReportes
       _ExtentY        =   1508
       ForeColor       =   8388608
       Caption         =   "Salir"
-      Picture         =   "FrmReportes.frx":1AE1F
+      Picture         =   "FrmReportes.frx":1C65B
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -3454,7 +3477,7 @@ Begin VB.Form FrmReportes
       _ExtentY        =   1508
       ForeColor       =   8388608
       Caption         =   "Ver Reporte"
-      Picture         =   "FrmReportes.frx":1C131
+      Picture         =   "FrmReportes.frx":1D96D
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -3555,6 +3578,321 @@ Sub HayUtilidadBruta()
         
 End Sub
 
+Private Sub BtnExcel_Click()
+
+Dim Utilidad As Double, Utilidad2 As Double, Utilidad3 As Double, RegTCostosOper As Integer
+Dim Decrementador As Integer, TotalActivoCirculante As Double, TotalActivoFijo As Double, TotalActivoDiferido As Double
+Dim TotalPasivoCirculante As Double, TotalPasivoFijo As Double, TotalPasivoDiferido As Double, TotalCapitalSocial As Double
+Dim RegInicioCostosOperativos As Integer 'variable que me guarda el orden donde se encuentra el registro donde comienzan los costos operativos
+Dim RegTotalCostosOperativos As Integer 'variable que me guarda el orden donde se encuentra el registro de total de costos operativos
+Dim Totalingresos As Double, TotalCostoVentas As Double, TotalGastosAdmon As Double, TotalGastos As Double
+Dim TotalGastoVentas As Double, TotalIngresosFinancieros As Double, TotalOtrosIngresos As Double, TotalOtrosGastos As Double
+Dim TotalUtilidadBruta As Double, TotalImpuestos As Double, TotalUtilidadNeta As Double, Fecha1 As String, Fecha2 As String
+Dim TotalCompras As Double, TotalInventarioInicial As Double, TotalInventarioFinal As Double
+Dim TotalAcarreo As Double, TotalRebajaVentas As Double, TotalDisponible As Double, TotalGastosR As Double, TotalCosto As Double
+Dim TotalSalidas As Double, TotalGastoOperacion As Double, TotalPasivo As Double, TotalCapital As Double
+Dim TotalCostos As Double, ListaActivos As Variant, TotalInventario As Double, TotalCuentaxCobrar As Double
+Dim TotalCuentasxPagar As Double, TotalActivos As Double, UtilidadBrutas As Double, UtilidadNetas As Double
+Dim UltimoOrden As Integer, RegIngresos  As Integer, PrimReg As Integer, UltReg As Integer
+Dim Fechas1 As String, Fechas2 As String, Orden As Integer, Sql As String, i As Double
+Dim ListaMeses As Variant, CantRegistros As Double, ComboIni As Double, ComboFin As Double, TotstoFijo As Double, TotalGastoFijo As Double
+Dim mes As Double, J As Double, TotalDebito As Double, TotalCredito As Double
+Dim rpt As Object, TotalCostoFijo As Double, Ajuste As String
+Dim fPreview As New FrmPreview, V As Double, H As Double
+Dim rs As New ADODB.Recordset
+Dim Parche As ADODB.Connection
+
+
+'On Error GoTo TipoErrs
+Me.Frame6.Visible = True
+Me.CmdVerReporte2.Enabled = False
+Me.CmdSalir.Enabled = False
+SaldoIni = 0
+SaldoFin = 0
+Total1 = 0
+TotalCuenta = 0
+
+FechaIni = Me.DTFecha1.Value
+FechaFin = Me.DTFecha2.Value
+
+
+
+
+Select Case Me.CmbReportes.Text
+        Case "BALANZA DE COMPROBACION"
+        
+        '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////ESTA OPCION CALCULA LA BALANZA POR CODIGO //////////////////////////////////////////////////
+        '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         
+         If Me.CmbMoneda.Text = "Córdobas" Then
+            Moneda = "Cordobas"
+         Else
+            Moneda = "Dolares"
+         End If
+         
+         
+           Call Inicio_Excel 'Llamamos a la funcion que abre el workbook en excel
+    
+            V = 4
+            H = 0
+            i = 1
+             
+          '///////////////////////////////////////////////////////////////////////////////////////
+          '////////////////////ENCABEZADOS//////////////////////////////////////////////////////
+          '///////////////////////////////////////////////////////////////////////////////////
+            objExcel.ActiveSheet.Cells(1, 1) = NombreEmpresa
+            objExcel.ActiveSheet.Range("A1:J1").Merge
+            objExcel.ActiveSheet.Range("A1", "J1").HorizontalAlignment = xlHAlignCenter
+            With objExcel.ActiveSheet.Cells(1, 1)
+                  .Font.Size = 20             ' tamaño de letra
+                  .Font.Bold = True           ' Fuente en negrita
+            End With
+            objExcel.ActiveSheet.Cells(2, 1) = "RUC " & RUC
+            objExcel.ActiveSheet.Cells(3, 1) = "EXPORTACION DESDE " & Me.DTFecha1.Value & " HASTA " & Me.DTFecha1.Value
+            objExcel.ActiveSheet.Range("A3:J3").Merge
+            objExcel.ActiveSheet.Range("A3", "J3").HorizontalAlignment = xlHAlignCenter
+            With objExcel.ActiveSheet.Cells(3, 1)
+                  .Font.Size = 14             ' tamaño de letra
+                  .Font.Bold = True           ' Fuente en negrita
+            End With
+            
+            objExcel.ActiveSheet.Cells(4, 1) = "CodEmpleado"
+            objExcel.ActiveSheet.Cells(4, 2) = "Nombre y Apellido"
+            objExcel.ActiveSheet.Cells(4, 3) = "NumerCedula"
+            objExcel.ActiveSheet.Cells(4, 4) = "Devengado"
+            objExcel.ActiveSheet.Cells(4, 5) = "MontoInss"
+            objExcel.ActiveSheet.Cells(4, 6) = "MontoIr"
+            
+            
+         If Option4.Value = True Then
+            Me.DtaReportes.Refresh
+            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.LblProgreso.AutoSize = True
+            Me.osProgress1.Visible = True
+            Me.osProgress1.Value = 0
+            Me.osProgress1.Min = 0
+            Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
+            Do While Not Me.DtaReportes.Recordset.EOF
+             Me.DtaReportes.Recordset.Delete
+                Me.DtaReportes.Recordset.MoveNext
+                Me.osProgress1.Value = Me.osProgress1.Value + 1
+            Loop
+            
+            Me.LblProgreso.Caption = ""
+            Me.osProgress1.Visible = False
+            SaldoReportes ("BalanzaCodigo")
+            Me.DtaReportes.Refresh
+            'aqui voy a poner el parche para que salga los movimientos de debito y credito en periodo
+
+            Set Parche = New ADODB.Connection
+            Parche.ConnectionString = Conexion
+            Parche.Open
+        
+            Parche.Execute "update reportes set debe2=0,haber2=0"
+            Parche.Execute "update reportes " & _
+                "set debe2=mdebito,haber2=mcredito " & _
+                "from (" & ConsultaTotalesMovimientos & ") as Temporal " & _
+                "where temporal.codcuentas=reportes.codcuentas"
+                
+            Parche.Execute "Update Reportes set debe3=debe1+debe2,haber3=haber1+haber2"
+                
+            
+            Parche.Execute "Update [Reportes] SET [Debe3] =  CASE WHEN (Debe1 + Debe2) > (Haber1 + Haber2) THEN (Debe1 + Debe2) - (Haber1 + Haber2) ELSE 0 END ,[Haber3] =  CASE WHEN (Haber1 + Haber2) > (Debe1 + Debe2) THEN (Haber1 + Haber2) - (Debe1 + Debe2) ELSE 0 END"
+               
+            
+            If Me.OptTradicional.Value = True Then
+                ArepBalanza.LblMoneda.Caption = Me.CmbMoneda.Text
+                
+                ArepBalanza.Logo.Picture = LoadPicture(RutaLogo)
+                
+                ArepBalanza.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
+                ArepBalanza.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
+                ArepBalanza.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
+                ArepBalanza.LblFechaFin = Me.DTFecha2.Value
+                ArepBalanza.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
+                ArepBalanza.LblFechaIni = Me.DTFecha1.Value
+                ArepBalanza.DataControl1.ConnectionString = ConexionReporte
+                ArepBalanza.DataControl1.Source = "SELECT * From Reportes ORDER BY CodCuentas"
+                ArepBalanza.DataControl1.Refresh
+                
+                QUIEN = "BalanzaCodigo"
+                ArepBalanza.Show 1
+        '         fPreview.arv.ReportSource = ArepBalanza
+        '         fPreview.Show 1
+            End If
+            Me.LblProgreso.Caption = ""
+            Me.osProgress1.Visible = False
+            
+            
+            
+         ElseIf Option5.Value = True Then
+           '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+           '//////////////////////EN ESTA OPCION CALCULO LA BALANZA POR GRUPOS//////////////////////////////////
+           '////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         
+        
+         
+            Me.DtaReportes.Refresh
+            
+            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.LblProgreso.AutoSize = True
+            Me.osProgress1.Value = 0
+            Me.osProgress1.Min = 0
+            Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
+            
+            
+            
+            Do While Not Me.DtaReportes.Recordset.EOF
+             Me.osProgress1.Value = Me.osProgress1.Value + 1
+             Me.DtaReportes.Recordset.Delete
+             Me.DtaReportes.Recordset.MoveNext
+            Loop
+            CreaEstructura ("Balanza")
+            SaldoReportes ("Balanza")
+            EliminaRegistroCero ("Balanza")
+            
+            '-----------------------BORRO TODAS LAS CUENTAS QUE NO SUMAN NINGUN VALOR ------------------
+            Set Parche = New ADODB.Connection
+            Parche.ConnectionString = Conexion
+            Parche.Open
+            Parche.Execute "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)"
+            
+            Me.DtaConsulta.RecordSource = "select sum(Debe1) as SumaDebe1,sum(debe2) as SumaDebe2,sum(debe3)as SumaDebe3,sum(haber1) as SumaHaber1,sum(haber2) as SumaHaber2,sum(haber3) as SumaHaber3 from reportes where descripcion not like '%total%'"
+            Me.DtaConsulta.Refresh
+            If Not DtaConsulta.Recordset.EOF Then
+        '      ArepBalanza.LblDebe1 = Format(Me.DtaConsulta.Recordset("SumaDebe1"), "##,##0.00")
+        '      ArepBalanza.LblHaber1 = Format(Me.DtaConsulta.Recordset("SumaHaber1"), "##,##0.00")
+        '      ArepBalanza.LblDebe2 = Format(Me.DtaConsulta.Recordset("SumaDebe2"), "##,##0.00")
+        '      ArepBalanza.LblHaber2 = Format(Me.DtaConsulta.Recordset("SumaHaber2"), "##,##0.00")
+        '      ArepBalanza.LblDebe3 = Format(Me.DtaConsulta.Recordset("SumaDebe3"), "##,##0.00")
+        '      ArepBalanza.LblHaber3 = Format(Me.DtaConsulta.Recordset("SumaHaber3"), "##,##0.00")
+              ArepBalanza.LblDebe3 = Me.DtaConsulta.Recordset("SumaDebe3")
+              ArepBalanza.LblHaber3 = Me.DtaConsulta.Recordset("SumaHaber3")
+            
+            End If
+            
+            
+            Parche.Execute "Update [Reportes] SET [Debe3] =  CASE WHEN (Debe1 + Debe2) > (Haber1 + Haber2) THEN (Debe1 + Debe2) - (Haber1 + Haber2) ELSE 0 END ,[Haber3] =  CASE WHEN (Haber1 + Haber2) > (Debe1 + Debe2) THEN (Haber1 + Haber2) - (Debe1 + Debe2) ELSE 0 END"
+            
+            Dim Resultado As String
+              If Me.OptTradicional.Value = True Then
+                Me.DtaReportes.Refresh
+                ArepBalanza.LblMoneda.Caption = Me.CmbMoneda.Text
+        
+        '          ArepBalanza.Logo.Picture = LoadPicture(RutaLogo)
+        '
+        '        ArepBalanza.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
+        '        ArepBalanza.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
+        '        ArepBalanza.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
+        '        ArepBalanza.LblFechaFin = Me.DTFecha2.Value
+        '        ArepBalanza.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
+        '        ArepBalanza.LblFechaIni = Me.DTFecha1.Value
+        '        ArepBalanza.DataControl1.ConnectionString = ConexionReporte
+        '        ArepBalanza.DataControl1.Source = "SELECT * From Reportes ORDER BY Orden"
+        '        ArepBalanza.Field8.Visible = False
+        '        ArepBalanza.Field9.Visible = False
+        '        ArepBalanza.Field10.Visible = False
+        '        ArepBalanza.Field11.Visible = False
+        '        ArepBalanza.FldTDebe3.Visible = False
+        '        ArepBalanza.FldTHaber3.Visible = False
+                Sql = "SELECT * From Reportes ORDER BY Orden"
+                QUIEN = "Balanza"
+        '        ArepBalanza.Show 1
+        
+                    Set rpt = New ArepBalanza
+                    rpt.DataControl1.ConnectionString = ConexionReporte
+                    rpt.DataControl1.Source = Sql
+                    fPreview.RunReport rpt
+                    fPreview.Show 1
+                    
+        
+              ElseIf Me.OptColumna.Value = True Then
+                Me.DtaReportes.Refresh
+                ArepBalanzaColumna.LblMoneda.Caption = Me.CmbMoneda.Text
+                ArepBalanzaColumna.Logo.Picture = LoadPicture(RutaLogo)
+                ArepBalanzaColumna.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
+                ArepBalanzaColumna.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
+                ArepBalanzaColumna.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
+                ArepBalanzaColumna.LblFechaFin = Me.DTFecha2.Value
+                ArepBalanzaColumna.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
+                ArepBalanzaColumna.LblFechaIni = Me.DTFecha1.Value
+                ArepBalanzaColumna.DataControl1.ConnectionString = ConexionReporte
+                ArepBalanzaColumna.DataControl1.Source = "SELECT * From Reportes ORDER BY Orden"
+                ArepBalanzaColumna.Field8.Visible = False
+                ArepBalanzaColumna.Field9.Visible = False
+                ArepBalanzaColumna.Field10.Visible = False
+                ArepBalanzaColumna.Field11.Visible = False
+                ArepBalanzaColumna.FldTDebe3.Visible = False
+                ArepBalanzaColumna.FldTHaber3.Visible = False
+                ArepBalanzaColumna.Show 1
+             
+              End If
+                 
+             Me.LblProgreso.Caption = ""
+            Me.osProgress1.Visible = False
+            
+         ElseIf Option9.Value = True Then
+         
+            '/////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////EN ESTA OPCION CALCULO POR CUENTA DE MAYOR/////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////
+            
+        Parche.Execute "Update [Reportes] SET [Debe3] =  CASE WHEN (Debe1 + Debe2) > (Haber1 + Haber2) THEN (Debe1 + Debe2) - (Haber1 + Haber2) ELSE 0 END ,[Haber3] =  CASE WHEN (Haber1 + Haber2) > (Debe1 + Debe2) THEN (Haber1 + Haber2) - (Debe1 + Debe2) ELSE 0 END"
+         
+        '     SQL = "SELECT Max(Transacciones.CodCuentas) AS CodCuentas, Max(Transacciones.NumeroMovimiento) AS NumeroMovimiento, Max(Transacciones.NombreCuenta) AS NombreCuenta, Avg(Transacciones.TCambio) AS TCambio, Sum(Transacciones.TCambio*Transacciones.Debito) AS Debito, Sum(Transacciones.TCambio*Transacciones.Credito) AS Credito, Cuentas.KeyGrupo, Cuentas.DescripcionGrupo, MAX(Cuentas.TipoMoneda) AS MonedaCuenta " & _
+        '    "FROM Grupos INNER JOIN (Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas) ON Grupos.KeyGrupo = Cuentas.KeyGrupo " & _
+        '    "WHERE     (Transacciones.FechaTransaccion < CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102)) " & _
+        '    "GROUP BY Cuentas.KeyGrupo, Cuentas.DescripcionGrupo " & _
+        '    "ORDER BY Cuentas.KeyGrupo "
+        '    "WHERE (((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "')) " & _
+
+            Sql = "SELECT MAX(Transacciones.CodCuentas) AS CodCuentas, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, SUM(Transacciones.Debito) AS Debito,SUM(Transacciones.Credito) AS Credito, Cuentas.KeyGrupo, Cuentas.DescripcionGrupo, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas FROM Transacciones INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas GROUP BY Cuentas.KeyGrupo, Cuentas.DescripcionGrupo " & _
+                  "HAVING (MAX(Transacciones.FechaTransaccion) <= CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) ORDER BY Cuentas.KeyGrupo"
+        
+        
+            If Me.OptTradicional.Value = True Then
+                ArepBalanzaMayor.DataControl1.ConnectionString = ConexionReporte
+                ArepBalanzaMayor.DataControl1.Source = Sql
+                ArepBalanzaMayor.Logo.Picture = LoadPicture(RutaLogo)
+                ArepBalanzaMayor.LblEmpresa.Caption = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
+                ArepBalanzaMayor.LblEmpresa1.Caption = Me.DtaDatosEmpresa.Recordset("Direccion")
+                ArepBalanzaMayor.LblEmpresa2.Caption = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
+                ArepBalanzaMayor.LblFechaIni.Caption = FechaIni
+                ArepBalanzaMayor.LblFechaFin.Caption = FechaFin
+                ArepBalanzaMayor.LblFechaImpreso.Caption = "Impreso: " & Format(Now, "dd/mm/yyyy")
+                ArepBalanzaMayor.Show 1
+        '         fPreview.arv.ReportSource = ArepBalanzaMayor
+        '         fPreview.Show 1
+            Else
+                ArepBalanzaMayorColumna.DataControl1.ConnectionString = ConexionReporte
+                ArepBalanzaMayorColumna.DataControl1.Source = Sql
+                ArepBalanzaMayorColumna.Logo.Picture = LoadPicture(RutaLogo)
+                ArepBalanzaMayorColumna.LblEmpresa.Caption = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
+                ArepBalanzaMayorColumna.LblEmpresa1.Caption = Me.DtaDatosEmpresa.Recordset("Direccion")
+                ArepBalanzaMayorColumna.LblEmpresa2.Caption = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
+                ArepBalanzaMayorColumna.LblFechaIni.Caption = FechaIni
+                ArepBalanzaMayorColumna.LblFechaFin.Caption = FechaFin
+                ArepBalanzaMayorColumna.LblFechaImpreso.Caption = "Impreso: " & Format(Now, "dd/mm/yyyy")
+                ArepBalanzaMayorColumna.Show 1
+        
+            End If
+         End If
+         
+         
+End Select
+
+
+
+Me.Frame6.Visible = False
+Me.CmdVerReporte2.Enabled = True
+Me.CmdSalir.Enabled = True
+Me.CmdVerReporte3.Visible = False
+Me.CmdVerReporte2.Visible = False
+Me.CmdVerReporte.Visible = True
+
+End Sub
+
 Private Sub ChkExportar_Click()
 ' If Me.ChkExportar.Value = 1 Then
 '   Me.CommonDialog1.ShowSave
@@ -3645,7 +3983,10 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
          Me.SSTab.TabVisible(1) = False
          Me.SSTab.TabVisible(2) = False
          Me.ChkQuitarMovimiento.Visible = False
-         Select Case Me.CmbReportes.Text
+
+         
+   Select Case Me.CmbReportes.Text
+         
        Case "COMPROBANTE DE DIARIO"
        
          Me.FrmDepartamento.Left = 3960
@@ -3741,6 +4082,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
               
               Me.DtaConsulta.Recordset.MoveNext
             Loop
+            
        Case "RETENCIONES EN LA FUENTE I.R X COBRAR"
          Me.CmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
@@ -3794,6 +4136,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
               
               Me.DtaConsulta.Recordset.MoveNext
             Loop
+            
       Case "ANEXO FISCAL IVA PROVEEDOR"
          Me.CmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
@@ -4119,6 +4462,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
       Me.ChkBalanza.Visible = True
       Me.Option4.Visible = True
       Me.Option9.Visible = False
+      
 '      Me.frameBalanza.Visible = True
 '      Me.frameBalanza.top = 2160
 '      Me.frameBalanza.Left = 3960
@@ -8498,8 +8842,14 @@ Me.DTFecha1 = Format(Now, "dd/mm/yyyy")
 Me.DTFecha2 = Format(Now, "dd/mm/yyyy")
 
 ConfiguracionReportesBalance
+Me.BtnExcel.Visible = False
 
 Select Case QUIEN
+ Case "ExportarExcel"
+  Me.CmbReportes.AddItem ("BALANZA DE COMPROBACION")
+  Me.BtnExcel.Visible = True
+  
+ 
  Case "ReporteCxC"
    Me.CmbReportes.AddItem ("LISTA CUENTAS X COBRAR")
    Me.CmbReportes.AddItem ("LISTA CUENTAS X PAGAR")

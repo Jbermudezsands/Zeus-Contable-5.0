@@ -1,13 +1,13 @@
 VERSION 5.00
 Begin {9EB8768B-CDFA-44DF-8F3E-857A8405E1DB} ArepBalanza 
    Caption         =   "Balanza de Comprobacion"
-   ClientHeight    =   10980
+   ClientHeight    =   11010
    ClientLeft      =   165
    ClientTop       =   555
-   ClientWidth     =   15240
+   ClientWidth     =   11400
    StartUpPosition =   3  'Windows Default
-   _ExtentX        =   26882
-   _ExtentY        =   19368
+   _ExtentX        =   35930
+   _ExtentY        =   19420
    SectionData     =   "ArepBalanza.dsx":0000
 End
 Attribute VB_Name = "ArepBalanza"
@@ -448,109 +448,144 @@ Private Sub GroupFooter1_Format()
 '    End If
                                           
      '///////////////////////////TOTAL MOVIMIENTOS ////////////////////////////////////////////
-     If QUIEN = "Balanza" Then
-     
-         If FrmReportes.CmbMoneda.Text = "Córdobas" Then
-            Ajuste = "Dólares"
-         ElseIf FrmReportes.CmbMoneda.Text = "Dólares" Then
-            Ajuste = "Córdobas"
-         
-         End If
-     
-                     If FrmReportes.TxtDesde.Text = "" Then
-                       FrmReportes.DtaConsulta.RecordSource = "SELECT * From Grupos ORDER BY KeyGrupo"
-                       FrmReportes.DtaConsulta.Refresh
-                       If Not FrmReportes.DtaConsulta.Recordset.EOF Then
-                         FrmReportes.DtaConsulta.Recordset.MoveFirst
-                         CodigoCuentaDesde = FrmReportes.DtaConsulta.Recordset("KeyGrupo")
-                       End If
-                    Else
-                        CodigoCuentaDesde = FrmReportes.TxtKeyGrupoDesde.Text
-                    End If
-                       
-                    If FrmReportes.TxtHasta.Text = "" Then
-                       FrmReportes.DtaConsulta.RecordSource = "SELECT * From Grupos ORDER BY KeyGrupo"
-                       FrmReportes.DtaConsulta.Refresh
-                       If Not FrmReportes.DtaConsulta.Recordset.EOF Then
-                         FrmReportes.DtaConsulta.Recordset.MoveLast
-                         CodigoCuentaHasta = FrmReportes.DtaConsulta.Recordset("KeyGrupo")
-                       End If
-                    Else
-                       CodigoCuentaHasta = FrmReportes.TxtKeyGrupoHasta.Text
-                    End If
-     
-     
-         If FrmReportes.CmbMoneda.Text = "Córdobas" Then
-           FrmReportes.DtaConsulta.RecordSource = "SELECT  MAX(Cuentas.CodCuentas) AS Expr1, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio - Transacciones.TCambio * Transacciones.Credito) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Transacciones.NTransaccion) AS Transaccion FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
-                                                  "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha1.Value, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) AND (Cuentas.KeyGrupo BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (IndiceTransaccion.Ajuste <> 'Dólares')"
-         Else
-           FrmReportes.DtaConsulta.RecordSource = "SELECT  MAX(Cuentas.CodCuentas) AS Expr1, SUM(Transacciones.Debito * (Transacciones.TCambio / Tasas.MontoCordobas)) AS MDebito, SUM(Transacciones.Credito * (Transacciones.TCambio / Tasas.MontoCordobas)) AS MCredito, SUM(Transacciones.Debito * (Transacciones.TCambio / Tasas.MontoCordobas) - Transacciones.Credito * (Transacciones.TCambio / Tasas.MontoCordobas)) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Transacciones.NTransaccion) As Transaccion FROM   Cuentas INNER JOIN  Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN  Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas INNER JOIN  IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion " & _
-                                                  "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha1.Value, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) AND (Cuentas.KeyGrupo BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (IndiceTransaccion.Ajuste <> 'Córdobas')"
-         End If
-
-     
-     
-     ElseIf QUIEN = "BalanzaCodigo" Then
-     
-                            If FrmReportes.DBCodigo.Text = "" Then
-                                 FrmReportes.DtaConsulta.RecordSource = "SELECT Cuentas.* From Cuentas ORDER BY CodCuentas"
-                                 FrmReportes.DtaConsulta.Refresh
-                                 If Not FrmReportes.DtaConsulta.Recordset.EOF Then
-                                   FrmReportes.DtaConsulta.Recordset.MoveFirst
-                                   CodigoCuentaDesde = FrmReportes.DtaConsulta.Recordset("CodCuentas")
-                                End If
-                            Else
-                              CodigoCuentaDesde = FrmReportes.DBCodigo.Text
-                            End If
-                            
-                            If FrmReportes.DBCodigoHasta.Text = "" Then
-                                 FrmReportes.DtaConsulta.RecordSource = "SELECT Cuentas.* From Cuentas ORDER BY CodCuentas"
-                                 FrmReportes.DtaConsulta.Refresh
-                                 If Not FrmReportes.DtaConsulta.Recordset.EOF Then
-                                   FrmReportes.DtaConsulta.Recordset.MoveLast
-                                   CodigoCuentaHasta = FrmReportes.DtaConsulta.Recordset("CodCuentas")
-                                End If
-                            Else
-                               CodigoCuentaHasta = FrmReportes.DBCodigoHasta.Text
-                            End If
-     
-         If FrmReportes.CmbMoneda.Text = "Córdobas" Then
-           FrmReportes.DtaConsulta.RecordSource = "SELECT MAX(Descripcion) AS Descripcion, SUM(Debe1) AS Debe1, SUM(Haber1) AS Haber1, SUM(Debe2) AS MDebito, SUM(Haber2) AS MCredito, SUM(Debe3) AS Debe3, SUM(Haber3) As Haber3 From Reportes"
-         Else
+'     If QUIEN = "Balanza" Then
+'
+'         If FrmReportes.CmbMoneda.Text = "Córdobas" Then
+'            Ajuste = "Dólares"
+'         ElseIf FrmReportes.CmbMoneda.Text = "Dólares" Then
+'            Ajuste = "Córdobas"
+'
+'         End If
+'
+'                     If FrmReportes.TxtDesde.Text = "" Then
+'                       FrmReportes.DtaConsulta.RecordSource = "SELECT * From Grupos ORDER BY KeyGrupo"
+'                       FrmReportes.DtaConsulta.Refresh
+'                       If Not FrmReportes.DtaConsulta.Recordset.EOF Then
+'                         FrmReportes.DtaConsulta.Recordset.MoveFirst
+'                         CodigoCuentaDesde = FrmReportes.DtaConsulta.Recordset("KeyGrupo")
+'                       End If
+'                    Else
+'                        CodigoCuentaDesde = FrmReportes.TxtKeyGrupoDesde.Text
+'                    End If
+'
+'                    If FrmReportes.TxtHasta.Text = "" Then
+'                       FrmReportes.DtaConsulta.RecordSource = "SELECT * From Grupos ORDER BY KeyGrupo"
+'                       FrmReportes.DtaConsulta.Refresh
+'                       If Not FrmReportes.DtaConsulta.Recordset.EOF Then
+'                         FrmReportes.DtaConsulta.Recordset.MoveLast
+'                         CodigoCuentaHasta = FrmReportes.DtaConsulta.Recordset("KeyGrupo")
+'                       End If
+'                    Else
+'                       CodigoCuentaHasta = FrmReportes.TxtKeyGrupoHasta.Text
+'                    End If
+'
+'
+'         If FrmReportes.CmbMoneda.Text = "Córdobas" Then
+'           FrmReportes.DtaConsulta.RecordSource = "SELECT  MAX(Cuentas.CodCuentas) AS Expr1, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio - Transacciones.TCambio * Transacciones.Credito) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Transacciones.NTransaccion) AS Transaccion FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
+'                                                  "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha1.Value, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) AND (Cuentas.KeyGrupo BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (IndiceTransaccion.Ajuste <> 'Dólares')"
+'         Else
+'           FrmReportes.DtaConsulta.RecordSource = "SELECT  MAX(Cuentas.CodCuentas) AS Expr1, SUM(Transacciones.Debito * (Transacciones.TCambio / Tasas.MontoCordobas)) AS MDebito, SUM(Transacciones.Credito * (Transacciones.TCambio / Tasas.MontoCordobas)) AS MCredito, SUM(Transacciones.Debito * (Transacciones.TCambio / Tasas.MontoCordobas) - Transacciones.Credito * (Transacciones.TCambio / Tasas.MontoCordobas)) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Transacciones.NTransaccion) As Transaccion FROM   Cuentas INNER JOIN  Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN  Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas INNER JOIN  IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion " & _
+'                                                  "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha1.Value, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) AND (Cuentas.KeyGrupo BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (IndiceTransaccion.Ajuste <> 'Córdobas')"
+'         End If
+'
+'
+'
+'     ElseIf QUIEN = "BalanzaCodigo" Then
+'
+'                            If FrmReportes.DBCodigo.Text = "" Then
+'                                 FrmReportes.DtaConsulta.RecordSource = "SELECT Cuentas.* From Cuentas ORDER BY CodCuentas"
+'                                 FrmReportes.DtaConsulta.Refresh
+'                                 If Not FrmReportes.DtaConsulta.Recordset.EOF Then
+'                                   FrmReportes.DtaConsulta.Recordset.MoveFirst
+'                                   CodigoCuentaDesde = FrmReportes.DtaConsulta.Recordset("CodCuentas")
+'                                End If
+'                            Else
+'                              CodigoCuentaDesde = FrmReportes.DBCodigo.Text
+'                            End If
+'
+'                            If FrmReportes.DBCodigoHasta.Text = "" Then
+'                                 FrmReportes.DtaConsulta.RecordSource = "SELECT Cuentas.* From Cuentas ORDER BY CodCuentas"
+'                                 FrmReportes.DtaConsulta.Refresh
+'                                 If Not FrmReportes.DtaConsulta.Recordset.EOF Then
+'                                   FrmReportes.DtaConsulta.Recordset.MoveLast
+'                                   CodigoCuentaHasta = FrmReportes.DtaConsulta.Recordset("CodCuentas")
+'                                End If
+'                            Else
+'                               CodigoCuentaHasta = FrmReportes.DBCodigoHasta.Text
+'                            End If
+'
+'         If FrmReportes.CmbMoneda.Text = "Córdobas" Then
+'           FrmReportes.DtaConsulta.RecordSource = "SELECT MAX(Descripcion) AS Descripcion, SUM(Debe1) AS Debe1, SUM(Haber1) AS Haber1, SUM(Debe2) AS MDebito, SUM(Haber2) AS MCredito, SUM(Debe3) AS Debe3, SUM(Haber3) As Haber3 From Reportes"
+'         Else
+''           FrmReportes.DtaConsulta.RecordSource = "SELECT  MAX(Cuentas.CodCuentas) AS Expr1, SUM(Transacciones.Debito * (Transacciones.TCambio / Tasas.MontoCordobas)) AS MDebito, SUM(Transacciones.Credito * (Transacciones.TCambio / Tasas.MontoCordobas)) AS MCredito, SUM(Transacciones.Debito * (Transacciones.TCambio / Tasas.MontoCordobas) - Transacciones.Credito * (Transacciones.TCambio / Tasas.MontoCordobas)) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Transacciones.NTransaccion) As Transaccion FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas  " & _
+''                                                  "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha1.Value, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) HAVING (MAX(Cuentas.CodCuentas) BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "')"
+'           FrmReportes.DtaConsulta.RecordSource = "SELECT MAX(Descripcion) AS Descripcion, SUM(Debe1) AS Debe1, SUM(Haber1) AS Haber1, SUM(Debe2) AS MDebito, SUM(Haber2) AS MCredito, SUM(Debe3) AS Debe3, SUM(Haber3) As Haber3 From Reportes"
+'         End If
+'    Else
+'
+'         If FrmReportes.CmbMoneda.Text = "Córdobas" Then
+'           FrmReportes.DtaConsulta.RecordSource = "SELECT  MAX(Cuentas.CodCuentas) AS Expr1, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio - Transacciones.TCambio * Transacciones.Credito) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Transacciones.NTransaccion) AS Transaccion FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas  " & _
+'                                                  "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha1.Value, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) HAVING (MAX(Cuentas.CodCuentas) BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "')"
+'         Else
 '           FrmReportes.DtaConsulta.RecordSource = "SELECT  MAX(Cuentas.CodCuentas) AS Expr1, SUM(Transacciones.Debito * (Transacciones.TCambio / Tasas.MontoCordobas)) AS MDebito, SUM(Transacciones.Credito * (Transacciones.TCambio / Tasas.MontoCordobas)) AS MCredito, SUM(Transacciones.Debito * (Transacciones.TCambio / Tasas.MontoCordobas) - Transacciones.Credito * (Transacciones.TCambio / Tasas.MontoCordobas)) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Transacciones.NTransaccion) As Transaccion FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas  " & _
 '                                                  "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha1.Value, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) HAVING (MAX(Cuentas.CodCuentas) BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "')"
-           FrmReportes.DtaConsulta.RecordSource = "SELECT MAX(Descripcion) AS Descripcion, SUM(Debe1) AS Debe1, SUM(Haber1) AS Haber1, SUM(Debe2) AS MDebito, SUM(Haber2) AS MCredito, SUM(Debe3) AS Debe3, SUM(Haber3) As Haber3 From Reportes"
-         End If
-    Else
-    
-         If FrmReportes.CmbMoneda.Text = "Córdobas" Then
-           FrmReportes.DtaConsulta.RecordSource = "SELECT  MAX(Cuentas.CodCuentas) AS Expr1, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio - Transacciones.TCambio * Transacciones.Credito) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Transacciones.NTransaccion) AS Transaccion FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas  " & _
-                                                  "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha1.Value, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) HAVING (MAX(Cuentas.CodCuentas) BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "')"
-         Else
-           FrmReportes.DtaConsulta.RecordSource = "SELECT  MAX(Cuentas.CodCuentas) AS Expr1, SUM(Transacciones.Debito * (Transacciones.TCambio / Tasas.MontoCordobas)) AS MDebito, SUM(Transacciones.Credito * (Transacciones.TCambio / Tasas.MontoCordobas)) AS MCredito, SUM(Transacciones.Debito * (Transacciones.TCambio / Tasas.MontoCordobas) - Transacciones.Credito * (Transacciones.TCambio / Tasas.MontoCordobas)) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Transacciones.NTransaccion) As Transaccion FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas  " & _
-                                                  "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha1.Value, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) HAVING (MAX(Cuentas.CodCuentas) BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "')"
-         End If
-    
-    End If
-    
-    
-    
+'         End If
+'
+'    End If
+'
+'
+
+      FrmReportes.DtaConsulta.RecordSource = "SELECT SUM(Debe1) AS Debe1, SUM(Haber1) AS Haber1, SUM(Debe2) AS Debe2, SUM(Haber2) AS Haber2, SUM(Debe3) AS Debe3, SUM(Haber3) AS Haber3 From Reportes WHERE (Nivel = 1) AND (Descripcion LIKE N'%Total%')"
       FrmReportes.DtaConsulta.Refresh
+      
         If Not FrmReportes.DtaConsulta.Recordset.EOF Then
-           If Not IsNull(FrmReportes.DtaConsulta.Recordset("MDebito")) Then
-             Debe2 = FrmReportes.DtaConsulta.Recordset("MDebito")
+           If Not IsNull(FrmReportes.DtaConsulta.Recordset("Debe1")) Then
+             Debe1 = FrmReportes.DtaConsulta.Recordset("Debe1")
            End If
-           If Not IsNull(FrmReportes.DtaConsulta.Recordset("MCredito")) Then
-             Haber2 = FrmReportes.DtaConsulta.Recordset("MCredito")
+           
+           If Not IsNull(FrmReportes.DtaConsulta.Recordset("Haber1")) Then
+             Haber1 = FrmReportes.DtaConsulta.Recordset("Haber1")
            End If
+           
+           If Not IsNull(FrmReportes.DtaConsulta.Recordset("Debe2")) Then
+             Debe2 = FrmReportes.DtaConsulta.Recordset("Debe2")
+           End If
+           
+           If Not IsNull(FrmReportes.DtaConsulta.Recordset("Haber2")) Then
+             Haber2 = FrmReportes.DtaConsulta.Recordset("Haber2")
+           End If
+           
+           If Not IsNull(FrmReportes.DtaConsulta.Recordset("Debe3")) Then
+             Debe3 = FrmReportes.DtaConsulta.Recordset("Debe3")
+           End If
+           
+           If Not IsNull(FrmReportes.DtaConsulta.Recordset("Haber3")) Then
+             Haber3 = FrmReportes.DtaConsulta.Recordset("Haber3")
+           End If
+         
+        
+        
+'           If Not IsNull(FrmReportes.DtaConsulta.Recordset("MDebito")) Then
+'             Debe2 = FrmReportes.DtaConsulta.Recordset("MDebito")
+'           End If
+'           If Not IsNull(FrmReportes.DtaConsulta.Recordset("MCredito")) Then
+'             Haber2 = FrmReportes.DtaConsulta.Recordset("MCredito")
+'           End If
         End If
+
+
+
     
-    Me.LblTotalDebe1.Caption = Format(TotalDebe1, "###,##0.00")
-    Me.LblTotalHaber1.Caption = Format(TotalHaber1, "###,##0.00")
+'    Me.LblTotalDebe1.Caption = Format(TotalDebe1, "###,##0.00")
+'    Me.LblTotalHaber1.Caption = Format(TotalHaber1, "###,##0.00")
+    Me.LblTotalDebe1.Caption = Format(Debe1, "###,##0.00")
+    Me.LblTotalHaber1.Caption = Format(Haber1, "###,##0.00")
     Me.LblTotalDebe2.Caption = Format(Debe2, "###,##0.00")
     Me.LblTotalHaber2.Caption = Format(Haber2, "###,##0.00")
-    Me.LblDebe3.Caption = Format(TotalDebe1 + Debe2, "###,##0.00")
-    Me.LblHaber3.Caption = Format(TotalHaber1 + Haber2, "###,##0.00")
+    Me.LblDebe3.Caption = Format(Debe3, "###,##0.00")
+    Me.LblHaber3.Caption = Format(Haber3, "###,##0.00")
+'    Me.LblDebe3.Caption = Format(TotalDebe1 + Debe2, "###,##0.00")
+'    Me.LblHaber3.Caption = Format(TotalHaber1 + Haber2, "###,##0.00")
     
     
     '////////////////////////////////AHORA BUSCO LOS SALDO FINALES ////////////////////////////////////////////////////////

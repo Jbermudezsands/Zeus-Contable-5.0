@@ -63,6 +63,7 @@ Public TasaCambio As Double, TotalDebito1 As Double, TotalCredito1 As Double, To
 Public KeyAnterior As String, Totalingresos As Double, TotalGastos As Double
 Public NombreBD As String, FechaSistema As Date
 
+
 Public FechaVence As Date, FechaFactura As Date
 Public CodigoCuentaIva As String, Beneficiario As String
 

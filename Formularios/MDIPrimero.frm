@@ -811,7 +811,6 @@ Begin VB.MDIForm MDIPrimero
             MinWidth        =   1764
             Picture         =   "MDIPrimero.frx":65898
             TextSave        =   ""
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
@@ -819,35 +818,31 @@ Begin VB.MDIForm MDIPrimero
             MinWidth        =   7937
             Text            =   "Licencia: Juan"
             TextSave        =   "Licencia: Juan"
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   3528
             MinWidth        =   3528
             TextSave        =   ""
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   1
             Enabled         =   0   'False
             TextSave        =   "MAYÚS"
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel5 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   2
+            Enabled         =   0   'False
             Object.Width           =   1393
             MinWidth        =   1393
             TextSave        =   "NÚM"
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel6 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   5
-            TextSave        =   "02:38 p.m."
-            Key             =   ""
+            TextSave        =   "11:17 a.m."
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -1362,7 +1357,10 @@ Private Sub CommandBars_Execute(ByVal Control As XtremeCommandBars.ICommandBarCo
        Case 1740: FrmCheque.Show
        Case 1741: FrmSolicitudPagoLista.Show
        Case 1742: FrmEstructuraPresupuesto.Show
-
+       Case 1743
+              QUIEN = "ExportarExcel"
+              FrmReportes.Label10.Caption = "Exportacion Excel"
+              FrmReportes.Show 1
 
         End Select
 End Sub
@@ -1429,8 +1427,8 @@ End With
 
 
 Dim Rutas As String
-
 Dim NombreEmpresa As String, RUC As String
+
 If Not Me.AdoConfiguracion.Recordset.EOF Then
  NombreEmpresa = Me.AdoConfiguracion.Recordset("NombreEmpresa")
  RUC = Me.AdoConfiguracion.Recordset("NumeroRuc")
@@ -1680,6 +1678,8 @@ Public Sub CargarInterfaz()
     Workspace.ThemedBackColor = False
     Workspace.PaintManager.ShowIcons = False
     
+    
+    
     Dim Pane1 As Pane
     Set Pane1 = DockingPaneManager.CreatePane(1, 154, 120, DockLeftOf, Nothing)
     Pane1.Title = "Navegador"
@@ -1778,6 +1778,7 @@ Private Sub CreateRibbonBar()
     CommandBars.Icons.LoadBitmap App.Path & "\Imagenes\Cheques.png", 1740, xtpImageNormal
     CommandBars.Icons.LoadBitmap App.Path & "\Imagenes\SolicitudPago.png", 1741, xtpImageNormal
     CommandBars.Icons.LoadBitmap App.Path & "\Imagenes\EstructuraPresupuesto.png", 1742, xtpImageNormal
+    CommandBars.Icons.LoadBitmap App.Path & "\Imagenes\Excel.png", 1743, xtpImageNormal
     
     
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1918,6 +1919,8 @@ Private Sub CreateRibbonBar()
      Item.Style = xtpButtonIconAndCaptionBelow
      Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1722, "&Analisis Financieros", False, False)
      Item.Style = xtpButtonIconAndCaptionBelow
+     Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1743, "&Exportar Excel", False, False)
+     Item.Style = xtpButtonIconAndCaptionBelow
      
     '/////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////CREO EL TABS DE CONTABILIZAR//////////////////////////////////////////////
@@ -1935,7 +1938,7 @@ Private Sub CreateRibbonBar()
      Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1726, "Contabilizar Nomina", False, False)
      Item.Style = xtpButtonIconAndCaptionBelow
     
-    RibbonBar.QuickAccessControls.Add XtremeCommandBars.XTPControlType.xtpControlButton, ID_FILE_SAVE, "Zeus Contable V.6.39", False, False
+    RibbonBar.QuickAccessControls.Add XtremeCommandBars.XTPControlType.xtpControlButton, ID_FILE_SAVE, "Zeus Contable V.6.42", False, False
 
 
 End Sub

@@ -15,6 +15,19 @@ For x = 1 To Ilen
 Next
 Encrypt = sFrase
 End Function
+Public Function Inicio_Excel() As Boolean
+Dim i As Integer
+Dim j As Integer
+
+Set objExcel = New Excel.Application
+ 
+objExcel.Visible = True 'lo hacemos visible
+objExcel.SheetsInNewWorkbook = 1 'decimos cuantas hojas queremos en el nuevo documento
+objExcel.Workbooks.Add ' añadimos el objeto al workbook
+
+End Function
+
+
 Public Function SaldoCuenta(Periodo As Double, Fecha As Date, Cuenta As String, KeyPresupuesto As Double) As Double
       Dim TipoMoneda As String, TipoCuenta As String, MontoTasa As Double
       
@@ -301,21 +314,21 @@ End Function
 
 Public Function LeeCadena(cadena As String, numero As Double) As String
   Dim i As Double
-  Dim A() As String, Can As String, J As Double
+  Dim A() As String, Can As String, j As Double
   
 '  ReDim A(Len(Cadena))
    ReDim A(5)
 
-    J = 1
+    j = 1
     For i = 1 To Len(cadena)
      If Mid(cadena, i, 1) = ";" Then
-      J = J + 1
+      j = j + 1
       i = i + 1
       Can = ""
      End If
      
         Can = Can & Mid(cadena, i, 1)
-        A(J) = Can
+        A(j) = Can
          
 
     Next
@@ -389,7 +402,7 @@ Public Function CalcularCostoPromedio(CodigoProducto As String, Conexion As Stri
                      FechaCompra = Trim(MDIPrimero.AdoConsultaFacturacion.Recordset("Fecha_Compra"))
                      TasaCambio = BuscaTasaCambio(FechaCompra)
                      If TasaCambio = 0 Then
-                        MsgBox "TASA DE CAMBIO CERO", vbApplicationModal, "Zeus Contabilidad "
+                        MsgBox "TASA DE CAMBIO CERO " & FechaCompra, vbApplicationModal, "Zeus Contabilidad "
                      Else
                         TotalImporte = (Importe * TasaCambio) + TotalImporte
                      End If
@@ -1040,7 +1053,7 @@ Dim DescripCuenta As String, DescripcionPadre As String, KeyUltimo As String, Aj
    
    End If
    
-       FrmReportes.lblProgreso.Caption = "Consultando Registros del periodo seleccionado para la cuenta " & CodigoCuenta
+       FrmReportes.LblProgreso.Caption = "Consultando Registros del periodo seleccionado para la cuenta " & CodigoCuenta
 
           FrmReportes.osProgress1.Value = FrmReportes.osProgress1.Value + 1
 
@@ -1474,7 +1487,7 @@ Dim DescripCuenta As String, DescripcionPadre As String, KeyUltimo As String, Aj
 'InputBox "", "", FrmReportes.DtaHistorial.RecordSource
  FrmReportes.DtaHistorial.Refresh
 
-FrmReportes.lblProgreso.Caption = "Consultando Registros del Periodo Anterior para " & QUIEN
+FrmReportes.LblProgreso.Caption = "Consultando Registros del Periodo Anterior para " & QUIEN
 FrmReportes.osProgress1.Value = 0
 
  If Not FrmReportes.DtaHistorial.Recordset.EOF Then
@@ -1958,7 +1971,7 @@ Dim Mayor() As String, CodGrupo() As String, DescripcionBalance As String
 Dim TotalMayor() As String, TotalDescripcion As String
 Dim KeySuperior As String, NumeroHijos As Double, NumeroHijosTotales As Double
 Dim DescripCuenta As String, DescripcionPadre As String, KeyUltimo As String
-Dim TipoCuenta As String, TipoMoneda As String, i As Double, J As Double, k As Double, NumRegistros As Double
+Dim TipoCuenta As String, TipoMoneda As String, i As Double, j As Double, k As Double, NumRegistros As Double
 
 Dim Orden As Long
 Orden = 1
@@ -1974,11 +1987,11 @@ Debug.Print FrmReportes.DtaHistorial.RecordSource
     FrmReportes.DtaHistorial.Recordset.MoveFirst
    End If
    
-       FrmReportes.lblProgreso.Caption = "Creando Estructura"
+       FrmReportes.LblProgreso.Caption = "Creando Estructura"
        FrmReportes.osProgress1.Value = 0
        FrmReportes.osProgress1.Visible = True
        FrmReportes.osProgress1.Max = CantRegistros
-       J = 0
+       j = 0
    
      Do While Not FrmReportes.DtaHistorial.Recordset.EOF
       If Not IsNull(FrmReportes.DtaHistorial.Recordset("KeyGrupoSuperior")) Then
@@ -2055,7 +2068,7 @@ Debug.Print FrmReportes.DtaHistorial.RecordSource
        End If
        CodigoCuenta = FrmReportes.DtaConsulta.Recordset("CodCuentas")
        
-       FrmReportes.lblProgreso.Caption = "Agregando la Cuenta " & CodigoCuenta
+       FrmReportes.LblProgreso.Caption = "Agregando la Cuenta " & CodigoCuenta
        DoEvents
        
 '/////////////Lleno de Espacios el codigo de la cuenta//////////////////////////////
@@ -2077,8 +2090,8 @@ Debug.Print FrmReportes.DtaHistorial.RecordSource
            FrmReportes.DtaConsulta.Recordset.MoveNext
          Loop
        
-       J = J + 1
-       FrmReportes.osProgress1.Value = J
+       j = j + 1
+       FrmReportes.osProgress1.Value = j
        DoEvents
        FrmReportes.DtaHistorial.Recordset.MoveNext
        
@@ -2375,7 +2388,7 @@ Dim CodDepartamento As String, NPeriodo As Double, NumeroPeriodo() As Double, i 
     Orden = 0
      FrmReportes.DtaHistorial.Refresh
 '     InputBox "", "", FrmReportes.DtaHistorial.RecordSource
-        FrmReportes.lblProgreso.Caption = "Creando Estructura"
+        FrmReportes.LblProgreso.Caption = "Creando Estructura"
         FrmReportes.osProgress1.Value = 0
         FrmReportes.osProgress1.Visible = True
        FrmReportes.osProgress1.Max = FrmReportes.DtaHistorial.Recordset.RecordCount
@@ -2706,7 +2719,7 @@ Dim CodDepartamento As String, NPeriodo As Double, NumeroPeriodo() As Double, i 
               DescripcionPadre = "Total " + FrmReportes.DtaConsulta2.Recordset("DescripcionGrupo")
 
 '////////////////////Lleno de Espacios la Descripcion del padre///////////////////////////////////
-             For J = 2 To i
+             For j = 2 To i
                DescripcionPadre = " " + DescripcionPadre
              Next
            
@@ -2818,7 +2831,7 @@ Dim CodDepartamentoAnt As String, CodigoGrupoAnt As String, UltimoCodigoGrupo As
     Orden = 0
      FrmReportes.DtaHistorial.Refresh
 '     InputBox "", "", FrmReportes.DtaHistorial.RecordSource
-        FrmReportes.lblProgreso.Caption = "Creando Estructura"
+        FrmReportes.LblProgreso.Caption = "Creando Estructura"
         FrmReportes.osProgress1.Value = 0
         FrmReportes.osProgress1.Visible = True
        FrmReportes.osProgress1.Max = FrmReportes.DtaHistorial.Recordset.RecordCount
@@ -3231,7 +3244,7 @@ Dim CodDepartamentoAnt As String, CodigoGrupoAnt As String, UltimoCodigoGrupo As
               DescripcionPadre = "Total " + FrmReportes.DtaConsulta2.Recordset("DescripcionGrupo")
 
 '////////////////////Lleno de Espacios la Descripcion del padre///////////////////////////////////
-             For J = 2 To i
+             For j = 2 To i
                DescripcionPadre = " " + DescripcionPadre
              Next
            
@@ -3585,7 +3598,7 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                     
                     
                     
-                     FrmReportes.lblProgreso.Caption = "Consultando Registros del periodo seleccionado para la cuenta " & CodigoCuenta
+                     FrmReportes.LblProgreso.Caption = "Consultando Registros del periodo seleccionado para la cuenta " & CodigoCuenta
                      FrmReportes.osProgress1.Value = FrmReportes.osProgress1.Value + 1
                      DoEvents
                      If FrmReportes.ChkQuitarMovimiento.Value = 1 Then
@@ -4289,7 +4302,7 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
         
                 FrmReportes.DtaHistorial.Refresh
         
-                FrmReportes.lblProgreso.Caption = "Consultando Registros del Periodo Anterior para " & QUIEN
+                FrmReportes.LblProgreso.Caption = "Consultando Registros del Periodo Anterior para " & QUIEN
                 FrmReportes.osProgress1.Value = 0
             
             If Not FrmReportes.DtaHistorial.Recordset.EOF Then
@@ -4305,11 +4318,11 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                 CodigoCuenta = FrmReportes.DtaHistorial.Recordset("CodCuentas")
                 
 
-                    If CodigoCuenta = "314-05" Then
-                      CodigoCuenta = "314-05"
+                    If CodigoCuenta = "1130-001-002" Then
+                      CodigoCuenta = "1130-001-002"
                     End If
                 
-                FrmReportes.lblProgreso.Caption = "Consultando Registros del Periodo Anterior para la Cuenta " & CodigoCuenta
+                FrmReportes.LblProgreso.Caption = "Consultando Registros del Periodo Anterior para la Cuenta " & CodigoCuenta
                 DoEvents
             
 '                FrmReportes.DtaConsulta.RecordSource = "SELECT Cuentas.CodCuentas, Transacciones.FechaTransaccion, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio - Transacciones.TCambio * Transacciones.Credito) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Tasas.MontoCordobas) AS MontoCordobas, MAX(Tasas.MontoLibras) AS MontoLibras, MAX(Transacciones.NTransaccion) AS NTransaccion FROM  Tasas INNER JOIN  Cuentas INNER JOIN  Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas ON Tasas.FechaTasas = Transacciones.FechaTasas GROUP BY Cuentas.CodCuentas, Transacciones.FechaTransaccion  " & _
@@ -4459,17 +4472,20 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
         
                   'FrmReportes.DtaConsulta2.Recordset.Edit
                   If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Bancos" Or TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Or TipoCuenta = "Papeleria - Utiles" Or TipoCuenta = "Inventario" Then
-                    If TotalCuenta < 0 Then
-                     FrmReportes.DtaConsulta2.Recordset("Haber1") = Abs(TotalCuenta)
-                    Else
-                     FrmReportes.DtaConsulta2.Recordset("Debe1") = TotalCuenta
-                    End If
+                    FrmReportes.DtaConsulta2.Recordset("Debe1") = TotalCuenta
+'                   If TotalCuenta < 0 Then
+'                     FrmReportes.DtaConsulta2.Recordset("Haber1") = Abs(TotalCuenta)
+'                    Else
+'                     FrmReportes.DtaConsulta2.Recordset("Debe1") = TotalCuenta
+'                    End If
                   Else
-                    If TotalCuenta < 0 Then
-                      FrmReportes.DtaConsulta2.Recordset("Debe1") = Abs(TotalCuenta)
-                    Else
                      FrmReportes.DtaConsulta2.Recordset("Haber1") = TotalCuenta
-                    End If
+                  
+'                    If TotalCuenta < 0 Then
+'                      FrmReportes.DtaConsulta2.Recordset("Debe1") = Abs(TotalCuenta)
+'                    Else
+'                     FrmReportes.DtaConsulta2.Recordset("Haber1") = TotalCuenta
+'                    End If
                   End If
         '          FrmReportes.DtaConsulta2.Recordset!Orden = Orden
                   Orden = Orden + 1
@@ -4500,17 +4516,20 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                       FrmReportes.DtaConsulta.Recordset.MoveLast
                       'FrmReportes.'DtaConsulta.Recordset.Edit
                       If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Bancos" Or TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Or TipoCuenta = "Papeleria - Utiles" Or TipoCuenta = "Inventario" Then
-                        If TotalCuenta < 0 Then
-                          FrmReportes.DtaConsulta.Recordset("Haber1") = FrmReportes.DtaConsulta.Recordset("Haber1") + Abs(TotalCuenta)
-                        Else
                          FrmReportes.DtaConsulta.Recordset("Debe1") = FrmReportes.DtaConsulta.Recordset("Debe1") + TotalCuenta
-                        End If
+
+'                        If TotalCuenta < 0 Then
+'                          FrmReportes.DtaConsulta.Recordset("Haber1") = FrmReportes.DtaConsulta.Recordset("Haber1") + Abs(TotalCuenta)
+'                        Else
+'                         FrmReportes.DtaConsulta.Recordset("Debe1") = FrmReportes.DtaConsulta.Recordset("Debe1") + TotalCuenta
+'                        End If
                       Else
-                        If TotalCuenta < 0 Then
-                         FrmReportes.DtaConsulta.Recordset("Debe1") = FrmReportes.DtaConsulta.Recordset("Debe1") + Abs(TotalCuenta)
-                        Else
                          FrmReportes.DtaConsulta.Recordset("Haber1") = FrmReportes.DtaConsulta.Recordset("Haber1") + TotalCuenta
-                        End If
+'                        If TotalCuenta < 0 Then
+'                         FrmReportes.DtaConsulta.Recordset("Debe1") = FrmReportes.DtaConsulta.Recordset("Debe1") + Abs(TotalCuenta)
+'                        Else
+'                         FrmReportes.DtaConsulta.Recordset("Haber1") = FrmReportes.DtaConsulta.Recordset("Haber1") + TotalCuenta
+'                        End If
                       End If
                       If 1 = 0 Then FrmReportes.DtaConsulta.Recordset!Orden = Orden + 1
                       Orden = Orden + 1
@@ -5072,7 +5091,7 @@ Dim TotalDebitoDpto As Double, TotalCreditoDpto As Double
 
                     
                     
-                     FrmReportes.lblProgreso.Caption = "Consultando Registros del periodo seleccionado para la cuenta " & CodigoCuenta
+                     FrmReportes.LblProgreso.Caption = "Consultando Registros del periodo seleccionado para la cuenta " & CodigoCuenta
                      FrmReportes.osProgress1.Value = FrmReportes.osProgress1.Value + 1
                      DoEvents
                      If FrmReportes.ChkQuitarMovimiento.Value = 1 Then
@@ -5762,7 +5781,7 @@ Dim TotalDebitoDpto As Double, TotalCreditoDpto As Double
                 FrmReportes.DtaHistorial.Refresh
               End If
         
-                FrmReportes.lblProgreso.Caption = "Consultando Registros del Periodo Anterior para " & QUIEN
+                FrmReportes.LblProgreso.Caption = "Consultando Registros del Periodo Anterior para " & QUIEN
                 FrmReportes.osProgress1.Value = 0
             
             If Not FrmReportes.DtaHistorial.Recordset.EOF Then
@@ -5780,7 +5799,7 @@ Dim TotalDebitoDpto As Double, TotalCreditoDpto As Double
 
 
                 
-                FrmReportes.lblProgreso.Caption = "Consultando Registros del Periodo Anterior para la Cuenta " & CodigoCuenta
+                FrmReportes.LblProgreso.Caption = "Consultando Registros del Periodo Anterior para la Cuenta " & CodigoCuenta
                 DoEvents
             
                 FrmReportes.DtaConsulta.RecordSource = "SELECT Cuentas.CodCuentas, Transacciones.FechaTransaccion, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio - Transacciones.TCambio * Transacciones.Credito) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda, MAX(Tasas.MontoCordobas) AS MontoCordobas, MAX(Tasas.MontoLibras) AS MontoLibras, MAX(Transacciones.NTransaccion) AS NTransaccion FROM  Tasas INNER JOIN  Cuentas INNER JOIN  Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas ON Tasas.FechaTasas = Transacciones.FechaTasas GROUP BY Cuentas.CodCuentas, Transacciones.FechaTransaccion  " & _
