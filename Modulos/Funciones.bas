@@ -15,18 +15,18 @@ For x = 1 To Ilen
 Next
 Encrypt = sFrase
 End Function
-Public Function Inicio_Excel() As Boolean
-
-Dim i As Integer
-Dim J As Integer
-
-Set objExcel = New Excel.Application
- 
-objExcel.Visible = True 'lo hacemos visible
-objExcel.SheetsInNewWorkbook = 1 'decimos cuantas hojas queremos en el nuevo documento
-objExcel.Workbooks.Add ' añadimos el objeto al workbook
-
-End Function
+'Public Function Inicio_Excel() As Boolean
+'
+'Dim i As Integer
+'Dim J As Integer
+'
+'Set objExcel = New Excel.Application
+'
+'objExcel.Visible = True 'lo hacemos visible
+'objExcel.SheetsInNewWorkbook = 1 'decimos cuantas hojas queremos en el nuevo documento
+'objExcel.Workbooks.Add ' añadimos el objeto al workbook
+'
+'End Function
 
 
 Public Function SaldoCuenta(Periodo As Double, Fecha As Date, Cuenta As String, KeyPresupuesto As Double) As Double
