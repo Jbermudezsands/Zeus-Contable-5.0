@@ -245,17 +245,17 @@ Public Function BuscaDpto(CodDepartamento As String) As String
 
 End Function
     
-'Public Function Inicio_Excel() As Boolean
-'Dim i As Integer
-'Dim J As Integer
-'
-'Set objExcel = New Excel.Application
-'
-'objExcel.Visible = True 'lo hacemos visible
-'objExcel.SheetsInNewWorkbook = 1 'decimos cuantas hojas queremos en el nuevo documento
-'objExcel.Workbooks.Add ' añadimos el objeto al workbook
-'
-'End Function
+Public Function Inicio_Excel() As Boolean
+Dim i As Integer
+Dim J As Integer
+
+Set objExcel = New Excel.Application
+
+objExcel.Visible = True 'lo hacemos visible
+objExcel.SheetsInNewWorkbook = 1 'decimos cuantas hojas queremos en el nuevo documento
+objExcel.Workbooks.Add ' añadimos el objeto al workbook
+
+End Function
 
 Public Function ConvertirMovimiento(NumeroMovimiento As Double, Fecha As Date, MonedaConvertir As String)
   Dim TipoMoneda As String, TasaCambio As Double

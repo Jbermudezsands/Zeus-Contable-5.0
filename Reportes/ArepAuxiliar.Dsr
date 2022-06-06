@@ -4,9 +4,9 @@ Begin {9EB8768B-CDFA-44DF-8F3E-857A8405E1DB} ArepAuxiliar
    ClientHeight    =   10980
    ClientLeft      =   165
    ClientTop       =   555
-   ClientWidth     =   20280
+   ClientWidth     =   11400
    StartUpPosition =   3  'Windows Default
-   _ExtentX        =   35772
+   _ExtentX        =   20108
    _ExtentY        =   19368
    SectionData     =   "ArepAuxiliar.dsx":0000
 End

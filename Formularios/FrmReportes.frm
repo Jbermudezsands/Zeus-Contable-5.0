@@ -534,14 +534,14 @@ Begin VB.Form FrmReportes
       TabCaption(1)   =   "Configuracion Reportes"
       TabPicture(1)   =   "FrmReportes.frx":1968A
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame10"
-      Tab(1).Control(1)=   "Frame11"
+      Tab(1).Control(0)=   "Frame11"
+      Tab(1).Control(1)=   "Frame10"
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "Configuracion Reportes "
       TabPicture(2)   =   "FrmReportes.frx":196A6
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame12"
-      Tab(2).Control(1)=   "Frame13"
+      Tab(2).Control(0)=   "Frame13"
+      Tab(2).Control(1)=   "Frame12"
       Tab(2).ControlCount=   2
       Begin VB.CheckBox ChkMostrarMovxMes 
          Caption         =   "Mostrar mov x mes"
@@ -2197,7 +2197,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   60293121
+            Format          =   59965441
             CurrentDate     =   37837
          End
          Begin MSComCtl2.DTPicker DTFecha1 
@@ -2209,7 +2209,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   60293121
+            Format          =   59965441
             CurrentDate     =   37837
          End
          Begin VB.Label Label4 
@@ -3634,38 +3634,7 @@ Select Case Me.CmbReportes.Text
          End If
          
          
-'           Call Inicio_Excel 'Llamamos a la funcion que abre el workbook en excel
-'
-'            V = 4
-'            H = 0
-'            i = 1
-'
-'          '///////////////////////////////////////////////////////////////////////////////////////
-'          '////////////////////ENCABEZADOS//////////////////////////////////////////////////////
-'          '///////////////////////////////////////////////////////////////////////////////////
-'            objExcel.ActiveSheet.Cells(1, 1) = NombreEmpresa
-'            objExcel.ActiveSheet.Range("A1:J1").Merge
-'            objExcel.ActiveSheet.Range("A1", "J1").HorizontalAlignment = xlHAlignCenter
-'            With objExcel.ActiveSheet.Cells(1, 1)
-'                  .Font.Size = 20             ' tamaño de letra
-'                  .Font.Bold = True           ' Fuente en negrita
-'            End With
-'            objExcel.ActiveSheet.Cells(2, 1) = "RUC " & RUC
-'            objExcel.ActiveSheet.Cells(3, 1) = "EXPORTACION DESDE " & Me.DTFecha1.Value & " HASTA " & Me.DTFecha1.Value
-'            objExcel.ActiveSheet.Range("A3:J3").Merge
-'            objExcel.ActiveSheet.Range("A3", "J3").HorizontalAlignment = xlHAlignCenter
-'            With objExcel.ActiveSheet.Cells(3, 1)
-'                  .Font.Size = 14             ' tamaño de letra
-'                  .Font.Bold = True           ' Fuente en negrita
-'            End With
-'
-'            objExcel.ActiveSheet.Cells(4, 1) = "CodEmpleado"
-'            objExcel.ActiveSheet.Cells(4, 2) = "Nombre y Apellido"
-'            objExcel.ActiveSheet.Cells(4, 3) = "NumerCedula"
-'            objExcel.ActiveSheet.Cells(4, 4) = "Devengado"
-'            objExcel.ActiveSheet.Cells(4, 5) = "MontoInss"
-'            objExcel.ActiveSheet.Cells(4, 6) = "MontoIr"
-            
+           
             
          If Option4.Value = True Then
             Me.DtaReportes.Refresh
@@ -3763,14 +3732,14 @@ Select Case Me.CmbReportes.Text
             Me.DtaConsulta.RecordSource = "select sum(Debe1) as SumaDebe1,sum(debe2) as SumaDebe2,sum(debe3)as SumaDebe3,sum(haber1) as SumaHaber1,sum(haber2) as SumaHaber2,sum(haber3) as SumaHaber3 from reportes where descripcion not like '%total%'"
             Me.DtaConsulta.Refresh
             If Not DtaConsulta.Recordset.EOF Then
-        '      ArepBalanza.LblDebe1 = Format(Me.DtaConsulta.Recordset("SumaDebe1"), "##,##0.00")
-        '      ArepBalanza.LblHaber1 = Format(Me.DtaConsulta.Recordset("SumaHaber1"), "##,##0.00")
-        '      ArepBalanza.LblDebe2 = Format(Me.DtaConsulta.Recordset("SumaDebe2"), "##,##0.00")
-        '      ArepBalanza.LblHaber2 = Format(Me.DtaConsulta.Recordset("SumaHaber2"), "##,##0.00")
-        '      ArepBalanza.LblDebe3 = Format(Me.DtaConsulta.Recordset("SumaDebe3"), "##,##0.00")
-        '      ArepBalanza.LblHaber3 = Format(Me.DtaConsulta.Recordset("SumaHaber3"), "##,##0.00")
-              ArepBalanza.LblDebe3 = Me.DtaConsulta.Recordset("SumaDebe3")
-              ArepBalanza.LblHaber3 = Me.DtaConsulta.Recordset("SumaHaber3")
+''        '      ArepBalanza.LblDebe1 = Format(Me.DtaConsulta.Recordset("SumaDebe1"), "##,##0.00")
+''        '      ArepBalanza.LblHaber1 = Format(Me.DtaConsulta.Recordset("SumaHaber1"), "##,##0.00")
+''        '      ArepBalanza.LblDebe2 = Format(Me.DtaConsulta.Recordset("SumaDebe2"), "##,##0.00")
+''        '      ArepBalanza.LblHaber2 = Format(Me.DtaConsulta.Recordset("SumaHaber2"), "##,##0.00")
+''        '      ArepBalanza.LblDebe3 = Format(Me.DtaConsulta.Recordset("SumaDebe3"), "##,##0.00")
+''        '      ArepBalanza.LblHaber3 = Format(Me.DtaConsulta.Recordset("SumaHaber3"), "##,##0.00")
+''              ArepBalanza.LblDebe3 = Me.DtaConsulta.Recordset("SumaDebe3")
+''              ArepBalanza.LblHaber3 = Me.DtaConsulta.Recordset("SumaHaber3")
             
             End If
             
@@ -3780,33 +3749,145 @@ Select Case Me.CmbReportes.Text
             Dim Resultado As String
               If Me.OptTradicional.Value = True Then
                 Me.DtaReportes.Refresh
-                ArepBalanza.LblMoneda.Caption = Me.CmbMoneda.Text
-        
-        '          ArepBalanza.Logo.Picture = LoadPicture(RutaLogo)
-        '
-        '        ArepBalanza.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
-        '        ArepBalanza.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
-        '        ArepBalanza.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
-        '        ArepBalanza.LblFechaFin = Me.DTFecha2.Value
-        '        ArepBalanza.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
-        '        ArepBalanza.LblFechaIni = Me.DTFecha1.Value
-        '        ArepBalanza.DataControl1.ConnectionString = ConexionReporte
-        '        ArepBalanza.DataControl1.Source = "SELECT * From Reportes ORDER BY Orden"
-        '        ArepBalanza.Field8.Visible = False
-        '        ArepBalanza.Field9.Visible = False
-        '        ArepBalanza.Field10.Visible = False
-        '        ArepBalanza.Field11.Visible = False
-        '        ArepBalanza.FldTDebe3.Visible = False
-        '        ArepBalanza.FldTHaber3.Visible = False
+
                 Sql = "SELECT * From Reportes ORDER BY Orden"
                 QUIEN = "Balanza"
         '        ArepBalanza.Show 1
         
-                    Set rpt = New ArepBalanza
-                    rpt.DataControl1.ConnectionString = ConexionReporte
-                    rpt.DataControl1.Source = Sql
-                    fPreview.RunReport rpt
-                    fPreview.Show 1
+        
+            Call Inicio_Excel 'Llamamos a la funcion que abre el workbook en excel
+
+            V = 6
+            H = 0
+            i = 1
+
+          '///////////////////////////////////////////////////////////////////////////////////////
+          '////////////////////ENCABEZADOS//////////////////////////////////////////////////////
+          '///////////////////////////////////////////////////////////////////////////////////
+            objExcel.ActiveSheet.Cells(1, 1) = NombreEmpresa
+            objExcel.ActiveSheet.Range("A1:J1").Merge
+            objExcel.ActiveSheet.Range("A1", "J1").HorizontalAlignment = xlHAlignCenter
+            With objExcel.ActiveSheet.Cells(1, 1)
+                  .Font.Size = 20             ' tamaño de letra
+                  .Font.Bold = True           ' Fuente en negrita
+            End With
+            objExcel.ActiveSheet.Cells(2, 1) = "RUC " & RUC
+            objExcel.ActiveSheet.Cells(3, 1) = "EXPORTACION DESDE " & Me.DTFecha1.Value & " HASTA " & Me.DTFecha1.Value
+            objExcel.ActiveSheet.Range("A3:J3").Merge
+            objExcel.ActiveSheet.Range("A3", "J3").HorizontalAlignment = xlHAlignCenter
+            With objExcel.ActiveSheet.Cells(3, 1)
+                  .Font.Size = 14             ' tamaño de letra
+                  .Font.Bold = True           ' Fuente en negrita
+            End With
+
+            objExcel.ActiveSheet.Cells(4, 1) = "Moneda Reporte: " & Me.CmbMoneda.Text
+            objExcel.ActiveSheet.Cells(4, 2) = "Saldo Antes del " & Me.DTFecha1.Value
+            objExcel.ActiveSheet.Cells(4, 6) = "Saldo Al " & Me.DTFecha2.Value
+            objExcel.ActiveSheet.Cells(5, 1) = "Codigo - Descripcion"
+            objExcel.ActiveSheet.Columns("A").ColumnWidth = 60
+            objExcel.ActiveSheet.Columns("B").ColumnWidth = 16
+            objExcel.ActiveSheet.Columns("C").ColumnWidth = 16
+            objExcel.ActiveSheet.Columns("D").ColumnWidth = 16
+            objExcel.ActiveSheet.Columns("E").ColumnWidth = 16
+            objExcel.ActiveSheet.Columns("F").ColumnWidth = 16
+            objExcel.ActiveSheet.Columns("G").ColumnWidth = 16
+            
+            objExcel.ActiveSheet.Cells(5, 2) = "Debe"
+            objExcel.ActiveSheet.Cells(5, 3) = "Haber"
+            objExcel.ActiveSheet.Cells(5, 4) = "Debe"
+            objExcel.ActiveSheet.Cells(5, 5) = "Haber"
+            objExcel.ActiveSheet.Cells(5, 6) = "Debe"
+            objExcel.ActiveSheet.Cells(5, 7) = "Haber"
+            objExcel.ActiveSheet.Columns("B").NumberFormat = "##,##0.00"
+            objExcel.ActiveSheet.Columns("C").NumberFormat = "##,##0.00"
+            objExcel.ActiveSheet.Columns("D").NumberFormat = "##,##0.00"
+            objExcel.ActiveSheet.Columns("E").NumberFormat = "##,##0.00"
+            objExcel.ActiveSheet.Columns("F").NumberFormat = "##,##0.00"
+            objExcel.ActiveSheet.Columns("G").NumberFormat = "##,##0.00"
+            
+            MDIPrimero.AdoConsulta.RecordSource = Sql
+            MDIPrimero.AdoConsulta.Refresh
+            
+            Me.osProgress1.Min = 0
+            MDIPrimero.AdoConsulta.Recordset.MoveLast
+            Me.osProgress1.Max = MDIPrimero.AdoConsulta.Recordset.RecordCount
+            MDIPrimero.AdoConsulta.Recordset.MoveFirst
+            Me.osProgress1.Value = 0
+            Do While Not MDIPrimero.AdoConsulta.Recordset.EOF
+                
+                objExcel.ActiveSheet.Cells(V, 1) = MDIPrimero.AdoConsulta.Recordset("Descripcion")
+                objExcel.ActiveSheet.Cells(V, 2) = MDIPrimero.AdoConsulta.Recordset("Debe1")
+                objExcel.ActiveSheet.Cells(V, 3) = MDIPrimero.AdoConsulta.Recordset("Haber1")
+                objExcel.ActiveSheet.Cells(V, 4) = MDIPrimero.AdoConsulta.Recordset("Debe2")
+                objExcel.ActiveSheet.Cells(V, 5) = MDIPrimero.AdoConsulta.Recordset("Haber2")
+                objExcel.ActiveSheet.Cells(V, 6) = MDIPrimero.AdoConsulta.Recordset("Debe2")
+                objExcel.ActiveSheet.Cells(V, 7) = MDIPrimero.AdoConsulta.Recordset("Haber2")
+            
+                V = V + 1
+                Me.osProgress1.Value = Me.osProgress1.Value + 1
+                MDIPrimero.AdoConsulta.Recordset.MoveNext
+            Loop
+            
+            '////////////////////////////////////////////////////////////////////
+            '/////////////TOTALIZO LA BALANZA /////////////////
+            '////////////////////////////////////////////////////////////////
+             FrmReportes.DtaConsulta.RecordSource = "SELECT SUM(Debe1) AS Debe1, SUM(Haber1) AS Haber1, SUM(Debe2) AS Debe2, SUM(Haber2) AS Haber2, SUM(Debe3) AS Debe3, SUM(Haber3) AS Haber3 From Reportes WHERE (Nivel = 1) AND (Descripcion LIKE N'%Total%')"
+             FrmReportes.DtaConsulta.Refresh
+      
+            If Not FrmReportes.DtaConsulta.Recordset.EOF Then
+              V = V + 1
+
+                 objExcel.ActiveSheet.Cells(V, 1) = "Totales"
+
+               If Not IsNull(FrmReportes.DtaConsulta.Recordset("Debe1")) Then
+                 objExcel.ActiveSheet.Cells(V, 2) = FrmReportes.DtaConsulta.Recordset("Debe1")
+               End If
+               
+               If Not IsNull(FrmReportes.DtaConsulta.Recordset("Haber1")) Then
+                 objExcel.ActiveSheet.Cells(V, 3) = FrmReportes.DtaConsulta.Recordset("Haber1")
+               End If
+               
+               If Not IsNull(FrmReportes.DtaConsulta.Recordset("Debe2")) Then
+                 objExcel.ActiveSheet.Cells(V, 4) = FrmReportes.DtaConsulta.Recordset("Debe2")
+               End If
+               
+               If Not IsNull(FrmReportes.DtaConsulta.Recordset("Haber2")) Then
+                 objExcel.ActiveSheet.Cells(V, 5) = FrmReportes.DtaConsulta.Recordset("Haber2")
+               End If
+               
+               If Not IsNull(FrmReportes.DtaConsulta.Recordset("Debe3")) Then
+                 objExcel.ActiveSheet.Cells(V, 6) = FrmReportes.DtaConsulta.Recordset("Debe3")
+               End If
+               
+               If Not IsNull(FrmReportes.DtaConsulta.Recordset("Haber3")) Then
+                objExcel.ActiveSheet.Cells(V, 7) = FrmReportes.DtaConsulta.Recordset("Haber3")
+               End If
+               
+             objExcel.ActiveSheet.Cells(V, 1).Font.Size = 10             ' tamaño de letra
+             objExcel.ActiveSheet.Cells(V, 1).Font.Bold = True           ' Fuente en negrita
+             objExcel.ActiveSheet.Cells(V, 2).Font.Size = 10             ' tamaño de letra
+             objExcel.ActiveSheet.Cells(V, 2).Font.Bold = True
+             objExcel.ActiveSheet.Cells(V, 3).Font.Size = 10             ' tamaño de letra
+             objExcel.ActiveSheet.Cells(V, 3).Font.Bold = True
+             objExcel.ActiveSheet.Cells(V, 4).Font.Size = 10             ' tamaño de letra
+             objExcel.ActiveSheet.Cells(V, 4).Font.Bold = True
+             objExcel.ActiveSheet.Cells(V, 5).Font.Size = 10             ' tamaño de letra
+             objExcel.ActiveSheet.Cells(V, 5).Font.Bold = True
+             objExcel.ActiveSheet.Cells(V, 6).Font.Size = 10             ' tamaño de letra
+             objExcel.ActiveSheet.Cells(V, 6).Font.Bold = True
+             objExcel.ActiveSheet.Cells(V, 7).Font.Size = 10             ' tamaño de letra
+             objExcel.ActiveSheet.Cells(V, 7).Font.Bold = True
+             
+             
+            End If
+            
+        
+'
+'                    Set rpt = New ArepBalanza
+'                    rpt.DataControl1.ConnectionString = ConexionReporte
+'                    rpt.DataControl1.Source = Sql
+'                    fPreview.RunReport rpt
+'                    fPreview.Show 1
                     
         
               ElseIf Me.OptColumna.Value = True Then

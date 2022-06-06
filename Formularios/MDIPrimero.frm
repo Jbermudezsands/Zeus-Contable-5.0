@@ -810,7 +810,6 @@ Begin VB.MDIForm MDIPrimero
             Object.Width           =   1773
             MinWidth        =   1764
             Picture         =   "MDIPrimero.frx":65898
-            TextSave        =   ""
             Key             =   ""
             Object.Tag             =   ""
          EndProperty
@@ -825,7 +824,6 @@ Begin VB.MDIForm MDIPrimero
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   3528
             MinWidth        =   3528
-            TextSave        =   ""
             Key             =   ""
             Object.Tag             =   ""
          EndProperty
@@ -847,7 +845,7 @@ Begin VB.MDIForm MDIPrimero
          EndProperty
          BeginProperty Panel6 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   5
-            TextSave        =   "02:11 p.m."
+            TextSave        =   "10:35 a.m."
             Key             =   ""
             Object.Tag             =   ""
          EndProperty
@@ -1127,8 +1125,8 @@ Private Sub DockingPaneManager_AttachPane(ByVal Item As XtremeDockingPane.IPane)
         Item.Handle = arrPanes(Item.Id).hWnd
     End If
 
- 
-    
+
+
 End Sub
 
 Public Function RibbonBar() As RibbonBar
@@ -1678,23 +1676,23 @@ Public Sub CargarInterfaz()
 '    Me.Width = GetSetting(App.Title, "Settings", "MainWidth", 6500)
 '    Me.Height = GetSetting(App.Title, "Settings", "MainHeight", 6500)
 '
-      
+'
     Dim Workspace  As TabWorkspace
     Set Workspace = CommandBars.ShowTabWorkspace(True)
     Workspace.ThemedBackColor = False
     Workspace.PaintManager.ShowIcons = False
+
     
-    
-        
-    Dim Pane1 As Pane
+
+    Dim Pane1 As PaneContainer
     Set Pane1 = DockingPaneManager.CreatePane(1, 154, 120, DockLeftOf, Nothing)
     Pane1.Title = "Navegador"
     Pane1.Options = PaneNoCloseable
     Pane1.Select
     
-  
+
     CommandBars.Options.KeyboardCuesShow = xtpKeyboardCuesShowWindowsDefault
-        
+
     CommandBars.EnableCustomization True
 
     DockingPaneManager.SetCommandBars CommandBars
@@ -1944,7 +1942,7 @@ Private Sub CreateRibbonBar()
      Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1726, "Contabilizar Nomina", False, False)
      Item.Style = xtpButtonIconAndCaptionBelow
     
-    RibbonBar.QuickAccessControls.Add XtremeCommandBars.XTPControlType.xtpControlButton, ID_FILE_SAVE, "Zeus Contable V.6.42", False, False
+    RibbonBar.QuickAccessControls.Add XtremeCommandBars.XTPControlType.xtpControlButton, ID_FILE_SAVE, "Zeus Contable V.6.43", False, False
 
 
 End Sub

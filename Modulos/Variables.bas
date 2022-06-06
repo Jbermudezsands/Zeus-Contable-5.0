@@ -1,6 +1,6 @@
 Attribute VB_Name = "Variables"
 Public Ejecutar As ADODB.Connection, QuienReporte As String, FechaIngreso As Date
-
+Public objExcel As Excel.Application
 
 Public SaldoFinalAuxiliar As Double, TotalDebitoAux As Double, TotalCreditoAux As Double
 
@@ -24,7 +24,7 @@ Public NumeroTransaccion As Integer, Periodo As Integer, NumeroPeriodo1 As Integ
 Public QueProducto As String, DescripcionContracuenta As String
 Public Orden As Boolean, Descripcion As String
 Public Debito As Double, Credito As Double, Diferencia As Double, DescripcionCuenta As String
-Dim NombreEmpresa As String, RUC As String
+Public NombreEmpresa As String, RUC As String
 
 
 Public ConsultaTotalesMovimientos As String ' consulta que voy a utilizar para poder cambiar la tabla de reportes para la

@@ -4,9 +4,9 @@ Begin {9EB8768B-CDFA-44DF-8F3E-857A8405E1DB} ArepAuxiliarMayor
    ClientHeight    =   11010
    ClientLeft      =   165
    ClientTop       =   555
-   ClientWidth     =   15240
+   ClientWidth     =   11400
    StartUpPosition =   3  'Windows Default
-   _ExtentX        =   26882
+   _ExtentX        =   20108
    _ExtentY        =   19420
    SectionData     =   "ArepAuxiliarMayor.dsx":0000
 End
@@ -24,7 +24,7 @@ If FrmReportes.ChkExportar.Value = 1 Then
    ' Establecer CancelError a True
     FrmReportes.CDRuta.CancelError = True
     ' Establecer los indicadores
-    FrmReportes.CDRuta.flags = cdlOFNHideReadOnly
+    FrmReportes.CDRuta.Flags = cdlOFNHideReadOnly
     ' Establecer los filtros
     FrmReportes.CDRuta.Filter = "Excel (*.XLS)|*.xls"
     ' Especificar el filtro predeterminado
