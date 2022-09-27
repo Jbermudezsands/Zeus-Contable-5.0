@@ -1,5 +1,5 @@
 Type=Exe
-Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINDOWS\system32\STDOLE2.TLB#OLE Automation
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINDOWS\system32\stdole2.tlb#OLE Automation
 Reference=*\G{00025E01-0000-0000-C000-000000000046}#4.0#0#C:\Archivos de programa\Archivos comunes\Microsoft Shared\DAO\DAO350.DLL#Microsoft DAO 3.51 Object Library
 Object={74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0; actskn43.ocx
 Reference=*\G{EF53050B-882E-4776-B643-EDA472E8E3F2}#2.7#0#C:\Archivos de programa\Archivos comunes\system\ado\msado27.tlb#Microsoft ActiveX Data Objects 2.7 Library
@@ -15,7 +15,7 @@ Startup="FrmCompañia"
 HelpFile=""
 Title="Servidor"
 ExeName32="Servidor.exe"
-Path32="C:\"
+Path32="C:\Sistemas"
 Command32=""
 Name="Proyecto1"
 HelpContextID="0"

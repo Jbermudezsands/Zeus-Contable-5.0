@@ -336,8 +336,12 @@ If Dir(RutaServer) = "" Then
   
   If Dir(RutaServer) = "" Then
     RutaServer = App.Path + "\CntNominas.dll"
+    
+    
+      If Dir(RutaServer) = "" Then
+        RutaServer = App.Path + "\CntZeusServer.dll"
+      End If
   End If
-
 End If
 
 

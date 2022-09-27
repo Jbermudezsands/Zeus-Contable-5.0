@@ -5,7 +5,7 @@ Begin VB.Form frmSplash
    ClientHeight    =   7335
    ClientLeft      =   255
    ClientTop       =   1410
-   ClientWidth     =   9930
+   ClientWidth     =   9945
    ClipControls    =   0   'False
    ControlBox      =   0   'False
    Icon            =   "frmSplash.frx":0000
@@ -14,7 +14,7 @@ Begin VB.Form frmSplash
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   7335
-   ScaleWidth      =   9930
+   ScaleWidth      =   9945
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Data DtaConsulta 
@@ -110,17 +110,10 @@ Begin VB.Form frmSplash
       EndProperty
       _Version        =   393216
    End
-   Begin VB.Image imgLogo 
-      Height          =   7425
-      Left            =   0
-      Picture         =   "frmSplash.frx":000C
-      Stretch         =   -1  'True
-      Top             =   0
-      Width           =   9975
-   End
    Begin VB.Label lblVersion 
       Alignment       =   1  'Right Justify
       AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
       Caption         =   "Versión"
       BeginProperty Font 
          Name            =   "Arial"
@@ -132,10 +125,18 @@ Begin VB.Form frmSplash
          Strikethrough   =   0   'False
       EndProperty
       Height          =   285
-      Left            =   1080
+      Left            =   5040
       TabIndex        =   8
-      Top             =   840
+      Top             =   6360
       Width           =   885
+   End
+   Begin VB.Image imgLogo 
+      Height          =   7425
+      Left            =   0
+      Picture         =   "frmSplash.frx":000C
+      Stretch         =   -1  'True
+      Top             =   0
+      Width           =   9975
    End
    Begin VB.Label lblCompanyProduct 
       AutoSize        =   -1  'True
@@ -277,6 +278,7 @@ End Sub
 
 Private Sub Form_Load()
     lblVersion.Caption = "Versión " & App.Major & "." & App.Minor & "." & App.Revision
+    Version = "Versión " & App.Major & "." & App.Minor & "." & App.Revision
     lblProductName.Caption = App.Title
 End Sub
 

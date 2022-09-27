@@ -836,7 +836,6 @@ Begin VB.MDIForm MDIPrimero
          EndProperty
          BeginProperty Panel5 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   2
-            Enabled         =   0   'False
             Object.Width           =   1393
             MinWidth        =   1393
             TextSave        =   "NÚM"
@@ -845,7 +844,7 @@ Begin VB.MDIForm MDIPrimero
          EndProperty
          BeginProperty Panel6 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   5
-            TextSave        =   "10:35 a.m."
+            TextSave        =   "02:33 p.m."
             Key             =   ""
             Object.Tag             =   ""
          EndProperty
@@ -1929,6 +1928,7 @@ Private Sub CreateRibbonBar()
     '/////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////CREO EL TABS DE CONTABILIZAR//////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////
+    Version = "V." & App.Minor & "." & App.Major & "." & App.Revision
     Set TabHome = RibbonBar.InsertTab(4, "&Contabilizar")
     TabHome.Id = 1500
      Set GroupFile = TabHome.Groups.AddGroup("Sistema Facturacion", 1)
@@ -1942,7 +1942,7 @@ Private Sub CreateRibbonBar()
      Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1726, "Contabilizar Nomina", False, False)
      Item.Style = xtpButtonIconAndCaptionBelow
     
-    RibbonBar.QuickAccessControls.Add XtremeCommandBars.XTPControlType.xtpControlButton, ID_FILE_SAVE, "Zeus Contable V.6.43", False, False
+    RibbonBar.QuickAccessControls.Add XtremeCommandBars.XTPControlType.xtpControlButton, ID_FILE_SAVE, "Zeus Contable " & Version, False, False
 
 
 End Sub

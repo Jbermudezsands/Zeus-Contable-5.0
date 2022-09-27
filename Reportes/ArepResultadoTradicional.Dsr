@@ -1,13 +1,13 @@
 VERSION 5.00
 Begin {9EB8768B-CDFA-44DF-8F3E-857A8405E1DB} ArepResultadoTradicional 
    Caption         =   "ActiveReport1"
-   ClientHeight    =   10980
+   ClientHeight    =   11010
    ClientLeft      =   165
    ClientTop       =   555
-   ClientWidth     =   20280
+   ClientWidth     =   11400
    StartUpPosition =   3  'Windows Default
-   _ExtentX        =   35772
-   _ExtentY        =   19368
+   _ExtentX        =   20108
+   _ExtentY        =   19420
    SectionData     =   "ArepResultadoTradicional.dsx":0000
 End
 Attribute VB_Name = "ArepResultadoTradicional"
@@ -258,8 +258,10 @@ End If
        UtilidadNeta = MDIPrimero.AdoConsulta.Recordset("Resultado")
   
      End If
+     
+     
     
-'    UtilidadNeta = Totalingresos - TotalCostos - TotalGastos
+    UtilidadNeta = Totalingresos - TotalCostos - TotalGastos
     
     Me.LblUtilidadNeta.Caption = Format(UtilidadNeta, "##,##0.00")
     

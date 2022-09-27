@@ -67,22 +67,22 @@ Begin VB.Form FrmImportarCuentas
       Columns(0)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
       Columns(1)._VlistStyle=   0
       Columns(1)._MaxComboItems=   5
-      Columns(1).Caption=   "Codigo Dpto"
+      Columns(1).Caption=   "CodigoDepartamento"
       Columns(1).DataField=   "CodigoDepartamento"
       Columns(1)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
       Columns(2)._VlistStyle=   0
       Columns(2)._MaxComboItems=   5
-      Columns(2).Caption=   "Descripcion "
+      Columns(2).Caption=   "DescripcionCuenta"
       Columns(2).DataField=   "DescripcionCuenta"
       Columns(2)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
       Columns(3)._VlistStyle=   0
       Columns(3)._MaxComboItems=   5
-      Columns(3).Caption=   "Tipo  de Cuenta"
+      Columns(3).Caption=   "ClaseCuenta"
       Columns(3).DataField=   "ClaseCuenta"
       Columns(3)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
       Columns(4)._VlistStyle=   0
       Columns(4)._MaxComboItems=   5
-      Columns(4).Caption=   "Descripcion Clase"
+      Columns(4).Caption=   "DescripcionClase"
       Columns(4).DataField=   "DescripcionClase"
       Columns(4)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
       Columns.Count   =   5
@@ -639,7 +639,7 @@ End Sub
 
 Private Sub CmdLeer_Click()
 On Error GoTo TipoErrs
-Dim Cadena As String
+Dim cadena As String
 Dim Consecutivo As Integer, CuentaArchivo As String, CodigoArchivo As String
 Dim CodigoCuenta As String, CodigoDepartamento As String, DescripcionArchivo As String
 Dim DescripcionCuenta As String, Identificador As String
@@ -651,6 +651,7 @@ If Me.OptCns.Value = True Then
 Else
  CommonDialog1.Filter = "Archivos de Excel|*.xls"
 End If
+
 Me.CommonDialog1.ShowOpen
 Directorio = Me.CommonDialog1.FileName
 If Directorio = "" Then
@@ -686,13 +687,13 @@ Me.AdoImporta.Refresh
  
         While Not EOF(1)
         Salir = False
-        Line Input #1, Cadena
+        Line Input #1, cadena
         
-         Identificador = Mid(Cadena, 1, 1)
-         CuentaArchivo = Mid(Cadena, 2, 16)
-         CodigoDepartamento = Mid(Cadena, 18, 3)
-         DescripcionCuenta = Mid(Cadena, 21, 35)
-         ClaseCuenta = Mid(Cadena, 56, 2)
+         Identificador = Mid(cadena, 1, 1)
+         CuentaArchivo = Mid(cadena, 2, 16)
+         CodigoDepartamento = Mid(cadena, 18, 3)
+         DescripcionCuenta = Mid(cadena, 21, 35)
+         ClaseCuenta = Mid(cadena, 56, 2)
         
         '/////////////QUITOS LOS ESPACIOS DEL CODIGO CUENTA///////////////
           Longitud = Len(CuentaArchivo)

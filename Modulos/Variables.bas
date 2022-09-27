@@ -24,7 +24,7 @@ Public NumeroTransaccion As Integer, Periodo As Integer, NumeroPeriodo1 As Integ
 Public QueProducto As String, DescripcionContracuenta As String
 Public Orden As Boolean, Descripcion As String
 Public Debito As Double, Credito As Double, Diferencia As Double, DescripcionCuenta As String
-Public NombreEmpresa As String, RUC As String
+Public NombreEmpresa As String, RUC As String, Version As String
 
 
 Public ConsultaTotalesMovimientos As String ' consulta que voy a utilizar para poder cambiar la tabla de reportes para la

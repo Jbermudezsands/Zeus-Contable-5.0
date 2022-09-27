@@ -2197,7 +2197,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   59965441
+            Format          =   16711681
             CurrentDate     =   37837
          End
          Begin MSComCtl2.DTPicker DTFecha1 
@@ -2209,7 +2209,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   59965441
+            Format          =   16711681
             CurrentDate     =   37837
          End
          Begin VB.Label Label4 
@@ -3598,7 +3598,7 @@ Dim TotalCuentasxPagar As Double, TotalActivos As Double, UtilidadBrutas As Doub
 Dim UltimoOrden As Integer, RegIngresos  As Integer, PrimReg As Integer, UltReg As Integer
 Dim Fechas1 As String, Fechas2 As String, Orden As Integer, Sql As String, i As Double
 Dim ListaMeses As Variant, CantRegistros As Double, ComboIni As Double, ComboFin As Double, TotstoFijo As Double, TotalGastoFijo As Double
-Dim mes As Double, J As Double, TotalDebito As Double, TotalCredito As Double
+Dim mes As Double, J As Double, TotalDebito As Double, TotalCredito As Double, CodigoCuentaDesde As String, CodigoCuentaHasta As String
 Dim rpt As Object, TotalCostoFijo As Double, Ajuste As String
 Dim fPreview As New FrmPreview, V As Double, H As Double
 Dim rs As New ADODB.Recordset
@@ -3621,6 +3621,253 @@ FechaFin = Me.DTFecha2.Value
 
 
 Select Case Me.CmbReportes.Text
+
+        Case "REPORTE PBI"
+        
+        
+    
+        
+    NumFecha1 = Me.DTFecha1.Value
+    NumFecha2 = Me.DTFecha2.Value
+    
+
+      
+      If Me.Option4.Value = True Then
+      
+      
+            If Me.DBCodigo.Text = "" Then
+                 Me.DtaConsulta.RecordSource = "SELECT Cuentas.* From Cuentas ORDER BY CodCuentas"
+                 Me.DtaConsulta.Refresh
+                 If Not Me.DtaConsulta.Recordset.EOF Then
+                   Me.DtaConsulta.Recordset.MoveFirst
+                   CodigoCuentaDesde = Me.DtaConsulta.Recordset("CodCuentas")
+                End If
+            Else
+              CodigoCuentaDesde = Me.DBCodigo.Text
+            End If
+            
+            If Me.DBCodigoHasta.Text = "" Then
+                 Me.DtaConsulta.RecordSource = "SELECT Cuentas.* From Cuentas ORDER BY CodCuentas"
+                 Me.DtaConsulta.Refresh
+                 If Not Me.DtaConsulta.Recordset.EOF Then
+                   Me.DtaConsulta.Recordset.MoveLast
+                   CodigoCuentaHasta = Me.DtaConsulta.Recordset("CodCuentas")
+                End If
+            Else
+               CodigoCuentaHasta = Me.DBCodigoHasta.Text
+            End If
+            
+            
+            CodDesde = CodigoCuentaDesde
+            CodHasta = CodigoCuentaHasta
+            
+             If Me.CmbMoneda.Text = "Córdobas" Then
+             
+               Moneda = "Cordobas"
+'               Sql = "SELECT Transacciones.CodCuentas, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Transacciones.NPeriodo) AS NPeriodo, MAX(Transacciones.NTransaccion) AS NTransaccion, MAX(Transacciones.NumeroMovimiento) AS NumeroMovimiento, MAX(Transacciones.VoucherNo) AS VoucherNo, MAX(Transacciones.DescripcionMovimiento) AS DescripcionMovimiento, MAX(Transacciones.Clave) AS Clave, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * Tasas.MontoCordobas END) AS Debito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * Tasas.MontoCordobas END) AS Credito, MAX(Transacciones.FacturaNo) AS FacturaNo, MAX(Transacciones.ChequeNo) AS ChequeNo, MAX(Transacciones.Fuente) AS Fuente, MAX(Cuentas.TipoCuenta) AS TipoCuenta, SUM(Transacciones.Debito + Transacciones.Credito) AS Saldo FROM  Cuentas INNER JOIN " & _
+'                     "Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN Tasas ON IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas  " & _
+'                     "WHERE (Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) AND (IndiceTransaccion.Ajuste <> 'Dólares') GROUP BY Transacciones.CodCuentas HAVING (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (SUM(Transacciones.Debito + Transacciones.Credito) <> 0) ORDER BY Transacciones.CodCuentas"
+             
+               Sql = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * Tasas.MontoCordobas END AS Debito, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * Tasas.MontoCordobas END AS Credito, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Fuente, Cuentas.TipoCuenta, Transacciones.Debito + Transacciones.Credito AS Saldo FROM  Cuentas INNER JOIN  Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND  " & _
+                     "Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN Tasas ON IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas  " & _
+                     "WHERE  (Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) AND (IndiceTransaccion.Ajuste <> 'Dólares') AND (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (Transacciones.Debito + Transacciones.Credito <> 0) ORDER BY Transacciones.CodCuentas"
+             
+             
+             Else
+               Moneda = "Dolares"
+'               Sql = "SELECT Transacciones.CodCuentas, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Transacciones.NPeriodo) AS NPeriodo, MAX(Transacciones.NTransaccion) AS NTransaccion, MAX(Transacciones.NumeroMovimiento) AS NumeroMovimiento, MAX(Transacciones.VoucherNo) AS VoucherNo, MAX(Transacciones.DescripcionMovimiento) AS DescripcionMovimiento, MAX(Transacciones.Clave) AS Clave, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito ELSE Transacciones.Debito / Tasas.MontoCordobas END) AS Debito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito ELSE Transacciones.Credito / Tasas.MontoCordobas END) AS Credito, MAX(Transacciones.FacturaNo) AS FacturaNo, MAX(Transacciones.ChequeNo) AS ChequeNo, MAX(Transacciones.Fuente) AS Fuente, MAX(Cuentas.TipoCuenta) AS TipoCuenta, SUM(Transacciones.Debito + Transacciones.Credito) AS Saldo FROM  Cuentas INNER JOIN " & _
+'                     "Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN Tasas ON IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas  " & _
+                     "WHERE (Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) AND (IndiceTransaccion.Ajuste <> 'Córdobas') GROUP BY Transacciones.CodCuentas HAVING (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (SUM(Transacciones.Debito + Transacciones.Credito) <> 0) ORDER BY Transacciones.CodCuentas"
+            
+             
+              Sql = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * Tasas.MontoCordobas END AS Debito, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * Tasas.MontoCordobas END AS Credito, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Fuente, Cuentas.TipoCuenta, Transacciones.Debito + Transacciones.Credito AS Saldo FROM  Cuentas INNER JOIN  Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND  " & _
+                     "Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN Tasas ON IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas  " & _
+                     "WHERE  (Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) AND (IndiceTransaccion.Ajuste <> 'Córdobas') AND (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (Transacciones.Debito + Transacciones.Credito <> 0) ORDER BY Transacciones.CodCuentas"
+             
+             End If
+            
+
+
+
+     
+       ElseIf Me.Option5.Value = True Then
+       
+      
+            If Me.TxtDesde.Text = "" Then
+               Me.DtaConsulta.RecordSource = "SELECT * From Grupos ORDER BY KeyGrupo"
+               Me.DtaConsulta.Refresh
+               If Not Me.DtaConsulta.Recordset.EOF Then
+                 Me.DtaConsulta.Recordset.MoveFirst
+                 CodigoCuentaDesde = Me.DtaConsulta.Recordset("KeyGrupo")
+               End If
+            Else
+                CodigoCuentaDesde = Me.TxtKeyGrupoDesde.Text
+            End If
+               
+            If Me.TxtHasta.Text = "" Then
+               Me.DtaConsulta.RecordSource = "SELECT * From Grupos ORDER BY KeyGrupo"
+               Me.DtaConsulta.Refresh
+               If Not Me.DtaConsulta.Recordset.EOF Then
+                 Me.DtaConsulta.Recordset.MoveLast
+                 CodigoCuentaHasta = Me.DtaConsulta.Recordset("KeyGrupo")
+               End If
+            Else
+               CodigoCuentaHasta = Me.TxtKeyGrupoHasta.Text
+            End If
+       
+             Sql = "SELECT  Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.TCambio, Transacciones.FacturaNo,Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTransaccion, Cuentas.TipoCuenta, Transacciones.TCambio AS Expr1, Transacciones.TCambio * Transacciones.Debito AS Debito, Transacciones.TCambio * Transacciones.Credito AS Credito, Grupos.KeyGrupo, Grupos.DescripcionGrupo " & _
+                    "FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Grupos ON Cuentas.KeyGrupo = Grupos.KeyGrupo " & _
+                    "WHERE  (Transacciones.FechaTransaccion BETWEEN '" & Format(Me.DTFecha1, "yyyymmdd") & "' AND '" & Format(Me.DTFecha2, "yyyymmdd") & "') AND (Grupos.KeyGrupo BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') " & _
+                    "ORDER BY Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NTransaccion "
+       
+'             ArepAuxiliarMayor.DataControl1.Source = Sql
+
+       
+       End If
+     
+                Call Inicio_Excel 'Llamamos a la funcion que abre el workbook en excel
+
+            V = 5
+            H = 0
+            i = 1
+
+          '///////////////////////////////////////////////////////////////////////////////////////
+          '////////////////////ENCABEZADOS//////////////////////////////////////////////////////
+          '///////////////////////////////////////////////////////////////////////////////////
+            objExcel.ActiveSheet.Cells(1, 1) = NombreEmpresa
+            objExcel.ActiveSheet.Range("A1:J1").Merge
+            objExcel.ActiveSheet.Range("A1", "J1").HorizontalAlignment = xlHAlignCenter
+            With objExcel.ActiveSheet.Cells(1, 1)
+                  .Font.Size = 20             ' tamaño de letra
+                  .Font.Bold = True           ' Fuente en negrita
+            End With
+            objExcel.ActiveSheet.Cells(2, 1) = "RUC " & RUC
+            objExcel.ActiveSheet.Cells(3, 1) = "EXPORTACION DESDE " & Me.DTFecha1.Value & " HASTA " & Me.DTFecha1.Value
+            objExcel.ActiveSheet.Range("A3:J3").Merge
+            objExcel.ActiveSheet.Range("A3", "J3").HorizontalAlignment = xlHAlignCenter
+            With objExcel.ActiveSheet.Cells(3, 1)
+                  .Font.Size = 14             ' tamaño de letra
+                  .Font.Bold = True           ' Fuente en negrita
+            End With
+
+
+            objExcel.ActiveSheet.Columns("A").ColumnWidth = 11
+            objExcel.ActiveSheet.Columns("B").ColumnWidth = 11
+            objExcel.ActiveSheet.Columns("C").ColumnWidth = 11
+            objExcel.ActiveSheet.Columns("D").ColumnWidth = 11
+            objExcel.ActiveSheet.Columns("E").ColumnWidth = 11
+            objExcel.ActiveSheet.Columns("F").ColumnWidth = 16
+            objExcel.ActiveSheet.Columns("G").ColumnWidth = 16
+             objExcel.ActiveSheet.Columns("J").ColumnWidth = 16
+             objExcel.ActiveSheet.Columns("K").ColumnWidth = 42
+             objExcel.ActiveSheet.Columns("L").ColumnWidth = 17
+             objExcel.ActiveSheet.Columns("M").ColumnWidth = 14
+             objExcel.ActiveSheet.Columns("N").ColumnWidth = 93
+            
+            objExcel.ActiveSheet.Cells(4, 1) = "Numero Registro: "
+            objExcel.ActiveSheet.Cells(4, 2) = "Fecha Registro "
+            objExcel.ActiveSheet.Cells(4, 3) = "Año"
+            objExcel.ActiveSheet.Cells(4, 4) = "Moneda"
+            objExcel.ActiveSheet.Cells(4, 5) = "Tipo Cambio"
+            objExcel.ActiveSheet.Cells(4, 6) = "Tipo Movimiento"
+            objExcel.ActiveSheet.Cells(4, 7) = "DEBE"
+            objExcel.ActiveSheet.Cells(4, 8) = "HABER"
+            objExcel.ActiveSheet.Cells(4, 9) = "SALDO"
+            objExcel.ActiveSheet.Cells(4, 10) = "COD_CUENTA"
+            objExcel.ActiveSheet.Cells(4, 11) = "DESCRIPCION DE LA CUENTA"
+            objExcel.ActiveSheet.Cells(4, 12) = "TIPO CUENTA"
+            objExcel.ActiveSheet.Cells(4, 13) = "DESCRIPCION CLIENTE O PROVEEDOR"
+            objExcel.ActiveSheet.Cells(4, 14) = "CAUSAL DE REGISTRO"
+            objExcel.ActiveSheet.Cells(4, 15) = "FacturaNo"
+            objExcel.ActiveSheet.Cells(4, 16) = "ChequeNo"
+            objExcel.ActiveSheet.Cells(4, 17) = "NumeroMovimiento"
+
+
+            objExcel.ActiveSheet.Columns("D").NumberFormat = "##,##0.00"
+            objExcel.ActiveSheet.Columns("E").NumberFormat = "##,##0.00"
+            objExcel.ActiveSheet.Columns("F").NumberFormat = "##,##0.00"
+            objExcel.ActiveSheet.Columns("G").NumberFormat = "##,##0.00"
+            
+            objExcel.ActiveSheet.Cells(4, 1).Font.Size = 10             ' tamaño de letra
+            objExcel.ActiveSheet.Cells(4, 1).Font.Bold = True           ' Fuente en negrita
+            objExcel.ActiveSheet.Cells(4, 2).Font.Size = 11             ' tamaño de letra
+            objExcel.ActiveSheet.Cells(4, 2).Font.Bold = True           ' Fuente en negrita
+            objExcel.ActiveSheet.Cells(4, 3).Font.Size = 11             ' tamaño de letra
+            objExcel.ActiveSheet.Cells(4, 3).Font.Bold = True           ' Fuente en negrita
+            objExcel.ActiveSheet.Cells(4, 4).Font.Size = 11             ' tamaño de letra
+            objExcel.ActiveSheet.Cells(4, 4).Font.Bold = True           ' Fuente en negrita
+            objExcel.ActiveSheet.Cells(4, 5).Font.Size = 11             ' tamaño de letra
+            objExcel.ActiveSheet.Cells(4, 5).Font.Bold = True           ' Fuente en negrita
+            objExcel.ActiveSheet.Cells(4, 6).Font.Size = 11             ' tamaño de letra
+            objExcel.ActiveSheet.Cells(4, 6).Font.Bold = True           ' Fuente en negrita
+            objExcel.ActiveSheet.Cells(4, 7).Font.Size = 11             ' tamaño de letra
+            objExcel.ActiveSheet.Cells(4, 7).Font.Bold = True           ' Fuente en negrita
+            objExcel.ActiveSheet.Cells(4, 8).Font.Size = 11             ' tamaño de letra
+            objExcel.ActiveSheet.Cells(4, 8).Font.Bold = True           ' Fuente en negrita
+            objExcel.ActiveSheet.Cells(4, 9).Font.Size = 11             ' tamaño de letra
+            objExcel.ActiveSheet.Cells(4, 9).Font.Bold = True           ' Fuente en negrita
+            objExcel.ActiveSheet.Cells(4, 10).Font.Size = 11             ' tamaño de letra
+            objExcel.ActiveSheet.Cells(4, 10).Font.Bold = True           ' Fuente en negrita
+            objExcel.ActiveSheet.Cells(4, 11).Font.Size = 11             ' tamaño de letra
+            objExcel.ActiveSheet.Cells(4, 11).Font.Bold = True           ' Fuente en negrita
+            objExcel.ActiveSheet.Cells(4, 12).Font.Size = 11             ' tamaño de letra
+            objExcel.ActiveSheet.Cells(4, 12).Font.Bold = True           ' Fuente en negrita
+            objExcel.ActiveSheet.Cells(4, 13).Font.Size = 11             ' tamaño de letra
+            objExcel.ActiveSheet.Cells(4, 13).Font.Bold = True           ' Fuente en negrita
+            objExcel.ActiveSheet.Cells(4, 14).Font.Size = 11             ' tamaño de letra
+            objExcel.ActiveSheet.Cells(4, 14).Font.Bold = True           ' Fuente en negrita
+            objExcel.ActiveSheet.Cells(4, 15).Font.Size = 11             ' tamaño de letra
+            objExcel.ActiveSheet.Cells(4, 15).Font.Bold = True           ' Fuente en negrita
+            objExcel.ActiveSheet.Cells(4, 16).Font.Size = 11             ' tamaño de letra
+            objExcel.ActiveSheet.Cells(4, 16).Font.Bold = True           ' Fuente en negrita
+            objExcel.ActiveSheet.Cells(4, 17).Font.Size = 11             ' tamaño de letra
+            objExcel.ActiveSheet.Cells(4, 17).Font.Bold = True           ' Fuente en negrita
+            
+            With objExcel.ActiveSheet.Cells(3, 1)
+                  .Font.Size = 14             ' tamaño de letra
+                  .Font.Bold = True           ' Fuente en negrita
+            End With
+            
+            Me.DtaConsulta.RecordSource = Sql
+            Me.DtaConsulta.Refresh
+            
+            
+            Me.osProgress1.Min = 0
+            Me.DtaConsulta.Recordset.MoveLast
+            Me.osProgress1.Max = Me.DtaConsulta.Recordset.RecordCount
+            Me.DtaConsulta.Recordset.MoveFirst
+            Me.osProgress1.Value = 0
+            Do While Not Me.DtaConsulta.Recordset.EOF
+                DoEvents
+                objExcel.ActiveSheet.Cells(V, 1) = Me.DtaConsulta.Recordset("NTransaccion")
+                objExcel.ActiveSheet.Cells(V, 2) = Format(Me.DtaConsulta.Recordset("FechaTransaccion"), "dd/mm/yyyy")
+                objExcel.ActiveSheet.Cells(V, 3) = Year(Me.DtaConsulta.Recordset("FechaTransaccion"))
+                objExcel.ActiveSheet.Cells(V, 4) = Me.CmbMoneda.Text
+                objExcel.ActiveSheet.Cells(V, 5) = BuscaTasaCambio(Me.DtaConsulta.Recordset("FechaTransaccion"))
+                objExcel.ActiveSheet.Cells(V, 6) = Me.DtaConsulta.Recordset("Clave")
+                objExcel.ActiveSheet.Cells(V, 7) = Me.DtaConsulta.Recordset("Debito")
+                objExcel.ActiveSheet.Cells(V, 8) = Me.DtaConsulta.Recordset("Credito")
+                objExcel.ActiveSheet.Cells(V, 9) = Me.DtaConsulta.Recordset("Saldo")
+                objExcel.ActiveSheet.Cells(V, 10) = Me.DtaConsulta.Recordset("CodCuentas")
+                objExcel.ActiveSheet.Cells(V, 11) = Me.DtaConsulta.Recordset("DescripcionCuentas")
+                objExcel.ActiveSheet.Cells(V, 12) = Me.DtaConsulta.Recordset("TipoCuenta")
+                objExcel.ActiveSheet.Cells(V, 13) = Me.DtaConsulta.Recordset("Fuente")
+                objExcel.ActiveSheet.Cells(V, 14) = Me.DtaConsulta.Recordset("DescripcionMovimiento")
+                objExcel.ActiveSheet.Cells(V, 15) = Me.DtaConsulta.Recordset("FacturaNo")
+                objExcel.ActiveSheet.Cells(V, 16) = Me.DtaConsulta.Recordset("ChequeNo")
+                objExcel.ActiveSheet.Cells(V, 17) = Me.DtaConsulta.Recordset("NumeroMovimiento")
+                
+                
+                
+                DoEvents
+                V = V + 1
+                Me.osProgress1.Value = Me.osProgress1.Value + 1
+                Me.DtaConsulta.Recordset.MoveNext
+            Loop
+            
+            
+         MsgBox "Proceso Terminado!!!", vbExclamation, "Zeus Contable"
+ 
         Case "BALANZA DE COMPROBACION"
         
         '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4031,7 +4278,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
  
  Me.FrmDepartamento.Left = 9360
  Me.FrmDepartamento.Caption = "Departamento"
- 
+ Me.CmbNivel = 3
  Me.ChkSinNiveles.Visible = False
  Me.Frame1.Visible = True
  Me.ChkMostrarMovxMes.Visible = False
@@ -4069,6 +4316,17 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
 
          
    Select Case Me.CmbReportes.Text
+   
+       Case "REPORTE PBI"
+      Me.Label3.Visible = True
+      Me.CmbMoneda.Visible = True
+      Me.Label2.Visible = False
+      Me.Label4.Visible = True
+      Me.DTFecha1.Visible = True
+      Me.Label2.Visible = True
+      Me.Frame7.Visible = False
+      Me.Frame2.Visible = False
+      Me.Frame3.Visible = False
          
        Case "COMPROBANTE DE DIARIO"
        
@@ -4281,6 +4539,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
          Me.Frame1.Visible = False
          Me.Frame4.Visible = True
       Case "BALANCE GENERAL TRADICIONAL"
+         Me.CmbNivel = 3
          Me.CmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmdVerReporte3.Visible = False
@@ -4591,6 +4850,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
         Me.DtaConsulta.Recordset.MoveNext
       Loop
    Case "BALANCE GENERAL"
+      Me.CmbNivel = 3
       Me.Frame4.Visible = True
       Me.Frame1.Visible = False
       Me.CmbMoneda.Visible = True
@@ -4616,6 +4876,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
       Loop
       
    Case "BALANCE COMPARATIVO"
+      Me.CmbNivel = 3
       Me.Frame4.Visible = True
       Me.DtaConsulta.RecordSource = "SELECT Periodos.Periodo, Periodos.FechaPeriodo, Periodos.NumeroTabla From Periodos Where (((Periodos.Periodo) = 1) And ((Periodos.NumeroTabla) = 1 Or (Periodos.NumeroTabla) = 2 Or (Periodos.NumeroTabla) = 3))"
       Me.DtaConsulta.Refresh
@@ -4635,6 +4896,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
       Loop
    
     Case "BALANCE GENERAL"
+
       Me.Frame4.Visible = True
       Me.DtaConsulta.RecordSource = "SELECT Periodos.Periodo, Periodos.FechaPeriodo, Periodos.NumeroTabla From Periodos Where (((Periodos.Periodo) = 1) And ((Periodos.NumeroTabla) = 1 Or (Periodos.NumeroTabla) = 2 Or (Periodos.NumeroTabla) = 3))"
       Me.DtaConsulta.Refresh
@@ -4700,6 +4962,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
       Me.Label3.Visible = True
       Me.ChkSinNiveles.Visible = True
       Me.ChkSinNiveles.Caption = "Expresado en Dolares"
+
       
       
       Me.ChkQuitarMovimiento.Visible = True
@@ -4724,6 +4987,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
       
     Case "ESTADO DE RESULTADO DPTO"
     
+
       Me.CmdVerReporte.Visible = False
       Me.CmdVerReporte2.Visible = False
       Me.CmdVerReporte3.Visible = True
@@ -4751,6 +5015,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
       Loop
       
     Case "RESULTADO ACUMULADO"
+
       Me.ChkQuitarMovimiento.Visible = True
       Me.Frame4.Visible = True
       Me.Frame1.Visible = False
@@ -4772,6 +5037,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
       Loop
       
     Case "RESULTADO HISTORICO"
+
       Me.ChkQuitarMovimiento.Visible = True
       Me.Frame4.Visible = True
       Me.DtaConsulta.RecordSource = "SELECT Periodos.Periodo, Periodos.FechaPeriodo, Periodos.NumeroTabla From Periodos Where (((Periodos.Periodo) = 1) And ((Periodos.NumeroTabla) = 1 Or (Periodos.NumeroTabla) = 2 Or (Periodos.NumeroTabla) = 3))"
@@ -4939,6 +5205,7 @@ Case "ESTRUCTURA DE CUENTAS"
 
 
 Case "ESTADO DE RESULTADO"
+
     NumeroPeriodo1 = Me.CmbIni.Text
     NumeroPeriodo2 = Me.CmbFin.Text
     Me.ChkQuitarMovimiento.Visible = True
@@ -8930,6 +9197,7 @@ Me.BtnExcel.Visible = False
 Select Case QUIEN
  Case "ExportarExcel"
   Me.CmbReportes.AddItem ("BALANZA DE COMPROBACION")
+  Me.CmbReportes.AddItem ("REPORTE PBI")
   Me.BtnExcel.Visible = True
   
  
