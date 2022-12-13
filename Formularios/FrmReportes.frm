@@ -23,9 +23,9 @@ Begin VB.Form FrmReportes
    StartUpPosition =   2  'CenterScreen
    Begin SmartButtonProject.SmartButton BtnExcel 
       Height          =   855
-      Left            =   120
+      Left            =   480
       TabIndex        =   232
-      Top             =   6720
+      Top             =   6600
       Visible         =   0   'False
       Width           =   1215
       _ExtentX        =   2143
@@ -534,14 +534,14 @@ Begin VB.Form FrmReportes
       TabCaption(1)   =   "Configuracion Reportes"
       TabPicture(1)   =   "FrmReportes.frx":1968A
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame11"
-      Tab(1).Control(1)=   "Frame10"
+      Tab(1).Control(0)=   "Frame10"
+      Tab(1).Control(1)=   "Frame11"
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "Configuracion Reportes "
       TabPicture(2)   =   "FrmReportes.frx":196A6
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame13"
-      Tab(2).Control(1)=   "Frame12"
+      Tab(2).Control(0)=   "Frame12"
+      Tab(2).Control(1)=   "Frame13"
       Tab(2).ControlCount=   2
       Begin VB.CheckBox ChkMostrarMovxMes 
          Caption         =   "Mostrar mov x mes"
@@ -2750,7 +2750,7 @@ Begin VB.Form FrmReportes
       Height          =   855
       Left            =   120
       TabIndex        =   70
-      Top             =   6720
+      Top             =   6600
       Width           =   1215
       _ExtentX        =   2143
       _ExtentY        =   1508
@@ -2836,7 +2836,7 @@ Begin VB.Form FrmReportes
       Height          =   855
       Left            =   120
       TabIndex        =   67
-      Top             =   6720
+      Top             =   6600
       Width           =   1215
       _ExtentX        =   2143
       _ExtentY        =   1508
@@ -3471,7 +3471,7 @@ Begin VB.Form FrmReportes
       Height          =   855
       Left            =   120
       TabIndex        =   44
-      Top             =   6720
+      Top             =   6600
       Width           =   1215
       _ExtentX        =   2143
       _ExtentY        =   1508
@@ -4316,6 +4316,32 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
 
          
    Select Case Me.CmbReportes.Text
+     Case "PRESUPUESTO DEL MES"
+      Me.CmbNivel = 3
+      Me.Frame4.Visible = True
+      Me.Frame1.Visible = False
+      Me.CmbMoneda.Visible = True
+      Me.Label3.Visible = True
+               Me.ChkSinNiveles.Visible = True
+         Me.ChkSinNiveles.Caption = "Expresado en Dolares"
+      
+      Me.DtaConsulta.RecordSource = "SELECT Periodos.Periodo, Periodos.FechaPeriodo, Periodos.NumeroTabla From Periodos Where (((Periodos.Periodo) = 1) And ((Periodos.NumeroTabla) = 1 Or (Periodos.NumeroTabla) = 2 Or (Periodos.NumeroTabla) = 3))"
+      Me.DtaConsulta.Refresh
+      Do While Not DtaConsulta.Recordset.EOF
+       If AÑO1 = "" Then
+        AÑO1 = Year(DtaConsulta.Recordset("FechaPeriodo"))
+        Me.Option8.Caption = AÑO1
+       ElseIf AÑO2 = "" Then
+        AÑO2 = Year(DtaConsulta.Recordset("FechaPeriodo"))
+        Me.Option7.Caption = AÑO2
+       Else
+         AÑO3 = Year(DtaConsulta.Recordset("FechaPeriodo"))
+         Me.Option6.Caption = AÑO3
+       End If
+        
+        Me.DtaConsulta.Recordset.MoveNext
+      Loop
+   
    
        Case "REPORTE PBI"
       Me.Label3.Visible = True
@@ -4792,6 +4818,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
       Me.Frame7.Visible = True
       Me.Frame2.Visible = False
       Me.Frame3.Visible = True
+
    Case "BALANZA DE COMPROBACION"
       Me.Label2.Visible = False
       Me.Label4.Visible = True
@@ -6486,21 +6513,182 @@ Case "AUXILIAR x GRUPO"
             fPreview.RunReport rpt
             fPreview.Show 1
  
-'     ArepPresupuesto.DataControl1.ConnectionString = ConexionReporte
-'     ArepPresupuesto.Label13.Caption = "PRESUPUESTO PARA EL AÑO " & Year(Fecha1)
-'     Sql = "SELECT Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, SUM(Presupuesto.MontoPresupuestado) AS SumaDeMontoPresupuestado, GrupoCuentas.CodGrupo, GrupoCuentas.DescripcionGrupo , Periodos.NumeroTabla FROM GrupoCuentas RIGHT OUTER JOIN Periodos INNER JOIN  Cuentas INNER JOIN Presupuesto ON Cuentas.CodCuentas = Presupuesto.CodCuenta ON Periodos.NPeriodo = Presupuesto.NPeriodo ON  GrupoCuentas.CodGrupo = Cuentas.CodGrupo GROUP BY Presupuesto.CodCuenta, Cuentas.DescripcionCuentas, GrupoCuentas.CodGrupo, GrupoCuentas.DescripcionGrupo, Periodos.NumeroTabla Having (Periodos.NumeroTabla = " & Tabla & ") ORDER BY Presupuesto.CodCuenta "
-'     ArepPresupuesto.DataControl1.Source = Sql
-'     ArepPresupuesto.Logo.Picture = LoadPicture(RutaLogo)
-'     ArepPresupuesto.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
-'     ArepPresupuesto.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
-'     ArepPresupuesto.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
-'     ArepPresupuesto.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
-'     ArepPresupuesto.Show 1
-'            Set rpt = New ArepPresupuesto
-'            rpt.DataControl1.ConnectionString = ConexionReporte
-'            rpt.DataControl1.Source = SQL
-'            fPreview.RunReport rpt
-'            fPreview.Show 1
+ 
+  Case "PRESUPUESTO DEL MES"
+  
+   Dim DescripcionPresupuesto As String, MontoPresupuesto As Double, MontoReal As Double, TipoCuenta As String
+   Dim MontoDebito As Double, MontoCredito As Double, PorcientoPresupuesto As Double
+   Dim KeyGrupo As String
+   
+    Ejecutar.Execute "delete from reportes"
+   
+    NumeroPeriodo1 = Me.CmbIni.Text
+    NumeroPeriodo2 = Me.CmbFin.Text
+    
+    If Me.Option8 = True Then
+     NumeroTabla = 1
+    ElseIf Me.Option7 = True Then
+      NumeroTabla = 2
+    ElseIf Me.Option6 = True Then
+      NumeroTabla = 3
+    End If
+    
+      Me.DtaConsulta.RecordSource = "SELECT Periodos.Periodo, Periodos.FechaPeriodo, Periodos.NumeroTabla From Periodos WHERE (((Periodos.Periodo) Between " & NumeroPeriodo1 & " And " & NumeroPeriodo2 & ") AND ((Periodos.NumeroTabla)=" & NumeroTabla & "))"
+      Me.DtaConsulta.Refresh
+       If Not Me.DtaConsulta.Recordset.EOF Then
+         Me.DtaConsulta.Recordset.MoveLast
+         i = Me.DtaConsulta.Recordset.RecordCount
+         Me.DtaConsulta.Recordset.MoveFirst
+       End If
+      Do While Not DtaConsulta.Recordset.EOF
+
+
+        If i = 1 Then
+          FechaIni = "01/" & Month(Me.DtaConsulta.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaConsulta.Recordset("FechaPeriodo"))
+          NumFecha1 = FechaIni
+          FechaFin = Me.DtaConsulta.Recordset("FechaPeriodo")
+          NumFecha2 = Me.DtaConsulta.Recordset("FechaPeriodo")
+        Else
+
+         If NumeroPeriodo1 = Me.DtaConsulta.Recordset("Periodo") Then
+          FechaIni = "01/" & Month(Me.DtaConsulta.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaConsulta.Recordset("FechaPeriodo"))
+          NumFecha1 = FechaIni
+         ElseIf NumeroPeriodo2 = Me.DtaConsulta.Recordset("Periodo") Then
+          FechaFin = Me.DtaConsulta.Recordset("FechaPeriodo")
+          NumFecha2 = Me.DtaConsulta.Recordset("FechaPeriodo")
+         End If
+        End If
+        Me.DtaConsulta.Recordset.MoveNext
+      Loop
+      
+      
+      '///////////////////////////////////////RECORRO LAS UNIDADES PRESUPUESTARIAS //////
+       Sql = "SELECT DescripcionGrupo, KeyGrupo, ISNULL ((SELECT  SUM(Presupuesto.MontoPresupuestado)As MontoPresupuestado FROM Presupuesto INNER JOIN Periodos ON Presupuesto.NPeriodo = Periodos.NPeriodo WHERE (Presupuesto.CodCuenta = EstructuraPresupuesto.KeyGrupo) AND (Periodos.NumeroTabla = " & NumeroTabla & ") AND (MONTH(Periodos.FechaPeriodo) BETWEEN  " & NumeroPeriodo1 & " AND " & NumeroPeriodo2 & ")), 0) AS Mes From EstructuraPresupuesto ORDER BY KeyGrupo"
+       Me.AdoConsultas.RecordSource = Sql
+       Me.AdoConsultas.Refresh
+       Me.osProgress1.Visible = True
+       Me.osProgress1.Min = 0
+       Me.osProgress1.Value = 0
+       If Not Me.AdoConsultas.Recordset.EOF Then
+            Me.AdoConsultas.Recordset.MoveLast
+            Me.osProgress1.Max = Me.AdoConsultas.Recordset.RecordCount
+            Me.AdoConsultas.Recordset.MoveFirst
+        Else
+            Me.osProgress1.Max = 0
+        End If
+       
+       Do While Not AdoConsultas.Recordset.EOF
+         DescripcionPresupuesto = Me.AdoConsultas.Recordset("DescripcionGrupo")
+         MontoPresupuesto = Me.AdoConsultas.Recordset("Mes")
+         KeyGrupo = Me.AdoConsultas.Recordset("KeyGrupo")
+         
+         Me.LblProgreso.Caption = DescripcionPresupuesto
+         DoEvents
+         
+         If KeyGrupo = "A0124" Then
+           KeyGrupo = "A0124"
+         End If
+         
+         '///////////////////////////CONSULTO EL MONTO REAL PARA ESTE GRUPO //////////////////////////////
+         SqlString = "SELECT  SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito / ISNULL(Tasas.MontoCordobas, 1) END) AS Debito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito / ISNULL(Tasas.MontoCordobas, 1) END) AS Credito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito ELSE Transacciones.Debito * ISNULL(Tasas.MontoCordobas, 0) END) AS MDebito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito ELSE Transacciones.Credito * ISNULL(Tasas.MontoCordobas, 0) END) AS Credito, Transacciones.KeyPresupuesto,  Cuentas.TipoCuenta FROM  Transacciones INNER JOIN Periodos ON Transacciones.NPeriodo = Periodos.NPeriodo INNER JOIN  IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN " & _
+                     "Tasas ON IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas WHERE (Periodos.NumeroTabla = " & NumeroTabla & ") And (Month(Periodos.FechaPeriodo) BETWEEN  " & NumeroPeriodo1 & " AND " & NumeroPeriodo2 & " ) GROUP BY Transacciones.KeyPresupuesto, Cuentas.TipoCuenta  HAVING  (Transacciones.KeyPresupuesto = '" & KeyGrupo & "')"
+        
+         MDIPrimero.AdoConsulta.RecordSource = SqlString
+         MDIPrimero.AdoConsulta.Refresh
+         MontoReal = 0
+         Me.osProgress2.Min = 0
+         Me.osProgress2.Value = 0
+         Me.osProgress2.Visible = True
+        If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
+            MDIPrimero.AdoConsulta.Recordset.MoveLast
+            Me.osProgress2.Max = MDIPrimero.AdoConsulta.Recordset.RecordCount
+            MDIPrimero.AdoConsulta.Recordset.MoveFirst
+        Else
+            Me.osProgress2.Max = 0
+        End If
+        
+         
+         '/////////////////////////////////////RECORRO LOS REGISTROS PARA ESTE GRUPO ///////////////////
+         MontoReal = 0
+       
+         Do While Not MDIPrimero.AdoConsulta.Recordset.EOF
+             Resultado = 0
+             If Me.CmbMoneda.Text = "Córdobas" Then
+               MontoDebito = MDIPrimero.AdoConsulta.Recordset("Debito")
+               MontoCredito = MDIPrimero.AdoConsulta.Recordset("Credito")
+             ElseIf Me.CmbMoneda.Text = "Dólares" Then
+               MontoDebito = MDIPrimero.AdoConsulta.Recordset("MDebito")
+               MontoCredito = MDIPrimero.AdoConsulta.Recordset("MCredito")
+             End If
+            
+            '
+            
+             TipoCuenta = MDIPrimero.AdoConsulta.Recordset("TipoCuenta")
+             'If TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Then
+             If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Bancos" Or TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Or TipoCuenta = "Papeleria - Utiles" Or TipoCuenta = "Inventario" Then
+                Resultado = MontoDebito - MontoCredito
+             Else
+                Resultado = MontoCredito - MontoDebito
+             End If
+             
+             'If TipoCuenta = "Ingresos - Ventas" Then
+         
+             MontoReal = Abs(MontoReal + Resultado)
+            
+             Me.osProgress2.Value = Me.osProgress2.Value + 1
+             MDIPrimero.AdoConsulta.Recordset.MoveNext
+         Loop
+         
+         PorcientoPresupuesto = 0
+         If MontoPresupuesto <> 0 Then
+           PorcientoPresupuesto = MontoReal / MontoPresupuesto
+         End If
+         
+         Resultado = MontoPresupuesto - MontoReal
+       
+       
+         '/////////////////////////////////////////////////////////////////////////////////
+         '///////////////////////AGREGO LOS REGISTROS PARA REPORTES DEL GRUPO///////////////////////
+         '//////////////////////////////////////////////////////////////////////////////////////
+           Me.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior From Reportes Where (((Reportes.KeyGrupo) = '" & KeyGrupo & "'))"
+           Me.DtaConsulta.Refresh
+           If Me.DtaConsulta.Recordset.EOF Then
+             Me.DtaConsulta.Recordset.AddNew
+               Me.DtaConsulta.Recordset("Descripcion") = DescripcionPresupuesto
+               Me.DtaConsulta.Recordset("Debe1") = MontoReal
+               Me.DtaConsulta.Recordset("Haber1") = MontoPresupuesto
+               Me.DtaConsulta.Recordset("Debe2") = PorcientoPresupuesto
+               Me.DtaConsulta.Recordset("Haber2") = Resultado
+               Me.DtaConsulta.Recordset("KeyGrupo") = KeyGrupo
+             Me.DtaConsulta.Recordset.Update
+           
+           End If
+       
+       
+       
+         Me.osProgress1.Value = Me.osProgress1.Value + 1
+         Me.AdoConsultas.Recordset.MoveNext
+       Loop
+       
+      
+     ArepPresupuestoArea.FechaIni = FechaIni
+     ArepPresupuestoArea.FechaFin = FechaFin
+     ArepPresupuestoArea.DataControl1.ConnectionString = ConexionReporte
+     ArepPresupuestoArea.Label13.Caption = "PRESUPUESTO PARA EL AÑO " & Year(Fecha1)
+     Sql = "SELECT Reportes.Descripcion, Reportes.Debe1 As Real, Reportes.Haber1 As Presupuesto, Reportes.Debe2 As Porciento, Reportes.Haber2 As Resultado, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior From Reportes ORDER BY Descripcion"
+     ArepPresupuestoArea.DataControl1.Source = Sql
+'     ArepPresupuestoArea.Logo.Picture = LoadPicture(RutaLogo)
+'     ArepPresupuestoArea.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
+'     ArepPresupuestoArea.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
+'     ArepPresupuestoArea.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
+'     ArepPresupuestoArea.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
+            Set rpt = New ArepPresupuestoArea
+            rpt.DataControl1.ConnectionString = ConexionReporte
+            rpt.DataControl1.Source = Sql
+            rpt.FechaIni = FechaIni
+            rpt.FechaFin = FechaFin
+            fPreview.RunReport rpt
+            fPreview.Show 1
      
      
   Case "AUXILIAR DE CUENTAS"
@@ -9127,7 +9315,6 @@ With Me.AdoConsultas
 End With
 
 With Me.DtaDatosEmpresa
-
    .ConnectionString = Conexion
    .RecordSource = "DatosEmpresa"
    .Refresh
@@ -9209,6 +9396,7 @@ Select Case QUIEN
  Case "ReporteMovimientos"
   Me.Frame7.Visible = False
   Me.CmbReportes.AddItem ("PRESUPUESTO ANUAL")
+  Me.CmbReportes.AddItem ("PRESUPUESTO DEL MES")
   Me.CmbReportes.AddItem ("REGISTRO DE MOVIMIENTOS")
   Me.CmbReportes.AddItem ("AUXILIAR DE CUENTAS")
   Me.CmbReportes.AddItem ("TOTAL AUXILIAR DE CUENTAS")
