@@ -144,12 +144,12 @@ If Me.Option1.Value = False Then
      Cadena1 = Val((Mid(KeyNodoUltimo, LongitudNodo - 1, LongitudNodo))) + 1
      Cadena2 = Mid(KeyNodoUltimo, 1, LongitudNodo - 2)
      If Len(Cadena2) = 1 Then
-      Cadena2 = Cadena2 & "01"
+      Cadena2 = Cadena2 & "001"
       
      End If
      DescripcionNodo = Me.TxtCodigo
      If Len(Cadena1) = 1 Then
-       KeyHijo = Cadena2 & "0" & Cadena1
+       KeyHijo = Cadena2 & "00" & Cadena1
      Else
        KeyHijo = Cadena2 & Cadena1
      End If
@@ -208,12 +208,12 @@ If Me.Option1.Value = False Then
      DescripcionNodo = Me.TxtCodigo
      
      If Len(Cadena2) = 1 Then
-      Cadena2 = Cadena2 & "01"
+      Cadena2 = Cadena2 & "001"
       
      End If
      DescripcionNodo = Me.TxtCodigo
      If Len(Cadena1) = 1 Then
-       KeyHijo = Cadena2 & "0" & Cadena1
+       KeyHijo = Cadena2 & "00" & Cadena1
      Else
        KeyHijo = Cadena2 & Cadena1
      End If
