@@ -639,7 +639,7 @@ Begin VB.Form FrmTransacciones
          _ExtentX        =   2990
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   17104897
+         Format          =   65273857
          CurrentDate     =   38918
       End
       Begin VB.TextBox TxtMonto 
@@ -659,7 +659,7 @@ Begin VB.Form FrmTransacciones
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   17104897
+         Format          =   65273857
          CurrentDate     =   38918
       End
       Begin VB.Label LblNombres 
@@ -1321,7 +1321,7 @@ Begin VB.Form FrmTransacciones
          Strikethrough   =   0   'False
       EndProperty
       Height          =   300
-      Left            =   6840
+      Left            =   6480
       Picture         =   "FrmTransacciones.frx":0614
       Style           =   1  'Graphical
       TabIndex        =   7
@@ -1392,11 +1392,20 @@ Begin VB.Form FrmTransacciones
       TabIndex        =   0
       Top             =   120
       Width           =   13335
+      Begin VB.ComboBox CmbAjustes 
+         Height          =   315
+         ItemData        =   "FrmTransacciones.frx":0762
+         Left            =   9480
+         List            =   "FrmTransacciones.frx":076F
+         TabIndex        =   54
+         Top             =   240
+         Width           =   1455
+      End
       Begin MSDataListLib.DataCombo TxtFuente 
-         Bindings        =   "FrmTransacciones.frx":0762
+         Bindings        =   "FrmTransacciones.frx":0793
          DataSource      =   "AdoFuente"
          Height          =   315
-         Left            =   11640
+         Left            =   11760
          TabIndex        =   50
          Top             =   240
          Width           =   1455
@@ -1416,21 +1425,21 @@ Begin VB.Form FrmTransacciones
          _ExtentX        =   2778
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   17104897
+         Format          =   65273857
          CurrentDate     =   38918
       End
       Begin VB.ComboBox CmbMoneda 
          Height          =   315
-         ItemData        =   "FrmTransacciones.frx":0789
-         Left            =   8520
-         List            =   "FrmTransacciones.frx":0793
+         ItemData        =   "FrmTransacciones.frx":07BA
+         Left            =   7920
+         List            =   "FrmTransacciones.frx":07C4
          TabIndex        =   9
          Top             =   240
-         Width           =   1815
+         Width           =   1455
       End
       Begin VB.TextBox TxtNTransacciones 
          Height          =   285
-         Left            =   5760
+         Left            =   5520
          Locked          =   -1  'True
          TabIndex        =   6
          Text            =   "0"
@@ -1439,7 +1448,7 @@ Begin VB.Form FrmTransacciones
       End
       Begin VB.TextBox TxtFuentess 
          Height          =   285
-         Left            =   11640
+         Left            =   11760
          TabIndex        =   2
          Top             =   240
          Width           =   1335
@@ -1447,7 +1456,7 @@ Begin VB.Form FrmTransacciones
       Begin VB.TextBox TxtPeriodo 
          Alignment       =   1  'Right Justify
          Height          =   285
-         Left            =   3480
+         Left            =   3120
          Locked          =   -1  'True
          TabIndex        =   1
          Top             =   240
@@ -1455,8 +1464,8 @@ Begin VB.Form FrmTransacciones
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel1 
          Height          =   255
-         Left            =   7440
-         OleObjectBlob   =   "FrmTransacciones.frx":07AA
+         Left            =   6840
+         OleObjectBlob   =   "FrmTransacciones.frx":07DB
          TabIndex        =   17
          Top             =   240
          Width           =   975
@@ -1464,31 +1473,31 @@ Begin VB.Form FrmTransacciones
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel2 
          Height          =   255
          Left            =   120
-         OleObjectBlob   =   "FrmTransacciones.frx":081E
+         OleObjectBlob   =   "FrmTransacciones.frx":084F
          TabIndex        =   18
          Top             =   240
          Width           =   495
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel3 
          Height          =   255
-         Left            =   4440
-         OleObjectBlob   =   "FrmTransacciones.frx":0886
+         Left            =   4200
+         OleObjectBlob   =   "FrmTransacciones.frx":08B7
          TabIndex        =   19
          Top             =   240
          Width           =   1215
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel4 
          Height          =   255
-         Left            =   2760
-         OleObjectBlob   =   "FrmTransacciones.frx":0902
+         Left            =   2520
+         OleObjectBlob   =   "FrmTransacciones.frx":0933
          TabIndex        =   20
          Top             =   240
          Width           =   615
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel5 
          Height          =   255
-         Left            =   11040
-         OleObjectBlob   =   "FrmTransacciones.frx":096E
+         Left            =   11160
+         OleObjectBlob   =   "FrmTransacciones.frx":099F
          TabIndex        =   21
          Top             =   240
          Width           =   495
@@ -1497,13 +1506,13 @@ Begin VB.Form FrmTransacciones
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel8 
       Height          =   255
       Left            =   2880
-      OleObjectBlob   =   "FrmTransacciones.frx":09D8
+      OleObjectBlob   =   "FrmTransacciones.frx":0A09
       TabIndex        =   24
       Top             =   4080
       Width           =   1335
    End
    Begin TrueOleDBGrid80.TDBGrid DBGTransacciones 
-      Bindings        =   "FrmTransacciones.frx":0A4A
+      Bindings        =   "FrmTransacciones.frx":0A7B
       Height          =   3015
       Left            =   120
       TabIndex        =   53
@@ -1944,6 +1953,15 @@ Else '////////En caso que transaccion tenga un numero en pantalla
   Else
    Me.CmbMoneda.Text = ""
   End If
+  
+  If Not IsNull(Me.CmbMoneda.Text = Me.DtaConsulta.Recordset("Ajuste")) Then
+   Me.CmbAjustes.Text = Me.DtaConsulta.Recordset("Ajuste")
+  Else
+   Me.CmbAjustes.Text = ""
+  End If
+  
+  
+  
  End If
      
      
@@ -2248,7 +2266,7 @@ Me.CmdBuscarEmpleado.Enabled = True
  
 
  
-Me.DtaConsulta.RecordSource = "SELECT IndiceTransaccion.TipoMoneda,IndiceTransaccion.FechaTransaccion, IndiceTransaccion.NumeroMovimiento, IndiceTransaccion.DescripcionMovimiento, IndiceTransaccion.Fuente, IndiceTransaccion.Fuente From IndiceTransaccion WHERE IndiceTransaccion.FechaTransaccion>='" & Format(NumFecha1, "yyyymmdd") & "' And IndiceTransaccion.FechaTransaccion<='" & Format(NumFecha2, "yyyymmdd") & "' AND IndiceTransaccion.NumeroMovimiento= " & NumeroTransaccion
+Me.DtaConsulta.RecordSource = "SELECT IndiceTransaccion.TipoMoneda,IndiceTransaccion.FechaTransaccion, IndiceTransaccion.NumeroMovimiento, IndiceTransaccion.DescripcionMovimiento, IndiceTransaccion.Fuente, IndiceTransaccion.Ajuste From IndiceTransaccion WHERE IndiceTransaccion.FechaTransaccion>='" & Format(NumFecha1, "yyyymmdd") & "' And IndiceTransaccion.FechaTransaccion<='" & Format(NumFecha2, "yyyymmdd") & "' AND IndiceTransaccion.NumeroMovimiento= " & NumeroTransaccion
  'la cambie por el mismo problema del between
  'Me.DtaConsulta.RecordSource = "SELECT IndiceTransaccion.TipoMoneda,IndiceTransaccion.FechaTransaccion, IndiceTransaccion.NumeroMovimiento, IndiceTransaccion.DescripcionMovimiento, IndiceTransaccion.Fuente, IndiceTransaccion.Fuente From IndiceTransaccion WHERE (((IndiceTransaccion.FechaTransaccion) Between " & NumFecha1 & " And " & NumFecha2 & " ) AND ((IndiceTransaccion.NumeroMovimiento)= " & NumeroTransaccion & "))"
  Me.DtaConsulta.Refresh
@@ -2259,6 +2277,7 @@ Me.DtaConsulta.RecordSource = "SELECT IndiceTransaccion.TipoMoneda,IndiceTransac
        If Not DtaConsulta.Recordset.EOF Then
   
           'Me.'DtaConsulta.Recordset.Edit
+          Me.DtaConsulta.Recordset("Ajuste") = Me.CmbAjustes.Text
           Me.DtaConsulta.Recordset("TipoMoneda") = Me.CmbMoneda.Text
          If Not Me.DBGTransacciones.Columns(3).Text = "" Then
           Me.DtaConsulta.Recordset("DescripcionMovimiento") = Me.DBGTransacciones.Columns(3).Text
@@ -2329,6 +2348,8 @@ Sql = "SELECT     Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacc
 Me.DtaTransacciones.RecordSource = Sql
 Me.DtaTransacciones.Refresh
 Me.CmbMoneda.Text = "Córdobas"
+Me.CmbAjustes.Text = "SIN AJUSTES"
+
 
   Me.DBGTransacciones.Columns(0).Button = True
   Me.DBGTransacciones.Columns(1).Locked = True
@@ -2702,7 +2723,7 @@ If Me.TxtNTransacciones = 0 Then
  NumFecha1 = FechaIni
  NumFecha2 = FechaFin
  
- Me.DtaConsulta.RecordSource = "SELECT IndiceTransaccion.TipoMoneda,IndiceTransaccion.FechaTransaccion, IndiceTransaccion.NumeroMovimiento, IndiceTransaccion.DescripcionMovimiento, IndiceTransaccion.Fuente, IndiceTransaccion.Fuente From IndiceTransaccion WHERE (((IndiceTransaccion.FechaTransaccion) Between " & NumFecha1 & " And " & NumFecha2 & " ) AND ((IndiceTransaccion.NumeroMovimiento)= " & NumeroTransaccion & "))"
+ Me.DtaConsulta.RecordSource = "SELECT IndiceTransaccion.TipoMoneda,IndiceTransaccion.FechaTransaccion, IndiceTransaccion.NumeroMovimiento, IndiceTransaccion.DescripcionMovimiento, IndiceTransaccion.Fuente, IndiceTransaccion.Ajuste From IndiceTransaccion WHERE (((IndiceTransaccion.FechaTransaccion) Between " & NumFecha1 & " And " & NumFecha2 & " ) AND ((IndiceTransaccion.NumeroMovimiento)= " & NumeroTransaccion & "))"
  Me.DtaConsulta.Refresh
  If Not DtaConsulta.Recordset.EOF Then
   If Not IsNull(Me.DtaConsulta.Recordset("TipoMoneda")) Then
@@ -2710,6 +2731,14 @@ If Me.TxtNTransacciones = 0 Then
   Else
    Me.CmbMoneda.Text = ""
   End If
+  
+  If Not IsNull(Me.DtaConsulta.Recordset("Ajuste")) Then
+   Me.CmbAjustes.Text = Me.DtaConsulta.Recordset("Ajuste")
+  Else
+   Me.CmbMoneda.Text = ""
+  End If
+  
+  
  End If
      
      '//////Sumo los Totales/////////////////////
@@ -4662,6 +4691,7 @@ Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transaccione
 Me.DtaTransacciones.RecordSource = Sql
 Me.DtaTransacciones.Refresh
 Me.CmbMoneda.Text = "Córdobas"
+Me.CmbAjustes.Text = "SIN AJUSTES"
   
   Me.DBGTransacciones.Columns("CodCuentas").Width = 1500  '0
   Me.DBGTransacciones.Columns("CodCuentas").Button = True  '0

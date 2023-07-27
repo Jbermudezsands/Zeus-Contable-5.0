@@ -352,25 +352,26 @@ Begin VB.Form FrmAuditor
       _ExtentX        =   16748
       _ExtentY        =   3413
       _Version        =   393216
-      Tab             =   1
       TabHeight       =   520
       BackColor       =   -2147483638
       TabCaption(0)   =   "Auditoria General"
       TabPicture(0)   =   "FrmAuditor.frx":0000
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Frame2"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).ControlCount=   1
       TabCaption(1)   =   "Convertir Transacciones"
       TabPicture(1)   =   "FrmAuditor.frx":001C
-      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Frame3"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
       TabCaption(2)   =   "Auditoria Cuentas"
       TabPicture(2)   =   "FrmAuditor.frx":0038
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "CmdTasas"
+      Tab(2).Control(0).Enabled=   0   'False
       Tab(2).Control(1)=   "CmdAuditarCuentas"
+      Tab(2).Control(1).Enabled=   0   'False
       Tab(2).ControlCount=   2
       Begin VB.CommandButton CmdTasas 
          Caption         =   "Tasa Cambio"
@@ -390,7 +391,7 @@ Begin VB.Form FrmAuditor
       End
       Begin VB.Frame Frame3 
          Height          =   1455
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   12
          Top             =   360
          Width           =   9255
@@ -496,7 +497,7 @@ Begin VB.Form FrmAuditor
                _ExtentX        =   2566
                _ExtentY        =   503
                _Version        =   393216
-               Format          =   79560705
+               Format          =   67174401
                CurrentDate     =   39117
             End
             Begin MSComCtl2.DTPicker DTFechaIni 
@@ -509,7 +510,7 @@ Begin VB.Form FrmAuditor
                _ExtentX        =   2778
                _ExtentY        =   503
                _Version        =   393216
-               Format          =   79560705
+               Format          =   67174401
                CurrentDate     =   39117
             End
          End
@@ -524,7 +525,7 @@ Begin VB.Form FrmAuditor
       End
       Begin VB.Frame Frame2 
          Height          =   1455
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   3
          Top             =   360
          Width           =   9255
@@ -578,7 +579,7 @@ Begin VB.Form FrmAuditor
                _ExtentY        =   503
                _Version        =   393216
                Enabled         =   0   'False
-               Format          =   79560705
+               Format          =   67174401
                CurrentDate     =   39117
             End
             Begin MSComCtl2.DTPicker DTPFechaIni 
@@ -591,7 +592,7 @@ Begin VB.Form FrmAuditor
                _ExtentY        =   503
                _Version        =   393216
                Enabled         =   0   'False
-               Format          =   79560705
+               Format          =   67174401
                CurrentDate     =   39117
             End
          End
@@ -851,8 +852,8 @@ On Error GoTo TipoErrs
          DescripcionGrupoF = Me.AdoCuentas.Recordset("DescripcionGrupo")
          CodigoCuenta = Me.AdoCuentas.Recordset("CodCuentas")
          
-         If CodigoCuenta = "6000-01-04-" Then
-          Cod = 1
+         If CodigoCuenta = "1019175002" Then
+          CodigoCuenta = "1019175002"
          End If
          
          '//////////////////////////BUSCO SI LA CUENTA TIENE BIEN EL GRUPO GRABADO/////////////////////
@@ -1129,7 +1130,7 @@ Private Sub CmdAuditoria_Click()
 Dim CantRegistros As Integer, i As Double, J As Double
 Dim MonedaCuenta As String, Fechas1 As Date, CodigoCuenta As String
 Dim TasaCambio1 As Double, TasaCambio2 As Double
-Dim Debito As Double, Credito As Double, SQL As String, CantRegistros2 As Double, i2 As Double
+Dim Debito As Double, Credito As Double, Sql As String, CantRegistros2 As Double, i2 As Double
 
 Me.SSTab1.Enabled = False
 Me.List1.Clear
@@ -1139,9 +1140,9 @@ Me.List1.Clear
 '/////////////////////////////////////////////////////////////////////////////////////////
 
 If Me.Option1.Value = True Then
- SQL = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.TCambio, Transacciones.Credito, Transacciones.Debito, Transacciones.FechaTasas, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
+ Sql = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.TCambio, Transacciones.Credito, Transacciones.Debito, Transacciones.FechaTasas, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
 Else
- SQL = "SELECT     Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, " & _
+ Sql = "SELECT     Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, " & _
        "Transacciones.NumeroMovimiento, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
       "Transacciones.Clave , Transacciones.TCambio, Transacciones.Credito, Transacciones.Debito, Transacciones.FechaTasas, Cuentas.TipoMoneda " & _
       "FROM         Cuentas INNER JOIN " & _
@@ -1152,7 +1153,7 @@ Else
 
 
 
-Me.DtaMovimientos.RecordSource = SQL
+Me.DtaMovimientos.RecordSource = Sql
 Me.DtaMovimientos.Refresh
 If Not Me.DtaMovimientos.Recordset.EOF Then
  Me.DtaMovimientos.Recordset.MoveLast
@@ -1303,8 +1304,8 @@ End With
 '//////////////////////////////VERIFICO LOS PERIODOS////////////////////////////////////////////////////////////////////////////////////
 '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 For J = 1 To 3
-  SQL = "SELECT * From Periodos Where (NumeroTabla = " & J & ") ORDER BY NPeriodo"
-  Me.AdoPeriodos.RecordSource = SQL
+  Sql = "SELECT * From Periodos Where (NumeroTabla = " & J & ") ORDER BY NPeriodo"
+  Me.AdoPeriodos.RecordSource = Sql
   Me.AdoPeriodos.Refresh
   
   If Not Me.AdoPeriodos.Recordset.EOF Then
@@ -2005,10 +2006,10 @@ Unload Me
 End Sub
 
 Private Sub CmdTasas_Click()
-Dim SQL As String, i As Double, CantRegistros As Double
+Dim Sql As String, i As Double, CantRegistros As Double
 
-SQL = "SELECT  * From Tasas"
-Me.AdoTasas.RecordSource = SQL
+Sql = "SELECT  * From Tasas"
+Me.AdoTasas.RecordSource = Sql
 Me.AdoTasas.Refresh
 
 Me.AdoTasas.Recordset.MoveLast

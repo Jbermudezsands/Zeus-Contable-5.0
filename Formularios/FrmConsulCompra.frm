@@ -2273,7 +2273,7 @@ Dim mes As Double, Año As Double
      NumeroTransaccion = FrmTransacciones.DtaTransacciones.Recordset("NumeroMovimiento")
      FrmTransacciones.TxtFuente.Text = FrmTransacciones.DtaTransacciones.Recordset("Fuente")
 
-      FrmTransacciones.DtaConsulta.RecordSource = "SELECT IndiceTransaccion.TipoMoneda,IndiceTransaccion.FechaTransaccion, IndiceTransaccion.NumeroMovimiento, IndiceTransaccion.DescripcionMovimiento, IndiceTransaccion.Fuente, IndiceTransaccion.Fuente From IndiceTransaccion WHERE IndiceTransaccion.FechaTransaccion>='" & Format(NumFecha1, "yyyymmdd") & "' And indicetransaccion.fechatransaccion<='" & Format(NumFecha2, "yyyymmdd") & "' AND IndiceTransaccion.NumeroMovimiento= " & NumeroTransaccion
+      FrmTransacciones.DtaConsulta.RecordSource = "SELECT IndiceTransaccion.TipoMoneda,IndiceTransaccion.FechaTransaccion, IndiceTransaccion.NumeroMovimiento, IndiceTransaccion.DescripcionMovimiento, IndiceTransaccion.Fuente, IndiceTransaccion.Fuente, IndiceTransaccion.Ajuste  From IndiceTransaccion WHERE IndiceTransaccion.FechaTransaccion>='" & Format(NumFecha1, "yyyymmdd") & "' And indicetransaccion.fechatransaccion<='" & Format(NumFecha2, "yyyymmdd") & "' AND IndiceTransaccion.NumeroMovimiento= " & NumeroTransaccion
       FrmTransacciones.DtaConsulta.Refresh
       If Not FrmTransacciones.DtaConsulta.Recordset.EOF Then
         If Not IsNull(FrmTransacciones.DtaConsulta.Recordset("TipoMoneda")) Then
@@ -2281,6 +2281,14 @@ Dim mes As Double, Año As Double
         Else
             FrmTransacciones.CmbMoneda.Text = ""
         End If
+        
+        If Not IsNull(FrmTransacciones.DtaConsulta.Recordset("Ajuste")) Then
+            FrmTransacciones.CmbAjustes.Text = FrmTransacciones.DtaConsulta.Recordset("Ajuste")
+        Else
+            FrmTransacciones.CmbAjustes.Text = ""
+        End If
+        
+        
       End If
      
      

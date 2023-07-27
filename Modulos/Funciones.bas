@@ -120,68 +120,219 @@ End Sub
 
 
 
-Public Sub AjusteDiferencial()
+Public Sub AjusteDiferencial(QUIEN As String)
   Dim TotalActivo1 As Double, TotalPC1 As Double, Diferencial As Double, TotalActivo2 As Double, TotalActivo3 As Double, TotalPC2 As Double, TotalPC3 As Double
   Dim Orden As Double, OrdenPC As Double
+  Dim TotalActivoD1 As Double, TotalActivoD2 As Double, TotalActivoD3 As Double, TotalPCD1 As Double, TotalPCD2 As Double, TotalPCD3 As Double
+  Dim TotalActivoH1 As Double, TotalActivoH2 As Double, TotalActivoH3 As Double, TotalPCH1 As Double, TotalPCH2 As Double, TotalPCH3 As Double
+  Dim TotalPasivoD1 As Double, TotalCapitalD1 As Double, TotalIngresosD1 As Double, TotalGastosD1 As Double, TotalCostosD1 As Double, TotalPasivoD2 As Double, TotalCapitalD2 As Double, TotalIngresosD2 As Double, TotalGastosD2 As Double, TotalCostosD2 As Double, TotalPasivoD3 As Double, TotalCapitalD3 As Double, TotalIngresosD3 As Double, TotalGastosD3 As Double, TotalCostosD3 As Double
+  Dim TotalPasivoH1 As Double, TotalCapitalH1 As Double, TotalIngresosH1 As Double, TotalGastosH1 As Double, TotalCostosH1 As Double, TotalPasivoH2 As Double, TotalCapitalH2 As Double, TotalIngresosH2 As Double, TotalGastosH2 As Double, TotalCostosH2 As Double, TotalPasivoH3 As Double, TotalCapitalH3 As Double, TotalIngresosH3 As Double, TotalGastosH3 As Double, TotalCostosH3 As Double
+  Dim TotalRD1 As Double, TotalRD2 As Double, TotalRD3 As Double, TotalRH1 As Double, TotalRH2 As Double, TotalRH3 As Double
+  Dim DiferencialD1 As Double, DiferencialD2 As Double, DiferencialD3 As Double, DiferencialH1 As Double, DiferencialH2 As Double, DiferencialH3 As Double
 
-  '////////////////////////////////////////////BUSCO EL TOTAL DE ACTIVOS //////////////////////////////////////////////////
-  MDIPrimero.AdoConsulta.RecordSource = "SELECT Reportes.* From Reportes WHERE (KeyGrupo = 'A') AND (Descripcion LIKE N'%Total%')"
-  MDIPrimero.AdoConsulta.Refresh
-  If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
-    TotalActivo1 = Format(MDIPrimero.AdoConsulta.Recordset("Haber1"), "##0.00")
-    TotalActivo2 = Format(MDIPrimero.AdoConsulta.Recordset("Haber2"), "##0.00")
-    TotalActivo3 = Format(MDIPrimero.AdoConsulta.Recordset("Haber3"), "##0.00")
-  End If
-  
-  
-  MDIPrimero.AdoConsulta.RecordSource = "SELECT Reportes.* From Reportes WHERE (KeyGrupo = 'PC') "
-  MDIPrimero.AdoConsulta.Refresh
-  If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
-    TotalPC1 = Format(MDIPrimero.AdoConsulta.Recordset("Haber1"), "##0.00")
-    TotalPC2 = Format(MDIPrimero.AdoConsulta.Recordset("Haber2"), "##0.00")
-    TotalPC3 = Format(MDIPrimero.AdoConsulta.Recordset("Haber3"), "##0.00")
-    OrdenPC = MDIPrimero.AdoConsulta.Recordset("Orden")
-  End If
-  
-  
-  Diferencial = TotalActivo1 - TotalPC1
-  
-  If Abs(Diferencial) < 0.02 And Abs(Diferencial) <> 0 Then
-  
-        
-        Diferencial = Format(Diferencial, "##0.00")
-  
-        MDIPrimero.AdoConsulta.RecordSource = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
+  If QUIEN = "Balance" Then
+
+        '////////////////////////////////////////////BUSCO EL TOTAL DE ACTIVOS //////////////////////////////////////////////////
+        MDIPrimero.AdoConsulta.RecordSource = "SELECT Reportes.* From Reportes WHERE (KeyGrupo = 'A') AND (Descripcion LIKE N'%Total%')"
         MDIPrimero.AdoConsulta.Refresh
         If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
-          MDIPrimero.AdoConsulta.Recordset.MoveLast
-          Orden = MDIPrimero.AdoConsulta.Recordset("Orden") + 1
+          TotalActivo1 = Format(MDIPrimero.AdoConsulta.Recordset("Haber1"), "##0.00")
+          TotalActivo2 = Format(MDIPrimero.AdoConsulta.Recordset("Haber2"), "##0.00")
+          TotalActivo3 = Format(MDIPrimero.AdoConsulta.Recordset("Haber3"), "##0.00")
         End If
         
-        
-        MDIPrimero.AdoConsulta.Recordset.AddNew
-           MDIPrimero.AdoConsulta.Recordset("Descripcion") = "Diferencial Cambiario"
-           MDIPrimero.AdoConsulta.Recordset("KeyGrupo") = "DF"
-           MDIPrimero.AdoConsulta.Recordset("Haber1") = Diferencial
-           MDIPrimero.AdoConsulta.Recordset("Nivel") = 1
-           MDIPrimero.AdoConsulta.Recordset("Orden") = OrdenPC
-        MDIPrimero.AdoConsulta.Recordset.Update
         
         MDIPrimero.AdoConsulta.RecordSource = "SELECT Reportes.* From Reportes WHERE (KeyGrupo = 'PC') "
         MDIPrimero.AdoConsulta.Refresh
         If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
-          MDIPrimero.AdoConsulta.Recordset("Haber1") = MDIPrimero.AdoConsulta.Recordset("Haber1") + Diferencial
-          MDIPrimero.AdoConsulta.Recordset("Haber2") = MDIPrimero.AdoConsulta.Recordset("Haber2") + Diferencial
-          MDIPrimero.AdoConsulta.Recordset("Haber3") = MDIPrimero.AdoConsulta.Recordset("Haber3") + Diferencial
-          MDIPrimero.AdoConsulta.Recordset("Orden") = Orden
-          MDIPrimero.AdoConsulta.Recordset.Update
+          TotalPC1 = Format(MDIPrimero.AdoConsulta.Recordset("Haber1"), "##0.00")
+          TotalPC2 = Format(MDIPrimero.AdoConsulta.Recordset("Haber2"), "##0.00")
+          TotalPC3 = Format(MDIPrimero.AdoConsulta.Recordset("Haber3"), "##0.00")
+          OrdenPC = MDIPrimero.AdoConsulta.Recordset("Orden")
         End If
+        
+        
+        Diferencial = TotalActivo1 - TotalPC1
+        
+        ''''DEVALUACION CAMBIARIA DE UN MES
+  
+        If Abs(Diferencial) < 0.0578 And Abs(Diferencial) <> 0 Then
+        
+              
+              Diferencial = Format(Diferencial, "##0.00")
+        
+              MDIPrimero.AdoConsulta.RecordSource = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
+              MDIPrimero.AdoConsulta.Refresh
+              If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
+                MDIPrimero.AdoConsulta.Recordset.MoveLast
+                Orden = MDIPrimero.AdoConsulta.Recordset("Orden") + 1
+              End If
+              
+              
+              MDIPrimero.AdoConsulta.Recordset.AddNew
+                 MDIPrimero.AdoConsulta.Recordset("Descripcion") = "Diferencial Cambiario"
+                 MDIPrimero.AdoConsulta.Recordset("KeyGrupo") = "DF"
+                 MDIPrimero.AdoConsulta.Recordset("Haber1") = Diferencial
+                 MDIPrimero.AdoConsulta.Recordset("Haber2") = Diferencial
+                 MDIPrimero.AdoConsulta.Recordset("Haber3") = Diferencial
+                 MDIPrimero.AdoConsulta.Recordset("Nivel") = 1
+                 MDIPrimero.AdoConsulta.Recordset("Orden") = OrdenPC
+              MDIPrimero.AdoConsulta.Recordset.Update
+              
+              MDIPrimero.AdoConsulta.RecordSource = "SELECT Reportes.* From Reportes WHERE (KeyGrupo = 'PC') "
+              MDIPrimero.AdoConsulta.Refresh
+              If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
+                MDIPrimero.AdoConsulta.Recordset("Haber1") = MDIPrimero.AdoConsulta.Recordset("Haber1") + Diferencial
+                MDIPrimero.AdoConsulta.Recordset("Haber2") = MDIPrimero.AdoConsulta.Recordset("Haber2") + Diferencial
+                MDIPrimero.AdoConsulta.Recordset("Haber3") = MDIPrimero.AdoConsulta.Recordset("Haber3") + Diferencial
+                MDIPrimero.AdoConsulta.Recordset("Orden") = Orden
+                MDIPrimero.AdoConsulta.Recordset.Update
+              End If
+          
+          
+        End If
+        
+   ElseIf QUIEN = "Libro" Then
+      
+         '////////////////////////////////////////////BUSCO EL TOTAL DE ACTIVOS //////////////////////////////////////////////////
+        MDIPrimero.AdoConsulta.RecordSource = "SELECT Reportes.* From Reportes WHERE (KeyGrupo = 'A') AND (Descripcion LIKE N'%Total%')"
+        MDIPrimero.AdoConsulta.Refresh
+        If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
+          TotalActivoD1 = Format(MDIPrimero.AdoConsulta.Recordset("Debe1"), "##0.00")
+          TotalActivoD2 = Format(MDIPrimero.AdoConsulta.Recordset("Debe2"), "##0.00")
+          TotalActivoD3 = Format(MDIPrimero.AdoConsulta.Recordset("Debe3"), "##0.00")
+          
+          TotalActivoH1 = Format(MDIPrimero.AdoConsulta.Recordset("Haber1"), "##0.00")
+          TotalActivoH2 = Format(MDIPrimero.AdoConsulta.Recordset("Haber2"), "##0.00")
+          TotalActivoH3 = Format(MDIPrimero.AdoConsulta.Recordset("Haber3"), "##0.00")
+        End If
+        
+         '////////////////////////////////////////////BUSCO EL TOTAL DE PASIVO //////////////////////////////////////////////////
+        MDIPrimero.AdoConsulta.RecordSource = "SELECT Reportes.* From Reportes WHERE (KeyGrupo = 'B') AND (Descripcion LIKE N'%Total%')"
+        MDIPrimero.AdoConsulta.Refresh
+        If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
+          TotalPasivoD1 = Format(MDIPrimero.AdoConsulta.Recordset("Debe1"), "##0.00")
+          TotalPasivoD2 = Format(MDIPrimero.AdoConsulta.Recordset("Debe2"), "##0.00")
+          TotalPasivoD3 = Format(MDIPrimero.AdoConsulta.Recordset("Debe3"), "##0.00")
+          
+          TotalPasivoH1 = Format(MDIPrimero.AdoConsulta.Recordset("Haber1"), "##0.00")
+          TotalPasivoH2 = Format(MDIPrimero.AdoConsulta.Recordset("Haber2"), "##0.00")
+          TotalPasivoH3 = Format(MDIPrimero.AdoConsulta.Recordset("Haber3"), "##0.00")
+        End If
+        
+         '////////////////////////////////////////////BUSCO EL TOTAL CAPITAL //////////////////////////////////////////////////
+        MDIPrimero.AdoConsulta.RecordSource = "SELECT Reportes.* From Reportes WHERE (KeyGrupo = 'C') AND (Descripcion LIKE N'%Total%')"
+        MDIPrimero.AdoConsulta.Refresh
+        If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
+          TotalCapitalD1 = Format(MDIPrimero.AdoConsulta.Recordset("Debe1"), "##0.00")
+          TotalCapitalD2 = Format(MDIPrimero.AdoConsulta.Recordset("Debe2"), "##0.00")
+          TotalCapitalD3 = Format(MDIPrimero.AdoConsulta.Recordset("Debe3"), "##0.00")
+        
+          TotalCapitalH1 = Format(MDIPrimero.AdoConsulta.Recordset("Haber1"), "##0.00")
+          TotalCapitalH2 = Format(MDIPrimero.AdoConsulta.Recordset("Haber2"), "##0.00")
+          TotalCapitalH3 = Format(MDIPrimero.AdoConsulta.Recordset("Haber3"), "##0.00")
+        End If
+        
+        '////////////////////////////////////////////BUSCO EL TOTAL INGRESOS //////////////////////////////////////////////////
+        MDIPrimero.AdoConsulta.RecordSource = "SELECT Reportes.* From Reportes WHERE (KeyGrupo = N'D') AND (Descripcion LIKE N'%Total%')"
+        MDIPrimero.AdoConsulta.Refresh
+        If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
+          TotalIngresosD1 = Format(MDIPrimero.AdoConsulta.Recordset("Debe1"), "##0.00")
+          TotalIngresosD2 = Format(MDIPrimero.AdoConsulta.Recordset("Debe2"), "##0.00")
+          TotalIngresosD3 = Format(MDIPrimero.AdoConsulta.Recordset("Debe3"), "##0.00")
+          
+          TotalIngresosH1 = Format(MDIPrimero.AdoConsulta.Recordset("Haber1"), "##0.00")
+          TotalIngresosH2 = Format(MDIPrimero.AdoConsulta.Recordset("Haber2"), "##0.00")
+          TotalIngresosH3 = Format(MDIPrimero.AdoConsulta.Recordset("Haber3"), "##0.00")
+        End If
+        
+        '////////////////////////////////////////////BUSCO EL TOTAL COSTOS //////////////////////////////////////////////////
+        MDIPrimero.AdoConsulta.RecordSource = "SELECT Reportes.* From Reportes WHERE (KeyGrupo = 'G') AND (Descripcion LIKE N'%Total%')"
+        MDIPrimero.AdoConsulta.Refresh
+        If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
+        
+          TotalCostosD1 = Format(MDIPrimero.AdoConsulta.Recordset("Debe1"), "##0.00")
+          TotalCostosD2 = Format(MDIPrimero.AdoConsulta.Recordset("Debe2"), "##0.00")
+          TotalCostosD3 = Format(MDIPrimero.AdoConsulta.Recordset("Debe3"), "##0.00")
+          
+          TotalCostosH1 = Format(MDIPrimero.AdoConsulta.Recordset("Haber1"), "##0.00")
+          TotalCostosH2 = Format(MDIPrimero.AdoConsulta.Recordset("Haber2"), "##0.00")
+          TotalCostosH3 = Format(MDIPrimero.AdoConsulta.Recordset("Haber3"), "##0.00")
+        End If
+        
+        '////////////////////////////////////////////BUSCO EL TOTAL GASTOS //////////////////////////////////////////////////
+        MDIPrimero.AdoConsulta.RecordSource = "SELECT Reportes.* From Reportes WHERE (KeyGrupo = 'O') AND (Descripcion LIKE N'%Total%') "
+        MDIPrimero.AdoConsulta.Refresh
+        If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
+          TotalGastosD1 = Format(MDIPrimero.AdoConsulta.Recordset("Debe1"), "##0.00")
+          TotalGastosD2 = Format(MDIPrimero.AdoConsulta.Recordset("Debe2"), "##0.00")
+          TotalGastosD3 = Format(MDIPrimero.AdoConsulta.Recordset("Debe3"), "##0.00")
+          
+          TotalGastosH1 = Format(MDIPrimero.AdoConsulta.Recordset("Haber1"), "##0.00")
+          TotalGastosH2 = Format(MDIPrimero.AdoConsulta.Recordset("Haber2"), "##0.00")
+          TotalGastosH3 = Format(MDIPrimero.AdoConsulta.Recordset("Haber3"), "##0.00")
+        End If
+        
+        TotalPCD1 = TotalPasivoD1 + TotalCapitalD1
+        TotalPCD2 = TotalPasivoD2 + TotalCapitalD2
+        TotalPCD3 = TotalPasivoD3 + TotalCapitalD3
+        
+        TotalPCH1 = TotalPasivoH1 + TotalCapitalH1
+        TotalPCH2 = TotalPasivoH2 + TotalCapitalH2
+        TotalPCH3 = TotalPasivoH3 + TotalCapitalH3
+        
+        TotalRD1 = TotalIngresosD1 - TotalCostosD1 - TotalGastosD1
+        TotalRD2 = TotalIngresosD2 - TotalCostosD2 - TotalGastosD2
+        TotalRD3 = TotalIngresosD3 - TotalCostosD3 - TotalGastosD3
+        
+        TotalRH1 = TotalIngresosH1 - TotalCostosH1 - TotalGastosH1
+        TotalRH2 = TotalIngresosH2 - TotalCostosH2 - TotalGastosH2
+        TotalRH3 = TotalIngresosH3 - TotalCostosH3 - TotalGastosH3
+         
+       
+        
+        DiferencialD1 = TotalActivoD1 - TotalPCD1 + TotalRD1
+        DiferencialD2 = TotalActivoD2 - TotalPCD2 + TotalRD2
+        DiferencialD2 = TotalActivoD3 - TotalPCD3 + TotalRD3
+        
+        DiferencialH1 = TotalActivoH1 - TotalPCH1 + TotalRH1
+        DiferencialH2 = TotalActivoH2 - TotalPCH2 + TotalRH2
+        DiferencialH2 = TotalActivoH3 - TotalPCH3 + TotalRH3
+        
+              MDIPrimero.AdoConsulta.RecordSource = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
+              MDIPrimero.AdoConsulta.Refresh
+              If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
+                MDIPrimero.AdoConsulta.Recordset.MoveLast
+                Orden = MDIPrimero.AdoConsulta.Recordset("Orden") + 1
+              End If
+        
     
-    
-  End If
+        ''''DEVALUACION CAMBIARIA DE UN MES
+  
+        If Abs(DiferencialD1) < 0.0578 And Abs(DiferencialD1) <> 0 Then: OrdenPC = AgregarDiferencia(DiferencialD1, Orden, "Debe1")
+        If Abs(DiferencialD2) < 0.0578 And Abs(DiferencialD2) <> 0 Then: OrdenPC = AgregarDiferencia(DiferencialD2, Orden, "Debe2")
+        If Abs(DiferencialD3) < 0.0578 And Abs(DiferencialD3) <> 0 Then: OrdenPC = AgregarDiferencia(DiferencialD3, Orden, "Debe3")
+        
+        If Abs(DiferencialH1) < 0.0578 And Abs(DiferencialH1) <> 0 Then: OrdenPC = AgregarDiferencia(DiferencialH1, Orden, "Haber1")
+        If Abs(DiferencialH2) < 0.0578 And Abs(DiferencialH2) <> 0 Then: OrdenPC = AgregarDiferencia(DiferencialH2, Orden, "Haber2")
+        If Abs(DiferencialH3) < 0.0578 And Abs(DiferencialH3) <> 0 Then: OrdenPC = AgregarDiferencia(DiferencialH3, Orden, "Haber3")
+        
+   End If
 
 End Sub
+Public Function AgregarDiferencia(Diferencial As Double, Orden As Double, QUIEN As String)
+              Diferencial = Format(Diferencial, "##0.00")
+              
+              
+              MDIPrimero.AdoConsulta.Recordset.AddNew
+                 MDIPrimero.AdoConsulta.Recordset("Descripcion") = "Diferencial Cambiario"
+                 MDIPrimero.AdoConsulta.Recordset("KeyGrupo") = "DF"
+                 MDIPrimero.AdoConsulta.Recordset(QUIEN) = Diferencial
+                 MDIPrimero.AdoConsulta.Recordset("Nivel") = 1
+                 MDIPrimero.AdoConsulta.Recordset("Orden") = Orden
+              MDIPrimero.AdoConsulta.Recordset.Update
 
+End Function
 
 
 Function Decrypt(Frase As String) As String
@@ -2212,92 +2363,116 @@ Public Sub EliminaRegistroCero(QUIEN As String)
 Dim KeyGrupo As String, Niveles As Integer
 Dim rs As New ADODB.Recordset, cadena As String
 
-If QUIEN = "Balanza" Then
-'FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.Debe3-Reportes.Haber3 AS Diferencia From Reportes Where (((Reportes.Descripcion) Like '*Total*') And ((Reportes.Debe3 - Reportes.Haber3) = 0))"
-FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.Debe3-Reportes.Haber3 AS Diferencia From Reportes Where (((Reportes.Descripcion) Like '%Total%') And ((Reportes.Debe1 + Reportes.Debe2+ Reportes.Debe3 + Reportes.Haber1+Reportes.Haber2+Reportes.Haber3) = 0))"
-FrmReportes.DtaConsulta.Refresh
- If Not FrmReportes.DtaConsulta.Recordset.EOF Then
-   FrmReportes.DtaConsulta.Recordset.MoveLast
-   numero = FrmReportes.DtaConsulta.Recordset.RecordCount
-   FrmReportes.DtaConsulta.Recordset.MoveFirst
-   Do While Not FrmReportes.DtaConsulta.Recordset.EOF
-      Descripcion = FrmReportes.DtaConsulta.Recordset("Descripcion")
-      KeyGrupo = FrmReportes.DtaConsulta.Recordset("KeyGrupo")
-      FrmReportes.DtaConsulta.Recordset.Delete
-      FrmReportes.DtaConsulta2.RecordSource = "SELECT Reportes.Descripcion, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.KeyGrupoCuenta From Reportes Where (((Reportes.KeyGrupo) = '" & KeyGrupo & "'))"
-      FrmReportes.DtaConsulta2.Refresh
-      If Not FrmReportes.DtaConsulta2.Recordset.EOF Then
-         FrmReportes.DtaConsulta2.Recordset.Delete
-      End If
-  
-     FrmReportes.DtaConsulta.Recordset.MoveNext
-   Loop
-   
-   
-   
- End If
-ElseIf QUIEN = "Nivel" Then
-  Niveles = Val(FrmReportes.CmbNivel.Text)
-  FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.KeyGrupoCuenta, Reportes.Nivel From Reportes Where (((Reportes.Nivel) > " & Niveles & "))"
-  FrmReportes.DtaConsulta.Refresh
-  If Not FrmReportes.DtaConsulta.Recordset.EOF Then
-     FrmReportes.DtaConsulta.Recordset.MoveLast
-     numero = FrmReportes.DtaConsulta.Recordset.RecordCount
-     FrmReportes.DtaConsulta.Recordset.MoveFirst
-     Do While Not FrmReportes.DtaConsulta.Recordset.EOF
-        FrmReportes.DtaConsulta.Recordset.Delete
-        FrmReportes.DtaConsulta.Recordset.MoveNext
-     Loop
-     FrmReportes.DtaConsulta.Refresh
-  End If
-  
-' FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.Debe3-Reportes.Haber3 AS Diferencia From Reportes Where (((Reportes.Descripcion) Like '*Total*') And ((Reportes.Debe3 - Reportes.Haber3) = 0))"
-FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.Debe3-Reportes.Haber3 AS Diferencia From Reportes Where (((Reportes.Descripcion) Like '%Total%') And ((Reportes.Debe3 - Reportes.Haber3) = 0))"
- FrmReportes.DtaConsulta.Refresh
- If Not FrmReportes.DtaConsulta.Recordset.EOF Then
-   FrmReportes.DtaConsulta.Recordset.MoveLast
-   numero = FrmReportes.DtaConsulta.Recordset.RecordCount
-   FrmReportes.DtaConsulta.Recordset.MoveFirst
-   Do While Not FrmReportes.DtaConsulta.Recordset.EOF
-     Descripcion = Trim(FrmReportes.DtaConsulta.Recordset("Descripcion"))
-     KeyGrupo = FrmReportes.DtaConsulta.Recordset("KeyGrupo")
-     FrmReportes.DtaConsulta.Recordset.Delete
-     FrmReportes.DtaConsulta2.RecordSource = "SELECT Reportes.Descripcion, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.KeyGrupoCuenta From Reportes Where (((Reportes.KeyGrupo) = '" & KeyGrupo & "'))"
-     FrmReportes.DtaConsulta2.Refresh
-     If Not FrmReportes.DtaConsulta2.Recordset.EOF Then
-       FrmReportes.DtaConsulta2.Recordset.Delete
-     End If
-  
-    FrmReportes.DtaConsulta.Recordset.MoveNext
-   Loop
-  FrmReportes.DtaConsulta.Refresh
- End If
-Else
-
-
-FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.Debe3-Reportes.Haber3 AS Diferencia From Reportes Where (((Reportes.Descripcion) Like '%Total%') And ((Reportes.Debe3 - Reportes.Haber3) = 0))"
-FrmReportes.DtaConsulta.Refresh
- If Not FrmReportes.DtaConsulta.Recordset.EOF Then
-  FrmReportes.DtaConsulta.Recordset.MoveLast
-  numero = FrmReportes.DtaConsulta.Recordset.RecordCount
-  FrmReportes.DtaConsulta.Refresh
-  Do While Not FrmReportes.DtaConsulta.Recordset.EOF
-    Descripcion = FrmReportes.DtaConsulta.Recordset("Descripcion")
-    KeyGrupo = FrmReportes.DtaConsulta.Recordset("KeyGrupo")
-    FrmReportes.DtaConsulta.Recordset.Delete
-'    FrmReportes.DtaConsulta.Refresh
-    FrmReportes.DtaConsulta2.RecordSource = "SELECT Reportes.Descripcion, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.KeyGrupoCuenta From Reportes Where (((Reportes.KeyGrupo) = '" & KeyGrupo & "'))"
-    FrmReportes.DtaConsulta2.Refresh
-    If Not FrmReportes.DtaConsulta2.Recordset.EOF Then
-      
-     rs.Open "DELETE FROM Reportes WHERE (KeyGrupo = '" & KeyGrupo & "')", Conexion
-    End If
+    If QUIEN = "Balanza" Then
+        'FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.Debe3-Reportes.Haber3 AS Diferencia From Reportes Where (((Reportes.Descripcion) Like '*Total*') And ((Reportes.Debe3 - Reportes.Haber3) = 0))"
+        FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.Debe3-Reportes.Haber3 AS Diferencia From Reportes Where (((Reportes.Descripcion) Like '%Total%') And ((Reportes.Debe3 + Reportes.Debe2 + Reportes.Haber3 + Reportes.Haber2) = 0))"
+        FrmReportes.DtaConsulta.Refresh
+         If Not FrmReportes.DtaConsulta.Recordset.EOF Then
+           FrmReportes.DtaConsulta.Recordset.MoveLast
+           numero = FrmReportes.DtaConsulta.Recordset.RecordCount
+           FrmReportes.DtaConsulta.Recordset.MoveFirst
+           Do While Not FrmReportes.DtaConsulta.Recordset.EOF
+              Descripcion = FrmReportes.DtaConsulta.Recordset("Descripcion")
+              KeyGrupo = FrmReportes.DtaConsulta.Recordset("KeyGrupo")
+              FrmReportes.DtaConsulta.Recordset.Delete
+              FrmReportes.DtaConsulta2.RecordSource = "SELECT Reportes.Descripcion, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.KeyGrupoCuenta From Reportes Where (((Reportes.KeyGrupo) = '" & KeyGrupo & "'))"
+              FrmReportes.DtaConsulta2.Refresh
+              If Not FrmReportes.DtaConsulta2.Recordset.EOF Then
+                 FrmReportes.DtaConsulta2.Recordset.Delete
+              End If
+          
+             FrmReportes.DtaConsulta.Recordset.MoveNext
+           Loop
+         End If
+         
+    ElseIf QUIEN = "Nivel" Then
+          Niveles = Val(FrmReportes.CmbNivel.Text)
+          FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.KeyGrupoCuenta, Reportes.Nivel From Reportes Where (((Reportes.Nivel) > " & Niveles & "))"
+          FrmReportes.DtaConsulta.Refresh
+          If Not FrmReportes.DtaConsulta.Recordset.EOF Then
+             FrmReportes.DtaConsulta.Recordset.MoveLast
+             numero = FrmReportes.DtaConsulta.Recordset.RecordCount
+             FrmReportes.DtaConsulta.Recordset.MoveFirst
+             Do While Not FrmReportes.DtaConsulta.Recordset.EOF
+                FrmReportes.DtaConsulta.Recordset.Delete
+                FrmReportes.DtaConsulta.Recordset.MoveNext
+             Loop
+             FrmReportes.DtaConsulta.Refresh
+          End If
+          
+        ' FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.Debe3-Reportes.Haber3 AS Diferencia From Reportes Where (((Reportes.Descripcion) Like '*Total*') And ((Reportes.Debe3 - Reportes.Haber3) = 0))"
+        FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.Debe3-Reportes.Haber3 AS Diferencia From Reportes Where (((Reportes.Descripcion) Like '%Total%') And ((Reportes.Debe3 - Reportes.Haber3) = 0))"
+         FrmReportes.DtaConsulta.Refresh
+         If Not FrmReportes.DtaConsulta.Recordset.EOF Then
+           FrmReportes.DtaConsulta.Recordset.MoveLast
+           numero = FrmReportes.DtaConsulta.Recordset.RecordCount
+           FrmReportes.DtaConsulta.Recordset.MoveFirst
+           Do While Not FrmReportes.DtaConsulta.Recordset.EOF
+             Descripcion = Trim(FrmReportes.DtaConsulta.Recordset("Descripcion"))
+             KeyGrupo = FrmReportes.DtaConsulta.Recordset("KeyGrupo")
+             FrmReportes.DtaConsulta.Recordset.Delete
+             FrmReportes.DtaConsulta2.RecordSource = "SELECT Reportes.Descripcion, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.KeyGrupoCuenta From Reportes Where (((Reportes.KeyGrupo) = '" & KeyGrupo & "'))"
+             FrmReportes.DtaConsulta2.Refresh
+             If Not FrmReportes.DtaConsulta2.Recordset.EOF Then
+               FrmReportes.DtaConsulta2.Recordset.Delete
+             End If
+          
+            FrmReportes.DtaConsulta.Recordset.MoveNext
+           Loop
+          FrmReportes.DtaConsulta.Refresh
+         End If
+    ElseIf QUIEN = "Libro" Then
     
-
-    FrmReportes.DtaConsulta.Recordset.MoveNext
-  Loop
- End If
-End If
+            FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.Debe3-Reportes.Haber3 AS Diferencia From Reportes " & _
+                                                   "Where (((Reportes.Descripcion) Like '%Total%') And ((Reportes.Debe3 + Reportes.Debe2 - Reportes.Haber3 - Reportes.Haber2) = 0))"
+            FrmReportes.DtaConsulta.Refresh
+             If Not FrmReportes.DtaConsulta.Recordset.EOF Then
+                  FrmReportes.DtaConsulta.Recordset.MoveLast
+                  numero = FrmReportes.DtaConsulta.Recordset.RecordCount
+                  FrmReportes.DtaConsulta.Refresh
+                  Do While Not FrmReportes.DtaConsulta.Recordset.EOF
+                    Descripcion = FrmReportes.DtaConsulta.Recordset("Descripcion")
+                    KeyGrupo = FrmReportes.DtaConsulta.Recordset("KeyGrupo")
+                    FrmReportes.DtaConsulta.Recordset.Delete
+                    FrmReportes.DtaConsulta2.RecordSource = "SELECT Reportes.Descripcion, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.KeyGrupoCuenta From Reportes Where (((Reportes.KeyGrupo) = '" & KeyGrupo & "'))"
+                    FrmReportes.DtaConsulta2.Refresh
+                    If Not FrmReportes.DtaConsulta2.Recordset.EOF Then
+                      
+                     rs.Open "DELETE FROM Reportes WHERE (KeyGrupo = '" & KeyGrupo & "')", Conexion
+                    End If
+                    
+                
+                    FrmReportes.DtaConsulta.Recordset.MoveNext
+                  Loop
+             End If
+    
+    
+    
+    Else
+    
+            FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.Debe3-Reportes.Haber3 AS Diferencia From Reportes Where (((Reportes.Descripcion) Like '%Total%') And ((Reportes.Debe3 - Reportes.Haber3) = 0))"
+            FrmReportes.DtaConsulta.Refresh
+             If Not FrmReportes.DtaConsulta.Recordset.EOF Then
+                  FrmReportes.DtaConsulta.Recordset.MoveLast
+                  numero = FrmReportes.DtaConsulta.Recordset.RecordCount
+                  FrmReportes.DtaConsulta.Refresh
+                  Do While Not FrmReportes.DtaConsulta.Recordset.EOF
+                    Descripcion = FrmReportes.DtaConsulta.Recordset("Descripcion")
+                    KeyGrupo = FrmReportes.DtaConsulta.Recordset("KeyGrupo")
+                    FrmReportes.DtaConsulta.Recordset.Delete
+                    FrmReportes.DtaConsulta2.RecordSource = "SELECT Reportes.Descripcion, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.KeyGrupoCuenta From Reportes Where (((Reportes.KeyGrupo) = '" & KeyGrupo & "'))"
+                    FrmReportes.DtaConsulta2.Refresh
+                    If Not FrmReportes.DtaConsulta2.Recordset.EOF Then
+                      
+                     rs.Open "DELETE FROM Reportes WHERE (KeyGrupo = '" & KeyGrupo & "')", Conexion
+                    End If
+                    
+                
+                    FrmReportes.DtaConsulta.Recordset.MoveNext
+                  Loop
+             End If
+             
+    End If
 End Sub
 
 
@@ -2446,6 +2621,10 @@ Dim CodDepartamento As String, NPeriodo As Double, NumeroPeriodo() As Double, i 
        Fecha1 = Format(FechaIni, "yyyy-mm-dd")
 '///////////////////////Busco si Existen Cuentas para esteGrupo////////////////////////////////
 
+          If CodigoGrupo = "A010407" Then
+           CodigoGrupo = "A010407"
+          End If
+
           FrmReportes.DtaConsulta.RecordSource = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Cuentas.KeyGrupo, Cuentas.DescripcionGrupo,Cuentas.UbicacionReporte FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas Where  (Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & Fecha2 & "', 102)) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, Cuentas.KeyGrupo, Cuentas.DescripcionGrupo,Cuentas.UbicacionReporte Having (((Cuentas.KeyGrupo) = '" & CodigoGrupo & "')) ORDER BY Cuentas.KeyGrupo"
           FrmReportes.DtaConsulta.Refresh
          
@@ -2462,6 +2641,14 @@ Dim CodDepartamento As String, NPeriodo As Double, NumeroPeriodo() As Double, i 
         DescripCuenta = FrmReportes.DtaConsulta.Recordset("CodCuentas") + "." + "NO TIENE DESCRIPCION????"
        End If
        CodigoCuenta = FrmReportes.DtaConsulta.Recordset("CodCuentas")
+       
+       If CodigoCuenta = "137-02" Then
+        CodigoCuenta = "137-02"
+       End If
+       
+       If CodigoCuenta = "137-01" Then
+        CodigoCuenta = "137-01"
+       End If
 '       If Not IsNull(FrmReportes.DtaConsulta.Recordset("VoucherNo")) Then
 '        CodDepartamento = FrmReportes.DtaConsulta.Recordset("VoucherNo")
 '       End If
@@ -4279,7 +4466,7 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
 '                SQl = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
 '                SQl = SQl & "ORDER BY Cuentas.CodCuentas"
         
-                Sql = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, MAX(Cuentas.KeyGrupo) AS KeyGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (Transacciones.FechaTransaccion < '" & Format(FechaIni, "yyyymmdd") & "') GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda HAVING (MAX(Cuentas.KeyGrupo) BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') ORDER BY Cuentas.CodCuentas"
+                Sql = "SELECT Cuentas.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS MDebito, SUM(Transacciones.TCambio * Transacciones.Credito) AS MCredito, SUM(Transacciones.Debito * Transacciones.TCambio) - SUM(Transacciones.Credito * Transacciones.TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda, MAX(Cuentas.KeyGrupo) AS KeyGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (Transacciones.FechaTransaccion < '" & Format(FechaIni, "yyyymmdd") & "')  GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda HAVING (MAX(Cuentas.KeyGrupo) BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') ORDER BY Cuentas.CodCuentas"
             
             ElseIf QUIEN = "Resultado" Then
               Sql = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) <'" & Format(FechaIni, "yyyymmdd") & "')) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta, Cuentas.TipoMoneda" & vbLf
@@ -4319,8 +4506,8 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                 CodigoCuenta = FrmReportes.DtaHistorial.Recordset("CodCuentas")
                 
 
-                    If CodigoCuenta = "1130-001-002" Then
-                      CodigoCuenta = "1130-001-002"
+                    If CodigoCuenta = "6410-001" Then
+                      CodigoCuenta = "6410-001"
                     End If
                 
                 FrmReportes.LblProgreso.Caption = "Consultando Registros del Periodo Anterior para la Cuenta " & CodigoCuenta

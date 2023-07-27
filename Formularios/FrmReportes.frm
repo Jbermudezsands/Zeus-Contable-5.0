@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "Comdlg32.ocx"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
@@ -23,7 +23,7 @@ Begin VB.Form FrmReportes
    StartUpPosition =   2  'CenterScreen
    Begin SmartButtonProject.SmartButton BtnExcel 
       Height          =   855
-      Left            =   480
+      Left            =   120
       TabIndex        =   232
       Top             =   6600
       Visible         =   0   'False
@@ -534,14 +534,14 @@ Begin VB.Form FrmReportes
       TabCaption(1)   =   "Configuracion Reportes"
       TabPicture(1)   =   "FrmReportes.frx":1968A
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame10"
-      Tab(1).Control(1)=   "Frame11"
+      Tab(1).Control(0)=   "Frame11"
+      Tab(1).Control(1)=   "Frame10"
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "Configuracion Reportes "
       TabPicture(2)   =   "FrmReportes.frx":196A6
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame12"
-      Tab(2).Control(1)=   "Frame13"
+      Tab(2).Control(0)=   "Frame13"
+      Tab(2).Control(1)=   "Frame12"
       Tab(2).ControlCount=   2
       Begin VB.CheckBox ChkMostrarMovxMes 
          Caption         =   "Mostrar mov x mes"
@@ -2197,7 +2197,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   16711681
+            Format          =   65667073
             CurrentDate     =   37837
          End
          Begin MSComCtl2.DTPicker DTFecha1 
@@ -2209,7 +2209,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   16711681
+            Format          =   65667073
             CurrentDate     =   37837
          End
          Begin VB.Label Label4 
@@ -3670,7 +3670,7 @@ Select Case Me.CmbReportes.Text
              
                Sql = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * Tasas.MontoCordobas END AS Debito, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * Tasas.MontoCordobas END AS Credito, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Fuente, Cuentas.TipoCuenta, Transacciones.Debito + Transacciones.Credito AS Saldo FROM  Cuentas INNER JOIN  Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND  " & _
                      "Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN Tasas ON IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas  " & _
-                     "WHERE  (Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) AND (IndiceTransaccion.Ajuste <> 'Dólares') AND (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (Transacciones.Debito + Transacciones.Credito <> 0) ORDER BY Transacciones.CodCuentas"
+                     "WHERE  (Transacciones.FechaTransaccion Between CONVERT(DATETIME, '" & Format(Me.DTFecha1.Value, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) AND (IndiceTransaccion.Ajuste <> 'Dólares') AND (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (Transacciones.Debito + Transacciones.Credito <> 0) ORDER BY Transacciones.CodCuentas"
              
              
              Else
@@ -3682,7 +3682,7 @@ Select Case Me.CmbReportes.Text
              
               Sql = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * Tasas.MontoCordobas END AS Debito, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * Tasas.MontoCordobas END AS Credito, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Fuente, Cuentas.TipoCuenta, Transacciones.Debito + Transacciones.Credito AS Saldo FROM  Cuentas INNER JOIN  Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND  " & _
                      "Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN Tasas ON IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas  " & _
-                     "WHERE  (Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) AND (IndiceTransaccion.Ajuste <> 'Córdobas') AND (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (Transacciones.Debito + Transacciones.Credito <> 0) ORDER BY Transacciones.CodCuentas"
+                     "WHERE  (Transacciones.FechaTransaccion Between CONVERT(DATETIME, '" & Format(Me.DTFecha1.Value, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) AND (IndiceTransaccion.Ajuste <> 'Córdobas') AND (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (Transacciones.Debito + Transacciones.Credito <> 0) ORDER BY Transacciones.CodCuentas"
              
              End If
             
@@ -3885,8 +3885,8 @@ Select Case Me.CmbReportes.Text
             
          If Option4.Value = True Then
             Me.DtaReportes.Refresh
-            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.LblProgreso.AutoSize = True
+            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.lblProgreso.AutoSize = True
             Me.osProgress1.Visible = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
@@ -3897,7 +3897,7 @@ Select Case Me.CmbReportes.Text
                 Me.osProgress1.Value = Me.osProgress1.Value + 1
             Loop
             
-            Me.LblProgreso.Caption = ""
+            Me.lblProgreso.Caption = ""
             Me.osProgress1.Visible = False
             SaldoReportes ("BalanzaCodigo")
             Me.DtaReportes.Refresh
@@ -3939,7 +3939,7 @@ Select Case Me.CmbReportes.Text
         '         fPreview.arv.ReportSource = ArepBalanza
         '         fPreview.Show 1
             End If
-            Me.LblProgreso.Caption = ""
+            Me.lblProgreso.Caption = ""
             Me.osProgress1.Visible = False
             
             
@@ -3953,8 +3953,8 @@ Select Case Me.CmbReportes.Text
          
             Me.DtaReportes.Refresh
             
-            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.LblProgreso.AutoSize = True
+            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.lblProgreso.AutoSize = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
             Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
@@ -4159,7 +4159,7 @@ Select Case Me.CmbReportes.Text
              
               End If
                  
-             Me.LblProgreso.Caption = ""
+             Me.lblProgreso.Caption = ""
             Me.osProgress1.Visible = False
             
          ElseIf Option9.Value = True Then
@@ -4859,7 +4859,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
       Me.Label2.Visible = False
          Me.Frame7.Visible = False
       Me.Frame2.Visible = True
-    Me.lbltitulo.Caption = "Seleccione el Periodo"
+    Me.LblTitulo.Caption = "Seleccione el Periodo"
       Me.DtaConsulta.RecordSource = "SELECT Periodos.Periodo, Periodos.FechaPeriodo, Periodos.NumeroTabla From Periodos Where (((Periodos.Periodo) = 1) And ((Periodos.NumeroTabla) = 1 Or (Periodos.NumeroTabla) = 2 Or (Periodos.NumeroTabla) = 3))"
       Me.DtaConsulta.Refresh
       Do While Not DtaConsulta.Recordset.EOF
@@ -5276,7 +5276,7 @@ Case "ESTADO DE RESULTADO"
     
     Me.DtaReportes.Refresh
     
-    FrmReportes.LblProgreso.Caption = "Eliminando Datos del Reporte Anterior"
+    FrmReportes.lblProgreso.Caption = "Eliminando Datos del Reporte Anterior"
     FrmReportes.osProgress1.Visible = True
     FrmReportes.osProgress1.Value = 0
     FrmReportes.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
@@ -5373,7 +5373,7 @@ Case "ESTADO DE RESULTADO"
 
     
     
-    FrmReportes.LblProgreso.Caption = ""
+    FrmReportes.lblProgreso.Caption = ""
     FrmReportes.osProgress1.Visible = False
 
 
@@ -5496,7 +5496,7 @@ Case "RESULTADO ACUMULADO"
      fPreview.RunReport rpt
      fPreview.Show 1
      
-    FrmReportes.LblProgreso.Caption = ""
+    FrmReportes.lblProgreso.Caption = ""
     FrmReportes.osProgress1.Visible = False
     
 
@@ -5617,7 +5617,7 @@ Case "RESULTADO HISTORICO"
    
 '     fPreview.arv.ReportSource = ArepResultadoHistorico
 '     fPreview.Show 1
-    FrmReportes.LblProgreso.Caption = ""
+    FrmReportes.lblProgreso.Caption = ""
     FrmReportes.osProgress1.Visible = False
 
 
@@ -5704,7 +5704,7 @@ Case "BALANCE GENERAL"
      Ejecutar.Execute "DELETE FROM Reportes WHERE (Descripcion NOT LIKE N'%Total%') AND (Nivel = " & Me.CmbNivel.Text & ")"
     End If
     
-    AjusteDiferencial
+    AjusteDiferencial ("Balance")
     
 '    '))))))))))PARCHE TEMPORAL PANAM ///////////////////////
 '    Dim UtilidadAnterior As Double
@@ -5850,7 +5850,7 @@ Case "BALANCE ACUMULADO"
      Ejecutar.Execute "DELETE FROM Reportes WHERE (Descripcion NOT LIKE N'%Total%') AND (Nivel = " & Me.CmbNivel.Text & ")"
     End If
     
-    AjusteDiferencial
+    AjusteDiferencial ("Balance")
     
     Me.DtaReportes.Refresh
     ArepBalanceComparativo.LblMoneda.Caption = "Expresado en " & Me.CmbMoneda.Text
@@ -6009,8 +6009,8 @@ Case "BALANZA DE COMPROBACION"
  
  If Option4.Value = True Then
     Me.DtaReportes.Refresh
-    Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-    Me.LblProgreso.AutoSize = True
+    Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+    Me.lblProgreso.AutoSize = True
     Me.osProgress1.Visible = True
     Me.osProgress1.Value = 0
     Me.osProgress1.Min = 0
@@ -6021,7 +6021,7 @@ Case "BALANZA DE COMPROBACION"
         Me.osProgress1.Value = Me.osProgress1.Value + 1
     Loop
     
-    Me.LblProgreso.Caption = ""
+    Me.lblProgreso.Caption = ""
     Me.osProgress1.Visible = False
     SaldoReportes ("BalanzaCodigo")
     Me.DtaReportes.Refresh
@@ -6063,7 +6063,7 @@ Case "BALANZA DE COMPROBACION"
 '         fPreview.arv.ReportSource = ArepBalanza
 '         fPreview.Show 1
     End If
-    Me.LblProgreso.Caption = ""
+    Me.lblProgreso.Caption = ""
     Me.osProgress1.Visible = False
     
     
@@ -6077,8 +6077,8 @@ Case "BALANZA DE COMPROBACION"
  
     Me.DtaReportes.Refresh
     
-    Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-    Me.LblProgreso.AutoSize = True
+    Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+    Me.lblProgreso.AutoSize = True
     Me.osProgress1.Value = 0
     Me.osProgress1.Min = 0
     Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
@@ -6098,7 +6098,7 @@ Case "BALANZA DE COMPROBACION"
     Set Parche = New ADODB.Connection
     Parche.ConnectionString = Conexion
     Parche.Open
-    Parche.Execute "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)"
+    Parche.Execute "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe2 + Haber2 + Debe3 + Haber3 = 0)"
     
     Me.DtaConsulta.RecordSource = "select sum(Debe1) as SumaDebe1,sum(debe2) as SumaDebe2,sum(debe3)as SumaDebe3,sum(haber1) as SumaHaber1,sum(haber2) as SumaHaber2,sum(haber3) as SumaHaber3 from reportes where descripcion not like '%total%'"
     Me.DtaConsulta.Refresh
@@ -6171,7 +6171,7 @@ Case "BALANZA DE COMPROBACION"
      
       End If
          
-     Me.LblProgreso.Caption = ""
+     Me.lblProgreso.Caption = ""
     Me.osProgress1.Visible = False
     
  ElseIf Option9.Value = True Then
@@ -6284,8 +6284,8 @@ Case "AUXILIAR x GRUPO"
     If Me.Option4.Value = True Then
     
     Me.DtaReportes.Refresh
-    Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-    Me.LblProgreso.AutoSize = True
+    Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+    Me.lblProgreso.AutoSize = True
     Me.osProgress1.Visible = True
     Me.osProgress1.Value = 0
     Me.osProgress1.Min = 0
@@ -6296,7 +6296,7 @@ Case "AUXILIAR x GRUPO"
         Me.osProgress1.Value = Me.osProgress1.Value + 1
     Loop
     
-    Me.LblProgreso.Caption = ""
+    Me.lblProgreso.Caption = ""
     Me.osProgress1.Visible = False
     SaldoReportes ("BalanzaCodigo")
     Me.DtaReportes.Refresh
@@ -6328,8 +6328,8 @@ Case "AUXILIAR x GRUPO"
 
             Me.DtaReportes.Refresh
             
-            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.LblProgreso.AutoSize = True
+            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.lblProgreso.AutoSize = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
             Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
@@ -6582,15 +6582,15 @@ Case "AUXILIAR x GRUPO"
          MontoPresupuesto = Me.AdoConsultas.Recordset("Mes")
          KeyGrupo = Me.AdoConsultas.Recordset("KeyGrupo")
          
-         Me.LblProgreso.Caption = DescripcionPresupuesto
+         Me.lblProgreso.Caption = DescripcionPresupuesto
          DoEvents
          
-         If KeyGrupo = "A0124" Then
-           KeyGrupo = "A0124"
+         If KeyGrupo = "A0103" Then
+           KeyGrupo = "A0103"
          End If
          
          '///////////////////////////CONSULTO EL MONTO REAL PARA ESTE GRUPO //////////////////////////////
-         SqlString = "SELECT  SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito / ISNULL(Tasas.MontoCordobas, 1) END) AS Debito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito / ISNULL(Tasas.MontoCordobas, 1) END) AS Credito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito ELSE Transacciones.Debito * ISNULL(Tasas.MontoCordobas, 0) END) AS MDebito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito ELSE Transacciones.Credito * ISNULL(Tasas.MontoCordobas, 0) END) AS Credito, Transacciones.KeyPresupuesto,  Cuentas.TipoCuenta FROM  Transacciones INNER JOIN Periodos ON Transacciones.NPeriodo = Periodos.NPeriodo INNER JOIN  IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN " & _
+         SqlString = "SELECT  SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * ISNULL(Tasas.MontoCordobas, 1) END) AS Debito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * ISNULL(Tasas.MontoCordobas, 1) END) AS Credito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito ELSE Transacciones.Debito / ISNULL(Tasas.MontoCordobas, 0) END) AS MDebito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito ELSE Transacciones.Credito / ISNULL(Tasas.MontoCordobas, 0) END) AS Credito, Transacciones.KeyPresupuesto,  Cuentas.TipoCuenta FROM  Transacciones INNER JOIN Periodos ON Transacciones.NPeriodo = Periodos.NPeriodo INNER JOIN  IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN " & _
                      "Tasas ON IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas WHERE (Periodos.NumeroTabla = " & NumeroTabla & ") And (Month(Periodos.FechaPeriodo) BETWEEN  " & NumeroPeriodo1 & " AND " & NumeroPeriodo2 & " ) GROUP BY Transacciones.KeyPresupuesto, Cuentas.TipoCuenta  HAVING  (Transacciones.KeyPresupuesto = '" & KeyGrupo & "')"
         
          MDIPrimero.AdoConsulta.RecordSource = SqlString
@@ -8255,7 +8255,7 @@ Case "BALANCE GENERAL RESUMEN"
 '     EliminaRegistroCero ("Nivel")
 '    End If
 
-     AjusteDiferencial
+     AjusteDiferencial ("Balance")
     
      Me.DtaReportes.Refresh
        
@@ -8341,7 +8341,7 @@ Case "BALANCE GENERAL RESUMEN ANEXOS"
 '     EliminaRegistroCero ("Nivel")
 '    End If
 
-    AjusteDiferencial
+    AjusteDiferencial ("Balance")
     
     ConvertirReporte (FechaFin)
  
@@ -8376,8 +8376,8 @@ Case "LIBRO MAYOR"
         '//////////////////////////////////////HAGO LA CONSULTA PARA LOS SALDOS INICIALES ///////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             Me.DtaReportes.Refresh
-            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.LblProgreso.AutoSize = True
+            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.lblProgreso.AutoSize = True
             Me.osProgress1.Visible = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
@@ -8393,7 +8393,7 @@ Case "LIBRO MAYOR"
             Parche.Execute "DELETE FROM Reportes"
             Parche.Close
             
-            Me.LblProgreso.Caption = ""
+            Me.lblProgreso.Caption = ""
             Me.osProgress1.Visible = False
             SaldoReportes ("BalanzaCodigo")
             Me.DtaReportes.Refresh
@@ -8447,18 +8447,20 @@ Case "LIBRO MAYOR"
              SaldoReportes ("Balanza")
             End If
             
-            EliminaRegistroCero ("Balanza")
+            EliminaRegistroCero ("Libro")
             
             '-----------------------BORRO TODAS LAS CUENTAS QUE NO SUMAN NINGUN VALOR ------------------
             Set Parche = New ADODB.Connection
             Parche.ConnectionString = Conexion
             Parche.Open
-            Parche.Execute "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)"
+            'Parche.Execute "DELETE FROM Reportes Where (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)"
+            Parche.Execute "DELETE FROM Reportes Where (Debe2 + Debe3 - Haber2 - Haber3 = 0)"
+'            Parche.Execute "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)"
         
         
-'            SQL = "SELECT  * From Reportes WHERE (Nivel = " & Me.CmbNivel2.Text & ") AND (Descripcion LIKE N'%Total%') AND (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 <> 0) ORDER BY Orden"
-
-        '    ArepLibroMayor.DataControl1.Source = SQL
+'            Sql = "SELECT  * From Reportes WHERE (Nivel = " & Me.CmbNivel2.Text & ") AND (Descripcion LIKE N'%Total%') AND (Debe2 + Debe3 - Haber2 - Haber3 <> 0) ORDER BY Orden"
+'
+'            ArepLibroMayor.DataControl1.Source = Sql
             ArepLibroMayor.Logo.Picture = LoadPicture(RutaLogo)
             ArepLibroMayor.LblEmpresa.Caption = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
             ArepLibroMayor.LblEmpresa1.Caption = Me.DtaDatosEmpresa.Recordset("Direccion")
@@ -8485,8 +8487,8 @@ Case "LIBRO DIARIO"
         '//////////////////////////////////////HAGO LA CONSULTA PARA LOS SALDOS INICIALES ///////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             Me.DtaReportes.Refresh
-            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.LblProgreso.AutoSize = True
+            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.lblProgreso.AutoSize = True
             Me.osProgress1.Visible = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
@@ -8507,7 +8509,7 @@ Case "LIBRO DIARIO"
             Parche.Execute "DELETE FROM Reportes"
             Parche.Close
             
-            Me.LblProgreso.Caption = ""
+            Me.lblProgreso.Caption = ""
             Me.osProgress1.Visible = False
             SaldoReportes ("BalanzaCodigo")
             Me.DtaReportes.Refresh
@@ -8557,13 +8559,16 @@ Case "LIBRO DIARIO"
                 
             CreaEstructura ("Balanza")
             SaldoReportes ("Balanza")
-            EliminaRegistroCero ("Balanza")
+            EliminaRegistroCero ("Libro")
+            
+            AjusteDiferencial ("Libro")
     
             '-----------------------BORRO TODAS LAS CUENTAS QUE NO SUMAN NINGUN VALOR ------------------
             Set Parche = New ADODB.Connection
             Parche.ConnectionString = Conexion
             Parche.Open
-            Parche.Execute "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)"
+            Parche.Execute "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe2 + Debe3 - Haber2  - Haber3 = 0)"
+            'Parche.Execute "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)"
         
         
 '            SQL = "SELECT  * From Reportes WHERE (Nivel = " & Me.CmbNivel2.Text & ") AND (Descripcion LIKE N'%Total%') AND (Debe2 + Haber2 <> 0) ORDER BY Orden"
@@ -8720,7 +8725,7 @@ Case "ESTADO DE RESULTADO DPTO"
     
     Me.DtaReportes.Refresh
     
-    FrmReportes.LblProgreso.Caption = "Eliminando Datos del Reporte Anterior"
+    FrmReportes.lblProgreso.Caption = "Eliminando Datos del Reporte Anterior"
     FrmReportes.osProgress1.Visible = True
     FrmReportes.osProgress1.Value = 0
     FrmReportes.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
@@ -8803,7 +8808,7 @@ Case "ESTADO DE RESULTADO DPTO"
 
     
     
-    FrmReportes.LblProgreso.Caption = ""
+    FrmReportes.lblProgreso.Caption = ""
     FrmReportes.osProgress1.Visible = False
 
 Case "COMPROBANTE DE DIARIO"
@@ -8858,8 +8863,8 @@ Case "LISTA CUENTAS X PAGAR"
     
     
     Me.DtaReportes.Refresh
-    Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-    Me.LblProgreso.AutoSize = True
+    Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+    Me.lblProgreso.AutoSize = True
     Me.osProgress1.Visible = True
     Me.osProgress1.Value = 0
     Me.osProgress1.Min = 0
@@ -8871,7 +8876,7 @@ Case "LISTA CUENTAS X PAGAR"
         Me.osProgress1.Value = Me.osProgress1.Value + 1
     Loop
     
-    Me.LblProgreso.Caption = ""
+    Me.lblProgreso.Caption = ""
     Me.osProgress1.Visible = False
     Me.AdoConsultas.RecordSource = "SELECT  * From Cuentas WHERE (TipoCuenta = 'Cuentas x Pagar') ORDER BY CodCuentas"
     Me.AdoConsultas.Refresh
@@ -8920,8 +8925,8 @@ Case "LISTA CUENTAS X PAGAR"
 
             Me.DtaReportes.Refresh
             
-            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.LblProgreso.AutoSize = True
+            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.lblProgreso.AutoSize = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
             Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
@@ -8974,8 +8979,8 @@ Case "LISTA CUENTAS X COBRAR"
     
     
     Me.DtaReportes.Refresh
-    Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-    Me.LblProgreso.AutoSize = True
+    Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+    Me.lblProgreso.AutoSize = True
     Me.osProgress1.Visible = True
     Me.osProgress1.Value = 0
     Me.osProgress1.Min = 0
@@ -8987,7 +8992,7 @@ Case "LISTA CUENTAS X COBRAR"
         Me.osProgress1.Value = Me.osProgress1.Value + 1
     Loop
     
-    Me.LblProgreso.Caption = ""
+    Me.lblProgreso.Caption = ""
     Me.osProgress1.Visible = False
     Me.AdoConsultas.RecordSource = "SELECT  * From Cuentas WHERE (TipoCuenta = 'Cuentas x Cobrar') ORDER BY CodCuentas"
     Me.AdoConsultas.Refresh
@@ -9034,8 +9039,8 @@ Case "LISTA CUENTAS X COBRAR"
 
             Me.DtaReportes.Refresh
             
-            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.LblProgreso.AutoSize = True
+            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.lblProgreso.AutoSize = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
             Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount

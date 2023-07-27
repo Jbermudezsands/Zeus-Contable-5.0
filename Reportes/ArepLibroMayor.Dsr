@@ -108,7 +108,7 @@ Private Sub Detail_Format()
    '-----------------------------------------------------------------------------------
    '--------------------------CARGO LOS ACTIVOS ---------------------------------------
    '-----------------------------------------------------------------------------------
-    SqlString = "SELECT  * From Reportes WHERE (Nivel = '" & FrmReportes.CmbNivel2.Text & "') AND (Descripcion LIKE N'%Total%') AND (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 <> 0) AND (KeyGrupo LIKE N'%A%')ORDER BY Orden"
+    SqlString = "SELECT  * From Reportes WHERE (Nivel = '" & FrmReportes.CmbNivel2.Text & "') AND (Descripcion LIKE N'%Total%') AND (Debe2 + Debe3 - Haber2 - Haber3 <> 0) AND (KeyGrupo LIKE N'%A%')ORDER BY Orden"
     Set Me.SrptActivos.object = New ArepSubReporteLibroMayor
     Me.SrptActivos.object.DataControl1.ConnectionString = ConexionReporte
     Me.SrptActivos.object.DataControl1.Source = SqlString
@@ -117,7 +117,7 @@ Private Sub Detail_Format()
    '-----------------------------------------------------------------------------------
    '--------------------------CARGO LOS PASIVOS---------------------------------------
    '-----------------------------------------------------------------------------------
-    SqlString = "SELECT  * From Reportes WHERE (Nivel = '" & FrmReportes.CmbNivel3.Text & "') AND (Descripcion LIKE N'%Total%') AND (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 <> 0) AND (KeyGrupo LIKE N'%B%')ORDER BY Orden"
+    SqlString = "SELECT  * From Reportes WHERE (Nivel = '" & FrmReportes.CmbNivel3.Text & "') AND (Descripcion LIKE N'%Total%') AND (Debe2 + Debe3 - Haber2 - Haber3 <> 0) AND (KeyGrupo LIKE N'%B%')ORDER BY Orden"
     Set Me.SrptPasivos.object = New ArepSubReporteLibroMayor
     Me.SrptPasivos.object.DataControl1.ConnectionString = ConexionReporte
     Me.SrptPasivos.object.DataControl1.Source = SqlString
@@ -125,7 +125,7 @@ Private Sub Detail_Format()
    '-----------------------------------------------------------------------------------
    '--------------------------CARGO EL CAPITAL---------------------------------------
    '-----------------------------------------------------------------------------------
-    SqlString = "SELECT  * From Reportes WHERE (Nivel = '" & FrmReportes.CmbNivel4.Text & "') AND (Descripcion LIKE N'%Total%') AND (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 <> 0) AND (KeyGrupo LIKE N'%C%')ORDER BY Orden"
+    SqlString = "SELECT  * From Reportes WHERE (Nivel = '" & FrmReportes.CmbNivel4.Text & "') AND (Descripcion LIKE N'%Total%') AND (Debe2 + Debe3 - Haber2 - Haber3 <> 0) AND (KeyGrupo LIKE N'%C%')ORDER BY Orden"
     Set Me.SrptCapital.object = New ArepSubReporteLibroMayor
     Me.SrptCapital.object.DataControl1.ConnectionString = ConexionReporte
     Me.SrptCapital.object.DataControl1.Source = SqlString
@@ -133,7 +133,7 @@ Private Sub Detail_Format()
    '-----------------------------------------------------------------------------------
    '--------------------------CARGO EL INGRESO---------------------------------------
    '-----------------------------------------------------------------------------------
-    SqlString = "SELECT  * From Reportes WHERE (Nivel = '" & FrmReportes.CmbNivel5.Text & "') AND (Descripcion LIKE N'%Total%') AND (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 <> 0) AND (KeyGrupo LIKE N'%D%')ORDER BY Orden"
+    SqlString = "SELECT  * From Reportes WHERE (Nivel = '" & FrmReportes.CmbNivel5.Text & "') AND (Descripcion LIKE N'%Total%') AND (Debe2 + Debe3 - Haber2 - Haber3 <> 0) AND (KeyGrupo LIKE N'%D%')ORDER BY Orden"
     Set Me.SrptIngresos.object = New ArepSubReporteLibroMayor
     Me.SrptIngresos.object.DataControl1.ConnectionString = ConexionReporte
     Me.SrptIngresos.object.DataControl1.Source = SqlString
@@ -141,7 +141,7 @@ Private Sub Detail_Format()
    '-----------------------------------------------------------------------------------
    '--------------------------CARGO LOS COSTOS---------------------------------------
    '-----------------------------------------------------------------------------------
-    SqlString = "SELECT  * From Reportes WHERE (Nivel = '" & FrmReportes.CmbNivel6.Text & "') AND (Descripcion LIKE N'%Total%') AND (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 <> 0) AND (KeyGrupo LIKE N'%G%')ORDER BY Orden"
+    SqlString = "SELECT  * From Reportes WHERE (Nivel = '" & FrmReportes.CmbNivel6.Text & "') AND (Descripcion LIKE N'%Total%') AND (Debe2 + Debe3 - Haber2 - Haber3 <> 0) AND (KeyGrupo LIKE N'%G%')ORDER BY Orden"
     Set Me.SrptCostos.object = New ArepSubReporteLibroMayor
     Me.SrptCostos.object.DataControl1.ConnectionString = ConexionReporte
     Me.SrptCostos.object.DataControl1.Source = SqlString
@@ -149,7 +149,7 @@ Private Sub Detail_Format()
    '-----------------------------------------------------------------------------------
    '--------------------------CARGO LOS GASTOS---------------------------------------
    '-----------------------------------------------------------------------------------
-    SqlString = "SELECT  * From Reportes WHERE (Nivel = '" & FrmReportes.CmbNivel7.Text & "') AND (Descripcion LIKE N'%Total%') AND (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 <> 0) AND (KeyGrupo LIKE N'%O%')ORDER BY Orden"
+    SqlString = "SELECT  * From Reportes WHERE (Nivel = '" & FrmReportes.CmbNivel7.Text & "') AND (Descripcion LIKE N'%Total%') AND (Debe2 + Debe3 - Haber2 - Haber3 <> 0) AND (KeyGrupo LIKE N'%O%')ORDER BY Orden"
     Set Me.SrptGastos.object = New ArepSubReporteLibroMayor
     Me.SrptGastos.object.DataControl1.ConnectionString = ConexionReporte
     Me.SrptGastos.object.DataControl1.Source = SqlString
