@@ -413,7 +413,7 @@ Begin VB.Form FrmCheque
          _ExtentX        =   2990
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   17104897
+         Format          =   183697409
          CurrentDate     =   38918
       End
       Begin MSComCtl2.DTPicker DTPFechaVence 
@@ -425,7 +425,7 @@ Begin VB.Form FrmCheque
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   17104897
+         Format          =   183697409
          CurrentDate     =   38918
       End
       Begin VB.Label LblNombres 
@@ -581,7 +581,7 @@ Begin VB.Form FrmCheque
       _ExtentY        =   503
       _Version        =   393216
       Enabled         =   0   'False
-      Format          =   17104897
+      Format          =   184418305
       CurrentDate     =   38008
    End
    Begin VB.CommandButton CmdSiguiente 
@@ -5674,8 +5674,17 @@ Dim Fechas1 As String
       Else
        MontoCheque = Me.TxtMonto
       End If
+      If Not IsNull(Me.DtaConsulta.Recordset("Debito")) Then
        Debito = Me.DtaConsulta.Recordset("Debito")
+      Else
+       Debito = 0
+      End If
+      
+      If Not IsNull(Me.DtaConsulta.Recordset("Credito")) Then
        Credito = Me.DtaConsulta.Recordset("Credito")
+      Else
+       Credito = 0
+      End If
        TotalDebito = TotalDebito + Debito
        TotalCredito = TotalCredito + Credito
        DtaConsulta.Recordset.MoveNext

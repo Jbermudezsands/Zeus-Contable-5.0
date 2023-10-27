@@ -542,7 +542,7 @@ Public Function CalcularCostoPromedio(CodigoProducto As String, Conexion As Stri
                      FechaCompra = Trim(MDIPrimero.AdoConsultaFacturacion.Recordset("Fecha_Compra"))
                      TasaCambio = BuscaTasaCambio(FechaCompra)
                      If TasaCambio = 0 Then
-                        MsgBox "TASA DE CAMBIO CERO", vbApplicationModal, "Zeus Contabilidad "
+                        MsgBox "TASA DE CAMBIO CERO FECHACOMPRA:" & FechaCompra, vbApplicationModal, "Zeus Contabilidad "
                         TasaCambio = 1
                      Else
                         PrecioCostoDolar = (TotalImporte / TasaCambio)
@@ -554,7 +554,7 @@ Public Function CalcularCostoPromedio(CodigoProducto As String, Conexion As Stri
                      FechaCompra = Trim(MDIPrimero.AdoConsultaFacturacion.Recordset("Fecha_Compra"))
                      TasaCambio = BuscaTasaCambio(FechaCompra)
                      If TasaCambio = 0 Then
-                        MsgBox "TASA DE CAMBIO CERO " & FechaCompra, vbApplicationModal, "Zeus Contabilidad "
+                        MsgBox "TASA DE CAMBIO CERO FECHACOMPRA:" & FechaCompra, vbApplicationModal, "Zeus Contabilidad "
                      Else
                         TotalImporte = (Importe * TasaCambio) + TotalImporte
                      End If
