@@ -639,7 +639,7 @@ Begin VB.Form FrmTransacciones
          _ExtentX        =   2990
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   65273857
+         Format          =   188416001
          CurrentDate     =   38918
       End
       Begin VB.TextBox TxtMonto 
@@ -659,7 +659,7 @@ Begin VB.Form FrmTransacciones
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   65273857
+         Format          =   188416001
          CurrentDate     =   38918
       End
       Begin VB.Label LblNombres 
@@ -1425,7 +1425,7 @@ Begin VB.Form FrmTransacciones
          _ExtentX        =   2778
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   65273857
+         Format          =   187039745
          CurrentDate     =   38918
       End
       Begin VB.ComboBox CmbMoneda 
@@ -2077,7 +2077,7 @@ Private Sub CmdBorrar_Click()
 Dim Periodo As Double, NumeroMovimiento As Double
 
 
-On Error GoTo TipoErrs
+'On Error GoTo TipoErrs
   Dim Respuesta, Rsp
   Salir = True
   
