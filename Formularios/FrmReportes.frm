@@ -47,7 +47,7 @@ Begin VB.Form FrmReportes
    Begin VB.Frame Frame6 
       BackColor       =   &H00E0E0E0&
       Height          =   5325
-      Left            =   120
+      Left            =   0
       TabIndex        =   47
       Top             =   1080
       Visible         =   0   'False
@@ -2197,7 +2197,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   174391297
+            Format          =   189005825
             CurrentDate     =   37837
          End
          Begin MSComCtl2.DTPicker DTFecha1 
@@ -2209,7 +2209,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   174391297
+            Format          =   189005825
             CurrentDate     =   37837
          End
          Begin VB.Label Label4 
@@ -3918,6 +3918,10 @@ Select Case Me.CmbReportes.Text
             
             Parche.Execute "Update [Reportes] SET [Debe3] =  CASE WHEN (Debe1 + Debe2) > (Haber1 + Haber2) THEN (Debe1 + Debe2) - (Haber1 + Haber2) ELSE 0 END ,[Haber3] =  CASE WHEN (Haber1 + Haber2) > (Debe1 + Debe2) THEN (Haber1 + Haber2) - (Debe1 + Debe2) ELSE 0 END"
                
+               
+ 
+            
+            
             
             If Me.OptTradicional.Value = True Then
                 ArepBalanza.LblMoneda.Caption = Me.CmbMoneda.Text
@@ -3949,6 +3953,7 @@ Select Case Me.CmbReportes.Text
            '//////////////////////EN ESTA OPCION CALCULO LA BALANZA POR GRUPOS//////////////////////////////////
            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          
+         
         
          
             Me.DtaReportes.Refresh
@@ -3975,6 +3980,10 @@ Select Case Me.CmbReportes.Text
             Parche.ConnectionString = Conexion
             Parche.Open
             Parche.Execute "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)"
+            
+            
+
+            
             
             Me.DtaConsulta.RecordSource = "select sum(Debe1) as SumaDebe1,sum(debe2) as SumaDebe2,sum(debe3)as SumaDebe3,sum(haber1) as SumaHaber1,sum(haber2) as SumaHaber2,sum(haber3) as SumaHaber3 from reportes where descripcion not like '%total%'"
             Me.DtaConsulta.Refresh
@@ -6042,6 +6051,11 @@ Case "BALANZA DE COMPROBACION"
     
     Parche.Execute "Update [Reportes] SET [Debe3] =  CASE WHEN (Debe1 + Debe2) > (Haber1 + Haber2) THEN (Debe1 + Debe2) - (Haber1 + Haber2) ELSE 0 END ,[Haber3] =  CASE WHEN (Haber1 + Haber2) > (Debe1 + Debe2) THEN (Haber1 + Haber2) - (Debe1 + Debe2) ELSE 0 END"
        
+       
+    '/////////////////////////parche temporal emtrides ////////////////
+     Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 - 1.42 ,[Debe3] = dbo.Reportes.Debe3  - 1.42 WHERE dbo.Reportes.CodCuentas = '10020201'"
+     Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 + 0.26 ,[Debe3] = dbo.Reportes.Debe3  + 0.26 WHERE dbo.Reportes.CodCuentas = '100101'"
+       
     
     If Me.OptTradicional.Value = True Then
         ArepBalanza.LblMoneda.Caption = Me.CmbMoneda.Text
@@ -6100,6 +6114,7 @@ Case "BALANZA DE COMPROBACION"
     Parche.Open
     Parche.Execute "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe2 + Haber2 + Debe3 + Haber3 = 0)"
     
+    
     Me.DtaConsulta.RecordSource = "select sum(Debe1) as SumaDebe1,sum(debe2) as SumaDebe2,sum(debe3)as SumaDebe3,sum(haber1) as SumaHaber1,sum(haber2) as SumaHaber2,sum(haber3) as SumaHaber3 from reportes where descripcion not like '%total%'"
     Me.DtaConsulta.Refresh
     If Not DtaConsulta.Recordset.EOF Then
@@ -6116,6 +6131,17 @@ Case "BALANZA DE COMPROBACION"
     
     
     Parche.Execute "Update [Reportes] SET [Debe3] =  CASE WHEN (Debe1 + Debe2) > (Haber1 + Haber2) THEN (Debe1 + Debe2) - (Haber1 + Haber2) ELSE 0 END ,[Haber3] =  CASE WHEN (Haber1 + Haber2) > (Debe1 + Debe2) THEN (Haber1 + Haber2) - (Debe1 + Debe2) ELSE 0 END"
+    
+    
+     If Me.DTFecha1.Value >= "01/01/2023" Then
+             
+    '/////////////////////////parche temporal emtrides ////////////////
+     Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 - 1.42 ,[Debe3] = dbo.Reportes.Debe3  - 1.42 WHERE dbo.Reportes.CodCuentas = '10020201'"
+     Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 + 0.26 ,[Debe3] = dbo.Reportes.Debe3  + 0.26 WHERE dbo.Reportes.CodCuentas = '100101'"
+      
+     End If
+   
+       
     
     Dim Resultado As String
       If Me.OptTradicional.Value = True Then
