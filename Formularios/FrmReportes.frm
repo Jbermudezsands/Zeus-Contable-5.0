@@ -2197,7 +2197,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   189005825
+            Format          =   188088321
             CurrentDate     =   37837
          End
          Begin MSComCtl2.DTPicker DTFecha1 
@@ -2209,7 +2209,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   189005825
+            Format          =   188088321
             CurrentDate     =   37837
          End
          Begin VB.Label Label4 
@@ -6137,8 +6137,11 @@ Case "BALANZA DE COMPROBACION"
              
     '/////////////////////////parche temporal emtrides ////////////////
      Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 - 1.42 ,[Debe3] = dbo.Reportes.Debe3  - 1.42 WHERE dbo.Reportes.CodCuentas = '10020201'"
+    
      Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 + 0.26 ,[Debe3] = dbo.Reportes.Debe3  + 0.26 WHERE dbo.Reportes.CodCuentas = '100101'"
-      
+     
+     Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 + 0.26 ,[Debe3] = dbo.Reportes.Debe3  + 0.26 WHERE (KeyGrupo = 'A010001') AND (Descripcion LIKE '%Total%')"
+     Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 - 1.42 ,[Debe3] = dbo.Reportes.Debe3  - 1.42 WHERE (KeyGrupo = 'A010002') AND (Descripcion LIKE '%Total%')"
      End If
    
        
