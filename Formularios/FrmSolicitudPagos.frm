@@ -1,10 +1,10 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
 Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
-Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
 Object = "{60CCE6A8-5C61-4F30-8513-F57EED62E86A}#8.0#0"; "todl8.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
@@ -23,10 +23,10 @@ Begin VB.Form FrmSolicitudPagos
       Height          =   1815
       Left            =   2280
       TabIndex        =   123
-      Top             =   2400
+      Top             =   4200
       Visible         =   0   'False
-      Width           =   8895
-      _ExtentX        =   15690
+      Width           =   9255
+      _ExtentX        =   16325
       _ExtentY        =   3201
       _Version        =   393216
       Appearance      =   0
@@ -44,7 +44,7 @@ Begin VB.Form FrmSolicitudPagos
          Locked          =   -1  'True
          TabIndex        =   63
          Text            =   "0"
-         Top             =   720
+         Top             =   100
          Width           =   855
       End
       Begin VB.TextBox TxtFuente 
@@ -530,7 +530,7 @@ Begin VB.Form FrmSolicitudPagos
          _ExtentX        =   2990
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   17104897
+         Format          =   193200129
          CurrentDate     =   38918
       End
       Begin MSComCtl2.DTPicker DTPFechaVence 
@@ -542,7 +542,7 @@ Begin VB.Form FrmSolicitudPagos
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   17104897
+         Format          =   193200129
          CurrentDate     =   38918
       End
       Begin VB.Label LblProveedor 
@@ -1009,6 +1009,39 @@ Begin VB.Form FrmSolicitudPagos
       _ExtentY        =   1931
       _StockProps     =   79
       UseVisualStyle  =   -1  'True
+      Begin VB.CommandButton CmdBuscapresupuesto 
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   300
+         Left            =   11520
+         Picture         =   "FrmSolicitudPagos.frx":054F
+         Style           =   1  'Graphical
+         TabIndex        =   127
+         Top             =   700
+         Width           =   375
+      End
+      Begin VB.TextBox TxtKeyPresupuesto 
+         Height          =   315
+         Left            =   11640
+         TabIndex        =   125
+         Top             =   720
+         Visible         =   0   'False
+         Width           =   735
+      End
+      Begin VB.TextBox TxtPresupuesto 
+         Height          =   315
+         Left            =   7440
+         TabIndex        =   124
+         Top             =   680
+         Width           =   4095
+      End
       Begin VB.CommandButton CmdConsultaBanco 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -1021,7 +1054,7 @@ Begin VB.Form FrmSolicitudPagos
          EndProperty
          Height          =   300
          Left            =   3480
-         Picture         =   "FrmSolicitudPagos.frx":054F
+         Picture         =   "FrmSolicitudPagos.frx":069D
          Style           =   1  'Graphical
          TabIndex        =   67
          Top             =   240
@@ -1029,9 +1062,9 @@ Begin VB.Form FrmSolicitudPagos
       End
       Begin VB.ComboBox CmbMoneda 
          Height          =   315
-         ItemData        =   "FrmSolicitudPagos.frx":069D
+         ItemData        =   "FrmSolicitudPagos.frx":07EB
          Left            =   3600
-         List            =   "FrmSolicitudPagos.frx":06AA
+         List            =   "FrmSolicitudPagos.frx":07F8
          TabIndex        =   45
          Top             =   680
          Width           =   1815
@@ -1047,7 +1080,7 @@ Begin VB.Form FrmSolicitudPagos
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel6 
          Height          =   255
          Left            =   2760
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":06C9
+         OleObjectBlob   =   "FrmSolicitudPagos.frx":0817
          TabIndex        =   46
          Top             =   720
          Width           =   735
@@ -1055,7 +1088,7 @@ Begin VB.Form FrmSolicitudPagos
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel5 
          Height          =   255
          Left            =   120
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":0733
+         OleObjectBlob   =   "FrmSolicitudPagos.frx":0881
          TabIndex        =   47
          Top             =   1200
          Width           =   1575
@@ -1063,13 +1096,13 @@ Begin VB.Form FrmSolicitudPagos
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel2 
          Height          =   255
          Left            =   120
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":07B3
+         OleObjectBlob   =   "FrmSolicitudPagos.frx":0901
          TabIndex        =   48
          Top             =   700
          Width           =   495
       End
       Begin MSDataListLib.DataCombo DBEmpleado 
-         Bindings        =   "FrmSolicitudPagos.frx":081B
+         Bindings        =   "FrmSolicitudPagos.frx":0969
          Height          =   315
          Left            =   1680
          TabIndex        =   49
@@ -1084,7 +1117,7 @@ Begin VB.Form FrmSolicitudPagos
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel1 
          Height          =   375
          Left            =   5040
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":0836
+         OleObjectBlob   =   "FrmSolicitudPagos.frx":0984
          TabIndex        =   50
          Top             =   1200
          Width           =   1815
@@ -1092,7 +1125,7 @@ Begin VB.Form FrmSolicitudPagos
       Begin ACTIVESKINLibCtl.SkinLabel LblSaldo 
          Height          =   375
          Left            =   7080
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":08BA
+         OleObjectBlob   =   "FrmSolicitudPagos.frx":0A08
          TabIndex        =   51
          Top             =   1200
          Width           =   1815
@@ -1107,13 +1140,13 @@ Begin VB.Form FrmSolicitudPagos
          _ExtentY        =   503
          _Version        =   393216
          Enabled         =   0   'False
-         Format          =   17104897
+         Format          =   193200129
          CurrentDate     =   38008
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel4 
          Height          =   255
          Left            =   4200
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":0918
+         OleObjectBlob   =   "FrmSolicitudPagos.frx":0A66
          TabIndex        =   53
          Top             =   240
          Width           =   1095
@@ -1121,23 +1154,31 @@ Begin VB.Form FrmSolicitudPagos
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel3 
          Height          =   255
          Left            =   120
-         OleObjectBlob   =   "FrmSolicitudPagos.frx":098C
+         OleObjectBlob   =   "FrmSolicitudPagos.frx":0ADA
          TabIndex        =   54
          Top             =   240
          Width           =   615
       End
       Begin MSDataListLib.DataCombo DBCodigo1 
-         Bindings        =   "FrmSolicitudPagos.frx":09F6
+         Bindings        =   "FrmSolicitudPagos.frx":0B44
          Height          =   315
-         Left            =   5880
+         Left            =   9720
          TabIndex        =   55
-         Top             =   600
+         Top             =   240
          Visible         =   0   'False
          Width           =   2775
          _ExtentX        =   4895
          _ExtentY        =   556
          _Version        =   393216
          Text            =   ""
+      End
+      Begin ACTIVESKINLibCtl.SkinLabel SkinLabel25 
+         Height          =   255
+         Left            =   5880
+         OleObjectBlob   =   "FrmSolicitudPagos.frx":0B5C
+         TabIndex        =   126
+         Top             =   720
+         Width           =   1455
       End
       Begin VB.Label Label9 
          Alignment       =   1  'Right Justify
@@ -1162,7 +1203,7 @@ Begin VB.Form FrmSolicitudPagos
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel12 
       Height          =   255
       Left            =   13200
-      OleObjectBlob   =   "FrmSolicitudPagos.frx":0A0E
+      OleObjectBlob   =   "FrmSolicitudPagos.frx":0BDE
       TabIndex        =   57
       Top             =   7560
       Width           =   1335
@@ -1170,7 +1211,7 @@ Begin VB.Form FrmSolicitudPagos
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel13 
       Height          =   255
       Left            =   11760
-      OleObjectBlob   =   "FrmSolicitudPagos.frx":0A7A
+      OleObjectBlob   =   "FrmSolicitudPagos.frx":0C4A
       TabIndex        =   58
       Top             =   7560
       Width           =   1335
@@ -1178,7 +1219,7 @@ Begin VB.Form FrmSolicitudPagos
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel14 
       Height          =   255
       Left            =   3000
-      OleObjectBlob   =   "FrmSolicitudPagos.frx":0AE4
+      OleObjectBlob   =   "FrmSolicitudPagos.frx":0CB4
       TabIndex        =   59
       Top             =   7200
       Width           =   1335
@@ -1886,7 +1927,7 @@ Begin VB.Form FrmSolicitudPagos
       Tabs            =   2
       TabHeight       =   520
       TabCaption(0)   =   "Generales Solicitud"
-      TabPicture(0)   =   "FrmSolicitudPagos.frx":0B56
+      TabPicture(0)   =   "FrmSolicitudPagos.frx":0D26
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "GroupBox4"
       Tab(0).Control(0).Enabled=   0   'False
@@ -1904,7 +1945,7 @@ Begin VB.Form FrmSolicitudPagos
       Tab(0).Control(6).Enabled=   0   'False
       Tab(0).ControlCount=   7
       TabCaption(1)   =   "Cuentas Contables"
-      TabPicture(1)   =   "FrmSolicitudPagos.frx":0B72
+      TabPicture(1)   =   "FrmSolicitudPagos.frx":0D42
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "GroupBox6"
       Tab(1).ControlCount=   1
@@ -2005,7 +2046,7 @@ Begin VB.Form FrmSolicitudPagos
             EndProperty
             Height          =   300
             Left            =   6600
-            Picture         =   "FrmSolicitudPagos.frx":0B8E
+            Picture         =   "FrmSolicitudPagos.frx":0D5E
             Style           =   1  'Graphical
             TabIndex        =   82
             Top             =   480
@@ -2074,7 +2115,7 @@ Begin VB.Form FrmSolicitudPagos
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel7 
             Height          =   255
             Left            =   240
-            OleObjectBlob   =   "FrmSolicitudPagos.frx":0CDC
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":0EAC
             TabIndex        =   86
             Top             =   240
             Width           =   3975
@@ -2082,7 +2123,7 @@ Begin VB.Form FrmSolicitudPagos
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel8 
             Height          =   255
             Left            =   8040
-            OleObjectBlob   =   "FrmSolicitudPagos.frx":0D6A
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":0F3A
             TabIndex        =   87
             Top             =   1320
             Width           =   615
@@ -2090,7 +2131,7 @@ Begin VB.Form FrmSolicitudPagos
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel9 
             Height          =   255
             Left            =   240
-            OleObjectBlob   =   "FrmSolicitudPagos.frx":0DD2
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":0FA2
             TabIndex        =   88
             Top             =   2040
             Width           =   1575
@@ -2113,7 +2154,7 @@ Begin VB.Form FrmSolicitudPagos
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel15 
             Height          =   255
             Left            =   7560
-            OleObjectBlob   =   "FrmSolicitudPagos.frx":0E4E
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":101E
             TabIndex        =   90
             Top             =   960
             Width           =   975
@@ -2128,7 +2169,7 @@ Begin VB.Form FrmSolicitudPagos
             _ExtentY        =   450
             _Version        =   393216
             Appearance      =   0
-            BackColor       =   16761024
+            BackColor       =   12648447
             Enabled         =   0   'False
             Format          =   "#,##0.00;(#,##0.00)"
             PromptChar      =   "_"
@@ -2136,7 +2177,7 @@ Begin VB.Form FrmSolicitudPagos
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel16 
             Height          =   255
             Left            =   8160
-            OleObjectBlob   =   "FrmSolicitudPagos.frx":0EC2
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":1092
             TabIndex        =   92
             Top             =   600
             Width           =   375
@@ -2151,14 +2192,14 @@ Begin VB.Form FrmSolicitudPagos
             _ExtentY        =   450
             _Version        =   393216
             Appearance      =   0
-            BackColor       =   16761024
+            BackColor       =   12648447
             Format          =   "#,##0.00;(#,##0.00)"
             PromptChar      =   "_"
          End
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel17 
             Height          =   255
             Left            =   7680
-            OleObjectBlob   =   "FrmSolicitudPagos.frx":0F26
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":10F6
             TabIndex        =   94
             Top             =   240
             Width           =   735
@@ -2196,7 +2237,7 @@ Begin VB.Form FrmSolicitudPagos
             EndProperty
             Height          =   300
             Left            =   3480
-            Picture         =   "FrmSolicitudPagos.frx":0F96
+            Picture         =   "FrmSolicitudPagos.frx":1166
             Style           =   1  'Graphical
             TabIndex        =   114
             Top             =   2280
@@ -2214,7 +2255,7 @@ Begin VB.Form FrmSolicitudPagos
             EndProperty
             Height          =   300
             Left            =   3480
-            Picture         =   "FrmSolicitudPagos.frx":10E4
+            Picture         =   "FrmSolicitudPagos.frx":12B4
             Style           =   1  'Graphical
             TabIndex        =   113
             Top             =   1920
@@ -2232,7 +2273,7 @@ Begin VB.Form FrmSolicitudPagos
             EndProperty
             Height          =   300
             Left            =   3480
-            Picture         =   "FrmSolicitudPagos.frx":1232
+            Picture         =   "FrmSolicitudPagos.frx":1402
             Style           =   1  'Graphical
             TabIndex        =   112
             Top             =   1560
@@ -2250,7 +2291,7 @@ Begin VB.Form FrmSolicitudPagos
             EndProperty
             Height          =   300
             Left            =   3480
-            Picture         =   "FrmSolicitudPagos.frx":1380
+            Picture         =   "FrmSolicitudPagos.frx":1550
             Style           =   1  'Graphical
             TabIndex        =   111
             Top             =   1200
@@ -2268,7 +2309,7 @@ Begin VB.Form FrmSolicitudPagos
             EndProperty
             Height          =   300
             Left            =   3480
-            Picture         =   "FrmSolicitudPagos.frx":14CE
+            Picture         =   "FrmSolicitudPagos.frx":169E
             Style           =   1  'Graphical
             TabIndex        =   110
             Top             =   840
@@ -2286,7 +2327,7 @@ Begin VB.Form FrmSolicitudPagos
             EndProperty
             Height          =   300
             Left            =   3480
-            Picture         =   "FrmSolicitudPagos.frx":161C
+            Picture         =   "FrmSolicitudPagos.frx":17EC
             Style           =   1  'Graphical
             TabIndex        =   109
             Top             =   480
@@ -2309,7 +2350,7 @@ Begin VB.Form FrmSolicitudPagos
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel22 
             Height          =   255
             Left            =   960
-            OleObjectBlob   =   "FrmSolicitudPagos.frx":176A
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":193A
             TabIndex        =   98
             Top             =   480
             Width           =   375
@@ -2331,7 +2372,7 @@ Begin VB.Form FrmSolicitudPagos
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel18 
             Height          =   255
             Left            =   240
-            OleObjectBlob   =   "FrmSolicitudPagos.frx":17CE
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":199E
             TabIndex        =   100
             Top             =   840
             Width           =   1335
@@ -2353,7 +2394,7 @@ Begin VB.Form FrmSolicitudPagos
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel19 
             Height          =   255
             Left            =   240
-            OleObjectBlob   =   "FrmSolicitudPagos.frx":1844
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":1A14
             TabIndex        =   102
             Top             =   1200
             Width           =   1335
@@ -2375,7 +2416,7 @@ Begin VB.Form FrmSolicitudPagos
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel20 
             Height          =   255
             Left            =   240
-            OleObjectBlob   =   "FrmSolicitudPagos.frx":18BA
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":1A8A
             TabIndex        =   104
             Top             =   1560
             Width           =   1335
@@ -2397,7 +2438,7 @@ Begin VB.Form FrmSolicitudPagos
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel21 
             Height          =   255
             Left            =   240
-            OleObjectBlob   =   "FrmSolicitudPagos.frx":1930
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":1B00
             TabIndex        =   106
             Top             =   1920
             Width           =   1335
@@ -2419,7 +2460,7 @@ Begin VB.Form FrmSolicitudPagos
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel23 
             Height          =   255
             Left            =   240
-            OleObjectBlob   =   "FrmSolicitudPagos.frx":19A6
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":1B76
             TabIndex        =   108
             Top             =   2280
             Width           =   1335
@@ -2427,7 +2468,7 @@ Begin VB.Form FrmSolicitudPagos
          Begin ACTIVESKINLibCtl.SkinLabel LblDescripcionIva 
             Height          =   255
             Left            =   3960
-            OleObjectBlob   =   "FrmSolicitudPagos.frx":1A1E
+            OleObjectBlob   =   "FrmSolicitudPagos.frx":1BEE
             TabIndex        =   122
             Top             =   480
             Width           =   4815
@@ -2491,6 +2532,35 @@ Option Explicit
 Public ChequeGrabado As Boolean, NumeroSolicitud As Double
 Private ew As cls_NumEnglishWord
 Private sw As cls_NumSpanishWord
+Public Sub TotalizarGrid()
+Dim MontoCheque As Double, MontoTasa As Double, Fecha As Long
+Dim Fechas1 As String, Registro As Double
+
+Registro = Me.DBGTransacciones.Row
+ Debito = 0
+ Credito = 0
+ TotalDebito = 0
+ TotalCredito = 0
+'      NumFecha1 = Me.TxtFecha.Value
+'      NMovimiento = Val(Me.TxtNTransacciones)
+'      Fechas1 = Format(Me.TxtFecha.Value, "yyyy/mm/dd")
+      Me.DBGTransacciones.MoveFirst
+      
+      
+      Do While Not Me.DBGTransacciones.EOF
+      
+       Debito = Me.DBGTransacciones.Columns("Debito").Text
+       Credito = Me.DBGTransacciones.Columns("Credito").Text
+       TotalDebito = TotalDebito + Debito
+       TotalCredito = TotalCredito + Credito
+       Me.DBGTransacciones.MoveNext
+       
+      Loop
+      
+      
+End Sub
+
+
 
 Private Sub Chk1_Click()
 
@@ -2498,6 +2568,9 @@ Private Sub Chk1_Click()
 
 End Sub
 Private Sub GrabaIndiceSolicitud(NumeroTransaccion As Double)
+
+
+       NumeroPeriodo = BuscarPeriodo(Me.TxtFecha.Value)
 
 
       '////////Edito los Datos de los indices de TransaccionesSolicitudPago//////
@@ -2592,6 +2665,8 @@ Private Sub GrabaIndiceSolicitud(NumeroTransaccion As Double)
                 Me.AdoBuscar.Recordset("MontoSolicitud") = Me.TxtMonto.Text
                 Me.AdoBuscar.Recordset("Beneficiario") = Me.TxtNombre.Text
                 Me.AdoBuscar.Recordset("CuentaBanco") = Me.DBCodigo.Text
+                Me.AdoBuscar.Recordset("KeyPresupuesto") = Me.TxtKeyPresupuesto.Text
+                Me.AdoBuscar.Recordset("Presupuesto") = Me.TxtPresupuesto.Text
                 Me.AdoBuscar.Recordset.Update
      Else
                 Me.AdoBuscar.Recordset("FechaTransaccion") = Format(Me.TxtFecha.Value, "dd/mm/yyyy")
@@ -2678,6 +2753,8 @@ Private Sub GrabaIndiceSolicitud(NumeroTransaccion As Double)
                 Me.AdoBuscar.Recordset("MontoSolicitud") = Me.TxtMonto.Text
                 Me.AdoBuscar.Recordset("Beneficiario") = Me.TxtNombre.Text
                 Me.AdoBuscar.Recordset("CuentaBanco") = Me.DBCodigo.Text
+                Me.AdoBuscar.Recordset("KeyPresupuesto") = Me.TxtKeyPresupuesto.Text
+                Me.AdoBuscar.Recordset("Presupuesto") = Me.TxtPresupuesto.Text
                 Me.AdoBuscar.Recordset.Update
      End If
 End Sub
@@ -2701,6 +2778,13 @@ End Sub
 
 Private Sub Chk7_Click()
     Me.TxtMonto.Text = CalcularMonto
+End Sub
+
+Private Sub CmdBuscapresupuesto_Click()
+         QueProducto = "Presupuesto"
+         FrmConsulta.Show 1
+         Me.TxtKeyPresupuesto.Text = FrmConsulta.KeyPresupuesto
+         Me.TxtPresupuesto.Text = FrmConsulta.DescripcionPresupuesto
 End Sub
 
 Private Sub CmdBuscarEmpleado_Click()
@@ -2734,8 +2818,11 @@ Private Sub CmdMemoriza_Click()
       
       
 GrabaIndiceSolicitud (NumeroSolicitud)
+ActualizoElGrid = True
 
 MsgBox "Grabado con Existo!!!", vbCritical, "Zeus Contable"
+
+
 Unload Me
 
 End Sub
@@ -2882,6 +2969,7 @@ TipoErrs:
 End Sub
 
 Private Sub CmdSalir_Click()
+ActualizoElGrid = False
 Unload Me
 End Sub
 
@@ -2895,6 +2983,14 @@ Me.DtaCuentas.Recordset.Find (Criterio)
   
 
 If Not DtaCuentas.Recordset.EOF Then
+
+' If Not IsNull(DtaCuentas.Recordset("KeyPresupuesto")) Then
+'    Me.TxtKeyPresupuesto.Text = DtaCuentas.Recordset("KeyPresupuesto")
+' End If
+'
+' If Not IsNull(DtaCuentas.Recordset("Presupuesto")) Then
+'   Me.TxtPresupuesto.Text = DtaCuentas.Recordset("Presupuesto")
+' End If
 
 '////////////////////////////////////////////////////////////////////////////////////////////
 '/////////////////CARGO LOS CHEQUES PENDIENTES/////////////////////////////////////////////////
@@ -3008,6 +3104,15 @@ Private Sub DBGTransacciones_BeforeUpdate(Cancel As Integer)
  If Me.DBGTransacciones.Columns(9).Text = "" Then
    Me.DBGTransacciones.Columns(9).Text = 0
  End If
+ 
+     If Me.DBGTransacciones.Columns("DescripcionMovimiento") = "" Then
+         If Me.TxtNombre.Text <> "" Then
+           Me.DBGTransacciones.Columns("DescripcionMovimiento") = Me.TxtNombre.Text
+         Else
+           Me.DBGTransacciones.Columns("DescripcionMovimiento") = "-"
+         End If
+     End If
+ 
   For i = 2 To 5
             If Me.DBGTransacciones.Columns(i).Text = "" Then Me.DBGTransacciones.Columns(i).Text = "-"
         Next i
@@ -3051,696 +3156,809 @@ End Sub
 
 
 Private Sub DBGTransacciones_AfterColEdit(ByVal ColIndex As Integer)
-On Error GoTo TipoErrs
-Dim Descripcion As String, cadena As String, MontoTasa As Double, Fecha As Long
-Dim ClaveMovimiento As String, DescripcionMovimiento As String, Sql As String
-Dim c As Variant
-'Este Procedimiento es solo cuando se ejecuta directamente de Recepcion
-QueProducto = "Egreso"
 
-If ColIndex = 8 Or ColIndex = 9 Then
- If Me.DBGTransacciones.Columns(6).Text = "Debito" Then
-    If Not ColIndex = 8 Then
-      Me.DBGTransacciones.Columns(ColIndex) = "0.00"
-    End If
-      'Me.DBGTransacciones.Columns(9).Locked = True
-      'Me.DBGTransacciones.Columns(8).Locked = False
-  ElseIf Me.DBGTransacciones.Columns(6).Text = "Credito" Then
-      If Not ColIndex = 9 Then
-        Me.DBGTransacciones.Columns(ColIndex) = "0.00"
-      End If
-     'Me.DBGTransacciones.Columns(9).Locked = False
-     'Me.DBGTransacciones.Columns(8).Locked = True
-  End If
- End If
- 
- 
- 
-   If ColIndex = 4 Then
-  
-  
-      If Me.ChkVentana.Value = 1 Then
-  
-          '//////////////////////////////////////////////////////////
-          '////BUSCO EL TIPO DE CUENTA PARA MOSTRAR FECHAS///////////
-          '////////////////////////////////////////////////////////
-          
-           CodigoCuenta = Me.DBGTransacciones.Columns(0).Text
-           Me.DtaConsulta.RecordSource = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo From Cuentas WHERE (CodCuentas = '" & CodigoCuenta & "')"
-           Me.DtaConsulta.Refresh
-           If Not Me.DtaConsulta.Recordset.EOF Then
-             TipoCuenta = Me.DtaConsulta.Recordset("TipoCuenta")
-             If TipoCuenta = "Cuentas x Cobrar" Then
-                Set c = DBGTransacciones.Columns(ColIndex)
-                With Me.TDBGridFechas
-                    .Left = Me.DBGTransacciones.Left + c.Left
-                    .top = DBGTransacciones.top + DBGTransacciones.RowTop(DBGTransacciones.Row) + DBGTransacciones.RowHeight
-                    .Visible = True
-                    .SetFocus
-        
-                End With
-             ElseIf TipoCuenta = "Cuentas x Pagar" Then
-                Set c = DBGTransacciones.Columns(ColIndex)
-                With Me.TDBGridFechas
-                    .Left = Me.DBGTransacciones.Left + c.Left
-                    .top = DBGTransacciones.top + DBGTransacciones.RowTop(DBGTransacciones.Row) + DBGTransacciones.RowHeight
-                    .Visible = True
-                    .SetFocus
-                End With
-             
-             End If
-           End If
-  
-  
-          Set c = DBGTransacciones.Columns(ColIndex)
-        With Me.TDBGridFechas
-            .Left = Me.DBGTransacciones.Left + c.Left
-            .top = DBGTransacciones.top + DBGTransacciones.RowTop(DBGTransacciones.Row) + DBGTransacciones.RowHeight
-            .Visible = True
-            .SetFocus
-        End With
-  
-        Me.DBGTransacciones.Enabled = False
-        
-   End If
-  
-  End If
+    On Error Resume Next
 
-'/////Busco cambios en las claves del movimiento///////////
-
-
-Select Case ColIndex
-  Case 0
-    '////////////Verifico la cuenta///////////////
-       
-
-       Me.DtaCuentas.Refresh
-
-       Criterio = "CodCuentas='" & Me.DBGTransacciones.Columns(0).Text & " '"
-       Me.DtaCuentas.Recordset.Find (Criterio)
-       If Not DtaCuentas.Recordset.EOF Then
-                TipoMoneda = DtaCuentas.Recordset("TipoMoneda")
-                
-                 Me.DBGTransacciones.Columns(1).Text = DtaCuentas.Recordset("DescripcionCuentas")
-         Select Case TipoMoneda
-            Case "Córdobas"
-                      Fecha = Me.TxtFecha.Value
-                      Me.DtaTasas.RecordSource = "SELECT FechaTasas, MontoCordobas, MontoLibras From Tasas WHERE (FechaTasas = '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "')"
-                      Me.DtaTasas.Refresh
-                If Not DtaTasas.Recordset.EOF Then
-                 MontoTasa = Me.DtaTasas.Recordset("MontoCordobas")
-                 If MontoTasa = 0 Then
-                   MontoTasa = 1
-                 End If
-                 Select Case Me.CmbMoneda.Text
-                  Case "Córdobas"
-                    Me.DBGTransacciones.Columns(7).Text = 1
-                  Case "Dólares"
-                    Me.DBGTransacciones.Columns(7).Text = MontoTasa
-                  Case "Libras"
-                    Me.DBGTransacciones.Columns(7).Text = MontoTasa
-                   ' Me.DBGTransacciones.Columns(7).Text = (1 / MontoTasa)
-                    
-                 End Select
-                Else
-                
-                 Me.DBGTransacciones.Columns(7).Text = 1
-                End If
-            
-            Case "Dólares"
-             Fecha = Me.TxtFecha.Value
-                      Me.DtaTasas.RecordSource = "SELECT FechaTasas, MontoCordobas, MontoLibras From Tasas WHERE (FechaTasas = '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "')"
-                      Me.DtaTasas.Refresh
-             If Not DtaTasas.Recordset.EOF Then
-                MontoTasa = Me.DtaTasas.Recordset("MontoCordobas")
-                If MontoTasa = 0 Then
-                  MontoTasa = 1
-                End If
-            
-               Select Case Me.CmbMoneda.Text
-                  Case "Córdobas"
-                    Me.DBGTransacciones.Columns(7).Text = (1 / MontoTasa)
-                  Case "Dólares"
-                    Me.DBGTransacciones.Columns(7).Text = 1
-                  Case "Libras"
-                    MontoTasa = Me.DtaTasas.Recordset("MontoLibras")
-                    Me.DBGTransacciones.Columns(7).Text = (1 / MontoTasa)
-
-                    
-                 End Select
-                Else
-                  Me.DBGTransacciones.Columns(7).Text = 1
-               End If
-            
-            Case "Libras"
-                      Fecha = Me.TxtFecha.Value
-                      Me.DtaTasas.RecordSource = "SELECT FechaTasas, MontoCordobas, MontoLibras From Tasas WHERE (FechaTasas = '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "')"
-                      Me.DtaTasas.Refresh
-                If Not DtaTasas.Recordset.EOF Then
-                MontoTasa = Me.DtaTasas.Recordset("MontoLibras")
-               Select Case Me.CmbMoneda.Text
-                  Case "Córdobas"
-                    Me.DBGTransacciones.Columns(7).Text = MontoTasa
-                  Case "Dólares"
-                    Me.DBGTransacciones.Columns(7).Text = MontoTasa
-                  Case "Libras"
-                    Me.DBGTransacciones.Columns(7).Text = 1
-
-                    
-                 End Select
-                Else
-                 Me.DBGTransacciones.Columns(7).Text = 1
-                End If
-         
-         End Select
-         
-         
-  Criterio = "CodCuentas='" & Me.DBCodigo.Text & "'"
-  Me.DtaCuentas.Recordset.Find (Criterio)
-  If Not DtaCuentas.Recordset.EOF Then
-  'Criterio = "CodCuentas='" & Me.DBCodigo.Text & "'"
-  'Me.DtaCuentas.Recordset.Find (Criterio)
-      
-    TipoCuenta = Me.DtaCuentas.Recordset("TipoCuenta")
-    CodigoCuenta = Me.DtaCuentas.Recordset("CodCuentas")
-   End If
-  If TipoCuenta = "Bancos" Then
-
-   If Primero = True Then
-     Primero = False
-        Me.DtaConsulta.RecordSource = "SELECT NConsecutivoVoucher.CodCuenta, NConsecutivoVoucher.ConsecutivoVoucher, NConsecutivoVoucher.NPeriodo From NConsecutivoVoucher Where (((NConsecutivoVoucher.CodCuenta) = '" & CodigoCuenta & "') And ((NConsecutivoVoucher.NPeriodo) = " & NumeroPeriodo & "))"
-        Me.DtaConsulta.Refresh
-        If DtaConsulta.Recordset.EOF Then
-           Me.DtaConsulta.Recordset.AddNew
-             Me.DtaConsulta.Recordset("CodCuenta") = CodigoCuenta
-             Me.DtaConsulta.Recordset("NPeriodo") = NumeroPeriodo
-             Me.DtaConsulta.Recordset("ConsecutivoVoucher") = 1
-           Me.DtaConsulta.Recordset.Update
-           NumeroVoucher = 1
+    '====================================================
+    ' 1. Descripción por defecto
+    '====================================================
+    If Trim(Me.DBGTransacciones.Columns("DescripcionMovimiento").Text) = "" Then
+        If Trim(Me.TxtNombre.Text) <> "" Then
+            Me.DBGTransacciones.Columns("DescripcionMovimiento").Text = Me.TxtNombre.Text
         Else
-           'Me.'DtaConsulta.Recordset.Edit
-            Me.DtaConsulta.Recordset("ConsecutivoVoucher") = Me.DtaConsulta.Recordset("ConsecutivoVoucher") + 1
-           Me.DtaConsulta.Recordset.Update
-         NumeroVoucher = Me.DtaConsulta.Recordset("ConsecutivoVoucher")
+            Me.DBGTransacciones.Columns("DescripcionMovimiento").Text = "-"
         End If
-     Else
-       ' Me.DtaTransacciones.Recordset.MoveLast
-     
-     End If
-        ConsecutivoVoucher = Month(Me.TxtFecha.Value)
-        If TipoCuenta = "Caja" Then
-              numero = "CASH " & NumeroVoucher & "/" & ConsecutivoVoucher
-        End If
-        Select Case TipoMoneda
-           Case "Córdobas"
-            If TipoCuenta = "Bancos" Then
-              numero = "BC " & NumeroVoucher & "/" & ConsecutivoVoucher
-            End If
-           Case "Dólares"
-            If TipoCuenta = "Bancos" Then
-              numero = "BD " & NumeroVoucher & "/" & ConsecutivoVoucher
-            End If
-        
-         End Select
-        
-     End If
-       
-       
-       
-         '  Cadena = Mid(Me.DBCodigo, 1, 1)
-          ' Cadena = Cadena & "/" & NumeroTransaccion
-           
-        
-   '///////////////////////////////////////////////////////////
-   '//////CON ESTA CONSULTA BUSCO LA DESCRIPCION DE LA LINEA ANTERIOR//////////////////
-   '/////////////////////////////////////////////////////////////////////////////////
-   
-            
-            Sql = "SELECT TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta AS DescripcionCuentas, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
-            "TransaccionesSolicitudPago.FacturaNo, TransaccionesSolicitudPago.ChequeNo, TransaccionesSolicitudPago.Clave, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito, " & _
-            "TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.NPeriodo, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.Fuente, TransaccionesSolicitudPago.FechaTasas, " & _
-            "TransaccionesSolicitudPago.NumeroMovimiento , Periodos.Periodo " & _
-            "FROM Periodos INNER JOIN TransaccionesSolicitudPago ON Periodos.NPeriodo = TransaccionesSolicitudPago.NPeriodo " & _
-            "WHERE  (TransaccionesSolicitudPago.FechaTransaccion BETWEEN '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "' And '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "') AND (TransaccionesSolicitudPago.NumeroMovimiento = " & Me.TxtNTransacciones.Text & ") " & _
-            "ORDER BY TransaccionesSolicitudPago.NTransaccion"
-              
-            Me.DtaConsulta.RecordSource = Sql
-            Me.DtaConsulta.Refresh
-            If Not Me.DtaConsulta.Recordset.EOF Then
-              Me.DtaConsulta.Recordset.MoveLast
-              If Not IsNull(Me.DtaConsulta.Recordset("DescripcionMovimiento")) Then
-                 DescripcionMovimiento = Me.DtaConsulta.Recordset("DescripcionMovimiento")
-              End If
-              If Not IsNull(Me.DtaConsulta.Recordset("Clave")) Then
-                ClaveMovimiento = Me.DtaConsulta.Recordset("Clave")
-              End If
-            
-            End If
-          
-
-         Me.DBGTransacciones.Columns(2).Text = cadena
-         Me.DBGTransacciones.Columns(3).Text = DescripcionMovimiento
-         Me.DBGTransacciones.Columns(10).Text = Format(Me.TxtFecha.Value, "dd/mm/yyyy")
-         Me.DBGTransacciones.Columns(11).Text = NumeroPeriodo
-         Me.DBGTransacciones.Columns(13).Text = Me.TxtFuente.Text
-         Me.DBGTransacciones.Columns(14).Text = Format(Me.TxtFecha.Value, "dd/mm/yyyy")
-         Me.DBGTransacciones.Columns(15).Text = Me.TxtNTransacciones.Text
-         If ClaveMovimiento = "" Then
-          Me.DBGTransacciones.Columns(6).Text = "Debito"
-         Else
-          Me.DBGTransacciones.Columns(6).Text = ClaveMovimiento
-         End If
-         'Me.DBGTransacciones.Columns(9).Locked = True
-        
-         
-         
-       Else
-               
-         MsgBox "La cuenta digitada no es correcta", vbCritical, "Sistema Contable"
-         NumeroTransaccion = Me.TxtNTransacciones.Text
-        
-  Me.DBGTransacciones.Columns(0).Button = True
-    Me.DBGTransacciones.Columns(1).Locked = True
-  Me.DBGTransacciones.Columns(6).Button = True
-  Me.DBGTransacciones.Columns(6).Locked = True
-  Me.DBGTransacciones.Columns(0).Width = 1500
-  Me.DBGTransacciones.Columns(2).Width = 1000
-  Me.DBGTransacciones.Columns(3).Caption = "Descripcion"
-  Me.DBGTransacciones.Columns(4).Width = 1000
-  Me.DBGTransacciones.Columns(4).Button = True
-  Me.DBGTransacciones.Columns(5).Width = 1000
-  Me.DBGTransacciones.Columns(6).Width = 800
-  Me.DBGTransacciones.Columns(7).Caption = "Tasa Cambio"
-  Me.DBGTransacciones.Columns(7).Locked = True
-  Me.DBGTransacciones.Columns(7).Width = 1200
-  Me.DBGTransacciones.Columns(7).NumberFormat = "##,##0.000000"
-  Me.DBGTransacciones.Columns(8).Width = 1200
-  Me.DBGTransacciones.Columns(8).NumberFormat = "##,##0.00"
-  Me.DBGTransacciones.Columns(9).Width = 1200
-  Me.DBGTransacciones.Columns(9).NumberFormat = "##,##0.00"
-  Me.DBGTransacciones.Columns(10).Visible = False
-  Me.DBGTransacciones.Columns(11).Visible = False
-  Me.DBGTransacciones.Columns(12).Visible = False
-  Me.DBGTransacciones.Columns(11).Visible = False
-  Me.DBGTransacciones.Columns(12).Visible = False
-  Me.DBGTransacciones.Columns(13).Visible = False
-  Me.DBGTransacciones.Columns(14).Visible = False
-  Me.DBGTransacciones.Columns(15).Visible = False
-    Me.DBGTransacciones.Columns(17).Visible = False
-  Me.DBGTransacciones.Columns(18).Visible = False
-'  Me.DBGTransacciones.Columns(19).Visible = False
-         Me.DBGTransacciones.Columns(16).Visible = False
-         FrmConsulta.Show 1
-         Exit Sub
-       End If
-     
-    
- 
- 
-       
- Case 7
- Salir = False
-   '//////////Sumo los totales del Debito///////////////
-    If Me.DBGTransacciones.Columns(7).Text = "" Then
-      Me.DBGTransacciones.Columns(7).Text = "0.00"
     End If
-    
-  
-    
-    Debito = Me.DBGTransacciones.Columns(7).Text
-    Diferencia = Val(Debito) - Val(DebitoAnt)
-    TotalDebito = TotalDebito + Diferencia
-    Me.TxtDebito.Text = Format(TotalDebito, "##,##0.00")
-    TotalDiferencia = TotalDebito - TotalCredito
-    Me.TxtDiferencia.Text = Format(TotalDiferencia, "##,##0.00")
-    
-  '//////////Busco es tipo de cuenta para sumar historico///////////////////////
-    CodigoCuenta = Me.DBGTransacciones.Columns(0).Text
-    Criterio = "CodCuentas='" & CodigoCuenta & "'"
-    Me.DtaCuentas.Recordset.Find (Criterio)
-    If Not DtaCuentas.Recordset.EOF Then
-     TipoCuenta = Me.DtaCuentas.Recordset("TipoCuenta")
-     If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Cuentas x Pagar" Or TipoCuenta = "Cuentas de Gastos" Or TipoCuenta = "Bancos" Then
-      
-   '//////Busco si tiene saldo en el historial del perido actual
-      Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
-      Me.DtaHistorial.Refresh
-       If DtaHistorial.Recordset.EOF Then
-        '////Si no existe registro para este Periodo Busco los ///
-        '////saldos del periodo anterior para que sean incial////
-         Criterio = "NPeriodo=" & NumeroPeriodo & " "
-         Me.DtaPeriodos.Recordset.Find (Criterio)
-        If Not DtaPeriodos.Recordset.EOF Then
-'////Busco el numero del periodo anterior para hacer la consulta
-          DtaPeriodos.Recordset.MovePrevious
-          NumeroPeriodoAnterior = DtaPeriodos.Recordset("NPeriodo")
-          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodoAnterior & "))"
-          Me.DtaHistorial.Refresh
-        
-          If DtaHistorial.Recordset.EOF Then
-       '//////si el periodo anterior no tiene saldo////
-       '/////Y el periodo actual tampoco tiene saldo/////////
-           Me.DtaHistorial.Recordset.AddNew
-             Me.DtaHistorial.Recordset("CodCuenta") = CodigoCuenta
-             Me.DtaHistorial.Recordset("NPeriodo") = NumeroPeriodo
-             Me.DtaHistorial.Recordset("SaldoInicial") = 0
-             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoInicial")) + Diferencia
-            Me.DtaHistorial.Recordset.Update
-         Else
-      '//////Si el periodo anterior tiene saldo////////
-      '/////y el periodo actual no tiene saldo//////////
-         SaldoFinal = Me.DtaHistorial.Recordset("SaldoFinal")
-            Me.DtaHistorial.Recordset.AddNew
-             Me.DtaHistorial.Recordset("CodCuenta") = CodigoCuenta
-             Me.DtaHistorial.Recordset("NPeriodo") = NumeroPeriodo
-             Me.DtaHistorial.Recordset("SaldoInicial") = SaldoFinal
-             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoInicial")) + Diferencia
-            Me.DtaHistorial.Recordset.Update
-         
-         End If
+
+    '====================================================
+    ' 2. Control Débito / Crédito (UI)
+    '====================================================
+    If ColIndex = 8 Or ColIndex = 9 Then
+        If Me.DBGTransacciones.Columns(6).Text = "Debito" Then
+            If ColIndex <> 8 Then Me.DBGTransacciones.Columns(ColIndex).Text = "0.00"
+        ElseIf Me.DBGTransacciones.Columns(6).Text = "Credito" Then
+            If ColIndex <> 9 Then Me.DBGTransacciones.Columns(ColIndex).Text = "0.00"
         End If
-       Else '////////Si la cuenta tiene saldo en el periodo actual
-        '////Si existe registro para este Periodo Busco los ///
-        '////saldos del periodo anterior para que sean incial////
-         Criterio = "NPeriodo=" & NumeroPeriodo & " "
-         Me.DtaPeriodos.Recordset.Find (Criterio)
-        If Not DtaPeriodos.Recordset.EOF Then
-'////Busco el numero del periodo anterior para hacer la consulta
-          DtaPeriodos.Recordset.MovePrevious
-          NumeroPeriodoAnterior = DtaPeriodos.Recordset("NPeriodo")
-          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodoAnterior & "))"
-          Me.DtaHistorial.Refresh
-        
-          If DtaHistorial.Recordset.EOF Then
-          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
-          Me.DtaHistorial.Refresh
-          
-       '//////si el periodo anterior no tiene saldo////
-       '/////Y el periodo actual tiene saldo/////////
-           'Me.DtaHistorial.Recordset.Edit
-             Me.DtaHistorial.Recordset("SaldoInicial") = 0
-             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoFinal")) + Diferencia
-            Me.DtaHistorial.Recordset.Update
-         Else
-          SaldoFinal = Me.DtaHistorial.Recordset("SaldoFinal")
-          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
-          Me.DtaHistorial.Refresh
-      '//////Si el periodo anterior tiene saldo////////
-      '/////y el periodo actual tiene saldo//////////
-        
-            'Me.DtaHistorial.Recordset.Edit
-             Me.DtaHistorial.Recordset("SaldoInicial") = SaldoFinal
-             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoFinal")) + Diferencia
-            Me.DtaHistorial.Recordset.Update
-         
-         End If
-        End If
-        
-        
-        
-       End If
-     Else '///Resto el saldo actual//////////
-       
-       '//////Busco si tiene saldo en el historial del perido actual
-      Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
-      Me.DtaHistorial.Refresh
-       If DtaHistorial.Recordset.EOF Then
-        '////Si no existe registro para este Periodo Busco los ///
-        '////saldos del periodo anterior para que sean incial////
-         Criterio = "NPeriodo=" & NumeroPeriodo & " "
-         Me.DtaPeriodos.Recordset.Find (Criterio)
-        If Not DtaPeriodos.Recordset.EOF Then
-'////Busco el numero del periodo anterior para hacer la consulta
-          DtaPeriodos.Recordset.MovePrevious
-          NumeroPeriodoAnterior = DtaPeriodos.Recordset("NPeriodo")
-          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodoAnterior & "))"
-          Me.DtaHistorial.Refresh
-        
-          If DtaHistorial.Recordset.EOF Then
-       '//////si el periodo anterior no tiene saldo////
-       '/////Y el periodo actual tampoco tiene saldo/////////
-           Me.DtaHistorial.Recordset.AddNew
-             Me.DtaHistorial.Recordset("CodCuenta") = CodigoCuenta
-             Me.DtaHistorial.Recordset("NPeriodo") = NumeroPeriodo
-             Me.DtaHistorial.Recordset("SaldoInicial") = 0
-             Me.DtaHistorial.Recordset("SaldoFinal") = -Diferencia
-            Me.DtaHistorial.Recordset.Update
-         Else
-      '//////Si el periodo anterior tiene saldo////////
-      '/////y el periodo actual no tiene saldo//////////
-         SaldoFinal = Me.DtaHistorial.Recordset("SaldoFinal")
-            Me.DtaHistorial.Recordset.AddNew
-             Me.DtaHistorial.Recordset("CodCuenta") = CodigoCuenta
-             Me.DtaHistorial.Recordset("NPeriodo") = NumeroPeriodo
-             Me.DtaHistorial.Recordset("SaldoInicial") = SaldoFinal
-             Me.DtaHistorial.Recordset("SaldoFinal") = -Diferencia
-            Me.DtaHistorial.Recordset.Update
-         
-         End If
-        End If
-       Else '////////Si la cuenta tiene saldo en el periodo actual
-        '////Si existe registro para este Periodo Busco los ///
-        '////saldos del periodo anterior para que sean incial////
-         Criterio = "NPeriodo=" & NumeroPeriodo & " "
-         Me.DtaPeriodos.Recordset.Find (Criterio)
-        If Not DtaPeriodos.Recordset.EOF Then
-'////Busco el numero del periodo anterior para hacer la consulta
-          DtaPeriodos.Recordset.MovePrevious
-          NumeroPeriodoAnterior = DtaPeriodos.Recordset("NPeriodo")
-          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodoAnterior & "))"
-          Me.DtaHistorial.Refresh
-        
-          If DtaHistorial.Recordset.EOF Then
-          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
-          Me.DtaHistorial.Refresh
-          
-       '//////si el periodo anterior no tiene saldo////
-       '/////Y el periodo actual tiene saldo/////////
-           'Me.DtaHistorial.Recordset.Edit
-             Me.DtaHistorial.Recordset("SaldoInicial") = 0
-             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoFinal")) - Diferencia
-            Me.DtaHistorial.Recordset.Update
-         Else
-          SaldoFinal = Me.DtaHistorial.Recordset("SaldoFinal")
-          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
-          Me.DtaHistorial.Refresh
-      '//////Si el periodo anterior tiene saldo////////
-      '/////y el periodo actual tiene saldo//////////
-        
-            'Me.DtaHistorial.Recordset.Edit
-             Me.DtaHistorial.Recordset("SaldoInicial") = SaldoFinal
-             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoFinal")) - Diferencia
-            Me.DtaHistorial.Recordset.Update
-         
-         End If
-        End If
-        
-        
-        
-       End If
-     
-     
-     
-     
-     
-     
-     End If
-   End If
-Case 8
-Salir = False
-    '//////////Sumo los totales del credito///////////////
-    If Me.DBGTransacciones.Columns(8).Text = "" Then
-      Me.DBGTransacciones.Columns(8).Text = "0.00"
     End If
-    
-       
-    Credito = Me.DBGTransacciones.Columns(8).Text
-    Diferencia = Val(Credito) - Val(CreditoAnt)
-    TotalCredito = TotalCredito + Diferencia
-    Me.TxtCredito.Text = Format(TotalCredito, "##,##0.00")
-    TotalDiferencia = TotalDebito - TotalCredito
-    Me.TxtDiferencia.Text = Format(TotalDiferencia, "##,##0.00")
 
-  
-   '//////////Busco es tipo de cuenta para sumar historico///////////////////////
-    CodigoCuenta = Me.DBGTransacciones.Columns(0).Text
-    Criterio = "CodCuentas='" & CodigoCuenta & "'"
-    Me.DtaCuentas.Recordset.Find (Criterio)
-    If Not DtaCuentas.Recordset.EOF Then
-     TipoCuenta = Me.DtaCuentas.Recordset("TipoCuenta")
-     If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Cuentas x Pagar" Or TipoCuenta = "Cuentas de Gastos" Or TipoCuenta = "Bancos" Then
-      
-   '//////Busco si tiene saldo en el historial del perido actual
-      Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
-      Me.DtaHistorial.Refresh
-       If DtaHistorial.Recordset.EOF Then
-        '////Si no existe registro para este Periodo Busco los ///
-        '////saldos del periodo anterior para que sean incial////
-         Criterio = "NPeriodo=" & NumeroPeriodo & " "
-         Me.DtaPeriodos.Recordset.Find (Criterio)
-        If Not DtaPeriodos.Recordset.EOF Then
-'////Busco el numero del periodo anterior para hacer la consulta
-          DtaPeriodos.Recordset.MovePrevious
-'          NumeroPeriodoAnterior = DtaPeriodos.Recordset("NPeriodo")
-          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodoAnterior & "))"
-          Me.DtaHistorial.Refresh
-        
-          If DtaHistorial.Recordset.EOF Then
-       '//////si el periodo anterior no tiene saldo////
-       '/////Y el periodo actual tampoco tiene saldo/////////
-           Me.DtaHistorial.Recordset.AddNew
-             Me.DtaHistorial.Recordset("CodCuenta") = CodigoCuenta
-             Me.DtaHistorial.Recordset("NPeriodo") = NumeroPeriodo
-             Me.DtaHistorial.Recordset("SaldoInicial") = 0
-             Me.DtaHistorial.Recordset("SaldoFinal") = -Diferencia
-            Me.DtaHistorial.Recordset.Update
-         Else
-      '//////Si el periodo anterior tiene saldo////////
-      '/////y el periodo actual no tiene saldo//////////
-         SaldoFinal = Me.DtaHistorial.Recordset("SaldoFinal")
-            Me.DtaHistorial.Recordset.AddNew
-             Me.DtaHistorial.Recordset("CodCuenta") = CodigoCuenta
-             Me.DtaHistorial.Recordset("NPeriodo") = NumeroPeriodo
-             Me.DtaHistorial.Recordset("SaldoInicial") = SaldoFinal
-             Me.DtaHistorial.Recordset("SaldoFinal") = -Diferencia
-            Me.DtaHistorial.Recordset.Update
-         
-         End If
-        End If
-       Else '////////Si la cuenta tiene saldo en el periodo actual
-        '////Si existe registro para este Periodo Busco los ///
-        '////saldos del periodo anterior para que sean incial////
-         Criterio = "NPeriodo=" & NumeroPeriodo & " "
-         Me.DtaPeriodos.Recordset.Find (Criterio)
-        If Not DtaPeriodos.Recordset.EOF Then
-'////Busco el numero del periodo anterior para hacer la consulta
-          DtaPeriodos.Recordset.MovePrevious
-          NumeroPeriodoAnterior = DtaPeriodos.Recordset("NPeriodo")
-          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodoAnterior & "))"
-          Me.DtaHistorial.Refresh
-        
-          If DtaHistorial.Recordset.EOF Then
-          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
-          Me.DtaHistorial.Refresh
-          
-       '//////si el periodo anterior no tiene saldo////
-       '/////Y el periodo actual tiene saldo/////////
-           'Me.DtaHistorial.Recordset.Edit
-             Me.DtaHistorial.Recordset("SaldoInicial") = 0
-             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoFinal")) - Diferencia
-            Me.DtaHistorial.Recordset.Update
-         Else
-          SaldoFinal = Me.DtaHistorial.Recordset("SaldoFinal")
-          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
-          Me.DtaHistorial.Refresh
-      '//////Si el periodo anterior tiene saldo////////
-      '/////y el periodo actual tiene saldo//////////
-        
-            'Me.DtaHistorial.Recordset.Edit
-             Me.DtaHistorial.Recordset("SaldoInicial") = SaldoFinal
-             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoFinal")) - Diferencia
-            Me.DtaHistorial.Recordset.Update
-         
-         End If
-        End If
-        
-        
-        
-       End If
-     Else '///Sumo el saldo//////////
-       
-       '//////Busco si tiene saldo en el historial del perido actual
-      Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
-      Me.DtaHistorial.Refresh
-       If DtaHistorial.Recordset.EOF Then
-        '////Si no existe registro para este Periodo Busco los ///
-        '////saldos del periodo anterior para que sean incial////
-         Criterio = "NPeriodo=" & NumeroPeriodo & " "
-         Me.DtaPeriodos.Recordset.Find (Criterio)
-        If Not DtaPeriodos.Recordset.EOF Then
-'////Busco el numero del periodo anterior para hacer la consulta
-          DtaPeriodos.Recordset.MovePrevious
-'          NumeroPeriodoAnterior = DtaPeriodos.Recordset("NPeriodo")
-          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodoAnterior & "))"
-          Me.DtaHistorial.Refresh
-        
-          If DtaHistorial.Recordset.EOF Then
-       '//////si el periodo anterior no tiene saldo////
-       '/////Y el periodo actual tampoco tiene saldo/////////
-           Me.DtaHistorial.Recordset.AddNew
-             Me.DtaHistorial.Recordset("CodCuenta") = CodigoCuenta
-             Me.DtaHistorial.Recordset("NPeriodo") = NumeroPeriodo
-             Me.DtaHistorial.Recordset("SaldoInicial") = 0
-             Me.DtaHistorial.Recordset("SaldoFinal") = Diferencia
-            Me.DtaHistorial.Recordset.Update
-         Else
-      '//////Si el periodo anterior tiene saldo////////
-      '/////y el periodo actual no tiene saldo//////////
-         SaldoFinal = Me.DtaHistorial.Recordset("SaldoFinal")
-            Me.DtaHistorial.Recordset.AddNew
-             Me.DtaHistorial.Recordset("CodCuenta") = CodigoCuenta
-             Me.DtaHistorial.Recordset("NPeriodo") = NumeroPeriodo
-             Me.DtaHistorial.Recordset("SaldoInicial") = SaldoFinal
-             Me.DtaHistorial.Recordset("SaldoFinal") = Diferencia
-            Me.DtaHistorial.Recordset.Update
-         
-         End If
-        End If
-       Else '////////Si la cuenta tiene saldo en el periodo actual
-        '////Si existe registro para este Periodo Busco los ///
-        '////saldos del periodo anterior para que sean incial////
-         Criterio = "NPeriodo=" & NumeroPeriodo & " "
-         Me.DtaPeriodos.Recordset.Find (Criterio)
-        If Not DtaPeriodos.Recordset.EOF Then
-'////Busco el numero del periodo anterior para hacer la consulta
-          DtaPeriodos.Recordset.MovePrevious
-'          NumeroPeriodoAnterior = DtaPeriodos.Recordset("NPeriodo")
-          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodoAnterior & "))"
-          Me.DtaHistorial.Refresh
-        
-          If DtaHistorial.Recordset.EOF Then
-          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
-          Me.DtaHistorial.Refresh
-          
-       '//////si el periodo anterior no tiene saldo////
-       '/////Y el periodo actual tiene saldo/////////
-           'Me.DtaHistorial.Recordset.Edit
-             Me.DtaHistorial.Recordset("SaldoInicial") = 0
-             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoFinal")) + Diferencia
-            Me.DtaHistorial.Recordset.Update
-         Else
-          SaldoFinal = Me.DtaHistorial.Recordset("SaldoFinal")
-          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
-          Me.DtaHistorial.Refresh
-      '//////Si el periodo anterior tiene saldo////////
-      '/////y el periodo actual tiene saldo//////////
-        
-            'Me.DtaHistorial.Recordset.Edit
-             Me.DtaHistorial.Recordset("SaldoInicial") = SaldoFinal
-             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoFinal")) + Diferencia
-            Me.DtaHistorial.Recordset.Update
-         
-         End If
-        End If
-        
-        
-        
-       End If
-     
-     
-     
-     
-     
-     
-     End If
-   End If
-End Select
+    '====================================================
+    ' 3. Cambio de cuenta ? asignar tasa de cambio
+    '====================================================
+    If ColIndex = 0 Then
 
-Exit Sub
-TipoErrs:
- ControlErrores
+        Dim CodigoCuenta As String
+        Dim MonedaCuenta As String
+        Dim Tasa As Double
+        Dim Criterio As String
+
+        CodigoCuenta = Trim(Me.DBGTransacciones.Columns(0).Text)
+        If CodigoCuenta <> "" Then
+
+            Criterio = "CodCuentas='" & CodigoCuenta & "'"
+            Me.DtaCuentas.Recordset.Find Criterio
+
+            If Not Me.DtaCuentas.Recordset.EOF Then
+                MonedaCuenta = Me.DtaCuentas.Recordset("TipoMoneda")
+
+                ' Usa la función que ya tienes
+                Tasa = ObtenerTasaCambioGrid(MonedaCuenta, Me.CmbMoneda.Text)
+
+                Me.DBGTransacciones.Columns(7).Text = Format(Tasa, "##,##0.000000")
+            End If
+        End If
+    End If
+
+    '====================================================
+    ' 4. Recalcular totales (ÚNICO lugar)
+    '====================================================
+    Call TotalizaMonto
 
 End Sub
+
+
+Private Function ObtenerTasaCambioGrid(ByVal MonedaCuenta As String, _
+                                      ByVal MonedaComprobante As String) As Double
+    On Error Resume Next
+
+    Dim TasaCordobas As Double
+    Dim TasaLibras As Double
+
+    ObtenerTasaCambioGrid = 1
+
+    Me.DtaTasas.RecordSource = _
+        "SELECT MontoCordobas, MontoLibras FROM Tasas " & _
+        "WHERE FechaTasas = '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "'"
+
+    Me.DtaTasas.Refresh
+
+    If Not Me.DtaTasas.Recordset.EOF Then
+        TasaCordobas = Val(Me.DtaTasas.Recordset("MontoCordobas"))
+        TasaLibras = Val(Me.DtaTasas.Recordset("MontoLibras"))
+    End If
+
+    Select Case MonedaCuenta & "-" & MonedaComprobante
+        Case "Córdobas-Dólares": ObtenerTasaCambioGrid = TasaCordobas
+        Case "Dólares-Córdobas": ObtenerTasaCambioGrid = 1 / TasaCordobas
+        Case "Libras-Dólares":   ObtenerTasaCambioGrid = 1 / TasaLibras
+        Case "Dólares-Libras":   ObtenerTasaCambioGrid = TasaLibras
+        Case Else:               ObtenerTasaCambioGrid = 1
+    End Select
+
+    If ObtenerTasaCambioGrid <= 0 Then ObtenerTasaCambioGrid = 1
+
+End Function
+
+
+
+
+'Private Sub DBGTransacciones_AfterColEdit(ByVal ColIndex As Integer)
+'On Error GoTo TipoErrs
+'Dim Descripcion As String, cadena As String, MontoTasa As Double, Fecha As Long
+'Dim ClaveMovimiento As String, DescripcionMovimiento As String, Sql As String
+'Dim c As Variant
+''Este Procedimiento es solo cuando se ejecuta directamente de Recepcion
+'QueProducto = "Egreso"
+'
+'       If Me.DBGTransacciones.Columns("DescripcionMovimiento") = "" Then
+'         If Me.TxtNombre.Text <> "" Then
+'           Me.DBGTransacciones.Columns("DescripcionMovimiento") = Me.TxtNombre.Text
+'         Else
+'           Me.DBGTransacciones.Columns("DescripcionMovimiento") = "-"
+'         End If
+'       End If
+'
+'
+'If ColIndex = 8 Or ColIndex = 9 Then
+' If Me.DBGTransacciones.Columns(6).Text = "Debito" Then
+'    If Not ColIndex = 8 Then
+'      Me.DBGTransacciones.Columns(ColIndex) = "0.00"
+'    End If
+'      'Me.DBGTransacciones.Columns(9).Locked = True
+'      'Me.DBGTransacciones.Columns(8).Locked = False
+'  ElseIf Me.DBGTransacciones.Columns(6).Text = "Credito" Then
+'      If Not ColIndex = 9 Then
+'        Me.DBGTransacciones.Columns(ColIndex) = "0.00"
+'      End If
+'     'Me.DBGTransacciones.Columns(9).Locked = False
+'     'Me.DBGTransacciones.Columns(8).Locked = True
+'  End If
+' End If
+'
+'
+'
+'
+'   If ColIndex = 4 Then
+'
+'
+'      If Me.ChkVentana.Value = 1 Then
+'
+'          '//////////////////////////////////////////////////////////
+'          '////BUSCO EL TIPO DE CUENTA PARA MOSTRAR FECHAS///////////
+'          '////////////////////////////////////////////////////////
+'
+'           CodigoCuenta = Me.DBGTransacciones.Columns(0).Text
+'           Me.DtaConsulta.RecordSource = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo From Cuentas WHERE (CodCuentas = '" & CodigoCuenta & "')"
+'           Me.DtaConsulta.Refresh
+'           If Not Me.DtaConsulta.Recordset.EOF Then
+'             TipoCuenta = Me.DtaConsulta.Recordset("TipoCuenta")
+'             If TipoCuenta = "Cuentas x Cobrar" Then
+'                Set c = DBGTransacciones.Columns(ColIndex)
+'                With Me.TDBGridFechas
+'                    .Left = Me.DBGTransacciones.Left + c.Left
+'                    .top = DBGTransacciones.top + DBGTransacciones.RowTop(DBGTransacciones.Row) + DBGTransacciones.RowHeight
+'                    .Visible = True
+'                    .SetFocus
+'
+'                End With
+'             ElseIf TipoCuenta = "Cuentas x Pagar" Then
+'                Set c = DBGTransacciones.Columns(ColIndex)
+'                With Me.TDBGridFechas
+'                    .Left = Me.DBGTransacciones.Left + c.Left
+'                    .top = DBGTransacciones.top + DBGTransacciones.RowTop(DBGTransacciones.Row) + DBGTransacciones.RowHeight
+'                    .Visible = True
+'                    .SetFocus
+'                End With
+'
+'             End If
+'           End If
+'
+'
+'          Set c = DBGTransacciones.Columns(ColIndex)
+'        With Me.TDBGridFechas
+'            .Left = Me.DBGTransacciones.Left + c.Left
+'            .top = DBGTransacciones.top + DBGTransacciones.RowTop(DBGTransacciones.Row) + DBGTransacciones.RowHeight
+'            .Visible = True
+'            .SetFocus
+'        End With
+'
+'        Me.DBGTransacciones.Enabled = False
+'
+'   End If
+'
+'  End If
+'
+''/////Busco cambios en las claves del movimiento///////////
+'
+''TotalizarGrid
+'
+'Select Case ColIndex
+'  Case 0
+'    '////////////Verifico la cuenta///////////////
+'
+'
+'       Me.DtaCuentas.Refresh
+'
+'       Criterio = "CodCuentas='" & Me.DBGTransacciones.Columns(0).Text & " '"
+'       Me.DtaCuentas.Recordset.Find (Criterio)
+'       If Not DtaCuentas.Recordset.EOF Then
+'                TipoMoneda = DtaCuentas.Recordset("TipoMoneda")
+'
+'                 Me.DBGTransacciones.Columns(1).Text = DtaCuentas.Recordset("DescripcionCuentas")
+'         Select Case TipoMoneda
+'            Case "Córdobas"
+'                      Fecha = Me.TxtFecha.Value
+'                      Me.DtaTasas.RecordSource = "SELECT FechaTasas, MontoCordobas, MontoLibras From Tasas WHERE (FechaTasas = '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "')"
+'                      Me.DtaTasas.Refresh
+'                If Not DtaTasas.Recordset.EOF Then
+'                 MontoTasa = Me.DtaTasas.Recordset("MontoCordobas")
+'                 If MontoTasa = 0 Then
+'                   MontoTasa = 1
+'                 End If
+'                 Select Case Me.CmbMoneda.Text
+'                  Case "Córdobas"
+'                    Me.DBGTransacciones.Columns(7).Text = 1
+'                  Case "Dólares"
+'                    Me.DBGTransacciones.Columns(7).Text = MontoTasa
+'                  Case "Libras"
+'                    Me.DBGTransacciones.Columns(7).Text = MontoTasa
+'                   ' Me.DBGTransacciones.Columns(7).Text = (1 / MontoTasa)
+'
+'                 End Select
+'                Else
+'
+'                 Me.DBGTransacciones.Columns(7).Text = 1
+'                End If
+'
+'            Case "Dólares"
+'             Fecha = Me.TxtFecha.Value
+'                      Me.DtaTasas.RecordSource = "SELECT FechaTasas, MontoCordobas, MontoLibras From Tasas WHERE (FechaTasas = '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "')"
+'                      Me.DtaTasas.Refresh
+'             If Not DtaTasas.Recordset.EOF Then
+'                MontoTasa = Me.DtaTasas.Recordset("MontoCordobas")
+'                If MontoTasa = 0 Then
+'                  MontoTasa = 1
+'                End If
+'
+'               Select Case Me.CmbMoneda.Text
+'                  Case "Córdobas"
+'                    Me.DBGTransacciones.Columns(7).Text = (1 / MontoTasa)
+'                  Case "Dólares"
+'                    Me.DBGTransacciones.Columns(7).Text = 1
+'                  Case "Libras"
+'                    MontoTasa = Me.DtaTasas.Recordset("MontoLibras")
+'                    Me.DBGTransacciones.Columns(7).Text = (1 / MontoTasa)
+'
+'
+'                 End Select
+'                Else
+'                  Me.DBGTransacciones.Columns(7).Text = 1
+'               End If
+'
+'            Case "Libras"
+'                      Fecha = Me.TxtFecha.Value
+'                      Me.DtaTasas.RecordSource = "SELECT FechaTasas, MontoCordobas, MontoLibras From Tasas WHERE (FechaTasas = '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "')"
+'                      Me.DtaTasas.Refresh
+'                If Not DtaTasas.Recordset.EOF Then
+'                MontoTasa = Me.DtaTasas.Recordset("MontoLibras")
+'               Select Case Me.CmbMoneda.Text
+'                  Case "Córdobas"
+'                    Me.DBGTransacciones.Columns(7).Text = MontoTasa
+'                  Case "Dólares"
+'                    Me.DBGTransacciones.Columns(7).Text = MontoTasa
+'                  Case "Libras"
+'                    Me.DBGTransacciones.Columns(7).Text = 1
+'
+'
+'                 End Select
+'                Else
+'                 Me.DBGTransacciones.Columns(7).Text = 1
+'                End If
+'
+'         End Select
+'
+'
+'  Criterio = "CodCuentas='" & Me.DBCodigo.Text & "'"
+'  Me.DtaCuentas.Recordset.Find (Criterio)
+'  If Not DtaCuentas.Recordset.EOF Then
+'  'Criterio = "CodCuentas='" & Me.DBCodigo.Text & "'"
+'  'Me.DtaCuentas.Recordset.Find (Criterio)
+'
+'    TipoCuenta = Me.DtaCuentas.Recordset("TipoCuenta")
+'    CodigoCuenta = Me.DtaCuentas.Recordset("CodCuentas")
+'   End If
+'  If TipoCuenta = "Bancos" Then
+'
+'   If Primero = True Then
+'     Primero = False
+'        Me.DtaConsulta.RecordSource = "SELECT NConsecutivoVoucher.CodCuenta, NConsecutivoVoucher.ConsecutivoVoucher, NConsecutivoVoucher.NPeriodo From NConsecutivoVoucher Where (((NConsecutivoVoucher.CodCuenta) = '" & CodigoCuenta & "') And ((NConsecutivoVoucher.NPeriodo) = " & NumeroPeriodo & "))"
+'        Me.DtaConsulta.Refresh
+'        If DtaConsulta.Recordset.EOF Then
+'           Me.DtaConsulta.Recordset.AddNew
+'             Me.DtaConsulta.Recordset("CodCuenta") = CodigoCuenta
+'             Me.DtaConsulta.Recordset("NPeriodo") = NumeroPeriodo
+'             Me.DtaConsulta.Recordset("ConsecutivoVoucher") = 1
+'           Me.DtaConsulta.Recordset.Update
+'           NumeroVoucher = 1
+'        Else
+'           'Me.'DtaConsulta.Recordset.Edit
+'            Me.DtaConsulta.Recordset("ConsecutivoVoucher") = Me.DtaConsulta.Recordset("ConsecutivoVoucher") + 1
+'           Me.DtaConsulta.Recordset.Update
+'         NumeroVoucher = Me.DtaConsulta.Recordset("ConsecutivoVoucher")
+'        End If
+'     Else
+'       ' Me.DtaTransacciones.Recordset.MoveLast
+'
+'     End If
+'        ConsecutivoVoucher = Month(Me.TxtFecha.Value)
+'        If TipoCuenta = "Caja" Then
+'              numero = "CASH " & NumeroVoucher & "/" & ConsecutivoVoucher
+'        End If
+'        Select Case TipoMoneda
+'           Case "Córdobas"
+'            If TipoCuenta = "Bancos" Then
+'              numero = "BC " & NumeroVoucher & "/" & ConsecutivoVoucher
+'            End If
+'           Case "Dólares"
+'            If TipoCuenta = "Bancos" Then
+'              numero = "BD " & NumeroVoucher & "/" & ConsecutivoVoucher
+'            End If
+'
+'         End Select
+'
+'     End If
+'
+'
+'
+'         '  Cadena = Mid(Me.DBCodigo, 1, 1)
+'          ' Cadena = Cadena & "/" & NumeroTransaccion
+'
+'
+'   '///////////////////////////////////////////////////////////
+'   '//////CON ESTA CONSULTA BUSCO LA DESCRIPCION DE LA LINEA ANTERIOR//////////////////
+'   '/////////////////////////////////////////////////////////////////////////////////
+'
+'
+'            Sql = "SELECT TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NombreCuenta AS DescripcionCuentas, TransaccionesSolicitudPago.VoucherNo, TransaccionesSolicitudPago.DescripcionMovimiento, " & _
+'            "TransaccionesSolicitudPago.FacturaNo, TransaccionesSolicitudPago.ChequeNo, TransaccionesSolicitudPago.Clave, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito, " & _
+'            "TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.NPeriodo, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.Fuente, TransaccionesSolicitudPago.FechaTasas, " & _
+'            "TransaccionesSolicitudPago.NumeroMovimiento , Periodos.Periodo " & _
+'            "FROM Periodos INNER JOIN TransaccionesSolicitudPago ON Periodos.NPeriodo = TransaccionesSolicitudPago.NPeriodo " & _
+'            "WHERE  (TransaccionesSolicitudPago.FechaTransaccion BETWEEN '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "' And '" & Format(Me.TxtFecha.Value, "yyyymmdd") & "') AND (TransaccionesSolicitudPago.NumeroMovimiento = " & Me.TxtNTransacciones.Text & ") " & _
+'            "ORDER BY TransaccionesSolicitudPago.NTransaccion"
+'
+'            Me.DtaConsulta.RecordSource = Sql
+'            Me.DtaConsulta.Refresh
+'            If Not Me.DtaConsulta.Recordset.EOF Then
+'              Me.DtaConsulta.Recordset.MoveLast
+'              If Not IsNull(Me.DtaConsulta.Recordset("DescripcionMovimiento")) Then
+'                 DescripcionMovimiento = Me.DtaConsulta.Recordset("DescripcionMovimiento")
+'              End If
+'              If Not IsNull(Me.DtaConsulta.Recordset("Clave")) Then
+'                ClaveMovimiento = Me.DtaConsulta.Recordset("Clave")
+'              End If
+'
+'            End If
+'
+'
+'         Me.DBGTransacciones.Columns(2).Text = cadena
+'         Me.DBGTransacciones.Columns(3).Text = DescripcionMovimiento
+'         Me.DBGTransacciones.Columns(10).Text = Format(Me.TxtFecha.Value, "dd/mm/yyyy")
+'         Me.DBGTransacciones.Columns(11).Text = NumeroPeriodo
+'         Me.DBGTransacciones.Columns(13).Text = Me.TxtFuente.Text
+'         Me.DBGTransacciones.Columns(14).Text = Format(Me.TxtFecha.Value, "dd/mm/yyyy")
+'         Me.DBGTransacciones.Columns(15).Text = Me.TxtNTransacciones.Text
+'         If ClaveMovimiento = "" Then
+'          Me.DBGTransacciones.Columns(6).Text = "Debito"
+'         Else
+'          Me.DBGTransacciones.Columns(6).Text = ClaveMovimiento
+'         End If
+'         'Me.DBGTransacciones.Columns(9).Locked = True
+'
+'
+'
+'       Else
+'
+'         MsgBox "La cuenta digitada no es correcta", vbCritical, "Sistema Contable"
+'         NumeroTransaccion = Me.TxtNTransacciones.Text
+'
+'  Me.DBGTransacciones.Columns(0).Button = True
+'    Me.DBGTransacciones.Columns(1).Locked = True
+'  Me.DBGTransacciones.Columns(6).Button = True
+'  Me.DBGTransacciones.Columns(6).Locked = True
+'  Me.DBGTransacciones.Columns(0).Width = 1500
+'  Me.DBGTransacciones.Columns(2).Width = 1000
+'  Me.DBGTransacciones.Columns(3).Caption = "Descripcion"
+'  Me.DBGTransacciones.Columns(4).Width = 1000
+'  Me.DBGTransacciones.Columns(4).Button = True
+'  Me.DBGTransacciones.Columns(5).Width = 1000
+'  Me.DBGTransacciones.Columns(6).Width = 800
+'  Me.DBGTransacciones.Columns(7).Caption = "Tasa Cambio"
+'  Me.DBGTransacciones.Columns(7).Locked = True
+'  Me.DBGTransacciones.Columns(7).Width = 1200
+'  Me.DBGTransacciones.Columns(7).NumberFormat = "##,##0.000000"
+'  Me.DBGTransacciones.Columns(8).Width = 1200
+'  Me.DBGTransacciones.Columns(8).NumberFormat = "##,##0.00"
+'  Me.DBGTransacciones.Columns(9).Width = 1200
+'  Me.DBGTransacciones.Columns(9).NumberFormat = "##,##0.00"
+'  Me.DBGTransacciones.Columns(10).Visible = False
+'  Me.DBGTransacciones.Columns(11).Visible = False
+'  Me.DBGTransacciones.Columns(12).Visible = False
+'  Me.DBGTransacciones.Columns(11).Visible = False
+'  Me.DBGTransacciones.Columns(12).Visible = False
+'  Me.DBGTransacciones.Columns(13).Visible = False
+'  Me.DBGTransacciones.Columns(14).Visible = False
+'  Me.DBGTransacciones.Columns(15).Visible = False
+'    Me.DBGTransacciones.Columns(17).Visible = False
+'  Me.DBGTransacciones.Columns(18).Visible = False
+''  Me.DBGTransacciones.Columns(19).Visible = False
+'         Me.DBGTransacciones.Columns(16).Visible = False
+'         FrmConsulta.Show 1
+'         Exit Sub
+'       End If
+'
+'
+'
+'
+'
+' Case 7
+' Salir = False
+'   '//////////Sumo los totales del Debito///////////////
+'    If Me.DBGTransacciones.Columns(7).Text = "" Then
+'      Me.DBGTransacciones.Columns(7).Text = "0.00"
+'    End If
+'
+'
+'
+'    Debito = Me.DBGTransacciones.Columns(7).Text
+'    Diferencia = Val(Debito) - Val(DebitoAnt)
+'    TotalDebito = TotalDebito + Diferencia
+'    Me.TxtDebito.Text = Format(TotalDebito, "##,##0.00")
+'    TotalDiferencia = TotalDebito - TotalCredito
+'    Me.TxtDiferencia.Text = Format(TotalDiferencia, "##,##0.00")
+'
+'  '//////////Busco es tipo de cuenta para sumar historico///////////////////////
+'    CodigoCuenta = Me.DBGTransacciones.Columns(0).Text
+'    Criterio = "CodCuentas='" & CodigoCuenta & "'"
+'    Me.DtaCuentas.Recordset.Find (Criterio)
+'    If Not DtaCuentas.Recordset.EOF Then
+'     TipoCuenta = Me.DtaCuentas.Recordset("TipoCuenta")
+'     If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Cuentas x Pagar" Or TipoCuenta = "Cuentas de Gastos" Or TipoCuenta = "Bancos" Then
+'
+'   '//////Busco si tiene saldo en el historial del perido actual
+'      Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
+'      Me.DtaHistorial.Refresh
+'       If DtaHistorial.Recordset.EOF Then
+'        '////Si no existe registro para este Periodo Busco los ///
+'        '////saldos del periodo anterior para que sean incial////
+'         Criterio = "NPeriodo=" & NumeroPeriodo & " "
+'         Me.DtaPeriodos.Recordset.Find (Criterio)
+'        If Not DtaPeriodos.Recordset.EOF Then
+''////Busco el numero del periodo anterior para hacer la consulta
+'          DtaPeriodos.Recordset.MovePrevious
+'          NumeroPeriodoAnterior = DtaPeriodos.Recordset("NPeriodo")
+'          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodoAnterior & "))"
+'          Me.DtaHistorial.Refresh
+'
+'          If DtaHistorial.Recordset.EOF Then
+'       '//////si el periodo anterior no tiene saldo////
+'       '/////Y el periodo actual tampoco tiene saldo/////////
+'           Me.DtaHistorial.Recordset.AddNew
+'             Me.DtaHistorial.Recordset("CodCuenta") = CodigoCuenta
+'             Me.DtaHistorial.Recordset("NPeriodo") = NumeroPeriodo
+'             Me.DtaHistorial.Recordset("SaldoInicial") = 0
+'             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoInicial")) + Diferencia
+'            Me.DtaHistorial.Recordset.Update
+'         Else
+'      '//////Si el periodo anterior tiene saldo////////
+'      '/////y el periodo actual no tiene saldo//////////
+'         SaldoFinal = Me.DtaHistorial.Recordset("SaldoFinal")
+'            Me.DtaHistorial.Recordset.AddNew
+'             Me.DtaHistorial.Recordset("CodCuenta") = CodigoCuenta
+'             Me.DtaHistorial.Recordset("NPeriodo") = NumeroPeriodo
+'             Me.DtaHistorial.Recordset("SaldoInicial") = SaldoFinal
+'             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoInicial")) + Diferencia
+'            Me.DtaHistorial.Recordset.Update
+'
+'         End If
+'        End If
+'       Else '////////Si la cuenta tiene saldo en el periodo actual
+'        '////Si existe registro para este Periodo Busco los ///
+'        '////saldos del periodo anterior para que sean incial////
+'         Criterio = "NPeriodo=" & NumeroPeriodo & " "
+'         Me.DtaPeriodos.Recordset.Find (Criterio)
+'        If Not DtaPeriodos.Recordset.EOF Then
+''////Busco el numero del periodo anterior para hacer la consulta
+'          DtaPeriodos.Recordset.MovePrevious
+'          NumeroPeriodoAnterior = DtaPeriodos.Recordset("NPeriodo")
+'          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodoAnterior & "))"
+'          Me.DtaHistorial.Refresh
+'
+'          If DtaHistorial.Recordset.EOF Then
+'          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
+'          Me.DtaHistorial.Refresh
+'
+'       '//////si el periodo anterior no tiene saldo////
+'       '/////Y el periodo actual tiene saldo/////////
+'           'Me.DtaHistorial.Recordset.Edit
+'             Me.DtaHistorial.Recordset("SaldoInicial") = 0
+'             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoFinal")) + Diferencia
+'            Me.DtaHistorial.Recordset.Update
+'         Else
+'          SaldoFinal = Me.DtaHistorial.Recordset("SaldoFinal")
+'          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
+'          Me.DtaHistorial.Refresh
+'      '//////Si el periodo anterior tiene saldo////////
+'      '/////y el periodo actual tiene saldo//////////
+'
+'            'Me.DtaHistorial.Recordset.Edit
+'             Me.DtaHistorial.Recordset("SaldoInicial") = SaldoFinal
+'             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoFinal")) + Diferencia
+'            Me.DtaHistorial.Recordset.Update
+'
+'         End If
+'        End If
+'
+'
+'
+'       End If
+'     Else '///Resto el saldo actual//////////
+'
+'       '//////Busco si tiene saldo en el historial del perido actual
+'      Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
+'      Me.DtaHistorial.Refresh
+'       If DtaHistorial.Recordset.EOF Then
+'        '////Si no existe registro para este Periodo Busco los ///
+'        '////saldos del periodo anterior para que sean incial////
+'         Criterio = "NPeriodo=" & NumeroPeriodo & " "
+'         Me.DtaPeriodos.Recordset.Find (Criterio)
+'        If Not DtaPeriodos.Recordset.EOF Then
+''////Busco el numero del periodo anterior para hacer la consulta
+'          DtaPeriodos.Recordset.MovePrevious
+'          NumeroPeriodoAnterior = DtaPeriodos.Recordset("NPeriodo")
+'          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodoAnterior & "))"
+'          Me.DtaHistorial.Refresh
+'
+'          If DtaHistorial.Recordset.EOF Then
+'       '//////si el periodo anterior no tiene saldo////
+'       '/////Y el periodo actual tampoco tiene saldo/////////
+'           Me.DtaHistorial.Recordset.AddNew
+'             Me.DtaHistorial.Recordset("CodCuenta") = CodigoCuenta
+'             Me.DtaHistorial.Recordset("NPeriodo") = NumeroPeriodo
+'             Me.DtaHistorial.Recordset("SaldoInicial") = 0
+'             Me.DtaHistorial.Recordset("SaldoFinal") = -Diferencia
+'            Me.DtaHistorial.Recordset.Update
+'         Else
+'      '//////Si el periodo anterior tiene saldo////////
+'      '/////y el periodo actual no tiene saldo//////////
+'         SaldoFinal = Me.DtaHistorial.Recordset("SaldoFinal")
+'            Me.DtaHistorial.Recordset.AddNew
+'             Me.DtaHistorial.Recordset("CodCuenta") = CodigoCuenta
+'             Me.DtaHistorial.Recordset("NPeriodo") = NumeroPeriodo
+'             Me.DtaHistorial.Recordset("SaldoInicial") = SaldoFinal
+'             Me.DtaHistorial.Recordset("SaldoFinal") = -Diferencia
+'            Me.DtaHistorial.Recordset.Update
+'
+'         End If
+'        End If
+'       Else '////////Si la cuenta tiene saldo en el periodo actual
+'        '////Si existe registro para este Periodo Busco los ///
+'        '////saldos del periodo anterior para que sean incial////
+'         Criterio = "NPeriodo=" & NumeroPeriodo & " "
+'         Me.DtaPeriodos.Recordset.Find (Criterio)
+'        If Not DtaPeriodos.Recordset.EOF Then
+''////Busco el numero del periodo anterior para hacer la consulta
+'          DtaPeriodos.Recordset.MovePrevious
+'          NumeroPeriodoAnterior = DtaPeriodos.Recordset("NPeriodo")
+'          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodoAnterior & "))"
+'          Me.DtaHistorial.Refresh
+'
+'          If DtaHistorial.Recordset.EOF Then
+'          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
+'          Me.DtaHistorial.Refresh
+'
+'       '//////si el periodo anterior no tiene saldo////
+'       '/////Y el periodo actual tiene saldo/////////
+'           'Me.DtaHistorial.Recordset.Edit
+'             Me.DtaHistorial.Recordset("SaldoInicial") = 0
+'             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoFinal")) - Diferencia
+'            Me.DtaHistorial.Recordset.Update
+'         Else
+'          SaldoFinal = Me.DtaHistorial.Recordset("SaldoFinal")
+'          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
+'          Me.DtaHistorial.Refresh
+'      '//////Si el periodo anterior tiene saldo////////
+'      '/////y el periodo actual tiene saldo//////////
+'
+'            'Me.DtaHistorial.Recordset.Edit
+'             Me.DtaHistorial.Recordset("SaldoInicial") = SaldoFinal
+'             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoFinal")) - Diferencia
+'            Me.DtaHistorial.Recordset.Update
+'
+'         End If
+'        End If
+'
+'
+'
+'       End If
+'
+'
+'
+'
+'
+'
+'     End If
+'   End If
+'Case 8
+'Salir = False
+'    '//////////Sumo los totales del credito///////////////
+'    If Me.DBGTransacciones.Columns(8).Text = "" Then
+'      Me.DBGTransacciones.Columns(8).Text = "0.00"
+'      Debito = 0
+'    Else
+'      Credito = Me.DBGTransacciones.Columns(8).Text
+'    End If
+'
+'
+'
+'    Diferencia = Val(Credito) - Val(CreditoAnt)
+'    TotalCredito = TotalCredito + Diferencia
+'    Me.TxtCredito.Text = Format(TotalCredito, "##,##0.00")
+'    TotalDiferencia = TotalDebito - TotalCredito
+'    Me.TxtDiferencia.Text = Format(TotalDiferencia, "##,##0.00")
+'
+'
+'   '//////////Busco es tipo de cuenta para sumar historico///////////////////////
+'    CodigoCuenta = Me.DBGTransacciones.Columns(0).Text
+'    Criterio = "CodCuentas='" & CodigoCuenta & "'"
+'    Me.DtaCuentas.Recordset.Find (Criterio)
+'    If Not DtaCuentas.Recordset.EOF Then
+'     TipoCuenta = Me.DtaCuentas.Recordset("TipoCuenta")
+'     If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Cuentas x Pagar" Or TipoCuenta = "Cuentas de Gastos" Or TipoCuenta = "Bancos" Then
+'
+'   '//////Busco si tiene saldo en el historial del perido actual
+'      Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
+'      Me.DtaHistorial.Refresh
+'       If DtaHistorial.Recordset.EOF Then
+'        '////Si no existe registro para este Periodo Busco los ///
+'        '////saldos del periodo anterior para que sean incial////
+'         Criterio = "NPeriodo=" & NumeroPeriodo & " "
+'         Me.DtaPeriodos.Recordset.Find (Criterio)
+'        If Not DtaPeriodos.Recordset.EOF Then
+''////Busco el numero del periodo anterior para hacer la consulta
+'          DtaPeriodos.Recordset.MovePrevious
+''          NumeroPeriodoAnterior = DtaPeriodos.Recordset("NPeriodo")
+'          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodoAnterior & "))"
+'          Me.DtaHistorial.Refresh
+'
+'          If DtaHistorial.Recordset.EOF Then
+'       '//////si el periodo anterior no tiene saldo////
+'       '/////Y el periodo actual tampoco tiene saldo/////////
+'           Me.DtaHistorial.Recordset.AddNew
+'             Me.DtaHistorial.Recordset("CodCuenta") = CodigoCuenta
+'             Me.DtaHistorial.Recordset("NPeriodo") = NumeroPeriodo
+'             Me.DtaHistorial.Recordset("SaldoInicial") = 0
+'             Me.DtaHistorial.Recordset("SaldoFinal") = -Diferencia
+'            Me.DtaHistorial.Recordset.Update
+'         Else
+'      '//////Si el periodo anterior tiene saldo////////
+'      '/////y el periodo actual no tiene saldo//////////
+'         SaldoFinal = Me.DtaHistorial.Recordset("SaldoFinal")
+'            Me.DtaHistorial.Recordset.AddNew
+'             Me.DtaHistorial.Recordset("CodCuenta") = CodigoCuenta
+'             Me.DtaHistorial.Recordset("NPeriodo") = NumeroPeriodo
+'             Me.DtaHistorial.Recordset("SaldoInicial") = SaldoFinal
+'             Me.DtaHistorial.Recordset("SaldoFinal") = -Diferencia
+'            Me.DtaHistorial.Recordset.Update
+'
+'         End If
+'        End If
+'       Else '////////Si la cuenta tiene saldo en el periodo actual
+'        '////Si existe registro para este Periodo Busco los ///
+'        '////saldos del periodo anterior para que sean incial////
+'         Criterio = "NPeriodo=" & NumeroPeriodo & " "
+'         Me.DtaPeriodos.Recordset.Find (Criterio)
+'        If Not DtaPeriodos.Recordset.EOF Then
+''////Busco el numero del periodo anterior para hacer la consulta
+'          DtaPeriodos.Recordset.MovePrevious
+'          NumeroPeriodoAnterior = DtaPeriodos.Recordset("NPeriodo")
+'          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodoAnterior & "))"
+'          Me.DtaHistorial.Refresh
+'
+'          If DtaHistorial.Recordset.EOF Then
+'          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
+'          Me.DtaHistorial.Refresh
+'
+'       '//////si el periodo anterior no tiene saldo////
+'       '/////Y el periodo actual tiene saldo/////////
+'           'Me.DtaHistorial.Recordset.Edit
+'             Me.DtaHistorial.Recordset("SaldoInicial") = 0
+'             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoFinal")) - Diferencia
+'            Me.DtaHistorial.Recordset.Update
+'         Else
+'          SaldoFinal = Me.DtaHistorial.Recordset("SaldoFinal")
+'          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
+'          Me.DtaHistorial.Refresh
+'      '//////Si el periodo anterior tiene saldo////////
+'      '/////y el periodo actual tiene saldo//////////
+'
+'            'Me.DtaHistorial.Recordset.Edit
+'             Me.DtaHistorial.Recordset("SaldoInicial") = SaldoFinal
+'             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoFinal")) - Diferencia
+'            Me.DtaHistorial.Recordset.Update
+'
+'         End If
+'        End If
+'
+'
+'
+'       End If
+'     Else '///Sumo el saldo//////////
+'
+'       '//////Busco si tiene saldo en el historial del perido actual
+'      Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
+'      Me.DtaHistorial.Refresh
+'       If DtaHistorial.Recordset.EOF Then
+'        '////Si no existe registro para este Periodo Busco los ///
+'        '////saldos del periodo anterior para que sean incial////
+'         Criterio = "NPeriodo=" & NumeroPeriodo & " "
+'         Me.DtaPeriodos.Recordset.Find (Criterio)
+'        If Not DtaPeriodos.Recordset.EOF Then
+''////Busco el numero del periodo anterior para hacer la consulta
+'          DtaPeriodos.Recordset.MovePrevious
+''          NumeroPeriodoAnterior = DtaPeriodos.Recordset("NPeriodo")
+'          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodoAnterior & "))"
+'          Me.DtaHistorial.Refresh
+'
+'          If DtaHistorial.Recordset.EOF Then
+'       '//////si el periodo anterior no tiene saldo////
+'       '/////Y el periodo actual tampoco tiene saldo/////////
+'           Me.DtaHistorial.Recordset.AddNew
+'             Me.DtaHistorial.Recordset("CodCuenta") = CodigoCuenta
+'             Me.DtaHistorial.Recordset("NPeriodo") = NumeroPeriodo
+'             Me.DtaHistorial.Recordset("SaldoInicial") = 0
+'             Me.DtaHistorial.Recordset("SaldoFinal") = Diferencia
+'            Me.DtaHistorial.Recordset.Update
+'         Else
+'      '//////Si el periodo anterior tiene saldo////////
+'      '/////y el periodo actual no tiene saldo//////////
+'         SaldoFinal = Me.DtaHistorial.Recordset("SaldoFinal")
+'            Me.DtaHistorial.Recordset.AddNew
+'             Me.DtaHistorial.Recordset("CodCuenta") = CodigoCuenta
+'             Me.DtaHistorial.Recordset("NPeriodo") = NumeroPeriodo
+'             Me.DtaHistorial.Recordset("SaldoInicial") = SaldoFinal
+'             Me.DtaHistorial.Recordset("SaldoFinal") = Diferencia
+'            Me.DtaHistorial.Recordset.Update
+'
+'         End If
+'        End If
+'       Else '////////Si la cuenta tiene saldo en el periodo actual
+'        '////Si existe registro para este Periodo Busco los ///
+'        '////saldos del periodo anterior para que sean incial////
+'         Criterio = "NPeriodo=" & NumeroPeriodo & " "
+'         Me.DtaPeriodos.Recordset.Find (Criterio)
+'        If Not DtaPeriodos.Recordset.EOF Then
+''////Busco el numero del periodo anterior para hacer la consulta
+'          DtaPeriodos.Recordset.MovePrevious
+''          NumeroPeriodoAnterior = DtaPeriodos.Recordset("NPeriodo")
+'          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodoAnterior & "))"
+'          Me.DtaHistorial.Refresh
+'
+'          If DtaHistorial.Recordset.EOF Then
+'          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
+'          Me.DtaHistorial.Refresh
+'
+'       '//////si el periodo anterior no tiene saldo////
+'       '/////Y el periodo actual tiene saldo/////////
+'           'Me.DtaHistorial.Recordset.Edit
+'             Me.DtaHistorial.Recordset("SaldoInicial") = 0
+'             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoFinal")) + Diferencia
+'            Me.DtaHistorial.Recordset.Update
+'         Else
+'          SaldoFinal = Me.DtaHistorial.Recordset("SaldoFinal")
+'          Me.DtaHistorial.RecordSource = "SELECT Historial.CodCuenta, Historial.NPeriodo, Historial.SaldoInicial, Historial.SaldoFinal From Historial WHERE (((Historial.CodCuenta)='" & CodigoCuenta & "') AND ((Historial.NPeriodo)=" & NumeroPeriodo & "))"
+'          Me.DtaHistorial.Refresh
+'      '//////Si el periodo anterior tiene saldo////////
+'      '/////y el periodo actual tiene saldo//////////
+'
+'            'Me.DtaHistorial.Recordset.Edit
+'             Me.DtaHistorial.Recordset("SaldoInicial") = SaldoFinal
+'             Me.DtaHistorial.Recordset("SaldoFinal") = Val(Me.DtaHistorial.Recordset("SaldoFinal")) + Diferencia
+'            Me.DtaHistorial.Recordset.Update
+'
+'         End If
+'        End If
+'
+'
+'
+'       End If
+'
+'
+'
+'
+'
+'
+'     End If
+'   End If
+'End Select
+'
+'
+'
+'
+'Exit Sub
+'TipoErrs:
+' ControlErrores
+'
+'End Sub
 
 Private Sub DBGTransacciones_AfterColUpdate(ByVal ColIndex As Integer)
 
@@ -3893,11 +4111,15 @@ End If
          NumeroTransaccion = Me.LblNumeroSolicitud.Caption
         End If
         EstadoPeriodo = DtaConsulta.Recordset("EstadoPeriodo")
+      
+      
       End If
       
       
   Me.AdoBuscar.RecordSource = "SELECT FechaTransaccion, NumeroMovimiento, Nperiodo, DescripcionMovimiento, Fuente, TipoMoneda From IndiceSolicitudPago Where (NPeriodo = " & NumeroPeriodo & ") And (NumeroMovimiento = " & NumeroTransaccion & ")"
   Me.AdoBuscar.Refresh
+  
+   Me.TxtNTransacciones.Text = NumeroTransaccion
   
    If Not Me.AdoBuscar.Recordset.EOF Then
    Me.AdoBuscar.Recordset("DescripcionMovimiento") = Me.DBGTransacciones.Columns(3).Text
@@ -4029,7 +4251,7 @@ End With
 With Me.DtaCuentas
    '.DatabaseName = Ruta
    .ConnectionString = Conexion
-   .RecordSource = "Cuentas"
+   .RecordSource = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo, UbicacionReporte, SubDivicion, CausaIva, CausaRetencion, DescRetencion, Nombre1, Nombre2, Apellido1, Apellido2 , cedula, RUC, Telefono, Direccion, CodCuentaImporta, CentroCostos, KeyPresupuesto, Presupuesto From Cuentas "
    .Refresh
 End With
 
@@ -4061,7 +4283,7 @@ End With
 '//////////////////////////////////////////////////////////////////////////////////////////////
 '////////////////////////////////////BUSCO LAS CUENTAS DE RETENCION //////////////////////
 '////////////////////////////////////////////////////////////////////////////////////////////////////
-Me.DtaConsulta.RecordSource = "SELECT  Cuentas.* From Cuentas WHERE  (CausaIva = 1) AND (TipoCuenta = N'Cuentas x Pagar')"
+Me.DtaConsulta.RecordSource = "SELECT  Cuentas.* From Cuentas WHERE(KeyGrupo LIKE N'%A%') AND (CausaIva = 1)"
 Me.DtaConsulta.Refresh
 If Not Me.DtaConsulta.Recordset.EOF Then
   Me.TxtCtaIva.Text = Me.DtaConsulta.Recordset("CodCuentas")
@@ -4199,6 +4421,17 @@ Private Sub DBGTransacciones_BeforeColUpdate(ByVal ColIndex As Integer, OldValue
          Me.DBGTransacciones.Columns(0).Text = ""
          Me.DBGTransacciones.Columns(1).Text = ""
        End If
+       
+       
+       If Me.DBGTransacciones.Columns("DescripcionMovimiento") = "" Or Me.DBGTransacciones.Columns("DescripcionMovimiento") = "-" Then
+         If Me.TxtNombre.Text <> "" Then
+           Me.DBGTransacciones.Columns("DescripcionMovimiento") = Me.TxtNombre.Text
+         Else
+           Me.DBGTransacciones.Columns("DescripcionMovimiento") = "-"
+         End If
+       End If
+       
+       
 End Sub
 
 Private Sub DBGTransacciones_BeforeColEdit(ByVal ColIndex As Integer, ByVal KeyAscii As Integer, Cancel As Integer)
@@ -4250,84 +4483,102 @@ Private Sub DBGTransacciones_AfterUpdate()
 Dim MontoCheque As Double, MontoTasa As Double, Fecha As Long
 Dim Fechas1 As String
 
- Debito = 0
- Credito = 0
- TotalDebito = 0
- TotalCredito = 0
-      NumFecha1 = Me.TxtFecha.Value
-      NMovimiento = Val(Me.TxtNTransacciones)
-      Fechas1 = Format(Me.TxtFecha.Value, "yyyy/mm/dd")
-      Me.DtaConsulta.RecordSource = "SELECT FechaTransaccion, CodCuentas, NTransaccion, NumeroMovimiento, TCambio * Debito AS MDebito, TCambio * Credito AS MCredito, TCambio, Debito,Credito From TransaccionesSolicitudPago WHERE  (FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (NumeroMovimiento = " & NMovimiento & ")"
+TotalizaMonto
 
-      Me.DtaConsulta.Refresh
-      Do While Not DtaConsulta.Recordset.EOF
-      If TxtMonto.Text = "" Then
-       MontoCheque = 0
-      Else
-       MontoCheque = Me.TxtMonto
-      End If
-       Debito = Me.DtaConsulta.Recordset("Debito")
-       Credito = Me.DtaConsulta.Recordset("Credito")
-       TotalDebito = TotalDebito + Debito
-       TotalCredito = TotalCredito + Credito
-       DtaConsulta.Recordset.MoveNext
-      Loop
-      
-       Criterio = "CodCuentas='" & Me.DBCodigo.Text & "'"
-       Me.DtaCuentas.Recordset.Find (Criterio)
-       If Not DtaCuentas.Recordset.EOF Then
-                TipoMoneda = DtaCuentas.Recordset("TipoMoneda")
-
-       If Not TxtMonto.Text = "" Then
-        MontoCheque = Me.TxtMonto.Text
-       Else
-        MontoCheque = 0
-       End If
-         Select Case TipoMoneda
-            Case "Córdobas"
-                      Fecha = Me.TxtFecha.Value
-                      Me.DtaTasas.RecordSource = "SELECT Tasas.FechaTasas, Tasas.MontoCordobas, Tasas.MontoLibras From Tasas Where (((Tasas.FechaTasas) =" & Fecha & "))"
-                      Me.DtaTasas.Refresh
-                If Not DtaTasas.Recordset.EOF Then
-                 MontoTasa = Me.DtaTasas.Recordset("MontoCordobas")
-                 If MontoTasa = 0 Then
-                   MontoTasa = 1
-                 End If
-                 'MontoCheque = (1 / MontoTasa) * MontoCheque
-                Else
-                 'MontoCheque = 1 * MontoCheque
-                End If
-            
-            Case "Dólares"
-                  'MontoCheque = 1 * MontoCheque
-            
-            Case "Libras"
-                      Fecha = Me.TxtFecha.Value
-                      Me.DtaTasas.RecordSource = "SELECT Tasas.FechaTasas, Tasas.MontoCordobas, Tasas.MontoLibras From Tasas Where (((Tasas.FechaTasas) =" & Fecha & "))"
-                      Me.DtaTasas.Refresh
-                If Not DtaTasas.Recordset.EOF Then
-                 MontoTasa = Me.DtaTasas.Recordset("MontoLibras")
- '               MontoCheque = MontoTasa * MontoCheque
-                Else
-'               MontoCheque = 1 * MontoCheque
-                End If
-         
-         End Select
-
-End If
-
-
-'Diferencia = TotalMovimientos(Me.TxtFecha.Value, Me.TxtNTransacciones)
-
-TotalCredito = TotalCredito + MontoCheque
-Me.TxtCredito.Text = Format(TotalCredito, "##,##0.00")
-Me.TxtDebito.Text = Format(TotalDebito, "##,##0.00")
-Me.TxtDiferencia.Text = Format(TotalDebito - TotalCredito, "##,##0.00")
-
-Me.DBGTransacciones.SetFocus
-Me.DBGTransacciones.PostMsg 2
-
-Me.CmdNuevo.Enabled = False
+' Debito = 0
+' Credito = 0
+' TotalDebito = 0
+' TotalCredito = 0
+'      NumFecha1 = Me.TxtFecha.Value
+'      NMovimiento = Val(NumeroTransaccion)
+'      Fechas1 = Format(Me.TxtFecha.Value, "yyyy/mm/dd")
+'      Me.DtaConsulta.RecordSource = "SELECT FechaTransaccion, CodCuentas, NTransaccion, NumeroMovimiento, TCambio * Debito AS MDebito, TCambio * Credito AS MCredito, TCambio, Debito,Credito From TransaccionesSolicitudPago WHERE  (FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (NumeroMovimiento = " & NMovimiento & ")"
+'      Me.DtaConsulta.Refresh
+'      Do While Not DtaConsulta.Recordset.EOF
+'
+'       Debito = Me.DtaConsulta.Recordset("Debito")
+'       Credito = Me.DtaConsulta.Recordset("Credito")
+'       TotalDebito = TotalDebito + Debito
+'       TotalCredito = TotalCredito + Credito
+'       DtaConsulta.Recordset.MoveNext
+'      Loop
+'
+'        If TxtMonto.Text = "" Then
+'         MontoCheque = 0
+'        Else
+'         MontoCheque = Me.TxtMonto
+'        End If
+'
+'       Criterio = "CodCuentas='" & Me.DBCodigo.Text & "'"
+'       Me.DtaCuentas.Recordset.Find (Criterio)
+'       If Not DtaCuentas.Recordset.EOF Then
+'                TipoMoneda = DtaCuentas.Recordset("TipoMoneda")
+'
+'            If Not TxtMonto.Text = "" Then
+'             MontoCheque = Me.TxtMonto.Text
+'            Else
+'             MontoCheque = 0
+'            End If
+'
+'
+'         Select Case TipoMoneda
+'            Case "Córdobas"
+'                      Fecha = Me.TxtFecha.Value
+'                      Me.DtaTasas.RecordSource = "SELECT Tasas.FechaTasas, Tasas.MontoCordobas, Tasas.MontoLibras From Tasas Where (((Tasas.FechaTasas) =" & Fecha & "))"
+'                      Me.DtaTasas.Refresh
+'                If Not DtaTasas.Recordset.EOF Then
+'                 MontoTasa = Me.DtaTasas.Recordset("MontoCordobas")
+'                 If MontoTasa = 0 Then
+'                   MontoTasa = 1
+'                 End If
+'                 'MontoCheque = (1 / MontoTasa) * MontoCheque
+'                Else
+'                 'MontoCheque = 1 * MontoCheque
+'                End If
+'
+'            Case "Dólares"
+'                  'MontoCheque = 1 * MontoCheque
+'
+'            Case "Libras"
+'                      Fecha = Me.TxtFecha.Value
+'                      Me.DtaTasas.RecordSource = "SELECT Tasas.FechaTasas, Tasas.MontoCordobas, Tasas.MontoLibras From Tasas Where (((Tasas.FechaTasas) =" & Fecha & "))"
+'                      Me.DtaTasas.Refresh
+'                If Not DtaTasas.Recordset.EOF Then
+'                 MontoTasa = Me.DtaTasas.Recordset("MontoLibras")
+' '               MontoCheque = MontoTasa * MontoCheque
+'                Else
+''               MontoCheque = 1 * MontoCheque
+'                End If
+'
+'         End Select
+'
+'End If
+'
+'Dim Retenciones As Double, Iva As Double
+'
+'Retenciones = 0
+'If Me.TxtRetenciones.Text <> "" Then
+'  Retenciones = Me.TxtRetenciones.Text
+'End If
+'
+'Iva = 0
+'If Me.TxtIVa.Text <> "" Then
+' Iva = Me.TxtIVa.Text
+'End If
+'
+''Diferencia = TotalMovimientos(Me.TxtFecha.Value, Me.TxtNTransacciones)
+'
+'TotalCredito = TotalCredito + MontoCheque + Retenciones
+'TotalDebito = TotalDebito + Iva
+'
+'Me.TxtCredito.Text = Format(TotalCredito, "##,##0.00")
+'Me.TxtDebito.Text = Format(TotalDebito, "##,##0.00")
+'Me.TxtDiferencia.Text = Format(TotalDebito - TotalCredito, "##,##0.00")
+'
+'Me.DBGTransacciones.SetFocus
+'Me.DBGTransacciones.PostMsg 2
+'
+'Me.CmdNuevo.Enabled = False
 End Sub
 
 Private Sub MaskEdBox3_Change()
@@ -5021,120 +5272,277 @@ TipoErrs:
 End Sub
 
 Public Sub TxtMonto_Change()
-'On Error GoTo TipoErrs
-Dim SqlContratista As String, Fecha As Long
-
- Debito = 0
- Credito = 0
- TotalDebito = 0
- TotalCredito = 0
-
-If Not DBCodigo.Text = "" Then
-  If TxtMonto.Text = "" Then
-   Credito = 0
-  Else
-   Credito = Me.TxtMonto
-  End If
-
-      NumFecha1 = Me.TxtFecha.Value
-      NMovimiento = Val(Me.TxtNTransacciones)
-'      Me.DtaConsulta.RecordSource = "SELECT TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.NumeroMovimiento, TCambio*Debito AS MDebito, TCambio*Credito AS MCredito, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito From TransaccionesSolicitudPago WHERE (((TransaccionesSolicitudPago.FechaTransaccion)=" & NumFecha1 & ") AND ((TransaccionesSolicitudPago.NumeroMovimiento)=" & NMovimiento & "))"
-      Me.DtaConsulta.RecordSource = "SELECT FechaTransaccion, CodCuentas, NTransaccion, NumeroMovimiento, TCambio * Debito AS MDebito, TCambio * Credito AS MCredito, TCambio, Debito, Credito From TransaccionesSolicitudPago  " & _
-                                    "WHERE (FechaTransaccion = CONVERT(DATETIME, '" & Format(Me.TxtFecha.Value, "yyyy-mm-dd") & "', 102)) AND (NumeroMovimiento = " & NMovimiento & ") AND (CodCuentas <> '" & Me.DBCodigo.Text & "')"
-      Me.DtaConsulta.Refresh
-      Do While Not DtaConsulta.Recordset.EOF
-       If Me.TxtMonto.Text = "" Then
-        MontoCheque = 0
-       Else
-         MontoCheque = Me.TxtMonto
-       End If
-       Debito = Me.DtaConsulta.Recordset("Debito")
-       Credito = Me.DtaConsulta.Recordset("Credito")
-       TotalDebito = TotalDebito + Debito
-       TotalCredito = TotalCredito + Credito
-       DtaConsulta.Recordset.MoveNext
-      Loop
-      
-
-      
-       Criterio = "CodCuentas='" & Me.DBCodigo.Text & "'"
-       Me.DtaCuentas.Recordset.Find (Criterio)
-       If Not DtaCuentas.Recordset.EOF Then
-'                TipoMoneda = DtaCuentas.Recordset("TipoMoneda")
-                TipoMoneda = Me.CmbMoneda.Text
-                TipoCuenta = DtaCuentas.Recordset("TipoCuenta")
-      If Me.TxtMonto.Text = "" Then
-         MontoCheque = 0
-      Else
-           MontoCheque = Me.TxtMonto.Text
-      End If
-     
-         Select Case TipoMoneda
-            Case "Córdobas"
-                      Fecha = Me.TxtFecha.Value
-                      Me.DtaTasas.RecordSource = "SELECT Tasas.FechaTasas, Tasas.MontoCordobas, Tasas.MontoLibras From Tasas Where (((Tasas.FechaTasas) =" & Fecha & "))"
-                      Me.DtaTasas.Refresh
-                If Not DtaTasas.Recordset.EOF Then
-                 MontoTasa = Me.DtaTasas.Recordset("MontoCordobas")
-                 If MontoTasa = 0 Then
-                   MontoTasa = 1
-                 End If
-                 'MontoCheque = (1 / MontoTasa) * MontoCheque
-                Else
-                 'MontoCheque = 1 * MontoCheque
-                End If
-            
-            Case "Dólares"
-                '  MontoCheque = 1 * MontoCheque
-            
-            Case "Libras"
-                      Fecha = Me.TxtFecha.Value
-                      Me.DtaTasas.RecordSource = "SELECT Tasas.FechaTasas, Tasas.MontoCordobas, Tasas.MontoLibras From Tasas Where (((Tasas.FechaTasas) =" & Fecha & "))"
-                      Me.DtaTasas.Refresh
-                If Not DtaTasas.Recordset.EOF Then
-                 MontoTasa = Me.DtaTasas.Recordset("MontoLibras")
-               ' MontoCheque = MontoTasa * MontoCheque
-                Else
-               'MontoCheque = 1 * MontoCheque
-                End If
-         
-         End Select
-
-End If
-
-TotalCredito = TotalCredito + MontoCheque
-Me.TxtCredito.Text = Format(TotalCredito, "##,##0.00")
-Me.TxtDebito.Text = Format(TotalDebito, "##,##0.00")
-Me.TxtDiferencia.Text = Format(TotalDebito - TotalCredito, "##,##0.00")
-
-
-
- Me.DBCodigo.Enabled = False
- 'If Cheque = True Then
-    'TxtLetras.Text = ew.ConvertCurrencyToEnglish(TxtMonto.Text, "Cordobas")
-   If TipoMoneda = "Dólares" Then
-    TxtLetras.Text = sw.ConvertCurrencyToSpanish(TxtMonto.Text, "Dólares")
-    
-   
-   ElseIf TipoMoneda = "Córdobas" Then
-    'TxtLetras.Text = ew.ConvertCurrencyToEnglish(TxtMonto.Text, "Cordobas")
-    TxtLetras.Text = sw.ConvertCurrencyToSpanish(TxtMonto.Text, "Córdobas")
-    
-   End If
-
- 'End If
-
-
-End If
-
-Exit Sub
-TipoErrs:
-ControlErrores
+    Call TotalizaMonto
+    Call MostrarMontoEnLetras
 End Sub
 
+
+'Public Sub TotalizaMonto()
+''On Error GoTo TipoErrs
+'Dim SqlContratista As String, Fecha As Long
+'
+' Debito = 0
+' Credito = 0
+' TotalDebito = 0
+' TotalCredito = 0
+'
+'If Not DBCodigo.Text = "" Then
+'  If TxtMonto.Text = "" Then
+'   Credito = 0
+'  Else
+'   Credito = Me.TxtMonto
+'  End If
+'
+'
+'      NumFecha1 = Me.TxtFecha.Value
+'      NMovimiento = Val(Me.TxtNTransacciones)
+''      Me.DtaConsulta.RecordSource = "SELECT TransaccionesSolicitudPago.FechaTransaccion, TransaccionesSolicitudPago.CodCuentas, TransaccionesSolicitudPago.NTransaccion, TransaccionesSolicitudPago.NumeroMovimiento, TCambio*Debito AS MDebito, TCambio*Credito AS MCredito, TransaccionesSolicitudPago.TCambio, TransaccionesSolicitudPago.Debito, TransaccionesSolicitudPago.Credito From TransaccionesSolicitudPago WHERE (((TransaccionesSolicitudPago.FechaTransaccion)=" & NumFecha1 & ") AND ((TransaccionesSolicitudPago.NumeroMovimiento)=" & NMovimiento & "))"
+'      Me.DtaConsulta.RecordSource = "SELECT FechaTransaccion, CodCuentas, NTransaccion, NumeroMovimiento, TCambio * Debito AS MDebito, TCambio * Credito AS MCredito, TCambio, Debito, Credito From TransaccionesSolicitudPago  " & _
+'                                    "WHERE (FechaTransaccion = CONVERT(DATETIME, '" & Format(Me.TxtFecha.Value, "yyyy-mm-dd") & "', 102)) AND (NumeroMovimiento = " & NMovimiento & ") AND (CodCuentas <> '" & Me.DBCodigo.Text & "')"
+'      Me.DtaConsulta.Refresh
+'      Do While Not DtaConsulta.Recordset.EOF
+'       If Me.TxtMonto.Text = "" Then
+'        MontoCheque = 0
+'       Else
+'         MontoCheque = Me.TxtMonto
+'       End If
+'       Debito = Me.DtaConsulta.Recordset("Debito")
+'       Credito = Me.DtaConsulta.Recordset("Credito")
+'       TotalDebito = TotalDebito + Debito
+'       TotalCredito = TotalCredito + Credito
+'       DtaConsulta.Recordset.MoveNext
+'      Loop
+'
+'  '///////////////SUMO EL IVA Y LAS RETENCIONES PARA CUADRAR EL COMPROBANTE ////////////////////
+'  If Me.TxtIVa.Text <> "" Then
+'    Debito = Me.TxtIVa.Text
+'    TotalDebito = TotalDebito + Debito
+'  End If
+'
+'  If Me.TxtRetenciones.Text <> "" Then
+'    Credito = Me.TxtRetenciones.Text
+'    TotalCredito = TotalCredito + Credito
+'  End If
+'
+'
+'
+'       Criterio = "CodCuentas='" & Me.DBCodigo.Text & "'"
+'       Me.DtaCuentas.Recordset.Find (Criterio)
+'       If Not DtaCuentas.Recordset.EOF Then
+''                TipoMoneda = DtaCuentas.Recordset("TipoMoneda")
+'                TipoMoneda = Me.CmbMoneda.Text
+'                TipoCuenta = DtaCuentas.Recordset("TipoCuenta")
+'      If Me.TxtMonto.Text = "" Then
+'         MontoCheque = 0
+'      Else
+'           MontoCheque = Me.TxtMonto.Text
+'      End If
+'
+'         Select Case TipoMoneda
+'            Case "Córdobas"
+'                      Fecha = Me.TxtFecha.Value
+'                      Me.DtaTasas.RecordSource = "SELECT Tasas.FechaTasas, Tasas.MontoCordobas, Tasas.MontoLibras From Tasas Where (((Tasas.FechaTasas) =" & Fecha & "))"
+'                      Me.DtaTasas.Refresh
+'                If Not DtaTasas.Recordset.EOF Then
+'                 MontoTasa = Me.DtaTasas.Recordset("MontoCordobas")
+'                 If MontoTasa = 0 Then
+'                   MontoTasa = 1
+'                 End If
+'                 'MontoCheque = (1 / MontoTasa) * MontoCheque
+'                Else
+'                 'MontoCheque = 1 * MontoCheque
+'                End If
+'
+'            Case "Dólares"
+'                '  MontoCheque = 1 * MontoCheque
+'
+'            Case "Libras"
+'                      Fecha = Me.TxtFecha.Value
+'                      Me.DtaTasas.RecordSource = "SELECT Tasas.FechaTasas, Tasas.MontoCordobas, Tasas.MontoLibras From Tasas Where (((Tasas.FechaTasas) =" & Fecha & "))"
+'                      Me.DtaTasas.Refresh
+'                If Not DtaTasas.Recordset.EOF Then
+'                 MontoTasa = Me.DtaTasas.Recordset("MontoLibras")
+'               ' MontoCheque = MontoTasa * MontoCheque
+'                Else
+'               'MontoCheque = 1 * MontoCheque
+'                End If
+'
+'         End Select
+'
+'End If
+'
+'TotalCredito = TotalCredito + MontoCheque
+'Me.TxtCredito.Text = Format(TotalCredito, "##,##0.00")
+'Me.TxtDebito.Text = Format(TotalDebito, "##,##0.00")
+'Me.TxtDiferencia.Text = Format(TotalDebito - TotalCredito, "##,##0.00")
+'
+'
+'
+' Me.DBCodigo.Enabled = False
+' 'If Cheque = True Then
+'    'TxtLetras.Text = ew.ConvertCurrencyToEnglish(TxtMonto.Text, "Cordobas")
+'   If TipoMoneda = "Dólares" Then
+'    TxtLetras.Text = sw.ConvertCurrencyToSpanish(TxtMonto.Text, "Dólares")
+'
+'
+'   ElseIf TipoMoneda = "Córdobas" Then
+'    'TxtLetras.Text = ew.ConvertCurrencyToEnglish(TxtMonto.Text, "Cordobas")
+'    TxtLetras.Text = sw.ConvertCurrencyToSpanish(TxtMonto.Text, "Córdobas")
+'
+'   End If
+'
+' 'End If
+'
+'
+'End If
+'
+'Exit Sub
+'TipoErrs:
+'ControlErrores
+'End Sub
+
+
+Private Sub MostrarMontoEnLetras()
+
+    Dim Monto As Double
+    Dim TipoMoneda As String
+
+    Monto = Val(Me.TxtMonto.Text)
+    TipoMoneda = Me.CmbMoneda.Text
+
+    If Monto <= 0 Then
+        Me.TxtLetras.Text = ""
+        Exit Sub
+    End If
+
+    Select Case TipoMoneda
+        Case "Dólares"
+            Me.TxtLetras.Text = sw.ConvertCurrencyToSpanish(Monto, "Dólares")
+
+        Case "Córdobas"
+            Me.TxtLetras.Text = sw.ConvertCurrencyToSpanish(Monto, "Córdobas")
+
+        Case Else
+            Me.TxtLetras.Text = ""
+    End Select
+
+End Sub
+
+
+
+
+
+Public Sub TotalizaMonto()
+
+    On Error Resume Next   'Evita errores mientras el usuario digita
+
+    Dim TotalDebito As Double
+    Dim TotalCredito As Double
+    Dim MontoCheque As Double
+    Dim MontoChequeBase As Double
+    Dim NMovimiento As Long
+    Dim FechaSQL As String
+    Dim TipoMoneda As String
+    Dim Tasa As Double
+
+    TotalDebito = 0
+    TotalCredito = 0
+
+    '================ Datos base =================
+    TipoMoneda = Me.CmbMoneda.Text
+    MontoCheque = Val(Me.TxtMonto.Text)
+    MontoChequeBase = MontoCheque
+
+    '================ Movimientos del grid =================
+    If Me.DBCodigo.Text <> "" Then
+
+        NMovimiento = Val(Me.TxtNTransacciones.Text)
+        FechaSQL = Format(Me.TxtFecha.Value, "yyyy-mm-dd")
+
+        Me.DtaConsulta.RecordSource = _
+            "SELECT (TCambio * Debito) AS MDebito, (TCambio * Credito) AS MCredito " & _
+            "FROM TransaccionesSolicitudPago " & _
+            "WHERE FechaTransaccion = CONVERT(DATETIME,'" & FechaSQL & "',102) " & _
+            "AND NumeroMovimiento = " & NMovimiento & " " & _
+            "AND CodCuentas <> '" & Me.DBCodigo.Text & "'"
+
+        Me.DtaConsulta.Refresh
+
+        Do While Not Me.DtaConsulta.Recordset.EOF
+            TotalDebito = TotalDebito + Val(Me.DtaConsulta.Recordset("MDebito"))
+            TotalCredito = TotalCredito + Val(Me.DtaConsulta.Recordset("MCredito"))
+            Me.DtaConsulta.Recordset.MoveNext
+        Loop
+    End If
+
+    '================ IVA y Retenciones =================
+    TotalDebito = TotalDebito + CDbl(Me.TxtIVa.Text)
+    TotalCredito = TotalCredito + CDbl(Me.TxtRetenciones.Text)
+
+    '================ Conversión del cheque =================
+    Tasa = 1
+
+    Select Case TipoMoneda
+        Case "Córdobas"
+            Tasa = ObtenerTasaCambio("Cordobas")
+
+        Case "Libras"
+            Tasa = ObtenerTasaCambio("Libras")
+
+        Case "Dólares"
+            Tasa = 1
+    End Select
+
+    If Tasa <= 0 Then Tasa = 1
+    MontoChequeBase = MontoCheque * Tasa
+
+    '================ Sumar cheque =================
+    TotalCredito = TotalCredito + MontoChequeBase
+
+    '================ Mostrar resultados =================
+    Me.TxtDebito.Text = Format(TotalDebito, "##,##0.00")
+    Me.TxtCredito.Text = Format(TotalCredito, "##,##0.00")
+    Me.TxtDiferencia.Text = Format(TotalDebito - TotalCredito, "##,##0.00")
+
+End Sub
+
+Private Function ObtenerTasaCambio(ByVal Tipo As String) As Double
+
+    On Error Resume Next
+
+    Dim Fecha As Long
+
+    ObtenerTasaCambio = 1
+    Fecha = Me.TxtFecha.Value
+
+    Me.DtaTasas.RecordSource = _
+        "SELECT MontoCordobas, MontoLibras " & _
+        "FROM Tasas WHERE FechaTasas = " & Fecha
+
+    Me.DtaTasas.Refresh
+
+    If Not Me.DtaTasas.Recordset.EOF Then
+        Select Case Tipo
+            Case "Cordobas"
+                ObtenerTasaCambio = Val(Me.DtaTasas.Recordset("MontoCordobas"))
+
+            Case "Libras"
+                ObtenerTasaCambio = Val(Me.DtaTasas.Recordset("MontoLibras"))
+        End Select
+    End If
+
+    If ObtenerTasaCambio <= 0 Then ObtenerTasaCambio = 1
+
+End Function
+
+
+
+
 Private Sub TxtNombre_Change()
+ DoEvents
  Me.AdoBuscar.RecordSource = "SELECT DISTINCT Beneficiario From Transacciones WHERE (Beneficiario LIKE '%" & Me.TxtNombre.Text & "%')"
  Me.AdoBuscar.Refresh
+ DoEvents
   Me.DtaList.Visible = True
 End Sub
 
@@ -5147,8 +5555,13 @@ Private Sub TxtNombre_KeyDown(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub TxtSubTotal_Change()
+  Dim Monto As Double
+
    Me.DtaList.Visible = False
-  Me.TxtMonto.Text = CalcularMonto
+  
+  Monto = CalcularMonto
+  Me.TxtMonto.Text = Monto
+  
 End Sub
 
 

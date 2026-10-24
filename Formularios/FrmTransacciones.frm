@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
 Object = "{60CCE6A8-5C61-4F30-8513-F57EED62E86A}#8.0#0"; "todl8.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
@@ -12,14 +12,161 @@ Begin VB.Form FrmTransacciones
    ClientHeight    =   5565
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   13635
+   ClientWidth     =   14970
    Icon            =   "FrmTransacciones.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
    ScaleHeight     =   5565
-   ScaleWidth      =   13635
+   ScaleWidth      =   14970
+   Begin TrueOleDBList80.TDBCombo TxtFuente 
+      Bindings        =   "FrmTransacciones.frx":030A
+      Height          =   315
+      Left            =   11880
+      TabIndex        =   55
+      Top             =   360
+      Width           =   1455
+      _ExtentX        =   2566
+      _ExtentY        =   556
+      _LayoutType     =   0
+      _RowHeight      =   -2147483647
+      _WasPersistedAsPixels=   0
+      _DropdownWidth  =   7064
+      _EDITHEIGHT     =   556
+      _GAPHEIGHT      =   53
+      Columns(0)._VlistStyle=   0
+      Columns(0)._MaxComboItems=   5
+      Columns(0).DataField=   ""
+      Columns(0)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
+      Columns(1)._VlistStyle=   0
+      Columns(1)._MaxComboItems=   5
+      Columns(1).DataField=   ""
+      Columns(1)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
+      Columns.Count   =   2
+      Splits(0)._UserFlags=   0
+      Splits(0).ExtendRightColumn=   -1  'True
+      Splits(0).AllowRowSizing=   0   'False
+      Splits(0)._PropDict=   "_ColumnProps,515,0;_UserFlags,518,3"
+      Splits(0)._ColumnProps(0)=   "Columns.Count=2"
+      Splits(0)._ColumnProps(1)=   "Column(0).Width=2725"
+      Splits(0)._ColumnProps(2)=   "Column(0).DividerColor=0"
+      Splits(0)._ColumnProps(3)=   "Column(0)._WidthInPix=2646"
+      Splits(0)._ColumnProps(4)=   "Column(0)._EditAlways=0"
+      Splits(0)._ColumnProps(5)=   "Column(0).Order=1"
+      Splits(0)._ColumnProps(6)=   "Column(1).Width=2725"
+      Splits(0)._ColumnProps(7)=   "Column(1).DividerColor=0"
+      Splits(0)._ColumnProps(8)=   "Column(1)._WidthInPix=2646"
+      Splits(0)._ColumnProps(9)=   "Column(1)._EditAlways=0"
+      Splits(0)._ColumnProps(10)=   "Column(1).Order=2"
+      Splits.Count    =   1
+      Appearance      =   1
+      BorderStyle     =   1
+      ComboStyle      =   0
+      AutoCompletion  =   0   'False
+      LimitToList     =   0   'False
+      ColumnHeaders   =   -1  'True
+      ColumnFooters   =   0   'False
+      DataMode        =   0
+      DefColWidth     =   0
+      Enabled         =   -1  'True
+      HeadLines       =   1
+      FootLines       =   1
+      RowDividerStyle =   0
+      Caption         =   ""
+      EditFont        =   "Size=8.25,Charset=0,Weight=400,Underline=0,Italic=0,Strikethrough=0,Name=MS Sans Serif"
+      LayoutName      =   ""
+      LayoutFileName  =   ""
+      MultipleLines   =   0
+      EmptyRows       =   -1  'True
+      CellTips        =   0
+      AutoSize        =   -1  'True
+      ListField       =   "Fuente"
+      BoundColumn     =   "Fuente"
+      IntegralHeight  =   0   'False
+      CellTipsWidth   =   0
+      CellTipsDelay   =   1000
+      AutoDropdown    =   0   'False
+      RowTracking     =   -1  'True
+      RightToLeft     =   0   'False
+      RowMember       =   ""
+      MouseIcon       =   0
+      MouseIcon.vt    =   3
+      MousePointer    =   0
+      MatchEntryTimeout=   2000
+      OLEDragMode     =   0
+      OLEDropMode     =   0
+      AnimateWindow   =   0
+      AnimateWindowDirection=   0
+      AnimateWindowTime=   200
+      AnimateWindowClose=   0
+      DropdownPosition=   3
+      Locked          =   0   'False
+      ScrollTrack     =   0   'False
+      RowDividerColor =   15790320
+      RowSubDividerColor=   15790320
+      AddItemSeparator=   ";"
+      _PropDict       =   $"FrmTransacciones.frx":0322
+      _StyleDefs(0)   =   "_StyleRoot:id=0,.parent=-1,.alignment=3,.valignment=0,.bgcolor=&H80000005&"
+      _StyleDefs(1)   =   ":id=0,.fgcolor=&H80000008&,.wraptext=0,.locked=0,.transparentBmp=0"
+      _StyleDefs(2)   =   ":id=0,.fgpicPosition=0,.bgpicMode=0,.appearance=0,.borderSize=0,.ellipsis=0"
+      _StyleDefs(3)   =   ":id=0,.borderColor=&H80000005&,.borderType=0,.bold=0,.fontsize=825,.italic=0"
+      _StyleDefs(4)   =   ":id=0,.underline=0,.strikethrough=0,.charset=0"
+      _StyleDefs(5)   =   ":id=0,.fontname=MS Sans Serif"
+      _StyleDefs(6)   =   "Style:id=1,.parent=0,.namedParent=33"
+      _StyleDefs(7)   =   "CaptionStyle:id=4,.parent=2,.namedParent=37"
+      _StyleDefs(8)   =   "HeadingStyle:id=2,.parent=1,.namedParent=34"
+      _StyleDefs(9)   =   "FooterStyle:id=3,.parent=1,.namedParent=35"
+      _StyleDefs(10)  =   "InactiveStyle:id=5,.parent=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+      _StyleDefs(11)  =   "SelectedStyle:id=6,.parent=1,.namedParent=36"
+      _StyleDefs(12)  =   "EditorStyle:id=7,.parent=1"
+      _StyleDefs(13)  =   "HighlightRowStyle:id=8,.parent=1,.namedParent=38"
+      _StyleDefs(14)  =   "EvenRowStyle:id=9,.parent=1,.namedParent=39"
+      _StyleDefs(15)  =   "OddRowStyle:id=10,.parent=1,.namedParent=40"
+      _StyleDefs(16)  =   "RecordSelectorStyle:id=11,.parent=2,.namedParent=41"
+      _StyleDefs(17)  =   "FilterBarStyle:id=12,.parent=1,.namedParent=42"
+      _StyleDefs(18)  =   "Splits(0).Style:id=13,.parent=1"
+      _StyleDefs(19)  =   "Splits(0).CaptionStyle:id=22,.parent=4"
+      _StyleDefs(20)  =   "Splits(0).HeadingStyle:id=14,.parent=2"
+      _StyleDefs(21)  =   "Splits(0).FooterStyle:id=15,.parent=3"
+      _StyleDefs(22)  =   "Splits(0).InactiveStyle:id=16,.parent=5"
+      _StyleDefs(23)  =   "Splits(0).SelectedStyle:id=18,.parent=6"
+      _StyleDefs(24)  =   "Splits(0).EditorStyle:id=17,.parent=7"
+      _StyleDefs(25)  =   "Splits(0).HighlightRowStyle:id=19,.parent=8"
+      _StyleDefs(26)  =   "Splits(0).EvenRowStyle:id=20,.parent=9"
+      _StyleDefs(27)  =   "Splits(0).OddRowStyle:id=21,.parent=10"
+      _StyleDefs(28)  =   "Splits(0).RecordSelectorStyle:id=23,.parent=11"
+      _StyleDefs(29)  =   "Splits(0).FilterBarStyle:id=24,.parent=12"
+      _StyleDefs(30)  =   "Splits(0).Columns(0).Style:id=28,.parent=13"
+      _StyleDefs(31)  =   "Splits(0).Columns(0).HeadingStyle:id=25,.parent=14"
+      _StyleDefs(32)  =   "Splits(0).Columns(0).FooterStyle:id=26,.parent=15"
+      _StyleDefs(33)  =   "Splits(0).Columns(0).EditorStyle:id=27,.parent=17"
+      _StyleDefs(34)  =   "Splits(0).Columns(1).Style:id=32,.parent=13"
+      _StyleDefs(35)  =   "Splits(0).Columns(1).HeadingStyle:id=29,.parent=14"
+      _StyleDefs(36)  =   "Splits(0).Columns(1).FooterStyle:id=30,.parent=15"
+      _StyleDefs(37)  =   "Splits(0).Columns(1).EditorStyle:id=31,.parent=17"
+      _StyleDefs(38)  =   "Named:id=33:Normal"
+      _StyleDefs(39)  =   ":id=33,.parent=0"
+      _StyleDefs(40)  =   "Named:id=34:Heading"
+      _StyleDefs(41)  =   ":id=34,.parent=33,.valignment=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+      _StyleDefs(42)  =   ":id=34,.wraptext=-1"
+      _StyleDefs(43)  =   "Named:id=35:Footing"
+      _StyleDefs(44)  =   ":id=35,.parent=33,.valignment=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+      _StyleDefs(45)  =   "Named:id=36:Selected"
+      _StyleDefs(46)  =   ":id=36,.parent=33,.bgcolor=&H8000000D&,.fgcolor=&H8000000E&"
+      _StyleDefs(47)  =   "Named:id=37:Caption"
+      _StyleDefs(48)  =   ":id=37,.parent=34,.alignment=2"
+      _StyleDefs(49)  =   "Named:id=38:HighlightRow"
+      _StyleDefs(50)  =   ":id=38,.parent=33,.bgcolor=&H8000000D&,.fgcolor=&H8000000E&"
+      _StyleDefs(51)  =   "Named:id=39:EvenRow"
+      _StyleDefs(52)  =   ":id=39,.parent=33,.bgcolor=&HFFFF00&"
+      _StyleDefs(53)  =   "Named:id=40:OddRow"
+      _StyleDefs(54)  =   ":id=40,.parent=33"
+      _StyleDefs(55)  =   "Named:id=41:RecordSelector"
+      _StyleDefs(56)  =   ":id=41,.parent=34"
+      _StyleDefs(57)  =   "Named:id=42:FilterBar"
+      _StyleDefs(58)  =   ":id=42,.parent=33"
+   End
    Begin VB.CheckBox ChkVentana 
       Caption         =   "Mostrar Vtana Factura"
       Height          =   255
@@ -361,7 +508,7 @@ Begin VB.Form FrmTransacciones
          EndProperty
          Height          =   300
          Left            =   3360
-         Picture         =   "FrmTransacciones.frx":030A
+         Picture         =   "FrmTransacciones.frx":03CC
          Style           =   1  'Graphical
          TabIndex        =   51
          Top             =   1320
@@ -445,7 +592,7 @@ Begin VB.Form FrmTransacciones
          Width           =   1095
       End
       Begin TrueOleDBList80.TDBCombo TDBProveedor 
-         Bindings        =   "FrmTransacciones.frx":0458
+         Bindings        =   "FrmTransacciones.frx":051A
          Height          =   315
          Left            =   1200
          TabIndex        =   40
@@ -530,7 +677,7 @@ Begin VB.Form FrmTransacciones
          RowDividerColor =   14215660
          RowSubDividerColor=   14215660
          AddItemSeparator=   ";"
-         _PropDict       =   $"FrmTransacciones.frx":0475
+         _PropDict       =   $"FrmTransacciones.frx":0537
          _StyleDefs(0)   =   "_StyleRoot:id=0,.parent=-1,.alignment=3,.valignment=0,.bgcolor=&H80000005&"
          _StyleDefs(1)   =   ":id=0,.fgcolor=&H80000008&,.wraptext=0,.locked=0,.transparentBmp=0"
          _StyleDefs(2)   =   ":id=0,.fgpicPosition=0,.bgpicMode=0,.appearance=0,.borderSize=0,.ellipsis=0"
@@ -639,7 +786,7 @@ Begin VB.Form FrmTransacciones
          _ExtentX        =   2990
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   188416001
+         Format          =   214237185
          CurrentDate     =   38918
       End
       Begin VB.TextBox TxtMonto 
@@ -659,7 +806,7 @@ Begin VB.Form FrmTransacciones
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   188416001
+         Format          =   122290177
          CurrentDate     =   38918
       End
       Begin VB.Label LblNombres 
@@ -816,7 +963,7 @@ Begin VB.Form FrmTransacciones
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel7 
       Height          =   255
       Left            =   11520
-      OleObjectBlob   =   "FrmTransacciones.frx":051F
+      OleObjectBlob   =   "FrmTransacciones.frx":05E1
       TabIndex        =   23
       Top             =   4560
       Width           =   1335
@@ -824,7 +971,7 @@ Begin VB.Form FrmTransacciones
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel6 
       Height          =   255
       Left            =   10080
-      OleObjectBlob   =   "FrmTransacciones.frx":058B
+      OleObjectBlob   =   "FrmTransacciones.frx":064D
       TabIndex        =   22
       Top             =   4560
       Width           =   1335
@@ -888,9 +1035,9 @@ Begin VB.Form FrmTransacciones
    Begin VB.ListBox List1 
       Appearance      =   0  'Flat
       Height          =   810
-      ItemData        =   "FrmTransacciones.frx":05F5
+      ItemData        =   "FrmTransacciones.frx":06B7
       Left            =   960
-      List            =   "FrmTransacciones.frx":05FF
+      List            =   "FrmTransacciones.frx":06C1
       TabIndex        =   8
       Top             =   1920
       Visible         =   0   'False
@@ -1322,7 +1469,7 @@ Begin VB.Form FrmTransacciones
       EndProperty
       Height          =   300
       Left            =   6480
-      Picture         =   "FrmTransacciones.frx":0614
+      Picture         =   "FrmTransacciones.frx":06D6
       Style           =   1  'Graphical
       TabIndex        =   7
       Top             =   360
@@ -1394,20 +1541,21 @@ Begin VB.Form FrmTransacciones
       Width           =   13335
       Begin VB.ComboBox CmbAjustes 
          Height          =   315
-         ItemData        =   "FrmTransacciones.frx":0762
+         ItemData        =   "FrmTransacciones.frx":0824
          Left            =   9480
-         List            =   "FrmTransacciones.frx":076F
+         List            =   "FrmTransacciones.frx":0831
          TabIndex        =   54
          Top             =   240
          Width           =   1455
       End
-      Begin MSDataListLib.DataCombo TxtFuente 
-         Bindings        =   "FrmTransacciones.frx":0793
+      Begin MSDataListLib.DataCombo TxtFuente1 
+         Bindings        =   "FrmTransacciones.frx":0855
          DataSource      =   "AdoFuente"
          Height          =   315
-         Left            =   11760
+         Left            =   0
          TabIndex        =   50
-         Top             =   240
+         Top             =   480
+         Visible         =   0   'False
          Width           =   1455
          _ExtentX        =   2566
          _ExtentY        =   556
@@ -1425,14 +1573,14 @@ Begin VB.Form FrmTransacciones
          _ExtentX        =   2778
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   187039745
+         Format          =   214761473
          CurrentDate     =   38918
       End
       Begin VB.ComboBox CmbMoneda 
          Height          =   315
-         ItemData        =   "FrmTransacciones.frx":07BA
+         ItemData        =   "FrmTransacciones.frx":087C
          Left            =   7920
-         List            =   "FrmTransacciones.frx":07C4
+         List            =   "FrmTransacciones.frx":0886
          TabIndex        =   9
          Top             =   240
          Width           =   1455
@@ -1465,7 +1613,7 @@ Begin VB.Form FrmTransacciones
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel1 
          Height          =   255
          Left            =   6840
-         OleObjectBlob   =   "FrmTransacciones.frx":07DB
+         OleObjectBlob   =   "FrmTransacciones.frx":089D
          TabIndex        =   17
          Top             =   240
          Width           =   975
@@ -1473,7 +1621,7 @@ Begin VB.Form FrmTransacciones
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel2 
          Height          =   255
          Left            =   120
-         OleObjectBlob   =   "FrmTransacciones.frx":084F
+         OleObjectBlob   =   "FrmTransacciones.frx":0911
          TabIndex        =   18
          Top             =   240
          Width           =   495
@@ -1481,7 +1629,7 @@ Begin VB.Form FrmTransacciones
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel3 
          Height          =   255
          Left            =   4200
-         OleObjectBlob   =   "FrmTransacciones.frx":08B7
+         OleObjectBlob   =   "FrmTransacciones.frx":0979
          TabIndex        =   19
          Top             =   240
          Width           =   1215
@@ -1489,15 +1637,15 @@ Begin VB.Form FrmTransacciones
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel4 
          Height          =   255
          Left            =   2520
-         OleObjectBlob   =   "FrmTransacciones.frx":0933
+         OleObjectBlob   =   "FrmTransacciones.frx":09F5
          TabIndex        =   20
          Top             =   240
          Width           =   615
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel5 
          Height          =   255
-         Left            =   11160
-         OleObjectBlob   =   "FrmTransacciones.frx":099F
+         Left            =   11040
+         OleObjectBlob   =   "FrmTransacciones.frx":0A61
          TabIndex        =   21
          Top             =   240
          Width           =   495
@@ -1506,19 +1654,19 @@ Begin VB.Form FrmTransacciones
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel8 
       Height          =   255
       Left            =   2880
-      OleObjectBlob   =   "FrmTransacciones.frx":0A09
+      OleObjectBlob   =   "FrmTransacciones.frx":0ACB
       TabIndex        =   24
       Top             =   4080
       Width           =   1335
    End
    Begin TrueOleDBGrid80.TDBGrid DBGTransacciones 
-      Bindings        =   "FrmTransacciones.frx":0A7B
+      Bindings        =   "FrmTransacciones.frx":0B3D
       Height          =   3015
       Left            =   120
       TabIndex        =   53
       Top             =   960
-      Width           =   13335
-      _ExtentX        =   23521
+      Width           =   14775
+      _ExtentX        =   26061
       _ExtentY        =   5318
       _LayoutType     =   0
       _RowHeight      =   -2147483647
@@ -2075,6 +2223,7 @@ End Sub
 
 Private Sub CmdBorrar_Click()
 Dim Periodo As Double, NumeroMovimiento As Double
+Dim rsTransacciones As New ADODB.Recordset, rsIndice As New ADODB.Recordset
 
 
 'On Error GoTo TipoErrs
@@ -2097,81 +2246,87 @@ Dim Periodo As Double, NumeroMovimiento As Double
    FechaFin = DateSerial(Año, mes + 1, 1 - 1)
    NumFecha1 = FechaIni
    NumFecha2 = FechaFin
+   
+    rsIndice.Open "UPDATE [IndiceTransaccion] SET [DescripcionMovimiento] = '**********CANCELADO*************' WHERE (FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(Me.TxtFecha.Value, "yyyy-MM-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(Me.TxtFecha.Value, "yyyy-MM-dd") & "', 102)) AND (NumeroMovimiento = " & NumeroTransaccion & ")", Conexion
  
-   Me.DtaConsulta.RecordSource = "SELECT IndiceTransaccion.FechaTransaccion, IndiceTransaccion.NumeroMovimiento, IndiceTransaccion.DescripcionMovimiento, IndiceTransaccion.Fuente, IndiceTransaccion.Fuente From IndiceTransaccion WHERE (((IndiceTransaccion.FechaTransaccion) Between " & NumFecha1 & " And " & NumFecha2 & " ) AND ((IndiceTransaccion.NumeroMovimiento)= " & NumeroTransaccion & "))"
-   Me.DtaConsulta.Refresh
-         
-       If Not DtaConsulta.Recordset.EOF Then
-        
-          'Me.'DtaConsulta.Recordset.Edit
-          Me.DtaConsulta.Recordset("DescripcionMovimiento") = "*****CANCELADO*****"
-          Me.DtaConsulta.Recordset.Update
-        
-       End If
+'   Me.DtaConsulta.RecordSource = "SELECT IndiceTransaccion.FechaTransaccion, IndiceTransaccion.NumeroMovimiento, IndiceTransaccion.DescripcionMovimiento, IndiceTransaccion.Fuente, IndiceTransaccion.Fuente From IndiceTransaccion WHERE (((IndiceTransaccion.FechaTransaccion) Between " & NumFecha1 & " And " & NumFecha2 & " ) AND ((IndiceTransaccion.NumeroMovimiento)= " & NumeroTransaccion & "))"
+'   Me.DtaConsulta.Refresh
+'
+'       If Not DtaConsulta.Recordset.EOF Then
+'
+'          'Me.'DtaConsulta.Recordset.Edit
+'          Me.DtaConsulta.Recordset("DescripcionMovimiento") = "*****CANCELADO*****"
+'          Me.DtaConsulta.Recordset.Update
+'
+'       End If
    
    
-   Me.DtaConsulta.RecordSource = "SELECT Transacciones.* From Transacciones WHERE (((Transacciones.FechaTransaccion) Between " & NumFecha1 & " And " & NumFecha2 & " ) AND ((Transacciones.NumeroMovimiento)= " & NumeroTransaccion & ") )"
-   Me.DtaConsulta.Refresh
-    Do While Not Me.DtaConsulta.Recordset.EOF
-'     'Me.DtaTransacciones.Recordset.Edit
-     DtaConsulta.Recordset("NombreCuenta") = "**********CANCELADO*************"
-     DtaConsulta.Recordset("DescripcionMovimiento") = "**********CANCELADO*************"
-     DtaConsulta.Recordset("Beneficiario") = "**********CANCELADO*************"
-     DtaConsulta.Recordset("Debito") = 0
-     DtaConsulta.Recordset("Credito") = 0
+'   Me.DtaConsulta.RecordSource = "SELECT Transacciones.* From Transacciones WHERE (((Transacciones.FechaTransaccion) Between " & NumFecha1 & " And " & NumFecha2 & " ) AND ((Transacciones.NumeroMovimiento)= " & NumeroTransaccion & ") )"
+'   Me.DtaConsulta.Refresh
+'    Do While Not Me.DtaConsulta.Recordset.EOF
+''     'Me.DtaTransacciones.Recordset.Edit
+'     DtaConsulta.Recordset("NombreCuenta") = "**********CANCELADO*************"
+'     DtaConsulta.Recordset("DescripcionMovimiento") = "**********CANCELADO*************"
+'     DtaConsulta.Recordset("Beneficiario") = "**********CANCELADO*************"
+'     DtaConsulta.Recordset("Debito") = 0
+'     DtaConsulta.Recordset("Credito") = 0
+'
+'     Me.DtaConsulta.Recordset.Update
+'     Me.DtaConsulta.Recordset.MoveNext
+'
+'     Me.CmbMoneda.Enabled = False
+'    Loop
 
-     Me.DtaConsulta.Recordset.Update
-     Me.DtaConsulta.Recordset.MoveNext
-       
-     Me.CmbMoneda.Enabled = False
-    Loop
+    rsTransacciones.Open "UPDATE [Transacciones]  SET [NombreCuenta] = '**********CANCELADO*************' ,[DescripcionMovimiento] = '**********CANCELADO*************' ,[Debito] = 0 ,[Credito] = 0 ,[Beneficiario] = '**********CANCELADO*************' ,[DebitoD] = 0 ,[CreditoD] = 0  WHERE (FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(Me.TxtFecha.Value, "yyyy-MM-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(Me.TxtFecha.Value, "yyyy-MM-dd") & "', 102)) AND (NumeroMovimiento = " & NumeroTransaccion & ")", Conexion
     
     
     
-    Me.DtaConsulta.RecordSource = "SELECT IndiceSolicitudPago.* From IndiceSolicitudPago  " & _
-                                  "WHERE (NumeroTransaccion = " & NumeroMovimiento & ") AND (NPeriodoTransaccion = " & Periodo & ")"
-    Me.DtaConsulta.Refresh
-    If Not Me.DtaConsulta.Recordset.EOF Then
-      Me.DtaConsulta.Recordset("DescripcionMovimiento") = "****ANULADO****·"
-      Me.DtaConsulta.Recordset("Activo") = 0
-      Me.DtaConsulta.Recordset("Anulado") = 1
-      Me.DtaConsulta.Recordset("Procesado") = 0
-      Me.DtaConsulta.Recordset.Update
-    End If
+'    Me.DtaConsulta.RecordSource = "SELECT IndiceSolicitudPago.* From IndiceSolicitudPago  " & _
+'                                  "WHERE (NumeroTransaccion = " & NumeroMovimiento & ") AND (NPeriodoTransaccion = " & Periodo & ")"
+'    Me.DtaConsulta.Refresh
+'    If Not Me.DtaConsulta.Recordset.EOF Then
+'      Me.DtaConsulta.Recordset("DescripcionMovimiento") = "****ANULADO****·"
+'      Me.DtaConsulta.Recordset("Activo") = 0
+'      Me.DtaConsulta.Recordset("Anulado") = 1
+'      Me.DtaConsulta.Recordset("Procesado") = 0
+'      Me.DtaConsulta.Recordset.Update
+'    End If
     
+    rsTransacciones.Open "UPDATE [dbo].[IndiceSolicitudPago] SET [DescripcionMovimiento] = '**********CANCELADO*************' ,[Activo] = 0 ,[Procesado] =0 ,[Beneficiario] = '**********CANCELADO*************' ,[Anulado] = 1  WHERE (NumeroTransaccion = " & NumeroMovimiento & ") AND (NPeriodoTransaccion = " & Periodo & ") ", Conexion
+
     
     
     
 '    Me.TxtFecha.Value = Format(FechaSistema, "dd/mm/yyyy")
     Me.DtaTransacciones.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento From Transacciones Where (((Transacciones.NumeroMovimiento) = -1))"
     Me.DtaTransacciones.Refresh
-  Me.DBGTransacciones.Columns(0).Button = True
+    Me.DBGTransacciones.Columns(0).Button = True
     Me.DBGTransacciones.Columns(1).Locked = True
-  Me.DBGTransacciones.Columns(5).Caption = "Cheq/Rec"
-  Me.DBGTransacciones.Columns(6).Button = True
-  Me.DBGTransacciones.Columns(6).Locked = True
-  Me.DBGTransacciones.Columns(0).Width = 1500
-  Me.DBGTransacciones.Columns(2).Width = 1000
-  Me.DBGTransacciones.Columns(3).Caption = "Descripcion"
-  Me.DBGTransacciones.Columns(4).Width = 1000
-  Me.DBGTransacciones.Columns(4).Button = True
-  Me.DBGTransacciones.Columns(5).Width = 1000
-  Me.DBGTransacciones.Columns(5).Caption = "Cheq/Rec"
-  Me.DBGTransacciones.Columns(6).Width = 800
-  Me.DBGTransacciones.Columns(7).Caption = "Tasa Cambio"
-  Me.DBGTransacciones.Columns(7).Locked = True
-  Me.DBGTransacciones.Columns(7).NumberFormat = "##,##0.000000"
-   Me.DBGTransacciones.Columns(7).Width = 1200
-  Me.DBGTransacciones.Columns(8).Width = 1200
-  Me.DBGTransacciones.Columns(8).NumberFormat = "##,##0.00"
-  Me.DBGTransacciones.Columns(9).Width = 1200
-  Me.DBGTransacciones.Columns(9).NumberFormat = "##,##0.00"
-  Me.DBGTransacciones.Columns(10).Visible = False
-  Me.DBGTransacciones.Columns(11).Visible = False
-  Me.DBGTransacciones.Columns(12).Visible = False
-  Me.DBGTransacciones.Columns(13).Visible = False
-  Me.DBGTransacciones.Columns(14).Visible = False
-  Me.DBGTransacciones.Columns(15).Visible = False
+    Me.DBGTransacciones.Columns(5).Caption = "Cheq/Rec"
+    Me.DBGTransacciones.Columns(6).Button = True
+    Me.DBGTransacciones.Columns(6).Locked = True
+    Me.DBGTransacciones.Columns(0).Width = 1500
+    Me.DBGTransacciones.Columns(2).Width = 1000
+    Me.DBGTransacciones.Columns(3).Caption = "Descripcion"
+    Me.DBGTransacciones.Columns(4).Width = 1000
+    Me.DBGTransacciones.Columns(4).Button = True
+    Me.DBGTransacciones.Columns(5).Width = 1000
+    Me.DBGTransacciones.Columns(5).Caption = "Cheq/Rec"
+    Me.DBGTransacciones.Columns(6).Width = 800
+    Me.DBGTransacciones.Columns(7).Caption = "Tasa Cambio"
+    Me.DBGTransacciones.Columns(7).Locked = True
+    Me.DBGTransacciones.Columns(7).NumberFormat = "##,##0.000000"
+     Me.DBGTransacciones.Columns(7).Width = 1200
+    Me.DBGTransacciones.Columns(8).Width = 1200
+    Me.DBGTransacciones.Columns(8).NumberFormat = "##,##0.00"
+    Me.DBGTransacciones.Columns(9).Width = 1200
+    Me.DBGTransacciones.Columns(9).NumberFormat = "##,##0.00"
+    Me.DBGTransacciones.Columns(10).Visible = False
+    Me.DBGTransacciones.Columns(11).Visible = False
+    Me.DBGTransacciones.Columns(12).Visible = False
+    Me.DBGTransacciones.Columns(13).Visible = False
+    Me.DBGTransacciones.Columns(14).Visible = False
+    Me.DBGTransacciones.Columns(15).Visible = False
   'Me.DBGTransacciones.Columns(16).Visible = False
    ' Me.DBGTransacciones.Enabled = False
  
@@ -2351,42 +2506,46 @@ Me.CmbMoneda.Text = "Córdobas"
 Me.CmbAjustes.Text = "SIN AJUSTES"
 
 
-  Me.DBGTransacciones.Columns(0).Button = True
-  Me.DBGTransacciones.Columns(1).Locked = True
-  Me.DBGTransacciones.Columns(1).Locked = True
-  Me.DBGTransacciones.Columns(5).Caption = "Cheq/Rec"
-  Me.DBGTransacciones.Columns(6).Button = True
-  Me.DBGTransacciones.Columns(6).Locked = True
-  Me.DBGTransacciones.Columns(0).Width = 1500
-  Me.DBGTransacciones.Columns(2).Width = 1000
-  Me.DBGTransacciones.Columns(3).Caption = "Descripcion"
-  Me.DBGTransacciones.Columns(4).Width = 1000
-  Me.DBGTransacciones.Columns(4).Button = True
-  Me.DBGTransacciones.Columns(5).Width = 1000
-  Me.DBGTransacciones.Columns(5).Caption = "Cheq/Rec"
-  Me.DBGTransacciones.Columns(6).Width = 800
-  Me.DBGTransacciones.Columns(7).Caption = "Tasa Cambio"
-  Me.DBGTransacciones.Columns(7).Locked = True
-  Me.DBGTransacciones.Columns(7).NumberFormat = "##,##0.000000"
-  Me.DBGTransacciones.Columns(7).Width = 1200
-  Me.DBGTransacciones.Columns(8).Width = 1200
-  Me.DBGTransacciones.Columns(8).NumberFormat = "##,##0.00"
-  Me.DBGTransacciones.Columns(9).Width = 1200
-  Me.DBGTransacciones.Columns(9).NumberFormat = "##,##0.00"
-  Me.DBGTransacciones.Columns(10).Visible = False
-  Me.DBGTransacciones.Columns(11).Visible = False
-  Me.DBGTransacciones.Columns(12).Visible = False
-  Me.DBGTransacciones.Columns(13).Visible = False
-  Me.DBGTransacciones.Columns(14).Visible = False
-  Me.DBGTransacciones.Columns(15).Visible = False
-  Me.DBGTransacciones.Columns(16).Visible = False
-  Me.DBGTransacciones.Columns(17).Visible = False
-  Me.DBGTransacciones.Columns(18).Visible = False
-  Me.DBGTransacciones.Columns(19).Visible = False
-  FrmTransacciones.DBGTransacciones.Columns(20).Visible = False
-  FrmTransacciones.DBGTransacciones.Columns(21).Visible = False
-  FrmTransacciones.DBGTransacciones.Columns(22).Visible = False
-  Me.DBGTransacciones.Columns(7).Locked = True 'columna tasa de cambio
+ConfiguracionGrid
+
+
+'
+'  Me.DBGTransacciones.Columns(0).Button = True
+'  Me.DBGTransacciones.Columns(1).Locked = True
+'  Me.DBGTransacciones.Columns(1).Locked = True
+'  Me.DBGTransacciones.Columns(5).Caption = "Cheq/Rec"
+'  Me.DBGTransacciones.Columns(6).Button = True
+'  Me.DBGTransacciones.Columns(6).Locked = True
+'  Me.DBGTransacciones.Columns(0).Width = 1500
+'  Me.DBGTransacciones.Columns(2).Width = 1000
+'  Me.DBGTransacciones.Columns(3).Caption = "Descripcion"
+'  Me.DBGTransacciones.Columns(4).Width = 1000
+'  Me.DBGTransacciones.Columns(4).Button = True
+'  Me.DBGTransacciones.Columns(5).Width = 1000
+'  Me.DBGTransacciones.Columns(5).Caption = "Cheq/Rec"
+'  Me.DBGTransacciones.Columns(6).Width = 800
+'  Me.DBGTransacciones.Columns(7).Caption = "Tasa Cambio"
+'  Me.DBGTransacciones.Columns(7).Locked = True
+'  Me.DBGTransacciones.Columns(7).NumberFormat = "##,##0.000000"
+'  Me.DBGTransacciones.Columns(7).Width = 1200
+'  Me.DBGTransacciones.Columns(8).Width = 1200
+'  Me.DBGTransacciones.Columns(8).NumberFormat = "##,##0.00"
+'  Me.DBGTransacciones.Columns(9).Width = 1200
+'  Me.DBGTransacciones.Columns(9).NumberFormat = "##,##0.00"
+'  Me.DBGTransacciones.Columns(10).Visible = False
+'  Me.DBGTransacciones.Columns(11).Visible = False
+'  Me.DBGTransacciones.Columns(12).Visible = False
+'  Me.DBGTransacciones.Columns(13).Visible = False
+'  Me.DBGTransacciones.Columns(14).Visible = False
+'  Me.DBGTransacciones.Columns(15).Visible = False
+'  Me.DBGTransacciones.Columns(16).Visible = False
+'  Me.DBGTransacciones.Columns(17).Visible = False
+'  Me.DBGTransacciones.Columns(18).Visible = False
+'  Me.DBGTransacciones.Columns(19).Visible = False
+'  FrmTransacciones.DBGTransacciones.Columns(20).Visible = False
+'  FrmTransacciones.DBGTransacciones.Columns(21).Visible = False
+'  FrmTransacciones.DBGTransacciones.Columns(22).Visible = False
+'  Me.DBGTransacciones.Columns(7).Locked = True 'columna tasa de cambio
   
   
 TotalCredito = 0
@@ -2398,7 +2557,8 @@ Diferencia = 0
 
 
 '////////////////ACTUALIZO LAS FUENTES///////////////////////////////////////////////////7
-Me.AdoFuente.RecordSource = "SELECT DISTINCT Fuente From IndiceTransaccion WHERE (Fuente <> N'  ')"
+'Me.AdoFuente.RecordSource = "SELECT DISTINCT Fuente From IndiceTransaccion WHERE (Fuente <> N'  ')"
+Me.AdoFuente.RecordSource = "SELECT  Valor As Fuente FROM (SELECT CodTipo + ' - ' + ISNULL(Descripcion, '') AS Valor  From TipoTransacciones Union SELECT  Fuente From Transacciones  Where Fuente Is Not Null AND LTRIM(RTRIM(Fuente)) <> '' ) AS Resultado ORDER BY Fuente "
 Me.AdoFuente.Refresh
 
  
@@ -3093,6 +3253,28 @@ If ColIndex = 8 Or ColIndex = 9 Then
   
         Me.DBGTransacciones.Enabled = False
 
+        Else
+        
+         
+         '////////////////////////////////////BUSCO SI ES PRESUPUESTO ///////////////////////
+           Me.DtaConsulta.RecordSource = "SELECT KeyGrupo, CodGrupo, KeyGrupoSuperior, Child, DescripcionGrupo, Imagen1, Imagen2 From EstructuraPresupuesto WHERE (DescripcionGrupo LIKE '%" & Me.DBGTransacciones.Columns("FacturaNo").Text & "%') "
+           Me.DtaConsulta.Refresh
+           If Not Me.DtaConsulta.Recordset.EOF Then
+              If Me.DBGTransacciones.Columns("FacturaNo").Text = "" Or Me.DBGTransacciones.Columns("FacturaNo").Text = "-" Then
+                   Me.DBGTransacciones.Columns("KeyPresupuesto").Text = 0
+                   Me.DBGTransacciones.Columns("Presupuesto").Text = 0
+           
+              Else
+                   Me.DBGTransacciones.Columns("KeyPresupuesto").Text = DtaConsulta.Recordset("KeyGrupo")
+                   Me.DBGTransacciones.Columns("Presupuesto").Text = DtaConsulta.Recordset("DescripcionGrupo")
+              End If
+           Else
+                   Me.DBGTransacciones.Columns("KeyPresupuesto").Text = 0
+                   Me.DBGTransacciones.Columns("Presupuesto").Text = 0
+           
+           End If
+        
+        
         
         End If
   
@@ -4064,6 +4246,8 @@ Select Case ColIndex
   
   QueProducto = "Transacciones"
   FrmConsulta.Show 1
+  
+  
   Case 2
    QueProducto = "Departamento"
    FrmConsulta.Show 1
@@ -4080,10 +4264,19 @@ Select Case ColIndex
       '.BoundText = Descripcion
       End With
   Case 4
+         QueProducto = "Presupuesto"
+         FrmConsulta.Show 1
+         Me.DBGTransacciones.Columns(4).Text = FrmConsulta.Codigo
+         Me.DBGTransacciones.Columns("KeyPresupuesto").Text = FrmConsulta.KeyPresupuesto
+         Me.DBGTransacciones.Columns("Presupuesto").Text = FrmConsulta.DescripcionPresupuesto
+  Case 24
+         QueProducto = "Beneficiario"
+         FrmConsulta.Show 1
+          Me.DBGTransacciones.Columns(24).Text = FrmConsulta.Codigo
+         
   
   
-  
-     FrmTransaccionCob.Show
+'     FrmTransaccionCob.Show
 
 End Select
 
@@ -4435,6 +4628,65 @@ Me.DBGTransacciones.Columns(19).Text = FechaVence
 
 End Sub
 
+Public Sub ConfiguracionGrid()
+  Me.DBGTransacciones.Columns("CodCuentas").Width = 1500  '0
+  Me.DBGTransacciones.Columns("CodCuentas").Button = True  '0
+  Me.DBGTransacciones.Columns("NombreCuenta").Locked = True '1
+  Me.DBGTransacciones.Columns("NombreCuenta").Locked = True '1
+  Me.DBGTransacciones.Columns("VoucherNo").Width = 1000 '2
+  Me.DBGTransacciones.Columns("VoucherNo").Caption = "Voucher/Dpto" '2
+  Me.DBGTransacciones.Columns("VoucherNo").Width = 1100 '2
+  Me.DBGTransacciones.Columns("DescripcionMovimiento").Caption = "Descripcion" '3
+  Me.DBGTransacciones.Columns("FacturaNo").Width = 1000 '4
+  Me.DBGTransacciones.Columns("FacturaNo").Width = 1000 '4
+  Me.DBGTransacciones.Columns("FacturaNo").Button = True '4
+  Me.DBGTransacciones.Columns("ChequeNo").Width = 1000
+  Me.DBGTransacciones.Columns("ChequeNo").Caption = "Cheq/Rec"
+  Me.DBGTransacciones.Columns("Clave").Button = True
+  Me.DBGTransacciones.Columns("Clave").Locked = True
+  Me.DBGTransacciones.Columns("Clave").Width = 800
+  Me.DBGTransacciones.Columns("TCambio").Caption = "Tasa Cambio"
+  Me.DBGTransacciones.Columns("TCambio").Locked = True
+  Me.DBGTransacciones.Columns("TCambio").NumberFormat = "##,##0.000000"
+  Me.DBGTransacciones.Columns("TCambio").Width = 1200
+  Me.DBGTransacciones.Columns("TCambio").Locked = True
+  Me.DBGTransacciones.Columns("Debito").Width = 1200
+  Me.DBGTransacciones.Columns("Debito").NumberFormat = "##,##0.00"
+  Me.DBGTransacciones.Columns("Credito").Width = 1200
+  Me.DBGTransacciones.Columns("Credito").NumberFormat = "##,##0.00"
+  Me.DBGTransacciones.Columns("FechaTransaccion").Visible = False
+  Me.DBGTransacciones.Columns("NPeriodo").Visible = False
+  Me.DBGTransacciones.Columns("NTransaccion").Visible = False
+  Me.DBGTransacciones.Columns("Fuente").Visible = False
+  Me.DBGTransacciones.Columns("FechaTasas").Visible = False
+  Me.DBGTransacciones.Columns("NumeroMovimiento").Visible = False
+  Me.DBGTransacciones.Columns("Periodo").Visible = False
+  Me.DBGTransacciones.Columns("FechaDescuento").Visible = False
+  Me.DBGTransacciones.Columns("DescuentoDisponible").Visible = False
+  Me.DBGTransacciones.Columns("FechaVence").Visible = False
+  Me.DBGTransacciones.Columns("CodCuentaProveedor").Visible = False
+  Me.DBGTransacciones.Columns("TipoFactura").Visible = False
+  Me.DBGTransacciones.Columns("KeyPresupuesto").Visible = False
+  Me.DBGTransacciones.Columns("Presupuesto").Visible = False
+  
+  If ActivarBeneficiario = 1 Then
+    '////////TERCEROS ''''
+    Me.DBGTransacciones.Columns("Cod_Tercero").Caption = "Beneficiario"
+    Me.DBGTransacciones.Columns("Cod_Tercero").Width = 1500
+    Me.DBGTransacciones.Columns("Cod_Tercero").Button = True
+    Me.DBGTransacciones.Width = 14775
+    Me.Width = 15060
+    
+  Else
+    Me.DBGTransacciones.Width = 13335
+    Me.Width = 13725
+  End If
+  FrmTransacciones.DBGTransacciones.Columns("NTransaccion").Visible = False
+
+End Sub
+
+
+
 Private Sub Form_Activate()
 On Error GoTo TipoErrs
  
@@ -4582,8 +4834,10 @@ End With
 '    Me.TDBGridFechas.ReBind
 
 
-Me.AdoFuente.RecordSource = "SELECT DISTINCT Fuente From IndiceTransaccion WHERE (Fuente <> N'  ')"
+'Me.AdoFuente.RecordSource = "SELECT DISTINCT Fuente From IndiceTransaccion WHERE (Fuente <> N'  ')"
+Me.AdoFuente.RecordSource = "SELECT  Valor As Fuente FROM (SELECT CodTipo + ' - ' + ISNULL(Descripcion, '') AS Valor  From TipoTransacciones Union SELECT  Fuente From Transacciones  Where Fuente Is Not Null AND LTRIM(RTRIM(Fuente)) <> '' ) AS Resultado ORDER BY Fuente "
 Me.AdoFuente.Refresh
+
 
 ' Me.TxtFuente.Clear
 'Do While Not Me.AdoFuente.Recordset.EOF
@@ -4678,59 +4932,94 @@ If Not Encontrado Then
 End If
 
 
-Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
+
+If ActivarBeneficiario = 1 Then
+Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo,  Transacciones.DescripcionMovimiento, " & _
        "Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, " & _
        "Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, " & _
        "Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.FechaDescuento, Transacciones.DescuentoDisponible, " & _
-       "Transacciones.FechaVence,Transacciones.CodCuentaProveedor,Transacciones.TipoFactura " & _
-       "FROM         Periodos INNER JOIN " & _
+       "Transacciones.FechaVence,Transacciones.CodCuentaProveedor,Transacciones.TipoFactura, Transacciones.KeyPresupuesto, " & _
+       "Transacciones.Presupuesto, Transacciones.Cod_Tercero " & _
+       "FROM Periodos INNER JOIN " & _
        "Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo " & _
        "Where (Transacciones.NumeroMovimiento = -1) " & _
        "ORDER BY Transacciones.NTransaccion "
+       
+Else
+
+    Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, " & _
+           "Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, " & _
+           "Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, " & _
+           "Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.FechaDescuento, Transacciones.DescuentoDisponible, " & _
+           "Transacciones.FechaVence,Transacciones.CodCuentaProveedor,Transacciones.TipoFactura,Transacciones.KeyPresupuesto, Transacciones.Presupuesto " & _
+           "FROM         Periodos INNER JOIN " & _
+           "Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo " & _
+           "Where (Transacciones.NumeroMovimiento = -1) " & _
+           "ORDER BY Transacciones.NTransaccion "
+       
+End If
        
 Me.DtaTransacciones.RecordSource = Sql
 Me.DtaTransacciones.Refresh
 Me.CmbMoneda.Text = "Córdobas"
 Me.CmbAjustes.Text = "SIN AJUSTES"
+
+ConfiguracionGrid
   
-  Me.DBGTransacciones.Columns("CodCuentas").Width = 1500  '0
-  Me.DBGTransacciones.Columns("CodCuentas").Button = True  '0
-  Me.DBGTransacciones.Columns("NombreCuenta").Locked = True '1
-  Me.DBGTransacciones.Columns("NombreCuenta").Locked = True '1
-  Me.DBGTransacciones.Columns("VoucherNo").Width = 1000 '2
-  Me.DBGTransacciones.Columns("VoucherNo").Caption = "Voucher/Dpto" '2
-  Me.DBGTransacciones.Columns("VoucherNo").Width = 1100 '2
-  Me.DBGTransacciones.Columns("DescripcionMovimiento").Caption = "Descripcion" '3
-  Me.DBGTransacciones.Columns("FacturaNo").Width = 1000 '4
-  Me.DBGTransacciones.Columns("FacturaNo").Width = 1000 '4
-  Me.DBGTransacciones.Columns("FacturaNo").Button = True '4
-  Me.DBGTransacciones.Columns("ChequeNo").Width = 1000
-  Me.DBGTransacciones.Columns("ChequeNo").Caption = "Cheq/Rec"
-  Me.DBGTransacciones.Columns("Clave").Button = True
-  Me.DBGTransacciones.Columns("Clave").Locked = True
-  Me.DBGTransacciones.Columns("Clave").Width = 800
-  Me.DBGTransacciones.Columns("TCambio").Caption = "Tasa Cambio"
-  Me.DBGTransacciones.Columns("TCambio").Locked = True
-  Me.DBGTransacciones.Columns("TCambio").NumberFormat = "##,##0.000000"
-  Me.DBGTransacciones.Columns("TCambio").Width = 1200
-  Me.DBGTransacciones.Columns("TCambio").Locked = True
-  Me.DBGTransacciones.Columns("Debito").Width = 1200
-  Me.DBGTransacciones.Columns("Debito").NumberFormat = "##,##0.00"
-  Me.DBGTransacciones.Columns("Credito").Width = 1200
-  Me.DBGTransacciones.Columns("Credito").NumberFormat = "##,##0.00"
-  Me.DBGTransacciones.Columns("FechaTransaccion").Visible = False
-  Me.DBGTransacciones.Columns("NPeriodo").Visible = False
-  Me.DBGTransacciones.Columns("NTransaccion").Visible = False
-  Me.DBGTransacciones.Columns("Fuente").Visible = False
-  Me.DBGTransacciones.Columns("FechaTasas").Visible = False
-  Me.DBGTransacciones.Columns("NumeroMovimiento").Visible = False
-  Me.DBGTransacciones.Columns("Periodo").Visible = False
-  Me.DBGTransacciones.Columns("FechaDescuento").Visible = False
-  Me.DBGTransacciones.Columns("DescuentoDisponible").Visible = False
-  Me.DBGTransacciones.Columns("FechaVence").Visible = False
-  Me.DBGTransacciones.Columns("CodCuentaProveedor").Visible = False
-  Me.DBGTransacciones.Columns("TipoFactura").Visible = False
-  FrmTransacciones.DBGTransacciones.Columns("NTransaccion").Visible = False
+'  Me.DBGTransacciones.Columns("CodCuentas").Width = 1500  '0
+'  Me.DBGTransacciones.Columns("CodCuentas").Button = True  '0
+'  Me.DBGTransacciones.Columns("NombreCuenta").Locked = True '1
+'  Me.DBGTransacciones.Columns("NombreCuenta").Locked = True '1
+'  Me.DBGTransacciones.Columns("VoucherNo").Width = 1000 '2
+'  Me.DBGTransacciones.Columns("VoucherNo").Caption = "Voucher/Dpto" '2
+'  Me.DBGTransacciones.Columns("VoucherNo").Width = 1100 '2
+'  Me.DBGTransacciones.Columns("DescripcionMovimiento").Caption = "Descripcion" '3
+'  Me.DBGTransacciones.Columns("FacturaNo").Width = 1000 '4
+'  Me.DBGTransacciones.Columns("FacturaNo").Width = 1000 '4
+'  Me.DBGTransacciones.Columns("FacturaNo").Button = True '4
+'  Me.DBGTransacciones.Columns("ChequeNo").Width = 1000
+'  Me.DBGTransacciones.Columns("ChequeNo").Caption = "Cheq/Rec"
+'  Me.DBGTransacciones.Columns("Clave").Button = True
+'  Me.DBGTransacciones.Columns("Clave").Locked = True
+'  Me.DBGTransacciones.Columns("Clave").Width = 800
+'  Me.DBGTransacciones.Columns("TCambio").Caption = "Tasa Cambio"
+'  Me.DBGTransacciones.Columns("TCambio").Locked = True
+'  Me.DBGTransacciones.Columns("TCambio").NumberFormat = "##,##0.000000"
+'  Me.DBGTransacciones.Columns("TCambio").Width = 1200
+'  Me.DBGTransacciones.Columns("TCambio").Locked = True
+'  Me.DBGTransacciones.Columns("Debito").Width = 1200
+'  Me.DBGTransacciones.Columns("Debito").NumberFormat = "##,##0.00"
+'  Me.DBGTransacciones.Columns("Credito").Width = 1200
+'  Me.DBGTransacciones.Columns("Credito").NumberFormat = "##,##0.00"
+'  Me.DBGTransacciones.Columns("FechaTransaccion").Visible = False
+'  Me.DBGTransacciones.Columns("NPeriodo").Visible = False
+'  Me.DBGTransacciones.Columns("NTransaccion").Visible = False
+'  Me.DBGTransacciones.Columns("Fuente").Visible = False
+'  Me.DBGTransacciones.Columns("FechaTasas").Visible = False
+'  Me.DBGTransacciones.Columns("NumeroMovimiento").Visible = False
+'  Me.DBGTransacciones.Columns("Periodo").Visible = False
+'  Me.DBGTransacciones.Columns("FechaDescuento").Visible = False
+'  Me.DBGTransacciones.Columns("DescuentoDisponible").Visible = False
+'  Me.DBGTransacciones.Columns("FechaVence").Visible = False
+'  Me.DBGTransacciones.Columns("CodCuentaProveedor").Visible = False
+'  Me.DBGTransacciones.Columns("TipoFactura").Visible = False
+'  Me.DBGTransacciones.Columns("KeyPresupuesto").Visible = False
+'  Me.DBGTransacciones.Columns("Presupuesto").Visible = False
+'
+'  If ActivarBeneficiario = 1 Then
+'    '////////TERCEROS ''''
+'    Me.DBGTransacciones.Columns("Cod_Tercero").Caption = "Cod. Tercero"
+'    Me.DBGTransacciones.Columns("Cod_Tercero").Width = 1500
+'    Me.DBGTransacciones.Columns("Cod_Tercero").Button = True
+'    Me.DBGTransacciones.Width = 14775
+'    Me.Width = 15060
+'
+'  Else
+'    Me.DBGTransacciones.Width = 13335
+'    Me.Width = 13725
+'  End If
+'  FrmTransacciones.DBGTransacciones.Columns("NTransaccion").Visible = False
+  
  'columna tasa de cambio
 Exit Sub
 TipoErrs:

@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "Comdlg32.ocx"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "ComDlg32.OCX"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
 Begin VB.Form FrmRespaldar 
    BackColor       =   &H00E0E0E0&
@@ -797,7 +797,7 @@ End Sub
 
 Private Sub Form_Load()
 Skin1.ApplySkin Me.hWnd
-Dim NextLine As String, Cadena As Variant
+Dim NextLine As String, cadena As Variant
 Dim posicion As Long
 Dim Servidor As String
 Dim ConexionBackupSTR1 As String
@@ -826,7 +826,7 @@ ConexionBackupSTR1 = Conexion
 posicion = InStr(1, ConexionBackupSTR1, "Source")
 Servidor = Mid(ConexionBackupSTR1, posicion + 7, Len(ConexionBackupSTR1) - posicion + 6)
 
-Cadena = UCase(Conexion)
+cadena = UCase(Conexion)
 
 'Debug.Print Conexion
 Dim inicioBD As Integer, FinBD As Integer

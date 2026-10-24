@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
 Begin VB.Form FrmPeriodos 
    BorderStyle     =   1  'Fixed Single
@@ -837,7 +837,7 @@ Begin VB.Form FrmPeriodos
          _ExtentX        =   3836
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   67174401
+         Format          =   195952641
          CurrentDate     =   37994
       End
       Begin VB.CommandButton CmdBuscaCuenta 
@@ -3727,6 +3727,8 @@ TotalDolar = 0
 TotalCordobas = 0
 TotalEuros = 0
  NumeroPeriodo = NumeroPeriodo + 11
+  DoEvents
+  
     Do While Not Me.DtaSaldos.Recordset.EOF
       .Value = i
       DoEvents
@@ -3747,6 +3749,8 @@ TotalEuros = 0
  
       Select Case MonedaCuenta
         Case "Dólares"
+         
+         DoEvents
               Total1 = 0
                 '//////////////////Busco el Saldo que tiene la cuenta////////////////////////////////
                 CodigoCuenta = Me.DtaSaldos.Recordset("CodCuentas")
@@ -3904,12 +3908,16 @@ TotalEuros = 0
 
    
           Case "Córdobas"
+            
+            DoEvents
                 Total1 = 0
                 '//////////////////Busco el Saldo que tiene la cuenta////////////////////////////////
                 CodigoCuenta = Me.DtaSaldos.Recordset("CodCuentas")
                 Me.DtaConsulta.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento, Transacciones.DescripcionMovimiento, Transacciones.Debito, Transacciones.Credito, Transacciones.Debito*Transacciones.TCambio AS MDebito, Transacciones.TCambio*Transacciones.Credito AS MCredito, Transacciones.TCambio From Transacciones WHERE (((Transacciones.CodCuentas)='" & CodigoCuenta & "') AND ((Transacciones.FechaTransaccion) Between '" & Format(Fechas1, "yyyymmdd") & "' And '" & Format(Fechas2, "yyyymmdd") & "')) ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
                 Me.DtaConsulta.Refresh
                 Do While Not Me.DtaConsulta.Recordset.EOF
+                
+                  DoEvents
                   'Me.CmbTipoMoneda.Enabled = False
                   If TipoCuenta = "Activo Fijo" Or TipoCuenta = "Otros Activos" Or TipoCuenta = "Caja" Or TipoCuenta = "Cuentas x Cobrar" Or TipoCuenta = "Bancos" Or TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Or TipoCuenta = "Papeleria - Utiles" Or TipoCuenta = "Inventario" Then
                     If Not IsNull(Me.DtaConsulta.Recordset("MDebito")) Then
@@ -3934,6 +3942,7 @@ TotalEuros = 0
                   End If
                   
                 Me.DtaConsulta.Recordset.MoveNext
+                DoEvents
 
                 Loop
                 If TipoCuenta = "Costos" Or TipoCuenta = "Gastos" Then
@@ -3945,6 +3954,7 @@ TotalEuros = 0
                 
      
             If IndiceCordobas = False Then
+             DoEvents
               '///////////////////////////////////////////////////////////////////////////////
               '//////////////Busco el ultimo numero de Tranccion del periodo para agregar una ///////////////////////
               '///////////////////////////////////////////////////////////////////////////////
@@ -4055,6 +4065,7 @@ TotalEuros = 0
         DoEvents
       i = i + 1
       Me.DtaSaldos.Recordset.MoveNext
+      DoEvents
     Loop
  
 If TotalDolar <> 0 Then

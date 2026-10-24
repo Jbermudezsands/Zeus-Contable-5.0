@@ -4,14 +4,14 @@ Object = "{E1C6DB9D-BD4A-4A61-A759-0CED75D034BF}#43.0#0"; "SmartButton.ocx"
 Begin VB.Form FrmImprimeCheque 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "FrmCheques"
-   ClientHeight    =   2925
+   ClientHeight    =   3945
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   4830
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   2925
+   ScaleHeight     =   3945
    ScaleWidth      =   4830
    StartUpPosition =   2  'CenterScreen
    Begin VB.CheckBox ChkRetencion 
@@ -19,7 +19,7 @@ Begin VB.Form FrmImprimeCheque
       Height          =   255
       Left            =   240
       TabIndex        =   9
-      Top             =   2640
+      Top             =   3240
       Width           =   3135
    End
    Begin ACTIVESKINLibCtl.SkinLabel LblCuenta 
@@ -27,14 +27,14 @@ Begin VB.Form FrmImprimeCheque
       Left            =   1920
       OleObjectBlob   =   "FrmImprimeCheque.frx":0000
       TabIndex        =   5
-      Top             =   2040
+      Top             =   2640
       Width           =   2775
    End
    Begin SmartButtonProject.SmartButton SmartButton1 
       Height          =   495
       Left            =   240
       TabIndex        =   2
-      Top             =   2040
+      Top             =   2640
       Width           =   1455
       _ExtentX        =   2566
       _ExtentY        =   873
@@ -51,7 +51,7 @@ Begin VB.Form FrmImprimeCheque
    End
    Begin VB.Frame Frame2 
       Caption         =   "Consecutivo Cheque"
-      Height          =   1815
+      Height          =   2295
       Left            =   2160
       TabIndex        =   1
       Top             =   120
@@ -74,11 +74,19 @@ Begin VB.Form FrmImprimeCheque
    End
    Begin VB.Frame Frame1 
       Caption         =   "Encabezados"
-      Height          =   1815
+      Height          =   2295
       Left            =   120
       TabIndex        =   0
       Top             =   120
       Width           =   1935
+      Begin VB.CheckBox Check4 
+         Caption         =   "Formato Imprenta"
+         Height          =   495
+         Left            =   240
+         TabIndex        =   10
+         Top             =   1680
+         Width           =   1575
+      End
       Begin VB.CheckBox Check3 
          Caption         =   "Imprimir Cheque"
          Height          =   495
@@ -272,17 +280,17 @@ NumeroMovimientos = NumeroTransaccion
     If FrmCheque.CmbMoneda.Text = "Córdobas" Then
         
         ArepCheque.DtaCheque.Source = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NumeroMovimiento, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.Debito, Transacciones.Credito, Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTasas,  " & _
-                                      "CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito / Tasas.MontoCordobas ELSE Transacciones.Debito END AS DebitoD, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito / Tasas.MontoCordobas ELSE Transacciones.Credito END AS CreditoD, Transacciones.NPeriodo, Cuentas.DescripcionGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
+                                      "CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito / Tasas.MontoCordobas ELSE Transacciones.Debito END AS DebitoD, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito / Tasas.MontoCordobas ELSE Transacciones.Credito END AS CreditoD, Transacciones.NPeriodo, Grupos.DescripcionGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN Grupos ON Cuentas.KeyGrupo = Grupos.KeyGrupo " & _
                                       "WHERE (Transacciones.FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (Transacciones.NumeroMovimiento = " & NumeroTransaccion & ") ORDER BY Transacciones.NTransaccion"
         ArepCheque2.DtaCheque.Source = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NumeroMovimiento, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.Debito, Transacciones.Credito, Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTasas,  " & _
-                                      "CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito / Tasas.MontoCordobas ELSE Transacciones.Debito END AS DebitoD, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito / Tasas.MontoCordobas ELSE Transacciones.Credito END AS CreditoD, Transacciones.NPeriodo, Cuentas.DescripcionGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
+                                      "CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito / Tasas.MontoCordobas ELSE Transacciones.Debito END AS DebitoD, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito / Tasas.MontoCordobas ELSE Transacciones.Credito END AS CreditoD, Transacciones.NPeriodo, Grupos.DescripcionGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN Grupos ON Cuentas.KeyGrupo = Grupos.KeyGrupo " & _
                                       "WHERE (Transacciones.FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (Transacciones.NumeroMovimiento = " & NumeroTransaccion & ") ORDER BY Transacciones.NTransaccion"
     Else
         ArepCheque.DtaCheque.Source = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NumeroMovimiento, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.Debito, Transacciones.Credito, Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTasas,  " & _
-                                      "CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito * Tasas.MontoCordobas ELSE Transacciones.Debito END AS DebitoD, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito / Tasas.MontoCordobas ELSE Transacciones.Credito END AS CreditoD, Transacciones.NPeriodo, Cuentas.DescripcionGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
+                                      "CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito * Tasas.MontoCordobas ELSE Transacciones.Debito END AS DebitoD, CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito / Tasas.MontoCordobas ELSE Transacciones.Credito END AS CreditoD, Transacciones.NPeriodo, Grupos.DescripcionGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN Grupos ON Cuentas.KeyGrupo = Grupos.KeyGrupo " & _
                                       "WHERE (Transacciones.FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (Transacciones.NumeroMovimiento = " & NumeroTransaccion & ") ORDER BY Transacciones.NTransaccion"
         ArepCheque2.DtaCheque.Source = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NumeroMovimiento, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito*Tasas.MontoCordobas  ELSE Transacciones.Debito END AS Debito,  CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito*Tasas.MontoCordobas  ELSE Transacciones.Credito END AS Credito, Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTasas,  " & _
-                                      "CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito  ELSE Transacciones.Debito * Tasas.MontoCordobas END AS DebitoD, CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito  ELSE Transacciones.Credito * Tasas.MontoCordobas END AS CreditoD, Transacciones.NPeriodo, Cuentas.DescripcionGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
+                                      "CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito  ELSE Transacciones.Debito * Tasas.MontoCordobas END AS DebitoD, CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito  ELSE Transacciones.Credito * Tasas.MontoCordobas END AS CreditoD, Transacciones.NPeriodo, Grupos.DescripcionGrupo FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN Grupos ON Cuentas.KeyGrupo = Grupos.KeyGrupo " & _
                                       "WHERE (Transacciones.FechaTransaccion = CONVERT(DATETIME, '" & Fechas1 & "', 102)) AND (Transacciones.NumeroMovimiento = " & NumeroTransaccion & ") ORDER BY Transacciones.NTransaccion"
     
     End If
@@ -1038,7 +1046,7 @@ ElseIf Me.Check3.Value = 1 Then
                                     Printer.FontName = "Times New Roman"
                                     Printer.FontSize = 11
                                     Printer.FontBold = True
-                                    FechaLetra = "Managua          " & Format(Day(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "          " & Format(Month(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "           " & Year(FrmCheque.DtaConsulta.Recordset("FechaTransaccion"))
+                                    FechaLetra = "Matiguas          " & Format(Day(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "          " & Format(Month(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "           " & Year(FrmCheque.DtaConsulta.Recordset("FechaTransaccion"))
                                     Printer.Print FechaLetra
                                    End If
                                 
@@ -1048,7 +1056,7 @@ ElseIf Me.Check3.Value = 1 Then
                                     Printer.FontName = "Times New Roman"
                                     Printer.FontSize = 11
                                     Printer.FontBold = True
-                                    FechaLetra = "Managua          " & Format(Day(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "          " & Format(Month(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "           " & Year(FrmCheque.DtaConsulta.Recordset("FechaTransaccion"))
+                                    FechaLetra = "Matiguas          " & Format(Day(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "          " & Format(Month(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "           " & Year(FrmCheque.DtaConsulta.Recordset("FechaTransaccion"))
                                     Printer.Print FechaLetra
                                    End If
                                 
@@ -1397,7 +1405,7 @@ Else
                     Printer.FontName = "Times New Roman"
                     Printer.FontSize = 11
                     Printer.FontBold = True
-                    FechaLetra = "Managua          " & Format(Day(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "          " & Format(Month(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "           " & Year(FrmCheque.DtaConsulta.Recordset("FechaTransaccion"))
+                    FechaLetra = "Matiguas          " & Format(Day(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "          " & Format(Month(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "           " & Year(FrmCheque.DtaConsulta.Recordset("FechaTransaccion"))
                     Printer.Print FechaLetra
                    End If
                 
@@ -1407,7 +1415,7 @@ Else
                     Printer.FontName = "Times New Roman"
                     Printer.FontSize = 11
                     Printer.FontBold = True
-                    FechaLetra = "Managua          " & Format(Day(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "          " & Format(Month(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "           " & Year(FrmCheque.DtaConsulta.Recordset("FechaTransaccion"))
+                    FechaLetra = "Matiguas          " & Format(Day(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "          " & Format(Month(FrmCheque.DtaConsulta.Recordset("FechaTransaccion")), "0#") & "           " & Year(FrmCheque.DtaConsulta.Recordset("FechaTransaccion"))
                     Printer.Print FechaLetra
                    End If
                 

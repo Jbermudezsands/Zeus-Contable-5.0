@@ -1,9 +1,1474 @@
 Attribute VB_Name = "Funciones"
+Option Explicit
 
 Public Declare Function LoadImage Lib "user32" Alias "LoadImageA" (ByVal hInst _
     As Long, ByVal lpsz As String, ByVal un1 As Long, ByVal n1 As Long, ByVal n2 _
     As Long, ByVal un2 As Long) As Long
     Declare Function GetVolumeInformation Lib "kernel32" Alias "GetVolumeInformationA" (ByVal lpRootPathName As String, ByVal pVolumeNameBuffer As String, ByVal nVolumeNameSize As Long, lpVolumeSerialNumber As Long, lpMaximumComponentLength As Long, lpFileSystemFlags As Long, ByVal lpFileSystemNameBuffer As String, ByVal nFileSystemNameSize As Long) As Long
+
+
+
+
+' Aquí continúan tus funciones y procedimientos.
+
+Public Sub CargarCuentas(ByVal Cmb As TDBCombo, _
+                         Optional ByVal CausaRetencion As Boolean = False, _
+                         Optional ByVal CausaIva As Boolean = False)
+
+    On Error GoTo ErrorHandler
+
+    Dim RsCuentas As ADODB.Recordset
+    Dim sqlconsulta As String
+
+    Set RsCuentas = New ADODB.Recordset
+
+    '----------------------------------------------------------
+    ' Consulta base
+    '----------------------------------------------------------
+    sqlconsulta = "SELECT " & _
+                  "CodCuentas, " & _
+                  "DescripcionCuentas " & _
+                  "FROM Cuentas "
+
+    '----------------------------------------------------------
+    ' Filtros
+    '----------------------------------------------------------
+    If CausaRetencion Or CausaIva Then
+
+        sqlconsulta = sqlconsulta & "WHERE "
+
+        If CausaRetencion Then
+            sqlconsulta = sqlconsulta & _
+                          "ISNULL(CausaRetencion, 0) = 1"
+        End If
+
+        If CausaIva Then
+
+            If CausaRetencion Then
+                sqlconsulta = sqlconsulta & " AND "
+            End If
+
+            sqlconsulta = sqlconsulta & _
+                          "ISNULL(CausaIva, 0) = 1"
+
+        End If
+
+    End If
+
+    '----------------------------------------------------------
+    ' Orden
+    '----------------------------------------------------------
+    sqlconsulta = sqlconsulta & _
+                  " ORDER BY CodCuentas"
+
+    '----------------------------------------------------------
+    ' Abrir Recordset
+    '----------------------------------------------------------
+    With RsCuentas
+
+        .CursorLocation = adUseClient
+
+        .Open sqlconsulta, Conexion, _
+              adOpenStatic, adLockReadOnly
+
+    End With
+
+    '----------------------------------------------------------
+    ' Asignar Recordset al TDBCombo
+    '----------------------------------------------------------
+    Set Cmb.RowSource = RsCuentas
+
+    '----------------------------------------------------------
+    ' El valor principal del combo será el código de cuenta
+    '----------------------------------------------------------
+    Cmb.ListField = "CodCuentas"
+    Cmb.BoundColumn = "CodCuentas"
+
+    Exit Sub
+
+ErrorHandler:
+
+    If Not RsCuentas Is Nothing Then
+
+        If RsCuentas.State <> 0 Then
+            RsCuentas.Close
+        End If
+
+    End If
+
+    Set RsCuentas = Nothing
+
+    MsgBox "Error al cargar las cuentas contables." & vbCrLf & _
+           err.Description, _
+           vbCritical, _
+           "Sistema Contable"
+
+End Sub
+
+
+
+Public Sub ObtenerSaldosCuenta( _
+    ByVal CodigoCuenta As String, _
+    ByVal FechaDesde As Date, _
+    ByVal FechaHasta As Date, _
+    ByVal MonedaReporte As String, _
+    ByVal TipoCuenta As String, _
+    ByRef SaldoInicial As Double, _
+    ByRef SaldoFinal As Double)
+
+    On Error GoTo ErrorHandler
+
+    Dim Rs As ADODB.Recordset
+    Dim Sql As String
+
+    Dim DebitoInicial As Double
+    Dim CreditoInicial As Double
+    Dim DebitoFinal As Double
+    Dim CreditoFinal As Double
+
+    Dim FechaIni As String
+    Dim FechaFin As String
+
+    SaldoInicial = 0
+    SaldoFinal = 0
+
+    DebitoInicial = 0
+    CreditoInicial = 0
+    DebitoFinal = 0
+    CreditoFinal = 0
+
+    FechaIni = Format(FechaDesde, "yyyy-mm-dd")
+    FechaFin = Format(FechaHasta, "yyyy-mm-dd")
+
+
+    '=========================================================
+    ' SALDO INICIAL
+    ' Movimientos anteriores a FechaDesde
+    '=========================================================
+
+    Sql = "SELECT "
+
+    If MonedaReporte = "Cordobas" Then
+
+        Sql = Sql & _
+            "SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' " & _
+            "THEN Transacciones.Debito " & _
+            "ELSE Transacciones.Debito * Tasas.MontoCordobas END) AS MDebito, "
+
+        Sql = Sql & _
+            "SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' " & _
+            "THEN Transacciones.Credito " & _
+            "ELSE Transacciones.Credito * Tasas.MontoCordobas END) AS MCredito "
+
+    Else
+
+        Sql = Sql & _
+            "SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' " & _
+            "THEN Transacciones.Debito " & _
+            "ELSE Transacciones.Debito / Tasas.MontoCordobas END) AS MDebito, "
+
+        Sql = Sql & _
+            "SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' " & _
+            "THEN Transacciones.Credito " & _
+            "ELSE Transacciones.Credito / Tasas.MontoCordobas END) AS MCredito "
+
+    End If
+
+    Sql = Sql & _
+        "FROM Transacciones " & _
+        "INNER JOIN IndiceTransaccion ON " & _
+        "Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion " & _
+        "AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
+        "AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo " & _
+        "INNER JOIN Tasas ON " & _
+        "IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas " & _
+        "WHERE Transacciones.CodCuentas = '" & CodigoCuenta & "' " & _
+        "AND Transacciones.FechaTransaccion < CONVERT(DATETIME, '" & _
+        FechaIni & "', 102)"
+
+
+    Set Rs = New ADODB.Recordset
+
+    Rs.Open Sql, ConexionReporte, adOpenForwardOnly, adLockReadOnly
+
+    If Not Rs.EOF Then
+
+        If Not IsNull(Rs("MDebito")) Then
+            DebitoInicial = Rs("MDebito")
+        End If
+
+        If Not IsNull(Rs("MCredito")) Then
+            CreditoInicial = Rs("MCredito")
+        End If
+
+    End If
+
+    Rs.Close
+    Set Rs = Nothing
+
+
+    '=========================================================
+    ' SALDO FINAL
+    ' Movimientos hasta FechaHasta
+    '=========================================================
+
+    Sql = "SELECT "
+
+    If MonedaReporte = "Cordobas" Then
+
+        Sql = Sql & _
+            "SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' " & _
+            "THEN Transacciones.Debito " & _
+            "ELSE Transacciones.Debito * Tasas.MontoCordobas END) AS MDebito, "
+
+        Sql = Sql & _
+            "SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' " & _
+            "THEN Transacciones.Credito " & _
+            "ELSE Transacciones.Credito * Tasas.MontoCordobas END) AS MCredito "
+
+    Else
+
+        Sql = Sql & _
+            "SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' " & _
+            "THEN Transacciones.Debito " & _
+            "ELSE Transacciones.Debito / Tasas.MontoCordobas END) AS MDebito, "
+
+        Sql = Sql & _
+            "SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' " & _
+            "THEN Transacciones.Credito " & _
+            "ELSE Transacciones.Credito / Tasas.MontoCordobas END) AS MCredito "
+
+    End If
+
+    Sql = Sql & _
+        "FROM Transacciones " & _
+        "INNER JOIN IndiceTransaccion ON " & _
+        "Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion " & _
+        "AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
+        "AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo " & _
+        "INNER JOIN Tasas ON " & _
+        "IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas " & _
+        "WHERE Transacciones.CodCuentas = '" & CodigoCuenta & "' " & _
+        "AND Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & _
+        FechaFin & "', 102)"
+
+
+    Set Rs = New ADODB.Recordset
+
+    Rs.Open Sql, ConexionReporte, adOpenForwardOnly, adLockReadOnly
+
+    If Not Rs.EOF Then
+
+        If Not IsNull(Rs("MDebito")) Then
+            DebitoFinal = Rs("MDebito")
+        End If
+
+        If Not IsNull(Rs("MCredito")) Then
+            CreditoFinal = Rs("MCredito")
+        End If
+
+    End If
+
+    Rs.Close
+    Set Rs = Nothing
+
+
+    '=========================================================
+    ' CALCULAR SALDOS SEGUN NATURALEZA DE LA CUENTA
+    '=========================================================
+
+    If TipoCuenta = "Activo Fijo" Or _
+       TipoCuenta = "Otros Activos" Or _
+       TipoCuenta = "Caja" Or _
+       TipoCuenta = "Cuentas x Cobrar" Or _
+       TipoCuenta = "Bancos" Or _
+       TipoCuenta = "Costos" Or _
+       TipoCuenta = "Gastos" Or _
+       TipoCuenta = "Papeleria - Utiles" Or _
+       TipoCuenta = "Inventario" Then
+
+        SaldoInicial = DebitoInicial - CreditoInicial
+        SaldoFinal = DebitoFinal - CreditoFinal
+
+    Else
+
+        SaldoInicial = CreditoInicial - DebitoInicial
+        SaldoFinal = CreditoFinal - DebitoFinal
+
+    End If
+
+
+    Exit Sub
+
+
+ErrorHandler:
+
+    If Not Rs Is Nothing Then
+        If Rs.State <> 0 Then Rs.Close
+    End If
+
+    Set Rs = Nothing
+
+    SaldoInicial = 0
+    SaldoFinal = 0
+
+    MsgBox "Error al obtener los saldos de la cuenta." & vbCrLf & _
+           err.Description, vbCritical, "Sistema Contable"
+
+End Sub
+
+Public Sub ObtenerTotalesBeneficiario( _
+    ByVal CodigoCuenta As String, _
+    ByVal CodigoBeneficiario As String, _
+    ByVal FechaDesde As Date, _
+    ByVal FechaHasta As Date, _
+    ByVal MonedaReporte As String, _
+    ByVal TipoCuenta As String, _
+    ByRef SaldoInicial As Double, _
+    ByRef TotalDebito As Double, _
+    ByRef TotalCredito As Double, _
+    ByRef SaldoFinal As Double)
+
+    On Error GoTo ErrorHandler
+
+    Dim Rs As ADODB.Recordset
+    Dim Sql As String
+
+    Dim DebitoAnterior As Double
+    Dim CreditoAnterior As Double
+
+    Dim DebitoPeriodo As Double
+    Dim CreditoPeriodo As Double
+
+    '==========================================================
+    ' INICIALIZAR RESULTADOS
+    '==========================================================
+
+    SaldoInicial = 0
+    TotalDebito = 0
+    TotalCredito = 0
+    SaldoFinal = 0
+
+    DebitoAnterior = 0
+    CreditoAnterior = 0
+
+    DebitoPeriodo = 0
+    CreditoPeriodo = 0
+
+
+    '==========================================================
+    ' VALIDACIONES
+    '==========================================================
+
+    If Trim$(CodigoCuenta) = "" Then Exit Sub
+
+    If Trim$(CodigoBeneficiario) = "" Then Exit Sub
+
+
+    '==========================================================
+    ' CONSULTA
+    '==========================================================
+
+    Sql = "SELECT "
+
+    '----------------------------------------------------------
+    ' DÉBITOS ANTERIORES A LA FECHA INICIAL
+    '----------------------------------------------------------
+
+    If UCase$(Trim$(MonedaReporte)) = "CORDOBAS" Or _
+       UCase$(Trim$(MonedaReporte)) = "CÓRDOBAS" Then
+
+        Sql = Sql & _
+            "SUM(CASE " & _
+            "WHEN Transacciones.FechaTransaccion < CONVERT(DATETIME, '" & _
+            Format$(FechaDesde, "yyyy-mm-dd") & "', 102) " & _
+            "THEN CASE " & _
+            "WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' " & _
+            "THEN Transacciones.Debito " & _
+            "ELSE Transacciones.Debito * Tasas.MontoCordobas " & _
+            "END " & _
+            "ELSE 0 END) AS DebitoAnterior, "
+
+        '------------------------------------------------------
+        ' CRÉDITOS ANTERIORES
+        '------------------------------------------------------
+
+        Sql = Sql & _
+            "SUM(CASE " & _
+            "WHEN Transacciones.FechaTransaccion < CONVERT(DATETIME, '" & _
+            Format$(FechaDesde, "yyyy-mm-dd") & "', 102) " & _
+            "THEN CASE " & _
+            "WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' " & _
+            "THEN Transacciones.Credito " & _
+            "ELSE Transacciones.Credito * Tasas.MontoCordobas " & _
+            "END " & _
+            "ELSE 0 END) AS CreditoAnterior, "
+
+        '------------------------------------------------------
+        ' DÉBITOS DEL PERÍODO
+        '------------------------------------------------------
+
+        Sql = Sql & _
+            "SUM(CASE " & _
+            "WHEN Transacciones.FechaTransaccion >= CONVERT(DATETIME, '" & _
+            Format$(FechaDesde, "yyyy-mm-dd") & "', 102) " & _
+            "AND Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & _
+            Format$(FechaHasta, "yyyy-mm-dd") & "', 102) " & _
+            "THEN CASE " & _
+            "WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' " & _
+            "THEN Transacciones.Debito " & _
+            "ELSE Transacciones.Debito * Tasas.MontoCordobas " & _
+            "END " & _
+            "ELSE 0 END) AS DebitoPeriodo, "
+
+        '------------------------------------------------------
+        ' CRÉDITOS DEL PERÍODO
+        '------------------------------------------------------
+
+        Sql = Sql & _
+            "SUM(CASE " & _
+            "WHEN Transacciones.FechaTransaccion >= CONVERT(DATETIME, '" & _
+            Format$(FechaDesde, "yyyy-mm-dd") & "', 102) " & _
+            "AND Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & _
+            Format$(FechaHasta, "yyyy-mm-dd") & "', 102) " & _
+            "THEN CASE " & _
+            "WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' " & _
+            "THEN Transacciones.Credito " & _
+            "ELSE Transacciones.Credito * Tasas.MontoCordobas " & _
+            "END " & _
+            "ELSE 0 END) AS CreditoPeriodo "
+
+    Else
+
+        '======================================================
+        ' DÓLARES
+        '======================================================
+
+        Sql = Sql & _
+            "SUM(CASE " & _
+            "WHEN Transacciones.FechaTransaccion < CONVERT(DATETIME, '" & _
+            Format$(FechaDesde, "yyyy-mm-dd") & "', 102) " & _
+            "THEN CASE " & _
+            "WHEN IndiceTransaccion.TipoMoneda = 'Dólares' " & _
+            "THEN Transacciones.Debito " & _
+            "ELSE Transacciones.Debito / Tasas.MontoCordobas " & _
+            "END " & _
+            "ELSE 0 END) AS DebitoAnterior, "
+
+        Sql = Sql & _
+            "SUM(CASE " & _
+            "WHEN Transacciones.FechaTransaccion < CONVERT(DATETIME, '" & _
+            Format$(FechaDesde, "yyyy-mm-dd") & "', 102) " & _
+            "THEN CASE " & _
+            "WHEN IndiceTransaccion.TipoMoneda = 'Dólares' " & _
+            "THEN Transacciones.Credito " & _
+            "ELSE Transacciones.Credito / Tasas.MontoCordobas " & _
+            "END " & _
+            "ELSE 0 END) AS CreditoAnterior, "
+
+        Sql = Sql & _
+            "SUM(CASE " & _
+            "WHEN Transacciones.FechaTransaccion >= CONVERT(DATETIME, '" & _
+            Format$(FechaDesde, "yyyy-mm-dd") & "', 102) " & _
+            "AND Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & _
+            Format$(FechaHasta, "yyyy-mm-dd") & "', 102) " & _
+            "THEN CASE " & _
+            "WHEN IndiceTransaccion.TipoMoneda = 'Dólares' " & _
+            "THEN Transacciones.Debito " & _
+            "ELSE Transacciones.Debito / Tasas.MontoCordobas " & _
+            "END " & _
+            "ELSE 0 END) AS DebitoPeriodo, "
+
+        Sql = Sql & _
+            "SUM(CASE " & _
+            "WHEN Transacciones.FechaTransaccion >= CONVERT(DATETIME, '" & _
+            Format$(FechaDesde, "yyyy-mm-dd") & "', 102) " & _
+            "AND Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & _
+            Format$(FechaHasta, "yyyy-mm-dd") & "', 102) " & _
+            "THEN CASE " & _
+            "WHEN IndiceTransaccion.TipoMoneda = 'Dólares' " & _
+            "THEN Transacciones.Credito " & _
+            "ELSE Transacciones.Credito / Tasas.MontoCordobas " & _
+            "END " & _
+            "ELSE 0 END) AS CreditoPeriodo "
+
+    End If
+
+
+    '==========================================================
+    ' FROM
+    '==========================================================
+
+    Sql = Sql & "FROM Transacciones "
+
+    Sql = Sql & _
+        "INNER JOIN IndiceTransaccion " & _
+        "ON Transacciones.FechaTransaccion = " & _
+        "IndiceTransaccion.FechaTransaccion " & _
+        "AND Transacciones.NumeroMovimiento = " & _
+        "IndiceTransaccion.NumeroMovimiento " & _
+        "AND Transacciones.NPeriodo = " & _
+        "IndiceTransaccion.Nperiodo "
+
+    Sql = Sql & _
+        "INNER JOIN Tasas " & _
+        "ON IndiceTransaccion.FechaTransaccion = " & _
+        "Tasas.FechaTasas "
+
+
+    '==========================================================
+    ' WHERE
+    '==========================================================
+
+    Sql = Sql & _
+        "WHERE Transacciones.CodCuentas = '" & _
+        Replace(CodigoCuenta, "'", "''") & "' "
+
+    Sql = Sql & _
+        "AND Transacciones.Cod_Tercero = '" & _
+        Replace(CodigoBeneficiario, "'", "''") & "' "
+
+
+    '==========================================================
+    ' FILTRO DE MONEDA
+    '==========================================================
+
+    If UCase$(Trim$(MonedaReporte)) = "CORDOBAS" Or _
+       UCase$(Trim$(MonedaReporte)) = "CÓRDOBAS" Then
+
+        Sql = Sql & _
+            "AND IndiceTransaccion.Ajuste <> 'Dólares' "
+
+    Else
+
+        Sql = Sql & _
+            "AND IndiceTransaccion.Ajuste <> 'Córdobas' "
+
+    End If
+
+
+    '==========================================================
+    ' SOLO NECESITAMOS HISTÓRICO HASTA FECHA FINAL
+    '==========================================================
+
+    Sql = Sql & _
+        "AND Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & _
+        Format$(FechaHasta, "yyyy-mm-dd") & "', 102)"
+
+
+    '==========================================================
+    ' EJECUTAR
+    '==========================================================
+
+    Set Rs = New ADODB.Recordset
+
+    With Rs
+
+        .CursorLocation = adUseClient
+
+        .Open Sql, ConexionReporte, adOpenStatic, adLockReadOnly
+
+        If Not .EOF Then
+
+            If Not IsNull(.Fields("DebitoAnterior").Value) Then
+                DebitoAnterior = CDbl(.Fields("DebitoAnterior").Value)
+            End If
+
+            If Not IsNull(.Fields("CreditoAnterior").Value) Then
+                CreditoAnterior = CDbl(.Fields("CreditoAnterior").Value)
+            End If
+
+            If Not IsNull(.Fields("DebitoPeriodo").Value) Then
+                DebitoPeriodo = CDbl(.Fields("DebitoPeriodo").Value)
+            End If
+
+            If Not IsNull(.Fields("CreditoPeriodo").Value) Then
+                CreditoPeriodo = CDbl(.Fields("CreditoPeriodo").Value)
+            End If
+
+        End If
+
+        .Close
+
+    End With
+
+    Set Rs = Nothing
+
+
+    '==========================================================
+    ' ASIGNAR TOTALES DEL PERÍODO
+    '==========================================================
+
+    TotalDebito = DebitoPeriodo
+    TotalCredito = CreditoPeriodo
+
+
+    '==========================================================
+    ' SALDO INICIAL
+    '==========================================================
+
+    If TipoCuenta = "Activo Fijo" Or _
+       TipoCuenta = "Otros Activos" Or _
+       TipoCuenta = "Caja" Or _
+       TipoCuenta = "Cuentas x Cobrar" Or _
+       TipoCuenta = "Bancos" Or _
+       TipoCuenta = "Costos" Or _
+       TipoCuenta = "Gastos" Or _
+       TipoCuenta = "Papeleria - Utiles" Or _
+       TipoCuenta = "Inventario" Then
+
+        SaldoInicial = DebitoAnterior - CreditoAnterior
+
+    Else
+
+        SaldoInicial = CreditoAnterior - DebitoAnterior
+
+    End If
+
+
+    '==========================================================
+    ' SALDO FINAL
+    '==========================================================
+
+    If TipoCuenta = "Activo Fijo" Or _
+       TipoCuenta = "Otros Activos" Or _
+       TipoCuenta = "Caja" Or _
+       TipoCuenta = "Cuentas x Cobrar" Or _
+       TipoCuenta = "Bancos" Or _
+       TipoCuenta = "Costos" Or _
+       TipoCuenta = "Gastos" Or _
+       TipoCuenta = "Papeleria - Utiles" Or _
+       TipoCuenta = "Inventario" Then
+
+        SaldoFinal = SaldoInicial + _
+                     TotalDebito - _
+                     TotalCredito
+
+    Else
+
+        SaldoFinal = SaldoInicial + _
+                     TotalCredito - _
+                     TotalDebito
+
+    End If
+
+
+    Exit Sub
+
+
+ErrorHandler:
+
+    SaldoInicial = 0
+    TotalDebito = 0
+    TotalCredito = 0
+    SaldoFinal = 0
+
+    If Not Rs Is Nothing Then
+
+        If Rs.State <> 0 Then
+            Rs.Close
+        End If
+
+    End If
+
+    Set Rs = Nothing
+
+    MsgBox "Error al obtener los totales del beneficiario." & _
+           vbCrLf & err.Description, _
+           vbCritical, _
+           "Sistema Contable"
+
+End Sub
+
+Public Function ObtenerNombreBeneficiario(ByVal CodigoBeneficiario As String) As String
+
+    Dim Rs As ADODB.Recordset
+    Dim Sql As String
+
+    On Error GoTo ErrorHandler
+
+    ObtenerNombreBeneficiario = ""
+
+    If Trim$(CodigoBeneficiario) = "" Then Exit Function
+
+    Sql = "SELECT Nombre_Beneficiario, Apellido_Beneficiario " & _
+          "FROM Beneficiario " & _
+          "WHERE Codigo_Beneficiario = '" & _
+          Replace(Trim$(CodigoBeneficiario), "'", "''") & "'"
+
+    Set Rs = New ADODB.Recordset
+
+    With Rs
+        .CursorLocation = adUseClient
+        .Open Sql, ConexionFacturacion, adOpenStatic, adLockReadOnly
+
+        If Not .EOF Then
+
+            ObtenerNombreBeneficiario = _
+                Trim$(.Fields("Nombre_Beneficiario").Value & " " & _
+                      .Fields("Apellido_Beneficiario").Value)
+
+        End If
+
+        .Close
+    End With
+
+    Set Rs = Nothing
+
+    Exit Function
+
+ErrorHandler:
+
+    If Not Rs Is Nothing Then
+        If Rs.State <> 0 Then Rs.Close
+    End If
+
+    Set Rs = Nothing
+
+    ObtenerNombreBeneficiario = ""
+
+End Function
+
+
+Public Function ObtenerSqlAuxiliarPorBeneficiario( _
+    ByVal FechaDesde As Date, _
+    ByVal FechaHasta As Date, _
+    ByVal CodigoCuentaDesde As String, _
+    ByVal CodigoCuentaHasta As String, _
+    ByVal CodigoBeneficiarioDesde As String, _
+    ByVal CodigoBeneficiarioHasta As String, _
+    ByVal MonedaReporte As String, _
+    ByVal CodigoBeneficiario As String) As String
+
+    Dim Sql As String
+    Dim FiltroBeneficiario As String
+
+    '==========================================================
+    ' FILTRO DE BENEFICIARIO
+    '==========================================================
+
+    FiltroBeneficiario = ""
+
+    '----------------------------------------------------------
+    ' Beneficiario específico
+    '----------------------------------------------------------
+
+    If Trim$(CodigoBeneficiario) <> "" Then
+
+        If UCase$(Trim$(CodigoBeneficiario)) <> "TODOS" Then
+
+            FiltroBeneficiario = _
+                " AND Transacciones.Cod_Tercero = '" & _
+                Replace(Trim$(CodigoBeneficiario), "'", "''") & "'"
+
+        End If
+
+    End If
+
+    '----------------------------------------------------------
+    ' Rango de beneficiarios
+    '
+    ' Solamente se utiliza cuando no se seleccionó
+    ' un beneficiario específico.
+    '----------------------------------------------------------
+
+    If FiltroBeneficiario = "" Then
+
+        If Trim$(CodigoBeneficiarioDesde) <> "" And _
+           Trim$(CodigoBeneficiarioHasta) <> "" Then
+
+            FiltroBeneficiario = _
+                " AND Transacciones.Cod_Tercero BETWEEN '" & _
+                Replace(Trim$(CodigoBeneficiarioDesde), "'", "''") & _
+                "' AND '" & _
+                Replace(Trim$(CodigoBeneficiarioHasta), "'", "''") & "'"
+
+        ElseIf Trim$(CodigoBeneficiarioDesde) <> "" Then
+
+            FiltroBeneficiario = _
+                " AND Transacciones.Cod_Tercero >= '" & _
+                Replace(Trim$(CodigoBeneficiarioDesde), "'", "''") & "'"
+
+        ElseIf Trim$(CodigoBeneficiarioHasta) <> "" Then
+
+            FiltroBeneficiario = _
+                " AND Transacciones.Cod_Tercero <= '" & _
+                Replace(Trim$(CodigoBeneficiarioHasta), "'", "''") & "'"
+
+        End If
+
+    End If
+
+
+    '==========================================================
+    ' CÓRDOBAS
+    '==========================================================
+
+    If UCase$(Trim$(MonedaReporte)) = "CORDOBAS" Or _
+       UCase$(Trim$(MonedaReporte)) = "CÓRDOBAS" Then
+
+
+        Sql = "SELECT "
+
+        Sql = Sql & "Transacciones.CodCuentas, "
+        Sql = Sql & "Cuentas.DescripcionCuentas, "
+
+        '------------------------------------------------------
+        ' BENEFICIARIO
+        '------------------------------------------------------
+
+        Sql = Sql & "Transacciones.Cod_Tercero AS CodBeneficiario, "
+
+        '------------------------------------------------------
+        ' DATOS DEL MOVIMIENTO
+        '------------------------------------------------------
+
+        Sql = Sql & "Transacciones.NPeriodo, "
+        Sql = Sql & "Transacciones.NTransaccion, "
+        Sql = Sql & "Transacciones.NumeroMovimiento, "
+        Sql = Sql & "Transacciones.VoucherNo, "
+        Sql = Sql & "Transacciones.DescripcionMovimiento, "
+        Sql = Sql & "Transacciones.Clave, "
+        Sql = Sql & "Transacciones.TCambio, "
+        Sql = Sql & "Transacciones.FacturaNo, "
+        Sql = Sql & "Transacciones.ChequeNo, "
+        Sql = Sql & "Transacciones.Fuente, "
+        Sql = Sql & "Transacciones.FechaTransaccion, "
+        Sql = Sql & "Cuentas.TipoCuenta, "
+
+        '------------------------------------------------------
+        ' DÉBITO
+        '------------------------------------------------------
+
+        Sql = Sql & "CASE "
+        Sql = Sql & "WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' "
+        Sql = Sql & "THEN Transacciones.Debito "
+        Sql = Sql & "ELSE Transacciones.Debito * Tasas.MontoCordobas "
+        Sql = Sql & "END AS Debito, "
+
+        '------------------------------------------------------
+        ' CRÉDITO
+        '------------------------------------------------------
+
+        Sql = Sql & "CASE "
+        Sql = Sql & "WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' "
+        Sql = Sql & "THEN Transacciones.Credito "
+        Sql = Sql & "ELSE Transacciones.Credito * Tasas.MontoCordobas "
+        Sql = Sql & "END AS Credito "
+
+        '======================================================
+        ' FROM
+        '======================================================
+
+        Sql = Sql & "FROM Cuentas "
+
+        Sql = Sql & "INNER JOIN Transacciones "
+        Sql = Sql & "ON Cuentas.CodCuentas = Transacciones.CodCuentas "
+
+        Sql = Sql & "INNER JOIN IndiceTransaccion "
+        Sql = Sql & "ON Transacciones.FechaTransaccion = "
+        Sql = Sql & "IndiceTransaccion.FechaTransaccion "
+
+        Sql = Sql & "AND Transacciones.NPeriodo = "
+        Sql = Sql & "IndiceTransaccion.Nperiodo "
+
+        Sql = Sql & "AND Transacciones.NumeroMovimiento = "
+        Sql = Sql & "IndiceTransaccion.NumeroMovimiento "
+
+        Sql = Sql & "INNER JOIN Tasas "
+        Sql = Sql & "ON IndiceTransaccion.FechaTransaccion = "
+        Sql = Sql & "Tasas.FechaTasas "
+
+        '======================================================
+        ' WHERE
+        '======================================================
+
+        Sql = Sql & "WHERE Transacciones.FechaTransaccion BETWEEN '"
+
+        Sql = Sql & Format$(FechaDesde, "yyyymmdd")
+
+        Sql = Sql & "' AND '"
+
+        Sql = Sql & Format$(FechaHasta, "yyyymmdd")
+
+        Sql = Sql & "' "
+
+        '------------------------------------------------------
+        ' Ajuste de moneda
+        '------------------------------------------------------
+
+        Sql = Sql & "AND IndiceTransaccion.Ajuste <> 'Dólares' "
+
+        '------------------------------------------------------
+        ' Rango de cuentas
+        '------------------------------------------------------
+
+        Sql = Sql & "AND Transacciones.CodCuentas BETWEEN '"
+
+        Sql = Sql & Replace(CodigoCuentaDesde, "'", "''")
+
+        Sql = Sql & "' AND '"
+
+        Sql = Sql & Replace(CodigoCuentaHasta, "'", "''")
+
+        Sql = Sql & "' "
+
+        '------------------------------------------------------
+        ' Beneficiario
+        '------------------------------------------------------
+
+        Sql = Sql & FiltroBeneficiario
+
+        '======================================================
+        ' ORDEN
+        '======================================================
+
+        Sql = Sql & "ORDER BY "
+        Sql = Sql & "Transacciones.CodCuentas, "
+        Sql = Sql & "Transacciones.Cod_Tercero, "
+        Sql = Sql & "Transacciones.FechaTransaccion, "
+        Sql = Sql & "Transacciones.NTransaccion"
+
+
+    '==========================================================
+    ' DÓLARES
+    '==========================================================
+
+    Else
+
+
+        Sql = "SELECT "
+
+        Sql = Sql & "Transacciones.CodCuentas, "
+        Sql = Sql & "Cuentas.DescripcionCuentas, "
+
+        '------------------------------------------------------
+        ' BENEFICIARIO
+        '------------------------------------------------------
+
+        Sql = Sql & "Transacciones.Cod_Tercero AS CodBeneficiario, "
+
+        '------------------------------------------------------
+        ' DATOS DEL MOVIMIENTO
+        '------------------------------------------------------
+
+        Sql = Sql & "Transacciones.NPeriodo, "
+        Sql = Sql & "Transacciones.NTransaccion, "
+        Sql = Sql & "Transacciones.NumeroMovimiento, "
+        Sql = Sql & "Transacciones.VoucherNo, "
+        Sql = Sql & "Transacciones.DescripcionMovimiento, "
+        Sql = Sql & "Transacciones.Clave, "
+        Sql = Sql & "Transacciones.TCambio, "
+        Sql = Sql & "Transacciones.FacturaNo, "
+        Sql = Sql & "Transacciones.ChequeNo, "
+        Sql = Sql & "Transacciones.Fuente, "
+        Sql = Sql & "Transacciones.FechaTransaccion, "
+        Sql = Sql & "Cuentas.TipoCuenta, "
+
+        '------------------------------------------------------
+        ' DÉBITO
+        '------------------------------------------------------
+
+        Sql = Sql & "CASE "
+        Sql = Sql & "WHEN IndiceTransaccion.TipoMoneda = 'Dólares' "
+        Sql = Sql & "THEN Transacciones.Debito "
+        Sql = Sql & "ELSE Transacciones.Debito / Tasas.MontoCordobas "
+        Sql = Sql & "END AS Debito, "
+
+        '------------------------------------------------------
+        ' CRÉDITO
+        '------------------------------------------------------
+
+        Sql = Sql & "CASE "
+        Sql = Sql & "WHEN IndiceTransaccion.TipoMoneda = 'Dólares' "
+        Sql = Sql & "THEN Transacciones.Credito "
+        Sql = Sql & "ELSE Transacciones.Credito / Tasas.MontoCordobas "
+        Sql = Sql & "END AS Credito "
+
+        '======================================================
+        ' FROM
+        '======================================================
+
+        Sql = Sql & "FROM Cuentas "
+
+        Sql = Sql & "INNER JOIN Transacciones "
+        Sql = Sql & "ON Cuentas.CodCuentas = Transacciones.CodCuentas "
+
+        Sql = Sql & "INNER JOIN IndiceTransaccion "
+        Sql = Sql & "ON Transacciones.FechaTransaccion = "
+        Sql = Sql & "IndiceTransaccion.FechaTransaccion "
+
+        Sql = Sql & "AND Transacciones.NPeriodo = "
+        Sql = Sql & "IndiceTransaccion.Nperiodo "
+
+        Sql = Sql & "AND Transacciones.NumeroMovimiento = "
+        Sql = Sql & "IndiceTransaccion.NumeroMovimiento "
+
+        Sql = Sql & "INNER JOIN Tasas "
+        Sql = Sql & "ON IndiceTransaccion.FechaTransaccion = "
+        Sql = Sql & "Tasas.FechaTasas "
+
+        '======================================================
+        ' WHERE
+        '======================================================
+
+        Sql = Sql & "WHERE Transacciones.FechaTransaccion BETWEEN '"
+
+        Sql = Sql & Format$(FechaDesde, "yyyymmdd")
+
+        Sql = Sql & "' AND '"
+
+        Sql = Sql & Format$(FechaHasta, "yyyymmdd")
+
+        Sql = Sql & "' "
+
+        '------------------------------------------------------
+        ' Ajuste de moneda
+        '------------------------------------------------------
+
+        Sql = Sql & "AND IndiceTransaccion.Ajuste <> 'Córdobas' "
+
+        '------------------------------------------------------
+        ' Rango de cuentas
+        '------------------------------------------------------
+
+        Sql = Sql & "AND Transacciones.CodCuentas BETWEEN '"
+
+        Sql = Sql & Replace(CodigoCuentaDesde, "'", "''")
+
+        Sql = Sql & "' AND '"
+
+        Sql = Sql & Replace(CodigoCuentaHasta, "'", "''")
+
+        Sql = Sql & "' "
+
+        '------------------------------------------------------
+        ' Beneficiario
+        '------------------------------------------------------
+
+        Sql = Sql & FiltroBeneficiario
+
+        '======================================================
+        ' ORDEN
+        '======================================================
+
+        Sql = Sql & "ORDER BY "
+        Sql = Sql & "Transacciones.CodCuentas, "
+        Sql = Sql & "Transacciones.Cod_Tercero, "
+        Sql = Sql & "Transacciones.FechaTransaccion, "
+        Sql = Sql & "Transacciones.NTransaccion"
+
+    End If
+
+
+    '==========================================================
+    ' RETORNAR CONSULTA
+    '==========================================================
+
+    ObtenerSqlAuxiliarPorBeneficiario = Sql
+
+End Function
+
+
+
+
+
+
+
+
+Public Sub ActualizarAuxiliarCuentas( _
+    ByVal CodCuenta As String, _
+    ByVal TipoMoneda As String, _
+    ByVal CodTercero As String, _
+    ByVal TipoCuenta As String)
+
+    On Error GoTo TipoErrs
+
+    Dim Debito As Double
+    Dim Credito As Double
+    Dim Total1Local As Double
+    Dim sqlconsulta As String
+    Dim FiltroTercero As String
+    Dim RsAux As ADODB.Recordset
+
+    Total1Local = 0
+    FiltroTercero = ""
+
+    '==========================================================
+    ' FILTRO OPCIONAL POR TERCERO
+    '==========================================================
+    If Trim(CodTercero) <> "" Then
+
+        FiltroTercero = _
+            " AND Transacciones.Cod_Tercero = '" & _
+            Replace(Trim(CodTercero), "'", "''") & "'"
+
+    End If
+
+    '==========================================================
+    ' RECORDSET PROPIO DE LA FUNCION
+    '==========================================================
+    Set RsAux = New ADODB.Recordset
+
+    '==========================================================
+    ' CARGAR DBGCuentas
+    '==========================================================
+    If TipoMoneda = "Córdobas" Then
+
+        sqlconsulta = _
+            "SELECT Transacciones.CodCuentas, " & _
+            "Transacciones.FechaTransaccion, " & _
+            "Transacciones.NumeroMovimiento, " & _
+            "VoucherNo, FacturaNo, ChequeNo, " & _
+            "Transacciones.DescripcionMovimiento, " & _
+            "Transacciones.TCambio, " & _
+            "Transacciones.Debito, " & _
+            "Transacciones.Credito, " & _
+            "Debito*TCambio AS MDebito, " & _
+            "TCambio*Credito AS MCredito " & _
+            "FROM Transacciones " & _
+            "WHERE Transacciones.CodCuentas = '" & CodCuenta & "'" & _
+            FiltroTercero & _
+            " ORDER BY Transacciones.FechaTransaccion, " & _
+            "Transacciones.NumeroMovimiento"
+
+    Else
+
+        sqlconsulta = _
+            "SELECT Transacciones.CodCuentas, " & _
+            "Transacciones.FechaTransaccion, " & _
+            "Transacciones.NumeroMovimiento, " & _
+            "Transacciones.VoucherNo, " & _
+            "Transacciones.FacturaNo, " & _
+            "Transacciones.ChequeNo, " & _
+            "Transacciones.DescripcionMovimiento, " & _
+            "Transacciones.TCambio, " & _
+            "Transacciones.Debito, " & _
+            "Transacciones.Credito, " & _
+            "ROUND(Transacciones.Debito * Transacciones.TCambio / Tasas.MontoCordobas, 3) AS MDebito, " & _
+            "ROUND(Transacciones.Credito * Transacciones.TCambio / Tasas.MontoCordobas, 3) AS MCredito " & _
+            "FROM Transacciones " & _
+            "INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas " & _
+            "WHERE Transacciones.CodCuentas = '" & CodCuenta & "'" & _
+            FiltroTercero & _
+            " ORDER BY Transacciones.FechaTransaccion, " & _
+            "Transacciones.NumeroMovimiento"
+
+    End If
+
+    With RsAux
+        .CursorLocation = adUseClient
+        .Open sqlconsulta, Conexion, adOpenDynamic, adLockOptimistic
+    End With
+
+    FrmAuxiliarCuentas.DBGCuentas.DataSource = RsAux
+
+    '==========================================================
+    ' CONSULTA PARA CALCULAR TOTAL1
+    '==========================================================
+    If TipoMoneda = "Córdobas" Then
+
+        FrmAuxiliarCuentas.DtaConsulta.RecordSource = _
+            "SELECT Transacciones.CodCuentas, " & _
+            "Transacciones.FechaTransaccion, " & _
+            "Transacciones.NumeroMovimiento, " & _
+            "Transacciones.DescripcionMovimiento, " & _
+            "Transacciones.TCambio, " & _
+            "Transacciones.Debito, " & _
+            "Transacciones.Credito, " & _
+            "Debito*TCambio AS MDebito, " & _
+            "TCambio*Credito AS MCredito " & _
+            "FROM Transacciones " & _
+            "WHERE Transacciones.CodCuentas = '" & CodCuenta & "'" & _
+            FiltroTercero & _
+            " ORDER BY Transacciones.FechaTransaccion, " & _
+            "Transacciones.NumeroMovimiento"
+
+    Else
+
+        FrmAuxiliarCuentas.DtaConsulta.RecordSource = _
+            "SELECT Transacciones.CodCuentas, " & _
+            "Transacciones.FechaTransaccion, " & _
+            "Transacciones.NumeroMovimiento, " & _
+            "Transacciones.DescripcionMovimiento, " & _
+            "Transacciones.TCambio, " & _
+            "Transacciones.Debito, " & _
+            "Transacciones.Credito, " & _
+            "ROUND(Transacciones.Debito * Transacciones.TCambio / Tasas.MontoCordobas, 3) AS MDebito, " & _
+            "ROUND(Transacciones.TCambio * Transacciones.Credito / Tasas.MontoCordobas, 3) AS MCredito " & _
+            "FROM Transacciones " & _
+            "INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas " & _
+            "WHERE Transacciones.CodCuentas = '" & CodCuenta & "'" & _
+            FiltroTercero & _
+            " ORDER BY Transacciones.FechaTransaccion, " & _
+            "Transacciones.NumeroMovimiento"
+
+    End If
+
+    FrmAuxiliarCuentas.DtaConsulta.Refresh
+
+    '==========================================================
+    ' CALCULAR SALDO
+    '==========================================================
+    Do While Not FrmAuxiliarCuentas.DtaConsulta.Recordset.EOF
+
+        Debito = 0
+        Credito = 0
+
+        If TipoCuenta = "Activo Fijo" Or _
+           TipoCuenta = "Otros Activos" Or _
+           TipoCuenta = "Caja" Or _
+           TipoCuenta = "Cuentas x Cobrar" Or _
+           TipoCuenta = "Bancos" Or _
+           TipoCuenta = "Costos" Or _
+           TipoCuenta = "Gastos" Or _
+           TipoCuenta = "Papeleria - Utiles" Or _
+           TipoCuenta = "Inventario" Then
+
+            If Not IsNull(FrmAuxiliarCuentas.DtaConsulta.Recordset("MDebito")) Then
+                Debito = Format( _
+                    FrmAuxiliarCuentas.DtaConsulta.Recordset("MDebito"), _
+                    "##,##0.00")
+            End If
+
+            If Not IsNull(FrmAuxiliarCuentas.DtaConsulta.Recordset("MCredito")) Then
+                Credito = Format( _
+                    FrmAuxiliarCuentas.DtaConsulta.Recordset("MCredito"), _
+                    "##,##0.00")
+            End If
+
+            Total1Local = Debito - Credito + Total1Local
+
+        Else
+
+            If Not IsNull(FrmAuxiliarCuentas.DtaConsulta.Recordset("MDebito")) Then
+                Debito = Format( _
+                    FrmAuxiliarCuentas.DtaConsulta.Recordset("MDebito"), _
+                    "##,##0.00")
+            End If
+
+            If Not IsNull(FrmAuxiliarCuentas.DtaConsulta.Recordset("MCredito")) Then
+                Credito = Format( _
+                    FrmAuxiliarCuentas.DtaConsulta.Recordset("MCredito"), _
+                    "##,##0.00")
+            End If
+
+            Total1Local = Credito - Debito + Total1Local
+
+        End If
+
+        FrmAuxiliarCuentas.DtaConsulta.Recordset.MoveNext
+
+    Loop
+
+    '==========================================================
+    ' BOTONES SEGUN TIPO DE CUENTA
+    '==========================================================
+    If TipoCuenta = "Bancos" Then
+
+        FrmAuxiliarCuentas.CmdAuditoria.Visible = False
+        FrmAuxiliarCuentas.CmdConciliacion.Visible = True
+
+    Else
+
+        FrmAuxiliarCuentas.CmdAuditoria.Visible = True
+        FrmAuxiliarCuentas.CmdConciliacion.Visible = False
+
+    End If
+
+    '==========================================================
+    ' FORMATO DEL GRID
+    '==========================================================
+    With FrmAuxiliarCuentas.DBGCuentas
+
+        .Columns(1).Caption = "Fecha"
+        .Columns(1).Width = 1000
+
+        .Columns(2).Caption = "No.Trans"
+        .Columns(2).Width = 1000
+
+        .Columns(3).Width = 1000
+        .Columns(4).Width = 1000
+
+        .Columns(5).Width = 1000
+        .Columns(5).Caption = "Cheq/Rec"
+
+        .Columns(6).Width = 3000
+
+        .Columns(7).Width = 1000
+        .Columns(7).NumberFormat = "##,##0.000000"
+
+        .Columns(8).Visible = False
+        .Columns(9).Visible = False
+
+        .Columns(10).Width = 1200
+        .Columns(10).Caption = "Debito"
+        .Columns(10).NumberFormat = "##,##0.00"
+
+        .Columns(11).Width = 1200
+        .Columns(11).Caption = "Credito"
+        .Columns(11).NumberFormat = "##,##0.00"
+
+        .Columns(0).Visible = False
+
+    End With
+
+    '==========================================================
+    ' SALDO
+    '==========================================================
+    FrmAuxiliarCuentas.LblSaldoCuenta.Caption = _
+        Format(Total1Local, "##,##0.00")
+        
+
+
+    Exit Sub
+
+TipoErrs:
+
+    ControlErrores
+
+End Sub
+
+
+Public Sub CargarBeneficiarios(ByVal Cmb As TDBCombo)
+
+    On Error GoTo ErrorHandler
+
+    Dim RsBeneficiarios As ADODB.Recordset
+    Dim sqlconsulta As String
+
+    Set RsBeneficiarios = New ADODB.Recordset
+
+    sqlconsulta = "SELECT " & _
+                  "'' AS Codigo_Beneficiario, " & _
+                  "'TODOS' AS Nombres, " & _
+                  "0 AS Orden " & _
+                  "UNION ALL " & _
+                  "SELECT " & _
+                  "Codigo_Beneficiario, " & _
+                  "Nombre_Beneficiario + ' ' + Apellido_Beneficiario AS Nombres, " & _
+                  "1 AS Orden " & _
+                  "FROM Beneficiario " & _
+                  "WHERE Activo = 1 " & _
+                  "ORDER BY Orden, Nombres"
+
+    With RsBeneficiarios
+        .CursorLocation = adUseClient
+        .Open sqlconsulta, ConexionFacturacion, adOpenStatic, adLockReadOnly
+    End With
+
+    Set Cmb.RowSource = RsBeneficiarios
+
+    '----------------------------------------------------------
+    ' El valor principal del combo será el código
+    '----------------------------------------------------------
+    Cmb.ListField = "Codigo_Beneficiario"
+    Cmb.BoundColumn = "Codigo_Beneficiario"
+
+    Exit Sub
+
+ErrorHandler:
+
+    If Not RsBeneficiarios Is Nothing Then
+        If RsBeneficiarios.State <> 0 Then
+            RsBeneficiarios.Close
+        End If
+    End If
+
+    Set RsBeneficiarios = Nothing
+
+    MsgBox "Error al cargar los beneficiarios." & vbCrLf & _
+           err.Description, vbCritical, "Sistema Contable"
+
+End Sub
+
+
+
+Public Function ValidarPeriodos(ByVal Cn As ADODB.Connection, _
+                                ByVal rsRegistros As ADODB.Recordset) As Boolean
+
+    Dim Rs As ADODB.Recordset
+    Dim rsPeriodo As ADODB.Recordset
+    Dim Fecha As Date
+    Dim LLave As String
+    Dim Sql As String
+
+    ValidarPeriodos = False
+
+    If rsRegistros Is Nothing Then Exit Function
+
+    If rsRegistros.BOF And rsRegistros.EOF Then
+        ValidarPeriodos = True
+        Exit Function
+    End If
+
+    Set DicPeriodos = CreateObject("Scripting.Dictionary")
+
+    Set Rs = rsRegistros.Clone
+    Rs.MoveFirst
+
+    Do While Not Rs.EOF
+
+        Fecha = Rs!Fecha
+
+        'Ejemplo: 202607
+        LLave = Format(Fecha, "yyyymm")
+
+        'Si el período ya fue validado no vuelve a consultar
+        If Not DicPeriodos.Exists(LLave) Then
+
+            Sql = "SELECT NPeriodo,EstadoPeriodo,NTransacciones,Periodo,FechaPeriodo " & _
+                  "FROM Periodos " & _
+                  "WHERE FechaPeriodo BETWEEN '" & _
+                  Format(DateSerial(Year(Fecha), Month(Fecha), 1), "yyyymmdd") & _
+                  "' AND '" & _
+                  Format(DateSerial(Year(Fecha), Month(Fecha) + 1, 0), "yyyymmdd") & "'"
+
+            Set rsPeriodo = New ADODB.Recordset
+
+            rsPeriodo.Open Sql, Cn, adOpenForwardOnly, adLockReadOnly
+
+            If rsPeriodo.EOF Then
+
+                MsgBox "No existe un período para la fecha " & _
+                       Format(Fecha, "dd/MM/yyyy"), _
+                       vbCritical, "Sistema Contable"
+
+                rsPeriodo.Close
+                Exit Function
+
+            End If
+
+            If rsPeriodo!EstadoPeriodo <> "A" Then
+
+                MsgBox "El período " & rsPeriodo!Periodo & _
+                       " está CERRADO." & vbCrLf & _
+                       "Fecha: " & Format(Fecha, "dd/MM/yyyy"), _
+                       vbCritical, "Sistema Contable"
+
+                rsPeriodo.Close
+                Exit Function
+
+            End If
+
+            'Guardar la información del período en memoria
+            DicPeriodos.Add LLave, Array( _
+                    rsPeriodo!NPeriodo, _
+                    rsPeriodo!NTransacciones, _
+                    rsPeriodo!Periodo)
+
+            rsPeriodo.Close
+
+        End If
+
+        Rs.MoveNext
+
+    Loop
+
+    ValidarPeriodos = True
+
+End Function
+
 Function Encrypt(Frase As String) As String
 Dim Ilen As Integer, x As Integer
 Dim sFrase As String, sCurrent As String, sNew As String
@@ -27,10 +1492,65 @@ End Function
 'objExcel.Workbooks.Add ' añadimos el objeto al workbook
 '
 'End Function
+Public Function BuscarPeriodo(Fecha As Date) As Double
+Dim Cnt As ADODB.Connection, SqlString As String
+Dim Rs As New ADODB.Recordset, Periodo As Double, NumeroPeriodo As Double
+Dim mes As Double, Año As Double, FechaIni As Date, FechaFin As Date
+Dim Fechas1 As String, Fechas2 As String
+
+ mes = Month(Fecha)
+ Año = Year(Fecha)
+ FechaIni = CDate("1/" & Month(Fecha) & "/" & Year(Fecha))
+ FechaFin = DateSerial(Año, mes + 1, 1 - 1)
+ NumFecha1 = FechaIni
+ NumFecha2 = FechaFin
+ Fechas1 = Format(FechaIni, "yyyy/mm/dd")
+ Fechas2 = Format(FechaFin, "yyyy/mm/dd")
+
+SqlString = "SELECT NPeriodo, NumeroTabla, FechaPeriodo, EstadoPeriodo, NTransacciones, Periodo From Periodos WHERE     (FechaPeriodo BETWEEN CONVERT(DATETIME, '" & Fechas1 & "', 102) AND CONVERT(DATETIME, '" & Fechas2 & "', 102))"
+'
+'            Set Cnt = New ADODB.Connection
+'            Cnt.ConnectionString = Conexion
+'            Cnt.Open
+'
+'            Cnt.Execute SqlString
+
+     Rs.Open SqlString, Conexion
+            
+        
+     If Not Rs.EOF Then
+      Periodo = Rs("Periodo")
+      NumeroPeriodo = Rs("NPeriodo")
+     End If
+     
+     BuscarPeriodo = NumeroPeriodo
+
+
+End Function
+Public Function KeyPresupuestoCuenta(CodigoCuenta As String)
+  Dim SqlString As String
+  Dim rsConsulta As New ADODB.Recordset, rsPresupuesto As New ADODB.Recordset
+  
+  SqlString = "SELECT Cuentas.* From Cuentas  WHERE (CodCuentas = '" & CodigoCuenta & "')"
+  rsConsulta.Open SqlString, Conexion
+  If Not rsConsulta.EOF Then
+    CuentaPresupuesto(0) = rsConsulta("KeyPresupuesto")
+    CuentaPresupuesto(1) = rsConsulta("Presupuesto")
+    
+    '//////////////////////////////CONSULTA PRESUPUESTO ////////////////////////////////////
+'    rsPresupuesto.Open ""
+  
+  End If
+
+
+End Function
+
+
 
 
 Public Function SaldoCuenta(Periodo As Double, Fecha As Date, Cuenta As String, KeyPresupuesto As Double) As Double
       Dim TipoMoneda As String, TipoCuenta As String, MontoTasa As Double
+      Dim Saldo As Double
       
        TipoMoneda = "Córdobas"  'DtaCuentas.Recordset("TipoMoneda")
        TipoCuenta = "Gastos" 'DtaCuentas.Recordset("TipoCuenta")
@@ -43,18 +1563,16 @@ Public Function SaldoCuenta(Periodo As Double, Fecha As Date, Cuenta As String, 
       MDIPrimero.AdoConsulta.RecordSource = "SELECT SUM(Debito * TCambio) AS MDebito, SUM(TCambio * Credito) AS MCredito From Transacciones WHERE   (FechaTransaccion  < CONVERT(DATETIME, '" & Format(Fecha, "YYYY-MM-DD") & "', 102)) GROUP BY FacturaNo HAVING (FacturaNo = '" & KeyPresupuesto & "')"
       MDIPrimero.AdoConsulta.Refresh
 
+      Debito = 0
+      Credito = 0
+
       If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
         If Not IsNull(MDIPrimero.AdoConsulta.Recordset("MDebito")) Then
           Debito = MDIPrimero.AdoConsulta.Recordset("MDebito")
         End If
-      Else
-         Debito = 0
-      End If
-      
-      If Not IsNull(MDIPrimero.AdoConsulta.Recordset("MCredito")) Then
-       Credito = MDIPrimero.AdoConsulta.Recordset("MCredito")
-      Else
-       Credito = 0
+        If Not IsNull(MDIPrimero.AdoConsulta.Recordset("MCredito")) Then
+          Credito = MDIPrimero.AdoConsulta.Recordset("MCredito")
+        End If
       End If
       
        Select Case TipoMoneda
@@ -93,6 +1611,10 @@ Public Sub ConvertirReporte(Fecha As Date)
   Dim TasaCambio As Double, Debe1 As Double, Debe2 As Double, Debe3 As Double, Haber1 As Double, Haber2 As Double, Haber3 As Double
   
   TasaCambio = BuscaTasaCambio(Fecha)
+  If TasaCambio = 0 Then
+     MsgBox "No existe tasa de cambio para la fecha " & Format(Fecha, "dd/mm/yyyy"), vbCritical, "Sistema Contable"
+     Exit Sub
+  End If
    '////////////////////////////////////////////BUSCO EL TOTAL DE ACTIVOS //////////////////////////////////////////////////
   MDIPrimero.AdoConsulta.RecordSource = "SELECT Reportes.* From Reportes ORDER BY Orden"
   MDIPrimero.AdoConsulta.Refresh
@@ -293,11 +1815,11 @@ Public Sub AjusteDiferencial(QUIEN As String)
         
         DiferencialD1 = TotalActivoD1 - TotalPCD1 + TotalRD1
         DiferencialD2 = TotalActivoD2 - TotalPCD2 + TotalRD2
-        DiferencialD2 = TotalActivoD3 - TotalPCD3 + TotalRD3
+        DiferencialD3 = TotalActivoD3 - TotalPCD3 + TotalRD3
         
         DiferencialH1 = TotalActivoH1 - TotalPCH1 + TotalRH1
         DiferencialH2 = TotalActivoH2 - TotalPCH2 + TotalRH2
-        DiferencialH2 = TotalActivoH3 - TotalPCH3 + TotalRH3
+        DiferencialH3 = TotalActivoH3 - TotalPCH3 + TotalRH3
         
               MDIPrimero.AdoConsulta.RecordSource = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
               MDIPrimero.AdoConsulta.Refresh
@@ -462,7 +1984,29 @@ Public Function ConvertirMovimiento(NumeroMovimiento As Double, Fecha As Date, M
 
 
 End Function
+Public Function Split(cadena As String, Caracter As String, posicion As Double) As String
+   Dim i As Double
+   Dim A() As String, Can As String, J As Double
 
+   ReDim A(20)
+   
+    J = 1
+    For i = 1 To Len(cadena)
+     If Mid(cadena, i, 1) = Caracter Then
+      J = J + 1
+      i = i + 1
+      Can = ""
+     End If
+     
+        Can = Can & Mid(cadena, i, 1)
+        A(J) = Can
+         
+
+    Next
+    
+    Split = A(posicion)
+
+End Function
 
 Public Function LeeCadena(cadena As String, numero As Double) As String
   Dim i As Double
@@ -490,18 +2034,25 @@ Public Function LeeCadena(cadena As String, numero As Double) As String
 End Function
 
 
-Public Function TRUNC(Value As Double, escala As Double)
- Dim posicion As Double, Valor As Control, Dec As Double, i As Double
- Dec = 1
- For i = 1 To escala
+Public Function TRUNC(ByVal Value As Double, ByVal escala As Double) As Double
+
+Dim Dec As Double
+Dim i As Double
+Dim Valor As Double
+
+Dec = 1
+
+For i = 1 To escala
     Dec = Dec * 10
- Next
- 
- Control = Value
-'  TRUNC = Int(Value * 1000) / 1000
-   TRUNC = Int(Control * Dec) / Dec
-   
+Next i
+
+Valor = Value
+
+TRUNC = Int(Valor * Dec) / Dec
+
+
 End Function
+
 Public Function BuscaTasaCambio(FechaTasa As Date) As Double
       MDIPrimero.AdoConsulta.RecordSource = "SELECT Tasas.FechaTasas, Tasas.MontoCordobas, Tasas.MontoLibras From Tasas WHERE (FechaTasas = '" & Format(FechaTasa, "yyyymmdd") & "')"
       MDIPrimero.AdoConsulta.Refresh
@@ -517,7 +2068,7 @@ Public Function BuscaTasaCambioFacturacion(FechaTasa As Date, ConexionFactura As
       MDIPrimero.AdoConsultaFacturacion.ConnectionString = ConexionFactura
       MDIPrimero.AdoConsultaFacturacion.RecordSource = "SELECT   FechaTasa, MontoTasa From TasaCambio WHERE (FechaTasa = CONVERT(DATETIME, '" & Format(FechaTasa, "yyyymmdd") & "', 102))"
       MDIPrimero.AdoConsultaFacturacion.Refresh
-      If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
+      If Not MDIPrimero.AdoConsultaFacturacion.Recordset.EOF Then
          BuscaTasaCambioFacturacion = MDIPrimero.AdoConsultaFacturacion.Recordset("MontoTasa")
       Else
          BuscaTasaCambioFacturacion = 0
@@ -581,6 +2132,8 @@ End Function
 
 
 Public Function ValidarCuentas(CodigoCuentas As String) As Boolean
+
+ Dim Sql As String
            
            Sql = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo " & _
                  "From Cuentas WHERE (CodCuentas = '" & CodigoCuentas & "')"
@@ -604,11 +2157,11 @@ Public Function MesLetras(Meses As Double) As String
       Case 5: MesLetras = "Mayo"
       Case 6: MesLetras = "Junio"
       Case 7: MesLetras = "Julio"
-      Case 8: MesLetras = "Julio"
-      Case 9: MesLetras = "Agosto"
-      Case 10: MesLetras = "Septiembre"
-      Case 11: MesLetras = "Octubre"
-      Case 12: MesLetras = "Noviembre"
+      Case 8: MesLetras = "Agosto"
+      Case 9: MesLetras = "Septiembre"
+      Case 10: MesLetras = "Octubre"
+      Case 11: MesLetras = "Noviembre"
+      Case 12: MesLetras = "Diciembre"
       
      
   End Select
@@ -616,23 +2169,66 @@ Public Function MesLetras(Meses As Double) As String
 End Function
 
 
-Sub HayUtilidadBruta()
- HayUtiBruta = True
-        With FrmReportes.DtaReportes
-            .RecordSource = "select * from reportes where descripcion like '%" & MDIPrimero.AdoConfiguracion.Recordset!OtrosINgresos & "%' order by orden"
-            .Refresh
-            If .Recordset.RecordCount = 0 Then HayUtiBruta = False
-            .RecordSource = "select * from reportes where descripcion like '%" & MDIPrimero.AdoConfiguracion.Recordset!Costos & "%' order by orden"
-            .Refresh
-            If .Recordset.RecordCount = 0 Then HayUtiBruta = False
-            .RecordSource = "select * from reportes where descripcion like '%" & MDIPrimero.AdoConfiguracion.Recordset!Ingresos & "%' order by orden"
-            .Refresh
-            If .Recordset.RecordCount = 0 Then HayUtiBruta = False
-            .RecordSource = "select * from reportes where descripcion like '%" & MDIPrimero.AdoConfiguracion.Recordset!CostosOperativos & "%' order by orden"
-            .Refresh
-            If .Recordset.RecordCount = 0 Then HayUtiBruta = False
-        End With
-        
+Public Sub HayUtilidadBruta()
+
+On Error GoTo ErrorHandler
+
+HayUtiBruta = True
+
+With FrmReportes.DtaReportes
+
+    ' Verificar Otros Ingresos
+    .RecordSource = "SELECT * FROM reportes WHERE descripcion LIKE '%" & _
+                    MDIPrimero.AdoConfiguracion.Recordset!OtrosINgresos & _
+                    "%' ORDER BY orden"
+    .Refresh
+
+    If .Recordset.EOF And .Recordset.BOF Then
+        HayUtiBruta = False
+        Exit Sub
+    End If
+
+    ' Verificar Costos
+    .RecordSource = "SELECT * FROM reportes WHERE descripcion LIKE '%" & _
+                    MDIPrimero.AdoConfiguracion.Recordset!Costos & _
+                    "%' ORDER BY orden"
+    .Refresh
+
+    If .Recordset.EOF And .Recordset.BOF Then
+        HayUtiBruta = False
+        Exit Sub
+    End If
+
+    ' Verificar Ingresos
+    .RecordSource = "SELECT * FROM reportes WHERE descripcion LIKE '%" & _
+                    MDIPrimero.AdoConfiguracion.Recordset!Ingresos & _
+                    "%' ORDER BY orden"
+    .Refresh
+
+    If .Recordset.EOF And .Recordset.BOF Then
+        HayUtiBruta = False
+        Exit Sub
+    End If
+
+    ' Verificar Costos Operativos
+    .RecordSource = "SELECT * FROM reportes WHERE descripcion LIKE '%" & _
+                    MDIPrimero.AdoConfiguracion.Recordset!CostosOperativos & _
+                    "%' ORDER BY orden"
+    .Refresh
+
+    If .Recordset.EOF And .Recordset.BOF Then
+        HayUtiBruta = False
+        Exit Sub
+    End If
+
+End With
+
+Exit Sub
+
+ErrorHandler:
+HayUtiBruta = False
+MsgBox "Error al verificar la utilidad bruta: " & err.Description, vbExclamation
+
 End Sub
 Public Sub Demo(FechaSalida As Date)
  Dim Horas As Double, HorasEncriptadas As String
@@ -972,6 +2568,9 @@ End Function
 
 
 Public Sub Utilidadbruta()
+Dim UltimoOrden As Integer, RegIngresos  As Integer, PrimReg As Integer, UltReg As Integer
+Dim Utilidad As Double, Utilidad2 As Double, Utilidad3 As Double, RegTCostosOper As Integer
+Dim Decrementador As Integer, TotalActivoCirculante As Double, TotalActivoFijo As Double, TotalActivoDiferido As Double
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         'validar que se encuentrenn todas las cuentas para encontrar la utilidad bruta
@@ -1044,7 +2643,7 @@ Public Sub Utilidadbruta()
             .Recordset.Update
         End If
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        'aquí sería bueno mover los registros que estén entre costos y totales de ingresos operativos y mandarlos hasta abajito
+        'aquí sería bueno mover los registros que están entre costos y totales de ingresos operativos y mandarlos hasta abajito
 '        Dim RegInicioCostosOperativos As Integer 'variable que me guarda el orden donde se encuentra el registro donde comienzan los costos operativos
 '        Dim RegTotalCostosOperativos As Integer 'variable que me guarda el orden donde se encuentra el registro de total de costos operativos
 
@@ -2109,7 +3708,7 @@ Public Sub LlenarDataCombos(ado As Adodc, ByRef DC As DataCombo, Campo As String
 err:
       Dim Msj
    If err.Number <> 0 Then
-        Msj = "Error N° " & Str(err.Number) & " fue generado por " _
+        Msj = "Error Nº " & Str(err.Number) & " fue generado por " _
         & err.Source & Chr(13) & err.Description
         MsgBox Msj, , "Error", err.HelpFile, err.HelpContext
     End If
@@ -2255,7 +3854,7 @@ Debug.Print FrmReportes.DtaHistorial.RecordSource
 End Sub
 Public Sub EliminaRegistroCeroDpto(QUIEN As String)
 Dim KeyGrupo As String, Niveles As Integer
-Dim rs As New ADODB.Recordset, cadena As String
+Dim Rs As New ADODB.Recordset, cadena As String
 
 If QUIEN = "Balanza" Then
 'FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.Debe3-Reportes.Haber3 AS Diferencia From Reportes Where (((Reportes.Descripcion) Like '*Total*') And ((Reportes.Debe3 - Reportes.Haber3) = 0))"
@@ -2295,7 +3894,7 @@ ElseIf QUIEN = "Nivel" Then
 '     Loop
 
 '///////////////////////////ELIMINO TODOS LOS REGISTROS MAYORES AL NIVEL SELECCIONADO ////////////////////
-      rs.Open "DELETE FROM Reportes WHERE (((Reportes.Nivel) > " & Niveles & "))", Conexion
+      Rs.Open "DELETE FROM Reportes WHERE (((Reportes.Nivel) > " & Niveles & "))", Conexion
      FrmReportes.DtaConsulta.Refresh
   End If
   
@@ -2322,7 +3921,7 @@ FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.De
 '       FrmReportes.DtaConsulta2.Recordset.Delete
 '     End If
      
-     rs.Open "DELETE FROM Reportes WHERE (Descripcion LIKE '%" & Descripcion & "%') AND (KeyGrupo = '" & KeyGrupo & "') And ((Reportes.Debe3 - Reportes.Haber3) = 0)", Conexion
+     Rs.Open "DELETE FROM Reportes WHERE (Descripcion LIKE '%" & Descripcion & "%') AND (KeyGrupo = '" & KeyGrupo & "') And ((Reportes.Debe3 - Reportes.Haber3) = 0)", Conexion
 
      
     FrmReportes.DtaConsulta.Recordset.MoveNext
@@ -2348,7 +3947,7 @@ FrmReportes.DtaConsulta.Refresh
     FrmReportes.DtaConsulta2.Refresh
     If Not FrmReportes.DtaConsulta2.Recordset.EOF Then
       
-     rs.Open "DELETE FROM Reportes WHERE (KeyGrupo = '" & KeyGrupo & "')", Conexion
+     Rs.Open "DELETE FROM Reportes WHERE (KeyGrupo = '" & KeyGrupo & "')", Conexion
     End If
     
 
@@ -2361,7 +3960,7 @@ End Sub
 
 Public Sub EliminaRegistroCero(QUIEN As String)
 Dim KeyGrupo As String, Niveles As Integer
-Dim rs As New ADODB.Recordset, cadena As String
+Dim Rs As New ADODB.Recordset, cadena As String
 
     If QUIEN = "Balanza" Then
         'FrmReportes.DtaConsulta.RecordSource = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3, Reportes.Haber3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.Debe3-Reportes.Haber3 AS Diferencia From Reportes Where (((Reportes.Descripcion) Like '*Total*') And ((Reportes.Debe3 - Reportes.Haber3) = 0))"
@@ -2438,7 +4037,7 @@ Dim rs As New ADODB.Recordset, cadena As String
                     FrmReportes.DtaConsulta2.Refresh
                     If Not FrmReportes.DtaConsulta2.Recordset.EOF Then
                       
-                     rs.Open "DELETE FROM Reportes WHERE (KeyGrupo = '" & KeyGrupo & "')", Conexion
+                     Rs.Open "DELETE FROM Reportes WHERE (KeyGrupo = '" & KeyGrupo & "')", Conexion
                     End If
                     
                 
@@ -2464,7 +4063,7 @@ Dim rs As New ADODB.Recordset, cadena As String
                     FrmReportes.DtaConsulta2.Refresh
                     If Not FrmReportes.DtaConsulta2.Recordset.EOF Then
                       
-                     rs.Open "DELETE FROM Reportes WHERE (KeyGrupo = '" & KeyGrupo & "')", Conexion
+                     Rs.Open "DELETE FROM Reportes WHERE (KeyGrupo = '" & KeyGrupo & "')", Conexion
                     End If
                     
                 
@@ -3037,7 +4636,7 @@ Dim CodDepartamentoAnt As String, CodigoGrupoAnt As String, UltimoCodigoGrupo As
       Descripcion = FrmReportes.DtaHistorial.Recordset("DescripcionGrupo")
       CodDepartamentoAnt = ""
       CodigoGrupoAnt = ""
-
+      
       
 '//////////////////////IDENTIFICO EL NIVEL////////////////////////////////////////////////////
       Longitud = Len(FrmReportes.DtaHistorial.Recordset("KeyGrupo"))
@@ -3085,6 +4684,12 @@ Dim CodDepartamentoAnt As String, CodigoGrupoAnt As String, UltimoCodigoGrupo As
       
        
      Do While Not FrmReportes.DtaConsulta.Recordset.EOF
+     
+       If FrmReportes.DtaConsulta.Recordset("CodCuentas") = "61011201" Then
+         FrmReportes.DtaConsulta.Recordset("CodCuentas") = "61011201"
+       End If
+       
+       
        If Not IsNull(FrmReportes.DtaConsulta.Recordset("DescripcionCuentas")) Then
         DescripCuenta = FrmReportes.DtaConsulta.Recordset("CodCuentas") + "." + FrmReportes.DtaConsulta.Recordset("DescripcionCuentas")
        Else
@@ -3093,6 +4698,8 @@ Dim CodDepartamentoAnt As String, CodigoGrupoAnt As String, UltimoCodigoGrupo As
        CodigoCuenta = FrmReportes.DtaConsulta.Recordset("CodCuentas")
        If Not IsNull(FrmReportes.DtaConsulta.Recordset("VoucherNo")) Then
         CodDepartamento = FrmReportes.DtaConsulta.Recordset("VoucherNo")
+       Else
+        CodDepartamento = ""
        End If
        
        If CodDepartamento = "" Or CodDepartamento = "-" Then
@@ -3673,13 +5280,13 @@ Dim DebitoD As Double, CreditoD As Double, Ajuste As String
                                 
                                 If FrmReportes.CmbMoneda.Text = "Córdobas" Then
                                     If FrmReportes.ChkQuitarMovimiento.Value = 1 Then
-                                      ConsultaTotalesMovimientos = "SELECT Transacciones.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio, 3)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito, 3)) AS MCredito, MAX(IndiceTransaccion.Fuente) AS Fuente FROM  Transacciones INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) GROUP BY Transacciones.CodCuentas, IndiceTransaccion.Ajuste HAVING (MAX(IndiceTransaccion.Fuente) <> 'Cierre') AND (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (IndiceTransaccion.Ajuste <> '" & Ajuste & "') ORDER BY Transacciones.CodCuentas"
+                                      ConsultaTotalesMovimientos = "SELECT Transacciones.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio, 3)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito, 3)) AS MCredito, MAX(IndiceTransaccion.Fuente) AS Fuente FROM  Transacciones INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) GROUP BY Transacciones.CodCuentas HAVING (MAX(IndiceTransaccion.Fuente) <> 'Cierre') AND (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (MAX(IndiceTransaccion.Ajuste) <> '" & Ajuste & "') ORDER BY Transacciones.CodCuentas"
                                     Else
-                                      ConsultaTotalesMovimientos = "SELECT Transacciones.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio, 3)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito, 3)) AS MCredito FROM  Transacciones INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) GROUP BY Transacciones.CodCuentas, IndiceTransaccion.Ajuste HAVING (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (IndiceTransaccion.Ajuste <> '" & Ajuste & "')"
+                                      ConsultaTotalesMovimientos = "SELECT Transacciones.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio, 3)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito, 3)) AS MCredito FROM  Transacciones INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) GROUP BY Transacciones.CodCuentas HAVING (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (MAX(IndiceTransaccion.Ajuste) <> '" & Ajuste & "')"
                                     End If
                                 Else
                                      ConsultaTotalesMovimientos = "SELECT Cuentas.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio / Tasas.MontoCordobas, 5)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito / Tasas.MontoCordobas, 5)) AS MCredito,SUM(ROUND(Transacciones.Debito * Transacciones.TCambio / Tasas.MontoCordobas, 5) - ROUND(Transacciones.TCambio * Transacciones.Credito / Tasas.MontoCordobas, 5)) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTransaccion = Tasas.FechaTasas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo " & _
-                                                                 "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) GROUP BY Cuentas.CodCuentas, IndiceTransaccion.Ajuste HAVING (Cuentas.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (IndiceTransaccion.Ajuste <> '" & Ajuste & "')"
+                                                                 "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(FechaIni, "yyyymmdd") & "', 102) AND CONVERT(DATETIME, '" & Format(FechaFin, "yyyymmdd") & "', 102)) GROUP BY Cuentas.CodCuentas HAVING (Cuentas.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (MAX(IndiceTransaccion.Ajuste) <> '" & Ajuste & "')"
                                 End If
                 
                 
@@ -6653,7 +8260,7 @@ Public Sub ControlErrores()
         Case 68
             MsgBox Prompt:="La unidad no está preparada. Inserte un disco en la unidad.", Buttons:=vbExclamation, Title:="Sistema Contable"
             ' Restablece la ruta a la unidad anterior.
-            Drive1.Drive = Dir1.Path
+'            Drive1.Drive = Dir1.Path
             Exit Sub
         Case 20525
               MsgBox Prompt:="No se puede Leer el Reporte", Buttons:=vbExclamation, Title:="Sistema Contable"
@@ -6894,13 +8501,13 @@ Function GrabaDetalleFactura(CodCuentas As String, FechaTransaccion As Date, Num
                                  End If
                                  
                                 
-                                 If FechaDescuento <> "12:00:00 a.m." Then
+'                                 If CDate(FechaDescuento) <> CDate("12:00:00 a.m.") Then
                                   MDIPrimero.AdoConsulta.Recordset("FechaDescuento") = FechaDescuento
-                                 End If
+'                                 End If
                                  MDIPrimero.AdoConsulta.Recordset("DescuentoDisponible") = Descuento
-                                 If FechaVence <> "12:00:00 a.m." Then
+'                                 If FechaVence <> "12:00:00 a.m." Then
                                   MDIPrimero.AdoConsulta.Recordset("FechaVence") = FechaVence
-                                 End If
+'                                 End If
                                  MDIPrimero.AdoConsulta.Recordset("CodCuentaProveedor") = CodCuentaProveedor
                                  MDIPrimero.AdoConsulta.Recordset("TipoFactura") = TipoFactura
                                 MDIPrimero.AdoConsulta.Recordset.Update
@@ -7383,11 +8990,8 @@ Function GrabaDetalleChequeSolicitud(CodCuentas As String, FechaTransaccion As D
                                  MDIPrimero.AdoConsulta.Recordset("NombreCuenta") = NombreCuenta
                                  
                                  If TipoCuenta = "Bancos" Then
-'                                  If NumeroFactura = "-" Then
-'                                    MDIPrimero.AdoConsulta.Recordset("ChequeNo") = "#######"
-'                                  Else
-'                                    MDIPrimero.AdoConsulta.Recordset("ChequeNo") = NumeroFactura
-'                                  End If
+                                  NumeroFactura = Split(Presupuesto, " ", 1)
+                                  MDIPrimero.AdoConsulta.Recordset("FacturaNo") = NumeroFactura
                                   MDIPrimero.AdoConsulta.Recordset("ChequeNo") = "#######"
                                   MDIPrimero.AdoConsulta.Recordset("DescripcionMovimiento") = DescripcionMovimiento & " " & TipoFactura
                                  Else
@@ -8963,7 +10567,7 @@ Public Sub CargaADODC(TablaMaestra As String, ByRef nombreADODC As Adodc, xsinon
     End If
     
     If TablaMaestra = "ControlSeccionFinca" Then
-        Sql = "select IdReg, NoSeccion from ControlSeccionFinca where IdFinca=" & FrmPlanificaActividad.cmdfinca.BoundText & " and  anoplanta=" & Trim(FrmPlanificaActividad.txtplantado.Text) & " "
+'        Sql = "select IdReg, NoSeccion from ControlSeccionFinca where IdFinca=" & FrmPlanificaActividad.cmdfinca.BoundText & " and  anoplanta=" & Trim(FrmPlanificaActividad.txtplantado.Text) & " "
     End If
     
      If TablaMaestra = "TipoNomina" Then
@@ -8972,10 +10576,10 @@ Public Sub CargaADODC(TablaMaestra As String, ByRef nombreADODC As Adodc, xsinon
         
     If TablaMaestra = "_Finca" Then
         If apliTrim = "" Then
-            Sql = "select ((Finca))," & TablaMaestra & ".IdFinca from " & TablaMaestra & " where IdSede=" & FrmRegSeccion.sede.BoundText & " " & sqlOrd
+'            Sql = "select ((Finca))," & TablaMaestra & ".IdFinca from " & TablaMaestra & " where IdSede=" & FrmRegSeccion.sede.BoundText & " " & sqlOrd
         Else
             If apliTrim = "2" Then
-                Sql = "select ((Finca))," & TablaMaestra & ".IdFinca from " & TablaMaestra & " where IdSede=" & FrmPlanificaActividad.cmdsede.BoundText & " " & sqlOrd
+'                Sql = "select ((Finca))," & TablaMaestra & ".IdFinca from " & TablaMaestra & " where IdSede=" & FrmPlanificaActividad.cmdsede.BoundText & " " & sqlOrd
             Else
                 Sql = "select ((Finca))," & TablaMaestra & ".IdFinca from " & TablaMaestra & "  " & sqlOrd
             End If
@@ -8999,9 +10603,9 @@ Public Sub CargaADODC(TablaMaestra As String, ByRef nombreADODC As Adodc, xsinon
     End If
     If TablaMaestra = "Tareas" Then
         If wregNuSede = 0 Then
-            If IsNumeric(FrmPlanificaActividad.cmdsede.BoundText) Then
-                wregNuSede = FrmPlanificaActividad.cmdsede.BoundText
-            End If
+'            If IsNumeric(FrmPlanificaActividad.cmdsede.BoundText) Then
+'                wregNuSede = FrmPlanificaActividad.cmdsede.BoundText
+'            End If
         End If
             Sql = "select CodigoTarea as No_Tarea, (LOWER (Nombre_Tarea)) as Nombre_Tarea , QuienPaga,UnidMedida, DH from  " & TablaMaestra & " where CodigoTarea like '" & wregNuSede & "%'"
     End If
@@ -9013,7 +10617,7 @@ Public Sub CargaADODC(TablaMaestra As String, ByRef nombreADODC As Adodc, xsinon
     On Local Error Resume Next
     err = 0
     If TablaMaestra = "Productos" Or TablaMaestra = "Tareas" Then
-        nombreADODC.ConnectionString = ConexionInventario
+'        nombreADODC.ConnectionString = ConexionInventario
     Else
         If TablaMaestra = "CataVH" Or TablaMaestra = "CatCombus" Then
             nombreADODC.ConnectionString = Conexion
@@ -9130,7 +10734,8 @@ End Function
 
 Function Mod2(cadena, num) As Long
    Dim Texto As String
-   Dim num1, num2 As Long
+   Dim num1 As Long, num2 As Long
+   Dim Res As Long
 
    Texto = ""
    num1 = 0
@@ -9159,7 +10764,7 @@ Set rsa1 = Nothing
 If codempl <> 0 Then
     Sql = "select nombre1, nombre2, apellido1, apellido2, codtiponomina, codgrupo, codcargo, SueldoPeriodo, dolarizado from empleado where codempleado=" & codempl & ""
 Else
-    Sql = "select nombre1, nombre2, apellido1, apellido2, codtiponomina, codgrupo, codcargo, SueldoPeriodo,dolarizado from empleado where codempleado=" & FrmFormulario.AdoHist.Recordset!idsoli & ""
+'    Sql = "select nombre1, nombre2, apellido1, apellido2, codtiponomina, codgrupo, codcargo, SueldoPeriodo,dolarizado from empleado where codempleado=" & FrmFormulario.AdoHist.Recordset!idsoli & ""
 End If
 rsa1.Open Sql, Conexion, adOpenForwardOnly, adLockOptimistic
 If rsa1.EOF = True Then

@@ -120,7 +120,7 @@ Dim CodigoCuenta As String, Concepto As String
 Dim x, y, H, V, Page As Integer, Dia As String, mes As String, Año As String
 Dim i, J As Integer, Fechass As Date
 Dim TotalDebito, TotalCredito, Totalpag As Double
-Dim SubTotal, Total, IGV As Double, Cadena As String
+Dim SubTotal, Total, IGV As Double, cadena As String
 Dim X1 As Double, Y1 As Double, X2 As Double, Y2 As Double, X3 As Double, Y3 As Double, X4 As Double, Y4 As Double, X5 As Double, Y5 As Double, X6 As Double, Y6 As Double, X7 As Double, Y7 As Double, X8 As Double, Y8 As Double, X9 As Double, Y9 As Double, X10 As Double, Y10 As Double, X11 As Double, Y11 As Double, X12 As Double, Y12 As Double, X13 As Double, Y13 As Double
 Dim UltimaLinea As Double, DiferenciaY As Double, NLineas As Double
 Dim Caracter As Double, ContadorLinea As Double, CadenaDescripcion As String, CaracteresLineas As Double
@@ -385,15 +385,15 @@ Else
            If X6 <> 0 Or Y6 <> 0 Then
             Printer.CurrentX = Val(X6) '5
             Printer.CurrentY = Val(Y6) + (5 * i)
-            Cadena = FrmEgresos.DtaConsulta.Recordset("CodCuentas")
-            If Len(Cadena) > 20 Then
-             Cadena = Mid(Cadena, 1, 20)
+            cadena = FrmEgresos.DtaConsulta.Recordset("CodCuentas")
+            If Len(cadena) > 20 Then
+             cadena = Mid(cadena, 1, 20)
             End If
             
             Printer.FontName = "Times New Roman"
             Printer.FontSize = 9
             Printer.FontBold = False
-            Printer.Print Cadena
+            Printer.Print cadena
            End If
         
         
@@ -402,39 +402,39 @@ Else
           If X10 <> 0 Or Y10 <> 0 Then
             Printer.CurrentX = Val(X10) '25
             Printer.CurrentY = Val(Y10) + (5 * i)
-            Cadena = FrmEgresos.DtaConsulta.Recordset("NombreCuenta")
-            If Len(Cadena) > 24 Then
-             Cadena = Mid(Cadena, 1, 24)
+            cadena = FrmEgresos.DtaConsulta.Recordset("NombreCuenta")
+            If Len(cadena) > 24 Then
+             cadena = Mid(cadena, 1, 24)
             End If
             
             Printer.FontName = "Times New Roman"
             Printer.FontSize = 9
             Printer.FontBold = False
-            Printer.Print Cadena
+            Printer.Print cadena
           End If
         
          
             If X11 <> 0 Or Y11 <> 0 Then
                      CadenaDescripcion = FrmEgresos.DtaConsulta.Recordset("DescripcionMovimiento")
-                     Cadena = FrmEgresos.DtaConsulta.Recordset("DescripcionMovimiento")
+                     cadena = FrmEgresos.DtaConsulta.Recordset("DescripcionMovimiento")
                      Caracter = 1
                      ContadorLinea = i
                      
-                     If Len(Cadena) > CaracteresLineas Then
-                              Do While Len(Cadena) >= CaracteresLineas
+                     If Len(cadena) > CaracteresLineas Then
+                              Do While Len(cadena) >= CaracteresLineas
                                        If Caracter = 1 Then
-                                                 Cadena = Mid(Cadena, 1, CaracteresLineas)
+                                                 cadena = Mid(cadena, 1, CaracteresLineas)
                                                  Printer.CurrentX = Val(X11) '25
                                                  Printer.CurrentY = Val(Y11) + (5 * i)
                                                  Printer.FontName = "Times New Roman"
                                                  Printer.FontSize = 9
                                                  Printer.FontBold = False
-                                                 Printer.Print Cadena
+                                                 Printer.Print cadena
                                                  Caracter = Caracter + CaracteresLineas
                                                  
                                                  '//////////////////VERIFICO SI LO QUE SOBRE ES MAYOR DE LA LINEA SIGUIENTE/////////////////
-                                                 Cadena = Mid(CadenaDescripcion, Caracter, CaracteresLineas)
-                                                 If Len(Cadena) < CaracteresLineas Then
+                                                 cadena = Mid(CadenaDescripcion, Caracter, CaracteresLineas)
+                                                 If Len(cadena) < CaracteresLineas Then
                                                   '///////////////////////SI ES MENOR IMPRIMO/////////////////////////
                                                      ContadorLinea = ContadorLinea + 1
                                                      Printer.CurrentX = Val(X11) '25
@@ -442,25 +442,25 @@ Else
                                                      Printer.FontName = "Times New Roman"
                                                      Printer.FontSize = 9
                                                      Printer.FontBold = False
-                                                     Printer.Print Cadena
+                                                     Printer.Print cadena
                                                      
                                                      Caracter = Caracter + CaracteresLineas
                                                  End If
                                          Else
                                                  ContadorLinea = ContadorLinea + 1
-                                                 Cadena = Mid(CadenaDescripcion, Caracter, CaracteresLineas)
+                                                 cadena = Mid(CadenaDescripcion, Caracter, CaracteresLineas)
                                                  Printer.CurrentX = Val(X11) '25
                                                  Printer.CurrentY = Val(Y11) + (5 * ContadorLinea)
                                                  Printer.FontName = "Times New Roman"
                                                  Printer.FontSize = 9
                                                  Printer.FontBold = False
-                                                 Printer.Print Cadena
+                                                 Printer.Print cadena
                                                  
                                                  Caracter = Caracter + CaracteresLineas
                                                  
                                                  '//////////////////VERIFICO SI LO QUE SOBRE ES MAYOR DE LA LINEA/////////////////
-                                                 Cadena = Mid(CadenaDescripcion, Caracter, CaracteresLineas)
-                                                 If Len(Cadena) < CaracteresLineas Then
+                                                 cadena = Mid(CadenaDescripcion, Caracter, CaracteresLineas)
+                                                 If Len(cadena) < CaracteresLineas Then
                                                   '///////////////////////SI ES MENOR IMPRIMO/////////////////////////
                                                      ContadorLinea = ContadorLinea + 1
                                                      Printer.CurrentX = Val(X11) '25
@@ -468,7 +468,7 @@ Else
                                                      Printer.FontName = "Times New Roman"
                                                      Printer.FontSize = 9
                                                      Printer.FontBold = False
-                                                     Printer.Print Cadena
+                                                     Printer.Print cadena
                                                      
                                                      Caracter = Caracter + CaracteresLineas
                                                  End If
@@ -485,7 +485,7 @@ Else
                              Printer.FontName = "Times New Roman"
                              Printer.FontSize = 9
                              Printer.FontBold = False
-                             Printer.Print Cadena
+                             Printer.Print cadena
                                            
                      End If
                   

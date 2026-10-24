@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "Comdlg32.ocx"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "ComDlg32.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
 Begin VB.Form FrmAgregarActivoFijo 
    Caption         =   "Agregando Activo Fijo"
@@ -38,7 +38,7 @@ Begin VB.Form FrmAgregarActivoFijo
    End
    Begin XtremeSuiteControls.TabControl TabControl1 
       Height          =   7935
-      Left            =   120
+      Left            =   0
       TabIndex        =   1
       Top             =   120
       Width           =   17415
@@ -220,7 +220,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   77725697
+            Format          =   200015873
             CurrentDate     =   38651
          End
          Begin MSComCtl2.DTPicker DTPicker1 
@@ -242,7 +242,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   77725697
+            Format          =   200015873
             CurrentDate     =   38651
          End
          Begin VB.Label Label18 
@@ -432,7 +432,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   77725697
+            Format          =   200015873
             CurrentDate     =   38651
          End
          Begin MSComCtl2.DTPicker DTPicker6 
@@ -454,7 +454,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   77725697
+            Format          =   200015873
             CurrentDate     =   38651
          End
          Begin VB.Label Label28 
@@ -756,7 +756,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   77725697
+            Format          =   203423745
             CurrentDate     =   38651
          End
          Begin MSComCtl2.DTPicker DTPicker4 
@@ -778,7 +778,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   77725697
+            Format          =   203423745
             CurrentDate     =   38651
          End
          Begin VB.Label Label34 
@@ -1159,7 +1159,7 @@ Begin VB.Form FrmAgregarActivoFijo
                Strikethrough   =   0   'False
             EndProperty
             CalendarForeColor=   0
-            Format          =   77725697
+            Format          =   203489281
             CurrentDate     =   38651
          End
          Begin MSComCtl2.DTPicker TxtFechaUltDep 
@@ -1171,7 +1171,7 @@ Begin VB.Form FrmAgregarActivoFijo
             _ExtentX        =   2566
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   77725697
+            Format          =   203489281
             CurrentDate     =   37992
          End
          Begin MSDataListLib.DataCombo DBGrupos 
@@ -1195,7 +1195,7 @@ Begin VB.Form FrmAgregarActivoFijo
             _ExtentX        =   2566
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   77725697
+            Format          =   203489281
             CurrentDate     =   37992
          End
          Begin VB.Label Label35 
@@ -1982,7 +1982,7 @@ Begin VB.Form FrmAgregarActivoFijo
             Strikethrough   =   0   'False
          EndProperty
          CalendarForeColor=   0
-         Format          =   77725697
+         Format          =   203554817
          CurrentDate     =   38651
       End
       Begin VB.Label Label49 
@@ -2431,7 +2431,7 @@ Attribute VB_Exposed = False
 Dim isvh, iscombu As Integer
 Dim hl As String
 Public actualiza As Integer
-Dim ruta, Ruta1, ruta2 As String
+Dim Ruta, Ruta1, ruta2 As String
 Public idregAF As Integer
 
 Private Sub combustible_Click(Area As Integer)
@@ -2455,8 +2455,8 @@ llamaconsulta 1
 End Sub
 Private Sub guardavh()
 Set rsa = Nothing
-SQL = "select * from dbo.CataVH"
-rsa.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+Sql = "select * from dbo.CataVH"
+rsa.Open Sql, Conexion, adOpenForwardOnly, adLockOptimistic
 rsa.AddNew
 rsa!descriCpcion = Trim(hl)
 rsa.Update
@@ -2464,8 +2464,8 @@ cvh
 End Sub
 Private Sub guardacombu()
 Set rsa = Nothing
-SQL = "select * from dbo.CatCombus"
-rsa.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+Sql = "select * from dbo.CatCombus"
+rsa.Open Sql, Conexion, adOpenForwardOnly, adLockOptimistic
 rsa.AddNew
 rsa!DescripCombus = Trim(hl)
 rsa.Update
@@ -2624,18 +2624,24 @@ End Sub
 Private Sub cargardatosAF()
 Set rsa = Nothing
 If actualiza = 1 Then
-    SQL = "select * from dbo.CatalogoActivoFijo where idreg=" & idregAF & ""
+    Sql = "select * from dbo.CatalogoActivoFijo where idreg=" & idregAF & ""
 End If
-rsa.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+rsa.Open Sql, Conexion, adOpenForwardOnly, adLockOptimistic
 
 txttipopla.Text = rsa!Unidad
-Text1.Text = rsa!marca
+If Not IsNull(rsa("marca")) Then
+ Text1.Text = rsa!marca
+End If
+If Not IsNull(rsa("modelo")) Then
 Text2.Text = rsa!modelo
+End If
 Text3.Text = rsa!Año
 Text4.Text = rsa!Color
+If Not IsNull(rsa("Serie")) Then
 Text5.Text = rsa!Serie
+End If
 Text24.Text = rsa!DescripcionAF
-Text20.Text = rsa!CNTACONTABLE
+Text20.Text = rsa!cntacontable
 If Not IsNull(rsa!CuentaGastos) Then
 Text7.Text = rsa!CuentaGastos
 End If
@@ -2756,8 +2762,8 @@ End If
 If Not IsNull(rsa!compasegvh) Then
   Text13.Text = rsa!compasegvh
 End If
-If Not IsNull(rsa!referencia) Then
- Text14.Text = rsa!referencia
+If Not IsNull(rsa!Referencia) Then
+ Text14.Text = rsa!Referencia
 End If
 DTPicker3.Value = Format(rsa!finiasevh, "DD/MM/YYYY")
 DTPicker4.Value = Format(rsa!ffinasevh, "DD/MM/YYYY")
@@ -2791,7 +2797,7 @@ Text18.Text = "0"
 Else
 Text18.Text = rsa!alarmapermiso
 End If
-Text20.Text = rsa!CNTACONTABLE
+Text20.Text = rsa!cntacontable
 Text21.Text = rsa!refegeneral
 Text22.Text = rsa!Factura
 DTPicker8.Value = Format(rsa!fcompragen, "DD/MM/YYYY")
@@ -2827,14 +2833,14 @@ Else
 Check3.Value = 0
 End If
 If IsNull(rsa!dirfoto) Or rsa!dirfoto = "" Then
-    ruta = ""
-    If Dir(ruta) <> "" Then
-      foto.Picture = LoadPicture(ruta)
+    Ruta = ""
+    If Dir(Ruta) <> "" Then
+      foto.Picture = LoadPicture(Ruta)
     End If
 Else
-    ruta = rsa!dirfoto
-    If Dir(ruta) <> "" Then
-     foto.Picture = LoadPicture(ruta)
+    Ruta = rsa!dirfoto
+    If Dir(Ruta) <> "" Then
+     foto.Picture = LoadPicture(Ruta)
     End If
 End If
 
@@ -2958,7 +2964,7 @@ If CommonDialog1.FileName = "" Then
    MsgBox "No se ha seleccionado ningún archivo", vbInformation
 Else
   'Mostramos la ruta archivo seleccionado
-  ruta = CommonDialog1.FileName
+  Ruta = CommonDialog1.FileName
   foto.Picture = LoadPicture(CommonDialog1.FileName)
 End If
 
@@ -2969,13 +2975,13 @@ End Sub
 Private Sub PushButton2_Click()
 Set rsa = Nothing
 If actualiza = 0 Then
-    SQL = "select * from dbo.CatalogoActivoFijo"
+    Sql = "select * from dbo.CatalogoActivoFijo"
 Else
-    SQL = "select * from dbo.CatalogoActivoFijo WHERE idreg=" & idregAF & ""
+    Sql = "select * from dbo.CatalogoActivoFijo WHERE idreg=" & idregAF & ""
 End If
 
 
-rsa.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+rsa.Open Sql, Conexion, adOpenForwardOnly, adLockOptimistic
 
 If actualiza = 0 Then
     rsa.AddNew
@@ -3053,7 +3059,7 @@ If Text24.Text <> "" Then
 End If
 
 If Text20.Text <> "" Then
- rsa!CNTACONTABLE = Text20.Text
+ rsa!cntacontable = Text20.Text
 End If
 
 If Text7.Text <> "" Then
@@ -3128,7 +3134,7 @@ If Text13.Text <> "" Then
   rsa!compasegvh = Text13.Text
 End If
 If Text14.Text <> "" Then
-  rsa!referencia = Text14.Text
+  rsa!Referencia = Text14.Text
 End If
 rsa!finiasevh = Format(DTPicker3, "DD/MM/YYYY")
 rsa!ffinasevh = Format(DTPicker4, "DD/MM/YYYY")
@@ -3155,7 +3161,7 @@ If Text18.Text = "" Then
 Else
     rsa!alarmapermiso = Text18.Text
 End If
-rsa!CNTACONTABLE = Text20.Text
+rsa!cntacontable = Text20.Text
 rsa!refegeneral = Text21.Text
 rsa!Factura = Text22.Text
 rsa!fcompragen = Format(DTPicker8, "DD/MM/YYYY")
@@ -3190,8 +3196,8 @@ If Len(vehi.Text) > 0 Then
 Else
     rsa!isvh = 0
 End If
-If ruta <> "" Then
-  rsa!dirfoto = ruta
+If Ruta <> "" Then
+  rsa!dirfoto = Ruta
 End If
 If Ruta1 <> "" Then
   rsa!dirfoto1 = Ruta1

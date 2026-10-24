@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{60CCE6A8-5C61-4F30-8513-F57EED62E86A}#8.0#0"; "todl8.ocx"
 Begin VB.Form FrmReporteComprobantes 
    BorderStyle     =   1  'Fixed Single
@@ -275,7 +275,7 @@ Begin VB.Form FrmReporteComprobantes
          _ExtentX        =   2355
          _ExtentY        =   661
          _Version        =   393216
-         Format          =   76152833
+         Format          =   212598785
          CurrentDate     =   38889
       End
       Begin MSComCtl2.DTPicker DPFechaFin 
@@ -287,7 +287,7 @@ Begin VB.Form FrmReporteComprobantes
          _ExtentX        =   2355
          _ExtentY        =   661
          _Version        =   393216
-         Format          =   76152833
+         Format          =   212598785
          CurrentDate     =   38889
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel4 
@@ -582,11 +582,11 @@ Dim Fuente1 As String, Fuente2 As String
 '            "WHERE  (Transacciones.FechaTransaccion BETWEEN '" & Format(FechaInicial, "yyyymmdd") & "' And '" & Format(FechaFinal, "yyyymmdd") & "') " & _
 '            "AND (Transacciones.Fuente BETWEEN '" & Fuente1 & "' AND '" & Fuente2 & "') ORDER BY Transacciones.NTransaccion"
     
- SQL = "SELECT  Transacciones.CodCuentas, Transacciones.NombreCuenta AS DescripcionCuentas, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo , IndiceTransaccion.Fuente FROM  Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  " & _
+ Sql = "SELECT  Transacciones.CodCuentas, Transacciones.NombreCuenta AS DescripcionCuentas, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo , IndiceTransaccion.Fuente FROM  Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  " & _
        "WHERE (Transacciones.FechaTransaccion BETWEEN '" & Format(FechaInicial, "yyyymmdd") & "' AND '" & Format(FechaFinal, "yyyymmdd") & "') AND (IndiceTransaccion.Fuente BETWEEN '" & Fuente1 & "' AND '" & Fuente2 & "') ORDER BY Transacciones.NTransaccion"
     
     
-    ArepTransacciones.DataControl1.Source = SQL
+    ArepTransacciones.DataControl1.Source = Sql
     
     ArepTransacciones.LblEmpresa = MDIPrimero.AdoConfiguracion.Recordset("NombreEmpresa")
     ArepTransacciones.LblEmpresa1 = MDIPrimero.AdoConfiguracion.Recordset("Direccion")

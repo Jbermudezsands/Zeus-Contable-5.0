@@ -1,31 +1,31 @@
 VERSION 5.00
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "Comdlg32.ocx"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "ComDlg32.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{080026CA-5CAE-11D6-82C2-000021B74250}#16.0#0"; "vbskfree.ocx"
+Object = "{60CCE6A8-5C61-4F30-8513-F57EED62E86A}#8.0#0"; "todl8.ocx"
 Object = "{E1C6DB9D-BD4A-4A61-A759-0CED75D034BF}#43.0#0"; "SmartButton.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
 Begin VB.Form FrmReportes 
    BackColor       =   &H00E0E0E0&
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Reportes"
-   ClientHeight    =   8115
+   ClientHeight    =   8265
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   9390
+   ClientWidth     =   9780
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   8115
-   ScaleWidth      =   9390
+   ScaleHeight     =   8265
+   ScaleWidth      =   9780
    StartUpPosition =   2  'CenterScreen
    Begin SmartButtonProject.SmartButton BtnExcel 
       Height          =   855
-      Left            =   120
-      TabIndex        =   232
-      Top             =   6600
+      Left            =   1320
+      TabIndex        =   230
+      Top             =   7080
       Visible         =   0   'False
       Width           =   1215
       _ExtentX        =   2143
@@ -47,11 +47,11 @@ Begin VB.Form FrmReportes
    Begin VB.Frame Frame6 
       BackColor       =   &H00E0E0E0&
       Height          =   5325
-      Left            =   0
+      Left            =   120
       TabIndex        =   47
-      Top             =   1080
+      Top             =   1200
       Visible         =   0   'False
-      Width           =   9240
+      Width           =   9480
       Begin VB.PictureBox picTV 
          Appearance      =   0  'Flat
          BackColor       =   &H00E0E0E0&
@@ -62,7 +62,7 @@ Begin VB.Form FrmReportes
          ScaleHeight     =   855
          ScaleWidth      =   7455
          TabIndex        =   48
-         Top             =   1320
+         Top             =   1440
          Width           =   7455
       End
       Begin VB.Label Lb9 
@@ -451,19 +451,19 @@ Begin VB.Form FrmReportes
    Begin VB.TextBox TxtTipoReporte 
       Height          =   375
       Left            =   1560
-      TabIndex        =   204
+      TabIndex        =   202
       Top             =   8640
       Visible         =   0   'False
       Width           =   2175
    End
    Begin TabDlg.SSTab SSTab 
-      Height          =   4935
+      Height          =   5295
       Left            =   120
       TabIndex        =   73
       Top             =   1200
-      Width           =   9015
-      _ExtentX        =   15901
-      _ExtentY        =   8705
+      Width           =   9375
+      _ExtentX        =   16536
+      _ExtentY        =   9340
       _Version        =   393216
       TabHeight       =   520
       BackColor       =   13225935
@@ -534,20 +534,20 @@ Begin VB.Form FrmReportes
       TabCaption(1)   =   "Configuracion Reportes"
       TabPicture(1)   =   "FrmReportes.frx":1968A
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame10"
-      Tab(1).Control(1)=   "Frame11"
+      Tab(1).Control(0)=   "Frame11"
+      Tab(1).Control(1)=   "Frame10"
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "Configuracion Reportes "
       TabPicture(2)   =   "FrmReportes.frx":196A6
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame12"
-      Tab(2).Control(1)=   "Frame13"
+      Tab(2).Control(0)=   "Frame13"
+      Tab(2).Control(1)=   "Frame12"
       Tab(2).ControlCount=   2
       Begin VB.CheckBox ChkMostrarMovxMes 
          Caption         =   "Mostrar mov x mes"
          Height          =   375
          Left            =   960
-         TabIndex        =   231
+         TabIndex        =   229
          Top             =   4320
          Visible         =   0   'False
          Width           =   2895
@@ -557,7 +557,7 @@ Begin VB.Form FrmReportes
          Caption         =   "Quitar Movimientos de Cierre"
          Height          =   255
          Left            =   4080
-         TabIndex        =   230
+         TabIndex        =   228
          Top             =   4080
          Visible         =   0   'False
          Width           =   2415
@@ -566,21 +566,21 @@ Begin VB.Form FrmReportes
          BackColor       =   &H00E0E0E0&
          Caption         =   "Departamento"
          Height          =   1215
-         Left            =   9840
-         TabIndex        =   223
-         Top             =   3480
+         Left            =   9960
+         TabIndex        =   221
+         Top             =   3720
          Width           =   4575
          Begin VB.TextBox TxtDptoHasta 
             Height          =   285
             Left            =   1320
-            TabIndex        =   229
+            TabIndex        =   227
             Top             =   720
             Width           =   2535
          End
          Begin VB.TextBox TxtDptoDesde 
             Height          =   285
             Left            =   1320
-            TabIndex        =   226
+            TabIndex        =   224
             Top             =   360
             Width           =   2535
          End
@@ -598,7 +598,7 @@ Begin VB.Form FrmReportes
             Left            =   3960
             Picture         =   "FrmReportes.frx":196C2
             Style           =   1  'Graphical
-            TabIndex        =   225
+            TabIndex        =   223
             Top             =   720
             Width           =   375
          End
@@ -616,7 +616,7 @@ Begin VB.Form FrmReportes
             Left            =   3960
             Picture         =   "FrmReportes.frx":19810
             Style           =   1  'Graphical
-            TabIndex        =   224
+            TabIndex        =   222
             Top             =   360
             Width           =   375
          End
@@ -625,7 +625,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Hasta"
             Height          =   255
             Left            =   240
-            TabIndex        =   228
+            TabIndex        =   226
             Top             =   720
             Width           =   855
          End
@@ -634,7 +634,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Desde"
             Height          =   255
             Left            =   240
-            TabIndex        =   227
+            TabIndex        =   225
             Top             =   360
             Width           =   975
          End
@@ -644,7 +644,7 @@ Begin VB.Form FrmReportes
          ItemData        =   "FrmReportes.frx":1995E
          Left            =   10560
          List            =   "FrmReportes.frx":1999E
-         TabIndex        =   217
+         TabIndex        =   215
          Text            =   "2"
          Top             =   3000
          Width           =   615
@@ -654,7 +654,7 @@ Begin VB.Form FrmReportes
          ItemData        =   "FrmReportes.frx":199E9
          Left            =   10560
          List            =   "FrmReportes.frx":19A29
-         TabIndex        =   216
+         TabIndex        =   214
          Text            =   "2"
          Top             =   2520
          Width           =   615
@@ -664,7 +664,7 @@ Begin VB.Form FrmReportes
          ItemData        =   "FrmReportes.frx":19A74
          Left            =   10560
          List            =   "FrmReportes.frx":19AB4
-         TabIndex        =   215
+         TabIndex        =   213
          Text            =   "2"
          Top             =   2040
          Width           =   615
@@ -674,7 +674,7 @@ Begin VB.Form FrmReportes
          ItemData        =   "FrmReportes.frx":19AFF
          Left            =   10560
          List            =   "FrmReportes.frx":19B3F
-         TabIndex        =   214
+         TabIndex        =   212
          Text            =   "3"
          Top             =   1560
          Width           =   615
@@ -684,7 +684,7 @@ Begin VB.Form FrmReportes
          ItemData        =   "FrmReportes.frx":19B8A
          Left            =   10560
          List            =   "FrmReportes.frx":19BCA
-         TabIndex        =   213
+         TabIndex        =   211
          Text            =   "3"
          Top             =   1080
          Width           =   615
@@ -693,7 +693,7 @@ Begin VB.Form FrmReportes
          Caption         =   "Movimientos sin Niveles"
          Height          =   255
          Left            =   6360
-         TabIndex        =   212
+         TabIndex        =   210
          Top             =   4440
          Visible         =   0   'False
          Width           =   2295
@@ -703,7 +703,7 @@ Begin VB.Form FrmReportes
          ItemData        =   "FrmReportes.frx":19C15
          Left            =   5280
          List            =   "FrmReportes.frx":19C55
-         TabIndex        =   210
+         TabIndex        =   208
          Text            =   "3"
          Top             =   4440
          Visible         =   0   'False
@@ -713,14 +713,14 @@ Begin VB.Form FrmReportes
          BackColor       =   &H00E0E0E0&
          Height          =   4695
          Left            =   -70560
-         TabIndex        =   180
+         TabIndex        =   178
          Top             =   360
          Width           =   4335
          Begin VB.TextBox TxtOtrosGastos 
             Height          =   285
             Left            =   1440
             MaxLength       =   50
-            TabIndex        =   209
+            TabIndex        =   207
             Text            =   "Rebajas y Devoluciones S/Ventas"
             Top             =   3360
             Width           =   1935
@@ -729,7 +729,7 @@ Begin VB.Form FrmReportes
             Height          =   285
             Left            =   1440
             MaxLength       =   50
-            TabIndex        =   199
+            TabIndex        =   197
             Text            =   "Comisiones e Intereses Ganados"
             Top             =   2400
             Width           =   1935
@@ -738,7 +738,7 @@ Begin VB.Form FrmReportes
             Height          =   285
             Left            =   1440
             MaxLength       =   50
-            TabIndex        =   198
+            TabIndex        =   196
             Text            =   "Comisiones e Intereses Pagados"
             Top             =   2760
             Width           =   1935
@@ -747,7 +747,7 @@ Begin VB.Form FrmReportes
             Height          =   285
             Left            =   1440
             MaxLength       =   50
-            TabIndex        =   189
+            TabIndex        =   187
             Text            =   "Energia Electrica y Agua Potable"
             Top             =   1800
             Width           =   1935
@@ -756,7 +756,7 @@ Begin VB.Form FrmReportes
             Height          =   285
             Left            =   1440
             MaxLength       =   50
-            TabIndex        =   188
+            TabIndex        =   186
             Text            =   "Sueldos Administrativos"
             Top             =   1440
             Width           =   1935
@@ -765,7 +765,7 @@ Begin VB.Form FrmReportes
             Height          =   285
             Left            =   1440
             MaxLength       =   50
-            TabIndex        =   182
+            TabIndex        =   180
             Text            =   "Propaganda"
             Top             =   840
             Width           =   1935
@@ -774,7 +774,7 @@ Begin VB.Form FrmReportes
             Height          =   285
             Left            =   1440
             MaxLength       =   50
-            TabIndex        =   181
+            TabIndex        =   179
             Text            =   "Sueldos y Comisiones"
             Top             =   480
             Width           =   1935
@@ -782,7 +782,7 @@ Begin VB.Form FrmReportes
          Begin XtremeSuiteControls.CheckBox ChkComisiones 
             Height          =   255
             Left            =   3480
-            TabIndex        =   183
+            TabIndex        =   181
             Top             =   480
             Width           =   735
             _Version        =   786432
@@ -795,7 +795,7 @@ Begin VB.Form FrmReportes
          Begin XtremeSuiteControls.CheckBox ChkPropaganda 
             Height          =   255
             Left            =   3480
-            TabIndex        =   184
+            TabIndex        =   182
             Top             =   840
             Width           =   735
             _Version        =   786432
@@ -808,7 +808,7 @@ Begin VB.Form FrmReportes
          Begin XtremeSuiteControls.CheckBox ChkSueldosAdmon 
             Height          =   255
             Left            =   3480
-            TabIndex        =   190
+            TabIndex        =   188
             Top             =   1440
             Width           =   735
             _Version        =   786432
@@ -821,7 +821,7 @@ Begin VB.Form FrmReportes
          Begin XtremeSuiteControls.CheckBox ChkEnergiaElectrica 
             Height          =   255
             Left            =   3480
-            TabIndex        =   191
+            TabIndex        =   189
             Top             =   1800
             Width           =   735
             _Version        =   786432
@@ -834,7 +834,7 @@ Begin VB.Form FrmReportes
          Begin XtremeSuiteControls.CheckBox ChkComisionesGanadas 
             Height          =   255
             Left            =   3480
-            TabIndex        =   200
+            TabIndex        =   198
             Top             =   2400
             Width           =   735
             _Version        =   786432
@@ -847,7 +847,7 @@ Begin VB.Form FrmReportes
          Begin XtremeSuiteControls.CheckBox ChkComisionesPagadas 
             Height          =   255
             Left            =   3480
-            TabIndex        =   201
+            TabIndex        =   199
             Top             =   2760
             Width           =   735
             _Version        =   786432
@@ -860,7 +860,7 @@ Begin VB.Form FrmReportes
          Begin XtremeSuiteControls.CheckBox ChkOtrosGastos 
             Height          =   255
             Left            =   3480
-            TabIndex        =   207
+            TabIndex        =   205
             Top             =   3360
             Width           =   735
             _Version        =   786432
@@ -875,7 +875,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Otros Gastos"
             Height          =   255
             Left            =   120
-            TabIndex        =   203
+            TabIndex        =   201
             Top             =   3360
             Width           =   1455
          End
@@ -894,7 +894,7 @@ Begin VB.Form FrmReportes
             ForeColor       =   &H00FF0000&
             Height          =   255
             Left            =   120
-            TabIndex        =   202
+            TabIndex        =   200
             Top             =   3120
             Width           =   2535
          End
@@ -913,7 +913,7 @@ Begin VB.Form FrmReportes
             ForeColor       =   &H00FF0000&
             Height          =   255
             Left            =   120
-            TabIndex        =   197
+            TabIndex        =   195
             Top             =   2160
             Width           =   2535
          End
@@ -922,7 +922,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Comisiones Gan"
             Height          =   255
             Left            =   120
-            TabIndex        =   196
+            TabIndex        =   194
             Top             =   2400
             Width           =   1455
          End
@@ -931,7 +931,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Comisiones Pag"
             Height          =   255
             Left            =   120
-            TabIndex        =   195
+            TabIndex        =   193
             Top             =   2760
             Width           =   1455
          End
@@ -940,7 +940,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Energia y Agua"
             Height          =   255
             Left            =   120
-            TabIndex        =   194
+            TabIndex        =   192
             Top             =   1800
             Width           =   1455
          End
@@ -949,7 +949,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Sueldos"
             Height          =   255
             Left            =   120
-            TabIndex        =   193
+            TabIndex        =   191
             Top             =   1440
             Width           =   1455
          End
@@ -968,7 +968,7 @@ Begin VB.Form FrmReportes
             ForeColor       =   &H00FF0000&
             Height          =   255
             Left            =   120
-            TabIndex        =   192
+            TabIndex        =   190
             Top             =   1200
             Width           =   2535
          End
@@ -977,7 +977,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Propaganda"
             Height          =   255
             Left            =   120
-            TabIndex        =   187
+            TabIndex        =   185
             Top             =   840
             Width           =   1455
          End
@@ -986,7 +986,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Sdos y Com"
             Height          =   255
             Left            =   120
-            TabIndex        =   186
+            TabIndex        =   184
             Top             =   480
             Width           =   1455
          End
@@ -1005,7 +1005,7 @@ Begin VB.Form FrmReportes
             ForeColor       =   &H00FF0000&
             Height          =   255
             Left            =   120
-            TabIndex        =   185
+            TabIndex        =   183
             Top             =   240
             Width           =   2535
          End
@@ -1014,14 +1014,14 @@ Begin VB.Form FrmReportes
          BackColor       =   &H00E0E0E0&
          Height          =   4695
          Left            =   -74880
-         TabIndex        =   156
+         TabIndex        =   154
          Top             =   360
          Width           =   4335
          Begin VB.TextBox TxtOtrosIngresos 
             Height          =   285
             Left            =   1440
             MaxLength       =   50
-            TabIndex        =   208
+            TabIndex        =   206
             Text            =   "Otros  Ingresos"
             Top             =   1800
             Width           =   1935
@@ -1030,7 +1030,7 @@ Begin VB.Form FrmReportes
             Height          =   285
             Left            =   1440
             MaxLength       =   50
-            TabIndex        =   177
+            TabIndex        =   175
             Text            =   "Rebajas y Devoluciones S/Ventas"
             Top             =   1440
             Width           =   1935
@@ -1039,7 +1039,7 @@ Begin VB.Form FrmReportes
             Height          =   285
             Left            =   1440
             MaxLength       =   50
-            TabIndex        =   163
+            TabIndex        =   161
             Text            =   "Ingresos por Ventas"
             Top             =   360
             Width           =   1935
@@ -1048,7 +1048,7 @@ Begin VB.Form FrmReportes
             Height          =   285
             Left            =   1440
             MaxLength       =   50
-            TabIndex        =   161
+            TabIndex        =   159
             Text            =   "Ventas de Servicios"
             Top             =   720
             Width           =   1935
@@ -1057,7 +1057,7 @@ Begin VB.Form FrmReportes
             Height          =   285
             Left            =   1440
             MaxLength       =   50
-            TabIndex        =   160
+            TabIndex        =   158
             Text            =   "Ingresos por Comisiones"
             Top             =   1095
             Width           =   1935
@@ -1066,7 +1066,7 @@ Begin VB.Form FrmReportes
             Height          =   285
             Left            =   1440
             MaxLength       =   50
-            TabIndex        =   159
+            TabIndex        =   157
             Text            =   "Costos de Ventas"
             Top             =   2400
             Width           =   1935
@@ -1075,7 +1075,7 @@ Begin VB.Form FrmReportes
             Height          =   285
             Left            =   1440
             MaxLength       =   50
-            TabIndex        =   158
+            TabIndex        =   156
             Text            =   "Costos de Produccion"
             Top             =   2760
             Width           =   1935
@@ -1084,7 +1084,7 @@ Begin VB.Form FrmReportes
             Height          =   285
             Left            =   1440
             MaxLength       =   50
-            TabIndex        =   157
+            TabIndex        =   155
             Text            =   "Costos Generales de Produccion"
             Top             =   3120
             Width           =   1935
@@ -1092,7 +1092,7 @@ Begin VB.Form FrmReportes
          Begin XtremeSuiteControls.CheckBox ChkVentas 
             Height          =   375
             Left            =   3480
-            TabIndex        =   162
+            TabIndex        =   160
             Top             =   285
             Width           =   735
             _Version        =   786432
@@ -1105,7 +1105,7 @@ Begin VB.Form FrmReportes
          Begin XtremeSuiteControls.CheckBox ChkVentasServicios 
             Height          =   255
             Left            =   3480
-            TabIndex        =   164
+            TabIndex        =   162
             Top             =   705
             Width           =   735
             _Version        =   786432
@@ -1118,7 +1118,7 @@ Begin VB.Form FrmReportes
          Begin XtremeSuiteControls.CheckBox ChkIngresoComisiones 
             Height          =   255
             Left            =   3480
-            TabIndex        =   165
+            TabIndex        =   163
             Top             =   1170
             Width           =   735
             _Version        =   786432
@@ -1131,7 +1131,7 @@ Begin VB.Form FrmReportes
          Begin XtremeSuiteControls.CheckBox ChkCostoVentas 
             Height          =   255
             Left            =   3480
-            TabIndex        =   166
+            TabIndex        =   164
             Top             =   2400
             Width           =   735
             _Version        =   786432
@@ -1144,7 +1144,7 @@ Begin VB.Form FrmReportes
          Begin XtremeSuiteControls.CheckBox ChkCostoProduccion 
             Height          =   255
             Left            =   3480
-            TabIndex        =   167
+            TabIndex        =   165
             Top             =   2760
             Width           =   735
             _Version        =   786432
@@ -1157,7 +1157,7 @@ Begin VB.Form FrmReportes
          Begin XtremeSuiteControls.CheckBox ChkCostosGeneralesProduccion 
             Height          =   255
             Left            =   3480
-            TabIndex        =   168
+            TabIndex        =   166
             Top             =   3120
             Width           =   735
             _Version        =   786432
@@ -1170,7 +1170,7 @@ Begin VB.Form FrmReportes
          Begin XtremeSuiteControls.CheckBox ChkRebajas 
             Height          =   255
             Left            =   3480
-            TabIndex        =   178
+            TabIndex        =   176
             Top             =   1440
             Width           =   735
             _Version        =   786432
@@ -1183,7 +1183,7 @@ Begin VB.Form FrmReportes
          Begin XtremeSuiteControls.CheckBox ChkOtrosIngresos 
             Height          =   255
             Left            =   3480
-            TabIndex        =   206
+            TabIndex        =   204
             Top             =   1800
             Width           =   735
             _Version        =   786432
@@ -1198,7 +1198,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Otros Ingresos"
             Height          =   255
             Left            =   120
-            TabIndex        =   205
+            TabIndex        =   203
             Top             =   1800
             Width           =   1095
          End
@@ -1207,7 +1207,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Reb y Dev"
             Height          =   255
             Left            =   120
-            TabIndex        =   179
+            TabIndex        =   177
             Top             =   1440
             Width           =   975
          End
@@ -1226,7 +1226,7 @@ Begin VB.Form FrmReportes
             ForeColor       =   &H00FF0000&
             Height          =   255
             Left            =   120
-            TabIndex        =   176
+            TabIndex        =   174
             Top             =   120
             Width           =   2535
          End
@@ -1235,7 +1235,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Ingresos/Ventas"
             Height          =   255
             Left            =   120
-            TabIndex        =   175
+            TabIndex        =   173
             Top             =   390
             Width           =   1455
          End
@@ -1244,7 +1244,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Vtas Servicios"
             Height          =   255
             Left            =   120
-            TabIndex        =   174
+            TabIndex        =   172
             Top             =   720
             Width           =   1575
          End
@@ -1253,7 +1253,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Ing/Comisiones"
             Height          =   255
             Left            =   120
-            TabIndex        =   173
+            TabIndex        =   171
             Top             =   1110
             Width           =   1215
          End
@@ -1262,7 +1262,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Costo de Ventas"
             Height          =   255
             Left            =   120
-            TabIndex        =   172
+            TabIndex        =   170
             Top             =   2400
             Width           =   1335
          End
@@ -1271,7 +1271,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Ctos Producc"
             Height          =   255
             Left            =   120
-            TabIndex        =   171
+            TabIndex        =   169
             Top             =   2760
             Width           =   1575
          End
@@ -1280,7 +1280,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Ctos Grales Prod"
             Height          =   255
             Left            =   120
-            TabIndex        =   170
+            TabIndex        =   168
             Top             =   3165
             Width           =   1575
          End
@@ -1299,7 +1299,7 @@ Begin VB.Form FrmReportes
             ForeColor       =   &H00FF0000&
             Height          =   255
             Left            =   120
-            TabIndex        =   169
+            TabIndex        =   167
             Top             =   2160
             Width           =   2535
          End
@@ -1308,7 +1308,7 @@ Begin VB.Form FrmReportes
          BackColor       =   &H00E0E0E0&
          Height          =   4695
          Left            =   -70680
-         TabIndex        =   138
+         TabIndex        =   136
          Top             =   360
          Width           =   4215
          Begin VB.TextBox TxtOtrasCtasCapital 
@@ -1568,7 +1568,7 @@ Begin VB.Form FrmReportes
             ForeColor       =   &H00FF0000&
             Height          =   255
             Left            =   120
-            TabIndex        =   153
+            TabIndex        =   151
             Top             =   2880
             Width           =   2535
          End
@@ -1577,7 +1577,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Otros Cap"
             Height          =   255
             Left            =   120
-            TabIndex        =   152
+            TabIndex        =   150
             Top             =   4350
             Width           =   975
          End
@@ -1596,7 +1596,7 @@ Begin VB.Form FrmReportes
             ForeColor       =   &H00FF0000&
             Height          =   255
             Left            =   120
-            TabIndex        =   151
+            TabIndex        =   149
             Top             =   120
             Width           =   2535
          End
@@ -1605,7 +1605,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Proveedor"
             Height          =   255
             Left            =   120
-            TabIndex        =   150
+            TabIndex        =   148
             Top             =   390
             Width           =   855
          End
@@ -1614,7 +1614,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Imp x Pag"
             Height          =   255
             Left            =   120
-            TabIndex        =   149
+            TabIndex        =   147
             Top             =   720
             Width           =   855
          End
@@ -1623,7 +1623,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Doc x Pag"
             Height          =   255
             Left            =   120
-            TabIndex        =   148
+            TabIndex        =   146
             Top             =   990
             Width           =   855
          End
@@ -1632,7 +1632,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Cob Antic"
             Height          =   255
             Left            =   120
-            TabIndex        =   147
+            TabIndex        =   145
             Top             =   1320
             Width           =   855
          End
@@ -1641,7 +1641,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Pasivo Acum"
             Height          =   255
             Left            =   120
-            TabIndex        =   146
+            TabIndex        =   144
             Top             =   1640
             Width           =   975
          End
@@ -1650,7 +1650,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Pagos  LP"
             Height          =   255
             Left            =   120
-            TabIndex        =   145
+            TabIndex        =   143
             Top             =   2250
             Width           =   855
          End
@@ -1659,7 +1659,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Doc LP"
             Height          =   255
             Left            =   120
-            TabIndex        =   144
+            TabIndex        =   142
             Top             =   2560
             Width           =   855
          End
@@ -1678,7 +1678,7 @@ Begin VB.Form FrmReportes
             ForeColor       =   &H00FF0000&
             Height          =   255
             Left            =   120
-            TabIndex        =   143
+            TabIndex        =   141
             Top             =   1920
             Width           =   2535
          End
@@ -1697,7 +1697,7 @@ Begin VB.Form FrmReportes
             ForeColor       =   &H00FF0000&
             Height          =   255
             Left            =   120
-            TabIndex        =   142
+            TabIndex        =   140
             Top             =   3480
             Width           =   2535
          End
@@ -1706,7 +1706,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Otros Pasivo"
             Height          =   255
             Left            =   120
-            TabIndex        =   141
+            TabIndex        =   139
             Top             =   3200
             Width           =   975
          End
@@ -1715,7 +1715,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Acciones C."
             Height          =   255
             Left            =   120
-            TabIndex        =   140
+            TabIndex        =   138
             Top             =   3720
             Width           =   975
          End
@@ -1724,7 +1724,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Util Acum"
             Height          =   255
             Left            =   120
-            TabIndex        =   139
+            TabIndex        =   137
             Top             =   4005
             Width           =   975
          End
@@ -1733,7 +1733,7 @@ Begin VB.Form FrmReportes
          BackColor       =   &H00E0E0E0&
          Height          =   4695
          Left            =   -74880
-         TabIndex        =   123
+         TabIndex        =   121
          Top             =   360
          Width           =   4215
          Begin VB.TextBox TxtOtrosActivos 
@@ -1983,7 +1983,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Otros Activos"
             Height          =   255
             Left            =   120
-            TabIndex        =   137
+            TabIndex        =   135
             Top             =   4005
             Width           =   975
          End
@@ -1992,7 +1992,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Pago Antic"
             Height          =   255
             Left            =   120
-            TabIndex        =   136
+            TabIndex        =   134
             Top             =   3720
             Width           =   975
          End
@@ -2001,7 +2001,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Papel y Util"
             Height          =   255
             Left            =   120
-            TabIndex        =   135
+            TabIndex        =   133
             Top             =   3360
             Width           =   975
          End
@@ -2020,7 +2020,7 @@ Begin VB.Form FrmReportes
             ForeColor       =   &H00FF0000&
             Height          =   255
             Left            =   120
-            TabIndex        =   134
+            TabIndex        =   132
             Top             =   3120
             Width           =   2535
          End
@@ -2029,7 +2029,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Dep Acum"
             Height          =   255
             Left            =   120
-            TabIndex        =   133
+            TabIndex        =   131
             Top             =   2880
             Width           =   855
          End
@@ -2048,7 +2048,7 @@ Begin VB.Form FrmReportes
             ForeColor       =   &H00FF0000&
             Height          =   255
             Left            =   120
-            TabIndex        =   132
+            TabIndex        =   130
             Top             =   1600
             Width           =   2535
          End
@@ -2057,7 +2057,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Eq Rodante"
             Height          =   255
             Left            =   120
-            TabIndex        =   131
+            TabIndex        =   129
             Top             =   2560
             Width           =   855
          End
@@ -2066,7 +2066,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Mob y Equi"
             Height          =   255
             Left            =   120
-            TabIndex        =   130
+            TabIndex        =   128
             Top             =   2250
             Width           =   855
          End
@@ -2075,7 +2075,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Terreno y Ed"
             Height          =   255
             Left            =   120
-            TabIndex        =   129
+            TabIndex        =   127
             Top             =   1920
             Width           =   975
          End
@@ -2084,7 +2084,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Inventario"
             Height          =   255
             Left            =   120
-            TabIndex        =   128
+            TabIndex        =   126
             Top             =   1320
             Width           =   855
          End
@@ -2093,7 +2093,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Ctas x Cob"
             Height          =   255
             Left            =   120
-            TabIndex        =   127
+            TabIndex        =   125
             Top             =   990
             Width           =   855
          End
@@ -2102,7 +2102,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Banco"
             Height          =   255
             Left            =   120
-            TabIndex        =   126
+            TabIndex        =   124
             Top             =   720
             Width           =   855
          End
@@ -2111,7 +2111,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Caja"
             Height          =   255
             Left            =   120
-            TabIndex        =   125
+            TabIndex        =   123
             Top             =   390
             Width           =   855
          End
@@ -2130,7 +2130,7 @@ Begin VB.Form FrmReportes
             ForeColor       =   &H00FF0000&
             Height          =   255
             Left            =   120
-            TabIndex        =   124
+            TabIndex        =   122
             Top             =   120
             Width           =   2535
          End
@@ -2139,7 +2139,7 @@ Begin VB.Form FrmReportes
          BackColor       =   &H00E0E0E0&
          Height          =   495
          Left            =   1080
-         TabIndex        =   117
+         TabIndex        =   115
          Top             =   3840
          Visible         =   0   'False
          Width           =   2535
@@ -2148,7 +2148,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Columna"
             Height          =   195
             Left            =   1440
-            TabIndex        =   119
+            TabIndex        =   117
             Top             =   200
             Width           =   975
          End
@@ -2157,7 +2157,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Tradicional"
             Height          =   195
             Left            =   120
-            TabIndex        =   118
+            TabIndex        =   116
             Top             =   200
             Value           =   -1  'True
             Width           =   1095
@@ -2167,7 +2167,7 @@ Begin VB.Form FrmReportes
          Caption         =   "Solo Historial Periodo Selecionado"
          Height          =   255
          Left            =   4080
-         TabIndex        =   116
+         TabIndex        =   114
          Top             =   4080
          Visible         =   0   'False
          Width           =   2775
@@ -2177,7 +2177,7 @@ Begin VB.Form FrmReportes
          ItemData        =   "FrmReportes.frx":19CA0
          Left            =   120
          List            =   "FrmReportes.frx":19CA2
-         TabIndex        =   115
+         TabIndex        =   113
          Top             =   840
          Width           =   3735
       End
@@ -2185,31 +2185,31 @@ Begin VB.Form FrmReportes
          BackColor       =   &H00E0E0E0&
          Height          =   735
          Left            =   4080
-         TabIndex        =   110
+         TabIndex        =   108
          Top             =   720
          Width           =   4455
          Begin MSComCtl2.DTPicker DTFecha2 
             Height          =   285
             Left            =   3000
-            TabIndex        =   111
+            TabIndex        =   109
             Top             =   240
             Width           =   1335
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   188088321
+            Format          =   196083713
             CurrentDate     =   37837
          End
          Begin MSComCtl2.DTPicker DTFecha1 
             Height          =   285
             Left            =   720
-            TabIndex        =   112
+            TabIndex        =   110
             Top             =   240
             Width           =   1335
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   188088321
+            Format          =   201588737
             CurrentDate     =   37837
          End
          Begin VB.Label Label4 
@@ -2226,7 +2226,7 @@ Begin VB.Form FrmReportes
             EndProperty
             Height          =   255
             Left            =   120
-            TabIndex        =   114
+            TabIndex        =   112
             Top             =   240
             Width           =   495
          End
@@ -2244,7 +2244,7 @@ Begin VB.Form FrmReportes
             EndProperty
             Height          =   255
             Left            =   2520
-            TabIndex        =   113
+            TabIndex        =   111
             Top             =   240
             Width           =   375
          End
@@ -2253,7 +2253,7 @@ Begin VB.Form FrmReportes
          BackColor       =   &H00E0E0E0&
          Height          =   735
          Left            =   4080
-         TabIndex        =   106
+         TabIndex        =   104
          Top             =   720
          Visible         =   0   'False
          Width           =   4455
@@ -2262,7 +2262,7 @@ Begin VB.Form FrmReportes
             Caption         =   "2003"
             Height          =   255
             Left            =   120
-            TabIndex        =   109
+            TabIndex        =   107
             Top             =   240
             Value           =   -1  'True
             Width           =   855
@@ -2272,7 +2272,7 @@ Begin VB.Form FrmReportes
             Caption         =   "2004"
             Height          =   255
             Left            =   1680
-            TabIndex        =   108
+            TabIndex        =   106
             Top             =   240
             Width           =   975
          End
@@ -2281,16 +2281,16 @@ Begin VB.Form FrmReportes
             Caption         =   "2005"
             Height          =   255
             Left            =   3120
-            TabIndex        =   107
+            TabIndex        =   105
             Top             =   240
             Width           =   975
          End
       End
       Begin VB.TextBox TxtTransaccion 
          Height          =   285
-         Left            =   5640
-         TabIndex        =   105
-         Top             =   1920
+         Left            =   8280
+         TabIndex        =   103
+         Top             =   480
          Visible         =   0   'False
          Width           =   735
       End
@@ -2298,7 +2298,7 @@ Begin VB.Form FrmReportes
          BackColor       =   &H00E0E0E0&
          Height          =   615
          Left            =   4080
-         TabIndex        =   101
+         TabIndex        =   99
          Top             =   1560
          Visible         =   0   'False
          Width           =   4455
@@ -2307,7 +2307,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Por Codigo"
             Height          =   255
             Left            =   1440
-            TabIndex        =   104
+            TabIndex        =   102
             Top             =   240
             Value           =   -1  'True
             Width           =   1215
@@ -2317,7 +2317,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Por Grupo"
             Height          =   255
             Left            =   120
-            TabIndex        =   103
+            TabIndex        =   101
             Top             =   240
             Width           =   1095
          End
@@ -2326,7 +2326,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Cuentas de Mayor"
             Height          =   255
             Left            =   2640
-            TabIndex        =   102
+            TabIndex        =   100
             Top             =   240
             Visible         =   0   'False
             Width           =   1695
@@ -2336,7 +2336,7 @@ Begin VB.Form FrmReportes
          BackColor       =   &H00E0E0E0&
          Height          =   1455
          Left            =   3960
-         TabIndex        =   90
+         TabIndex        =   88
          Top             =   720
          Visible         =   0   'False
          Width           =   4575
@@ -2344,7 +2344,7 @@ Begin VB.Form FrmReportes
             BackColor       =   &H00E0E0E0&
             Height          =   735
             Left            =   2040
-            TabIndex        =   94
+            TabIndex        =   92
             Top             =   120
             Width           =   2415
             Begin VB.OptionButton Option6 
@@ -2352,7 +2352,7 @@ Begin VB.Form FrmReportes
                Caption         =   "2000"
                Height          =   255
                Left            =   1560
-               TabIndex        =   97
+               TabIndex        =   95
                Top             =   240
                Width           =   735
             End
@@ -2361,7 +2361,7 @@ Begin VB.Form FrmReportes
                Caption         =   "2000"
                Height          =   255
                Left            =   840
-               TabIndex        =   96
+               TabIndex        =   94
                Top             =   240
                Width           =   735
             End
@@ -2370,7 +2370,7 @@ Begin VB.Form FrmReportes
                Caption         =   "2000"
                Height          =   255
                Left            =   120
-               TabIndex        =   95
+               TabIndex        =   93
                Top             =   240
                Value           =   -1  'True
                Width           =   735
@@ -2381,7 +2381,7 @@ Begin VB.Form FrmReportes
             ItemData        =   "FrmReportes.frx":19CA4
             Left            =   1320
             List            =   "FrmReportes.frx":19CCC
-            TabIndex        =   93
+            TabIndex        =   91
             Text            =   "1"
             Top             =   240
             Width           =   615
@@ -2391,7 +2391,7 @@ Begin VB.Form FrmReportes
             ItemData        =   "FrmReportes.frx":19CF7
             Left            =   1320
             List            =   "FrmReportes.frx":19D1F
-            TabIndex        =   92
+            TabIndex        =   90
             Text            =   "1"
             Top             =   600
             Width           =   615
@@ -2399,7 +2399,7 @@ Begin VB.Form FrmReportes
          Begin VB.ComboBox CmbNivel 
             Height          =   315
             Left            =   1320
-            TabIndex        =   91
+            TabIndex        =   89
             Text            =   "3"
             Top             =   960
             Width           =   615
@@ -2409,7 +2409,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Periodo Hasta:"
             Height          =   255
             Left            =   120
-            TabIndex        =   100
+            TabIndex        =   98
             Top             =   600
             Width           =   1095
          End
@@ -2418,7 +2418,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Periodo Desde:"
             Height          =   255
             Left            =   120
-            TabIndex        =   99
+            TabIndex        =   97
             Top             =   240
             Width           =   1095
          End
@@ -2427,7 +2427,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Nivel"
             Height          =   255
             Left            =   720
-            TabIndex        =   98
+            TabIndex        =   96
             Top             =   960
             Width           =   615
          End
@@ -2435,9 +2435,9 @@ Begin VB.Form FrmReportes
       Begin VB.ComboBox CmbMoneda 
          Height          =   315
          ItemData        =   "FrmReportes.frx":19D4A
-         Left            =   5520
+         Left            =   6000
          List            =   "FrmReportes.frx":19D54
-         TabIndex        =   89
+         TabIndex        =   87
          Text            =   "Córdobas"
          Top             =   3720
          Visible         =   0   'False
@@ -2452,6 +2452,314 @@ Begin VB.Form FrmReportes
          Top             =   2160
          Visible         =   0   'False
          Width           =   4575
+         Begin VB.TextBox TxtHasta 
+            Height          =   285
+            Left            =   840
+            TabIndex        =   78
+            Top             =   600
+            Visible         =   0   'False
+            Width           =   3015
+         End
+         Begin VB.TextBox TxtDesde 
+            Height          =   285
+            Left            =   840
+            TabIndex        =   79
+            Top             =   240
+            Visible         =   0   'False
+            Width           =   3015
+         End
+         Begin TrueOleDBList80.TDBCombo DBCodigoHasta 
+            Height          =   315
+            Left            =   840
+            TabIndex        =   232
+            Top             =   600
+            Width           =   3015
+            _ExtentX        =   5318
+            _ExtentY        =   556
+            _LayoutType     =   0
+            _RowHeight      =   -2147483647
+            _WasPersistedAsPixels=   0
+            _DropdownWidth  =   10583
+            _EDITHEIGHT     =   556
+            _GAPHEIGHT      =   53
+            Columns(0)._VlistStyle=   0
+            Columns(0)._MaxComboItems=   5
+            Columns(0).DataField=   ""
+            Columns(0)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
+            Columns(1)._VlistStyle=   0
+            Columns(1)._MaxComboItems=   5
+            Columns(1).DataField=   ""
+            Columns(1)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
+            Columns.Count   =   2
+            Splits(0)._UserFlags=   0
+            Splits(0).ExtendRightColumn=   -1  'True
+            Splits(0).AllowRowSizing=   0   'False
+            Splits(0)._PropDict=   "_ColumnProps,515,0;_UserFlags,518,3"
+            Splits(0)._ColumnProps(0)=   "Columns.Count=2"
+            Splits(0)._ColumnProps(1)=   "Column(0).Width=2725"
+            Splits(0)._ColumnProps(2)=   "Column(0).DividerColor=0"
+            Splits(0)._ColumnProps(3)=   "Column(0)._WidthInPix=2646"
+            Splits(0)._ColumnProps(4)=   "Column(0)._EditAlways=0"
+            Splits(0)._ColumnProps(5)=   "Column(0).Order=1"
+            Splits(0)._ColumnProps(6)=   "Column(1).Width=2725"
+            Splits(0)._ColumnProps(7)=   "Column(1).DividerColor=0"
+            Splits(0)._ColumnProps(8)=   "Column(1)._WidthInPix=2646"
+            Splits(0)._ColumnProps(9)=   "Column(1)._EditAlways=0"
+            Splits(0)._ColumnProps(10)=   "Column(1).Order=2"
+            Splits.Count    =   1
+            Appearance      =   1
+            BorderStyle     =   1
+            ComboStyle      =   0
+            AutoCompletion  =   0   'False
+            LimitToList     =   0   'False
+            ColumnHeaders   =   -1  'True
+            ColumnFooters   =   0   'False
+            DataMode        =   0
+            DefColWidth     =   0
+            Enabled         =   -1  'True
+            HeadLines       =   1
+            FootLines       =   1
+            RowDividerStyle =   0
+            Caption         =   ""
+            EditFont        =   "Size=8.25,Charset=0,Weight=400,Underline=0,Italic=0,Strikethrough=0,Name=MS Sans Serif"
+            LayoutName      =   ""
+            LayoutFileName  =   ""
+            MultipleLines   =   0
+            EmptyRows       =   -1  'True
+            CellTips        =   0
+            AutoSize        =   -1  'True
+            ListField       =   ""
+            BoundColumn     =   ""
+            IntegralHeight  =   0   'False
+            CellTipsWidth   =   0
+            CellTipsDelay   =   1000
+            AutoDropdown    =   0   'False
+            RowTracking     =   -1  'True
+            RightToLeft     =   0   'False
+            RowMember       =   ""
+            MouseIcon       =   0
+            MouseIcon.vt    =   3
+            MousePointer    =   0
+            MatchEntryTimeout=   2000
+            OLEDragMode     =   0
+            OLEDropMode     =   0
+            AnimateWindow   =   0
+            AnimateWindowDirection=   0
+            AnimateWindowTime=   200
+            AnimateWindowClose=   0
+            DropdownPosition=   0
+            Locked          =   0   'False
+            ScrollTrack     =   0   'False
+            RowDividerColor =   15790320
+            RowSubDividerColor=   15790320
+            AddItemSeparator=   ";"
+            _PropDict       =   $"FrmReportes.frx":19D6B
+            _StyleDefs(0)   =   "_StyleRoot:id=0,.parent=-1,.alignment=3,.valignment=0,.bgcolor=&H80000005&"
+            _StyleDefs(1)   =   ":id=0,.fgcolor=&H80000008&,.wraptext=0,.locked=0,.transparentBmp=0"
+            _StyleDefs(2)   =   ":id=0,.fgpicPosition=0,.bgpicMode=0,.appearance=0,.borderSize=0,.ellipsis=0"
+            _StyleDefs(3)   =   ":id=0,.borderColor=&H80000005&,.borderType=0,.bold=0,.fontsize=825,.italic=0"
+            _StyleDefs(4)   =   ":id=0,.underline=0,.strikethrough=0,.charset=0"
+            _StyleDefs(5)   =   ":id=0,.fontname=MS Sans Serif"
+            _StyleDefs(6)   =   "Style:id=1,.parent=0,.namedParent=33"
+            _StyleDefs(7)   =   "CaptionStyle:id=4,.parent=2,.namedParent=37"
+            _StyleDefs(8)   =   "HeadingStyle:id=2,.parent=1,.namedParent=34"
+            _StyleDefs(9)   =   "FooterStyle:id=3,.parent=1,.namedParent=35"
+            _StyleDefs(10)  =   "InactiveStyle:id=5,.parent=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+            _StyleDefs(11)  =   "SelectedStyle:id=6,.parent=1,.namedParent=36"
+            _StyleDefs(12)  =   "EditorStyle:id=7,.parent=1"
+            _StyleDefs(13)  =   "HighlightRowStyle:id=8,.parent=1,.namedParent=38"
+            _StyleDefs(14)  =   "EvenRowStyle:id=9,.parent=1,.namedParent=39"
+            _StyleDefs(15)  =   "OddRowStyle:id=10,.parent=1,.namedParent=40"
+            _StyleDefs(16)  =   "RecordSelectorStyle:id=11,.parent=2,.namedParent=41"
+            _StyleDefs(17)  =   "FilterBarStyle:id=12,.parent=1,.namedParent=42"
+            _StyleDefs(18)  =   "Splits(0).Style:id=13,.parent=1"
+            _StyleDefs(19)  =   "Splits(0).CaptionStyle:id=22,.parent=4"
+            _StyleDefs(20)  =   "Splits(0).HeadingStyle:id=14,.parent=2"
+            _StyleDefs(21)  =   "Splits(0).FooterStyle:id=15,.parent=3"
+            _StyleDefs(22)  =   "Splits(0).InactiveStyle:id=16,.parent=5"
+            _StyleDefs(23)  =   "Splits(0).SelectedStyle:id=18,.parent=6"
+            _StyleDefs(24)  =   "Splits(0).EditorStyle:id=17,.parent=7"
+            _StyleDefs(25)  =   "Splits(0).HighlightRowStyle:id=19,.parent=8"
+            _StyleDefs(26)  =   "Splits(0).EvenRowStyle:id=20,.parent=9"
+            _StyleDefs(27)  =   "Splits(0).OddRowStyle:id=21,.parent=10"
+            _StyleDefs(28)  =   "Splits(0).RecordSelectorStyle:id=23,.parent=11"
+            _StyleDefs(29)  =   "Splits(0).FilterBarStyle:id=24,.parent=12"
+            _StyleDefs(30)  =   "Splits(0).Columns(0).Style:id=28,.parent=13"
+            _StyleDefs(31)  =   "Splits(0).Columns(0).HeadingStyle:id=25,.parent=14"
+            _StyleDefs(32)  =   "Splits(0).Columns(0).FooterStyle:id=26,.parent=15"
+            _StyleDefs(33)  =   "Splits(0).Columns(0).EditorStyle:id=27,.parent=17"
+            _StyleDefs(34)  =   "Splits(0).Columns(1).Style:id=32,.parent=13"
+            _StyleDefs(35)  =   "Splits(0).Columns(1).HeadingStyle:id=29,.parent=14"
+            _StyleDefs(36)  =   "Splits(0).Columns(1).FooterStyle:id=30,.parent=15"
+            _StyleDefs(37)  =   "Splits(0).Columns(1).EditorStyle:id=31,.parent=17"
+            _StyleDefs(38)  =   "Named:id=33:Normal"
+            _StyleDefs(39)  =   ":id=33,.parent=0"
+            _StyleDefs(40)  =   "Named:id=34:Heading"
+            _StyleDefs(41)  =   ":id=34,.parent=33,.valignment=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+            _StyleDefs(42)  =   ":id=34,.wraptext=-1"
+            _StyleDefs(43)  =   "Named:id=35:Footing"
+            _StyleDefs(44)  =   ":id=35,.parent=33,.valignment=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+            _StyleDefs(45)  =   "Named:id=36:Selected"
+            _StyleDefs(46)  =   ":id=36,.parent=33,.bgcolor=&H8000000D&,.fgcolor=&H8000000E&"
+            _StyleDefs(47)  =   "Named:id=37:Caption"
+            _StyleDefs(48)  =   ":id=37,.parent=34,.alignment=2"
+            _StyleDefs(49)  =   "Named:id=38:HighlightRow"
+            _StyleDefs(50)  =   ":id=38,.parent=33,.bgcolor=&H8000000D&,.fgcolor=&H8000000E&"
+            _StyleDefs(51)  =   "Named:id=39:EvenRow"
+            _StyleDefs(52)  =   ":id=39,.parent=33,.bgcolor=&HFFFF00&"
+            _StyleDefs(53)  =   "Named:id=40:OddRow"
+            _StyleDefs(54)  =   ":id=40,.parent=33"
+            _StyleDefs(55)  =   "Named:id=41:RecordSelector"
+            _StyleDefs(56)  =   ":id=41,.parent=34"
+            _StyleDefs(57)  =   "Named:id=42:FilterBar"
+            _StyleDefs(58)  =   ":id=42,.parent=33"
+         End
+         Begin TrueOleDBList80.TDBCombo DBCodigo 
+            Height          =   315
+            Left            =   840
+            TabIndex        =   231
+            Top             =   240
+            Width           =   3015
+            _ExtentX        =   5318
+            _ExtentY        =   556
+            _LayoutType     =   0
+            _RowHeight      =   -2147483647
+            _WasPersistedAsPixels=   0
+            _DropdownWidth  =   10583
+            _EDITHEIGHT     =   556
+            _GAPHEIGHT      =   53
+            Columns(0)._VlistStyle=   0
+            Columns(0)._MaxComboItems=   5
+            Columns(0).DataField=   ""
+            Columns(0)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
+            Columns(1)._VlistStyle=   0
+            Columns(1)._MaxComboItems=   5
+            Columns(1).DataField=   ""
+            Columns(1)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
+            Columns.Count   =   2
+            Splits(0)._UserFlags=   0
+            Splits(0).ExtendRightColumn=   -1  'True
+            Splits(0).AllowRowSizing=   0   'False
+            Splits(0)._PropDict=   "_ColumnProps,515,0;_UserFlags,518,3"
+            Splits(0)._ColumnProps(0)=   "Columns.Count=2"
+            Splits(0)._ColumnProps(1)=   "Column(0).Width=2725"
+            Splits(0)._ColumnProps(2)=   "Column(0).DividerColor=0"
+            Splits(0)._ColumnProps(3)=   "Column(0)._WidthInPix=2646"
+            Splits(0)._ColumnProps(4)=   "Column(0)._EditAlways=0"
+            Splits(0)._ColumnProps(5)=   "Column(0).Order=1"
+            Splits(0)._ColumnProps(6)=   "Column(1).Width=2725"
+            Splits(0)._ColumnProps(7)=   "Column(1).DividerColor=0"
+            Splits(0)._ColumnProps(8)=   "Column(1)._WidthInPix=2646"
+            Splits(0)._ColumnProps(9)=   "Column(1)._EditAlways=0"
+            Splits(0)._ColumnProps(10)=   "Column(1).Order=2"
+            Splits.Count    =   1
+            Appearance      =   1
+            BorderStyle     =   1
+            ComboStyle      =   0
+            AutoCompletion  =   0   'False
+            LimitToList     =   0   'False
+            ColumnHeaders   =   -1  'True
+            ColumnFooters   =   0   'False
+            DataMode        =   0
+            DefColWidth     =   0
+            Enabled         =   -1  'True
+            HeadLines       =   1
+            FootLines       =   1
+            RowDividerStyle =   0
+            Caption         =   ""
+            EditFont        =   "Size=8.25,Charset=0,Weight=400,Underline=0,Italic=0,Strikethrough=0,Name=MS Sans Serif"
+            LayoutName      =   ""
+            LayoutFileName  =   ""
+            MultipleLines   =   0
+            EmptyRows       =   -1  'True
+            CellTips        =   0
+            AutoSize        =   -1  'True
+            ListField       =   ""
+            BoundColumn     =   ""
+            IntegralHeight  =   0   'False
+            CellTipsWidth   =   0
+            CellTipsDelay   =   1000
+            AutoDropdown    =   0   'False
+            RowTracking     =   -1  'True
+            RightToLeft     =   0   'False
+            RowMember       =   ""
+            MouseIcon       =   0
+            MouseIcon.vt    =   3
+            MousePointer    =   0
+            MatchEntryTimeout=   2000
+            OLEDragMode     =   0
+            OLEDropMode     =   0
+            AnimateWindow   =   0
+            AnimateWindowDirection=   0
+            AnimateWindowTime=   200
+            AnimateWindowClose=   0
+            DropdownPosition=   0
+            Locked          =   0   'False
+            ScrollTrack     =   0   'False
+            RowDividerColor =   15790320
+            RowSubDividerColor=   15790320
+            AddItemSeparator=   ";"
+            _PropDict       =   $"FrmReportes.frx":19E15
+            _StyleDefs(0)   =   "_StyleRoot:id=0,.parent=-1,.alignment=3,.valignment=0,.bgcolor=&H80000005&"
+            _StyleDefs(1)   =   ":id=0,.fgcolor=&H80000008&,.wraptext=0,.locked=0,.transparentBmp=0"
+            _StyleDefs(2)   =   ":id=0,.fgpicPosition=0,.bgpicMode=0,.appearance=0,.borderSize=0,.ellipsis=0"
+            _StyleDefs(3)   =   ":id=0,.borderColor=&H80000005&,.borderType=0,.bold=0,.fontsize=825,.italic=0"
+            _StyleDefs(4)   =   ":id=0,.underline=0,.strikethrough=0,.charset=0"
+            _StyleDefs(5)   =   ":id=0,.fontname=MS Sans Serif"
+            _StyleDefs(6)   =   "Style:id=1,.parent=0,.namedParent=33"
+            _StyleDefs(7)   =   "CaptionStyle:id=4,.parent=2,.namedParent=37"
+            _StyleDefs(8)   =   "HeadingStyle:id=2,.parent=1,.namedParent=34"
+            _StyleDefs(9)   =   "FooterStyle:id=3,.parent=1,.namedParent=35"
+            _StyleDefs(10)  =   "InactiveStyle:id=5,.parent=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+            _StyleDefs(11)  =   "SelectedStyle:id=6,.parent=1,.namedParent=36"
+            _StyleDefs(12)  =   "EditorStyle:id=7,.parent=1"
+            _StyleDefs(13)  =   "HighlightRowStyle:id=8,.parent=1,.namedParent=38"
+            _StyleDefs(14)  =   "EvenRowStyle:id=9,.parent=1,.namedParent=39"
+            _StyleDefs(15)  =   "OddRowStyle:id=10,.parent=1,.namedParent=40"
+            _StyleDefs(16)  =   "RecordSelectorStyle:id=11,.parent=2,.namedParent=41"
+            _StyleDefs(17)  =   "FilterBarStyle:id=12,.parent=1,.namedParent=42"
+            _StyleDefs(18)  =   "Splits(0).Style:id=13,.parent=1"
+            _StyleDefs(19)  =   "Splits(0).CaptionStyle:id=22,.parent=4"
+            _StyleDefs(20)  =   "Splits(0).HeadingStyle:id=14,.parent=2"
+            _StyleDefs(21)  =   "Splits(0).FooterStyle:id=15,.parent=3"
+            _StyleDefs(22)  =   "Splits(0).InactiveStyle:id=16,.parent=5"
+            _StyleDefs(23)  =   "Splits(0).SelectedStyle:id=18,.parent=6"
+            _StyleDefs(24)  =   "Splits(0).EditorStyle:id=17,.parent=7"
+            _StyleDefs(25)  =   "Splits(0).HighlightRowStyle:id=19,.parent=8"
+            _StyleDefs(26)  =   "Splits(0).EvenRowStyle:id=20,.parent=9"
+            _StyleDefs(27)  =   "Splits(0).OddRowStyle:id=21,.parent=10"
+            _StyleDefs(28)  =   "Splits(0).RecordSelectorStyle:id=23,.parent=11"
+            _StyleDefs(29)  =   "Splits(0).FilterBarStyle:id=24,.parent=12"
+            _StyleDefs(30)  =   "Splits(0).Columns(0).Style:id=28,.parent=13"
+            _StyleDefs(31)  =   "Splits(0).Columns(0).HeadingStyle:id=25,.parent=14"
+            _StyleDefs(32)  =   "Splits(0).Columns(0).FooterStyle:id=26,.parent=15"
+            _StyleDefs(33)  =   "Splits(0).Columns(0).EditorStyle:id=27,.parent=17"
+            _StyleDefs(34)  =   "Splits(0).Columns(1).Style:id=32,.parent=13"
+            _StyleDefs(35)  =   "Splits(0).Columns(1).HeadingStyle:id=29,.parent=14"
+            _StyleDefs(36)  =   "Splits(0).Columns(1).FooterStyle:id=30,.parent=15"
+            _StyleDefs(37)  =   "Splits(0).Columns(1).EditorStyle:id=31,.parent=17"
+            _StyleDefs(38)  =   "Named:id=33:Normal"
+            _StyleDefs(39)  =   ":id=33,.parent=0"
+            _StyleDefs(40)  =   "Named:id=34:Heading"
+            _StyleDefs(41)  =   ":id=34,.parent=33,.valignment=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+            _StyleDefs(42)  =   ":id=34,.wraptext=-1"
+            _StyleDefs(43)  =   "Named:id=35:Footing"
+            _StyleDefs(44)  =   ":id=35,.parent=33,.valignment=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+            _StyleDefs(45)  =   "Named:id=36:Selected"
+            _StyleDefs(46)  =   ":id=36,.parent=33,.bgcolor=&H8000000D&,.fgcolor=&H8000000E&"
+            _StyleDefs(47)  =   "Named:id=37:Caption"
+            _StyleDefs(48)  =   ":id=37,.parent=34,.alignment=2"
+            _StyleDefs(49)  =   "Named:id=38:HighlightRow"
+            _StyleDefs(50)  =   ":id=38,.parent=33,.bgcolor=&H8000000D&,.fgcolor=&H8000000E&"
+            _StyleDefs(51)  =   "Named:id=39:EvenRow"
+            _StyleDefs(52)  =   ":id=39,.parent=33,.bgcolor=&HFFFF00&"
+            _StyleDefs(53)  =   "Named:id=40:OddRow"
+            _StyleDefs(54)  =   ":id=40,.parent=33"
+            _StyleDefs(55)  =   "Named:id=41:RecordSelector"
+            _StyleDefs(56)  =   ":id=41,.parent=34"
+            _StyleDefs(57)  =   "Named:id=42:FilterBar"
+            _StyleDefs(58)  =   ":id=42,.parent=33"
+         End
          Begin VB.CommandButton CmdBuscarEmpleado 
             BeginProperty Font 
                Name            =   "MS Sans Serif"
@@ -2464,7 +2772,7 @@ Begin VB.Form FrmReportes
             EndProperty
             Height          =   300
             Left            =   3960
-            Picture         =   "FrmReportes.frx":19D6B
+            Picture         =   "FrmReportes.frx":19EBF
             Style           =   1  'Graphical
             TabIndex        =   84
             Top             =   240
@@ -2482,7 +2790,7 @@ Begin VB.Form FrmReportes
             EndProperty
             Height          =   300
             Left            =   3960
-            Picture         =   "FrmReportes.frx":19EB9
+            Picture         =   "FrmReportes.frx":1A00D
             Style           =   1  'Graphical
             TabIndex        =   83
             Top             =   600
@@ -2516,52 +2824,12 @@ Begin VB.Form FrmReportes
                Width           =   1095
             End
          End
-         Begin VB.TextBox TxtDesde 
-            Height          =   285
-            Left            =   840
-            TabIndex        =   79
-            Top             =   240
-            Visible         =   0   'False
-            Width           =   3015
-         End
-         Begin VB.TextBox TxtHasta 
-            Height          =   285
-            Left            =   840
-            TabIndex        =   78
-            Top             =   600
-            Visible         =   0   'False
-            Width           =   3015
-         End
-         Begin MSDataListLib.DataCombo DBCodigo 
-            Bindings        =   "FrmReportes.frx":1A007
-            Height          =   315
-            Left            =   840
-            TabIndex        =   85
-            Top             =   240
-            Width           =   3015
-            _ExtentX        =   5318
-            _ExtentY        =   556
-            _Version        =   393216
-            Text            =   ""
-         End
-         Begin MSDataListLib.DataCombo DBCodigoHasta 
-            Bindings        =   "FrmReportes.frx":1A01F
-            Height          =   315
-            Left            =   840
-            TabIndex        =   86
-            Top             =   600
-            Width           =   3015
-            _ExtentX        =   5318
-            _ExtentY        =   556
-            _Version        =   393216
-            Text            =   ""
-         End
          Begin VB.Label Label2 
             BackStyle       =   0  'Transparent
             Caption         =   "Desde:"
             Height          =   255
             Left            =   240
-            TabIndex        =   88
+            TabIndex        =   86
             Top             =   300
             Width           =   615
          End
@@ -2570,7 +2838,7 @@ Begin VB.Form FrmReportes
             Caption         =   "Hasta:"
             Height          =   255
             Left            =   240
-            TabIndex        =   87
+            TabIndex        =   85
             Top             =   600
             Width           =   615
          End
@@ -2608,7 +2876,7 @@ Begin VB.Form FrmReportes
          Caption         =   "Nivel Gastos"
          Height          =   255
          Left            =   9480
-         TabIndex        =   222
+         TabIndex        =   220
          Top             =   3000
          Width           =   1095
       End
@@ -2617,7 +2885,7 @@ Begin VB.Form FrmReportes
          Caption         =   "Nivel Costos"
          Height          =   255
          Left            =   9480
-         TabIndex        =   221
+         TabIndex        =   219
          Top             =   2520
          Width           =   1095
       End
@@ -2626,7 +2894,7 @@ Begin VB.Form FrmReportes
          Caption         =   "Nivel Ingresos"
          Height          =   255
          Left            =   9480
-         TabIndex        =   220
+         TabIndex        =   218
          Top             =   2040
          Width           =   1095
       End
@@ -2635,7 +2903,7 @@ Begin VB.Form FrmReportes
          Caption         =   "Nivel Capital"
          Height          =   255
          Left            =   9480
-         TabIndex        =   219
+         TabIndex        =   217
          Top             =   1560
          Width           =   1095
       End
@@ -2644,7 +2912,7 @@ Begin VB.Form FrmReportes
          Caption         =   "Nivel Pasivo"
          Height          =   255
          Left            =   9480
-         TabIndex        =   218
+         TabIndex        =   216
          Top             =   1080
          Width           =   1095
       End
@@ -2653,7 +2921,7 @@ Begin VB.Form FrmReportes
          Caption         =   "Nivel Activos"
          Height          =   255
          Left            =   4200
-         TabIndex        =   211
+         TabIndex        =   209
          Top             =   4440
          Visible         =   0   'False
          Width           =   1095
@@ -2672,8 +2940,8 @@ Begin VB.Form FrmReportes
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   4200
-         TabIndex        =   122
+         Left            =   4320
+         TabIndex        =   120
          Top             =   480
          Visible         =   0   'False
          Width           =   3855
@@ -2683,7 +2951,7 @@ Begin VB.Form FrmReportes
          Caption         =   "Transaccion No."
          Height          =   255
          Left            =   4080
-         TabIndex        =   121
+         TabIndex        =   119
          Top             =   1920
          Width           =   1335
       End
@@ -2692,7 +2960,7 @@ Begin VB.Form FrmReportes
          Caption         =   "Tipo de Moneda:"
          Height          =   255
          Left            =   4200
-         TabIndex        =   120
+         TabIndex        =   118
          Top             =   3720
          Visible         =   0   'False
          Width           =   1455
@@ -2713,15 +2981,15 @@ Begin VB.Form FrmReportes
       Height          =   1095
       Left            =   -120
       ScaleHeight     =   1095
-      ScaleWidth      =   9495
+      ScaleWidth      =   9975
       TabIndex        =   71
       Top             =   -120
-      Width           =   9495
+      Width           =   9975
       Begin VB.Line Line1 
          BorderColor     =   &H00800000&
          BorderWidth     =   2
-         X1              =   0
-         X2              =   9480
+         X1              =   480
+         X2              =   9960
          Y1              =   1080
          Y2              =   1080
       End
@@ -2756,7 +3024,7 @@ Begin VB.Form FrmReportes
       _ExtentY        =   1508
       ForeColor       =   8388608
       Caption         =   "Ver Reporte"
-      Picture         =   "FrmReportes.frx":1A037
+      Picture         =   "FrmReportes.frx":1A15B
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -2842,7 +3110,7 @@ Begin VB.Form FrmReportes
       _ExtentY        =   1508
       ForeColor       =   8388608
       Caption         =   "Ver Reporte"
-      Picture         =   "FrmReportes.frx":1B349
+      Picture         =   "FrmReportes.frx":1B46D
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -3448,7 +3716,7 @@ Begin VB.Form FrmReportes
       _ExtentY        =   1508
       ForeColor       =   8388608
       Caption         =   "Salir"
-      Picture         =   "FrmReportes.frx":1C65B
+      Picture         =   "FrmReportes.frx":1C77F
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -3477,7 +3745,7 @@ Begin VB.Form FrmReportes
       _ExtentY        =   1508
       ForeColor       =   8388608
       Caption         =   "Ver Reporte"
-      Picture         =   "FrmReportes.frx":1D96D
+      Picture         =   "FrmReportes.frx":1DA91
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -3492,7 +3760,7 @@ Begin VB.Form FrmReportes
    Begin XtremeSuiteControls.ProgressBar osProgress2 
       Height          =   255
       Left            =   4080
-      TabIndex        =   155
+      TabIndex        =   153
       Top             =   7320
       Visible         =   0   'False
       Width           =   3615
@@ -3505,7 +3773,7 @@ Begin VB.Form FrmReportes
    Begin XtremeSuiteControls.ProgressBar osProgress1 
       Height          =   375
       Left            =   1440
-      TabIndex        =   154
+      TabIndex        =   152
       Top             =   6840
       Visible         =   0   'False
       Width           =   6255
@@ -3558,6 +3826,166 @@ Option Explicit
 Public CodDesde As String, CodHasta As String
 Dim Tape As New clsTape
 Dim HayUtiBruta As Boolean
+Private WithEvents CmbBeneficiario As TDBCombo
+Attribute CmbBeneficiario.VB_VarHelpID = -1
+Private LblBeneficiario As Label
+Private CodigoBeneficiarioSeleccionado As String
+
+Private Sub EscribirSubtotalGrupo(ByVal Fila As Long, _
+                                  ByVal SIni As Double, ByVal SDeb As Double, _
+                                  ByVal SCre As Double, ByVal SFin As Double)
+    With objExcel.ActiveSheet
+        .Range(.Cells(Fila, 2), .Cells(Fila, 6)).Value = _
+            Array("TOTAL GRUPO", SIni, SDeb, SCre, SFin)
+        .Range(.Cells(Fila, 2), .Cells(Fila, 6)).Font.Bold = True
+        .Range(.Cells(Fila, 3), .Cells(Fila, 6)).Borders(8).LineStyle = 1   ' línea superior
+    End With
+End Sub
+
+
+Private Sub CmbBeneficiario_Change()
+
+'    MsgBox "Código seleccionado: " & CmbBeneficiario.Text
+
+End Sub
+
+Private Sub CmbBeneficiario_ItemChange()
+
+    If Trim(CmbBeneficiario.Text) = "" Or _
+       UCase(Trim(CmbBeneficiario.Text)) = "TODOS" Then
+
+        CodigoBeneficiarioSeleccionado = ""
+
+    Else
+
+        CodigoBeneficiarioSeleccionado = Trim(CmbBeneficiario.Text)
+
+    End If
+
+End Sub
+
+'==========================================================
+' AUXILIAR DE CUENTAS
+'   Detallado    : True = movimientos, False = totalizado por cuenta
+'   AgruparBenef : True = subgrupos por beneficiario dentro de la cuenta
+'==========================================================
+Private Sub GenerarAuxiliarDeCuentas(ByVal Detallado As Boolean, _
+                                     Optional ByVal AgruparBenef As Boolean = False)
+
+    Dim Sql As String
+    Dim Benef As String
+    Dim FiltroBenefMayor As String
+    Dim GrupoDesde As String
+    Dim GrupoHasta As String
+
+    Dim rptAux As ArepAuxiliar
+    Dim rptMayor As ArepAuxiliarMayor
+    Dim fPreview As New FrmPreview
+
+    '==========================================================
+    ' VARIABLES GLOBALES QUE USAN LOS REPORTES
+    '==========================================================
+    NumFecha1 = Me.DTFecha1.Value
+    NumFecha2 = Me.DTFecha2.Value
+    Moneda = IIf(Me.CmbMoneda.Text = "Córdobas", "Cordobas", "Dolares")
+    AuxiliarDetallado = Detallado
+    ActivarBeneficiarioReporte = AgruparBenef
+
+    '==========================================================
+    ' BENEFICIARIO (vacío o "TODOS" = sin filtro)
+    '==========================================================
+    Benef = ""
+    If ActivarBeneficiario = 1 Or AgruparBenef Then
+        Benef = Trim$(CmbBeneficiario.Text)
+    End If
+
+    '==========================================================
+    ' OPTION 4 - AUXILIAR POR CUENTA
+    '==========================================================
+    If Me.Option4.Value = True Then
+
+        CodDesde = Me.DBCodigo.Text
+        CodHasta = Me.DBCodigoHasta.Text
+
+        Sql = SqlAuxiliarCuentas( _
+                Me.DTFecha1.Value, _
+                Me.DTFecha2.Value, _
+                Me.CmbMoneda.Text, _
+                Me.DBCodigo.Text, _
+                Me.DBCodigoHasta.Text, _
+                Benef, _
+                Detallado, _
+                AgruparBenef)
+
+        Set rptAux = New ArepAuxiliar
+        rptAux.LblRangoFecha.Caption = "Desde " & Me.DTFecha1.Value & " Hasta " & Me.DTFecha2.Value
+        rptAux.LblFecha.Caption = Format(Now, "dd/mm/yyyy")
+        rptAux.DataControl1.ConnectionString = ConexionReporte
+        rptAux.DataControl1.Source = Sql
+
+        fPreview.RunReport rptAux
+        fPreview.Show 1
+
+    '==========================================================
+    ' OPTION 5 - GRUPO / CUENTA DE MAYOR
+    '==========================================================
+    ElseIf Me.Option5.Value = True Then
+
+        If Me.TxtDesde.Text <> "" Then GrupoDesde = Me.TxtKeyGrupoDesde.Text
+        If Me.TxtHasta.Text <> "" Then GrupoHasta = Me.TxtKeyGrupoHasta.Text
+
+        CodDesde = GrupoDesde
+        CodHasta = GrupoHasta
+
+        '--- Filtro de beneficiario
+        If Benef <> "" And UCase$(Benef) <> "TODOS" Then
+            FiltroBenefMayor = "AND Transacciones.Cod_Tercero = '" & Replace(Benef, "'", "''") & "' "
+        End If
+
+        Sql = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, "
+        Sql = Sql & "Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, "
+        Sql = Sql & "Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.TCambio, "
+        Sql = Sql & "Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Fuente, "
+        Sql = Sql & "Transacciones.FechaTransaccion, Cuentas.TipoCuenta, Transacciones.TCambio AS Expr1, "
+        Sql = Sql & "Transacciones.TCambio * Transacciones.Debito AS Debito, "
+        Sql = Sql & "Transacciones.TCambio * Transacciones.Credito AS Credito, "
+        Sql = Sql & "Grupos.KeyGrupo, Grupos.DescripcionGrupo "
+        Sql = Sql & "FROM Cuentas "
+        Sql = Sql & "INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas "
+        Sql = Sql & "INNER JOIN Grupos ON Cuentas.KeyGrupo = Grupos.KeyGrupo "
+        Sql = Sql & "WHERE Transacciones.FechaTransaccion BETWEEN '" & Format(Me.DTFecha1.Value, "yyyymmdd") & "' "
+        Sql = Sql & "AND '" & Format(Me.DTFecha2.Value, "yyyymmdd") & "' "
+
+        If GrupoDesde <> "" Then Sql = Sql & "AND Grupos.KeyGrupo >= '" & Replace(GrupoDesde, "'", "''") & "' "
+        If GrupoHasta <> "" Then Sql = Sql & "AND Grupos.KeyGrupo <= '" & Replace(GrupoHasta, "'", "''") & "' "
+
+        Sql = Sql & FiltroBenefMayor
+        Sql = Sql & "ORDER BY Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NTransaccion"
+
+        Set rptMayor = New ArepAuxiliarMayor
+        rptMayor.LblRangoFecha.Caption = "Desde " & Me.DTFecha1.Value & " Hasta " & Me.DTFecha2.Value
+        rptMayor.LblFecha.Caption = Format(Now, "dd/mm/yyyy")
+        rptMayor.LblCodigo.Caption = "Mis Code:" & Me.DBCodigo.Text
+        rptMayor.LblRango.Caption = "Filtrado Desde: " & _
+            IIf(GrupoDesde = "", "Inicio", GrupoDesde) & " Hasta " & IIf(GrupoHasta = "", "Final", GrupoHasta)
+
+        If RutaLogo <> "" Then
+            If Dir(RutaLogo) <> "" Then rptMayor.Logo.Picture = LoadPicture(RutaLogo)
+        End If
+
+        rptMayor.LblEmpresa.Caption = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
+        rptMayor.LblEmpresa1.Caption = Me.DtaDatosEmpresa.Recordset("Direccion")
+        rptMayor.LblEmpresa2.Caption = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
+        rptMayor.LblFechaImpreso.Caption = Format(Now, "dd/mm/yyyy")
+        rptMayor.DataControl1.ConnectionString = ConexionReporte
+        rptMayor.DataControl1.Source = Sql
+
+        fPreview.RunReport rptMayor
+        fPreview.Show 1
+
+    End If
+
+End Sub
 
 Sub HayUtilidadBruta()
  HayUtiBruta = True
@@ -3599,9 +4027,9 @@ Dim UltimoOrden As Integer, RegIngresos  As Integer, PrimReg As Integer, UltReg 
 Dim Fechas1 As String, Fechas2 As String, Orden As Integer, Sql As String, i As Double
 Dim ListaMeses As Variant, CantRegistros As Double, ComboIni As Double, ComboFin As Double, TotstoFijo As Double, TotalGastoFijo As Double
 Dim mes As Double, J As Double, TotalDebito As Double, TotalCredito As Double, CodigoCuentaDesde As String, CodigoCuentaHasta As String
-Dim rpt As Object, TotalCostoFijo As Double, Ajuste As String
-Dim fPreview As New FrmPreview, V As Double, H As Double
-Dim rs As New ADODB.Recordset
+Dim Rpt As Object, TotalCostoFijo As Double, Ajuste As String, SqlString As String, Cont As Double, KeyGrupo As String
+Dim fPreview As New FrmPreview, V As Double, H As Double, DescripcionGrupo As String
+Dim Rs As New ADODB.Recordset
 Dim Parche As ADODB.Connection
 
 
@@ -3621,6 +4049,186 @@ FechaFin = Me.DTFecha2.Value
 
 
 Select Case Me.CmbReportes.Text
+
+Case "TOTAL AUXILIAR DE CUENTAS"
+
+    Dim sqlTotAux As String
+    Dim rsTotAux As ADODB.Recordset
+    Dim filaXls As Long
+    Dim grupoActual As String, grupoFila As String
+    Dim debAnt As Double, creAnt As Double, debPer As Double, crePer As Double
+    Dim saldoIniCta As Double, saldoFinCta As Double
+    Dim subIni As Double, subDeb As Double, subCre As Double, subFin As Double
+    Dim ctaDesdeTot As String, ctaHastaTot As String
+    Dim grpDesdeTot As String, grpHastaTot As String
+    Dim benefTot As String
+    Const SIN_GRUPO As String = "<<INICIO>>"
+
+    '------------------------------------------------------
+    ' Parámetros según la opción
+    '------------------------------------------------------
+    If Me.Option4.Value = True Then
+        ctaDesdeTot = Me.DBCodigo.Text
+        ctaHastaTot = Me.DBCodigoHasta.Text
+    ElseIf Me.Option5.Value = True Then
+        If Me.TxtDesde.Text <> "" Then grpDesdeTot = Me.TxtKeyGrupoDesde.Text
+        If Me.TxtHasta.Text <> "" Then grpHastaTot = Me.TxtKeyGrupoHasta.Text
+    End If
+
+    If ActivarBeneficiario = 1 Then benefTot = CmbBeneficiario.Text
+
+    '------------------------------------------------------
+    ' Consulta (resumida, sin agrupar por beneficiario)
+    '------------------------------------------------------
+    Me.lblProgreso.Caption = "Consultando saldos..."
+    Me.lblProgreso.AutoSize = True
+    DoEvents
+
+    sqlTotAux = SqlAuxiliarCuentas( _
+                    Me.DTFecha1.Value, Me.DTFecha2.Value, Me.CmbMoneda.Text, _
+                    ctaDesdeTot, ctaHastaTot, benefTot, _
+                    False, False, _
+                    grpDesdeTot, grpHastaTot)
+
+    Set rsTotAux = New ADODB.Recordset
+    rsTotAux.CursorLocation = adUseClient
+    rsTotAux.Open sqlTotAux, Conexion, adOpenStatic, adLockReadOnly
+
+    If rsTotAux.EOF Then
+
+        Me.lblProgreso.Caption = ""
+        MsgBox "No hay movimientos para los filtros seleccionados.", vbInformation, "Zeus Contable"
+
+    Else
+
+        Call Inicio_Excel
+
+        '--------------------------------------------------
+        ' Encabezados
+        '--------------------------------------------------
+        With objExcel.ActiveSheet
+
+            .Cells(1, 1) = NombreEmpresa
+            .Range("A1:J1").Merge
+            .Range("A1:J1").HorizontalAlignment = xlHAlignCenter
+            .Cells(1, 1).Font.Size = 20
+            .Cells(1, 1).Font.Bold = True
+
+            .Cells(2, 1) = "RUC " & RUC
+
+            .Cells(3, 1) = "EXPORTACION DESDE " & Me.DTFecha1.Value & " HASTA " & Me.DTFecha2.Value
+            .Range("A3:J3").Merge
+            .Range("A3:J3").HorizontalAlignment = xlHAlignCenter
+            .Cells(3, 1).Font.Size = 14
+            .Cells(3, 1).Font.Bold = True
+
+            .Cells(4, 1) = "Moneda Reporte: " & Me.CmbMoneda.Text
+            .Cells(4, 3) = "Antes del " & Me.DTFecha1.Value
+            .Cells(4, 6) = "Al " & Me.DTFecha2.Value
+
+            .Cells(5, 1) = "Codigo Cuenta"
+            .Cells(5, 2) = "Nombre Cuenta"
+            .Cells(5, 3) = "Saldo Inicial"
+            .Cells(5, 4) = "Movimiento"
+            .Cells(5, 6) = "Saldo Final"
+            .Range("D5:E5").Merge
+            .Range("D5:E5").HorizontalAlignment = xlHAlignCenter
+            .Cells(6, 4) = "Debe"
+            .Cells(6, 5) = "Haber"
+            .Range("D6:E6").HorizontalAlignment = xlHAlignCenter
+            .Range("A5:F6").Font.Bold = True
+
+            .Columns("A").ColumnWidth = 24.43
+            .Columns("B").ColumnWidth = 40
+            .Columns("C").ColumnWidth = 19
+            .Columns("D").ColumnWidth = 16
+            .Columns("E").ColumnWidth = 16
+            .Columns("F").ColumnWidth = 19
+            .Columns("A").NumberFormat = "@"
+            .Columns("C:F").NumberFormat = "##,##0.00"
+
+        End With
+
+        '--------------------------------------------------
+        ' Detalle por cuenta
+        '--------------------------------------------------
+        Me.lblProgreso.Caption = "Exportando a Excel..."
+        Me.osProgress1.Visible = True
+        Me.osProgress1.Min = 0
+        Me.osProgress1.Max = IIf(rsTotAux.RecordCount > 0, rsTotAux.RecordCount, 1)
+        Me.osProgress1.Value = 0
+
+        filaXls = 7
+        grupoActual = SIN_GRUPO
+
+        Do While Not rsTotAux.EOF
+
+            grupoFila = rsTotAux("DescripcionGrupo") & ""
+
+            '--- Cambio de grupo: cierro el anterior y abro el nuevo
+            If grupoFila <> grupoActual Then
+
+                If grupoActual <> SIN_GRUPO Then
+                    EscribirSubtotalGrupo filaXls, subIni, subDeb, subCre, subFin
+                    filaXls = filaXls + 2
+                End If
+
+                objExcel.ActiveSheet.Cells(filaXls, 1) = grupoFila
+                objExcel.ActiveSheet.Cells(filaXls, 1).Font.Bold = True
+                filaXls = filaXls + 1
+
+                subIni = 0: subDeb = 0: subCre = 0: subFin = 0
+                grupoActual = grupoFila
+
+            End If
+
+            '--- Saldos de la cuenta
+            debAnt = NzD(rsTotAux("DebitoAnterior"))
+            creAnt = NzD(rsTotAux("CreditoAnterior"))
+            debPer = NzD(rsTotAux("Debito"))
+            crePer = NzD(rsTotAux("Credito"))
+
+            If EsCuentaDeudora(rsTotAux("TipoCuenta") & "") Then
+                saldoIniCta = debAnt - creAnt
+                saldoFinCta = saldoIniCta + debPer - crePer
+            Else
+                saldoIniCta = creAnt - debAnt
+                saldoFinCta = saldoIniCta + crePer - debPer
+            End If
+
+            '--- Una sola escritura por fila (más rápido que celda por celda)
+            objExcel.ActiveSheet.Range( _
+                objExcel.ActiveSheet.Cells(filaXls, 1), _
+                objExcel.ActiveSheet.Cells(filaXls, 6)).Value = _
+                Array(rsTotAux("CodCuentas") & "", _
+                      rsTotAux("DescripcionCuentas") & "", _
+                      saldoIniCta, debPer, crePer, saldoFinCta)
+
+            subIni = subIni + saldoIniCta
+            subDeb = subDeb + debPer
+            subCre = subCre + crePer
+            subFin = subFin + saldoFinCta
+
+            filaXls = filaXls + 1
+            Me.osProgress1.Value = Me.osProgress1.Value + 1
+            DoEvents
+
+            rsTotAux.MoveNext
+        Loop
+
+        '--- Subtotal del último grupo
+        EscribirSubtotalGrupo filaXls, subIni, subDeb, subCre, subFin
+
+        Me.lblProgreso.Caption = ""
+        Me.osProgress1.Visible = False
+        MsgBox "Proceso Terminado!!!", vbExclamation, "Zeus Contable"
+
+    End If
+
+    rsTotAux.Close
+    Set rsTotAux = Nothing
+
+
 
         Case "REPORTE PBI"
         
@@ -3885,8 +4493,8 @@ Select Case Me.CmbReportes.Text
             
          If Option4.Value = True Then
             Me.DtaReportes.Refresh
-            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.LblProgreso.AutoSize = True
+            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.lblProgreso.AutoSize = True
             Me.osProgress1.Visible = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
@@ -3897,7 +4505,7 @@ Select Case Me.CmbReportes.Text
                 Me.osProgress1.Value = Me.osProgress1.Value + 1
             Loop
             
-            Me.LblProgreso.Caption = ""
+            Me.lblProgreso.Caption = ""
             Me.osProgress1.Visible = False
             SaldoReportes ("BalanzaCodigo")
             Me.DtaReportes.Refresh
@@ -3943,7 +4551,7 @@ Select Case Me.CmbReportes.Text
         '         fPreview.arv.ReportSource = ArepBalanza
         '         fPreview.Show 1
             End If
-            Me.LblProgreso.Caption = ""
+            Me.lblProgreso.Caption = ""
             Me.osProgress1.Visible = False
             
             
@@ -3958,8 +4566,8 @@ Select Case Me.CmbReportes.Text
          
             Me.DtaReportes.Refresh
             
-            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.LblProgreso.AutoSize = True
+            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.lblProgreso.AutoSize = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
             Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
@@ -4168,7 +4776,7 @@ Select Case Me.CmbReportes.Text
              
               End If
                  
-             Me.LblProgreso.Caption = ""
+             Me.lblProgreso.Caption = ""
             Me.osProgress1.Visible = False
             
          ElseIf Option9.Value = True Then
@@ -4314,6 +4922,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
          Me.Label3.Visible = False
          Me.ChkBalanza.Visible = False
          Me.Frame9.Visible = False
+         Me.Frame8.Enabled = False
          Me.Frame1.Visible = True
          Me.Frame4.Visible = False
          Me.CmbNivel.Visible = True
@@ -4322,9 +4931,39 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
          Me.SSTab.TabVisible(1) = False
          Me.SSTab.TabVisible(2) = False
          Me.ChkQuitarMovimiento.Visible = False
+         
+             CmbBeneficiario.Visible = False
+    LblBeneficiario.Visible = False
 
          
    Select Case Me.CmbReportes.Text
+     Case "RETENCIONES X PAGAR"
+     
+         Me.CmdVerReporte.Visible = False
+         Me.CmdVerReporte2.Visible = False
+         Me.CmdVerReporte3.Visible = True
+
+
+      Me.Label3.Visible = True
+      Me.CmbMoneda.Visible = True
+      Me.Label2.Visible = False
+      Me.Label4.Visible = True
+      Me.DTFecha1.Visible = True
+      Me.Label2.Visible = True
+       Me.Frame7.Visible = True
+      Me.Frame2.Visible = False
+'      Me.Frame3.Visible = True
+
+        Frame7.Caption = "Realizar Filtrado por Codigo"
+        Me.TxtDesde.Visible = False
+        Me.TxtHasta.Visible = False
+        Me.DBCodigo.Visible = True
+        Me.DBCodigoHasta.Visible = True
+        
+        CargarCuentas Me.DBCodigo, True
+        CargarCuentas Me.DBCodigoHasta, True
+     
+     
      Case "PRESUPUESTO DEL MES"
       Me.CmbNivel = 3
       Me.Frame4.Visible = True
@@ -4778,6 +5417,10 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
    Case "TARJETA ACTIVO FIJO"
       Me.Frame2.Visible = False
       Me.Frame1.Visible = False
+   Case "LISTA ACTIVO FIJO"
+      Me.Frame2.Visible = False
+      Me.Frame1.Visible = False
+      
    Case "TARJETA EMPLEADOS"
      Me.Frame2.Visible = False
      Me.Frame1.Visible = False
@@ -4817,6 +5460,24 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
       Me.Frame7.Visible = True
       Me.Frame2.Visible = False
       Me.Frame3.Visible = True
+      
+   Case "AUXILIAR CUENTAS X BENEFICIARIO"
+      Me.Label3.Visible = True
+      Me.CmbMoneda.Visible = True
+      Me.Label2.Visible = False
+      Me.Label4.Visible = True
+      Me.DTFecha1.Visible = True
+      Me.Label2.Visible = True
+      Me.Frame7.Visible = True
+      Me.Frame2.Visible = False
+      Me.Frame3.Visible = True
+      CmbBeneficiario.Visible = True
+      LblBeneficiario.Visible = True
+      
+         Me.CmdVerReporte.Visible = False
+         Me.CmdVerReporte2.Visible = False
+         Me.CmdVerReporte3.Visible = True
+      
    Case "AUXILIAR DE CUENTAS"
       Me.Label3.Visible = True
       Me.CmbMoneda.Visible = True
@@ -4827,6 +5488,9 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
       Me.Frame7.Visible = True
       Me.Frame2.Visible = False
       Me.Frame3.Visible = True
+'      CmbBeneficiario.Visible = True
+'      LblBeneficiario.Visible = True
+    
 
    Case "BALANZA DE COMPROBACION"
       Me.Label2.Visible = False
@@ -4834,12 +5498,14 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
       Me.DTFecha1.Visible = True
       Me.Frame3.Visible = True
       Me.Frame7.Visible = True
+      Me.Frame8.Enabled = True
       Me.Frame2.Visible = False
       Me.Label3.Visible = True
       Me.CmbMoneda.Visible = True
       Me.ChkBalanza.Visible = True
       Me.Option4.Visible = True
       Me.Option9.Visible = False
+      Me.Option11.Value = True
       
 '      Me.frameBalanza.Visible = True
 '      Me.frameBalanza.top = 2160
@@ -4868,7 +5534,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
       Me.Label2.Visible = False
          Me.Frame7.Visible = False
       Me.Frame2.Visible = True
-    Me.lbltitulo.Caption = "Seleccione el Periodo"
+    Me.lblTitulo.Caption = "Seleccione el Periodo"
       Me.DtaConsulta.RecordSource = "SELECT Periodos.Periodo, Periodos.FechaPeriodo, Periodos.NumeroTabla From Periodos Where (((Periodos.Periodo) = 1) And ((Periodos.NumeroTabla) = 1 Or (Periodos.NumeroTabla) = 2 Or (Periodos.NumeroTabla) = 3))"
       Me.DtaConsulta.Refresh
       Do While Not DtaConsulta.Recordset.EOF
@@ -5120,10 +5786,12 @@ Dim Utilidad As Double, Utilidad2 As Double, Utilidad3 As Double, RegTCostosOper
 Dim Decrementador As Integer
 Dim RegInicioCostosOperativos As Integer 'variable que me guarda el orden donde se encuentra el registro donde comienzan los costos operativos
 Dim RegTotalCostosOperativos As Integer 'variable que me guarda el orden donde se encuentra el registro de total de costos operativos
-Dim rs As New ADODB.Recordset, Fecha2 As String
+Dim Rs As New ADODB.Recordset, Fecha2 As String
 Dim CodigoCuentaDesde As String, CodigoCuentaHasta As String
-Dim rpt As Object
+Dim Rpt As Object
 Dim fPreview As New FrmPreview
+
+
 
 
 
@@ -5195,10 +5863,10 @@ End If
 '  fPreview.arv.ReportSource = EstadoCuenta
 '  fPreview.Show 1
 
-     Set rpt = New EstadoCuenta
-     rpt.AdoEstadoCuenta.ConnectionString = ConexionReporte
-     rpt.AdoEstadoCuenta.Source = Sql
-     fPreview.RunReport rpt
+     Set Rpt = New EstadoCuenta
+     Rpt.AdoEstadoCuenta.ConnectionString = ConexionReporte
+     Rpt.AdoEstadoCuenta.Source = Sql
+     fPreview.RunReport Rpt
      fPreview.Show 1
 
 Case "ESTRUCTURA DE CUENTAS"
@@ -5222,10 +5890,10 @@ Case "ESTRUCTURA DE CUENTAS"
     ArepCatalogo.DataControl1.ConnectionString = ConexionReporte
     '    ArepCatalogo.Show 1
 
-     Set rpt = New ArepCatalogo
-     rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = "SELECT * From Reportes ORDER BY Orden"
-     fPreview.RunReport rpt
+     Set Rpt = New ArepCatalogo
+     Rpt.DataControl1.ConnectionString = ConexionReporte
+     Rpt.DataControl1.Source = "SELECT * From Reportes ORDER BY Orden"
+     fPreview.RunReport Rpt
      fPreview.Show 1
      
 '     Dim rpt As Object
@@ -5285,7 +5953,7 @@ Case "ESTADO DE RESULTADO"
     
     Me.DtaReportes.Refresh
     
-    FrmReportes.LblProgreso.Caption = "Eliminando Datos del Reporte Anterior"
+    FrmReportes.lblProgreso.Caption = "Eliminando Datos del Reporte Anterior"
     FrmReportes.osProgress1.Visible = True
     FrmReportes.osProgress1.Value = 0
     FrmReportes.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
@@ -5298,7 +5966,7 @@ Case "ESTADO DE RESULTADO"
 '     Me.DtaReportes.Recordset.MoveNext
 '    Loop
     
-    rs.Open "DELETE FROM Reportes", Conexion
+    Rs.Open "DELETE FROM Reportes", Conexion
 
     CreaEstructura ("Resultado")
     
@@ -5331,7 +5999,7 @@ Case "ESTADO DE RESULTADO"
 '    '------------------------------------------------------------------------------
 '    '----------------IGUALO LOS SALDOS DEL RESULTADO ACUMULADO --------------------
 '    '------------------------------------------------------------------------------
-    rs.Open "UPDATE [Reportes] Set [Debe1] = [Debe2] ,[Haber1] = [Haber2] WHERE (KeyGrupo = 'RP')", Conexion
+    Rs.Open "UPDATE [Reportes] Set [Debe1] = [Debe2] ,[Haber1] = [Haber2] WHERE (KeyGrupo = 'RP')", Conexion
     
     
 
@@ -5340,10 +6008,10 @@ Case "ESTADO DE RESULTADO"
     
     If Me.CmbNivel.Text = 0 Then
      EliminaRegistroCero ("Resultado")
-      rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
+      Rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
     Else
      EliminaRegistroCero ("Nivel")
-     rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
+     Rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
      Ejecutar.Execute "DELETE FROM Reportes WHERE (Descripcion NOT LIKE N'%Total%') AND (Nivel = " & Me.CmbNivel.Text & ")"
     End If
     
@@ -5374,15 +6042,15 @@ Case "ESTADO DE RESULTADO"
 '     fPreview.arv.ReportSource = ArepResultado
 '     fPreview.Show 1
 
-     Set rpt = New ArepResultado
-     rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
-     fPreview.RunReport rpt
+     Set Rpt = New ArepResultado
+     Rpt.DataControl1.ConnectionString = ConexionReporte
+     Rpt.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
+     fPreview.RunReport Rpt
      fPreview.Show 1
 
     
     
-    FrmReportes.LblProgreso.Caption = ""
+    FrmReportes.lblProgreso.Caption = ""
     FrmReportes.osProgress1.Visible = False
 
 
@@ -5462,10 +6130,10 @@ Case "RESULTADO ACUMULADO"
     
     If Me.CmbNivel.Text = 0 Then
      EliminaRegistroCero ("Resultado")
-      rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
+      Rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
     Else
      EliminaRegistroCero ("Nivel")
-     rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
+     Rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
      Ejecutar.Execute "DELETE FROM Reportes WHERE (Descripcion NOT LIKE N'%Total%') AND (Nivel = " & Me.CmbNivel.Text & ")"
     End If
     
@@ -5499,13 +6167,13 @@ Case "RESULTADO ACUMULADO"
 '     fPreview.arv.ReportSource = ArepResultadoAcumulado
 '     fPreview.Show 1
 
-     Set rpt = New ArepResultadoAcumulado
-     rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
-     fPreview.RunReport rpt
+     Set Rpt = New ArepResultadoAcumulado
+     Rpt.DataControl1.ConnectionString = ConexionReporte
+     Rpt.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
+     fPreview.RunReport Rpt
      fPreview.Show 1
      
-    FrmReportes.LblProgreso.Caption = ""
+    FrmReportes.lblProgreso.Caption = ""
     FrmReportes.osProgress1.Visible = False
     
 
@@ -5591,10 +6259,10 @@ Case "RESULTADO HISTORICO"
 
     If Me.CmbNivel.Text = 0 Then
      EliminaRegistroCero ("Resultado")
-      rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
+      Rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
     Else
      EliminaRegistroCero ("Nivel")
-     rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
+     Rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
      Ejecutar.Execute "DELETE FROM Reportes WHERE (Descripcion NOT LIKE N'%Total%') AND (Nivel = " & Me.CmbNivel.Text & ")"
     End If
 
@@ -5618,15 +6286,15 @@ Case "RESULTADO HISTORICO"
     ArepResultadoHistorico.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
     Sql = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
    
-     Set rpt = New ArepResultadoHistorico
-     rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = Sql
-     fPreview.RunReport rpt
+     Set Rpt = New ArepResultadoHistorico
+     Rpt.DataControl1.ConnectionString = ConexionReporte
+     Rpt.DataControl1.Source = Sql
+     fPreview.RunReport Rpt
      fPreview.Show 1
    
 '     fPreview.arv.ReportSource = ArepResultadoHistorico
 '     fPreview.Show 1
-    FrmReportes.LblProgreso.Caption = ""
+    FrmReportes.lblProgreso.Caption = ""
     FrmReportes.osProgress1.Visible = False
 
 
@@ -5757,7 +6425,15 @@ Case "BALANCE GENERAL"
     ArepBalance.LblFechaIni = FechaIni
     ArepBalance.DataControl1.ConnectionString = ConexionReporte
     ArepBalance.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
-    ArepBalance.Show 1
+'    ArepBalance.Show 1
+    
+     Set Rpt = New ArepBalance
+     Rpt.DataControl1.ConnectionString = ConexionReporte
+     Rpt.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
+     fPreview.RunReport Rpt
+
+
+     fPreview.Show 1
     
     
     
@@ -5885,10 +6561,10 @@ Case "BALANCE ACUMULADO"
 '     fPreview.arv.ReportSource = ArepBalanceComparativo
 '     fPreview.Show 1
 
-     Set rpt = New ArepBalanceComparativo
-     rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = Sql
-     fPreview.RunReport rpt
+     Set Rpt = New ArepBalanceComparativo
+     Rpt.DataControl1.ConnectionString = ConexionReporte
+     Rpt.DataControl1.Source = Sql
+     fPreview.RunReport Rpt
      fPreview.Show 1
     
 
@@ -5993,10 +6669,10 @@ Case "BALANCE ACUMULADO"
 'Dim rpt As Object
 'Dim fPreview As New FrmPreview
 
-     Set rpt = New ArepBalanceHistorico
-     rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = Sql
-     fPreview.RunReport rpt
+     Set Rpt = New ArepBalanceHistorico
+     Rpt.DataControl1.ConnectionString = ConexionReporte
+     Rpt.DataControl1.Source = Sql
+     fPreview.RunReport Rpt
      fPreview.Show 1
 
 ''    ArepBalanceHistorico.Show 1
@@ -6018,8 +6694,8 @@ Case "BALANZA DE COMPROBACION"
  
  If Option4.Value = True Then
     Me.DtaReportes.Refresh
-    Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-    Me.LblProgreso.AutoSize = True
+    Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+    Me.lblProgreso.AutoSize = True
     Me.osProgress1.Visible = True
     Me.osProgress1.Value = 0
     Me.osProgress1.Min = 0
@@ -6030,7 +6706,7 @@ Case "BALANZA DE COMPROBACION"
         Me.osProgress1.Value = Me.osProgress1.Value + 1
     Loop
     
-    Me.LblProgreso.Caption = ""
+    Me.lblProgreso.Caption = ""
     Me.osProgress1.Visible = False
     SaldoReportes ("BalanzaCodigo")
     Me.DtaReportes.Refresh
@@ -6053,8 +6729,8 @@ Case "BALANZA DE COMPROBACION"
        
        
     '/////////////////////////parche temporal emtrides ////////////////
-     Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 - 1.42 ,[Debe3] = dbo.Reportes.Debe3  - 1.42 WHERE dbo.Reportes.CodCuentas = '10020201'"
-     Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 + 0.26 ,[Debe3] = dbo.Reportes.Debe3  + 0.26 WHERE dbo.Reportes.CodCuentas = '100101'"
+'     Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 - 1.42 ,[Debe3] = dbo.Reportes.Debe3  - 1.42 WHERE dbo.Reportes.CodCuentas = '10020201'"
+'     Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 + 0.26 ,[Debe3] = dbo.Reportes.Debe3  + 0.26 WHERE dbo.Reportes.CodCuentas = '100101'"
        
     
     If Me.OptTradicional.Value = True Then
@@ -6077,7 +6753,7 @@ Case "BALANZA DE COMPROBACION"
 '         fPreview.arv.ReportSource = ArepBalanza
 '         fPreview.Show 1
     End If
-    Me.LblProgreso.Caption = ""
+    Me.lblProgreso.Caption = ""
     Me.osProgress1.Visible = False
     
     
@@ -6091,8 +6767,8 @@ Case "BALANZA DE COMPROBACION"
  
     Me.DtaReportes.Refresh
     
-    Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-    Me.LblProgreso.AutoSize = True
+    Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+    Me.lblProgreso.AutoSize = True
     Me.osProgress1.Value = 0
     Me.osProgress1.Min = 0
     Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
@@ -6133,16 +6809,16 @@ Case "BALANZA DE COMPROBACION"
     Parche.Execute "Update [Reportes] SET [Debe3] =  CASE WHEN (Debe1 + Debe2) > (Haber1 + Haber2) THEN (Debe1 + Debe2) - (Haber1 + Haber2) ELSE 0 END ,[Haber3] =  CASE WHEN (Haber1 + Haber2) > (Debe1 + Debe2) THEN (Haber1 + Haber2) - (Debe1 + Debe2) ELSE 0 END"
     
     
-     If Me.DTFecha1.Value >= "01/01/2023" Then
-             
-    '/////////////////////////parche temporal emtrides ////////////////
-     Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 - 1.42 ,[Debe3] = dbo.Reportes.Debe3  - 1.42 WHERE dbo.Reportes.CodCuentas = '10020201'"
-    
-     Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 + 0.26 ,[Debe3] = dbo.Reportes.Debe3  + 0.26 WHERE dbo.Reportes.CodCuentas = '100101'"
-     
-     Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 + 0.26 ,[Debe3] = dbo.Reportes.Debe3  + 0.26 WHERE (KeyGrupo = 'A010001') AND (Descripcion LIKE '%Total%')"
-     Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 - 1.42 ,[Debe3] = dbo.Reportes.Debe3  - 1.42 WHERE (KeyGrupo = 'A010002') AND (Descripcion LIKE '%Total%')"
-     End If
+'     If Me.DTFecha1.Value >= "01/01/2023" Then
+'
+'    '/////////////////////////parche temporal emtrides ////////////////
+'     Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 - 1.42 ,[Debe3] = dbo.Reportes.Debe3  - 1.42 WHERE dbo.Reportes.CodCuentas = '10020201'"
+'
+'     Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 + 0.26 ,[Debe3] = dbo.Reportes.Debe3  + 0.26 WHERE dbo.Reportes.CodCuentas = '100101'"
+'
+'     Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 + 0.26 ,[Debe3] = dbo.Reportes.Debe3  + 0.26 WHERE (KeyGrupo = 'A010001') AND (Descripcion LIKE '%Total%')"
+'     Parche.Execute "UPDATE [dbo].[Reportes] Set [Debe1] = dbo.Reportes.Debe1 - 1.42 ,[Debe3] = dbo.Reportes.Debe3  - 1.42 WHERE (KeyGrupo = 'A010002') AND (Descripcion LIKE '%Total%')"
+'     End If
    
        
     
@@ -6171,10 +6847,10 @@ Case "BALANZA DE COMPROBACION"
         QUIEN = "Balanza"
 '        ArepBalanza.Show 1
 
-            Set rpt = New ArepBalanza
-            rpt.DataControl1.ConnectionString = ConexionReporte
-            rpt.DataControl1.Source = Sql
-            fPreview.RunReport rpt
+            Set Rpt = New ArepBalanza
+            Rpt.DataControl1.ConnectionString = ConexionReporte
+            Rpt.DataControl1.Source = Sql
+            fPreview.RunReport Rpt
             fPreview.Show 1
             
 
@@ -6200,7 +6876,7 @@ Case "BALANZA DE COMPROBACION"
      
       End If
          
-     Me.LblProgreso.Caption = ""
+     Me.lblProgreso.Caption = ""
     Me.osProgress1.Visible = False
     
  ElseIf Option9.Value = True Then
@@ -6298,95 +6974,166 @@ Case "AUXILIAR x GRUPO"
 '     fPreview.Show 1
  
  Case "TOTAL AUXILIAR DE CUENTAS"
-    ArepTotalAuxiliar.LblFecha = Format(Now, "dd/mm/yyyy")
-    NumFecha1 = Me.DTFecha1.Value
-    NumFecha2 = Me.DTFecha2.Value
-    
-    Fechas1 = Format(Me.DTFecha1.Value, "yyyy-mm-dd")
-    Fechas2 = Format(Me.DTFecha2.Value, "yyyy-mm-dd")
-    
-    
-    ArepTotalAuxiliar.LblRangoFecha = "Desde " & Me.DTFecha1.Value & " Hasta " & Me.DTFecha2.Value
-    ArepTotalAuxiliar.DataControl1.ConnectionString = ConexionReporte
+
     
     
     If Me.Option4.Value = True Then
     
-    Me.DtaReportes.Refresh
-    Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-    Me.LblProgreso.AutoSize = True
-    Me.osProgress1.Visible = True
-    Me.osProgress1.Value = 0
-    Me.osProgress1.Min = 0
-    Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
-    Do While Not Me.DtaReportes.Recordset.EOF
-     Me.DtaReportes.Recordset.Delete
-        Me.DtaReportes.Recordset.MoveNext
-        Me.osProgress1.Value = Me.osProgress1.Value + 1
-    Loop
+     ArepTotalAuxiliar.LblFecha = Format(Now, "dd/mm/yyyy")
+            NumFecha1 = Me.DTFecha1.Value
+            NumFecha2 = Me.DTFecha2.Value
+            
+            Fechas1 = Format(Me.DTFecha1.Value, "yyyy-mm-dd")
+            Fechas2 = Format(Me.DTFecha2.Value, "yyyy-mm-dd")
+            
+            
+            ArepTotalAuxiliar.LblRangoFecha = "Desde " & Me.DTFecha1.Value & " Hasta " & Me.DTFecha2.Value
+            ArepTotalAuxiliar.DataControl1.ConnectionString = ConexionReporte
     
-    Me.LblProgreso.Caption = ""
+    Me.DtaReportes.Refresh
+    Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+    Me.lblProgreso.AutoSize = True
+    Rs.Open "DELETE FROM Reportes", Conexion
+'    Me.osProgress1.Visible = True
+'    Me.osProgress1.Value = 0
+'    Me.osProgress1.Min = 0
+'    Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
+'
+'
+'    Do While Not Me.DtaReportes.Recordset.EOF
+'     Me.DtaReportes.Recordset.Delete
+'        Me.DtaReportes.Recordset.MoveNext
+'        Me.osProgress1.Value = Me.osProgress1.Value + 1
+'    Loop
+    
+    Me.lblProgreso.Caption = ""
     Me.osProgress1.Visible = False
     SaldoReportes ("BalanzaCodigo")
     Me.DtaReportes.Refresh
     'aqui voy a poner el parche para que salga los movimientos de debito y credito en periodo
 '    Dim Parche As ADODB.Connection
-    Set Parche = New ADODB.Connection
-    Parche.ConnectionString = Conexion
-    Parche.Open
-
-    Parche.Execute "update reportes set debe2=0,haber2=0"
-    Parche.Execute "update reportes " & _
-        "set debe2=mdebito,haber2=mcredito " & _
-        "from (" & ConsultaTotalesMovimientos & ") as Temporal " & _
-        "where temporal.codcuentas=reportes.codcuentas"
+            Set Parche = New ADODB.Connection
+            Parche.ConnectionString = Conexion
+            Parche.Open
+            
+            
         
-    Parche.Execute "Update Reportes set debe3=debe1+debe2,haber3=haber1+haber2"
+            Parche.Execute "update reportes set debe2=0,haber2=0"
+            Parche.Execute "update reportes " & _
+                "set debe2=mdebito,haber2=mcredito " & _
+                "from (" & ConsultaTotalesMovimientos & ") as Temporal " & _
+                "where temporal.codcuentas=reportes.codcuentas"
+                
+            Parche.Execute "Update Reportes set debe3=debe1+debe2,haber3=haber1+haber2"
      
                     ArepTotalAuxiliar.Logo.Picture = LoadPicture(RutaLogo)
                     ArepTotalAuxiliar.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
                     ArepTotalAuxiliar.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
                     ArepTotalAuxiliar.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
                     ArepTotalAuxiliar.DataControl1.Source = "SELECT  Reportes.Descripcion, Reportes.Debe1 + Reportes.Haber1 AS SaldoInicial, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3 - Reportes.Haber3 AS SaldoFinal, Reportes.Orden , Cuentas.CodCuentas, Cuentas.DescripcionCuentas FROM  Reportes INNER JOIN  Cuentas ON Reportes.CodCuentas = Cuentas.CodCuentas ORDER BY Reportes.Orden"
-                    ArepTotalAuxiliar.Show 1
-'                    fPreview.arv.ReportSource = ArepTotalAuxiliar
-'                    fPreview.Show 1
+'                    ArepTotalAuxiliar.Show 1
+                    fPreview.arv.ReportSource = ArepTotalAuxiliar
+                    fPreview.Show 1
 
      
      ElseIf Me.Option5.Value = True Then
+     
+     
+            ArepAuxiliarGrupo.LblFecha = Format(Now, "dd/mm/yyyy")
+            NumFecha1 = Me.DTFecha1.Value
+            NumFecha2 = Me.DTFecha2.Value
+            
+            Fechas1 = Format(Me.DTFecha1.Value, "yyyy-mm-dd")
+            Fechas2 = Format(Me.DTFecha2.Value, "yyyy-mm-dd")
+            
+            
+           ArepAuxiliarGrupo.LblRangoFecha = "Desde " & Me.DTFecha1.Value & " Hasta " & Me.DTFecha2.Value
+     
+        '///////////////////////ESTA OPCION ES TOTAL AUXILIAR POR GRUPO //////////////////////////////
 
             Me.DtaReportes.Refresh
             
-            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.LblProgreso.AutoSize = True
-            Me.osProgress1.Value = 0
-            Me.osProgress1.Min = 0
-            Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
-            Do While Not Me.DtaReportes.Recordset.EOF
-             Me.osProgress1.Value = Me.osProgress1.Value + 1
-             Me.DtaReportes.Recordset.Delete
-             Me.DtaReportes.Recordset.MoveNext
-            Loop
-            CreaEstructura ("Balanza")
-            SaldoReportes ("Balanza")
-            EliminaRegistroCero ("Balanza")
+            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.lblProgreso.AutoSize = True
+            Rs.Open "DELETE FROM Reportes", Conexion
+            
+'            Me.osProgress1.Value = 0
+'            Me.osProgress1.Min = 0
+'            Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
+'            Do While Not Me.DtaReportes.Recordset.EOF
+'             Me.osProgress1.Value = Me.osProgress1.Value + 1
+'             Me.DtaReportes.Recordset.Delete
+'             Me.DtaReportes.Recordset.MoveNext
+'            Loop
 
-                    Me.DtaReportes.Refresh
+'
+'            CreaEstructura ("Balanza")
+'            SaldoReportes ("Balanza")
+'            EliminaRegistroCero ("Balanza")
+            SaldoReportes ("BalanzaCodigo")
+
+            Me.DtaReportes.Refresh
+                    
+'            ConsultaTotalesMovimientos = "SELECT Cuentas.CodCuentas, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio / Tasas.MontoCordobas, 5)) AS MDebito, SUM(ROUND(Transacciones.TCambio * Transacciones.Credito / Tasas.MontoCordobas, 5))  AS MCredito, SUM(ROUND(Transacciones.Debito * Transacciones.TCambio / Tasas.MontoCordobas, 5) - ROUND(Transacciones.TCambio * Transacciones.Credito / Tasas.MontoCordobas, 5)) AS Total, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Cuentas.TipoCuenta) AS TipoCuenta, MAX(Cuentas.TipoMoneda) AS TipoMoneda FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Tasas ON Transacciones.FechaTransaccion = Tasas.FechaTasas  WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(Me.DTFecha1.Value, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) GROUP BY Cuentas.CodCuentas"
+            Set Parche = New ADODB.Connection
+            Parche.ConnectionString = Conexion
+            Parche.Open
+
+            Parche.Execute "update reportes set debe2=0,haber2=0"
+            Parche.Execute "update reportes " & _
+                "set debe2=mdebito,haber2=mcredito " & _
+                "from (" & ConsultaTotalesMovimientos & ") as Temporal " & _
+                "where temporal.codcuentas=reportes.codcuentas"
+        
+            Parche.Execute "Update Reportes set debe3=debe1+debe2,haber3=haber1+haber2"
                     'aqui voy a poner el parche para que salga los movimientos de debito y credito en periodo
                 '    Dim Parche As ADODB.Connection
      
-                    ArepTotalAuxiliar.LblFecha = Format(Now, "dd/mm/yyyy")
-                    ArepTotalAuxiliar.LblRangoFecha = "Desde " & Me.DTFecha1.Value & " Hasta " & Me.DTFecha2.Value
-                    ArepTotalAuxiliar.DataControl1.ConnectionString = ConexionReporte
-                    ArepTotalAuxiliar.Logo.Picture = LoadPicture(RutaLogo)
-                    ArepTotalAuxiliar.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
-                    ArepTotalAuxiliar.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
-                    ArepTotalAuxiliar.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
-                    ArepTotalAuxiliar.Field17.Visible = False
-                    ArepTotalAuxiliar.Field22.Visible = False
-                    ArepTotalAuxiliar.Field23.Visible = True
-                    ArepTotalAuxiliar.DataControl1.Source = "SELECT Descripcion, Debe1 + Haber1 AS SaldoInicial, Debe2, Haber2, Debe3 - Haber3 AS SaldoFinal, Orden,CodCuentas,KeyGrupo From Reportes ORDER BY Orden"
-                    ArepTotalAuxiliar.Show 1
+                    ArepAuxiliarGrupo.LblFecha = Format(Now, "dd/mm/yyyy")
+                    ArepAuxiliarGrupo.LblRangoFecha = "Desde " & Me.DTFecha1.Value & " Hasta " & Me.DTFecha2.Value
+                    ArepAuxiliarGrupo.DataControlGrupo.ConnectionString = Conexion
+                    ArepAuxiliarGrupo.Logo.Picture = LoadPicture(RutaLogo)
+                    ArepAuxiliarGrupo.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
+                    ArepAuxiliarGrupo.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
+                    ArepAuxiliarGrupo.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
+'                    ArepAuxiliarGrupo.LblContador.Caption = Me.DtaDatosEmpresa.Recordset("Elaborado_Por")
+'                    ArepAuxiliarGrupo.LblGerenteFinanciero.Caption = Me.DtaDatosEmpresa.Recordset("Revisado_Por")
+'                    ArepAuxiliarGrupo.LblGerenteGeneral.Caption = Me.DtaDatosEmpresa.Recordset("Autorizado_Por")
+'                    ArepTotalAuxiliarGrupo.Field17.Visible = False
+'                    ArepTotalAuxiliarGrupo.Field22.Visible = False
+'                    ArepTotalAuxiliarGrupo.Field23.Visible = True
+                    If Me.TxtDesde.Text = "" And Me.TxtHasta.Text = "" Then
+'                      ArepAuxiliarGrupo.DataControlGrupo.Source = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3 - Reportes.Haber3 AS Debe3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.KeyGrupoCuenta, Reportes.Nivel, Reportes.Orden, Reportes.CodCuentas, Reportes.Ubicacion, Reportes.CodDepartamento, Reportes.Debe4, Reportes.Haber4, Reportes.Debe5, Reportes.Haber5, Reportes.Debe6, Reportes.Haber6, Grupos.DescripcionGrupo, Reportes.Debe1 + Reportes.Haber1 + Reportes.Debe2 + Reportes.Haber2 + Reportes.Debe3 AS Saldo, Grupos.KeyGrupoSuperior, Grupos_1.DescripcionGrupo AS DescripcionGrupoSuperior FROM Reportes INNER JOIN Cuentas ON Reportes.CodCuentas = Cuentas.CodCuentas INNER JOIN Grupos ON Cuentas.KeyGrupo = Grupos.KeyGrupo INNER JOIN Grupos AS Grupos_1 ON Grupos.KeyGrupoSuperior = Grupos_1.KeyGrupo " & _
+'                                                                  "WHERE (Reportes.CodCuentas Is Not Null) And (Reportes.Debe1 + Reportes.Haber1 + Reportes.Debe2 + Reportes.Haber2 + Reportes.Debe3 <> 0) ORDER BY Reportes.CodCuentas, Reportes.Orden"
+                    
+                       ArepAuxiliarGrupo.DataControlGrupo.Source = "SELECT Reportes.Descripcion, CASE WHEN Cuentas.TipoCuenta = 'Activo Fijo' OR Cuentas.TipoCuenta = 'Otros Activos' OR Cuentas.TipoCuenta = 'Caja' OR Cuentas.TipoCuenta = 'Cuentas x Cobrar' OR  Cuentas.TipoCuenta = 'Bancos' OR Cuentas.TipoCuenta = 'Costos' OR Cuentas.TipoCuenta = 'Gastos' OR  Cuentas.TipoCuenta = 'Papeleria - Utiles' OR Cuentas.TipoCuenta = 'Inventario' THEN Reportes.Debe1 - Reportes.Haber1 ELSE Reportes.Haber1 - Reportes.Debe1 END AS SaldoInicial, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, CASE WHEN Cuentas.TipoCuenta = 'Activo Fijo' OR  Cuentas.TipoCuenta = 'Otros Activos' OR Cuentas.TipoCuenta = 'Caja' OR  Cuentas.TipoCuenta = 'Cuentas x Cobrar' OR  Cuentas.TipoCuenta = 'Bancos' OR  Cuentas.TipoCuenta = 'Costos' OR Cuentas.TipoCuenta = 'Gastos' OR  Cuentas.TipoCuenta = 'Papeleria - Utiles' OR " & _
+                                                                   "Cuentas.TipoCuenta = 'Inventario' THEN Reportes.Debe3 - Reportes.Haber3 ELSE Reportes.Haber3 - Reportes.Debe3 END AS SaldoFinal, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.KeyGrupoCuenta, Reportes.Nivel, Reportes.Orden, Reportes.CodCuentas, Reportes.Ubicacion, Reportes.CodDepartamento, Reportes.Debe4, Reportes.Haber4, Reportes.Debe5, Reportes.Haber5, Reportes.Debe6, Reportes.Haber6, Grupos.DescripcionGrupo, Reportes.Debe1 + Reportes.Haber1 + Reportes.Debe2 + Reportes.Haber2 + Reportes.Debe3 AS Saldo, Grupos.KeyGrupoSuperior AS Expr1, Grupos_1.DescripcionGrupo AS DescripcionGrupoSuperior, Cuentas.TipoCuenta FROM  Reportes INNER JOIN Cuentas ON Reportes.CodCuentas = Cuentas.CodCuentas INNER JOIN Grupos ON Cuentas.KeyGrupo = Grupos.KeyGrupo INNER JOIN Grupos AS Grupos_1 ON Grupos.KeyGrupoSuperior = Grupos_1.KeyGrupo " & _
+                                                                   "Where(Reportes.CodCuentas Is Not Null) And (Reportes.Debe1 + Reportes.Haber1 + Reportes.Debe2 + Reportes.Haber2 + Reportes.Debe3 <> 0) ORDER BY Reportes.CodCuentas, Reportes.Orden"
+                    Else
+                       ArepAuxiliarGrupo.DataControlGrupo.Source = "SELECT Reportes.Descripcion, CASE WHEN Cuentas.TipoCuenta = 'Activo Fijo' OR Cuentas.TipoCuenta = 'Otros Activos' OR Cuentas.TipoCuenta = 'Caja' OR Cuentas.TipoCuenta = 'Cuentas x Cobrar' OR  Cuentas.TipoCuenta = 'Bancos' OR Cuentas.TipoCuenta = 'Costos' OR Cuentas.TipoCuenta = 'Gastos' OR  Cuentas.TipoCuenta = 'Papeleria - Utiles' OR Cuentas.TipoCuenta = 'Inventario' THEN Reportes.Debe1 - Reportes.Haber1 ELSE Reportes.Haber1 - Reportes.Debe1 END AS SaldoInicial, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, CASE WHEN Cuentas.TipoCuenta = 'Activo Fijo' OR  Cuentas.TipoCuenta = 'Otros Activos' OR Cuentas.TipoCuenta = 'Caja' OR  Cuentas.TipoCuenta = 'Cuentas x Cobrar' OR  Cuentas.TipoCuenta = 'Bancos' OR  Cuentas.TipoCuenta = 'Costos' OR Cuentas.TipoCuenta = 'Gastos' OR  Cuentas.TipoCuenta = 'Papeleria - Utiles' OR " & _
+                                                                   "Cuentas.TipoCuenta = 'Inventario' THEN Reportes.Debe3 - Reportes.Haber3 ELSE Reportes.Haber3 - Reportes.Debe3 END AS SaldoFinal, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.KeyGrupoCuenta, Reportes.Nivel, Reportes.Orden, Reportes.CodCuentas, Reportes.Ubicacion, Reportes.CodDepartamento, Reportes.Debe4, Reportes.Haber4, Reportes.Debe5, Reportes.Haber5, Reportes.Debe6, Reportes.Haber6, Grupos.DescripcionGrupo, Reportes.Debe1 + Reportes.Haber1 + Reportes.Debe2 + Reportes.Haber2 + Reportes.Debe3 AS Saldo, Grupos.KeyGrupoSuperior AS Expr1, Grupos_1.DescripcionGrupo AS DescripcionGrupoSuperior, Cuentas.TipoCuenta FROM  Reportes INNER JOIN Cuentas ON Reportes.CodCuentas = Cuentas.CodCuentas INNER JOIN Grupos ON Cuentas.KeyGrupo = Grupos.KeyGrupo INNER JOIN Grupos AS Grupos_1 ON Grupos.KeyGrupoSuperior = Grupos_1.KeyGrupo " & _
+                                                                   "Where(Reportes.CodCuentas Is Not Null) And (Reportes.Debe1 + Reportes.Haber1 + Reportes.Debe2 + Reportes.Haber2 + Reportes.Debe3 <> 0) AND (Grupos.KeyGrupo BETWEEN '" & Me.TxtKeyGrupoDesde.Text & "' AND '" & Me.TxtKeyGrupoHasta.Text & "') ORDER BY Reportes.CodCuentas, Reportes.Orden"
+'                      ArepAuxiliarGrupo.DataControlGrupo.Source = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3 - Reportes.Haber3 AS Debe3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.KeyGrupoCuenta, Reportes.Nivel, Reportes.Orden, Reportes.CodCuentas, Reportes.Ubicacion, Reportes.CodDepartamento, Reportes.Debe4, Reportes.Haber4, Reportes.Debe5, Reportes.Haber5, Reportes.Debe6, Reportes.Haber6, Grupos.DescripcionGrupo, Reportes.Debe1 + Reportes.Haber1 + Reportes.Debe2 + Reportes.Haber2 + Reportes.Debe3 AS Saldo, Grupos.KeyGrupoSuperior, Grupos_1.DescripcionGrupo AS DescripcionGrupoSuperior FROM Reportes INNER JOIN Cuentas ON Reportes.CodCuentas = Cuentas.CodCuentas INNER JOIN Grupos ON Cuentas.KeyGrupo = Grupos.KeyGrupo INNER JOIN Grupos AS Grupos_1 ON Grupos.KeyGrupoSuperior = Grupos_1.KeyGrupo " & _
+                                                                  "WHERE (Reportes.CodCuentas Is Not Null) And (Reportes.Debe1 + Reportes.Haber1 + Reportes.Debe2 + Reportes.Haber2 + Reportes.Debe3 <> 0) AND (Grupos.DescripcionGrupo BETWEEN '" & Me.TxtDesde.Text & "' AND '" & Me.TxtHasta.Text & "') ORDER BY Reportes.CodCuentas, Reportes.Orden"
+'                      ArepAuxiliarGrupo.DataControlGrupo.Source = "SELECT Reportes.Descripcion, Reportes.Debe1, Reportes.Haber1, Reportes.Debe2, Reportes.Haber2, Reportes.Debe3 - Reportes.Haber3 As Debe3, Reportes.KeyGrupo, Reportes.KeyGrupoSuperior, Reportes.KeyGrupoCuenta, Reportes.Nivel, Reportes.Orden, Reportes.CodCuentas, Reportes.Ubicacion, Reportes.CodDepartamento, Reportes.Debe4, Reportes.Haber4, Reportes.Debe5, Reportes.Haber5, Reportes.Debe6, Reportes.Haber6, Grupos.DescripcionGrupo, Reportes.Debe1 + Reportes.Haber1 + Reportes.Debe2 + Reportes.Haber2 + Reportes.Debe3 AS Saldo FROM Reportes INNER JOIN Cuentas ON Reportes.CodCuentas = Cuentas.CodCuentas INNER JOIN Grupos ON Cuentas.KeyGrupo = Grupos.KeyGrupo  WHERE (Reportes.CodCuentas IS NOT NULL) AND (Reportes.Debe1 + Reportes.Haber1 + Reportes.Debe2 + Reportes.Haber2 + Reportes.Debe3 <> 0) AND (Grupos.DescripcionGrupo BETWEEN '" & Me.TxtDesde.Text & "' AND '" & Me.TxtHasta.Text & "') ORDER BY Reportes.CodCuentas, Reportes.Orden"
+                    End If
+                    
+'                    ArepAuxiliarGrupo.Show 1
+                    
+                    ArepAuxiliarGrupo.LblFecha = Format(Now, "dd/mm/yyyy")
+                    ArepAuxiliarGrupo.LblRangoFecha = "Desde " & Me.DTFecha1.Value & " Hasta " & Me.DTFecha2.Value
+                    ArepAuxiliarGrupo.DataControlGrupo.ConnectionString = Conexion
+                    ArepAuxiliarGrupo.Logo.Picture = LoadPicture(RutaLogo)
+                    ArepAuxiliarGrupo.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
+                    ArepAuxiliarGrupo.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
+                    ArepAuxiliarGrupo.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
+                    
+
+
+                    fPreview.arv.ReportSource = ArepAuxiliarGrupo
+                    fPreview.Show 1
+                    
+                    
 '                    fPreview.arv.ReportSource = ArepTotalAuxiliarG
 '                    fPreview.Show 1
 
@@ -6441,10 +7188,10 @@ Case "AUXILIAR x GRUPO"
  Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE (((Transacciones.FechaTransaccion) Between '" & Format(Me.DTFecha1, "yyyymmdd") & "' And '" & Format(Me.DTFecha2, "yyyymmdd") & "') AND ((Transacciones.NumeroMovimiento)=" & NumeroTransaccion & ")) ORDER BY Transacciones.NTransaccion"
 ' ArepCheque.Show 1
 
-            Set rpt = New ArepCheque
-            rpt.DtaCheque.ConnectionString = ConexionReporte
-            rpt.DtaCheque.Source = Sql
-            fPreview.RunReport rpt
+            Set Rpt = New ArepCheque
+            Rpt.DtaCheque.ConnectionString = ConexionReporte
+            Rpt.DtaCheque.Source = Sql
+            fPreview.RunReport Rpt
             fPreview.Show 1
             
   
@@ -6536,10 +7283,10 @@ Case "AUXILIAR x GRUPO"
 '     ArepPresupuestoGeneral.Label13.Caption = "PRESUPUESTO PARA EL AÑO " & Year(Fecha1)
 '    ArepPresupuesto.DataControl1.Source = SqlString
  
-            Set rpt = New ArepPresupuestoGeneral
-            rpt.DataControl1.ConnectionString = ConexionReporte
-            rpt.DataControl1.Source = SqlString
-            fPreview.RunReport rpt
+            Set Rpt = New ArepPresupuestoGeneral
+            Rpt.DataControl1.ConnectionString = ConexionReporte
+            Rpt.DataControl1.Source = SqlString
+            fPreview.RunReport Rpt
             fPreview.Show 1
  
  
@@ -6611,7 +7358,7 @@ Case "AUXILIAR x GRUPO"
          MontoPresupuesto = Me.AdoConsultas.Recordset("Mes")
          KeyGrupo = Me.AdoConsultas.Recordset("KeyGrupo")
          
-         Me.LblProgreso.Caption = DescripcionPresupuesto
+         Me.lblProgreso.Caption = DescripcionPresupuesto
          DoEvents
          
          If KeyGrupo = "A0103" Then
@@ -6619,8 +7366,8 @@ Case "AUXILIAR x GRUPO"
          End If
          
          '///////////////////////////CONSULTO EL MONTO REAL PARA ESTE GRUPO //////////////////////////////
-         SqlString = "SELECT  SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * ISNULL(Tasas.MontoCordobas, 1) END) AS Debito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * ISNULL(Tasas.MontoCordobas, 1) END) AS Credito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito ELSE Transacciones.Debito / ISNULL(Tasas.MontoCordobas, 0) END) AS MDebito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito ELSE Transacciones.Credito / ISNULL(Tasas.MontoCordobas, 0) END) AS Credito, Transacciones.KeyPresupuesto,  Cuentas.TipoCuenta FROM  Transacciones INNER JOIN Periodos ON Transacciones.NPeriodo = Periodos.NPeriodo INNER JOIN  IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN " & _
-                     "Tasas ON IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas WHERE (Periodos.NumeroTabla = " & NumeroTabla & ") And (Month(Periodos.FechaPeriodo) BETWEEN  " & NumeroPeriodo1 & " AND " & NumeroPeriodo2 & " ) GROUP BY Transacciones.KeyPresupuesto, Cuentas.TipoCuenta  HAVING  (Transacciones.KeyPresupuesto = '" & KeyGrupo & "')"
+         SqlString = "SELECT  SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * ISNULL(Tasas.MontoCordobas, 1) END) AS Debito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * ISNULL(Tasas.MontoCordobas, 1) END) AS Credito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito ELSE Transacciones.Debito / ISNULL(Tasas.MontoCordobas, 0) END) AS MDebito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito ELSE Transacciones.Credito / ISNULL(Tasas.MontoCordobas, 0) END) AS MCredito, Transacciones.KeyPresupuesto,  Cuentas.TipoCuenta FROM  Transacciones INNER JOIN Periodos ON Transacciones.NPeriodo = Periodos.NPeriodo INNER JOIN  IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN " & _
+                     "Tasas ON IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas WHERE (Periodos.NumeroTabla = " & NumeroTabla & ") AND (Transacciones.FacturaNo <> '-') AND (Month(Periodos.FechaPeriodo) BETWEEN  " & NumeroPeriodo1 & " AND " & NumeroPeriodo2 & " ) GROUP BY Transacciones.KeyPresupuesto, Cuentas.TipoCuenta  HAVING  (Transacciones.KeyPresupuesto = '" & KeyGrupo & "') "
         
          MDIPrimero.AdoConsulta.RecordSource = SqlString
          MDIPrimero.AdoConsulta.Refresh
@@ -6711,150 +7458,25 @@ Case "AUXILIAR x GRUPO"
 '     ArepPresupuestoArea.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
 '     ArepPresupuestoArea.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
 '     ArepPresupuestoArea.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
-            Set rpt = New ArepPresupuestoArea
-            rpt.DataControl1.ConnectionString = ConexionReporte
-            rpt.DataControl1.Source = Sql
-            rpt.FechaIni = FechaIni
-            rpt.FechaFin = FechaFin
-            fPreview.RunReport rpt
+            Set Rpt = New ArepPresupuestoArea
+            Rpt.DataControl1.ConnectionString = ConexionReporte
+            Rpt.DataControl1.Source = Sql
+            Rpt.FechaIni = FechaIni
+            Rpt.FechaFin = FechaFin
+            fPreview.RunReport Rpt
             fPreview.Show 1
-     
-     
-  Case "AUXILIAR DE CUENTAS"
-    
-    NumFecha1 = Me.DTFecha1.Value
-    NumFecha2 = Me.DTFecha2.Value
-    
-    
-'         If FrmReportes.CmbMoneda.Text = "Córdobas" Then
-'            Ajuste = "Dólares"
-'         ElseIf FrmReportes.CmbMoneda.Text = "Dólares" Then
-'            Ajuste = "Córdobas"
+            
+            
+
+Case "AUXILIAR DE CUENTAS"
+
+    GenerarAuxiliarDeCuentas True, False
+'    ActivarBeneficiarioReporte = False
+''    GenerarAuxiliarDeCuentas
 '
-'         End If
+'    GenerarAuxiliarDeCuentas True     ' detallado
+''    GenerarAuxiliarDeCuentas False    ' totalizado
 
-      
-      If Me.Option4.Value = True Then
-          ArepAuxiliar.LblRangoFecha = "Desde " & Me.DTFecha1.Value & " Hasta " & Me.DTFecha2.Value
-          ArepAuxiliar.LblFecha = Format(Now, "dd/mm/yyyy")
-          ArepAuxiliar.DataControl1.ConnectionString = ConexionReporte
-      
-      
-            If Me.DBCodigo.Text = "" Then
-                 Me.DtaConsulta.RecordSource = "SELECT Cuentas.* From Cuentas ORDER BY CodCuentas"
-                 Me.DtaConsulta.Refresh
-                 If Not Me.DtaConsulta.Recordset.EOF Then
-                   Me.DtaConsulta.Recordset.MoveFirst
-                   CodigoCuentaDesde = Me.DtaConsulta.Recordset("CodCuentas")
-                End If
-            Else
-              CodigoCuentaDesde = Me.DBCodigo.Text
-            End If
-            
-            If Me.DBCodigoHasta.Text = "" Then
-                 Me.DtaConsulta.RecordSource = "SELECT Cuentas.* From Cuentas ORDER BY CodCuentas"
-                 Me.DtaConsulta.Refresh
-                 If Not Me.DtaConsulta.Recordset.EOF Then
-                   Me.DtaConsulta.Recordset.MoveLast
-                   CodigoCuentaHasta = Me.DtaConsulta.Recordset("CodCuentas")
-                End If
-            Else
-               CodigoCuentaHasta = Me.DBCodigoHasta.Text
-            End If
-            
-            
-            CodDesde = CodigoCuentaDesde
-            CodHasta = CodigoCuentaHasta
-            
-             If Me.CmbMoneda.Text = "Córdobas" Then
-             
-               Moneda = "Cordobas"
-               Sql = "SELECT Transacciones.CodCuentas, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Transacciones.NPeriodo) AS NPeriodo, MAX(Transacciones.NTransaccion) AS NTransaccion, MAX(Transacciones.NumeroMovimiento) AS NumeroMovimiento, MAX(Transacciones.VoucherNo) AS VoucherNo, MAX(Transacciones.DescripcionMovimiento) AS DescripcionMovimiento, MAX(Transacciones.Clave) AS Clave, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Debito ELSE Transacciones.Debito * Tasas.MontoCordobas END) AS Debito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Córdobas' THEN Transacciones.Credito ELSE Transacciones.Credito * Tasas.MontoCordobas END) AS Credito, MAX(Transacciones.FacturaNo) AS FacturaNo, MAX(Transacciones.ChequeNo) AS ChequeNo, MAX(Transacciones.Fuente) AS Fuente, MAX(Cuentas.TipoCuenta) AS TipoCuenta, SUM(Transacciones.Debito + Transacciones.Credito) AS Saldo FROM  Cuentas INNER JOIN " & _
-                     "Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN Tasas ON IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas  " & _
-                     "WHERE (Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) AND (IndiceTransaccion.Ajuste <> 'Dólares') GROUP BY Transacciones.CodCuentas HAVING (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (SUM(Transacciones.Debito + Transacciones.Credito) <> 0) ORDER BY Transacciones.CodCuentas"
-             Else
-               Moneda = "Dolares"
-               Sql = "SELECT Transacciones.CodCuentas, MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Transacciones.NPeriodo) AS NPeriodo, MAX(Transacciones.NTransaccion) AS NTransaccion, MAX(Transacciones.NumeroMovimiento) AS NumeroMovimiento, MAX(Transacciones.VoucherNo) AS VoucherNo, MAX(Transacciones.DescripcionMovimiento) AS DescripcionMovimiento, MAX(Transacciones.Clave) AS Clave, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Debito ELSE Transacciones.Debito / Tasas.MontoCordobas END) AS Debito, SUM(CASE WHEN IndiceTransaccion.TipoMoneda = 'Dólares' THEN Transacciones.Credito ELSE Transacciones.Credito / Tasas.MontoCordobas END) AS Credito, MAX(Transacciones.FacturaNo) AS FacturaNo, MAX(Transacciones.ChequeNo) AS ChequeNo, MAX(Transacciones.Fuente) AS Fuente, MAX(Cuentas.TipoCuenta) AS TipoCuenta, SUM(Transacciones.Debito + Transacciones.Credito) AS Saldo FROM  Cuentas INNER JOIN " & _
-                     "Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NPeriodo = IndiceTransaccion.Nperiodo AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento INNER JOIN Tasas ON IndiceTransaccion.FechaTransaccion = Tasas.FechaTasas  " & _
-                     "WHERE (Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) AND (IndiceTransaccion.Ajuste <> 'Córdobas') GROUP BY Transacciones.CodCuentas HAVING (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (SUM(Transacciones.Debito + Transacciones.Credito) <> 0) ORDER BY Transacciones.CodCuentas"
-            
-             End If
-            
-'            SQL = "SELECT Transacciones.CodCuentas,  MAX(Transacciones.FechaTransaccion) AS FechaTransaccion, MAX(Cuentas.DescripcionCuentas) AS DescripcionCuentas, MAX(Transacciones.NPeriodo) AS NPeriodo,MAX(Transacciones.NTransaccion) AS NTransaccion, MAX(Transacciones.NumeroMovimiento) AS NumeroMovimiento, MAX(Transacciones.VoucherNo) AS VoucherNo, MAX(Transacciones.DescripcionMovimiento) AS DescripcionMovimiento, MAX(Transacciones.Clave) AS Clave, SUM(Transacciones.Debito) AS Debito, SUM(Transacciones.Credito) AS Credito, MAX(Transacciones.FacturaNo) AS FacturaNo, MAX(Transacciones.ChequeNo) AS ChequeNo, MAX(Transacciones.Fuente) AS Fuente, MAX(Cuentas.TipoCuenta) AS TipoCuenta, SUM(Transacciones.Debito + Transacciones.Credito) As Saldo FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE  (Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) GROUP BY Transacciones.CodCuentas " & _
-'                                               "HAVING (Transacciones.CodCuentas BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') AND (SUM(Transacciones.Debito + Transacciones.Credito) <> 0) ORDER BY Transacciones.CodCuentas"
-
-               ArepAuxiliar.DataControl1.ConnectionString = ConexionReporte
-            
-'             ArepAuxiliar.LblCodigo.Caption = "Mis Code:" & Me.DBCodigo.Text
-'             ArepAuxiliar.LblRango.Caption = "Filtrado Desde: " & CodigoCuentaDesde & " Hasta " & CodigoCuentaHasta
-'             If Dir(RutaLogo) <> "" Then
-'                   ArepAuxiliar.Logo.Picture = LoadPicture(RutaLogo)
-'             End If
-'             ArepAuxiliar.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
-'             ArepAuxiliar.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
-'             ArepAuxiliar.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
-'             ArepAuxiliar.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
-             
-            Set rpt = New ArepAuxiliar
-            rpt.DataControl1.ConnectionString = ConexionReporte
-            rpt.DataControl1.Source = Sql
-            fPreview.RunReport rpt
-            fPreview.Show 1
-'             ArepAuxiliar.Show 1
-'            fPreview.arv.ReportSource = ArepAuxiliar
-'            fPreview.Show 1
-     
-       ElseIf Me.Option5.Value = True Then
-       
-          ArepAuxiliarMayor.LblRangoFecha = "Desde " & Me.DTFecha1.Value & " Hasta " & Me.DTFecha2.Value
-          ArepAuxiliarMayor.LblFecha = Format(Now, "dd/mm/yyyy")
-          ArepAuxiliarMayor.DataControl1.ConnectionString = ConexionReporte
-       
-            If Me.TxtDesde.Text = "" Then
-               Me.DtaConsulta.RecordSource = "SELECT * From Grupos ORDER BY KeyGrupo"
-               Me.DtaConsulta.Refresh
-               If Not Me.DtaConsulta.Recordset.EOF Then
-                 Me.DtaConsulta.Recordset.MoveFirst
-                 CodigoCuentaDesde = Me.DtaConsulta.Recordset("KeyGrupo")
-               End If
-            Else
-                CodigoCuentaDesde = Me.TxtKeyGrupoDesde.Text
-            End If
-               
-            If Me.TxtHasta.Text = "" Then
-               Me.DtaConsulta.RecordSource = "SELECT * From Grupos ORDER BY KeyGrupo"
-               Me.DtaConsulta.Refresh
-               If Not Me.DtaConsulta.Recordset.EOF Then
-                 Me.DtaConsulta.Recordset.MoveLast
-                 CodigoCuentaHasta = Me.DtaConsulta.Recordset("KeyGrupo")
-               End If
-            Else
-               CodigoCuentaHasta = Me.TxtKeyGrupoHasta.Text
-            End If
-       
-             Sql = "SELECT  Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.TCambio, Transacciones.FacturaNo,Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTransaccion, Cuentas.TipoCuenta, Transacciones.TCambio AS Expr1, Transacciones.TCambio * Transacciones.Debito AS Debito, Transacciones.TCambio * Transacciones.Credito AS Credito, Grupos.KeyGrupo, Grupos.DescripcionGrupo " & _
-                    "FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas INNER JOIN Grupos ON Cuentas.KeyGrupo = Grupos.KeyGrupo " & _
-                    "WHERE  (Transacciones.FechaTransaccion BETWEEN '" & Format(Me.DTFecha1, "yyyymmdd") & "' AND '" & Format(Me.DTFecha2, "yyyymmdd") & "') AND (Grupos.KeyGrupo BETWEEN '" & CodigoCuentaDesde & "' AND '" & CodigoCuentaHasta & "') " & _
-                    "ORDER BY Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NTransaccion "
-       
-             ArepAuxiliarMayor.DataControl1.Source = Sql
-             ArepAuxiliarMayor.LblCodigo.Caption = "Mis Code:" & Me.DBCodigo.Text
-             ArepAuxiliarMayor.LblRango.Caption = "Filtrado Desde: " & CodigoCuentaDesde & " Hasta " & CodigoCuentaHasta
-             ArepAuxiliarMayor.Logo.Picture = LoadPicture(RutaLogo)
-             ArepAuxiliarMayor.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
-             ArepAuxiliarMayor.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
-             ArepAuxiliarMayor.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
-             ArepAuxiliarMayor.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
-'             ArepAuxiliarMayor.Show 1
-           
-            Set rpt = New ArepAuxiliar
-            rpt.DataControl1.ConnectionString = ConexionReporte
-            rpt.DataControl1.Source = Sql
-            fPreview.RunReport rpt
-            fPreview.Show 1
-       
-       End If
-       
 
     
 
@@ -6866,17 +7488,11 @@ Case "AUXILIAR x GRUPO"
     ArepTransacciones.DataControl1.ConnectionString = ConexionReporte
     Sql = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FacturaNo , Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTransaccion FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas  " & _
           "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(Me.DTFecha1.Value, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) ORDER BY Transacciones.NumeroMovimiento, Transacciones.NTransaccion"
-'   SQL = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTransaccion FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between " & NumFecha1 & "  And " & NumFecha2 & " )) ORDER BY Transacciones.NumeroMovimiento, Transacciones.NTransaccion"
-'    ArepTransacciones.Logo.Picture = LoadPicture(RutaLogo)
-'    ArepTransacciones.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
-'    ArepTransacciones.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
-'    ArepTransacciones.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
-'    ArepTransacciones.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
 
-     Set rpt = New ArepTransacciones
-     rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = Sql
-     fPreview.RunReport rpt
+     Set Rpt = New ArepTransacciones
+     Rpt.DataControl1.ConnectionString = ConexionReporte
+     Rpt.DataControl1.Source = Sql
+     fPreview.RunReport Rpt
 
 
      fPreview.Show 1
@@ -6945,9 +7561,22 @@ Case "AUXILIAR x GRUPO"
            fPreview.arv.ReportSource = ArepEncargado
            fPreview.Show 1
 
+      Case "LISTA ACTIVO FIJO"
+      ArepListadoAF.DataControl1.ConnectionString = ConexionReporte
+      ArepListadoAF.DataControl1.Source = "SELECT CodCuenta, DescripcionAF, marca, modelo, fcompragen, costogen, ivagen, ValorRescate, DepreciacionAcumulada From CatalogoActivoFijo Order by CodCuenta"
+      ArepListadoAF.Logo.Picture = LoadPicture(RutaLogo)
+      ArepListadoAF.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
+      ArepListadoAF.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
+      ArepListadoAF.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
+      ArepListadoAF.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
+'      ArepActivoFijo.Show 1
+           fPreview.arv.ReportSource = ArepListadoAF
+           fPreview.Show 1
+           
    Case "TARJETA ACTIVO FIJO"
       ArepActivoFijo.DataControl1.ConnectionString = ConexionReporte
-      ArepActivoFijo.DataControl1.Source = "SELECT ActivoFijo.CodCuenta, ActivoFijo.Localizacion, ActivoFijo.NumeroMarbete, ActivoFijo.FechaCompra, ActivoFijo.FechaCompra, ActivoFijo.ValorOriginal, ActivoFijo.FechaUltimaDepre, ActivoFijo.ValorEstimadoMeses, ActivoFijo.ValorRescate, ActivoFijo.FechaBaja, ActivoFijo.DepreciacionAcumulada, ActivoFijo.DescripcionActivo, ActivoFijo.NumeroSerie, ActivoFijo.Marca, Encargado.NombreEncargado FROM Encargado INNER JOIN ActivoFijo ON Encargado.CodEncargado = ActivoFijo.CodEncargado"
+      'ArepActivoFijo.DataControl1.Source = "SELECT ActivoFijo.CodCuenta, ActivoFijo.Localizacion, ActivoFijo.NumeroMarbete, ActivoFijo.FechaCompra, ActivoFijo.FechaCompra, ActivoFijo.ValorOriginal, ActivoFijo.FechaUltimaDepre, ActivoFijo.ValorEstimadoMeses, ActivoFijo.ValorRescate, ActivoFijo.FechaBaja, ActivoFijo.DepreciacionAcumulada, ActivoFijo.DescripcionActivo, ActivoFijo.NumeroSerie, ActivoFijo.Marca, Encargado.NombreEncargado FROM Encargado INNER JOIN ActivoFijo ON Encargado.CodEncargado = ActivoFijo.CodEncargado"
+      ArepActivoFijo.DataControl1.Source = "SELECT CatalogoActivoFijo.CodCuenta, CatalogoActivoFijo.DescripcionAF, CatalogoActivoFijo.marca, CatalogoActivoFijo.modelo, CatalogoActivoFijo.fcompragen, CatalogoActivoFijo.costogen, CatalogoActivoFijo.ivagen, CatalogoActivoFijo.ValorRescate, CatalogoActivoFijo.DepreciacionAcumulada, CatalogoActivoFijo.Serie, CatalogoActivoFijo.NumeroMarbete, CatalogoActivoFijo.ValorEstimadoMeses, CatalogoActivoFijo.FechaUltimaDepre, CatalogoActivoFijo.Localizacion , CatalogoActivoFijo.FechaBaja, Encargado.NombreEncargado FROM  CatalogoActivoFijo INNER JOIN Encargado ON CatalogoActivoFijo.CodEncargado = Encargado.CodEncargado ORDER BY CatalogoActivoFijo.CodCuenta"
       ArepActivoFijo.Logo.Picture = LoadPicture(RutaLogo)
       ArepActivoFijo.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
       ArepActivoFijo.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
@@ -7122,10 +7751,10 @@ Case "AUXILIAR x GRUPO"
 '       ArepBank.Show 1
 
 
-        Set rpt = New ArepBank
-        rpt.DtaBanco.ConnectionString = ConexionReporte
-        rpt.DtaBanco.Source = Sql
-        fPreview.RunReport rpt
+        Set Rpt = New ArepBank
+        Rpt.DtaBanco.ConnectionString = ConexionReporte
+        Rpt.DtaBanco.Source = Sql
+        fPreview.RunReport Rpt
          fPreview.Show 1
 
            
@@ -7161,9 +7790,9 @@ Dim TotalCostos As Double, ListaActivos As Variant, TotalInventario As Double, T
 Dim TotalCuentasxPagar As Double, TotalActivos As Double, UtilidadBrutas As Double, UtilidadNetas As Double
 Dim ListaMeses As Variant, CantRegistros As Double, ComboIni As Double, ComboFin As Double, TotalCostoFijo As Double, TotalGastoFijo As Double
 Dim mes As Double, R As Variant
-Dim rpt As Object
+Dim Rpt As Object
 Dim fPreview As New FrmPreview
-Dim rs As New ADODB.Recordset
+Dim Rs As New ADODB.Recordset
 Dim IngresosVentas, ServiciosVentas, ComisionVentas As Double
 Dim CostosProduccion, CostosGeneralesProduccion As Double
 Dim Parche As ADODB.Connection
@@ -7248,10 +7877,10 @@ Case "RETENCIONES EN LA FUENTE I.R X COBRAR"
          ArepRetencionesIR.DataControl1.Source = Sql
          
          
-     Set rpt = New ArepRetencionesIR
-     rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = Sql
-     fPreview.RunReport rpt
+     Set Rpt = New ArepRetencionesIR
+     Rpt.DataControl1.ConnectionString = ConexionReporte
+     Rpt.DataControl1.Source = Sql
+     fPreview.RunReport Rpt
 
      fPreview.Show 1
 
@@ -7316,10 +7945,10 @@ Case "RETENCIONES EN LA FUENTE I.R X PAGAR"
          "WHERE (Cuentas.CausaRetencion = 1) AND (Cuentas.TipoCuenta = 'Cuentas x Pagar') AND (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Fecha1 & "', 102) AND CONVERT(DATETIME, '" & Fecha2 & "', 102)) "
          ArepRetencionesIR.DataControl1.Source = Sql
          
-     Set rpt = New ArepRetencionesIR
-     rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = Sql
-     fPreview.RunReport rpt
+     Set Rpt = New ArepRetencionesIR
+     Rpt.DataControl1.ConnectionString = ConexionReporte
+     Rpt.DataControl1.Source = Sql
+     fPreview.RunReport Rpt
 
      fPreview.Show 1
 
@@ -7389,10 +8018,10 @@ Case "ANEXO FISCAL IVA CLIENTES"
  ArepCreditoProveedor.DataControl1.Source = Sql
 
 
-     Set rpt = New ArepCreditoProveedor
-     rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = Sql
-     fPreview.RunReport rpt
+     Set Rpt = New ArepCreditoProveedor
+     Rpt.DataControl1.ConnectionString = ConexionReporte
+     Rpt.DataControl1.Source = Sql
+     fPreview.RunReport Rpt
      fPreview.Show 1
 
 Case "ANEXO FISCAL IVA PROVEEDOR"
@@ -7464,10 +8093,10 @@ Sql = "SELECT  Transacciones.FechaTransaccion, Transacciones.FacturaNo, Cuentas.
        
  ArepCreditoProveedor.DataControl1.Source = Sql
 
-     Set rpt = New ArepCreditoProveedor
-     rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = Sql
-     fPreview.RunReport rpt
+     Set Rpt = New ArepCreditoProveedor
+     Rpt.DataControl1.ConnectionString = ConexionReporte
+     Rpt.DataControl1.Source = Sql
+     fPreview.RunReport Rpt
      fPreview.Show 1
 
 
@@ -7701,14 +8330,14 @@ Case "COMPARATIVO UTILIDADES"
            
 Case "RAZONES FINANCIERAS"
 
-                    Set rpt = New ArepRazonesFinancieras
-                    fPreview.RunReport rpt
+                    Set Rpt = New ArepRazonesFinancieras
+                    fPreview.RunReport Rpt
                     fPreview.Show 1
 
 Case "CATALOGO RESUMEN"
 
-                    Set rpt = New ArepCatalogoResumen
-                    fPreview.RunReport rpt
+                    Set Rpt = New ArepCatalogoResumen
+                    fPreview.RunReport Rpt
                     fPreview.Show 1
   
  
@@ -7886,10 +8515,10 @@ Case "BALANCE GENERAL TRADICIONAL"
 '            ArepBalanceTradicional.LblFecha2.Caption = Format(FechaFin, "yyyy-mm-dd")
 '            ArepBalanceTradicional.Show 1
                  
-                        Set rpt = New ArepBalanceTradicional
+                        Set Rpt = New ArepBalanceTradicional
 '                        rpt.DataControl1.ConnectionString = ConexionReporte
 '                        rpt.DataControl1.Source = SQL
-                        fPreview.RunReport rpt
+                        fPreview.RunReport Rpt
                         fPreview.Show 1
                 
 
@@ -7902,8 +8531,8 @@ Case "ESTADO DE RESULTADO TRADICIONAL"
 
     SaldoReportes ("UtilidadResultado")
 
-     Set rpt = New ArepResultadoTradicional
-     fPreview.RunReport rpt
+     Set Rpt = New ArepResultadoTradicional
+     fPreview.RunReport Rpt
      fPreview.Show 1
 
 Case "ESTADO DE RESULTADO RESUMEN ANEXOS"
@@ -7993,13 +8622,13 @@ Case "ESTADO DE RESULTADO RESUMEN ANEXOS"
     
     Me.TxtTipoReporte.Text = "ESTADO DE RESULTADO RESUMEN ANEXOS"
     
-     Set rpt = New ArepResultadoResumen2
-     fPreview.RunReport rpt
+     Set Rpt = New ArepResultadoResumen2
+     fPreview.RunReport Rpt
      fPreview.Show 1
      
      '//////////////////AHORA IMPRIMO LOS ANEXOS//////////////////////
-     Set rpt = New ArepAnexosResultado
-     fPreview.RunReport rpt
+     Set Rpt = New ArepAnexosResultado
+     fPreview.RunReport Rpt
      fPreview.Show 1
      
 
@@ -8082,19 +8711,19 @@ Case "ESTADO DE RESULTADO RESUMEN"
     
     If Me.CmbNivel.Text = 0 Then
      EliminaRegistroCero ("Resultado")
-      rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
+      Rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
     Else
      EliminaRegistroCero ("Nivel")
-     rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
+     Rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
      Ejecutar.Execute "DELETE FROM Reportes WHERE (Descripcion NOT LIKE N'%Total%') AND (Nivel = " & Me.CmbNivel.Text & ")"
     End If
     
     If Me.CmbNivel.Text = 0 Then
      EliminaRegistroCero ("Resultado")
-      rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
+      Rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
     Else
      EliminaRegistroCero ("Nivel")
-     rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
+     Rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
      Ejecutar.Execute "DELETE FROM Reportes WHERE (Descripcion NOT LIKE N'%Total%') AND (Nivel = " & Me.CmbNivel.Text & ")"
     End If
     
@@ -8103,8 +8732,8 @@ Case "ESTADO DE RESULTADO RESUMEN"
 
     Me.TxtTipoReporte.Text = "ESTADO DE RESULTADO RESUMEN"
 
-     Set rpt = New ArepResultadoResumen
-     fPreview.RunReport rpt
+     Set Rpt = New ArepResultadoResumen
+     fPreview.RunReport Rpt
      fPreview.Show 1
      
 Case "ESTADO DE RESULTADO RESUMEN 2"
@@ -8199,8 +8828,8 @@ Case "ESTADO DE RESULTADO RESUMEN 2"
 
     Me.TxtTipoReporte.Text = "ESTADO DE RESULTADO RESUMEN 2"
 
-     Set rpt = New ArepResultadoResumen3
-     fPreview.RunReport rpt
+     Set Rpt = New ArepResultadoResumen3
+     fPreview.RunReport Rpt
      fPreview.Show 1
      
 
@@ -8290,8 +8919,8 @@ Case "BALANCE GENERAL RESUMEN"
        
      Me.TxtTipoReporte.Text = "BALANCE GENERAL RESUMEN"
      Me.DtaReportes.Refresh
-     Set rpt = New ArepBalancePersonalizado
-     fPreview.RunReport rpt
+     Set Rpt = New ArepBalancePersonalizado
+     fPreview.RunReport Rpt
      fPreview.Show 1
      
            
@@ -8383,16 +9012,16 @@ Case "BALANCE GENERAL RESUMEN ANEXOS"
      Me.TxtTipoReporte.Text = "BALANCE GENERAL RESUMEN ANEXOS"
      
      Me.DtaReportes.Refresh
-     Set rpt = New ArepBalancePersonalizado
-     fPreview.RunReport rpt
+     Set Rpt = New ArepBalancePersonalizado
+     fPreview.RunReport Rpt
      fPreview.Show 1
     
 '     ArepBalancePersonalizado.Show 1
      
      '////////////AHORA IMPRIMO LOS ANEXOS/////////////////////////////
      'R = AnexosReporteResumen(FechaIni, FechaFin)
-     Set rpt = New ArepAnexosBalances
-     fPreview.RunReport rpt
+     Set Rpt = New ArepAnexosBalances
+     fPreview.RunReport Rpt
      fPreview.Show 1
      
 
@@ -8405,8 +9034,8 @@ Case "LIBRO MAYOR"
         '//////////////////////////////////////HAGO LA CONSULTA PARA LOS SALDOS INICIALES ///////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             Me.DtaReportes.Refresh
-            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.LblProgreso.AutoSize = True
+            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.lblProgreso.AutoSize = True
             Me.osProgress1.Visible = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
@@ -8422,7 +9051,7 @@ Case "LIBRO MAYOR"
             Parche.Execute "DELETE FROM Reportes"
             Parche.Close
             
-            Me.LblProgreso.Caption = ""
+            Me.lblProgreso.Caption = ""
             Me.osProgress1.Visible = False
             SaldoReportes ("BalanzaCodigo")
             Me.DtaReportes.Refresh
@@ -8516,8 +9145,8 @@ Case "LIBRO DIARIO"
         '//////////////////////////////////////HAGO LA CONSULTA PARA LOS SALDOS INICIALES ///////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             Me.DtaReportes.Refresh
-            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.LblProgreso.AutoSize = True
+            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.lblProgreso.AutoSize = True
             Me.osProgress1.Visible = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
@@ -8538,7 +9167,7 @@ Case "LIBRO DIARIO"
             Parche.Execute "DELETE FROM Reportes"
             Parche.Close
             
-            Me.LblProgreso.Caption = ""
+            Me.lblProgreso.Caption = ""
             Me.osProgress1.Visible = False
             SaldoReportes ("BalanzaCodigo")
             Me.DtaReportes.Refresh
@@ -8677,9 +9306,9 @@ Dim UltimoOrden As Integer, RegIngresos  As Integer, PrimReg As Integer, UltReg 
 Dim Fechas1 As String, Fechas2 As String, Orden As Integer, Sql As String, i As Double
 Dim ListaMeses As Variant, CantRegistros As Double, ComboIni As Double, ComboFin As Double, TotstoFijo As Double, TotalGastoFijo As Double
 Dim mes As Double, J As Double, TotalDebito As Double, TotalCredito As Double
-Dim rpt As Object, TotalCostoFijo As Double, Ajuste As String
+Dim Rpt As Object, TotalCostoFijo As Double, Ajuste As String
 Dim fPreview As New FrmPreview
-Dim rs As New ADODB.Recordset
+Dim Rs As New ADODB.Recordset
 Dim Parche As ADODB.Connection
 
 
@@ -8699,6 +9328,18 @@ FechaFin = Me.DTFecha2.Value
 
 
 Select Case Me.CmbReportes.Text
+
+Case "RETENCIONES X PAGAR"
+
+
+   ReporteRetenciones
+
+
+Case "AUXILIAR CUENTAS X BENEFICIARIO"
+
+
+   GenerarAuxiliarDeCuentas True, True
+
 Case "ESTADO DE RESULTADO DPTO"
     NumeroPeriodo1 = Me.CmbIni.Text
     NumeroPeriodo2 = Me.CmbFin.Text
@@ -8754,7 +9395,7 @@ Case "ESTADO DE RESULTADO DPTO"
     
     Me.DtaReportes.Refresh
     
-    FrmReportes.LblProgreso.Caption = "Eliminando Datos del Reporte Anterior"
+    FrmReportes.lblProgreso.Caption = "Eliminando Datos del Reporte Anterior"
     FrmReportes.osProgress1.Visible = True
     FrmReportes.osProgress1.Value = 0
     FrmReportes.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
@@ -8767,7 +9408,7 @@ Case "ESTADO DE RESULTADO DPTO"
 '     Me.DtaReportes.Recordset.MoveNext
 '    Loop
     
-    rs.Open "DELETE FROM Reportes", Conexion
+    Rs.Open "DELETE FROM Reportes", Conexion
 
     CreaEstructuraDpto ("Resultado")
     
@@ -8799,10 +9440,10 @@ Case "ESTADO DE RESULTADO DPTO"
     
     If Me.CmbNivel.Text = 0 Then
      EliminaRegistroCero ("Resultado")
-      rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
+      Rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
     Else
      EliminaRegistroCeroDpto ("Nivel")
-     rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
+     Rs.Open "DELETE FROM Reportes Where (Not (CodCuentas Is Null)) And (Debe1 + Haber1 + Debe2 + Haber2 + Debe3 + Haber3 = 0)", Conexion
      Ejecutar.Execute "DELETE FROM Reportes WHERE (Descripcion NOT LIKE N'%Total%') AND (Nivel = " & Me.CmbNivel.Text & ")"
     End If
     
@@ -8829,15 +9470,15 @@ Case "ESTADO DE RESULTADO DPTO"
 '     fPreview.arv.ReportSource = ArepResultado
 '     fPreview.Show 1
 
-     Set rpt = New ArepResultado
-     rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
-     fPreview.RunReport rpt
+     Set Rpt = New ArepResultado
+     Rpt.DataControl1.ConnectionString = ConexionReporte
+     Rpt.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
+     fPreview.RunReport Rpt
      fPreview.Show 1
 
     
     
-    FrmReportes.LblProgreso.Caption = ""
+    FrmReportes.lblProgreso.Caption = ""
     FrmReportes.osProgress1.Visible = False
 
 Case "COMPROBANTE DE DIARIO"
@@ -8865,10 +9506,10 @@ Case "COMPROBANTE DE DIARIO"
 
     End If
 
-     Set rpt = New ArepComprobanteDiario
-     rpt.DataControl1.ConnectionString = ConexionReporte
-     rpt.DataControl1.Source = Sql
-     fPreview.RunReport rpt
+     Set Rpt = New ArepComprobanteDiario
+     Rpt.DataControl1.ConnectionString = ConexionReporte
+     Rpt.DataControl1.Source = Sql
+     fPreview.RunReport Rpt
 
 
      fPreview.Show 1
@@ -8892,8 +9533,8 @@ Case "LISTA CUENTAS X PAGAR"
     
     
     Me.DtaReportes.Refresh
-    Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-    Me.LblProgreso.AutoSize = True
+    Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+    Me.lblProgreso.AutoSize = True
     Me.osProgress1.Visible = True
     Me.osProgress1.Value = 0
     Me.osProgress1.Min = 0
@@ -8905,7 +9546,7 @@ Case "LISTA CUENTAS X PAGAR"
         Me.osProgress1.Value = Me.osProgress1.Value + 1
     Loop
     
-    Me.LblProgreso.Caption = ""
+    Me.lblProgreso.Caption = ""
     Me.osProgress1.Visible = False
     Me.AdoConsultas.RecordSource = "SELECT  * From Cuentas WHERE (TipoCuenta = 'Cuentas x Pagar') ORDER BY CodCuentas"
     Me.AdoConsultas.Refresh
@@ -8954,8 +9595,8 @@ Case "LISTA CUENTAS X PAGAR"
 
             Me.DtaReportes.Refresh
             
-            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.LblProgreso.AutoSize = True
+            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.lblProgreso.AutoSize = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
             Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
@@ -9008,8 +9649,8 @@ Case "LISTA CUENTAS X COBRAR"
     
     
     Me.DtaReportes.Refresh
-    Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-    Me.LblProgreso.AutoSize = True
+    Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+    Me.lblProgreso.AutoSize = True
     Me.osProgress1.Visible = True
     Me.osProgress1.Value = 0
     Me.osProgress1.Min = 0
@@ -9021,7 +9662,7 @@ Case "LISTA CUENTAS X COBRAR"
         Me.osProgress1.Value = Me.osProgress1.Value + 1
     Loop
     
-    Me.LblProgreso.Caption = ""
+    Me.lblProgreso.Caption = ""
     Me.osProgress1.Visible = False
     Me.AdoConsultas.RecordSource = "SELECT  * From Cuentas WHERE (TipoCuenta = 'Cuentas x Cobrar') ORDER BY CodCuentas"
     Me.AdoConsultas.Refresh
@@ -9068,8 +9709,8 @@ Case "LISTA CUENTAS X COBRAR"
 
             Me.DtaReportes.Refresh
             
-            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.LblProgreso.AutoSize = True
+            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.lblProgreso.AutoSize = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
             Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
@@ -9259,7 +9900,7 @@ Case "PUNTO DE EQUILIBRIO"
                 ArepPuntoEquilibrio.Show 1
 
       
-     Set rpt = New ArepPuntoEquilibrio
+     Set Rpt = New ArepPuntoEquilibrio
 '     rpt.DataControl1.ConnectionString = ConexionReporte
 '     rpt.DataControl1.Source = SQL
 '     fPreview.RunReport rpt
@@ -9323,6 +9964,67 @@ End Sub
 
 'Dim Tape As New clsTape
 Private Sub Form_Load()
+
+'==========================================================
+' CREAR CONTROLES DINÁMICOS DE BENEFICIARIO
+'==========================================================
+
+SSTab.Tab = 0
+
+Set LblBeneficiario = Me.Controls.Add( _
+                        "VB.Label", _
+                        "LblBeneficiarioDinamico", _
+                        SSTab)
+
+With LblBeneficiario
+    .Caption = "Beneficiario:"
+    .Left = 4200
+    .top = 4200
+    .Width = 1200
+    .Height = 255
+    .Visible = False
+End With
+
+
+Set CmbBeneficiario = Me.Controls.Add( _
+                        "TrueOleDBList80.TDBCombo", _
+                        "CmbBeneficiarioDinamico", _
+                        SSTab)
+
+With CmbBeneficiario
+    .Left = 6000
+    .top = 4200
+    .Width = 2295
+    .Height = 315
+    .Visible = False
+    .DropdownWidth = 5000
+End With
+
+
+    CargarCuentas Me.DBCodigo
+    CargarCuentas Me.DBCodigoHasta
+
+If ActivarBeneficiario = 1 Then
+
+'    CmbBeneficiario.Visible = True
+'    LblBeneficiario.Visible = True
+
+    CargarBeneficiarios CmbBeneficiario
+    CmbBeneficiario.Columns(2).Visible = False
+    
+  
+    
+
+Else
+
+    CmbBeneficiario.Visible = False
+    LblBeneficiario.Visible = False
+    
+
+
+End If
+
+
 Me.CmdVerReporte2.Visible = False
 Me.Frame3.Visible = False
 Me.Timer1.Enabled = True
@@ -9419,6 +10121,7 @@ Select Case QUIEN
  Case "ExportarExcel"
   Me.CmbReportes.AddItem ("BALANZA DE COMPROBACION")
   Me.CmbReportes.AddItem ("REPORTE PBI")
+  Me.CmbReportes.AddItem ("TOTAL AUXILIAR DE CUENTAS")
   Me.BtnExcel.Visible = True
   
  
@@ -9427,15 +10130,27 @@ Select Case QUIEN
    Me.CmbReportes.AddItem ("LISTA CUENTAS X PAGAR")
    Me.CmbReportes.AddItem ("CUENTAS X COBRAR")
    
+ Case "ReportesTerceros"
+  Me.CmbReportes.AddItem ("AUXILIAR CUENTAS X BENEFICIARIO")
+  Me.CmbReportes.AddItem ("RETENCIONES X PAGAR")
+ 
+'  If ActivarBeneficiario = 1 Then
+   
+'  End If
+   
  Case "ReporteMovimientos"
   Me.Frame7.Visible = False
   Me.CmbReportes.AddItem ("PRESUPUESTO ANUAL")
   Me.CmbReportes.AddItem ("PRESUPUESTO DEL MES")
   Me.CmbReportes.AddItem ("REGISTRO DE MOVIMIENTOS")
+  Me.CmbReportes.AddItem ("RETENCIONES X PAGAR")
   Me.CmbReportes.AddItem ("AUXILIAR DE CUENTAS")
   Me.CmbReportes.AddItem ("TOTAL AUXILIAR DE CUENTAS")
   Me.CmbReportes.AddItem ("AUXILIAR x GRUPO")
   Me.CmbReportes.AddItem ("BALANZA DE COMPROBACION")
+  
+
+  
 '  Me.CmbReportes.AddItem ("ANEXO FISCAL IVA PROVEEDOR")
 '  Me.CmbReportes.AddItem ("ANEXO FISCAL IVA CLIENTES")
 '  Me.CmbReportes.AddItem ("RETENCIONES EN LA FUENTE I.R X COBRAR")
@@ -9448,11 +10163,20 @@ Select Case QUIEN
   Me.CmbReportes.AddItem ("DETALLE DIARIO MAYOR")
   Me.DtaBancos.RecordSource = "SELECT Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta From Cuentas ORDER BY Cuentas.CodCuentas"
   Me.DtaBancos.Refresh
-  Me.DBCodigo.ListField = "CodCuentas"
-  Me.DBCodigoHasta.ListField = "CodCuentas"
-  Me.Label2.Visible = False
-  Me.Label1.Visible = False
-  Me.LblTransaccion.Visible = False
+  
+  
+
+
+
+
+
+
+'  Me.DBCodigo.RowSource = Me.DtaBancos
+'  Me.DBCodigo.ListField = "CodCuentas"
+'  Me.DBCodigoHasta.ListField = "CodCuentas"
+'  Me.Label2.Visible = False
+'  Me.Label1.Visible = False
+'  Me.LblTransaccion.Visible = False
   
  Case "ReporteGenerales"
  Me.Frame7.Visible = False
@@ -9461,6 +10185,7 @@ Select Case QUIEN
  Me.CmbReportes.AddItem ("CATALOGO RESUMEN")
  Me.CmbReportes.AddItem ("LISTADO CUENTAS")
  Me.CmbReportes.AddItem ("TARJETA ACTIVO FIJO")
+ Me.CmbReportes.AddItem ("LISTA ACTIVO FIJO")
  Me.CmbReportes.AddItem ("TARJETA EMPLEADOS")
  Me.CmbReportes.AddItem ("GRUPOS DE CUENTAS")
  Me.CmbReportes.AddItem ("TASAS DE CAMBIO")
@@ -9513,6 +10238,10 @@ Me.TxtDesde.Visible = False
 Me.TxtHasta.Visible = False
 Me.DBCodigo.Visible = True
 Me.DBCodigoHasta.Visible = True
+
+    CargarCuentas Me.DBCodigo
+    CargarCuentas Me.DBCodigoHasta
+
 End Sub
 
 Private Sub Option5_Click()
@@ -9637,3 +10366,208 @@ Function ExtraerCodigo(cadena As String) As String
     
 End Function
 
+Private Sub GenerarAuxiliarCuentasXBeneficiario()
+
+    Dim Sql As String
+    Dim CodigoCuentaDesde As String
+    Dim CodigoCuentaHasta As String
+    Dim CodigoBeneficiario As String
+
+    Dim Rpt As Object
+    Dim fPreview As New FrmPreview
+    
+
+
+        If Me.CmbMoneda.Text = "Córdobas" Then
+            Moneda = "Cordobas"
+        Else
+            Moneda = "Dolares"
+        End If
+
+
+    '==========================================================
+    ' CUENTA DESDE
+    '==========================================================
+
+    If Me.DBCodigo.Text = "" Then
+
+        Me.DtaConsulta.RecordSource = _
+            "SELECT Cuentas.* FROM Cuentas ORDER BY CodCuentas"
+
+        Me.DtaConsulta.Refresh
+
+        If Not Me.DtaConsulta.Recordset.EOF Then
+
+            Me.DtaConsulta.Recordset.MoveFirst
+
+            CodigoCuentaDesde = _
+                Me.DtaConsulta.Recordset("CodCuentas")
+
+        End If
+
+    Else
+
+        CodigoCuentaDesde = Me.DBCodigo.Text
+
+    End If
+
+
+    '==========================================================
+    ' CUENTA HASTA
+    '==========================================================
+
+    If Me.DBCodigoHasta.Text = "" Then
+
+        Me.DtaConsulta.RecordSource = _
+            "SELECT Cuentas.* FROM Cuentas ORDER BY CodCuentas"
+
+        Me.DtaConsulta.Refresh
+
+        If Not Me.DtaConsulta.Recordset.EOF Then
+
+            Me.DtaConsulta.Recordset.MoveLast
+
+            CodigoCuentaHasta = _
+                Me.DtaConsulta.Recordset("CodCuentas")
+
+        End If
+
+    Else
+
+        CodigoCuentaHasta = Me.DBCodigoHasta.Text
+
+    End If
+
+
+    '==========================================================
+    ' BENEFICIARIO
+    '==========================================================
+
+    CodigoBeneficiario = Trim$(CmbBeneficiario.Text)
+
+
+    '==========================================================
+    ' GENERAR SQL
+    '==========================================================
+
+    Sql = ObtenerSqlAuxiliarPorBeneficiario( _
+                Me.DTFecha1.Value, _
+                Me.DTFecha2.Value, _
+                CodigoCuentaDesde, _
+                CodigoCuentaHasta, _
+                "", _
+                "", _
+                Me.CmbMoneda.Text, _
+                CodigoBeneficiario)
+
+MsgBox right$(Sql, 500)
+    '==========================================================
+    ' EJECUTAR REPORTE
+    '==========================================================
+
+    Set Rpt = New ArepAuxiliar
+
+    Rpt.DataControl1.ConnectionString = ConexionReporte
+    Rpt.DataControl1.Source = Sql
+
+    fPreview.RunReport Rpt
+    fPreview.Show 1
+
+End Sub
+
+Private Sub ReporteRetenciones()
+
+    Dim Sql As String
+    Dim CodigoCuentaDesde As String
+    Dim CodigoCuentaHasta As String
+
+    Dim Rpt As ArepRetenciones
+    Dim fPreview As New FrmPreview
+
+    On Error GoTo ErrReporte
+
+    If Me.CmbMoneda.Text = "Córdobas" Then
+        Moneda = "Cordobas"
+    Else
+        Moneda = "Dolares"
+    End If
+
+    '--- Validar fechas
+    If Me.DTFecha1.Value > Me.DTFecha2.Value Then
+        MsgBox "La fecha inicial no puede ser mayor que la fecha final.", _
+               vbExclamation, "Reporte de Retenciones"
+        Exit Sub
+    End If
+
+    '--- Rango de cuentas (vacío = sin límite)
+    CodigoCuentaDesde = Trim$(Me.DBCodigo.Text)
+    CodigoCuentaHasta = Trim$(Me.DBCodigoHasta.Text)
+
+    '--- SQL
+    Sql = ObtenerSqlRetenciones(Me.DTFecha1.Value, Me.DTFecha2.Value, _
+                                CodigoCuentaDesde, CodigoCuentaHasta)
+
+    '--- Reporte
+    Set Rpt = New ArepRetenciones
+
+    Rpt.FechaDesde = Me.DTFecha1.Value
+    Rpt.FechaHasta = Me.DTFecha2.Value
+    Rpt.CuentaDesde = CodigoCuentaDesde
+    Rpt.CuentaHasta = CodigoCuentaHasta
+
+    Rpt.DataControl1.ConnectionString = ConexionReporte
+    Rpt.DataControl1.Source = Sql
+
+    fPreview.RunReport Rpt
+    fPreview.Show 1
+
+    Exit Sub
+
+ErrReporte:
+    MsgBox "Error al generar el reporte de retenciones." & vbCrLf & _
+           "Número: " & err.Number & vbCrLf & _
+           "Descripción: " & err.Description, _
+           vbExclamation, "Reporte de Retenciones"
+
+End Sub
+
+Public Function ObtenerSqlRetenciones( _
+    ByVal FechaDesde As Date, _
+    ByVal FechaHasta As Date, _
+    ByVal CuentaDesde As String, _
+    ByVal CuentaHasta As String) As String
+
+    Dim Sql As String
+
+    Sql = ""
+    Sql = Sql & "SELECT "
+    Sql = Sql & "T.FechaTransaccion, T.NPeriodo, T.NumeroMovimiento, T.NTransaccion, "
+    Sql = Sql & "T.CodCuentas, C.DescripcionCuentas AS NombreCuenta, C.DescRetencion, "
+    Sql = Sql & "T.Cod_Tercero, T.Beneficiario, "
+    Sql = Sql & "T.FacturaNo, T.NumNomina, T.MontoBase, "
+    Sql = Sql & "T.DescripcionMovimiento, T.VoucherNo, T.ChequeNo, T.Fuente, "
+    Sql = Sql & "ISNULL(T.Debito,0) AS Debito, "
+    Sql = Sql & "ISNULL(T.Credito,0) AS Credito, "
+    Sql = Sql & "(ISNULL(T.Credito,0) - ISNULL(T.Debito,0)) AS Retenido "
+
+    Sql = Sql & "FROM Transacciones AS T "
+    Sql = Sql & "INNER JOIN Cuentas AS C ON T.CodCuentas = C.CodCuentas "
+
+    Sql = Sql & "WHERE ISNULL(C.CausaRetencion,0) = 1 "
+
+    If Len(Trim$(CuentaDesde)) > 0 Then
+        Sql = Sql & "AND T.CodCuentas >= '" & Replace(Trim$(CuentaDesde), "'", "''") & "' "
+    End If
+
+    If Len(Trim$(CuentaHasta)) > 0 Then
+        Sql = Sql & "AND T.CodCuentas <= '" & Replace(Trim$(CuentaHasta), "'", "''") & "' "
+    End If
+
+    Sql = Sql & "AND T.FechaTransaccion >= '" & Format$(FechaDesde, "yyyymmdd") & "' "
+    Sql = Sql & "AND T.FechaTransaccion < '" & Format$(DateAdd("d", 1, FechaHasta), "yyyymmdd") & "' "
+
+    Sql = Sql & "ORDER BY T.CodCuentas, T.FechaTransaccion, T.NumeroMovimiento, T.NTransaccion"
+
+    ObtenerSqlRetenciones = Sql
+
+End Function

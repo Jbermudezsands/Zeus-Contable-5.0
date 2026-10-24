@@ -1,8 +1,9 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
+Object = "{60CCE6A8-5C61-4F30-8513-F57EED62E86A}#8.0#0"; "todl8.ocx"
 Begin VB.Form FrmAuxiliarCuentas 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Auxiliar de Cuentas"
@@ -17,6 +18,152 @@ Begin VB.Form FrmAuxiliarCuentas
    ScaleHeight     =   8100
    ScaleWidth      =   12600
    StartUpPosition =   2  'CenterScreen
+   Begin TrueOleDBList80.TDBCombo CmbBeneficiario 
+      Height          =   315
+      Left            =   9720
+      TabIndex        =   19
+      Top             =   360
+      Width           =   2295
+      _ExtentX        =   4048
+      _ExtentY        =   556
+      _LayoutType     =   0
+      _RowHeight      =   -2147483647
+      _WasPersistedAsPixels=   0
+      _DropdownWidth  =   10583
+      _EDITHEIGHT     =   556
+      _GAPHEIGHT      =   53
+      Columns(0)._VlistStyle=   0
+      Columns(0)._MaxComboItems=   5
+      Columns(0).DataField=   ""
+      Columns(0)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
+      Columns(1)._VlistStyle=   0
+      Columns(1)._MaxComboItems=   5
+      Columns(1).DataField=   ""
+      Columns(1)._PropDict=   "_MaxComboItems,516,2;_VlistStyle,514,3"
+      Columns.Count   =   2
+      Splits(0)._UserFlags=   0
+      Splits(0).ExtendRightColumn=   -1  'True
+      Splits(0).AllowRowSizing=   0   'False
+      Splits(0)._PropDict=   "_ColumnProps,515,0;_UserFlags,518,3"
+      Splits(0)._ColumnProps(0)=   "Columns.Count=2"
+      Splits(0)._ColumnProps(1)=   "Column(0).Width=2725"
+      Splits(0)._ColumnProps(2)=   "Column(0).DividerColor=0"
+      Splits(0)._ColumnProps(3)=   "Column(0)._WidthInPix=2646"
+      Splits(0)._ColumnProps(4)=   "Column(0)._EditAlways=0"
+      Splits(0)._ColumnProps(5)=   "Column(0).Order=1"
+      Splits(0)._ColumnProps(6)=   "Column(1).Width=2725"
+      Splits(0)._ColumnProps(7)=   "Column(1).DividerColor=0"
+      Splits(0)._ColumnProps(8)=   "Column(1)._WidthInPix=2646"
+      Splits(0)._ColumnProps(9)=   "Column(1)._EditAlways=0"
+      Splits(0)._ColumnProps(10)=   "Column(1).Order=2"
+      Splits.Count    =   1
+      Appearance      =   1
+      BorderStyle     =   1
+      ComboStyle      =   0
+      AutoCompletion  =   0   'False
+      LimitToList     =   0   'False
+      ColumnHeaders   =   -1  'True
+      ColumnFooters   =   0   'False
+      DataMode        =   0
+      DefColWidth     =   0
+      Enabled         =   -1  'True
+      HeadLines       =   1
+      FootLines       =   1
+      RowDividerStyle =   0
+      Caption         =   ""
+      EditFont        =   "Size=8.25,Charset=0,Weight=400,Underline=0,Italic=0,Strikethrough=0,Name=MS Sans Serif"
+      LayoutName      =   ""
+      LayoutFileName  =   ""
+      MultipleLines   =   0
+      EmptyRows       =   -1  'True
+      CellTips        =   0
+      AutoSize        =   -1  'True
+      ListField       =   ""
+      BoundColumn     =   ""
+      IntegralHeight  =   0   'False
+      CellTipsWidth   =   0
+      CellTipsDelay   =   1000
+      AutoDropdown    =   0   'False
+      RowTracking     =   -1  'True
+      RightToLeft     =   0   'False
+      RowMember       =   ""
+      MouseIcon       =   0
+      MouseIcon.vt    =   3
+      MousePointer    =   0
+      MatchEntryTimeout=   2000
+      OLEDragMode     =   0
+      OLEDropMode     =   0
+      AnimateWindow   =   0
+      AnimateWindowDirection=   0
+      AnimateWindowTime=   200
+      AnimateWindowClose=   0
+      DropdownPosition=   0
+      Locked          =   0   'False
+      ScrollTrack     =   0   'False
+      RowDividerColor =   15790320
+      RowSubDividerColor=   15790320
+      AddItemSeparator=   ";"
+      _PropDict       =   $"FrmAuxiliarCuentas.frx":030A
+      _StyleDefs(0)   =   "_StyleRoot:id=0,.parent=-1,.alignment=3,.valignment=0,.bgcolor=&H80000005&"
+      _StyleDefs(1)   =   ":id=0,.fgcolor=&H80000008&,.wraptext=0,.locked=0,.transparentBmp=0"
+      _StyleDefs(2)   =   ":id=0,.fgpicPosition=0,.bgpicMode=0,.appearance=0,.borderSize=0,.ellipsis=0"
+      _StyleDefs(3)   =   ":id=0,.borderColor=&H80000005&,.borderType=0,.bold=0,.fontsize=825,.italic=0"
+      _StyleDefs(4)   =   ":id=0,.underline=0,.strikethrough=0,.charset=0"
+      _StyleDefs(5)   =   ":id=0,.fontname=MS Sans Serif"
+      _StyleDefs(6)   =   "Style:id=1,.parent=0,.namedParent=33"
+      _StyleDefs(7)   =   "CaptionStyle:id=4,.parent=2,.namedParent=37"
+      _StyleDefs(8)   =   "HeadingStyle:id=2,.parent=1,.namedParent=34"
+      _StyleDefs(9)   =   "FooterStyle:id=3,.parent=1,.namedParent=35"
+      _StyleDefs(10)  =   "InactiveStyle:id=5,.parent=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+      _StyleDefs(11)  =   "SelectedStyle:id=6,.parent=1,.namedParent=36"
+      _StyleDefs(12)  =   "EditorStyle:id=7,.parent=1"
+      _StyleDefs(13)  =   "HighlightRowStyle:id=8,.parent=1,.namedParent=38"
+      _StyleDefs(14)  =   "EvenRowStyle:id=9,.parent=1,.namedParent=39"
+      _StyleDefs(15)  =   "OddRowStyle:id=10,.parent=1,.namedParent=40"
+      _StyleDefs(16)  =   "RecordSelectorStyle:id=11,.parent=2,.namedParent=41"
+      _StyleDefs(17)  =   "FilterBarStyle:id=12,.parent=1,.namedParent=42"
+      _StyleDefs(18)  =   "Splits(0).Style:id=13,.parent=1"
+      _StyleDefs(19)  =   "Splits(0).CaptionStyle:id=22,.parent=4"
+      _StyleDefs(20)  =   "Splits(0).HeadingStyle:id=14,.parent=2"
+      _StyleDefs(21)  =   "Splits(0).FooterStyle:id=15,.parent=3"
+      _StyleDefs(22)  =   "Splits(0).InactiveStyle:id=16,.parent=5"
+      _StyleDefs(23)  =   "Splits(0).SelectedStyle:id=18,.parent=6"
+      _StyleDefs(24)  =   "Splits(0).EditorStyle:id=17,.parent=7"
+      _StyleDefs(25)  =   "Splits(0).HighlightRowStyle:id=19,.parent=8"
+      _StyleDefs(26)  =   "Splits(0).EvenRowStyle:id=20,.parent=9"
+      _StyleDefs(27)  =   "Splits(0).OddRowStyle:id=21,.parent=10"
+      _StyleDefs(28)  =   "Splits(0).RecordSelectorStyle:id=23,.parent=11"
+      _StyleDefs(29)  =   "Splits(0).FilterBarStyle:id=24,.parent=12"
+      _StyleDefs(30)  =   "Splits(0).Columns(0).Style:id=28,.parent=13"
+      _StyleDefs(31)  =   "Splits(0).Columns(0).HeadingStyle:id=25,.parent=14"
+      _StyleDefs(32)  =   "Splits(0).Columns(0).FooterStyle:id=26,.parent=15"
+      _StyleDefs(33)  =   "Splits(0).Columns(0).EditorStyle:id=27,.parent=17"
+      _StyleDefs(34)  =   "Splits(0).Columns(1).Style:id=32,.parent=13"
+      _StyleDefs(35)  =   "Splits(0).Columns(1).HeadingStyle:id=29,.parent=14"
+      _StyleDefs(36)  =   "Splits(0).Columns(1).FooterStyle:id=30,.parent=15"
+      _StyleDefs(37)  =   "Splits(0).Columns(1).EditorStyle:id=31,.parent=17"
+      _StyleDefs(38)  =   "Named:id=33:Normal"
+      _StyleDefs(39)  =   ":id=33,.parent=0"
+      _StyleDefs(40)  =   "Named:id=34:Heading"
+      _StyleDefs(41)  =   ":id=34,.parent=33,.valignment=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+      _StyleDefs(42)  =   ":id=34,.wraptext=-1"
+      _StyleDefs(43)  =   "Named:id=35:Footing"
+      _StyleDefs(44)  =   ":id=35,.parent=33,.valignment=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+      _StyleDefs(45)  =   "Named:id=36:Selected"
+      _StyleDefs(46)  =   ":id=36,.parent=33,.bgcolor=&H8000000D&,.fgcolor=&H8000000E&"
+      _StyleDefs(47)  =   "Named:id=37:Caption"
+      _StyleDefs(48)  =   ":id=37,.parent=34,.alignment=2"
+      _StyleDefs(49)  =   "Named:id=38:HighlightRow"
+      _StyleDefs(50)  =   ":id=38,.parent=33,.bgcolor=&H8000000D&,.fgcolor=&H8000000E&"
+      _StyleDefs(51)  =   "Named:id=39:EvenRow"
+      _StyleDefs(52)  =   ":id=39,.parent=33,.bgcolor=&HFFFF00&"
+      _StyleDefs(53)  =   "Named:id=40:OddRow"
+      _StyleDefs(54)  =   ":id=40,.parent=33"
+      _StyleDefs(55)  =   "Named:id=41:RecordSelector"
+      _StyleDefs(56)  =   ":id=41,.parent=34"
+      _StyleDefs(57)  =   "Named:id=42:FilterBar"
+      _StyleDefs(58)  =   ":id=42,.parent=33"
+   End
    Begin VB.CommandButton CmdConciliacion 
       Caption         =   "Conciliacion"
       Height          =   375
@@ -68,7 +215,7 @@ Begin VB.Form FrmAuxiliarCuentas
    Begin ACTIVESKINLibCtl.SkinLabel LblSaldoCuenta 
       Height          =   255
       Left            =   1800
-      OleObjectBlob   =   "FrmAuxiliarCuentas.frx":030A
+      OleObjectBlob   =   "FrmAuxiliarCuentas.frx":03B4
       TabIndex        =   10
       Top             =   1560
       Width           =   3975
@@ -76,13 +223,13 @@ Begin VB.Form FrmAuxiliarCuentas
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel2 
       Height          =   255
       Left            =   120
-      OleObjectBlob   =   "FrmAuxiliarCuentas.frx":0368
+      OleObjectBlob   =   "FrmAuxiliarCuentas.frx":0412
       TabIndex        =   6
       Top             =   1560
       Width           =   1575
    End
    Begin MSDataListLib.DataCombo DBCliente 
-      Bindings        =   "FrmAuxiliarCuentas.frx":03EC
+      Bindings        =   "FrmAuxiliarCuentas.frx":0496
       Height          =   315
       Left            =   1560
       TabIndex        =   5
@@ -95,7 +242,7 @@ Begin VB.Form FrmAuxiliarCuentas
       Text            =   ""
    End
    Begin TrueOleDBGrid80.TDBGrid DBGCuentas 
-      Bindings        =   "FrmAuxiliarCuentas.frx":0405
+      Bindings        =   "FrmAuxiliarCuentas.frx":04AF
       Height          =   5535
       Left            =   120
       TabIndex        =   4
@@ -379,9 +526,9 @@ Begin VB.Form FrmAuxiliarCuentas
       Width           =   12135
       Begin VB.ComboBox CmbTipoMoneda 
          Height          =   315
-         ItemData        =   "FrmAuxiliarCuentas.frx":041D
-         Left            =   6840
-         List            =   "FrmAuxiliarCuentas.frx":0427
+         ItemData        =   "FrmAuxiliarCuentas.frx":04C7
+         Left            =   6000
+         List            =   "FrmAuxiliarCuentas.frx":04D1
          Style           =   2  'Dropdown List
          TabIndex        =   3
          Top             =   240
@@ -409,7 +556,7 @@ Begin VB.Form FrmAuxiliarCuentas
          EndProperty
          Height          =   300
          Left            =   4320
-         Picture         =   "FrmAuxiliarCuentas.frx":043E
+         Picture         =   "FrmAuxiliarCuentas.frx":04E8
          Style           =   1  'Graphical
          TabIndex        =   1
          Top             =   240
@@ -417,16 +564,16 @@ Begin VB.Form FrmAuxiliarCuentas
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel1 
          Height          =   255
-         Left            =   5520
-         OleObjectBlob   =   "FrmAuxiliarCuentas.frx":058C
+         Left            =   4920
+         OleObjectBlob   =   "FrmAuxiliarCuentas.frx":0636
          TabIndex        =   7
          Top             =   240
-         Width           =   1215
+         Width           =   1095
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel3 
          Height          =   255
          Left            =   120
-         OleObjectBlob   =   "FrmAuxiliarCuentas.frx":0600
+         OleObjectBlob   =   "FrmAuxiliarCuentas.frx":06AA
          TabIndex        =   8
          Top             =   240
          Width           =   1215
@@ -434,10 +581,18 @@ Begin VB.Form FrmAuxiliarCuentas
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel4 
          Height          =   255
          Left            =   120
-         OleObjectBlob   =   "FrmAuxiliarCuentas.frx":066A
+         OleObjectBlob   =   "FrmAuxiliarCuentas.frx":0714
          TabIndex        =   9
          Top             =   720
          Width           =   1215
+      End
+      Begin ACTIVESKINLibCtl.SkinLabel LblBeneficiario 
+         Height          =   255
+         Left            =   8640
+         OleObjectBlob   =   "FrmAuxiliarCuentas.frx":0788
+         TabIndex        =   18
+         Top             =   240
+         Width           =   975
       End
    End
    Begin VB.CommandButton CmdAuditoria 
@@ -455,15 +610,36 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private cnx As New ADODB.Connection
-Private rs As New ADODB.Recordset, rsConexion As New ADODB.Recordset
-Private SQL As String
+Private Rs As New ADODB.Recordset, rsConexion As New ADODB.Recordset
+Private Sql As String
 Private modal As Boolean
 Private getVal As Boolean
 Private Id As Integer
+
+
+
+Private Sub CmbBeneficiario_Change()
+    ActualizarAuxiliarCuentas _
+        Me.DBCliente.Text, _
+        Me.CmbTipoMoneda.Text, _
+        Me.CmbBeneficiario.Text, _
+        TipoCuenta
+End Sub
+
+Private Sub CmbBeneficiario_ItemChange()
+
+    ActualizarAuxiliarCuentas _
+        Me.DBCliente.Text, _
+        Me.CmbTipoMoneda.Text, _
+        Me.CmbBeneficiario.BoundText, _
+        TipoCuenta
+
+End Sub
+
 Private Sub Form_Unload(Cancel As Integer)
 On Error Resume Next
 Set cnx = Nothing
-Set rs = Nothing
+Set Rs = Nothing
 Set rs2 = Nothing
 Set rs3 = Nothing
 End Sub
@@ -480,13 +656,13 @@ If DtaCuentas.Recordset.EOF Then
  
   sqlconsulta = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento,VoucherNo, FacturaNo, ChequeNo, Transacciones.DescripcionMovimiento, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Debito*TCambio AS MDebito, TCambio*Credito AS MCredito From Transacciones Where (((Transacciones.CodCuentas) =  '0')) ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
 '  Me.DtaSaldos.Refresh
-        rs.Close
-        With rs
+        Rs.Close
+        With Rs
           .CursorLocation = adUseClient
           .Open sqlconsulta, Conexion, adOpenDynamic, adLockOptimistic
         End With
        
-       Me.DBGCuentas.DataSource = rs
+       Me.DBGCuentas.DataSource = Rs
        
   Me.DBGCuentas.Columns(1).Caption = "Fecha"
   Me.DBGCuentas.Columns(1).Width = 1000
@@ -531,23 +707,23 @@ If QUIEN = "Nuevo" Then
  If Me.CmbTipoMoneda.Text = "Córdobas" Then
     sqlconsulta = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento, VoucherNo, FacturaNo, ChequeNo,Transacciones.DescripcionMovimiento, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Debito*TCambio AS MDebito, TCambio*Credito AS MCredito From Transacciones Where (((Transacciones.CodCuentas) =  '" & Me.DBCliente.Text & "')) ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
 '    Me.DtaSaldos.Refresh
-        rs.Close
-        With rs
+        Rs.Close
+        With Rs
           .CursorLocation = adUseClient
           .Open sqlconsulta, Conexion, adOpenDynamic, adLockOptimistic
         End With
         
-       Me.DBGCuentas.DataSource = rs
+       Me.DBGCuentas.DataSource = Rs
  Else
     sqlconsulta = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo,Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.DescripcionMovimiento, Transacciones.TCambio, Transacciones.Debito,Transacciones.Credito, ROUND(Transacciones.Debito * Transacciones.TCambio / Tasas.MontoCordobas, 3) AS MDebito, ROUND(Transacciones.Credito * Transacciones.TCambio / Tasas.MontoCordobas, 3) As MCredito FROM Transacciones INNER JOIN Tasas ON Transacciones.FechaTasas = Tasas.FechaTasas WHERE (Transacciones.CodCuentas = '" & Me.DBCliente.Text & "') ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
 '    Me.DtaSaldos.Refresh
-        rs.Close
-        With rs
+        Rs.Close
+        With Rs
           .CursorLocation = adUseClient
           .Open sqlconsulta, Conexion, adOpenDynamic, adLockOptimistic
         End With
         
-       Me.DBGCuentas.DataSource = rs
+       Me.DBGCuentas.DataSource = Rs
  End If
  
  If Me.CmbTipoMoneda.Text = "Córdobas" Then
@@ -896,13 +1072,13 @@ If DtaCuentas.Recordset.EOF Then
  
    sqlconsulta = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento,VoucherNo, FacturaNo, ChequeNo, Transacciones.DescripcionMovimiento, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Debito*TCambio AS MDebito, TCambio*Credito AS MCredito From Transacciones Where (((Transacciones.CodCuentas) =  '0')) ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
 '  Me.DtaSaldos.Refresh
-        With rs
+        With Rs
           .Close
           .CursorLocation = adUseClient
           .Open sqlconsulta, Conexion, adOpenDynamic, adLockOptimistic
         End With
         
-       Me.DBGCuentas.DataSource = rs
+       Me.DBGCuentas.DataSource = Rs
        
   Me.DBGCuentas.Columns(1).Caption = "Fecha"
   Me.DBGCuentas.Columns(1).Width = 1000
@@ -940,13 +1116,13 @@ Else
   
  sqlconsulta = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento, VoucherNo, FacturaNo, ChequeNo,Transacciones.DescripcionMovimiento, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, ROUND(Debito*TCambio,3) AS MDebito, ROUND(TCambio*Credito,3) AS MCredito From Transacciones Where (((Transacciones.CodCuentas) =  '" & Me.DBCliente.Text & "')) ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
 ' Me.DtaSaldos.Refresh
-        With rs
+        With Rs
           .Close
           .CursorLocation = adUseClient
           .Open sqlconsulta, Conexion, adOpenDynamic, adLockOptimistic
         End With
         
-       Me.DBGCuentas.DataSource = rs
+       Me.DBGCuentas.DataSource = Rs
  
   Me.DtaConsulta.RecordSource = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento, Transacciones.DescripcionMovimiento, Transacciones.TCambio,Transacciones.Debito, Transacciones.Credito, ROUND(Debito*TCambio,3) AS MDebito, ROUND(TCambio*Credito,3) AS MCredito From Transacciones Where (((Transacciones.CodCuentas) =  '" & Me.DBCliente.Text & "')) ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
   Me.DtaConsulta.Refresh
@@ -1173,8 +1349,8 @@ Private Sub DBGCuentas_FilterChange()
     
     c = DBGCuentas.col
     DBGCuentas.HoldFields
-    SQL = rs.Filter
-    rs.Filter = getFilter(col, cols)
+    Sql = Rs.Filter
+    Rs.Filter = getFilter(col, cols)
     DBGCuentas.col = c
     DBGCuentas.EditActive = True
 Exit Sub
@@ -1193,7 +1369,7 @@ For Each col In cols
     If Trim(col.FilterText) <> "" Then
         n = n + 1
         If n > 1 Then tmp = tmp & " AND "
-        Select Case rs.Fields(x).Type
+        Select Case Rs.Fields(x).Type
         Case adVarWChar, adVarChar: tmp = tmp & "[" & col.DataField & "] LIKE '%" & col.FilterText & "%'"
         Case adInteger, adNumeric: tmp = tmp & "[" & col.DataField & "] = " & col.FilterText
         Case adDBTimeStamp: tmp = tmp & "[" & col.DataField & "] = #" & col.FilterText & "#"
@@ -1274,16 +1450,30 @@ If cnx.State = adStateClosed Then
     cnx.Open
 End If
 
+If ActivarBeneficiario = 1 Then
+       CmbBeneficiario.Visible = True
+   LblBeneficiario.Visible = True
+    CargarBeneficiarios Me.CmbBeneficiario
+    CmbBeneficiario.Columns(2).Visible = False
+Else
+   CmbBeneficiario.Visible = False
+   LblBeneficiario.Visible = False
+End If
+
+
+
+
+
  sqlconsulta = "SELECT Transacciones.CodCuentas, Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento, VoucherNo, FacturaNo, ChequeNo,Transacciones.DescripcionMovimiento, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Debito*TCambio AS MDebito, TCambio*Credito AS MCredito From Transacciones Where (((Transacciones.CodCuentas) =  '" & Me.DBCliente.Text & "')) ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
 ' Me.DtaSaldos.Refresh
 
-        With rs
+        With Rs
           .CursorLocation = adUseClient
           .Open sqlconsulta, Conexion, adOpenDynamic, adLockOptimistic
         End With
         
         
-       Me.DBGCuentas.DataSource = rs
+       Me.DBGCuentas.DataSource = Rs
 
   Me.DBGCuentas.Columns(2).Caption = "No.Trans"
   Me.DBGCuentas.Columns(2).Width = 1000

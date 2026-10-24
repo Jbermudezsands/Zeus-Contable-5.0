@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
 Begin VB.Form FrmtrasladoActivos 
@@ -959,8 +959,8 @@ End If
 End Sub
 Private Sub yasetraslado()
 Set rsa = Nothing
-SQL = "select IdUserAutoriza from TrasladoBienes where IdActivoTraslada='" & idactivo & "'"
-rsa.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+Sql = "select IdUserAutoriza from TrasladoBienes where IdActivoTraslada='" & idactivo & "'"
+rsa.Open Sql, Conexion, adOpenForwardOnly, adLockOptimistic
 If rsa.EOF Then
     dtrespo3.Locked = False
 '    Label11.Visible = False
@@ -975,8 +975,8 @@ End If
 End Sub
 Private Sub quienrecibeyentrego()
 Set rsa = Nothing
-SQL = "select IdUserRecibe, IdUserEntrega from AltadeBienes where IdActivoAlta='" & idactivo & "'"
-rsa.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+Sql = "select IdUserRecibe, IdUserEntrega from AltadeBienes where IdActivoAlta='" & idactivo & "'"
+rsa.Open Sql, Conexion, adOpenForwardOnly, adLockOptimistic
 dtrespo.BoundText = rsa!IdUserRecibe
 dtrespo2.BoundText = rsa!IdUserEntrega
  Label11.Visible = True
@@ -995,8 +995,8 @@ CargaADODCConta "ResponsablesAreas", adorespo, "1", dtrespo3.Name, "Trim", Conex
 End Sub
 Private Sub generareferencia()
 Set rsa = Nothing
-SQL = "select max (idreg) as idreg from TrasladoBienes "
-rsa.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+Sql = "select max (idreg) as idreg from TrasladoBienes "
+rsa.Open Sql, Conexion, adOpenForwardOnly, adLockOptimistic
 If IsNull(rsa!idreg) Then
     Text1.Text = "000000" & 1
 Else
@@ -1051,7 +1051,7 @@ FrmOficinas.Show
 End Sub
 
 Private Sub PushButton4_Click()
-If txtfecha.Text = "" Or txtobserva.Text = "" Or dtrespo.Text = "" Or dtrespo2.Text = "" Or idactivo = "" Then
+If TxtFecha.Text = "" Or txtobserva.Text = "" Or dtrespo.Text = "" Or dtrespo2.Text = "" Or idactivo = "" Then
     MsgBox ("Informacion incompleta, por favor verifique"), vbInformation
 Else
    guardatras
@@ -1061,11 +1061,11 @@ End If
 End Sub
 Private Sub guardatras()
 Set rsa = Nothing
-SQL = "select * from TrasladoBienes "
-rsa.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+Sql = "select * from TrasladoBienes "
+rsa.Open Sql, Conexion, adOpenForwardOnly, adLockOptimistic
 rsa.AddNew
 rsa!IdReferencia = Text1.Text
-rsa!FechaGraba = Format(CDate(txtfecha.Text), "YYYY/MM/DD")
+rsa!FechaGraba = Format(CDate(TxtFecha.Text), "YYYY/MM/DD")
 rsa!IdOfiOrigen = DepartamentoID(cmdgrupo2.BoundText)
 rsa!DescriOficina = cmdgrupo2.Text
 rsa!IdOfiDestino = DepartamentoID(cmdgrupo3.Text)
@@ -1083,14 +1083,14 @@ PushButton4.Enabled = False
 End Sub
 Private Sub actualizaestadoactivo()
 Set rsa = Nothing
-SQL = "update CatalogoActivoFijo set Trasladado=1, Fechatraslado='" & Format(Now, "dd/MM/yyyy") & "'  where Idreg='" & Trim(idactivo) & "'"
-rsa.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+Sql = "update CatalogoActivoFijo set Trasladado=1, Fechatraslado='" & Format(Now, "dd/MM/yyyy") & "'  where Idreg='" & Trim(idactivo) & "'"
+rsa.Open Sql, Conexion, adOpenForwardOnly, adLockOptimistic
 End Sub
 
 Private Sub PushButton5_Click()
-     wfecha = IIf(Len(Trim(txtfecha.Text)) = 0 Or Not IsDate(txtfecha.Text), Date, txtfecha.Text)
+     wfecha = IIf(Len(Trim(TxtFecha.Text)) = 0 Or Not IsDate(TxtFecha.Text), Date, TxtFecha.Text)
     Set wforma = Me
-    wtextc = txtfecha.Name
+    wtextc = TxtFecha.Name
     whabfe = True
     On Local Error Resume Next
     Load fcalendario

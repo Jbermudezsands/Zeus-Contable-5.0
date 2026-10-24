@@ -1,0 +1,2 @@
+ALTER TABLE Registros
+ADD Cod_Tercero VARCHAR(20) NULL

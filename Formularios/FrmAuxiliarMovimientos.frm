@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
 Begin VB.Form FrmAuxiliarMovimientos 
    BorderStyle     =   1  'Fixed Single
@@ -775,7 +775,7 @@ Begin VB.Form FrmAuxiliarMovimientos
          _ExtentX        =   2778
          _ExtentY        =   503
          _Version        =   393216
-         Format          =   79560705
+         Format          =   196608001
          CurrentDate     =   38008
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel3 

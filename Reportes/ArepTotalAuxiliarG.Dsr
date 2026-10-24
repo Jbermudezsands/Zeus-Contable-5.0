@@ -1,13 +1,13 @@
 VERSION 5.00
 Begin {9EB8768B-CDFA-44DF-8F3E-857A8405E1DB} ArepTotalAuxiliarG 
    Caption         =   "ActiveReport1"
-   ClientHeight    =   11490
-   ClientLeft      =   60
-   ClientTop       =   450
-   ClientWidth     =   19080
+   ClientHeight    =   11055
+   ClientLeft      =   165
+   ClientTop       =   510
+   ClientWidth     =   20370
    StartUpPosition =   3  'Windows Default
-   _ExtentX        =   33655
-   _ExtentY        =   20267
+   _ExtentX        =   35930
+   _ExtentY        =   19500
    SectionData     =   "ArepTotalAuxiliarG.dsx":0000
 End
 Attribute VB_Name = "ArepTotalAuxiliarG"
@@ -173,7 +173,7 @@ If FrmReportes.ChkExportar.Value = 1 Then
    ' Establecer CancelError a True
     FrmReportes.CDRuta.CancelError = True
     ' Establecer los indicadores
-    FrmReportes.CDRuta.flags = cdlOFNHideReadOnly
+    FrmReportes.CDRuta.Flags = cdlOFNHideReadOnly
     ' Establecer los filtros
     FrmReportes.CDRuta.Filter = "Excel (*.XLS)|*.xls"
     ' Especificar el filtro predeterminado

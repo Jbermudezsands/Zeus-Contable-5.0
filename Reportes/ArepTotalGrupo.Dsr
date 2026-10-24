@@ -42,37 +42,37 @@ Private Sub Detail_Format()
 '         FrmReportes.DtaHistorial.RecordSource = "SELECT Transacciones.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito From Transacciones Where (((Transacciones.FechaTransaccion) < " & NumFecha1 & ")) GROUP BY Transacciones.CodCuentas Having (((Transacciones.CodCuentas) = '" & CodigoCuenta & "'))"
          FrmReportes.DtaHistorial.RecordSource = "SELECT  CodCuentas, SUM(Debito * TCambio) AS MDebito, SUM(TCambio * Credito) AS MCredito From Transacciones WHERE  (FechaTransaccion < CONVERT(DATETIME, '" & Format(FrmReportes.DTFecha1.Value, "yyyymmdd") & "', 102)) GROUP BY CodCuentas HAVING (CodCuentas = '" & CodigoCuenta & "')"
          FrmReportes.DtaHistorial.Refresh
-         
+
          If Not FrmReportes.DtaHistorial.Recordset.EOF Then
           If Not IsNull(FrmReportes.DtaHistorial.Recordset("MDebito")) Then
            Debito = FrmReportes.DtaHistorial.Recordset("MDebito")
-           
+
           End If
            If Not IsNull(FrmReportes.DtaHistorial.Recordset("MCredito")) Then
              Credito = FrmReportes.DtaHistorial.Recordset("MCredito")
-          
+
           End If
           Total = Debito - Credito
           SaldoIni = Total
          Else
           SaldoIni = 0
          End If
-          
-           
+
+
          Else
 '///////////////Busco el Acumulado de la cuenta hasta la ultima fecha Seleccionada////////////
 '///////////////////////////////////////////////////////////////////////////////////////////////
          FrmReportes.DtaHistorial.RecordSource = "SELECT Transacciones.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito From Transacciones Where (((Transacciones.FechaTransaccion) < " & NumFecha1 & ")) GROUP BY Transacciones.CodCuentas Having (((Transacciones.CodCuentas) = '" & CodigoCuenta & "'))"
          FrmReportes.DtaHistorial.Refresh
-         
+
          If Not FrmReportes.DtaHistorial.Recordset.EOF Then
           If Not IsNull(FrmReportes.DtaHistorial.Recordset("MDebito")) Then
            Debito = FrmReportes.DtaHistorial.Recordset("MDebito")
-         
+
           End If
            If Not IsNull(FrmReportes.DtaHistorial.Recordset("MCredito")) Then
              Credito = FrmReportes.DtaHistorial.Recordset("MCredito")
-        
+
           End If
           Total = Debito - Credito
           SaldoIni = Total
@@ -80,16 +80,16 @@ Private Sub Detail_Format()
           SaldoIni = 0
          End If
          End If
-         
+
  '//////////////////////////Busco el total de los movimientos///////////////////////////////
- 
+
  TotalIni = SaldoIni + TotalIni
-        
+
   Me.LblIni.Caption = Format(SaldoIni, "##,##0.00")
   If Me.Field20.Text = "" Then
    Movimiento = 0
   Else
-   Movimiento = Me.Field20.Text
+'   Movimiento = Me.Field20.Text
   End If
   FrmReportes.DtaConsulta.RecordSource = "SELECT Cuentas.CodCuentas, Sum(Debito*TCambio) AS MDebito, Sum(TCambio*Credito) AS MCredito, Sum(Debito*TCambio)-Sum(Credito*TCambio) AS Total, Cuentas.DescripcionCuentas FROM Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas WHERE (((Transacciones.FechaTransaccion) Between " & NumFecha1 & " And " & NumFecha2 & ")) GROUP BY Cuentas.CodCuentas, Cuentas.DescripcionCuentas"
   FrmReportes.DtaConsulta.Refresh

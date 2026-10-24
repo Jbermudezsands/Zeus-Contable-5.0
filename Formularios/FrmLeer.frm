@@ -1,9 +1,9 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "Comdlg32.ocx"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "ComDlg32.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
 Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
 Begin VB.Form FrmImporta 
@@ -350,11 +350,11 @@ Begin VB.Form FrmImporta
    End
    Begin ACTIVESKINLibCtl.SkinLabel LblRegistros 
       Height          =   495
-      Left            =   3360
+      Left            =   3120
       OleObjectBlob   =   "FrmLeer.frx":2C70
       TabIndex        =   11
       Top             =   3840
-      Width           =   2055
+      Width           =   1095
    End
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel4 
       Height          =   495
@@ -805,7 +805,7 @@ Begin VB.Form FrmImporta
       _ExtentY        =   529
       _Version        =   393216
       Enabled         =   0   'False
-      Format          =   80609281
+      Format          =   122683393
       CurrentDate     =   37714
    End
    Begin MSMask.MaskEdBox TxtDebito 
@@ -890,19 +890,134 @@ Begin VB.Form FrmImporta
          Value           =   -1  'True
       End
    End
+   Begin ACTIVESKINLibCtl.SkinLabel LblAnulados2 
+      Height          =   495
+      Left            =   4440
+      OleObjectBlob   =   "FrmLeer.frx":2F77
+      TabIndex        =   22
+      Top             =   3840
+      Width           =   975
+   End
+   Begin ACTIVESKINLibCtl.SkinLabel LblAnulados 
+      Height          =   495
+      Left            =   5400
+      OleObjectBlob   =   "FrmLeer.frx":2FFB
+      TabIndex        =   23
+      Top             =   3840
+      Width           =   1095
+   End
 End
 Attribute VB_Name = "FrmImporta"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Private LogErrores As String
+Private HayErrores As Boolean
+
+Private Sub AgregarError( _
+        ByVal Fila As Long, _
+        ByVal Movimiento As Variant, _
+        ByVal Cuenta As String, _
+        ByVal CentroCosto As String, _
+        ByVal CodTercero As String, _
+        ByVal Mensaje As String)
+
+    HayErrores = True
+
+    LogErrores = LogErrores & _
+        String(60, "=") & vbCrLf & _
+        "Fila          : " & Fila & vbCrLf & _
+        "Movimiento    : " & Movimiento & vbCrLf & _
+        "Cuenta        : " & Cuenta & vbCrLf & _
+        "Centro Costo  : " & CentroCosto & vbCrLf & _
+        "Cod. Tercero  : " & CodTercero & vbCrLf & _
+        vbCrLf & _
+        "ERROR:" & vbCrLf & _
+        Mensaje & vbCrLf & _
+        String(60, "=") & vbCrLf & vbCrLf
+
+End Sub
+
+Private Sub GuardarLogErrores(ByVal ArchivoExcel As String)
+
+    Dim Archivo As Integer
+    Dim NombreLog As String
+
+    NombreLog = App.Path & "\Errores_" & _
+                Format(Now, "yyyymmdd_hhnnss") & ".txt"
+
+    Archivo = FreeFile
+
+    Open NombreLog For Output As #Archivo
+
+    Print #Archivo, "==============================================="
+    Print #Archivo, " REPORTE DE ERRORES DE IMPORTACION"
+    Print #Archivo, "==============================================="
+    Print #Archivo, ""
+    Print #Archivo, "Archivo : " & ArchivoExcel
+    Print #Archivo, "Fecha   : " & Format(Now, "dd/MM/yyyy hh:mm:ss")
+    Print #Archivo, ""
+    Print #Archivo, LogErrores
+
+    Close #Archivo
+
+    MsgBox "Se encontraron errores." & vbCrLf & _
+           "Revise el archivo:" & vbCrLf & _
+           NombreLog, vbExclamation
+
+End Sub
+
+Private Sub IniciarProgreso(ByVal Total As Long, ByVal Mensaje As String)
+
+    osProgress.Visible = True
+    osProgress.Min = 0
+    osProgress.Max = Total
+    osProgress.Value = 0
+
+    LblProgreso.Caption = Mensaje
+
+
+    DoEvents
+
+End Sub
+
+Private Sub ActualizarProgreso(ByVal Actual As Long, _
+                               ByVal Total As Long, _
+                               ByVal Mensaje As String, _
+                               Optional ByVal Errores As Long = 0)
+
+    If Actual <= osProgress.Max Then
+        osProgress.Value = Actual
+    End If
+
+    LblEstado.Caption = Mensaje & "Registro " & Format$(Actual, "#,##0") & _
+                         " de " & Format$(Total, "#,##0") & " " & "Errores encontrados: " & _
+                         Format$(Errores, "#,##0")
+
+
+    DoEvents
+
+End Sub
+
+Private Sub FinalizarProgreso()
+
+    osProgress.Value = osProgress.Max
+
+    LblProgreso.Caption = "Proceso finalizado"
+
+    DoEvents
+
+End Sub
+
+
 Private Sub CmdAnexar_Click()
 Dim FechaArchivo As Date, NumeroPeriodo As Integer, NumeroMovimiento As Integer
-Dim Fechas1 As String, Fechas2 As String, MovimientoArchivo As Double, SQL As String
+Dim Fechas1 As String, Fechas2 As String, MovimientoArchivo As Double, Sql As String
 Dim FechaGrabada As Date, MovimientoGrabado As Double, Fuente As String
 Dim NombreCuenta As String, CodigoArchivo As String, Longitud As Double, i As Integer, J As Integer
 Dim CodigoCuenta As String, mes As Double, CantidadRegistros As Double, ExisteCodigo As Boolean
-Dim Directorio As String, Abrir As String, Cadena As String
+Dim Directorio As String, Abrir As String, cadena As String
 
 Directorio = App.Path + "\Cuentas.txt"
 
@@ -943,13 +1058,13 @@ With Me.osProgress
           Me.LblProgreso.Caption = "Extraccion de la Cuenta: " & CodigoCuenta
           DoEvents
            
-           SQL = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo " & _
+           Sql = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo " & _
                  "From Cuentas WHERE (CodCuentas = '" & CodigoCuenta & "')"
-           Me.AdoConsulta.RecordSource = SQL
+           Me.AdoConsulta.RecordSource = Sql
            Me.AdoConsulta.Refresh
            If Me.AdoConsulta.Recordset.EOF Then
-              Cadena = CodigoCuenta
-              Print #1, Cadena
+              cadena = CodigoCuenta
+              Print #1, cadena
               ExisteCodigo = False
            End If
         
@@ -983,11 +1098,11 @@ With Me.osProgress
  
  
   
-  SQL = "SELECT Control, IdRegistros, Fecha, NTransaccion, Fuente, CodCuenta, CodDepartamento, CodAcciones, ClaveProyecto, FacturaNumero, TipoMovimiento, " & _
+  Sql = "SELECT Control, IdRegistros, Fecha, NTransaccion, Fuente, CodCuenta, CodDepartamento, CodAcciones, ClaveProyecto, FacturaNumero, TipoMovimiento, " & _
         "RefCheque, Descripcion, FechaVencimiento, ImporteTransaccionDebito, ImporteTransaccionCredito, ImporteDescuento, ValorUnitario, TipoTransaccion, " & _
         "DebitoDolar , CreditoDolar, FechaDescuento From Registros ORDER BY Control "
         
- Me.AdoAnexar.RecordSource = SQL
+ Me.AdoAnexar.RecordSource = Sql
  Me.AdoAnexar.Refresh
  
   Me.AdoAnexar.Recordset.MoveLast
@@ -1042,11 +1157,11 @@ With Me.osProgress
    
     Fuente = Me.AdoAnexar.Recordset("Fuente")
     '////////////////////BUSCO SI EL MOVIMIENTO ESTA CUADRADO//////////////////////////////
-     SQL = "SELECT     MAX(Control) AS Control, MAX(IdRegistros) AS IdRegistros, MAX(Fecha) AS Fecha, NTransaccion AS NTransaccion, SUM(ImporteTransaccionDebito) " & _
+     Sql = "SELECT     MAX(Control) AS Control, MAX(IdRegistros) AS IdRegistros, MAX(Fecha) AS Fecha, NTransaccion AS NTransaccion, SUM(ImporteTransaccionDebito) " & _
          "AS Debito, SUM(ImporteTransaccionCredito) AS Credito, SUM(ImporteTransaccionDebito) - SUM(ImporteTransaccionCredito) AS Diferencia " & _
          "From Registros GROUP BY NTransaccion " & _
          "HAVING  (MAX(Fecha) = '" & Format(FechaArchivo, "yyyymmdd") & "') AND (NTransaccion = " & MovimientoArchivo & " )"
-     AdoSuma.RecordSource = SQL
+     AdoSuma.RecordSource = Sql
      AdoSuma.Refresh
      If Not Me.AdoSuma.Recordset.EOF Then
         If Format(Me.AdoSuma.Recordset("Diferencia"), "##,##0.00") <> 0# Then
@@ -1061,11 +1176,11 @@ With Me.osProgress
    '///////SI NO EXISTE, PROBLEMA CON EL PERIODO O DESCUADRE AGREGO EL REGISTRO////////
    '///////////AGREGO EL INDICE DE LA TRANSACCION/////////////////////////////////
      
-   SQL = "SELECT  FechaTransaccion, NumeroMovimiento, DescripcionMovimiento, Nperiodo, Fuente, TipoMoneda " & _
+   Sql = "SELECT  FechaTransaccion, NumeroMovimiento, DescripcionMovimiento, Nperiodo, Fuente, TipoMoneda " & _
          "From IndiceTransaccion " & _
          "Where (NPeriodo = " & NumeroPeriodo & ") And (NumeroMovimiento = " & NumeroMovimiento & ") "
      
-   Me.AdoIndiceTransaccion.RecordSource = SQL
+   Me.AdoIndiceTransaccion.RecordSource = Sql
    Me.AdoIndiceTransaccion.Refresh
    If Me.AdoIndiceTransaccion.Recordset.EOF Then
 
@@ -1094,10 +1209,10 @@ With Me.osProgress
     '/////////////////////////////////////////////////////////////////////////////////
     '//////////BUSCO LA CUENTA CONTABLE PARA EL NOMBRE////////
     '/////////////////////////////////////////////////////////////
-    SQL = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo " & _
+    Sql = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo " & _
         "From Cuentas WHERE (CodCuentas ='" & CodigoCuenta & "')"
         
-    AdoCuenta.RecordSource = SQL
+    AdoCuenta.RecordSource = Sql
     AdoCuenta.Refresh
     If Not Me.AdoCuenta.Recordset.EOF Then
      If Not IsNull(Me.AdoCuenta.Recordset("DescripcionCuentas")) Then
@@ -1116,12 +1231,12 @@ With Me.osProgress
     '///////BUSCO LA TRANSACCION PARA ANEXAR O AGREGAR EL REGISTRO////////
     '///////////////////////////////////////////////////////////////////////
     
-    SQL = "SELECT  CodCuentas, FechaTransaccion, NPeriodo, NTransaccion, NumeroMovimiento, NombreCuenta, VoucherNo, DescripcionMovimiento, Clave, TCambio, " & _
+    Sql = "SELECT  CodCuentas, FechaTransaccion, NPeriodo, NTransaccion, NumeroMovimiento, NombreCuenta, VoucherNo, DescripcionMovimiento, Clave, TCambio, " & _
          "Debito, Credito, FacturaNo, ChequeNo, Fuente, FechaTasas, Conciliada, ConciliacionProcesada, FechaDescuento, DescuentoDisponible, " & _
          "FechaVence From Transacciones " & _
          "Where (NPeriodo = " & NumeroPeriodo & ") And (NumeroMovimiento = " & NumeroMovimiento & ")"
     
-    Me.AdoTransacciones.RecordSource = SQL
+    Me.AdoTransacciones.RecordSource = Sql
     Me.AdoTransacciones.Refresh
 
       Me.AdoTransacciones.Recordset.AddNew
@@ -1165,11 +1280,11 @@ End Sub
 
 Private Sub CmdAnexarZeus_Click()
 Dim FechaArchivo As Date, NumeroPeriodo As Integer, NumeroMovimiento As Integer
-Dim Fechas1 As String, Fechas2 As String, MovimientoArchivo As Double, SQL As String
+Dim Fechas1 As String, Fechas2 As String, MovimientoArchivo As Double, Sql As String
 Dim FechaGrabada As Date, MovimientoGrabado As Double, Fuente As String
 Dim NombreCuenta As String, CodigoArchivo As String, Longitud As Double, i As Integer, J As Integer
 Dim CodigoCuenta As String, mes As Double, CantidadRegistros As Double, ExisteCodigo As Boolean
-Dim Directorio As String, Abrir As String, Cadena As String, VoucherNo As String
+Dim Directorio As String, Abrir As String, cadena As String, VoucherNo As String
 
 Directorio = App.Path + "\Cuentas.txt"
 
@@ -1182,6 +1297,8 @@ Me.osProgress.Visible = True
 
 Me.AdoRegistros.Recordset.MoveLast
 CantidadRegistros = AdoRegistros.Recordset.RecordCount
+
+'If Not ValidarPeriodos(Conexion, Me.AdoRegistros.Recordset) Then Exit Sub
  
 With Me.osProgress
  .Min = 0
@@ -1210,13 +1327,13 @@ With Me.osProgress
           Me.LblProgreso.Caption = "Extraccion de la Cuenta: " & CodigoCuenta
           DoEvents
            
-           SQL = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo " & _
+           Sql = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo " & _
                  "From Cuentas WHERE (CodCuentas = '" & CodigoCuenta & "')"
-           Me.AdoConsulta.RecordSource = SQL
+           Me.AdoConsulta.RecordSource = Sql
            Me.AdoConsulta.Refresh
            If Me.AdoConsulta.Recordset.EOF Then
-              Cadena = CodigoCuenta
-              Print #1, Cadena
+              cadena = CodigoCuenta
+              Print #1, cadena
               ExisteCodigo = False
            End If
         
@@ -1250,11 +1367,11 @@ With Me.osProgress
  
  
   
-  SQL = "SELECT Control, IdRegistros, Fecha, NTransaccion, Fuente, CodCuenta, CodDepartamento, CodAcciones, ClaveProyecto, FacturaNumero, TipoMovimiento, " & _
+  Sql = "SELECT Control, IdRegistros, Fecha, NTransaccion, Fuente, CodCuenta, CodDepartamento, CodAcciones, ClaveProyecto, FacturaNumero, TipoMovimiento, " & _
         "RefCheque, Descripcion, FechaVencimiento, ImporteTransaccionDebito, ImporteTransaccionCredito, ImporteDescuento, ValorUnitario, TipoTransaccion, " & _
-        "DebitoDolar , CreditoDolar, FechaDescuento From Registros ORDER BY NTransaccion, Control "
+        "DebitoDolar , CreditoDolar, FechaDescuento, Cod_Tercero From Registros ORDER BY NTransaccion, Control "
         
- Me.AdoAnexar.RecordSource = SQL
+ Me.AdoAnexar.RecordSource = Sql
  Me.AdoAnexar.Refresh
  
   Me.AdoAnexar.Recordset.MoveLast
@@ -1285,6 +1402,8 @@ With Me.osProgress
  
  CodigoCuenta = Me.AdoAnexar.Recordset("CodCuenta")
  
+
+ 
  
   '//////BUSCO EL PERIODO DEL MOVIMIENTOS PARA AGREGARLO//////////////////////////////
 
@@ -1292,11 +1411,14 @@ With Me.osProgress
   mes = Month(Fechas1)
   Año = Year(Fechas1)
   Fechas2 = DateSerial(Año, mes + 1, 1 - 1)
+  
+  
+ '////////////////////CODIGO RETIRADO 30/07/2026 //////////////////////////////////////////////////
   Me.AdoPeriodos.RecordSource = "SELECT NPeriodo, NumeroTabla, FechaPeriodo, EstadoPeriodo, NTransacciones, Periodo From Periodos WHERE (FechaPeriodo BETWEEN '" & Format(Fechas1, "yyyymmdd") & "' AND '" & Format(Fechas2, "yyyymmdd") & "')"
   Me.AdoPeriodos.Refresh
   If Not Me.AdoPeriodos.Recordset.EOF Then
     NumeroPeriodo = Me.AdoPeriodos.Recordset("NPeriodo")
-    
+
     If MovimientoArchivo = Me.AdoAnexar.Recordset("NTransaccion") And FechaArchivo = Me.AdoAnexar.Recordset("Fecha") Then
      NumeroMovimiento = Me.AdoPeriodos.Recordset("NTransacciones")
      MovimientoArchivo = Me.AdoAnexar.Recordset("NTransaccion")
@@ -1306,35 +1428,41 @@ With Me.osProgress
      MovimientoArchivo = Me.AdoAnexar.Recordset("NTransaccion")
      FechaArchivo = Me.AdoAnexar.Recordset("Fecha")
    End If
-   
+
     Fuente = Me.AdoAnexar.Recordset("Fuente")
     '////////////////////BUSCO SI EL MOVIMIENTO ESTA CUADRADO//////////////////////////////
-     SQL = "SELECT     MAX(Control) AS Control, MAX(IdRegistros) AS IdRegistros, MAX(Fecha) AS Fecha, NTransaccion AS NTransaccion, SUM(ImporteTransaccionDebito) " & _
+     Sql = "SELECT     MAX(Control) AS Control, MAX(IdRegistros) AS IdRegistros, MAX(Fecha) AS Fecha, NTransaccion AS NTransaccion, SUM(ImporteTransaccionDebito) " & _
          "AS Debito, SUM(ImporteTransaccionCredito) AS Credito, SUM(ImporteTransaccionDebito) - SUM(ImporteTransaccionCredito) AS Diferencia " & _
          "From Registros GROUP BY NTransaccion " & _
          "HAVING  (MAX(Fecha) = '" & Format(FechaArchivo, "yyyymmdd") & "') AND (NTransaccion = " & MovimientoArchivo & " )"
-     AdoSuma.RecordSource = SQL
+     AdoSuma.RecordSource = Sql
      AdoSuma.Refresh
      If Not Me.AdoSuma.Recordset.EOF Then
         If Format(Me.AdoSuma.Recordset("Diferencia"), "##,##0.00") <> 0# Then
          MsgBox "Existen Transacciones Descuadradas", vbCritical, "Fecha: " & FechaArchivo & " Transac# " & MovimientoArchivo
          Exit Sub
-     
+
         End If
      End If
-     
-     
+
+
+
+
+
    '///////////////////////////////////////////////////////////////////////////////////
    '///////SI NO EXISTE, PROBLEMA CON EL PERIODO O DESCUADRE AGREGO EL REGISTRO////////
    '///////////AGREGO EL INDICE DE LA TRANSACCION/////////////////////////////////
-     
-   SQL = "SELECT  FechaTransaccion, NumeroMovimiento, DescripcionMovimiento, Nperiodo, Fuente, TipoMoneda " & _
+
+   Sql = "SELECT  FechaTransaccion, NumeroMovimiento, DescripcionMovimiento, Nperiodo, Fuente, TipoMoneda " & _
          "From IndiceTransaccion " & _
          "Where (NPeriodo = " & NumeroPeriodo & ") And (NumeroMovimiento = " & NumeroMovimiento & ") "
-     
-   Me.AdoIndiceTransaccion.RecordSource = SQL
+
+   Me.AdoIndiceTransaccion.RecordSource = Sql
    Me.AdoIndiceTransaccion.Refresh
    If Me.AdoIndiceTransaccion.Recordset.EOF Then
+   
+    Me.LblProgreso.Caption = "Agregando el Periodo: " & NumeroPeriodo
+    DoEvents
 
     NumeroMovimiento = NumeroMovimiento
     Me.AdoIndiceTransaccion.Recordset.AddNew
@@ -1345,14 +1473,14 @@ With Me.osProgress
     Me.AdoIndiceTransaccion.Recordset("Fuente") = Fuente
     Me.AdoIndiceTransaccion.Recordset("TipoMoneda") = "Córdobas"
     Me.AdoIndiceTransaccion.Recordset.Update
-    
-    
+
+
     '/////////////////////////////////////////////////////////////////////////////////
     '/////////////EDITO LA TABLA PERIODOS////////////////////////////////////////////
     '////////////////////////////////////////////////////////////////////////////////
      Me.AdoPeriodos.Recordset("NTransacciones") = Me.AdoPeriodos.Recordset("NTransacciones") + 1
      Me.AdoPeriodos.Recordset.Update
-    
+
    End If
     
 
@@ -1361,16 +1489,18 @@ With Me.osProgress
     '/////////////////////////////////////////////////////////////////////////////////
     '//////////BUSCO LA CUENTA CONTABLE PARA EL NOMBRE////////
     '/////////////////////////////////////////////////////////////
-    SQL = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo " & _
+    Sql = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo " & _
         "From Cuentas WHERE (CodCuentas ='" & CodigoCuenta & "')"
         
-    AdoCuenta.RecordSource = SQL
+    AdoCuenta.RecordSource = Sql
     AdoCuenta.Refresh
     If Not Me.AdoCuenta.Recordset.EOF Then
      If Not IsNull(Me.AdoCuenta.Recordset("DescripcionCuentas")) Then
       NombreCuenta = Me.AdoCuenta.Recordset("DescripcionCuentas")
      Else
       NombreCuenta = "CUENTA SIN DESCRIPCION?????"
+      Me.LblProgreso.Caption = "La cuenta no tiene Descripcion: " & NombreCuenta
+      DoEvents
      End If
     
     End If
@@ -1383,13 +1513,16 @@ With Me.osProgress
     '///////BUSCO LA TRANSACCION PARA ANEXAR O AGREGAR EL REGISTRO////////
     '///////////////////////////////////////////////////////////////////////
     
-    SQL = "SELECT  CodCuentas, FechaTransaccion, NPeriodo, NTransaccion, NumeroMovimiento, NombreCuenta, VoucherNo, DescripcionMovimiento, Clave, TCambio, " & _
+    Sql = "SELECT  CodCuentas, FechaTransaccion, NPeriodo, NTransaccion, NumeroMovimiento, NombreCuenta, VoucherNo, DescripcionMovimiento, Clave, TCambio, " & _
          "Debito, Credito, FacturaNo, ChequeNo, Fuente, FechaTasas, Conciliada, ConciliacionProcesada, FechaDescuento, DescuentoDisponible, " & _
-         "FechaVence From Transacciones " & _
+         "FechaVence, Cod_Tercero, Cod_Centro_Costo From Transacciones " & _
          "Where (NPeriodo = " & NumeroPeriodo & ") And (NumeroMovimiento = " & NumeroMovimiento & ")"
     
-    Me.AdoTransacciones.RecordSource = SQL
+    Me.AdoTransacciones.RecordSource = Sql
     Me.AdoTransacciones.Refresh
+    
+      Me.LblProgreso.Caption = "Agregando Registro con la cuenta: " & CodigoCuenta
+      DoEvents
 
       Me.AdoTransacciones.Recordset.AddNew
        Me.AdoTransacciones.Recordset("CodCuentas") = CodigoCuenta
@@ -1406,15 +1539,17 @@ With Me.osProgress
        End If
        Me.AdoTransacciones.Recordset("TCambio") = 1
        
-       If Not IsNull(Me.AdoAnexar.Recordset("CodAcciones")) Then
-        Me.AdoTransacciones.Recordset("VoucherNo") = Me.AdoAnexar.Recordset("CodAcciones")
-       End If
+'       If Not IsNull(Me.AdoAnexar.Recordset("CodAcciones")) Then
+'        Me.AdoTransacciones.Recordset("VoucherNo") = Me.AdoAnexar.Recordset("CodAcciones")
+'       End If
        If Not IsNull(Me.AdoAnexar.Recordset("FacturaNumero")) Then
         Me.AdoTransacciones.Recordset("FacturaNo") = Me.AdoAnexar.Recordset("FacturaNumero")
        End If
        Me.AdoTransacciones.Recordset("ChequeNo") = Me.AdoAnexar.Recordset("RefCheque")
        Me.AdoTransacciones.Recordset("Fuente") = Fuente
        Me.AdoTransacciones.Recordset("FechaTasas") = FechaArchivo
+       Me.AdoTransacciones.Recordset("Cod_Tercero") = Me.AdoAnexar.Recordset("Cod_Tercero")
+       Me.AdoTransacciones.Recordset("Cod_Centro_Costo") = Me.AdoAnexar.Recordset("CodDepartamento")
        Me.AdoTransacciones.Recordset("Debito") = Me.AdoAnexar.Recordset("ImporteTransaccionDebito")
        Me.AdoTransacciones.Recordset("Credito") = Me.AdoAnexar.Recordset("ImporteTransaccionCredito")
           
@@ -1436,233 +1571,726 @@ With Me.osProgress
 End With
  MsgBox "Proceso de Importacion Terminado!!!!", vbExclamation, "Sistema Contable"
 End Sub
+Private Sub AgregarRegistro( _
+        ByVal Consecutivo As Long, _
+        ByVal Fecha As Date, _
+        ByVal NTransaccion As Double, _
+        ByVal Fuente As String, _
+        ByVal CodCuenta As String, _
+        ByVal CodDepartamento As String, _
+        ByVal CodAcciones As String, _
+        ByVal ClaveProyecto As String, _
+        ByVal FacturaNumero As String, _
+        ByVal TipoMovimiento As String, _
+        ByVal RefCheque As String, _
+        ByVal Descripcion As String, _
+        ByVal ImporteTransaccion As Double, _
+        ByVal CodTercero As String)
+        
+        
+          Me.AdoRegistros.Recordset.AddNew
+          AdoRegistros.Recordset("IdRegistros") = Consecutivo
+          AdoRegistros.Recordset("Fecha") = Fecha
+          AdoRegistros.Recordset("NTransaccion") = NTransaccion
+          AdoRegistros.Recordset("Fuente") = Fuente
+          AdoRegistros.Recordset("CodCuenta") = CodCuenta
+          AdoRegistros.Recordset("CodDepartamento") = CodDepartamento
+          AdoRegistros.Recordset("CodAcciones") = CodAcciones
+          AdoRegistros.Recordset("ClaveProyecto") = ClaveProyecto
+          AdoRegistros.Recordset("FacturaNumero") = FacturaNumero
+          AdoRegistros.Recordset("TipoMovimiento") = TipoMovimiento
+          AdoRegistros.Recordset("RefCheque") = RefCheque
+          AdoRegistros.Recordset("Descripcion") = Descripcion
+          AdoRegistros.Recordset("Cod_Tercero") = CodTercero
+          
+          If TipoMovimiento = "01" Or TipoMovimiento = "02" Or TipoMovimiento = "03" Or TipoMovimiento = "04" Or TipoMovimiento = "10" Or TipoMovimiento = "11" Or TipoMovimiento = "12" Or TipoMovimiento = "13" Or TipoMovimiento = "14" Or TipoMovimiento = "20" Or TipoMovimiento = "21" Or TipoMovimiento = "23" Or TipoMovimiento = "27" Or TipoMovimiento = "31" Then
+            AdoRegistros.Recordset("ImporteTransaccionDebito") = ImporteTransaccion
+          ElseIf TipoMovimiento = "05" Or TipoMovimiento = "06" Or TipoMovimiento = "07" Or TipoMovimiento = "08" Or TipoMovimiento = "09" Or TipoMovimiento = "15" Or TipoMovimiento = "16" Or TipoMovimiento = "17" Or TipoMovimiento = "18" Or TipoMovimiento = "19" Or TipoMovimiento = "22" Or TipoMovimiento = "24" Or TipoMovimiento = "25" Or TipoMovimiento = "26" Or TipoMovimiento = "28" Or TipoMovimiento = "29" Or TipoMovimiento = "30" Then
+            AdoRegistros.Recordset("ImporteTransaccionCredito") = ImporteTransaccion
+          Else
+              cadena = "Este Archivo Contienen un Codigo Nuevo" & vbLf
+              cadena = cadena & "Llame a su Soporte Tecnico para Anexarlo" & vbLf
+              cadena = cadena & "Al listado Permitido, para Importar"
+            MsgBox cadena
+            Exit Sub
+          End If
+
+          
+          
+          Me.AdoRegistros.Recordset.Update
+
+End Sub
+
+
+
+
+Private Sub LeerTxt(ByVal Directorio As String)
+
+On Error GoTo TipoErrs
+
+    Dim Contador As Integer
+    Dim Campo As String, Fechas As String, FechaT1 As String, FechaT2 As String, FechaT3 As String
+    Dim TotalDebito As Double, TotalCredito As Double, cadena As String
+    Dim Consecutivo As Integer, NTransaccion As Double
+    Dim Anulado As Integer, CodigoArchivo As String, CodigoCuenta As String
+    Dim Fuente As String
+    Dim CodCuenta As String, CodDepartamento As String
+    Dim CodAcciones As String, ClaveProyecto As String, NFactura As String
+    Dim Ttransaccion As String, ReferenciaCh As String
+    Dim Descripcion As String, FechaDescuento As String
+    Dim FechaVencimiento As String, ImporteDescuento As String
+    Dim ImporteTransaccion As Double, ValorUnit As String
+    Dim TipoTransaccion As String, Longitud As Double
+    Dim Ultimo As Boolean
+    Dim Encontrado As Boolean
+    Dim Conexion As String
+    Dim Buscado As Boolean
+    Dim NumFecha1 As Long, NumFecha2 As Long
+    Dim TipoMovimiento As String
+    Dim Salir As Boolean, Continuar As Boolean
+
+       Me.AdoRegistros.Refresh
+        Do While Not Me.AdoRegistros.Recordset.EOF
+          Me.AdoRegistros.Recordset.Delete
+         Me.AdoRegistros.Recordset.MoveNext
+        Loop
+        
+        Consecutivo = 0
+        crlf$ = Chr(13) & Chr(10)
+        Contador = 0
+        Open Directorio For Input As #1
+        
+        Me.AdoImporta.RecordSource = "SELECT Registros.Control, Registros.IdRegistros, Registros.Fecha, Registros.NTransaccion, Registros.Fuente, Registros.CodCuenta, Registros.Descripcion, Registros.CodDepartamento, Registros.CodAcciones, Registros.ClaveProyecto, Registros.FacturaNumero, Registros.TipoMovimiento, Registros.RefCheque, Registros.FechaDescuento, Registros.FechaVencimiento, Registros.ImporteTransaccionDebito, Registros.ImporteTransaccionCredito, Registros.ImporteDescuento, Registros.ValorUnitario, Registros.TipoTransaccion From Registros Where (((Registros.IdRegistros) = " & Consecutivo & ")) "
+        Me.AdoImporta.Refresh
+        'Me.DBRegistro.Columns(0).Visible = False
+        'Me.DBRegistro.Columns(1).Visible = False
+        'Me.DBRegistro.Columns(2).Visible = False
+        'Me.DBRegistro.Columns(3).Visible = False
+        'Me.DBRegistro.Columns(4).Visible = False
+        'Me.DBRegistro.Columns(5).Caption = "Cuenta"
+        'Me.DBRegistro.Columns(7).Caption = "Departamento"
+        'Me.DBRegistro.Columns(8).Visible = False
+        'Me.DBRegistro.Columns(9).Visible = False
+        'Me.DBRegistro.Columns(11).Visible = False
+        'Me.DBRegistro.Columns(13).Visible = False
+        'Me.DBRegistro.Columns(14).Visible = False
+        'Me.DBRegistro.Columns(15).Caption = "Debito"
+        'Me.DBRegistro.Columns(16).Caption = "Credito"
+        'Me.DBRegistro.Columns(17).Visible = False
+        'Me.DBRegistro.Columns(18).Visible = False
+        'Me.DBRegistro.Columns(19).Visible = False
+        
+        If Consecutivo = 0 Then
+          Me.AdoConsecutivo.Recordset("ConsecutivoImporta") = AdoConsecutivo.Recordset("ConsecutivoImporta") + 1
+         Me.AdoConsecutivo.Recordset.Update
+         If Not IsNull(AdoConsecutivo.Recordset("ConsecutivoImporta")) Then
+         Consecutivo = AdoConsecutivo.Recordset("ConsecutivoImporta")
+         Else
+          Consecutivo = 1
+         End If
+        End If
+        Anulado = 0
+        While Not EOF(1)
+        Salir = False
+        Line Input #1, cadena
+         
+        
+         Fechas = Mid(cadena, 1, 8)
+         FechaT2 = Mid(Fechas, 1, 2)
+         FechaT1 = Mid(Fechas, 3, 2)
+         FechaT3 = Mid(Fechas, 5, 4)
+         Fecha = FechaT1 & "/" & FechaT2 + "/" + FechaT3
+         
+         
+        
+         NTransaccion = Mid(cadena, 9, 8)
+        
+         
+         Fuente = Mid(cadena, 17, 4)
+         CodCuenta = Mid(cadena, 21, 16)
+         Me.Caption = "Procesando Cuenta " & CodCuenta
+         CodDepartamento = Mid(cadena, 37, 3)
+         CodAcciones = Mid(cadena, 40, 17)
+         ClaveProyecto = Mid(cadena, 57, 15)
+         NFactura = Mid(cadena, 72, 8)
+         Ttransaccion = Mid(cadena, 80, 2)
+         ReferenciaCh = Mid(cadena, 82, 6)
+         Descripcion = Mid(cadena, 88, 35)
+         
+         
+         '/////////////QUITOS LOS ESPACIOS DEL CODIGO CUENTA///////////////
+          Longitud = Len(CodCuenta)
+          CodigoArchivo = ""
+          CodigoCuenta = ""
+
+         For i = 1 To Longitud
+             CodigoArchivo = Mid(CodCuenta, i, 1)
+             If CodigoArchivo <> " " Then
+               CodigoCuenta = CodigoCuenta & CodigoArchivo
+        
+             End If
+           
+           Next
+        
+           CodCuenta = CodigoCuenta
+           If CodigoCuenta = "113-5-1-103-001-" Then
+             Cod = 1
+           End If
+        
+        
+         '///////Convierto el formato de fecha////////////////
+         
+         
+        ' FechaDescuento = Mid(Cadena, 124, 8)
+        ' FechaVencimiento = Mid(Cadena, 132, 8)
+        
+        
+         ImporteTransaccion = Mid(cadena, 140, 17)
+        ' ImporteDescuento = Mid(cadena, 157, 17)
+        ' ValorUnit = Mid(cadena, 174, 17)
+        ' TipoTransaccion = Mid(cadena, 191, 2)
+        
+        If Not CodCuenta = "                " Then
+         If ImporteTransaccion <> 0 Then
+
+
+                AgregarRegistro _
+                    Consecutivo, _
+                    Fecha, _
+                    NTransaccion, _
+                    Fuente, _
+                    CodCuenta, _
+                    CodDepartamento, _
+                    CodAcciones, _
+                    ClaveProyecto, _
+                    NFactura, _
+                    Ttransaccion, _
+                    ReferenciaCh, _
+                    Descripcion, _
+                    ImporteTransaccion, _
+                    ""
+
+
+          Contador = Contador + 1
+          Me.LblRegistros.Caption = Contador
+          DoEvents
+         Else
+          Anulado = Anulado + 1
+         End If
+         Else
+          Anulado = Anulado + 1
+         End If
+        Wend
+        Close #1
+        Me.AdoImporta.RecordSource = "SELECT Registros.Control, Registros.IdRegistros, Registros.Fecha, Registros.NTransaccion, Registros.Fuente, Registros.CodCuenta, Registros.Descripcion, Registros.CodDepartamento, Registros.CodAcciones, Registros.ClaveProyecto, Registros.FacturaNumero, Registros.TipoMovimiento, Registros.RefCheque, Registros.FechaDescuento, Registros.FechaVencimiento, Registros.ImporteTransaccionDebito, Registros.ImporteTransaccionCredito, Registros.ImporteDescuento, Registros.ValorUnitario, Registros.TipoTransaccion From Registros Where (((Registros.IdRegistros) = " & Consecutivo & ")) ORDER BY NTransaccion, Control"
+        Me.AdoImporta.Refresh
+        ' Me.DBRegistro.Columns(0).Visible = False
+        'Me.DBRegistro.Columns(1).Visible = False
+        'Me.DBRegistro.Columns(2).Visible = False
+        'Me.DBRegistro.Columns(3).Visible = False
+        'Me.DBRegistro.Columns(4).Visible = False
+        'Me.DBRegistro.Columns(5).Caption = "Cuenta"
+        'Me.DBRegistro.Columns(7).Caption = "Departamento"
+        'Me.DBRegistro.Columns(8).Visible = False
+        'Me.DBRegistro.Columns(9).Visible = False
+        'Me.DBRegistro.Columns(11).Visible = False
+        'Me.DBRegistro.Columns(13).Visible = False
+        'Me.DBRegistro.Columns(14).Visible = False
+        'Me.DBRegistro.Columns(15).Caption = "Debito"
+        'Me.DBRegistro.Columns(16).Caption = "Credito"
+        'Me.DBRegistro.Columns(17).Visible = False
+        'Me.DBRegistro.Columns(18).Visible = False
+        'Me.DBRegistro.Columns(19).Visible = False
+        MsgBox "Proceso Terminado", vbExclamation, "Sistema de Enlace"
+        If Not Anulado = 0 Then
+         MsgBox "Se quitaron " & Anulado & " Transacciones anuladas"
+        End If
+        Me.AdoSuma.RecordSource = "SELECT Sum(Registros.ImporteTransaccionDebito) AS TotalDebito, Sum(Registros.ImporteTransaccionCredito) AS TotalCredito From Registros"
+        Me.AdoSuma.Refresh
+        TotalCredito = Format(AdoSuma.Recordset("TotalCredito"), "##,##0.00")
+        Me.TxtCredito.Text = TotalCredito
+        TotalDebito = Format(AdoSuma.Recordset("TotalDebito"), "##,##0.00")
+        Me.TxtDebito.Text = TotalDebito
+        Salir = True
+        Exit Sub
+TipoErrs:
+        MsgBox err.Description
+        Salir = True
+End Sub
+
+Private Sub LeerExcel(ByVal Directorio As String)
+
+    On Error GoTo ErrExcel
+
+    Dim xlApp As Object
+    Dim xlLibro As Object
+    Dim xlHoja As Object
+
+    Set xlApp = CreateObject("Excel.Application")
+    Set xlLibro = xlApp.Workbooks.Open(Directorio)
+    Set xlHoja = xlLibro.Worksheets(1)
+    
+    '=========================================
+    ' Cargar catálogos en memoria
+    '=========================================
+      CargarCatalogos
+      
+    Dim Fila As Long
+    Dim Fecha As Variant
+    Dim Movimiento As Variant
+    Dim Fuente As String
+    Dim Cuenta As String
+    Dim CentroCosto As String
+    Dim Factura As String
+    Dim Tipo As String
+    Dim Referencia As String
+    Dim Descripcion As String
+    Dim Importe As Double
+    Dim CodTercero As String
+    Dim NombreTercero As String
+    
+    Dim Consecutivo As Integer
+    Dim Contador As Integer
+    Dim TotalDebito As Double
+    Dim TotalCredito As Double
+    Dim Anulado As Integer
+    
+    Me.AdoRegistros.Refresh
+
+    Do While Not Me.AdoRegistros.Recordset.EOF
+        Me.AdoRegistros.Recordset.Delete
+        Me.AdoRegistros.Recordset.MoveNext
+    Loop
+    
+    Consecutivo = 0
+    Contador = 0
+    
+    Me.AdoImporta.RecordSource = "SELECT * FROM Registros WHERE IdRegistros = " & Consecutivo
+    Me.AdoImporta.Refresh
+    
+    If Consecutivo = 0 Then
+        Me.AdoConsecutivo.Recordset("ConsecutivoImporta") = _
+            Me.AdoConsecutivo.Recordset("ConsecutivoImporta") + 1
+    
+        Me.AdoConsecutivo.Recordset.Update
+    
+        If Not IsNull(Me.AdoConsecutivo.Recordset("ConsecutivoImporta")) Then
+            Consecutivo = Me.AdoConsecutivo.Recordset("ConsecutivoImporta")
+        Else
+            Consecutivo = 1
+        End If
+    End If
+    
+    
+    Dim UltimaFila As Long
+    
+    UltimaFila = xlHoja.Cells(xlHoja.Rows.Count, 1).End(-4162).Row
+    
+    Fila = 2
+    
+    osProgress.Visible = True
+    osProgress.Min = 0
+    osProgress.Max = UltimaFila - 1    'Porque comienzas en la fila 2
+    osProgress.Value = 0
+    Me.LblProgreso.Visible = True
+    Me.LblProgreso.Caption = "Importando transacciones..." & "Errores: 0"
+'    LblDetalle.Caption = ""
+'    LblErrores.Caption = "Errores: 0"
+
+    DoEvents
+    
+    Do While Fila <= UltimaFila
+    
+        Fecha = xlHoja.Cells(Fila, 1).Value
+'        Movimiento = xlHoja.Cells(Fila, 2).Value
+        Movimiento = 1
+        Fuente = Trim(CStr(xlHoja.Cells(Fila, 3).Value))
+        Cuenta = Trim(CStr(xlHoja.Cells(Fila, 4).Value))
+        Cuenta = Replace(Cuenta, " ", "")
+        CentroCosto = Trim(CStr(xlHoja.Cells(Fila, 5).Value))
+        Factura = Trim(CStr(xlHoja.Cells(Fila, 6).Value))
+        Tipo = Trim(CStr(xlHoja.Cells(Fila, 7).Value))
+        Referencia = Trim(CStr(xlHoja.Cells(Fila, 8).Value))
+        Descripcion = Trim(CStr(xlHoja.Cells(Fila, 9).Value))
+        
+        '/////VALIDO QUE LA CUENTA NO ESTE EN BLANCO
+   
+        If Trim(CStr(xlHoja.Cells(Fila, 10).Value)) <> "" Then
+            Importe = CDbl(xlHoja.Cells(Fila, 10).Value)
+        Else
+            Importe = 0
+        End If
+    
+        CodTercero = Trim(CStr(xlHoja.Cells(Fila, 11).Value))
+        CodTercero = Replace(CodTercero, " ", "")
+'        NombreTercero = Trim(CStr(xlHoja.Cells(Fila, 12).Value))
+
+If CodTercero = "5353" Then
+ CodTercero = "5353"
+End If
+       
+
+        If ValidarRegistroExcel(Fila, Fecha, Movimiento, Cuenta, CentroCosto, Tipo, Importe, CodTercero) Then
+
+
+             AgregarRegistro _
+                Consecutivo, _
+                CDate(Fecha), _
+                CDbl(Movimiento), _
+                Fuente, _
+                Cuenta, _
+                CentroCosto, _
+                "", _
+                "", _
+                Factura, _
+                Tipo, _
+                Referencia, _
+                Descripcion, _
+                Importe, _
+                CodTercero
+        
+            Contador = Contador + 1
+            Me.LblRegistros.Caption = Contador
+            DoEvents
+        Else
+            Anulado = Anulado + 1
+        End If
+        
+        If (Fila Mod 5) = 0 Then
+        
+            osProgress.Value = Fila - 1
+        
+            Me.LblRegistros.Caption = Contador
+            Me.LblAnulados.Caption = Anulado
+            Me.LblProgreso.Caption = "Validando registros..."
+        
+            DoEvents
+        
+        End If
+            
+        Fila = Fila + 1
+    
+   Loop
+   
+    If HayErrores Then
+    
+        Me.AdoRegistros.Refresh
+    
+        Do While Not Me.AdoRegistros.Recordset.EOF
+            Me.AdoRegistros.Recordset.Delete
+            Me.AdoRegistros.Recordset.MoveNext
+        Loop
+    
+        GuardarLogErrores Directorio
+    
+        GoTo Salir
+    
+    End If
+    
+MsgBox "Se importaron " & Contador & " registros."
+
+Salir:
+
+    On Error Resume Next
+
+    xlLibro.Close False
+    xlApp.Quit
+
+    Set xlHoja = Nothing
+    Set xlLibro = Nothing
+    Set xlApp = Nothing
+    
+        Me.AdoImporta.RecordSource = "SELECT Registros.Control, Registros.IdRegistros, Registros.Fecha, Registros.NTransaccion, Registros.Fuente, Registros.CodCuenta, Registros.Descripcion, Registros.CodDepartamento, Registros.CodAcciones, Registros.ClaveProyecto, Registros.FacturaNumero, Registros.TipoMovimiento, Registros.RefCheque, Registros.FechaDescuento, Registros.FechaVencimiento, Registros.ImporteTransaccionDebito, Registros.ImporteTransaccionCredito, Registros.ImporteDescuento, Registros.ValorUnitario, Registros.TipoTransaccion From Registros Where (((Registros.IdRegistros)=" & Consecutivo & ")) ORDER BY NTransaccion, Control"
+        Me.AdoImporta.Refresh
+    
+        MsgBox "Proceso Terminado", vbExclamation, "Sistema de Enlace"
+        If Not Anulado = 0 Then
+         MsgBox "Se quitaron " & Anulado & " Transacciones anuladas"
+        End If
+        Me.AdoSuma.RecordSource = "SELECT Sum(Registros.ImporteTransaccionDebito) AS TotalDebito, Sum(Registros.ImporteTransaccionCredito) AS TotalCredito From Registros"
+        Me.AdoSuma.Refresh
+        TotalCredito = Format(AdoSuma.Recordset("TotalCredito"), "##,##0.00")
+        Me.TxtCredito.Text = TotalCredito
+        TotalDebito = Format(AdoSuma.Recordset("TotalDebito"), "##,##0.00")
+        Me.TxtDebito.Text = TotalDebito
+
+    Exit Sub
+
+ErrExcel:
+
+    MsgBox err.Number & " - " & err.Description, vbCritical
+
+    Resume Salir
+
+End Sub
+Public Sub CargarCatalogos()
+
+    InicializarCatalogos
+
+    CargarCatalogoCuentas
+    CargarCatalogoCentrosCosto
+    CargarCatalogoTerceros
+
+End Sub
+
+
+Private Function ValidarRegistroExcel( _
+        ByVal Fila As Long, _
+        ByVal Fecha As Variant, _
+        ByVal Movimiento As Variant, _
+        ByVal Cuenta As String, _
+        ByVal CentroCosto As String, _
+        ByVal Tipo As String, _
+        ByVal Importe As Double, _
+        ByVal CodTercero As String) As Boolean
+
+    ValidarRegistroExcel = True
+    
+
+
+    '------------------------------
+    ' Fecha
+    '------------------------------
+    If Not IsDate(Fecha) Then
+
+        AgregarError _
+            Fila, _
+            Movimiento, _
+            Cuenta, _
+            CentroCosto, _
+            CodTercero, _
+            "La fecha no es válida."
+
+        ValidarRegistroExcel = False
+
+    End If
+
+    '------------------------------
+    ' Movimiento
+    '------------------------------
+    '------------------------------
+    ' Movimiento
+    '------------------------------
+    If Trim(CStr(Movimiento)) = "" Then
+    
+        AgregarError _
+            Fila, _
+            Movimiento, _
+            Cuenta, _
+            CentroCosto, _
+            CodTercero, _
+            "El número de movimiento está vacío."
+    
+        ValidarRegistroExcel = False
+    
+    ElseIf Not IsNumeric(Movimiento) Then
+    
+        AgregarError _
+            Fila, _
+            Movimiento, _
+            Cuenta, _
+            CentroCosto, _
+            CodTercero, _
+            "El número de movimiento debe ser numérico. Valor recibido: '" & Movimiento & "'."
+    
+        ValidarRegistroExcel = False
+    
+    End If
+
+    '------------------------------
+    ' Cuenta obligatoria
+    '------------------------------
+    If Cuenta = "" Then
+
+        AgregarError _
+            Fila, _
+            Movimiento, _
+            Cuenta, _
+            CentroCosto, _
+            CodTercero, _
+            "La cuenta contable está vacía."
+
+        ValidarRegistroExcel = False
+
+    End If
+
+    '------------------------------
+    ' Tipo de movimiento
+    '------------------------------
+    If Tipo <> "03" And Tipo <> "07" Then
+
+        AgregarError _
+            Fila, _
+            Movimiento, _
+            Cuenta, _
+            CentroCosto, _
+            CodTercero, _
+            "Tipo de movimiento inválido (" & Tipo & "). Solo se permite 03 o 07."
+
+        ValidarRegistroExcel = False
+
+    End If
+
+        '------------------------------
+        ' Importe
+        '------------------------------
+        If Trim(CStr(Importe)) = "" Then
+        
+            AgregarError _
+                Fila, _
+                Movimiento, _
+                Cuenta, _
+                CentroCosto, _
+                CodTercero, _
+                "El importe está vacío."
+        
+            ValidarRegistroExcel = False
+        
+        ElseIf Not IsNumeric(Importe) Then
+        
+            AgregarError _
+                Fila, _
+                Movimiento, _
+                Cuenta, _
+                CentroCosto, _
+                CodTercero, _
+                "El importe debe ser numérico. Valor recibido: '" & Importe & "'."
+        
+            ValidarRegistroExcel = False
+        
+        ElseIf CDbl(Importe) <= 0 Then
+        
+            AgregarError _
+                Fila, _
+                Movimiento, _
+                Cuenta, _
+                CentroCosto, _
+                CodTercero, _
+                "El importe debe ser mayor que cero."
+        
+            ValidarRegistroExcel = False
+        
+        End If
+
+    '------------------------------
+    ' La cuenta debe existir
+    '------------------------------
+    If Cuenta <> "" Then
+
+        If Not CuentaExiste(Cuenta) Then
+
+            AgregarError _
+                Fila, _
+                Movimiento, _
+                Cuenta, _
+                CentroCosto, _
+                CodTercero, _
+                "La cuenta contable '" & Cuenta & "' no existe."
+
+            ValidarRegistroExcel = False
+
+        End If
+
+    End If
+
+    '------------------------------
+    ' El centro de costo debe existir
+    '------------------------------
+    If Not CentroCostoExiste(CentroCosto) Then
+
+        AgregarError _
+            Fila, _
+            Movimiento, _
+            Cuenta, _
+            CentroCosto, _
+            CodTercero, _
+            "El centro de costo '" & CentroCosto & "' no existe."
+
+        ValidarRegistroExcel = False
+
+    End If
+
+    '------------------------------
+    ' El tercero debe existir
+    '------------------------------
+    If Not TerceroExiste(CodTercero) Then
+
+        AgregarError _
+            Fila, _
+            Movimiento, _
+            Cuenta, _
+            CentroCosto, _
+            CodTercero, _
+            "El código de tercero '" & CodTercero & "' no existe."
+
+        ValidarRegistroExcel = False
+
+    End If
+
+End Function
+
+Public Function CuentaExiste(ByVal Codigo As String) As Boolean
+
+    CuentaExiste = DicCuentas.Exists(Trim(Codigo))
+
+End Function
+
+Public Function CentroCostoExiste(ByVal Codigo As String) As Boolean
+
+    If Trim(Codigo) = "" Then
+        CentroCostoExiste = True
+    Else
+        CentroCostoExiste = DicCentrosCosto.Exists(Trim(Codigo))
+    End If
+
+End Function
+
+Public Function TerceroExiste(ByVal Codigo As String) As Boolean
+
+    If Trim(Codigo) = "" Then
+        TerceroExiste = True
+    Else
+        TerceroExiste = DicTerceros.Exists(Trim(Codigo))
+    End If
+
+End Function
+
+
+
 
 Private Sub CmdLeer_Click()
 
-Dim Contador As Integer
-Dim Campo As String, Fechas As String, FechaT1 As String, FechaT2 As String, FechaT3 As String
-Dim TotalDebito As Double, TotalCredito As Double, Cadena As String
-Dim Consecutivo As Integer, NTransaccion As Double
-Dim Anulado As Integer, CodigoArchivo As String, CodigoCuenta As String
-Dim Fuente As String
-Dim CodCuenta As String, CodDepartamento As String
-Dim CodAcciones As String, ClaveProyecto As String, NFactura As String
-Dim Ttransaccion As String, ReferenciaCh As String
-Dim Descripcion As String, FechaDescuento As String
-Dim FechaVencimiento As String, ImporteDescuento As String
-Dim ImporteTransaccion As Double, ValorUnit As String
-Dim TipoTransaccion As String, Longitud As Double
-Dim Ultimo As Boolean
-Dim Encontrado As Boolean
-Dim Conexion As String, Directorio As String
-Dim Buscado As Boolean
-Dim NumFecha1 As Long, NumFecha2 As Long
-Dim TipoMovimiento As String
-Dim Salir As Boolean, Continuar As Boolean
-
 'On Error GoTo TipoErrs
 
-Me.CommonDialog1.ShowOpen
-Directorio = Me.CommonDialog1.FileName
-If Directorio = "" Then
- Exit Sub
-End If
-'Como leer un fichero de texto desde Visual Basic
-
-'Ejemplo de Programa
-
-'1. Crear un nuevo proyecto en Visual basic, por defecto será Form1
-
-'2. Añadir un control Text Box al formulario, fijar en propiedades "Multiline"
-'en "TRUE" y en "ScrollBars" en 3-Both.
-
-'3 Añadir el siguiente codigo al formulario en "Form_Load"
-
-Me.AdoRegistros.Refresh
-Do While Not Me.AdoRegistros.Recordset.EOF
-  Me.AdoRegistros.Recordset.Delete
- Me.AdoRegistros.Recordset.MoveNext
-Loop
-
-Consecutivo = 0
-crlf$ = Chr(13) & Chr(10)
-Contador = 0
-Open Directorio For Input As #1
-
-Me.AdoImporta.RecordSource = "SELECT Registros.Control, Registros.IdRegistros, Registros.Fecha, Registros.NTransaccion, Registros.Fuente, Registros.CodCuenta, Registros.Descripcion, Registros.CodDepartamento, Registros.CodAcciones, Registros.ClaveProyecto, Registros.FacturaNumero, Registros.TipoMovimiento, Registros.RefCheque, Registros.FechaDescuento, Registros.FechaVencimiento, Registros.ImporteTransaccionDebito, Registros.ImporteTransaccionCredito, Registros.ImporteDescuento, Registros.ValorUnitario, Registros.TipoTransaccion From Registros Where (((Registros.IdRegistros) = " & Consecutivo & ")) "
-Me.AdoImporta.Refresh
-'Me.DBRegistro.Columns(0).Visible = False
-'Me.DBRegistro.Columns(1).Visible = False
-'Me.DBRegistro.Columns(2).Visible = False
-'Me.DBRegistro.Columns(3).Visible = False
-'Me.DBRegistro.Columns(4).Visible = False
-'Me.DBRegistro.Columns(5).Caption = "Cuenta"
-'Me.DBRegistro.Columns(7).Caption = "Departamento"
-'Me.DBRegistro.Columns(8).Visible = False
-'Me.DBRegistro.Columns(9).Visible = False
-'Me.DBRegistro.Columns(11).Visible = False
-'Me.DBRegistro.Columns(13).Visible = False
-'Me.DBRegistro.Columns(14).Visible = False
-'Me.DBRegistro.Columns(15).Caption = "Debito"
-'Me.DBRegistro.Columns(16).Caption = "Credito"
-'Me.DBRegistro.Columns(17).Visible = False
-'Me.DBRegistro.Columns(18).Visible = False
-'Me.DBRegistro.Columns(19).Visible = False
-
-If Consecutivo = 0 Then
-  Me.AdoConsecutivo.Recordset("ConsecutivoImporta") = AdoConsecutivo.Recordset("ConsecutivoImporta") + 1
- Me.AdoConsecutivo.Recordset.Update
- If Not IsNull(AdoConsecutivo.Recordset("ConsecutivoImporta")) Then
- Consecutivo = AdoConsecutivo.Recordset("ConsecutivoImporta")
- Else
-  Consecutivo = 1
- End If
-End If
-Anulado = 0
-While Not EOF(1)
-Salir = False
-Line Input #1, Cadena
- 
-
- Fechas = Mid(Cadena, 1, 8)
- FechaT2 = Mid(Fechas, 1, 2)
- FechaT1 = Mid(Fechas, 3, 2)
- FechaT3 = Mid(Fechas, 5, 4)
- Fecha = FechaT1 & "/" & FechaT2 + "/" + FechaT3
- 
- 
-
- NTransaccion = Mid(Cadena, 9, 8)
-
- 
- Fuente = Mid(Cadena, 17, 4)
- CodCuenta = Mid(Cadena, 21, 16)
- Me.Caption = "Procesando Cuenta " & CodCuenta
- CodDepartamento = Mid(Cadena, 37, 3)
- CodAcciones = Mid(Cadena, 40, 17)
- ClaveProyecto = Mid(Cadena, 57, 15)
- NFactura = Mid(Cadena, 72, 8)
- Ttransaccion = Mid(Cadena, 80, 2)
- ReferenciaCh = Mid(Cadena, 82, 6)
- Descripcion = Mid(Cadena, 88, 35)
- 
- 
- '/////////////QUITOS LOS ESPACIOS DEL CODIGO CUENTA///////////////
-  Longitud = Len(CodCuenta)
-  CodigoArchivo = ""
-  CodigoCuenta = ""
- For i = 1 To Longitud
-     CodigoArchivo = Mid(CodCuenta, i, 1)
-     If CodigoArchivo <> " " Then
-       CodigoCuenta = CodigoCuenta & CodigoArchivo
-
-     End If
-   
-   Next
-
-   CodCuenta = CodigoCuenta
-   If CodigoCuenta = "113-5-1-103-001-" Then
-     Cod = 1
-   End If
+ Dim Directorio As String
 
 
- '///////Convierto el formato de fecha////////////////
- 
- 
-' FechaDescuento = Mid(Cadena, 124, 8)
-' FechaVencimiento = Mid(Cadena, 132, 8)
+
+    With Me.CommonDialog1
+        .CancelError = False
+        .Filter = "Archivos de Importación (*.cns;*.xls;*.xlsx)|*.cns;*.xls;*.xlsx|Archivos Texto (*.cns)|*.cns|Archivos Excel (*.xls;*.xlsx)|*.xls;*.xlsx|Todos los archivos (*.*)|*.*"
+        .FilterIndex = 1
+        .ShowOpen
+    End With
+
+    Directorio = Me.CommonDialog1.FileName
+    
+    If Trim(Directorio) = "" Then Exit Sub
+    
+    
+        If LCase$(right$(Directorio, 4)) = ".cns" Then
+            LeerTxt Directorio
+        Else
+            LeerExcel Directorio
+       
+        End If
+        
+        
 
 
- ImporteTransaccion = Mid(Cadena, 140, 17)
- ImporteDescuento = Mid(Cadena, 157, 17)
- ValorUnit = Mid(Cadena, 174, 17)
- TipoTransaccion = Mid(Cadena, 191, 2)
 
-If Not CodCuenta = "                " Then
- If ImporteTransaccion <> 0 Then
-  Me.AdoRegistros.Recordset.AddNew
-  AdoRegistros.Recordset("IdRegistros") = Consecutivo
-  AdoRegistros.Recordset("Fecha") = Fecha
-  AdoRegistros.Recordset("NTransaccion") = NTransaccion
-  AdoRegistros.Recordset("Fuente") = Fuente
-  AdoRegistros.Recordset("CodCuenta") = CodCuenta
-  AdoRegistros.Recordset("CodDepartamento") = CodDepartamento
-  AdoRegistros.Recordset("CodAcciones") = CodAcciones
-  AdoRegistros.Recordset("ClaveProyecto") = ClaveProyecto
-  AdoRegistros.Recordset("FacturaNumero") = NFactura
-  AdoRegistros.Recordset("TipoMovimiento") = Ttransaccion
-  AdoRegistros.Recordset("RefCheque") = ReferenciaCh
-  AdoRegistros.Recordset("Descripcion") = Descripcion
-  If Not FechaDescuento = "" Then
-'  AdoRegistros.Recordset("FechaDescuento") = FechaDescuento
-  End If
-'  AdoRegistros.Recordset("FechaVencimiento") = FechaVencimiento
-  
-  If Ttransaccion = "01" Or Ttransaccion = "02" Or Ttransaccion = "03" Or Ttransaccion = "04" Or Ttransaccion = "10" Or Ttransaccion = "11" Or Ttransaccion = "12" Or Ttransaccion = "13" Or Ttransaccion = "14" Or Ttransaccion = "20" Or Ttransaccion = "21" Or Ttransaccion = "23" Or Ttransaccion = "27" Or Ttransaccion = "31" Then
-    AdoRegistros.Recordset("ImporteTransaccionDebito") = ImporteTransaccion
-  ElseIf Ttransaccion = "05" Or Ttransaccion = "06" Or Ttransaccion = "07" Or Ttransaccion = "08" Or Ttransaccion = "09" Or Ttransaccion = "15" Or Ttransaccion = "16" Or Ttransaccion = "17" Or Ttransaccion = "18" Or Ttransaccion = "19" Or Ttransaccion = "22" Or Ttransaccion = "24" Or Ttransaccion = "25" Or Ttransaccion = "26" Or Ttransaccion = "28" Or Ttransaccion = "29" Or Ttransaccion = "30" Then
-    AdoRegistros.Recordset("ImporteTransaccionCredito") = ImporteTransaccion
-  Else
-      Cadena = "Este Archivo Contienen un Codigo Nuevo" & vbLf
-      Cadena = Cadena & "Llame a su Soporte Tecnico para Anexarlo" & vbLf
-      Cadena = Cadena & "Al listado Permitido, para Importar"
-    MsgBox Cadena
-    Exit Sub
-  End If
 
-'  If ImporteDescuento <> "                 " Then
-'    AdoRegistros.Recordset("ImporteDescuento") = ImporteDescuento
-'  End If
-'  AdoRegistros.Recordset("ValorUnitario") = ValorUnit
-'  AdoRegistros.Recordset("TipoTransaccion") = TipoTransaccion
-  
-  
-  Me.AdoRegistros.Recordset.Update
-  Contador = Contador + 1
-  Me.LblRegistros.Caption = Contador
-  DoEvents
- Else
-  Anulado = Anulado + 1
- End If
- Else
-  Anulado = Anulado + 1
- End If
-Wend
-Close #1
-Me.AdoImporta.RecordSource = "SELECT Registros.Control, Registros.IdRegistros, Registros.Fecha, Registros.NTransaccion, Registros.Fuente, Registros.CodCuenta, Registros.Descripcion, Registros.CodDepartamento, Registros.CodAcciones, Registros.ClaveProyecto, Registros.FacturaNumero, Registros.TipoMovimiento, Registros.RefCheque, Registros.FechaDescuento, Registros.FechaVencimiento, Registros.ImporteTransaccionDebito, Registros.ImporteTransaccionCredito, Registros.ImporteDescuento, Registros.ValorUnitario, Registros.TipoTransaccion From Registros Where (((Registros.IdRegistros) = " & Consecutivo & ")) ORDER BY NTransaccion, Control"
-Me.AdoImporta.Refresh
-' Me.DBRegistro.Columns(0).Visible = False
-'Me.DBRegistro.Columns(1).Visible = False
-'Me.DBRegistro.Columns(2).Visible = False
-'Me.DBRegistro.Columns(3).Visible = False
-'Me.DBRegistro.Columns(4).Visible = False
-'Me.DBRegistro.Columns(5).Caption = "Cuenta"
-'Me.DBRegistro.Columns(7).Caption = "Departamento"
-'Me.DBRegistro.Columns(8).Visible = False
-'Me.DBRegistro.Columns(9).Visible = False
-'Me.DBRegistro.Columns(11).Visible = False
-'Me.DBRegistro.Columns(13).Visible = False
-'Me.DBRegistro.Columns(14).Visible = False
-'Me.DBRegistro.Columns(15).Caption = "Debito"
-'Me.DBRegistro.Columns(16).Caption = "Credito"
-'Me.DBRegistro.Columns(17).Visible = False
-'Me.DBRegistro.Columns(18).Visible = False
-'Me.DBRegistro.Columns(19).Visible = False
-MsgBox "Proceso Terminado", vbExclamation, "Sistema de Enlace"
-If Not Anulado = 0 Then
- MsgBox "Se quitaron " & Anulado & " Transacciones anuladas"
-End If
-Me.AdoSuma.RecordSource = "SELECT Sum(Registros.ImporteTransaccionDebito) AS TotalDebito, Sum(Registros.ImporteTransaccionCredito) AS TotalCredito From Registros"
-Me.AdoSuma.Refresh
-TotalCredito = Format(AdoSuma.Recordset("TotalCredito"), "##,##0.00")
-Me.TxtCredito.Text = TotalCredito
-TotalDebito = Format(AdoSuma.Recordset("TotalDebito"), "##,##0.00")
-Me.TxtDebito.Text = TotalDebito
-Salir = True
-Exit Sub
-TipoErrs:
-MsgBox err.Description
-Salir = True
+
 End Sub
 
 Private Sub ADOImporta_Reposition()

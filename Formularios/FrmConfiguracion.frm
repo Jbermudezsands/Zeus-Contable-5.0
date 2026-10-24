@@ -1,12 +1,12 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "Comdlg32.ocx"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "ComDlg32.OCX"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Begin VB.Form FrmConfiguracion 
    BorderStyle     =   0  'None
    Caption         =   "Configuración del Sistema"
-   ClientHeight    =   4455
+   ClientHeight    =   4470
    ClientLeft      =   0
    ClientTop       =   -105
    ClientWidth     =   7200
@@ -15,7 +15,7 @@ Begin VB.Form FrmConfiguracion
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   4455
+   ScaleHeight     =   4470
    ScaleWidth      =   7200
    ShowInTaskbar   =   0   'False
    Begin TabDlg.SSTab SSTab1 
@@ -134,6 +134,14 @@ Begin VB.Form FrmConfiguracion
          TabIndex        =   3
          Top             =   360
          Width           =   6855
+         Begin VB.CheckBox ChkBeneficiarios 
+            Caption         =   "Activar Beneficiarios"
+            Height          =   255
+            Left            =   2880
+            TabIndex        =   34
+            Top             =   1920
+            Width           =   2655
+         End
          Begin VB.CommandButton Command1 
             Height          =   375
             Left            =   6360
@@ -375,6 +383,8 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
+
 Private Sub CmdBuscarLogo_Click()
 Dim retval
 Dim OpenFileName As String
@@ -402,6 +412,8 @@ Private Sub CmdGuardar_Click()
 On Error GoTo TipoErr
 'verifico que las numeraciones no esten siendo utilizadas
 
+
+
 'Guardando configuración
     MDIPrimero.AdoConfiguracion.Refresh
     MDIPrimero.AdoConfiguracion.Recordset!DireccionLogo = Me.TxtRutaLogo.Text
@@ -420,6 +432,14 @@ On Error GoTo TipoErr
     MDIPrimero.AdoConfiguracion.Recordset!OtrosINgresos = Me.TxtOI.Text
     MDIPrimero.AdoConfiguracion.Recordset!Ingresos = Me.TxtI.Text
     MDIPrimero.AdoConfiguracion.Recordset!Costos = Me.TxtC.Text
+    
+     If Me.ChkBeneficiarios.Value = 1 Then
+        MDIPrimero.AdoConfiguracion.Recordset!ActivarBeneficiario = True
+        ActivarBeneficiario = 1
+     Else
+         MDIPrimero.AdoConfiguracion.Recordset!ActivarBeneficiario = False
+        ActivarBeneficiario = 0
+     End If
 
 MDIPrimero.AdoConfiguracion.Recordset.Update
 
@@ -452,6 +472,9 @@ End Sub
 
 Private Sub Form_Load()
 On Error GoTo TipoErr
+
+ActivarBeneficiario = 0
+
 MDIPrimero.Skin1.ApplySkin Me.hWnd
 
 If MDIPrimero.AdoConfiguracion.Recordset.RecordCount > 0 Then
@@ -508,6 +531,16 @@ If MDIPrimero.AdoConfiguracion.Recordset.RecordCount > 0 Then
         Me.imgLogo.Picture = LoadPicture(MDIPrimero.AdoConfiguracion.Recordset!DireccionLogo)
         Me.TxtRutaLogo.Text = MDIPrimero.AdoConfiguracion.Recordset!DireccionLogo
        End If
+    End If
+    
+    If Not IsNull(MDIPrimero.AdoConfiguracion.Recordset!ActivarBeneficiario) Then
+      If MDIPrimero.AdoConfiguracion.Recordset!ActivarBeneficiario = True Then
+         ActivarBeneficiario = 1
+      Else
+         ActivarBeneficiario = 0
+      End If
+      
+      Me.ChkBeneficiarios.Value = ActivarBeneficiario
     End If
 End If
 Exit Sub

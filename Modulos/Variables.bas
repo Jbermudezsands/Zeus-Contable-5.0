@@ -1,6 +1,12 @@
 Attribute VB_Name = "Variables"
+Option Explicit
+
 Public Ejecutar As ADODB.Connection, QuienReporte As String, FechaIngreso As Date
 Public objExcel As Excel.Application
+
+Public ActivarBeneficiario As Integer
+
+Public DicPeriodos As Object
 
 Public SaldoFinalAuxiliar As Double, TotalDebitoAux As Double, TotalCreditoAux As Double
 
@@ -9,8 +15,8 @@ Public TotalInicial As Double, TotalFinal As Double
 
 Public ResultadoPersonalizado As Double, ResultadoPersonalizadoPeriodo As Double, RutaArchivo As String
 Public Cheque As Boolean, Debitos As Double, Creditos As Double
-Public ruta As String, RutaLogo As String, RutaIconos As String, RutaFotos As String
-Public Conexion As String, ConexionReporte As String, numero As String
+Public Ruta As String, RutaLogo As String, RutaIconos As String, RutaFotos As String
+Public Conexion As String, ConexionReporte As String, ConexionFacturacion As String, numero As String
 Public Unidad As String, CodGrupo As String, MonedaCuenta As String, MonedaContracuenta As String
 Public Criterio As String, CodEncargado As String
 Public Opt As String, CodigoCuenta As String
@@ -25,6 +31,7 @@ Public QueProducto As String, DescripcionContracuenta As String
 Public Orden As Boolean, Descripcion As String
 Public Debito As Double, Credito As Double, Diferencia As Double, DescripcionCuenta As String
 Public NombreEmpresa As String, RUC As String, Version As String
+Public CuentaPresupuesto(3) As String, ActualizoElGrid As Boolean
 
 
 Public ConsultaTotalesMovimientos As String ' consulta que voy a utilizar para poder cambiar la tabla de reportes para la
@@ -91,3 +98,39 @@ Public Moneda As String, FechaCheque As String, NumeroMovimientos As String
 Public RTotalActivoCirculante As Double, RTotalActivoFijo As Double, RTotalPasivo As Double, RTotalCapital As Double, RUtilidad As Double
 
 Public SaldoIniBank As Double, CodigoBancoBank As String, FechaIniBank As Date, FechaFinBank As Date
+
+
+Public ActivarBeneficiarioReporte As Boolean
+
+
+'=====================================================================
+' VARIABLES RESTAURADAS (usadas en Funciones.bas)
+'=====================================================================
+Public cadena As String               'Mensajes y VoucherNo en SaldoReportes / GrabaDetalle*
+Public Sql As String                  'CargaADODC, tienepermiso, DameNombreEmpleado, etc.
+Public SqlString As String            'BuscaCodigoProducto, BuscaCuentaImpuestos, BuscaTasaIva*
+
+'--- Utilidad bruta (HayUtilidadBruta / Utilidadbruta)
+Public HayUtiBruta As Boolean
+Public RegInicioCostosOperativos As Integer
+Public RegTotalCostosOperativos As Integer
+
+'--- Variable de depuracion (SaldoReportes / SaldoReportesDpto)
+Public Cod As Integer
+
+'--- Colores de ColorForm (asignelos al iniciar el sistema)
+Public BkColor As Long
+Public FrColor As Long
+
+'--- CargaADODC
+Public wcodbodega As String
+Public wregNuSede As Long
+
+'--- DameNombreEmpleado
+Public idnomina As String
+Public salanterior As Double
+Public idgrupo As Variant
+Public idcargo As Variant
+Public grupo As String
+Public Nomina As String
+Public isaldolar As Variant

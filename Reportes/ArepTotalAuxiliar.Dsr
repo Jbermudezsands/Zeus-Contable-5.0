@@ -1,13 +1,13 @@
 VERSION 5.00
 Begin {9EB8768B-CDFA-44DF-8F3E-857A8405E1DB} ArepTotalAuxiliar 
    Caption         =   "Total de Reportes Auxiliares"
-   ClientHeight    =   11010
+   ClientHeight    =   10980
    ClientLeft      =   165
    ClientTop       =   555
    ClientWidth     =   15240
    StartUpPosition =   3  'Windows Default
    _ExtentX        =   26882
-   _ExtentY        =   19420
+   _ExtentY        =   19368
    SectionData     =   "ArepTotalAuxiliar.dsx":0000
 End
 Attribute VB_Name = "ArepTotalAuxiliar"
@@ -23,54 +23,54 @@ ClienteID = DataControl1.Recordset.Fields("CodCuentas")
 End If
 End Sub
  Private Sub ActiveReport_hyperLink(ByVal Button As Integer, Link As String)
- Dim CodigoCuenta As String, FechaIni As Date, FechaFin As Date, SQL As String
+ Dim CodigoCuenta As String, FechaIni As Date, FechaFin As Date, Sql As String
  Dim rpt As Object, fPreview As New FrmPreview
-'Check to see if an email link or web page has been selected
-  If InStr(1, Link, "htm", vbTextCompare) = 0 And InStr(1, Link, "mailto", vbTextCompare) = 0 Then
-
-
-    CodigoCuenta = Link
-    
-    FechaIni = FrmReportes.DTFecha1.Value
-    FechaFin = FrmReportes.DTFecha2.Value
-    
-    
-'    SQL = "SELECT Transacciones.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS Debito, SUM(Transacciones.Credito * Transacciones.TCambio) AS Credito, SUM((Transacciones.Debito - Transacciones.Credito) * Transacciones.TCambio) AS Saldo, SUM(Transacciones.TCambio) AS Expr5 " & _
-'          "FROM  Transacciones INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas " & _
-'          "WHERE (Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & Format(FechaFin, "yyyy-mm-dd") & "', 102)) AND (Cuentas.TipoCuenta = 'Cuentas x Cobrar') GROUP BY Transacciones.CodCuentas HAVING (Transacciones.CodCuentas BETWEEN '" & CodigoCuenta & "' AND '" & CodigoCuenta & "')"
-    
-     SQL = "SELECT     Transacciones.CodCuentas AS CodCuentas, Transacciones.DescripcionMovimiento AS DescripcionMovimiento, " & _
-         "Transacciones.FechaTransaccion AS FechaTransaccion, Transacciones.FechaVence AS FechaVence, " & _
-         "Transacciones.NumeroMovimiento AS NumeroMovimiento, Cuentas.TipoCuenta AS TipoCuenta, Transacciones.FacturaNo AS FacturaNo, " & _
-         "Transacciones.Debito * Transacciones.TCambio AS Debito, Transacciones.Credito * Transacciones.TCambio AS Credito, " & _
-         "(Transacciones.Debito - Transacciones.Credito) * Transacciones.TCambio AS Saldo, Transacciones.ChequeNo, Cuentas.DescripcionCuentas, " & _
-         "Transacciones.TCambio " & _
-         "FROM         Transacciones INNER JOIN " & _
-         "Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas " & _
-         "WHERE     (Transacciones.CodCuentas = '" & CodigoCuenta & "') AND ((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "') " & _
-         "ORDER BY Transacciones.FacturaNo,Transacciones.FechaTransaccion "
-     
-    
-      ArepEstadoCuenta.DataControl1.ConnectionString = ConexionReporte
-      ArepEstadoCuenta.DataControl1.Source = SQL
-      ArepEstadoCuenta.LblFecha1.Caption = FrmReportes.DTFecha1.Value
-      ArepEstadoCuenta.LblFecha.Caption = FrmReportes.DTFecha2.Value
-    
-       ArepEstadoCuenta.Logo.Picture = LoadPicture(RutaLogo)
-    
-      ArepEstadoCuenta.LblEmpresa.Caption = FrmReportes.DtaDatosEmpresa.Recordset("NombreEmpresa")
-      ArepEstadoCuenta.LblEmpresa1.Caption = FrmReportes.DtaDatosEmpresa.Recordset("Direccion")
-      ArepEstadoCuenta.LblEmpresa2.Caption = "RUC " & FrmReportes.DtaDatosEmpresa.Recordset("NumeroRuc")
-'      ArepEstadoCuenta.Show 1
-   
-         Set rpt = New ArepEstadoCuenta
-         rpt.DataControl1.ConnectionString = ConexionReporte
-         rpt.DataControl1.Source = SQL
-         fPreview.RunReport rpt
-         fPreview.Show 1
-
-
-  End If
+''Check to see if an email link or web page has been selected
+'  If InStr(1, Link, "htm", vbTextCompare) = 0 And InStr(1, Link, "mailto", vbTextCompare) = 0 Then
+'
+'
+'    CodigoCuenta = Link
+'
+'    FechaIni = FrmReportes.DTFecha1.Value
+'    FechaFin = FrmReportes.DTFecha2.Value
+'
+'
+''    SQL = "SELECT Transacciones.CodCuentas, SUM(Transacciones.Debito * Transacciones.TCambio) AS Debito, SUM(Transacciones.Credito * Transacciones.TCambio) AS Credito, SUM((Transacciones.Debito - Transacciones.Credito) * Transacciones.TCambio) AS Saldo, SUM(Transacciones.TCambio) AS Expr5 " & _
+''          "FROM  Transacciones INNER JOIN Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas " & _
+''          "WHERE (Transacciones.FechaTransaccion <= CONVERT(DATETIME, '" & Format(FechaFin, "yyyy-mm-dd") & "', 102)) AND (Cuentas.TipoCuenta = 'Cuentas x Cobrar') GROUP BY Transacciones.CodCuentas HAVING (Transacciones.CodCuentas BETWEEN '" & CodigoCuenta & "' AND '" & CodigoCuenta & "')"
+'
+'     Sql = "SELECT     Transacciones.CodCuentas AS CodCuentas, Transacciones.DescripcionMovimiento AS DescripcionMovimiento, " & _
+'         "Transacciones.FechaTransaccion AS FechaTransaccion, Transacciones.FechaVence AS FechaVence, " & _
+'         "Transacciones.NumeroMovimiento AS NumeroMovimiento, Cuentas.TipoCuenta AS TipoCuenta, Transacciones.FacturaNo AS FacturaNo, " & _
+'         "Transacciones.Debito * Transacciones.TCambio AS Debito, Transacciones.Credito * Transacciones.TCambio AS Credito, " & _
+'         "(Transacciones.Debito - Transacciones.Credito) * Transacciones.TCambio AS Saldo, Transacciones.ChequeNo, Cuentas.DescripcionCuentas, " & _
+'         "Transacciones.TCambio " & _
+'         "FROM         Transacciones INNER JOIN " & _
+'         "Cuentas ON Transacciones.CodCuentas = Cuentas.CodCuentas " & _
+'         "WHERE     (Transacciones.CodCuentas = '" & CodigoCuenta & "') AND ((Transacciones.FechaTransaccion) Between '" & Format(FechaIni, "yyyymmdd") & "' And '" & Format(FechaFin, "yyyymmdd") & "') " & _
+'         "ORDER BY Transacciones.FacturaNo,Transacciones.FechaTransaccion "
+'
+'
+'      ArepEstadoCuenta.DataControl1.ConnectionString = ConexionReporte
+'      ArepEstadoCuenta.DataControl1.Source = Sql
+'      ArepEstadoCuenta.LblFecha1.Caption = FrmReportes.DTFecha1.Value
+'      ArepEstadoCuenta.LblFecha.Caption = FrmReportes.DTFecha2.Value
+'
+'       ArepEstadoCuenta.Logo.Picture = LoadPicture(RutaLogo)
+'
+'      ArepEstadoCuenta.LblEmpresa.Caption = FrmReportes.DtaDatosEmpresa.Recordset("NombreEmpresa")
+'      ArepEstadoCuenta.LblEmpresa1.Caption = FrmReportes.DtaDatosEmpresa.Recordset("Direccion")
+'      ArepEstadoCuenta.LblEmpresa2.Caption = "RUC " & FrmReportes.DtaDatosEmpresa.Recordset("NumeroRuc")
+''      ArepEstadoCuenta.Show 1
+'
+'         Set rpt = New ArepEstadoCuenta
+'         rpt.DataControl1.ConnectionString = ConexionReporte
+'         rpt.DataControl1.Source = Sql
+'         fPreview.RunReport rpt
+'         fPreview.Show 1
+'
+'
+'  End If
 End Sub
 
 Private Sub ActiveReport_ReportStart()

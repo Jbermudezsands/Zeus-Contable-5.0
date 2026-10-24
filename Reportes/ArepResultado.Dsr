@@ -63,7 +63,7 @@ err:
         FrmReportes.DtaConsulta.Recordset.MoveNext
       Loop
 
-
+    Me.LblCentroCostos.Caption = "Desde: " & FrmReportes.TxtDptoDesde.Text & " Hasta: " & FrmReportes.TxtDptoHasta.Text
     Me.LblMoneda.Caption = "Expresado en " & FrmReportes.CmbMoneda.Text
     If Dir(RutaLogo) <> "" Then
      Me.Logo.Picture = LoadPicture(RutaLogo)

@@ -1,9 +1,9 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "COMCTL32.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "ComDlg32.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.OCX"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
+Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.5#0"; "comctl32.Ocx"
 Object = "{E1C6DB9D-BD4A-4A61-A759-0CED75D034BF}#43.0#0"; "SmartButton.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
 Object = "{555E8FCC-830E-45CC-AF00-A012D5AE7451}#12.0#0"; "Codejock.CommandBars.v12.0.0.Demo.ocx"
@@ -810,6 +810,8 @@ Begin VB.MDIForm MDIPrimero
             Object.Width           =   1773
             MinWidth        =   1764
             Picture         =   "MDIPrimero.frx":65898
+            TextSave        =   ""
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
@@ -817,17 +819,21 @@ Begin VB.MDIForm MDIPrimero
             MinWidth        =   7937
             Text            =   "Licencia: Juan"
             TextSave        =   "Licencia: Juan"
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   3528
             MinWidth        =   3528
+            TextSave        =   ""
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   1
             Enabled         =   0   'False
             TextSave        =   "MAYÚS"
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel5 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
@@ -835,11 +841,13 @@ Begin VB.MDIForm MDIPrimero
             Object.Width           =   1393
             MinWidth        =   1393
             TextSave        =   "NÚM"
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel6 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   5
-            TextSave        =   "10:09 a.m."
+            TextSave        =   "11:20 a. m."
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -1278,7 +1286,7 @@ Private Sub CommandBars_Execute(ByVal Control As XtremeCommandBars.ICommandBarCo
   
               FrmConexiones.Option2.Value = True
               FrmConexiones.Image2 = LoadPicture(App.Path & "\Imagenes\ConexionFacturacion.bmp")
-              FrmConexiones.lbltitulo.Caption = "Conexion Sistema Facturacion"
+              FrmConexiones.lblTitulo.Caption = "Conexion Sistema Facturacion"
               FrmConexiones.Show
        
        Case 1724
@@ -1295,7 +1303,7 @@ Private Sub CommandBars_Execute(ByVal Control As XtremeCommandBars.ICommandBarCo
               
               FrmConexiones.Option1.Value = True
               FrmConexiones.Image2 = LoadPicture(App.Path & "\Imagenes\ConexionContabilidad.bmp")
-              FrmConexiones.lbltitulo.Caption = "Conexion Sistema Nominas"
+              FrmConexiones.lblTitulo.Caption = "Conexion Sistema Nominas"
               FrmConexiones.Show
               
               
@@ -1305,6 +1313,8 @@ Private Sub CommandBars_Execute(ByVal Control As XtremeCommandBars.ICommandBarCo
              FrmAltaBienes.Show
        Case 1728
              FrmOficinas.Show
+       Case 1729
+             FrmActivoFijo.Show
        Case 1730
              FrmtrasladoActivos.Show
        Case 1731
@@ -1358,6 +1368,32 @@ Private Sub CommandBars_Execute(ByVal Control As XtremeCommandBars.ICommandBarCo
               QUIEN = "ExportarExcel"
               FrmReportes.Label10.Caption = "Exportacion Excel"
               FrmReportes.Show 1
+              
+       Case 1744
+       
+                 QUIEN = "ReportesTerceros"
+                 FrmReportes.Label10.Caption = "Reportes de Terceros"
+                 'FrmReportes.Image2.Picture = LoadPicture(App.Path & "\Imagenes\AnalisisFinanciero2.bmp")
+                 FrmReportes.CmbMoneda.Visible = True
+                 FrmReportes.Frame1.Visible = False
+                 FrmReportes.Frame4.Visible = True
+                 FrmReportes.DtaConsulta.RecordSource = "SELECT Periodos.Periodo, Periodos.FechaPeriodo, Periodos.NumeroTabla From Periodos Where (((Periodos.Periodo) = 1) And ((Periodos.NumeroTabla) = 1 Or (Periodos.NumeroTabla) = 2 Or (Periodos.NumeroTabla) = 3))"
+                 FrmReportes.DtaConsulta.Refresh
+                 Do While Not FrmReportes.DtaConsulta.Recordset.EOF
+                  If AÑO1 = "" Then
+                   AÑO1 = Year(FrmReportes.DtaConsulta.Recordset("FechaPeriodo"))
+                   FrmReportes.Option8.Caption = AÑO1
+                  ElseIf AÑO2 = "" Then
+                   AÑO2 = Year(FrmReportes.DtaConsulta.Recordset("FechaPeriodo"))
+                   FrmReportes.Option7.Caption = AÑO2
+                  Else
+                    AÑO3 = Year(FrmReportes.DtaConsulta.Recordset("FechaPeriodo"))
+                    FrmReportes.Option6.Caption = AÑO3
+                  End If
+                   
+                   FrmReportes.DtaConsulta.Recordset.MoveNext
+                 Loop
+                FrmReportes.Show 1
 
         End Select
 End Sub
@@ -1389,8 +1425,8 @@ Dim FechaFin As Date
 Dim Encontrado As Boolean
 Dim Fecha As String
 Dim NumFecha As Long
-Dim cn As New ADODB.Connection
-Dim rs As New ADODB.Recordset
+Dim Cn As New ADODB.Connection
+Dim Rs As New ADODB.Recordset
 
 Tasa = True
 
@@ -1422,7 +1458,6 @@ End With
         
 
 
-
 Dim Rutas As String
 
 
@@ -1430,6 +1465,12 @@ If Not Me.AdoConfiguracion.Recordset.EOF Then
  NombreEmpresa = Me.AdoConfiguracion.Recordset("NombreEmpresa")
  RUC = Me.AdoConfiguracion.Recordset("NumeroRuc")
  RutaLogo = Me.AdoConfiguracion.Recordset("DireccionLogo")
+ If Me.AdoConfiguracion.Recordset("ActivarBeneficiario") = True Then
+    ActivarBeneficiario = 1
+ Else
+    ActivarBeneficiario = 0
+ End If
+
 ' Valor = Me.AdoConfiguracion.Recordset("Valor") + 1
 '
 ' Me.AdoConfiguracion.Recordset("valor") = Valor
@@ -1605,9 +1646,13 @@ AdoConfiguracion.Refresh
     MDIPrimero.AdoConsulta.Refresh
     
     If Not IsNull(MDIPrimero.AdoConsulta.Recordset("Valor")) Then
-     If Not MDIPrimero.AdoConsulta.Recordset("Valor") = "" Then
-      Cadena2 = MDIPrimero.AdoConsulta.Recordset("Valor")
-     End If
+        If Not MDIPrimero.AdoConsulta.Recordset("Valor") = "" Then
+         Cadena2 = MDIPrimero.AdoConsulta.Recordset("Valor")
+        End If
+        
+        If Not IsNull(MDIPrimero.AdoConsulta.Recordset("ConexionFacturacion")) Then
+         ConexionFacturacion = MDIPrimero.AdoConsulta.Recordset("ConexionFacturacion")
+        End If
     End If
 
 Cadena2 = Decrypt(Cadena2)
@@ -1776,6 +1821,7 @@ Private Sub CreateRibbonBar()
     CommandBars.Icons.LoadBitmap App.Path & "\Imagenes\SolicitudPago.png", 1741, xtpImageNormal
     CommandBars.Icons.LoadBitmap App.Path & "\Imagenes\EstructuraPresupuesto.png", 1742, xtpImageNormal
     CommandBars.Icons.LoadBitmap App.Path & "\Imagenes\Excel.png", 1743, xtpImageNormal
+    CommandBars.Icons.LoadBitmap App.Path & "\Imagenes\Cuentas1.png", 1744, xtpImageNormal
     
     
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1918,6 +1964,11 @@ Private Sub CreateRibbonBar()
      Item.Style = xtpButtonIconAndCaptionBelow
      Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1743, "&Exportar Excel", False, False)
      Item.Style = xtpButtonIconAndCaptionBelow
+     
+      If ActivarBeneficiario = 1 Then
+         Set Item = GroupFile.Add(XtremeCommandBars.XTPControlType.xtpControlButton, 1744, "&Reportes Beneficiario", False, False)
+         Item.Style = xtpButtonIconAndCaptionBelow
+     End If
      
     '/////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////CREO EL TABS DE CONTABILIZAR//////////////////////////////////////////////

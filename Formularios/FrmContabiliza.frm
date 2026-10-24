@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
 Begin VB.Form FrmContabilizaFacturacion 
@@ -473,8 +473,8 @@ Begin VB.Form FrmContabilizaFacturacion
       TabCaption(2)   =   "Cuentas x Cobrar y Pagar"
       TabPicture(2)   =   "FrmContabiliza.frx":0038
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "TDBGridCuentas"
-      Tab(2).Control(1)=   "GroupBox3"
+      Tab(2).Control(0)=   "GroupBox3"
+      Tab(2).Control(1)=   "TDBGridCuentas"
       Tab(2).ControlCount=   2
       TabCaption(3)   =   "Planilla Leche"
       TabPicture(3)   =   "FrmContabiliza.frx":0054
@@ -511,7 +511,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   118620161
+            Format          =   212926465
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker3 
@@ -523,7 +523,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   118620161
+            Format          =   212926465
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptCompras 
@@ -575,7 +575,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   118620161
+            Format          =   212860929
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton RadioButton4 
@@ -723,7 +723,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   118620161
+            Format          =   211746817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptFacturacion 
@@ -776,7 +776,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   119537665
+            Format          =   211746817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecibos 
@@ -829,7 +829,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   119537665
+            Format          =   211746817
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptSalidaBodega 
@@ -1522,7 +1522,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   118947841
+            Format          =   189399041
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebito 
@@ -1560,7 +1560,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   118947841
+            Format          =   189399041
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.PushButton CmdContabilizarNotas 
@@ -1600,7 +1600,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   118947841
+            Format          =   189399041
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptNotaDebitoProveedor 
@@ -2055,7 +2055,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2355
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   181534721
+            Format          =   189399041
             CurrentDate     =   40301
          End
          Begin MSComCtl2.DTPicker DTPicker11 
@@ -2067,7 +2067,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   181534721
+            Format          =   189399041
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptRecepcion 
@@ -2093,7 +2093,7 @@ Begin VB.Form FrmContabilizaFacturacion
             _ExtentX        =   2566
             _ExtentY        =   609
             _Version        =   393216
-            Format          =   181534721
+            Format          =   189399041
             CurrentDate     =   40301
          End
          Begin XtremeSuiteControls.RadioButton OptPlanilla 
@@ -3366,8 +3366,8 @@ Private Sub CmdContabilizar_Click()
   Dim MonedaFactura As String, Reg As Double, CodigoCuentaIngresos As String, CodCuentaEfectivo As String
   Dim CostoProducto As Double, CodigoCuentaCostos As String, CodigoCuentaInventario As String, CodigoCuentaOtros As String
   Dim CodigoCuentaMetodo As String, Pagado As Double, TotalRetencion As Double, Fuente As String, MonedaMovimiento As String
-  Dim cn As New ADODB.Connection, TasaMovimiento As Double, TipoProducto As String, DescripcionProducto As String, UnidadMedida As String
-  Dim rs As New ADODB.Recordset, DescripcionRecibo As String, SqlStringAnuladas As String
+  Dim Cn As New ADODB.Connection, TasaMovimiento As Double, TipoProducto As String, DescripcionProducto As String, UnidadMedida As String
+  Dim Rs As New ADODB.Recordset, DescripcionRecibo As String, SqlStringAnuladas As String
   Dim cmd As New ADODB.Command, TasaCambioFacturacion As Double, Costo_Unitario As Double
   
   CmdContabilizar.Enabled = False
@@ -3590,7 +3590,7 @@ Private Sub CmdContabilizar_Click()
                                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                 '/////////////////////////////////////////////ACTUALIZO LA FACTURA COMO CONTABILIZADO //////////////////////////////////////////
                                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                rs.Open "UPDATE Recibo SET Contabilizado = 1 ,Activo = 0  WHERE (CodReciboPago = '" & NumeroFactura & "') ", ConexionFacturacion
+                                                Rs.Open "UPDATE Recibo SET Contabilizado = 1 ,Activo = 0  WHERE (CodReciboPago = '" & NumeroFactura & "') ", ConexionFacturacion
                                       
                                       
                               
@@ -4104,7 +4104,7 @@ Private Sub CmdContabilizar_Click()
                                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                 '/////////////////////////////////////////////ACTUALIZO LA FACTURA COMO CONTABILIZADO //////////////////////////////////////////
                                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                rs.Open "UPDATE Facturas SET Contabilizado = 1 ,Activo = 0  WHERE (Numero_Factura = '" & NumeroFactura & "') AND (Facturas.Tipo_Factura = '" & TipoFactura & "')", ConexionFacturacion
+                                                Rs.Open "UPDATE Facturas SET Contabilizado = 1 ,Activo = 0  WHERE (Numero_Factura = '" & NumeroFactura & "') AND (Facturas.Tipo_Factura = '" & TipoFactura & "')", ConexionFacturacion
                                      
 
                                 
@@ -4141,25 +4141,25 @@ Private Sub CmdContabilizar_Click()
                                  '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                  '/////////////////////////////////////////////ACTUALIZO LA FACTURA COMO CONTABILIZADO //////////////////////////////////////////
                                  '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                  rs.Open "UPDATE Facturas SET Contabilizado = 1 ,Activo = 0  WHERE (Numero_Factura = '" & NumeroFactura & "') AND (Facturas.Tipo_Factura = '" & TipoFactura & "')", ConexionFacturacion
+                                  Rs.Open "UPDATE Facturas SET Contabilizado = 1 ,Activo = 0  WHERE (Numero_Factura = '" & NumeroFactura & "') AND (Facturas.Tipo_Factura = '" & TipoFactura & "')", ConexionFacturacion
                            Case "Recibos de Caja"
                                NumeroFactura = Me.AdoProcesos.Recordset("CodReciboPago")
                                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                '/////////////////////////////////////////////ACTUALIZO LA FACTURA COMO CONTABILIZADO //////////////////////////////////////////
                                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                 rs.Open "UPDATE Recibo SET Contabilizado = 1 ,Activo = 0  WHERE (CodReciboPago = '" & NumeroFactura & "') ", ConexionFacturacion
+                                 Rs.Open "UPDATE Recibo SET Contabilizado = 1 ,Activo = 0  WHERE (CodReciboPago = '" & NumeroFactura & "') ", ConexionFacturacion
                           Case "Factura"
                                 NumeroFactura = Me.AdoProcesos.Recordset("Numero_Factura")
                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                  '/////////////////////////////////////////////ACTUALIZO LA FACTURA COMO CONTABILIZADO //////////////////////////////////////////
                                  '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                  rs.Open "UPDATE Facturas SET Contabilizado = 1 ,Activo = 0  WHERE (Numero_Factura = '" & NumeroFactura & "') AND (Facturas.Tipo_Factura = '" & TipoFactura & "')", ConexionFacturacion
+                                  Rs.Open "UPDATE Facturas SET Contabilizado = 1 ,Activo = 0  WHERE (Numero_Factura = '" & NumeroFactura & "') AND (Facturas.Tipo_Factura = '" & TipoFactura & "')", ConexionFacturacion
                           Case "Devolucion de Venta"
                                  NumeroFactura = Me.AdoProcesos.Recordset("Numero_Factura")
                                   '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                  '/////////////////////////////////////////////ACTUALIZO LA FACTURA COMO CONTABILIZADO //////////////////////////////////////////
                                  '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                  rs.Open "UPDATE Facturas SET Contabilizado = 1 ,Activo = 0  WHERE (Numero_Factura = '" & NumeroFactura & "') AND (Facturas.Tipo_Factura = '" & TipoFactura & "')", ConexionFacturacion
+                                  Rs.Open "UPDATE Facturas SET Contabilizado = 1 ,Activo = 0  WHERE (Numero_Factura = '" & NumeroFactura & "') AND (Facturas.Tipo_Factura = '" & TipoFactura & "')", ConexionFacturacion
                         End Select
                        
                        
@@ -4189,8 +4189,8 @@ Private Sub CmdContabilizarCompras_Click()
   Dim MonedaFactura As String, Reg As Double, CodigoCuentaIngresos As String, CodCuentaEfectivo As String
   Dim CostoProducto As Double, CodigoCuentaCostos As String, CodigoCuentaInventario As String, CodigoCuentaOtros As String, CodigoCuentaMetodo As String
   Dim Pagado As Double, NumeroReferencia As String, MonedaMovimiento As String, TasaMovimiento As Double
-  Dim cn As New ADODB.Connection, SuReferencia As String, CodigoCuentaBanco As String
-  Dim rs As New ADODB.Recordset, Registro As Double, NumeroCompra As String
+  Dim Cn As New ADODB.Connection, SuReferencia As String, CodigoCuentaBanco As String
+  Dim Rs As New ADODB.Recordset, Registro As Double, NumeroCompra As String
   Dim cmd As New ADODB.Command, Ret1Porc As Double, Ret2Porc As Double, MontoRetencion1 As Double, MontoRetencion2 As Double, Ret3Porc As Double, Ret4Porc As Double, MontoRetencion3 As Double, MontoRetencion4 As Double
   Dim MontoBanco As Double
   
@@ -4491,7 +4491,7 @@ Private Sub CmdContabilizarCompras_Click()
                                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                 '/////////////////////////////////////////////ACTUALIZO LA FACTURA COMO CONTABILIZADO //////////////////////////////////////////
                                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                rs.Open "UPDATE ReciboPago SET Contabilizado = 1 ,Activo = 0  WHERE (CodReciboPago = '" & NumeroFactura & "') ", ConexionFacturacion
+                                                Rs.Open "UPDATE ReciboPago SET Contabilizado = 1 ,Activo = 0  WHERE (CodReciboPago = '" & NumeroFactura & "') ", ConexionFacturacion
                                       
                                       
                               
@@ -5206,7 +5206,7 @@ Private Sub CmdContabilizarCompras_Click()
                                                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                 '/////////////////////////////////////////////ACTUALIZO LA FACTURA COMO CONTABILIZADO //////////////////////////////////////////
                                                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                rs.Open "UPDATE Compras SET Contabilizado = 1 ,Activo = 0  WHERE (Numero_Compra = '" & NumeroFactura & "') ", ConexionFacturacion
+                                                                Rs.Open "UPDATE Compras SET Contabilizado = 1 ,Activo = 0  WHERE (Numero_Compra = '" & NumeroFactura & "') ", ConexionFacturacion
                                                      
                                                      
                                                      
@@ -5236,8 +5236,8 @@ Private Sub CmdContabilizarNotas_Click()
   Dim MonedaFactura As String, Reg As Double, CodigoCuentaIngresos As String, CodCuentaEfectivo As String
   Dim CostoProducto As Double, CodigoCuentaCostos As String, CodigoCuentaInventario As String, CodigoCuentaOtros As String, CodigoCuentaMetodo As String
   Dim Pagado As Double, NumeroReferencia As String, MonedaMovimiento As String, TasaMovimiento As Double
-  Dim cn As New ADODB.Connection, SuReferencia As String, NumeroNota As String, CodigoCuentaNota As String
-  Dim rs As New ADODB.Recordset, CodigoTipoNota As String
+  Dim Cn As New ADODB.Connection, SuReferencia As String, NumeroNota As String, CodigoCuentaNota As String
+  Dim Rs As New ADODB.Recordset, CodigoTipoNota As String
   Dim cmd As New ADODB.Command, Fuente As String
   
   Reg = 1
@@ -5461,7 +5461,7 @@ End If
                                                                              '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                 '/////////////////////////////////////////////ACTUALIZO LA FACTURA COMO CONTABILIZADO //////////////////////////////////////////
                                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                rs.Open "UPDATE [IndiceNota]  Set [Activo] = 0 ,[Contabilizado] = 1 WHERE (IndiceNota.Numero_Nota = '" & NumeroNota & "') AND (IndiceNota.Tipo_Nota = '" & CodigoTipoNota & "')", ConexionFacturacion
+                                                Rs.Open "UPDATE [IndiceNota]  Set [Activo] = 0 ,[Contabilizado] = 1 WHERE (IndiceNota.Numero_Nota = '" & NumeroNota & "') AND (IndiceNota.Tipo_Nota = '" & CodigoTipoNota & "')", ConexionFacturacion
                                
                                Me.osProgress1.Value = Me.osProgress1.Value + 1
                                Me.AdoProcesos.Recordset.MoveNext
@@ -5493,8 +5493,8 @@ Private Sub CmdContabilizarPlanilla_Click()
   Dim MonedaFactura As String, Reg As Double, CodigoCuentaIngresos As String, CodCuentaEfectivo As String
   Dim CostoProducto As Double, CodigoCuentaCostos As String, CodigoCuentaInventario As String, CodigoCuentaOtros As String, CodigoCuentaMetodo As String
   Dim Pagado As Double, NumeroReferencia As String, MonedaMovimiento As String, TasaMovimiento As Double
-  Dim cn As New ADODB.Connection, SuReferencia As String, CodigoCuentaBanco As String
-  Dim rs As New ADODB.Recordset, Registro As Double, NumeroCompra As String
+  Dim Cn As New ADODB.Connection, SuReferencia As String, CodigoCuentaBanco As String
+  Dim Rs As New ADODB.Recordset, Registro As Double, NumeroCompra As String
   Dim cmd As New ADODB.Command, Ret1Porc As Double, Ret2Porc As Double, MontoRetencion1 As Double, MontoRetencion2 As Double, Ret3Porc As Double, Ret4Porc As Double, MontoRetencion3 As Double, MontoRetencion4 As Double
   Dim MontoBanco As Double, Directorio As String, NombreProductor As String
   Dim CtaxPagar As String, Cuenta_Banco As String, Cuenta_IR As String, Cuenta_Bolsa As String, Cuenta_Anticipo As String, Cuenta_Pulperia As String
@@ -6735,7 +6735,7 @@ Private Sub CmdContabilizarPlanilla_Click()
                                                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                 '/////////////////////////////////////////////ACTUALIZO LA FACTURA COMO CONTABILIZADO //////////////////////////////////////////
                                                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                rs.Open "UPDATE Compras SET Contabilizado = 1 ,Activo = 0  WHERE (Numero_Compra = '" & NumeroFactura & "') ", ConexionFacturacion
+                                                                Rs.Open "UPDATE Compras SET Contabilizado = 1 ,Activo = 0  WHERE (Numero_Compra = '" & NumeroFactura & "') ", ConexionFacturacion
                                                      
                                                      
                                                      
@@ -6912,8 +6912,8 @@ Private Sub PushButton1_Click()
   Dim MonedaFactura As String, Reg As Double, CodigoCuentaIngresos As String, CodCuentaEfectivo As String
   Dim CostoProducto As Double, CodigoCuentaCostos As String, CodigoCuentaInventario As String, CodigoCuentaOtros As String, CodigoCuentaMetodo As String
   Dim Pagado As Double, NumeroReferencia As String, MonedaMovimiento As String, TasaMovimiento As Double
-  Dim cn As New ADODB.Connection, SuReferencia As String, CodigoCuentaBanco As String
-  Dim rs As New ADODB.Recordset, Registro As Double, NumeroCompra As String
+  Dim Cn As New ADODB.Connection, SuReferencia As String, CodigoCuentaBanco As String
+  Dim Rs As New ADODB.Recordset, Registro As Double, NumeroCompra As String
   Dim cmd As New ADODB.Command, Ret1Porc As Double, Ret2Porc As Double, MontoRetencion1 As Double, MontoRetencion2 As Double, Ret3Porc As Double, Ret4Porc As Double, MontoRetencion3 As Double, MontoRetencion4 As Double
   Dim MontoBanco As Double
 
@@ -7176,7 +7176,7 @@ Private Sub PushButton1_Click()
                                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                 '/////////////////////////////////////////////ACTUALIZO LA FACTURA COMO CONTABILIZADO //////////////////////////////////////////
                                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                rs.Open "UPDATE ReciboPago SET Contabilizado = 1 ,Activo = 0  WHERE (CodReciboPago = '" & NumeroFactura & "') ", ConexionFacturacion
+                                                Rs.Open "UPDATE ReciboPago SET Contabilizado = 1 ,Activo = 0  WHERE (CodReciboPago = '" & NumeroFactura & "') ", ConexionFacturacion
                                       
                                       
                               
@@ -7780,7 +7780,7 @@ Private Sub PushButton1_Click()
                                                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                 '/////////////////////////////////////////////ACTUALIZO LA FACTURA COMO CONTABILIZADO //////////////////////////////////////////
                                                                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                rs.Open "UPDATE Compras SET Contabilizado = 1 ,Activo = 0  WHERE (Numero_Compra = '" & NumeroFactura & "') ", ConexionFacturacion
+                                                                Rs.Open "UPDATE Compras SET Contabilizado = 1 ,Activo = 0  WHERE (Numero_Compra = '" & NumeroFactura & "') ", ConexionFacturacion
                                                      
                                                      
                                                      

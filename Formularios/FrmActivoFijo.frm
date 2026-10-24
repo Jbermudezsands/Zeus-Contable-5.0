@@ -1,7 +1,8 @@
 VERSION 5.00
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "ComDlg32.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
 Begin VB.Form FrmActivoFijo 
    BorderStyle     =   1  'Fixed Single
@@ -9,17 +10,713 @@ Begin VB.Form FrmActivoFijo
    ClientHeight    =   6240
    ClientLeft      =   45
    ClientTop       =   405
-   ClientWidth     =   12675
+   ClientWidth     =   10365
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
    ScaleHeight     =   6240
-   ScaleWidth      =   12675
+   ScaleWidth      =   10365
+   Begin XtremeSuiteControls.TabControl TabControl1 
+      Height          =   5415
+      Left            =   0
+      TabIndex        =   6
+      Top             =   0
+      Width           =   10335
+      _Version        =   786432
+      _ExtentX        =   18230
+      _ExtentY        =   9551
+      _StockProps     =   68
+      Appearance      =   9
+      Color           =   4
+      PaintManager.BoldSelected=   -1  'True
+      PaintManager.DisableLunaColors=   0   'False
+      PaintManager.OneNoteColors=   -1  'True
+      PaintManager.ShowIcons=   -1  'True
+      ItemCount       =   4
+      Item(0).Caption =   "Datos Generales"
+      Item(0).ControlCount=   27
+      Item(0).Control(0)=   "TxtDescripcion"
+      Item(0).Control(1)=   "TxtLocalizacion"
+      Item(0).Control(2)=   "TxtSerie"
+      Item(0).Control(3)=   "TxtMarca"
+      Item(0).Control(4)=   "TxtMarbete"
+      Item(0).Control(5)=   "Command1"
+      Item(0).Control(6)=   "DBEncargado"
+      Item(0).Control(7)=   "DBCodigo"
+      Item(0).Control(8)=   "TxtFechaCompra"
+      Item(0).Control(9)=   "Label1"
+      Item(0).Control(10)=   "Label2"
+      Item(0).Control(11)=   "Label3"
+      Item(0).Control(12)=   "Label5"
+      Item(0).Control(13)=   "Label4"
+      Item(0).Control(14)=   "Label6"
+      Item(0).Control(15)=   "Label7"
+      Item(0).Control(16)=   "Label8"
+      Item(0).Control(17)=   "Label9"
+      Item(0).Control(18)=   "Frame6"
+      Item(0).Control(19)=   "Label23"
+      Item(0).Control(20)=   "Label24"
+      Item(0).Control(21)=   "Label16"
+      Item(0).Control(22)=   "TxtUnidad"
+      Item(0).Control(23)=   "TxtModelo"
+      Item(0).Control(24)=   "TxtColor"
+      Item(0).Control(25)=   "Label26"
+      Item(0).Control(26)=   "TxtAño"
+      Item(1).Caption =   "Depreciacion"
+      Item(1).ControlCount=   27
+      Item(1).Control(0)=   "Label21"
+      Item(1).Control(1)=   "Shape4"
+      Item(1).Control(2)=   "TxtDepreciacion"
+      Item(1).Control(3)=   "Command2"
+      Item(1).Control(4)=   "Label18"
+      Item(1).Control(5)=   "TxtGastos"
+      Item(1).Control(6)=   "Command3"
+      Item(1).Control(7)=   "Label19"
+      Item(1).Control(8)=   "TxtCuentaOriginal"
+      Item(1).Control(9)=   "Command5"
+      Item(1).Control(10)=   "Label20"
+      Item(1).Control(11)=   "Shape2"
+      Item(1).Control(12)=   "Label22"
+      Item(1).Control(13)=   "Label10"
+      Item(1).Control(14)=   "TxtValorOriginal"
+      Item(1).Control(15)=   "Label11"
+      Item(1).Control(16)=   "TxtFechaUltDep"
+      Item(1).Control(17)=   "Label12"
+      Item(1).Control(18)=   "TxtValorEstMeses"
+      Item(1).Control(19)=   "TxtValorRescate"
+      Item(1).Control(20)=   "Label13"
+      Item(1).Control(21)=   "TxtFechaBaja"
+      Item(1).Control(22)=   "Label14"
+      Item(1).Control(23)=   "TxtDepAcumulada"
+      Item(1).Control(24)=   "Label15"
+      Item(1).Control(25)=   "DBGrupos"
+      Item(1).Control(26)=   "Label17"
+      Item(2).Caption =   "Traslados y Asignaciones"
+      Item(2).ControlCount=   0
+      Item(3).Caption =   "Soporte Tecnico"
+      Item(3).ControlCount=   0
+      Begin VB.TextBox TxtAño 
+         Height          =   285
+         Left            =   5640
+         TabIndex        =   61
+         Top             =   4080
+         Width           =   2175
+      End
+      Begin VB.TextBox TxtUnidad 
+         Height          =   285
+         Left            =   5640
+         TabIndex        =   56
+         Top             =   4440
+         Width           =   2175
+      End
+      Begin VB.TextBox TxtModelo 
+         Height          =   285
+         Left            =   5640
+         TabIndex        =   55
+         Top             =   3720
+         Width           =   2175
+      End
+      Begin VB.TextBox TxtColor 
+         Height          =   285
+         Left            =   5640
+         TabIndex        =   54
+         Top             =   3360
+         Width           =   2175
+      End
+      Begin VB.TextBox TxtDepAcumulada 
+         Height          =   285
+         Left            =   -65200
+         TabIndex        =   49
+         Top             =   3360
+         Visible         =   0   'False
+         Width           =   1935
+      End
+      Begin VB.TextBox TxtValorRescate 
+         Height          =   285
+         Left            =   -65200
+         TabIndex        =   45
+         Top             =   2640
+         Visible         =   0   'False
+         Width           =   1935
+      End
+      Begin VB.TextBox TxtValorEstMeses 
+         Height          =   285
+         Left            =   -65200
+         TabIndex        =   44
+         Top             =   2160
+         Visible         =   0   'False
+         Width           =   1935
+      End
+      Begin VB.TextBox TxtValorOriginal 
+         Height          =   285
+         Left            =   -65200
+         Locked          =   -1  'True
+         TabIndex        =   40
+         Top             =   1440
+         Visible         =   0   'False
+         Width           =   1935
+      End
+      Begin VB.CommandButton Command5 
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   300
+         Left            =   -67480
+         Picture         =   "FrmActivoFijo.frx":0000
+         Style           =   1  'Graphical
+         TabIndex        =   36
+         Top             =   2760
+         Visible         =   0   'False
+         Width           =   375
+      End
+      Begin VB.TextBox TxtCuentaOriginal 
+         Height          =   285
+         Left            =   -69400
+         TabIndex        =   35
+         Top             =   2760
+         Visible         =   0   'False
+         Width           =   1815
+      End
+      Begin VB.CommandButton Command3 
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   300
+         Left            =   -67480
+         Picture         =   "FrmActivoFijo.frx":014E
+         Style           =   1  'Graphical
+         TabIndex        =   33
+         Top             =   2160
+         Visible         =   0   'False
+         Width           =   375
+      End
+      Begin VB.TextBox TxtGastos 
+         Height          =   285
+         Left            =   -69400
+         TabIndex        =   32
+         Top             =   2160
+         Visible         =   0   'False
+         Width           =   1815
+      End
+      Begin VB.CommandButton Command2 
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   300
+         Left            =   -67480
+         Picture         =   "FrmActivoFijo.frx":029C
+         Style           =   1  'Graphical
+         TabIndex        =   30
+         Top             =   1560
+         Visible         =   0   'False
+         Width           =   375
+      End
+      Begin VB.TextBox TxtDepreciacion 
+         Height          =   285
+         Left            =   -69400
+         TabIndex        =   29
+         Top             =   1560
+         Visible         =   0   'False
+         Width           =   1815
+      End
+      Begin VB.Frame Frame6 
+         BackColor       =   &H00E8AA8C&
+         Caption         =   "Imagen 1"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   2775
+         Left            =   120
+         TabIndex        =   25
+         Top             =   960
+         Width           =   3615
+         Begin XtremeSuiteControls.PushButton PushButton5 
+            Height          =   375
+            Left            =   3120
+            TabIndex        =   26
+            Top             =   1680
+            Width           =   375
+            _Version        =   786432
+            _ExtentX        =   661
+            _ExtentY        =   661
+            _StockProps     =   79
+            ForeColor       =   0
+            Appearance      =   6
+            Picture         =   "FrmActivoFijo.frx":03EA
+            ImageAlignment  =   0
+         End
+         Begin XtremeSuiteControls.PushButton PushButton1 
+            Height          =   375
+            Left            =   3120
+            TabIndex        =   27
+            Top             =   2160
+            Width           =   375
+            _Version        =   786432
+            _ExtentX        =   661
+            _ExtentY        =   661
+            _StockProps     =   79
+            ForeColor       =   0
+            Appearance      =   6
+            Picture         =   "FrmActivoFijo.frx":0984
+            ImageAlignment  =   0
+         End
+         Begin VB.Image foto 
+            BorderStyle     =   1  'Fixed Single
+            Height          =   2415
+            Left            =   120
+            Picture         =   "FrmActivoFijo.frx":0F1E
+            Stretch         =   -1  'True
+            Top             =   240
+            Width           =   2895
+         End
+      End
+      Begin VB.TextBox TxtDescripcion 
+         Height          =   615
+         Left            =   5640
+         MaxLength       =   255
+         MultiLine       =   -1  'True
+         ScrollBars      =   2  'Vertical
+         TabIndex        =   12
+         Top             =   1440
+         Width           =   4095
+      End
+      Begin VB.TextBox TxtLocalizacion 
+         Height          =   405
+         Left            =   5640
+         MultiLine       =   -1  'True
+         ScrollBars      =   2  'Vertical
+         TabIndex        =   11
+         Top             =   2160
+         Width           =   4095
+      End
+      Begin VB.TextBox TxtSerie 
+         Height          =   285
+         Left            =   1560
+         TabIndex        =   10
+         Top             =   4440
+         Width           =   2775
+      End
+      Begin VB.TextBox TxtMarca 
+         Height          =   495
+         Left            =   1560
+         MultiLine       =   -1  'True
+         ScrollBars      =   2  'Vertical
+         TabIndex        =   9
+         Top             =   3840
+         Width           =   2775
+      End
+      Begin VB.TextBox TxtMarbete 
+         Height          =   285
+         Left            =   5640
+         TabIndex        =   8
+         Top             =   2640
+         Width           =   2175
+      End
+      Begin VB.CommandButton Command1 
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   300
+         Left            =   7440
+         Picture         =   "FrmActivoFijo.frx":4FD5
+         Style           =   1  'Graphical
+         TabIndex        =   7
+         Top             =   1080
+         Width           =   375
+      End
+      Begin MSDataListLib.DataCombo DBEncargado 
+         Height          =   315
+         Left            =   1560
+         TabIndex        =   13
+         Top             =   4800
+         Width           =   2775
+         _ExtentX        =   4895
+         _ExtentY        =   556
+         _Version        =   393216
+         Text            =   ""
+      End
+      Begin MSDataListLib.DataCombo DBCodigo 
+         Height          =   315
+         Left            =   5640
+         TabIndex        =   14
+         Top             =   1080
+         Width           =   1695
+         _ExtentX        =   2990
+         _ExtentY        =   556
+         _Version        =   393216
+         Text            =   ""
+      End
+      Begin MSComCtl2.DTPicker TxtFechaCompra 
+         Height          =   285
+         Left            =   5640
+         TabIndex        =   15
+         Top             =   3000
+         Width           =   2175
+         _ExtentX        =   3836
+         _ExtentY        =   503
+         _Version        =   393216
+         Format          =   122355713
+         CurrentDate     =   37992
+      End
+      Begin MSComCtl2.DTPicker TxtFechaUltDep 
+         Height          =   285
+         Left            =   -65200
+         TabIndex        =   42
+         Top             =   1800
+         Visible         =   0   'False
+         Width           =   1935
+         _ExtentX        =   3413
+         _ExtentY        =   503
+         _Version        =   393216
+         Format          =   122355713
+         CurrentDate     =   37992
+      End
+      Begin MSComCtl2.DTPicker TxtFechaBaja 
+         Height          =   285
+         Left            =   -65200
+         TabIndex        =   47
+         Top             =   3000
+         Visible         =   0   'False
+         Width           =   1935
+         _ExtentX        =   3413
+         _ExtentY        =   503
+         _Version        =   393216
+         Format          =   122355713
+         CurrentDate     =   37992
+      End
+      Begin MSDataListLib.DataCombo DBGrupos 
+         Height          =   315
+         Left            =   -65200
+         TabIndex        =   51
+         Top             =   3840
+         Visible         =   0   'False
+         Width           =   1935
+         _ExtentX        =   3413
+         _ExtentY        =   556
+         _Version        =   393216
+         Text            =   ""
+      End
+      Begin VB.Label Label26 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Año:"
+         Height          =   255
+         Left            =   5160
+         TabIndex        =   60
+         Top             =   4080
+         Width           =   375
+      End
+      Begin VB.Label Label16 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Unidad:"
+         Height          =   255
+         Left            =   4920
+         TabIndex        =   58
+         Top             =   4440
+         Width           =   615
+      End
+      Begin VB.Label Label24 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Modelo:"
+         Height          =   255
+         Left            =   4920
+         TabIndex        =   57
+         Top             =   3720
+         Width           =   615
+      End
+      Begin VB.Label Label23 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Color:"
+         Height          =   255
+         Left            =   5040
+         TabIndex        =   53
+         Top             =   3360
+         Width           =   495
+      End
+      Begin VB.Label Label17 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Grupo de Cuentas"
+         Height          =   375
+         Left            =   -66640
+         TabIndex        =   52
+         Top             =   3840
+         Visible         =   0   'False
+         Width           =   1335
+      End
+      Begin VB.Label Label15 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Depreciacion Acumulada"
+         Height          =   375
+         Left            =   -66280
+         TabIndex        =   50
+         Top             =   3360
+         Visible         =   0   'False
+         Width           =   1095
+      End
+      Begin VB.Label Label14 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Fecha de Baja"
+         Height          =   255
+         Left            =   -66400
+         TabIndex        =   48
+         Top             =   3000
+         Visible         =   0   'False
+         Width           =   1215
+      End
+      Begin VB.Label Label13 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Valor Rescate"
+         Height          =   255
+         Left            =   -66400
+         TabIndex        =   46
+         Top             =   2640
+         Visible         =   0   'False
+         Width           =   1215
+      End
+      Begin VB.Label Label12 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Valor Estimado en Meses"
+         Height          =   375
+         Left            =   -66400
+         TabIndex        =   43
+         Top             =   2160
+         Visible         =   0   'False
+         Width           =   1215
+      End
+      Begin VB.Label Label11 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Fecha Ultima Dep"
+         Height          =   255
+         Left            =   -66640
+         TabIndex        =   41
+         Top             =   1800
+         Visible         =   0   'False
+         Width           =   1335
+      End
+      Begin VB.Label Label10 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Valor Original"
+         Height          =   255
+         Left            =   -66280
+         TabIndex        =   39
+         Top             =   1440
+         Visible         =   0   'False
+         Width           =   1215
+      End
+      Begin VB.Label Label22 
+         Alignment       =   2  'Center
+         BackStyle       =   0  'Transparent
+         Caption         =   "Datos de la Depreciacion"
+         BeginProperty Font 
+            Name            =   "Cambria"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Left            =   -66160
+         TabIndex        =   38
+         Top             =   720
+         Visible         =   0   'False
+         Width           =   2775
+      End
+      Begin VB.Shape Shape2 
+         DrawMode        =   6  'Mask Pen Not
+         Height          =   3855
+         Left            =   -66760
+         Shape           =   4  'Rounded Rectangle
+         Top             =   1080
+         Visible         =   0   'False
+         Width           =   3735
+      End
+      Begin VB.Label Label20 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Cuenta Valor Original"
+         Height          =   255
+         Left            =   -69400
+         TabIndex        =   37
+         Top             =   2520
+         Visible         =   0   'False
+         Width           =   1695
+      End
+      Begin VB.Label Label19 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Cuenta de Gastos"
+         Height          =   255
+         Left            =   -69280
+         TabIndex        =   34
+         Top             =   1920
+         Visible         =   0   'False
+         Width           =   1575
+      End
+      Begin VB.Label Label18 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Cuenta Depreciacion"
+         Height          =   255
+         Left            =   -69280
+         TabIndex        =   31
+         Top             =   1320
+         Visible         =   0   'False
+         Width           =   1695
+      End
+      Begin VB.Shape Shape4 
+         DrawMode        =   6  'Mask Pen Not
+         Height          =   3855
+         Left            =   -69640
+         Shape           =   4  'Rounded Rectangle
+         Top             =   1080
+         Visible         =   0   'False
+         Width           =   2775
+      End
+      Begin VB.Label Label21 
+         Alignment       =   2  'Center
+         BackStyle       =   0  'Transparent
+         Caption         =   "Cuentas Depreciacion"
+         BeginProperty Font 
+            Name            =   "Cambria"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Left            =   -69520
+         TabIndex        =   28
+         Top             =   720
+         Visible         =   0   'False
+         Width           =   2775
+      End
+      Begin VB.Label Label1 
+         Alignment       =   2  'Center
+         BackStyle       =   0  'Transparent
+         Caption         =   "Datos Generales del Activo"
+         BeginProperty Font 
+            Name            =   "Cambria"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   1200
+         TabIndex        =   24
+         Top             =   480
+         Width           =   3135
+      End
+      Begin VB.Label Label2 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Codigo Activo"
+         Height          =   255
+         Left            =   4560
+         TabIndex        =   23
+         Top             =   1080
+         Width           =   1215
+      End
+      Begin VB.Label Label3 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Descripcion"
+         Height          =   255
+         Left            =   4680
+         TabIndex        =   22
+         Top             =   1440
+         Width           =   975
+      End
+      Begin VB.Label Label5 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Localizacion:"
+         Height          =   255
+         Left            =   4560
+         TabIndex        =   21
+         Top             =   2160
+         Width           =   975
+      End
+      Begin VB.Label Label4 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Numero Marbete:"
+         Height          =   255
+         Left            =   4320
+         TabIndex        =   20
+         Top             =   2640
+         Width           =   1335
+      End
+      Begin VB.Label Label6 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Fecha Compra:"
+         Height          =   255
+         Left            =   4440
+         TabIndex        =   19
+         Top             =   3000
+         Width           =   1215
+      End
+      Begin VB.Label Label7 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Numero Serie:"
+         Height          =   255
+         Left            =   360
+         TabIndex        =   18
+         Top             =   4440
+         Width           =   1215
+      End
+      Begin VB.Label Label8 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Marca:"
+         Height          =   255
+         Left            =   840
+         TabIndex        =   17
+         Top             =   3840
+         Width           =   495
+      End
+      Begin VB.Label Label9 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Empleado Encag:"
+         Height          =   255
+         Left            =   240
+         TabIndex        =   16
+         Top             =   4800
+         Width           =   1335
+      End
+   End
    Begin VB.CommandButton CmdSalir 
       Caption         =   "Salir"
       Height          =   495
-      Left            =   9960
+      Left            =   9120
       TabIndex        =   5
       Top             =   5520
       Width           =   1215
@@ -340,574 +1037,21 @@ Begin VB.Form FrmActivoFijo
       EndProperty
       _Version        =   393216
    End
-   Begin XtremeSuiteControls.TabControl TabControl1 
-      Height          =   5415
+   Begin MSComDlg.CommonDialog CommonDialog1 
       Left            =   0
-      TabIndex        =   6
       Top             =   0
-      Width           =   11295
-      _Version        =   786432
-      _ExtentX        =   19923
-      _ExtentY        =   9551
-      _StockProps     =   68
-      Appearance      =   9
-      Color           =   4
-      PaintManager.BoldSelected=   -1  'True
-      PaintManager.DisableLunaColors=   0   'False
-      PaintManager.OneNoteColors=   -1  'True
-      PaintManager.ShowIcons=   -1  'True
-      ItemCount       =   4
-      Item(0).Caption =   "Datos Generales"
-      Item(0).ControlCount=   47
-      Item(0).Control(0)=   "TxtDescripcion"
-      Item(0).Control(1)=   "TxtLocalizacion"
-      Item(0).Control(2)=   "TxtSerie"
-      Item(0).Control(3)=   "TxtMarca"
-      Item(0).Control(4)=   "TxtMarbete"
-      Item(0).Control(5)=   "Command1"
-      Item(0).Control(6)=   "DBEncargado"
-      Item(0).Control(7)=   "DBCodigo"
-      Item(0).Control(8)=   "TxtFechaCompra"
-      Item(0).Control(9)=   "Shape1"
-      Item(0).Control(10)=   "Label1"
-      Item(0).Control(11)=   "Label2"
-      Item(0).Control(12)=   "Label3"
-      Item(0).Control(13)=   "Label5"
-      Item(0).Control(14)=   "Label4"
-      Item(0).Control(15)=   "Label6"
-      Item(0).Control(16)=   "Label7"
-      Item(0).Control(17)=   "Label8"
-      Item(0).Control(18)=   "Label9"
-      Item(0).Control(19)=   "TxtValorOriginal"
-      Item(0).Control(20)=   "TxtValorEstMeses"
-      Item(0).Control(21)=   "TxtValorRescate"
-      Item(0).Control(22)=   "TxtDepAcumulada"
-      Item(0).Control(23)=   "DBGrupos"
-      Item(0).Control(24)=   "TxtFechaBaja"
-      Item(0).Control(25)=   "TxtFechaUltDep"
-      Item(0).Control(26)=   "Shape2"
-      Item(0).Control(27)=   "Label10"
-      Item(0).Control(28)=   "Label11"
-      Item(0).Control(29)=   "Label12"
-      Item(0).Control(30)=   "Label13"
-      Item(0).Control(31)=   "Label14"
-      Item(0).Control(32)=   "Label15"
-      Item(0).Control(33)=   "Label16"
-      Item(0).Control(34)=   "Command2"
-      Item(0).Control(35)=   "Command3"
-      Item(0).Control(36)=   "Command4"
-      Item(0).Control(37)=   "Shape4"
-      Item(0).Control(38)=   "Command5"
-      Item(0).Control(39)=   "Label17"
-      Item(0).Control(40)=   "Label18"
-      Item(0).Control(41)=   "Label19"
-      Item(0).Control(42)=   "Label20"
-      Item(0).Control(43)=   "Label21"
-      Item(0).Control(44)=   "TxtDepreciacion"
-      Item(0).Control(45)=   "TxtGastos"
-      Item(0).Control(46)=   "TxtCuentaOriginal"
-      Item(1).Caption =   "Depreciacion"
-      Item(1).ControlCount=   0
-      Item(2).Caption =   "Traslados y Asignaciones"
-      Item(2).ControlCount=   0
-      Item(3).Caption =   "Soporte Tecnico"
-      Item(3).ControlCount=   0
-      Begin VB.CommandButton Command5 
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   12
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   300
-         Left            =   10320
-         Picture         =   "FrmActivoFijo.frx":0000
-         Style           =   1  'Graphical
-         TabIndex        =   45
-         Top             =   2760
-         Width           =   375
-      End
-      Begin VB.TextBox TxtDescripcion 
-         Height          =   615
-         Left            =   1800
-         MaxLength       =   255
-         MultiLine       =   -1  'True
-         ScrollBars      =   2  'Vertical
-         TabIndex        =   22
-         Top             =   1680
-         Width           =   2175
-      End
-      Begin VB.TextBox TxtLocalizacion 
-         Height          =   285
-         Left            =   1800
-         TabIndex        =   21
-         Top             =   2400
-         Width           =   2175
-      End
-      Begin VB.TextBox TxtSerie 
-         Height          =   285
-         Left            =   1800
-         TabIndex        =   20
-         Top             =   3480
-         Width           =   2175
-      End
-      Begin VB.TextBox TxtMarca 
-         Height          =   495
-         Left            =   1800
-         MultiLine       =   -1  'True
-         ScrollBars      =   2  'Vertical
-         TabIndex        =   19
-         Top             =   3840
-         Width           =   2175
-      End
-      Begin VB.TextBox TxtMarbete 
-         Height          =   285
-         Left            =   1800
-         TabIndex        =   18
-         Top             =   2760
-         Width           =   2175
-      End
-      Begin VB.CommandButton Command1 
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   12
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   300
-         Left            =   3600
-         Picture         =   "FrmActivoFijo.frx":014E
-         Style           =   1  'Graphical
-         TabIndex        =   17
-         Top             =   1320
-         Width           =   375
-      End
-      Begin VB.TextBox TxtValorOriginal 
-         Height          =   285
-         Left            =   6000
-         Locked          =   -1  'True
-         TabIndex        =   16
-         Top             =   1200
-         Width           =   1935
-      End
-      Begin VB.TextBox TxtValorEstMeses 
-         Height          =   285
-         Left            =   6000
-         TabIndex        =   15
-         Top             =   1920
-         Width           =   1935
-      End
-      Begin VB.TextBox TxtValorRescate 
-         Height          =   285
-         Left            =   6000
-         TabIndex        =   14
-         Top             =   2520
-         Width           =   1935
-      End
-      Begin VB.TextBox TxtDepAcumulada 
-         Height          =   285
-         Left            =   6000
-         Locked          =   -1  'True
-         TabIndex        =   13
-         Top             =   3480
-         Width           =   1935
-      End
-      Begin VB.TextBox TxtGastos 
-         Height          =   285
-         Left            =   8400
-         TabIndex        =   12
-         Top             =   2160
-         Width           =   1815
-      End
-      Begin VB.TextBox TxtCuentaOriginal 
-         Height          =   285
-         Left            =   8400
-         TabIndex        =   11
-         Top             =   2760
-         Width           =   1815
-      End
-      Begin VB.CommandButton Command2 
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   12
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   300
-         Left            =   10320
-         Picture         =   "FrmActivoFijo.frx":029C
-         Style           =   1  'Graphical
-         TabIndex        =   10
-         Top             =   1560
-         Width           =   375
-      End
-      Begin VB.CommandButton Command3 
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   12
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   300
-         Left            =   10320
-         Picture         =   "FrmActivoFijo.frx":03EA
-         Style           =   1  'Graphical
-         TabIndex        =   9
-         Top             =   2160
-         Width           =   375
-      End
-      Begin VB.CommandButton Command4 
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   12
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   300
-         Left            =   2040
-         Picture         =   "FrmActivoFijo.frx":0538
-         Style           =   1  'Graphical
-         TabIndex        =   8
-         Top             =   1680
-         Width           =   375
-      End
-      Begin VB.TextBox TxtDepreciacion 
-         Height          =   285
-         Left            =   8400
-         TabIndex        =   7
-         Top             =   1560
-         Width           =   1815
-      End
-      Begin MSDataListLib.DataCombo DBEncargado 
-         Height          =   315
-         Left            =   1800
-         TabIndex        =   23
-         Top             =   4440
-         Width           =   2175
-         _ExtentX        =   3836
-         _ExtentY        =   556
-         _Version        =   393216
-         Text            =   ""
-      End
-      Begin MSDataListLib.DataCombo DBCodigo 
-         Height          =   315
-         Left            =   1800
-         TabIndex        =   24
-         Top             =   1320
-         Width           =   1695
-         _ExtentX        =   2990
-         _ExtentY        =   556
-         _Version        =   393216
-         Text            =   ""
-      End
-      Begin MSComCtl2.DTPicker TxtFechaCompra 
-         Height          =   285
-         Left            =   1800
-         TabIndex        =   25
-         Top             =   3120
-         Width           =   2175
-         _ExtentX        =   3836
-         _ExtentY        =   503
-         _Version        =   393216
-         Format          =   78053377
-         CurrentDate     =   37992
-      End
-      Begin MSDataListLib.DataCombo DBGrupos 
-         Height          =   315
-         Left            =   6000
-         TabIndex        =   26
-         Top             =   3960
-         Width           =   1935
-         _ExtentX        =   3413
-         _ExtentY        =   556
-         _Version        =   393216
-         Text            =   ""
-      End
-      Begin MSComCtl2.DTPicker TxtFechaBaja 
-         Height          =   285
-         Left            =   6000
-         TabIndex        =   27
-         Top             =   3000
-         Width           =   1935
-         _ExtentX        =   3413
-         _ExtentY        =   503
-         _Version        =   393216
-         Format          =   78053377
-         CurrentDate     =   37992
-      End
-      Begin MSComCtl2.DTPicker TxtFechaUltDep 
-         Height          =   285
-         Left            =   6000
-         TabIndex        =   28
-         Top             =   1560
-         Width           =   1935
-         _ExtentX        =   3413
-         _ExtentY        =   503
-         _Version        =   393216
-         Format          =   78053377
-         CurrentDate     =   37992
-      End
-      Begin VB.Label Label21 
-         Alignment       =   2  'Center
-         BackStyle       =   0  'Transparent
-         Caption         =   "Datos Depreciacion"
-         BeginProperty Font 
-            Name            =   "Cambria"
-            Size            =   12
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Left            =   8160
-         TabIndex        =   50
-         Top             =   720
-         Width           =   2775
-      End
-      Begin VB.Label Label20 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Cuenta Valor Original"
-         Height          =   255
-         Left            =   8400
-         TabIndex        =   49
-         Top             =   2520
-         Width           =   1695
-      End
-      Begin VB.Label Label19 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Cuenta de Gastos"
-         Height          =   255
-         Left            =   8400
-         TabIndex        =   48
-         Top             =   1920
-         Width           =   1575
-      End
-      Begin VB.Label Label18 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Cuenta Depreciacion"
-         Height          =   255
-         Left            =   8400
-         TabIndex        =   47
-         Top             =   1320
-         Width           =   1575
-      End
-      Begin VB.Label Label17 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Grupo de Cuentas"
-         Height          =   375
-         Left            =   4680
-         TabIndex        =   46
-         Top             =   4080
-         Width           =   1335
-      End
-      Begin VB.Shape Shape1 
-         BackColor       =   &H00E0E0E0&
-         BorderColor     =   &H00000000&
-         DrawMode        =   2  'Blackness
-         FillColor       =   &H000000FF&
-         Height          =   3855
-         Left            =   120
-         Shape           =   5  'Rounded Square
-         Top             =   1080
-         Width           =   4335
-      End
-      Begin VB.Label Label1 
-         Alignment       =   2  'Center
-         BackStyle       =   0  'Transparent
-         Caption         =   "Datos Generales del Activo"
-         BeginProperty Font 
-            Name            =   "Cambria"
-            Size            =   12
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Left            =   600
-         TabIndex        =   44
-         Top             =   720
-         Width           =   3135
-      End
-      Begin VB.Label Label2 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Codigo Activo"
-         Height          =   255
-         Left            =   480
-         TabIndex        =   43
-         Top             =   1320
-         Width           =   1215
-      End
-      Begin VB.Label Label3 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Descripcion"
-         Height          =   255
-         Left            =   480
-         TabIndex        =   42
-         Top             =   1680
-         Width           =   975
-      End
-      Begin VB.Label Label5 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Localizacion:"
-         Height          =   255
-         Left            =   480
-         TabIndex        =   41
-         Top             =   2400
-         Width           =   1215
-      End
-      Begin VB.Label Label4 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Numero Marbete:"
-         Height          =   255
-         Left            =   480
-         TabIndex        =   40
-         Top             =   2760
-         Width           =   1335
-      End
-      Begin VB.Label Label6 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Fecha Compra:"
-         Height          =   255
-         Left            =   480
-         TabIndex        =   39
-         Top             =   3120
-         Width           =   1215
-      End
-      Begin VB.Label Label7 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Numero Serie:"
-         Height          =   255
-         Left            =   480
-         TabIndex        =   38
-         Top             =   3480
-         Width           =   1215
-      End
-      Begin VB.Label Label8 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Marca:"
-         Height          =   255
-         Left            =   480
-         TabIndex        =   37
-         Top             =   3840
-         Width           =   1215
-      End
-      Begin VB.Label Label9 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Empleado Encag:"
-         Height          =   255
-         Left            =   480
-         TabIndex        =   36
-         Top             =   4440
-         Width           =   1335
-      End
-      Begin VB.Shape Shape2 
-         DrawMode        =   6  'Mask Pen Not
-         Height          =   3855
-         Left            =   4440
-         Shape           =   4  'Rounded Rectangle
-         Top             =   1080
-         Width           =   3735
-      End
-      Begin VB.Label Label10 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Valor Original"
-         Height          =   255
-         Left            =   4680
-         TabIndex        =   35
-         Top             =   1200
-         Width           =   1215
-      End
-      Begin VB.Label Label11 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Fecha Ultima Dep"
-         Height          =   255
-         Left            =   4560
-         TabIndex        =   34
-         Top             =   1560
-         Width           =   1335
-      End
-      Begin VB.Label Label12 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Valor Estimado en Meses"
-         Height          =   375
-         Left            =   4680
-         TabIndex        =   33
-         Top             =   1920
-         Width           =   1215
-      End
-      Begin VB.Label Label13 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Valor Rescate"
-         Height          =   255
-         Left            =   4680
-         TabIndex        =   32
-         Top             =   2520
-         Width           =   1215
-      End
-      Begin VB.Label Label14 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Fecha de Baja"
-         Height          =   255
-         Left            =   4680
-         TabIndex        =   31
-         Top             =   3000
-         Width           =   1215
-      End
-      Begin VB.Label Label15 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Depreciacion Acumulada"
-         Height          =   375
-         Left            =   4680
-         TabIndex        =   30
-         Top             =   3480
-         Width           =   1095
-      End
-      Begin VB.Label Label16 
-         Alignment       =   2  'Center
-         BackStyle       =   0  'Transparent
-         Caption         =   "Datos Depreciacion"
-         BeginProperty Font 
-            Name            =   "Cambria"
-            Size            =   12
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Left            =   4680
-         TabIndex        =   29
-         Top             =   720
-         Width           =   3135
-      End
-      Begin VB.Shape Shape4 
-         DrawMode        =   6  'Mask Pen Not
-         Height          =   3855
-         Left            =   8280
-         Shape           =   4  'Rounded Rectangle
-         Top             =   1080
-         Width           =   2775
-      End
+      _ExtentX        =   847
+      _ExtentY        =   847
+      _Version        =   393216
+   End
+   Begin VB.Label Label25 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Modelo:"
+      Height          =   255
+      Left            =   5880
+      TabIndex        =   59
+      Top             =   5760
+      Width           =   615
    End
 End
 Attribute VB_Name = "FrmActivoFijo"
@@ -981,7 +1125,7 @@ FrmConsulta.Show 1
 End Sub
 
 Private Sub CmdGrabar_Click()
-On Error GoTo TipoErrs
+'On Error GoTo TipoErrs
 
 If Me.TxtCuentaOriginal.Text = "" Then
   MsgBox "Se necesita la cuenta del Activo", vbCritical, "DFID"
@@ -1062,16 +1206,16 @@ If DtaActivoFijo.Recordset.EOF Then
 Else
   'DtaActivoFijo.Recordset.Edit
    DtaActivoFijo.Recordset!CodCuenta = Me.DBCodigo.Text
-   DtaActivoFijo.Recordset!CuentaValorOriginal = Me.TxtCuentaOriginal.Text
+   DtaActivoFijo.Recordset!cntacontable = Me.TxtCuentaOriginal.Text
    DtaActivoFijo.Recordset!CuentaGastos = Me.TxtGastos
    DtaActivoFijo.Recordset!CuentaDepreciacion = Me.TxtDepreciacion
-   Me.DtaActivoFijo.Recordset!DescripcionActivo = Me.TxtDescripcion.Text
+   Me.DtaActivoFijo.Recordset!DescripcionAF = Me.TxtDescripcion.Text
    Me.DtaActivoFijo.Recordset!Localizacion = Me.TxtLocalizacion.Text
    Me.DtaActivoFijo.Recordset!NumeroMarbete = Me.TxtMarbete.Text
-   Me.DtaActivoFijo.Recordset!FechaCompra = Me.TxtFechaCompra.Value
-   Me.DtaActivoFijo.Recordset!NumeroSerie = Me.TxtSerie.Text
+   Me.DtaActivoFijo.Recordset!fcompragen = Me.TxtFechaCompra.Value
+   Me.DtaActivoFijo.Recordset!Serie = Me.TxtSerie.Text
    Me.DtaActivoFijo.Recordset!marca = Me.TxtMarca.Text
-   Me.DtaActivoFijo.Recordset!ValorOriginal = Me.TxtValorOriginal.Text
+   Me.DtaActivoFijo.Recordset!costogen = Me.TxtValorOriginal.Text
    Me.DtaActivoFijo.Recordset!FechaUltimaDepre = Me.TxtFechaUltDep.Value
    Me.DtaActivoFijo.Recordset!ValorEstimadoMeses = Me.TxtValorEstMeses.Text
    Me.DtaActivoFijo.Recordset!ValorRescate = Me.TxtValorRescate.Text
@@ -1122,9 +1266,13 @@ QueProducto = "CuentaActivoFijo"
 FrmConsulta.Show 1
 End Sub
 
+Private Sub Command4_Click()
+
+End Sub
+
 Private Sub DBCodigo_Change()
-On Error GoTo TipoErrs
-Dim Debito As Double, Credito As Double
+'On Error GoTo TipoErrs
+Dim Debito As Double, Credito As Double, Ruta As String
 
 Criterio = "CodCuenta='" & Me.DBCodigo.Text & "'"
 If DtaActivoFijo.Recordset.RecordCount <> 0 Then DtaActivoFijo.Recordset.MoveFirst
@@ -1148,32 +1296,81 @@ If DtaActivoFijo.Recordset.EOF Then
   Me.TxtCuentaOriginal.Text = ""
   Me.TxtGastos.Text = ""
 Else
-  Me.TxtCuentaOriginal.Text = DtaActivoFijo.Recordset!CodCuenta
-  Me.TxtGastos = Me.DtaActivoFijo.Recordset!CuentaGastos
-  Me.TxtDepreciacion = Me.DtaActivoFijo.Recordset!CuentaDepreciacion
-  Me.TxtDescripcion.Text = Me.DtaActivoFijo.Recordset!DescripcionActivo
-  Me.TxtLocalizacion.Text = Me.DtaActivoFijo.Recordset!Localizacion
-  Me.TxtMarbete.Text = Me.DtaActivoFijo.Recordset!NumeroMarbete
-  Me.TxtFechaCompra.Value = Me.DtaActivoFijo.Recordset!FechaCompra
-  Me.TxtSerie.Text = Me.DtaActivoFijo.Recordset!NumeroSerie
-  Me.TxtMarca.Text = Me.DtaActivoFijo.Recordset!marca
-  'Me.TxtValorOriginal.Text = Me.DtaActivoFijo.Recordset!ValorOriginal
+     Me.TxtCuentaOriginal.Text = DtaActivoFijo.Recordset!CodCuenta
+  If Not IsNull(Me.DtaActivoFijo.Recordset!CuentaGastos) Then
+     Me.TxtGastos = Me.DtaActivoFijo.Recordset!CuentaGastos
+  End If
+  If Not IsNull(Me.DtaActivoFijo.Recordset!CuentaDepreciacion) Then
+    Me.TxtDepreciacion = Me.DtaActivoFijo.Recordset!CuentaDepreciacion
+  End If
+  If Not IsNull(Me.DtaActivoFijo.Recordset!DescripcionAF) Then
+    Me.TxtDescripcion.Text = Me.DtaActivoFijo.Recordset!DescripcionAF
+  End If
+  If Not IsNull(Me.DtaActivoFijo.Recordset!Localizacion) Then
+    Me.TxtLocalizacion.Text = Me.DtaActivoFijo.Recordset!Localizacion
+  End If
+  
+  If Not IsNull(Me.DtaActivoFijo.Recordset!NumeroMarbete) Then
+   Me.TxtMarbete.Text = Me.DtaActivoFijo.Recordset!NumeroMarbete
+  End If
+  Me.TxtFechaCompra.Value = Me.DtaActivoFijo.Recordset!fcompragen
+  If Not IsNull(Me.DtaActivoFijo.Recordset!Serie) Then
+    Me.TxtSerie.Text = Me.DtaActivoFijo.Recordset!Serie
+  End If
+  If Not IsNull(Me.DtaActivoFijo.Recordset!marca) Then
+    Me.TxtMarca.Text = Me.DtaActivoFijo.Recordset!marca
+  End If
+  
+  If Not IsNull(Me.DtaActivoFijo.Recordset!modelo) Then
+    Me.TxtModelo.Text = Me.DtaActivoFijo.Recordset!modelo
+  End If
+  
+  If Not IsNull(Me.DtaActivoFijo.Recordset!Color) Then
+   Me.TxtColor.Text = Me.DtaActivoFijo.Recordset!Color
+  End If
+  
+  If Not IsNull(Me.DtaActivoFijo.Recordset!Año) Then
+   Me.TxtAño.Text = Me.DtaActivoFijo.Recordset!Año
+  End If
+  If Not IsNull(Me.DtaActivoFijo.Recordset!costogen) Then
+  Me.TxtValorOriginal.Text = Me.DtaActivoFijo.Recordset!costogen
+  Else
+  Me.TxtValorOriginal.Text = "0.00"
+  End If
   Me.TxtFechaUltDep.Value = Me.DtaActivoFijo.Recordset!FechaUltimaDepre
   Me.TxtValorEstMeses.Text = Me.DtaActivoFijo.Recordset!ValorEstimadoMeses
   Me.TxtValorRescate.Text = Me.DtaActivoFijo.Recordset!ValorRescate
-  Me.TxtFechaBaja.Value = Me.DtaActivoFijo.Recordset!FechaBaja
+  If Not IsNull(Me.DtaActivoFijo.Recordset!FechaBaja) Then
+    Me.TxtFechaBaja.Value = Me.DtaActivoFijo.Recordset!FechaBaja
+  End If
+  
+  If Not IsNull(Me.DtaActivoFijo.Recordset!DepreciacionAcumulada) Then
+    Me.TxtDepAcumulada.Text = Me.DtaActivoFijo.Recordset!DepreciacionAcumulada
+  End If
+  
+  If IsNull(Me.DtaActivoFijo.Recordset("dirfoto")) Or Me.DtaActivoFijo.Recordset("dirfoto") = "" Then
+    Ruta = ""
+    If Dir(Ruta) <> "" Then
+      foto.Picture = LoadPicture(Ruta)
+    End If
+Else
+    Ruta = Me.DtaActivoFijo.Recordset!dirfoto
+    If Dir(Ruta) <> "" Then
+     foto.Picture = LoadPicture(Ruta)
+    End If
+End If
   'Me.TxtDepAcumulada.Text = Me.DtaActivoFijo.Recordset.DepreciacionAcumulada
   
 '//////////////////////////////Busco el Saldo de la Depreciacion////////////////////////
- Me.DtaBusca.RecordSource = "SELECT Transacciones.CodCuentas, Sum(Transacciones.Debito*Transacciones.TCambio) AS MDebito, Sum(Transacciones.TCambio*Transacciones.Credito) AS MCredito From Transacciones GROUP BY Transacciones.CodCuentas Having (((Transacciones.CodCuentas) = '" & Me.TxtDepreciacion.Text & "'))"
- Me.DtaBusca.Refresh
- If Not DtaBusca.Recordset.EOF Then
-   Debito = Me.DtaBusca.Recordset!MDebito
-   Credito = Me.DtaBusca.Recordset!MCredito
-   Me.TxtDepAcumulada.Text = Credito - Debito
- Else
-   Me.TxtDepAcumulada.Text = "0.00"
- End If
+' Me.DtaBusca.RecordSource = "SELECT Transacciones.CodCuentas, Sum(Transacciones.Debito*Transacciones.TCambio) AS MDebito, Sum(Transacciones.TCambio*Transacciones.Credito) AS MCredito From Transacciones GROUP BY Transacciones.CodCuentas Having (((Transacciones.CodCuentas) = '" & Me.TxtDepreciacion.Text & "'))"
+' Me.DtaBusca.Refresh
+' If Not DtaBusca.Recordset.EOF Then
+'   Debito = Me.DtaBusca.Recordset!MDebito
+'   Credito = Me.DtaBusca.Recordset!MCredito
+'   Me.TxtDepAcumulada.Text = Credito - Debito
+' Else
+'   Me.TxtDepAcumulada.Text = "0.00"
+' End If
  
 '///////////////////////Busco el Saldo del Valor Original///////////////////////////////////
  Me.DtaBusca.RecordSource = "SELECT Transacciones.CodCuentas, Sum(Transacciones.Debito*Transacciones.TCambio) AS MDebito, Sum(Transacciones.TCambio*Transacciones.Credito) AS MCredito From Transacciones GROUP BY Transacciones.CodCuentas Having (((Transacciones.CodCuentas) = '" & Me.TxtCuentaOriginal.Text & "'))"
@@ -1183,7 +1380,7 @@ Else
    Credito = Me.DtaBusca.Recordset!MCredito
    Me.TxtValorOriginal.Text = Debito - Credito
  Else
-   Me.TxtValorOriginal.Text = "0.00"
+'   Me.TxtValorOriginal.Text = "0.00"
  End If
  
 
@@ -1198,16 +1395,16 @@ Else
   End If
  
  '/////Busco la Descripcion del Grupo/////////////////
-  CodigoCuenta = TxtCuentaOriginal
-  Criterio = "CodCuentas='" & CodigoCuenta & "'"
-  If DtaCuentas.Recordset.RecordCount <> 0 Then DtaCuentas.Recordset.MoveFirst
-  Me.DtaCuentas.Recordset.Find (Criterio)
-  If Not DtaCuentas.Recordset.EOF Then
-   If Not IsNull(DtaCuentas.Recordset!CodGrupo) Then
-    CodGrupo = DtaCuentas.Recordset!CodGrupo
-   End If
-  End If
- 
+'  CodigoCuenta = TxtCuentaOriginal
+'  Criterio = "CodCuentas='" & CodigoCuenta & "'"
+'  If DtaCuentas.Recordset.RecordCount <> 0 Then DtaCuentas.Recordset.MoveFirst
+'  Me.DtaCuentas.Recordset.Find (Criterio)
+'  If Not DtaCuentas.Recordset.EOF Then
+'   If Not IsNull(DtaCuentas.Recordset!CodGrupo) Then
+'    CodGrupo = DtaCuentas.Recordset!CodGrupo
+'   End If
+'  End If
+
  
  '/////Busco la Descripcion del Grupo/////////////////
   Criterio = "CodGrupo='" & CodGrupo & "'"
@@ -1258,7 +1455,7 @@ End If
 End Sub
 
 Private Sub Form_Load()
-MDIPrimero.Skin1.ApplySkin hWnd
+'MDIPrimero.Skin1.ApplySkin hWnd
 'SkinFramework.LoadSkin App.Path + "\Office2007.cjstyles", "NormalBlue.ini"
 'SkinFramework.ApplyWindow Me.hWnd
 'SkinFramework.ApplyOptions = SkinFramework.ApplyOptions Or xtpSkinApplyMetrics
@@ -1318,6 +1515,35 @@ With Me.DtaEncargado
 End With
 LlenarDataCombos DtaEncargado, DBEncargado, "NombreEncargado", "CodEncargado"
 
+End Sub
+
+Private Sub PushButton1_Click()
+On Error GoTo TipoErrs
+'la ruta de la imagen en el disco
+
+'ruta inicial del CommonDialog
+CommonDialog1.InitDir = "C:\Documents and Settings\Administrador\Mis documentos\Mis imágenes\"
+
+'Titulo del CommonDialog
+CommonDialog1.DialogTitle = "Seleccione el archivo gif"
+
+'Extensión del CommonDialog
+CommonDialog1.Filter = "Archivos Graficos (*.bmp;*.gif;*.jpg)"
+
+'Abrimos el CommonDialog
+CommonDialog1.ShowOpen
+
+If CommonDialog1.FileName = "" Then
+   'No se ha seleccionado ningún archivo
+   MsgBox "No se ha seleccionado ningún archivo", vbInformation
+Else
+  'Mostramos la ruta archivo seleccionado
+  Ruta = CommonDialog1.FileName
+  foto.Picture = LoadPicture(CommonDialog1.FileName)
+End If
+
+TipoErrs:
+ MsgBox err.Description
 End Sub
 
 Private Sub TxtCuentaOriginal_Change()

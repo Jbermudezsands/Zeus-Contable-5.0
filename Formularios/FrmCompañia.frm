@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{FAEEE763-117E-101B-8933-08002B2F4F5A}#1.1#0"; "DBLIST32.OCX"
+Object = "{FAEEE763-117E-101B-8933-08002B2F4F5A}#1.1#0"; "dblist32.Ocx"
 Begin VB.Form FrmCompañia 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Administracion de Compañias"
@@ -318,7 +318,7 @@ Me.TxtConexionString.Text = mydlg.PromptNew
 
 Exit Sub
 TipoErrs:
- MsgBox Err.Description
+ MsgBox err.Description
 End Sub
 
 Private Sub Form_Load()

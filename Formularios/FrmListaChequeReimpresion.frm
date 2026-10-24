@@ -1,7 +1,8 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
 Begin VB.Form FrmListaChequeReimpresion 
@@ -17,6 +18,30 @@ Begin VB.Form FrmListaChequeReimpresion
    MinButton       =   0   'False
    ScaleHeight     =   7215
    ScaleWidth      =   11085
+   Begin VB.CommandButton Command1 
+      Caption         =   "Filtrar Fechas"
+      Height          =   375
+      Left            =   9600
+      TabIndex        =   21
+      Top             =   2400
+      Width           =   1335
+   End
+   Begin ACTIVESKINLibCtl.SkinLabel LblFechaIni 
+      Height          =   375
+      Left            =   6360
+      OleObjectBlob   =   "FrmListaChequeReimpresion.frx":0000
+      TabIndex        =   19
+      Top             =   5880
+      Width           =   1095
+   End
+   Begin VB.CommandButton CmdListadoCheque 
+      Caption         =   "Exportar"
+      Height          =   375
+      Left            =   9600
+      TabIndex        =   16
+      Top             =   3360
+      Width           =   1335
+   End
    Begin VB.CommandButton CmdAnular 
       Caption         =   "Anular"
       Height          =   375
@@ -61,7 +86,7 @@ Begin VB.Form FrmListaChequeReimpresion
       EndProperty
       Height          =   300
       Left            =   3960
-      Picture         =   "FrmListaChequeReimpresion.frx":0000
+      Picture         =   "FrmListaChequeReimpresion.frx":0076
       Style           =   1  'Graphical
       TabIndex        =   7
       Top             =   120
@@ -80,7 +105,7 @@ Begin VB.Form FrmListaChequeReimpresion
       EndProperty
       Height          =   405
       Left            =   9600
-      Picture         =   "FrmListaChequeReimpresion.frx":014E
+      Picture         =   "FrmListaChequeReimpresion.frx":01C4
       TabIndex        =   6
       ToolTipText     =   "Salir"
       Top             =   5160
@@ -327,6 +352,7 @@ Begin VB.Form FrmListaChequeReimpresion
       PrintInfos(0).PageHeaderHeight=   0
       PrintInfos(0).PageFooterHeight=   0
       PrintInfos.Count=   1
+      AllowUpdate     =   0   'False
       Appearance      =   3
       DefColWidth     =   0
       HeadLines       =   1
@@ -334,13 +360,14 @@ Begin VB.Form FrmListaChequeReimpresion
       MultipleLines   =   0
       CellTipsWidth   =   0
       DeadAreaBackColor=   14215660
-      RowDividerColor =   14215660
+      RowDividerColor =   0
       RowSubDividerColor=   14215660
       DirectionAfterEnter=   1
       DirectionAfterTab=   1
       MaxRows         =   250000
       ViewColumnCaptionWidth=   0
       ViewColumnWidth =   0
+      CollapseColor   =   6579300
       _PropDict       =   "_ExtentX,2003,3;_ExtentY,2004,3;_LayoutType,512,2;_RowHeight,16,3;_StyleDefs,513,0;_WasPersistedAsPixels,516,2"
       _StyleDefs(0)   =   "_StyleRoot:id=0,.parent=-1,.alignment=3,.valignment=0,.bgcolor=&H80000005&"
       _StyleDefs(1)   =   ":id=0,.fgcolor=&H80000008&,.wraptext=0,.locked=0,.transparentBmp=0"
@@ -348,92 +375,93 @@ Begin VB.Form FrmListaChequeReimpresion
       _StyleDefs(3)   =   ":id=0,.borderColor=&H80000005&,.borderType=0,.bold=0,.fontsize=825,.italic=0"
       _StyleDefs(4)   =   ":id=0,.underline=0,.strikethrough=0,.charset=0"
       _StyleDefs(5)   =   ":id=0,.fontname=MS Sans Serif"
-      _StyleDefs(6)   =   "Style:id=1,.parent=0,.namedParent=33"
-      _StyleDefs(7)   =   "CaptionStyle:id=4,.parent=2,.namedParent=37,.bold=-1,.fontsize=825,.italic=0"
-      _StyleDefs(8)   =   ":id=4,.underline=0,.strikethrough=0,.charset=0"
+      _StyleDefs(6)   =   "Style:id=1,.parent=0,.namedParent=33,.bgcolor=&HFFFFFF&,.fgcolor=&HFFFFFF&"
+      _StyleDefs(7)   =   "CaptionStyle:id=4,.parent=2,.namedParent=37,.bgcolor=&H646464&,.bold=-1"
+      _StyleDefs(8)   =   ":id=4,.fontsize=825,.italic=0,.underline=0,.strikethrough=0,.charset=0"
       _StyleDefs(9)   =   ":id=4,.fontname=MS Sans Serif"
       _StyleDefs(10)  =   "HeadingStyle:id=2,.parent=1,.namedParent=34,.fgcolor=&H0&,.bold=-1,.fontsize=825"
       _StyleDefs(11)  =   ":id=2,.italic=0,.underline=0,.strikethrough=0,.charset=0"
       _StyleDefs(12)  =   ":id=2,.fontname=MS Sans Serif"
-      _StyleDefs(13)  =   "FooterStyle:id=3,.parent=1,.namedParent=35"
+      _StyleDefs(13)  =   "FooterStyle:id=3,.parent=1,.namedParent=35,.fgcolor=&HFFFFFF&"
       _StyleDefs(14)  =   "InactiveStyle:id=5,.parent=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
-      _StyleDefs(15)  =   "SelectedStyle:id=6,.parent=1,.namedParent=36"
-      _StyleDefs(16)  =   "EditorStyle:id=7,.parent=1"
+      _StyleDefs(15)  =   "SelectedStyle:id=6,.parent=1,.namedParent=36,.fgcolor=&HFFFFFF&"
+      _StyleDefs(16)  =   "EditorStyle:id=7,.parent=1,.bgcolor=&H0&"
       _StyleDefs(17)  =   "HighlightRowStyle:id=8,.parent=1,.namedParent=38"
       _StyleDefs(18)  =   "EvenRowStyle:id=9,.parent=1,.namedParent=39"
       _StyleDefs(19)  =   "OddRowStyle:id=10,.parent=1,.namedParent=40"
       _StyleDefs(20)  =   "RecordSelectorStyle:id=11,.parent=2,.namedParent=41"
-      _StyleDefs(21)  =   "FilterBarStyle:id=12,.parent=1,.namedParent=42"
-      _StyleDefs(22)  =   "Splits(0).Style:id=13,.parent=1"
-      _StyleDefs(23)  =   "Splits(0).CaptionStyle:id=22,.parent=4,.bgcolor=&HD2D7E6&,.fgcolor=&HA00000&"
-      _StyleDefs(24)  =   ":id=22,.bold=-1,.fontsize=1275,.italic=0,.underline=0,.strikethrough=0"
-      _StyleDefs(25)  =   ":id=22,.charset=0"
-      _StyleDefs(26)  =   ":id=22,.fontname=Pristina"
-      _StyleDefs(27)  =   "Splits(0).HeadingStyle:id=14,.parent=2,.bgcolor=&HD2D7E6&,.fgcolor=&H0&,.bold=-1"
-      _StyleDefs(28)  =   ":id=14,.fontsize=825,.italic=0,.underline=0,.strikethrough=0,.charset=0"
-      _StyleDefs(29)  =   ":id=14,.fontname=MS Sans Serif"
-      _StyleDefs(30)  =   "Splits(0).FooterStyle:id=15,.parent=3"
-      _StyleDefs(31)  =   "Splits(0).InactiveStyle:id=16,.parent=5"
-      _StyleDefs(32)  =   "Splits(0).SelectedStyle:id=18,.parent=6"
-      _StyleDefs(33)  =   "Splits(0).EditorStyle:id=17,.parent=7"
-      _StyleDefs(34)  =   "Splits(0).HighlightRowStyle:id=19,.parent=8"
-      _StyleDefs(35)  =   "Splits(0).EvenRowStyle:id=20,.parent=9"
-      _StyleDefs(36)  =   "Splits(0).OddRowStyle:id=21,.parent=10"
-      _StyleDefs(37)  =   "Splits(0).RecordSelectorStyle:id=23,.parent=11"
-      _StyleDefs(38)  =   "Splits(0).FilterBarStyle:id=24,.parent=12,.bgcolor=&H80000013&"
-      _StyleDefs(39)  =   "Splits(0).Columns(0).Style:id=28,.parent=13,.locked=-1"
-      _StyleDefs(40)  =   "Splits(0).Columns(0).HeadingStyle:id=25,.parent=14"
-      _StyleDefs(41)  =   "Splits(0).Columns(0).FooterStyle:id=26,.parent=15"
-      _StyleDefs(42)  =   "Splits(0).Columns(0).EditorStyle:id=27,.parent=17"
-      _StyleDefs(43)  =   "Splits(0).Columns(1).Style:id=32,.parent=13,.locked=-1"
-      _StyleDefs(44)  =   "Splits(0).Columns(1).HeadingStyle:id=29,.parent=14"
-      _StyleDefs(45)  =   "Splits(0).Columns(1).FooterStyle:id=30,.parent=15"
-      _StyleDefs(46)  =   "Splits(0).Columns(1).EditorStyle:id=31,.parent=17"
-      _StyleDefs(47)  =   "Splits(0).Columns(2).Style:id=46,.parent=13,.locked=-1"
-      _StyleDefs(48)  =   "Splits(0).Columns(2).HeadingStyle:id=43,.parent=14"
-      _StyleDefs(49)  =   "Splits(0).Columns(2).FooterStyle:id=44,.parent=15"
-      _StyleDefs(50)  =   "Splits(0).Columns(2).EditorStyle:id=45,.parent=17"
-      _StyleDefs(51)  =   "Splits(0).Columns(3).Style:id=50,.parent=13,.alignment=1,.locked=-1"
-      _StyleDefs(52)  =   "Splits(0).Columns(3).HeadingStyle:id=47,.parent=14"
-      _StyleDefs(53)  =   "Splits(0).Columns(3).FooterStyle:id=48,.parent=15"
-      _StyleDefs(54)  =   "Splits(0).Columns(3).EditorStyle:id=49,.parent=17"
-      _StyleDefs(55)  =   "Splits(0).Columns(4).Style:id=62,.parent=13,.alignment=2,.locked=-1"
-      _StyleDefs(56)  =   "Splits(0).Columns(4).HeadingStyle:id=59,.parent=14"
-      _StyleDefs(57)  =   "Splits(0).Columns(4).FooterStyle:id=60,.parent=15"
-      _StyleDefs(58)  =   "Splits(0).Columns(4).EditorStyle:id=61,.parent=17"
-      _StyleDefs(59)  =   "Splits(0).Columns(5).Style:id=54,.parent=13"
-      _StyleDefs(60)  =   "Splits(0).Columns(5).HeadingStyle:id=51,.parent=14"
-      _StyleDefs(61)  =   "Splits(0).Columns(5).FooterStyle:id=52,.parent=15"
-      _StyleDefs(62)  =   "Splits(0).Columns(5).EditorStyle:id=53,.parent=17"
-      _StyleDefs(63)  =   "Splits(0).Columns(6).Style:id=58,.parent=13"
-      _StyleDefs(64)  =   "Splits(0).Columns(6).HeadingStyle:id=55,.parent=14"
-      _StyleDefs(65)  =   "Splits(0).Columns(6).FooterStyle:id=56,.parent=15"
-      _StyleDefs(66)  =   "Splits(0).Columns(6).EditorStyle:id=57,.parent=17"
-      _StyleDefs(67)  =   "Named:id=33:Normal"
-      _StyleDefs(68)  =   ":id=33,.parent=0"
-      _StyleDefs(69)  =   "Named:id=34:Heading"
-      _StyleDefs(70)  =   ":id=34,.parent=33,.valignment=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
-      _StyleDefs(71)  =   ":id=34,.wraptext=-1"
-      _StyleDefs(72)  =   "Named:id=35:Footing"
-      _StyleDefs(73)  =   ":id=35,.parent=33,.valignment=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
-      _StyleDefs(74)  =   "Named:id=36:Selected"
-      _StyleDefs(75)  =   ":id=36,.parent=33,.bgcolor=&H8000000D&,.fgcolor=&H8000000E&"
-      _StyleDefs(76)  =   "Named:id=37:Caption"
-      _StyleDefs(77)  =   ":id=37,.parent=34,.alignment=2"
-      _StyleDefs(78)  =   "Named:id=38:HighlightRow"
-      _StyleDefs(79)  =   ":id=38,.parent=33,.bgcolor=&H8000000D&,.fgcolor=&H8000000E&"
-      _StyleDefs(80)  =   "Named:id=39:EvenRow"
-      _StyleDefs(81)  =   ":id=39,.parent=33,.bgcolor=&HFFFF00&"
-      _StyleDefs(82)  =   "Named:id=40:OddRow"
-      _StyleDefs(83)  =   ":id=40,.parent=33"
-      _StyleDefs(84)  =   "Named:id=41:RecordSelector"
-      _StyleDefs(85)  =   ":id=41,.parent=34"
-      _StyleDefs(86)  =   "Named:id=42:FilterBar"
-      _StyleDefs(87)  =   ":id=42,.parent=33"
+      _StyleDefs(21)  =   "FilterBarStyle:id=12,.parent=1,.namedParent=42,.bgcolor=&HFFFFFF&"
+      _StyleDefs(22)  =   ":id=12,.borderColor=&HFFFFFF&"
+      _StyleDefs(23)  =   "Splits(0).Style:id=13,.parent=1,.bgcolor=&HFFFFFF&,.fgcolor=&H646464&"
+      _StyleDefs(24)  =   "Splits(0).CaptionStyle:id=22,.parent=4,.bgcolor=&H646464&,.fgcolor=&H800000&"
+      _StyleDefs(25)  =   ":id=22,.bold=-1,.fontsize=1275,.italic=0,.underline=0,.strikethrough=0"
+      _StyleDefs(26)  =   ":id=22,.charset=0"
+      _StyleDefs(27)  =   ":id=22,.fontname=Pristina"
+      _StyleDefs(28)  =   "Splits(0).HeadingStyle:id=14,.parent=2,.bgcolor=&HD2D7E6&,.fgcolor=&H0&,.bold=-1"
+      _StyleDefs(29)  =   ":id=14,.fontsize=825,.italic=0,.underline=0,.strikethrough=0,.charset=0"
+      _StyleDefs(30)  =   ":id=14,.fontname=MS Sans Serif"
+      _StyleDefs(31)  =   "Splits(0).FooterStyle:id=15,.parent=3"
+      _StyleDefs(32)  =   "Splits(0).InactiveStyle:id=16,.parent=5"
+      _StyleDefs(33)  =   "Splits(0).SelectedStyle:id=18,.parent=6"
+      _StyleDefs(34)  =   "Splits(0).EditorStyle:id=17,.parent=7,.fgcolor=&H646464&"
+      _StyleDefs(35)  =   "Splits(0).HighlightRowStyle:id=19,.parent=8"
+      _StyleDefs(36)  =   "Splits(0).EvenRowStyle:id=20,.parent=9"
+      _StyleDefs(37)  =   "Splits(0).OddRowStyle:id=21,.parent=10"
+      _StyleDefs(38)  =   "Splits(0).RecordSelectorStyle:id=23,.parent=11"
+      _StyleDefs(39)  =   "Splits(0).FilterBarStyle:id=24,.parent=12,.bgcolor=&HD6F7D2&,.fgcolor=&H0&"
+      _StyleDefs(40)  =   "Splits(0).Columns(0).Style:id=28,.parent=13,.locked=-1"
+      _StyleDefs(41)  =   "Splits(0).Columns(0).HeadingStyle:id=25,.parent=14"
+      _StyleDefs(42)  =   "Splits(0).Columns(0).FooterStyle:id=26,.parent=15"
+      _StyleDefs(43)  =   "Splits(0).Columns(0).EditorStyle:id=27,.parent=17"
+      _StyleDefs(44)  =   "Splits(0).Columns(1).Style:id=32,.parent=13,.locked=-1"
+      _StyleDefs(45)  =   "Splits(0).Columns(1).HeadingStyle:id=29,.parent=14"
+      _StyleDefs(46)  =   "Splits(0).Columns(1).FooterStyle:id=30,.parent=15"
+      _StyleDefs(47)  =   "Splits(0).Columns(1).EditorStyle:id=31,.parent=17"
+      _StyleDefs(48)  =   "Splits(0).Columns(2).Style:id=46,.parent=13,.locked=-1"
+      _StyleDefs(49)  =   "Splits(0).Columns(2).HeadingStyle:id=43,.parent=14"
+      _StyleDefs(50)  =   "Splits(0).Columns(2).FooterStyle:id=44,.parent=15"
+      _StyleDefs(51)  =   "Splits(0).Columns(2).EditorStyle:id=45,.parent=17"
+      _StyleDefs(52)  =   "Splits(0).Columns(3).Style:id=50,.parent=13,.alignment=1,.locked=-1"
+      _StyleDefs(53)  =   "Splits(0).Columns(3).HeadingStyle:id=47,.parent=14"
+      _StyleDefs(54)  =   "Splits(0).Columns(3).FooterStyle:id=48,.parent=15"
+      _StyleDefs(55)  =   "Splits(0).Columns(3).EditorStyle:id=49,.parent=17"
+      _StyleDefs(56)  =   "Splits(0).Columns(4).Style:id=62,.parent=13,.alignment=2,.locked=-1"
+      _StyleDefs(57)  =   "Splits(0).Columns(4).HeadingStyle:id=59,.parent=14"
+      _StyleDefs(58)  =   "Splits(0).Columns(4).FooterStyle:id=60,.parent=15"
+      _StyleDefs(59)  =   "Splits(0).Columns(4).EditorStyle:id=61,.parent=17"
+      _StyleDefs(60)  =   "Splits(0).Columns(5).Style:id=54,.parent=13"
+      _StyleDefs(61)  =   "Splits(0).Columns(5).HeadingStyle:id=51,.parent=14"
+      _StyleDefs(62)  =   "Splits(0).Columns(5).FooterStyle:id=52,.parent=15"
+      _StyleDefs(63)  =   "Splits(0).Columns(5).EditorStyle:id=53,.parent=17"
+      _StyleDefs(64)  =   "Splits(0).Columns(6).Style:id=58,.parent=13"
+      _StyleDefs(65)  =   "Splits(0).Columns(6).HeadingStyle:id=55,.parent=14"
+      _StyleDefs(66)  =   "Splits(0).Columns(6).FooterStyle:id=56,.parent=15"
+      _StyleDefs(67)  =   "Splits(0).Columns(6).EditorStyle:id=57,.parent=17"
+      _StyleDefs(68)  =   "Named:id=33:Normal"
+      _StyleDefs(69)  =   ":id=33,.parent=0"
+      _StyleDefs(70)  =   "Named:id=34:Heading"
+      _StyleDefs(71)  =   ":id=34,.parent=33,.valignment=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+      _StyleDefs(72)  =   ":id=34,.wraptext=-1"
+      _StyleDefs(73)  =   "Named:id=35:Footing"
+      _StyleDefs(74)  =   ":id=35,.parent=33,.valignment=2,.bgcolor=&H8000000F&,.fgcolor=&H80000012&"
+      _StyleDefs(75)  =   "Named:id=36:Selected"
+      _StyleDefs(76)  =   ":id=36,.parent=33,.bgcolor=&H8000000D&,.fgcolor=&H8000000E&"
+      _StyleDefs(77)  =   "Named:id=37:Caption"
+      _StyleDefs(78)  =   ":id=37,.parent=34,.alignment=2"
+      _StyleDefs(79)  =   "Named:id=38:HighlightRow"
+      _StyleDefs(80)  =   ":id=38,.parent=33,.bgcolor=&H8000000D&,.fgcolor=&H8000000E&"
+      _StyleDefs(81)  =   "Named:id=39:EvenRow"
+      _StyleDefs(82)  =   ":id=39,.parent=33,.bgcolor=&HFFFF00&"
+      _StyleDefs(83)  =   "Named:id=40:OddRow"
+      _StyleDefs(84)  =   ":id=40,.parent=33"
+      _StyleDefs(85)  =   "Named:id=41:RecordSelector"
+      _StyleDefs(86)  =   ":id=41,.parent=34"
+      _StyleDefs(87)  =   "Named:id=42:FilterBar"
+      _StyleDefs(88)  =   ":id=42,.parent=33,.bgcolor=&HFFFFFF&,.fgcolor=&HFFFFFF&"
    End
    Begin ACTIVESKINLibCtl.Skin Skin1 
       Left            =   10080
-      OleObjectBlob   =   "FrmListaChequeReimpresion.frx":06D8
+      OleObjectBlob   =   "FrmListaChequeReimpresion.frx":074E
       Top             =   840
    End
    Begin MSAdodcLib.Adodc AdoCheques 
@@ -575,7 +603,7 @@ Begin VB.Form FrmListaChequeReimpresion
       _Version        =   393216
    End
    Begin MSDataListLib.DataCombo DBCodigo 
-      Bindings        =   "FrmListaChequeReimpresion.frx":25BF05
+      Bindings        =   "FrmListaChequeReimpresion.frx":25BF7B
       Height          =   315
       Left            =   1440
       TabIndex        =   8
@@ -636,7 +664,7 @@ Begin VB.Form FrmListaChequeReimpresion
    Begin ACTIVESKINLibCtl.SkinLabel SkinLabel5 
       Height          =   255
       Left            =   360
-      OleObjectBlob   =   "FrmListaChequeReimpresion.frx":25BF1D
+      OleObjectBlob   =   "FrmListaChequeReimpresion.frx":25BF93
       TabIndex        =   11
       Top             =   120
       Width           =   615
@@ -687,6 +715,38 @@ Begin VB.Form FrmListaChequeReimpresion
       EndProperty
       _Version        =   393216
    End
+   Begin MSComCtl2.DTPicker TxtFechaIni 
+      Height          =   285
+      Left            =   7560
+      TabIndex        =   17
+      Top             =   5880
+      Width           =   1575
+      _ExtentX        =   2778
+      _ExtentY        =   503
+      _Version        =   393216
+      Format          =   122945537
+      CurrentDate     =   38918
+   End
+   Begin MSComCtl2.DTPicker TxtFechaFin 
+      Height          =   285
+      Left            =   7560
+      TabIndex        =   18
+      Top             =   6360
+      Width           =   1575
+      _ExtentX        =   2778
+      _ExtentY        =   503
+      _Version        =   393216
+      Format          =   122945537
+      CurrentDate     =   38918
+   End
+   Begin ACTIVESKINLibCtl.SkinLabel LblFechaFin 
+      Height          =   375
+      Left            =   6360
+      OleObjectBlob   =   "FrmListaChequeReimpresion.frx":25BFFD
+      TabIndex        =   20
+      Top             =   6360
+      Width           =   1095
+   End
    Begin XtremeSuiteControls.Label Label2 
       Height          =   375
       Left            =   240
@@ -710,7 +770,7 @@ Private ew As cls_NumEnglishWord
 Private sw As cls_NumSpanishWord
 
 Private cnx As New ADODB.Connection
-Private rs As New ADODB.Recordset, rsConexion As New ADODB.Recordset
+Private Rs As New ADODB.Recordset, rsConexion As New ADODB.Recordset
 Private Sql As String
 
 Private Sub CmdAnular_Click()
@@ -790,13 +850,13 @@ CodigoCuenta = Me.DBCodigo.Text
 Sql = "SELECT  Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo,Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.Beneficiario, Transacciones.FechaVence, IndiceTransaccion.FechaTransaccion AS Expr1, IndiceTransaccion.NumeroMovimiento AS Expr2, IndiceTransaccion.ImprimeCheque, IndiceTransaccion.TipoMoneda FROM  Periodos INNER JOIN  Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  " & _
       "WHERE (Transacciones.Fuente = 'CHEQUE') AND (Transacciones.CodCuentas = '" & CodigoCuenta & "') ORDER BY Transacciones.FechaTransaccion,Transacciones.NumeroMovimiento"
 
-        With rs
+        With Rs
           .Close
           .CursorLocation = adUseClient
           .Open Sql, Conexion, adOpenDynamic, adLockOptimistic
         End With
         
-       Me.TDBGridNominas.DataSource = rs
+       Me.TDBGridNominas.DataSource = Rs
 
 
 Me.TDBGridNominas.Columns(0).Button = False
@@ -2072,12 +2132,102 @@ Do While Not Me.AdoImprime.Recordset.EOF
 
 End Sub
 
+Private Sub CmdListadoCheque_Click()
+    Call Inicio_Excel 'Llamamos a la funcion que abre el workbook en excel
+    'Call Formato_Excel(8, Heading()) 'llamamos a la funcion que da el formato al nuevo workbook
+    
+V = 2
+H = 0
+i = 1
+
+ '///////////////////////////////////////////////////////////////////////////////////////
+ '////////////////////ENCABEZADOS//////////////////////////////////////////////////////
+ '///////////////////////////////////////////////////////////////////////////////////
+
+            objExcel.ActiveSheet.Cells(1, 1) = "CodCuentas"
+            objExcel.ActiveSheet.Cells(1, 2) = "NombreCuenta"
+            objExcel.ActiveSheet.Cells(1, 3) = "DescripcionMovimiento"
+            objExcel.ActiveSheet.Cells(1, 4) = "Fecha"
+            objExcel.ActiveSheet.Cells(1, 5) = "Movimiento"
+            objExcel.ActiveSheet.Cells(1, 6) = "Beneficiario"
+            objExcel.ActiveSheet.Cells(1, 7) = "Monto"
+            objExcel.ActiveSheet.Cells(1, 8) = "Cheque No"
+            objExcel.ActiveSheet.Cells(1, 9) = "Moneda"
+            
+        objExcel.ActiveSheet.Columns("A").ColumnWidth = 10
+        objExcel.ActiveSheet.Columns("B").ColumnWidth = 40
+        objExcel.ActiveSheet.Columns("C").ColumnWidth = 80
+        objExcel.ActiveSheet.Columns("D").ColumnWidth = 10
+        objExcel.ActiveSheet.Columns("D").NumberFormat = "dd/mm/yyyy"
+        objExcel.ActiveSheet.Columns("E").ColumnWidth = 10
+        objExcel.ActiveSheet.Columns("F").ColumnWidth = 30
+        objExcel.ActiveSheet.Columns("G").ColumnWidth = 17
+        objExcel.ActiveSheet.Columns("G").NumberFormat = "##,##0.00"
+        objExcel.ActiveSheet.Columns("H").ColumnWidth = 10
+        objExcel.ActiveSheet.Columns("I").ColumnWidth = 10
+            
+
+         If Not Rs.EOF Then
+           Rs.MoveFirst
+         End If
+         
+         Do While Not Rs.EOF
+         
+            objExcel.ActiveSheet.Cells(V, H + 1) = Rs("CodCuentas")
+            objExcel.ActiveSheet.Cells(V, H + 2) = Rs("NombreCuenta")
+            objExcel.ActiveSheet.Cells(V, H + 3) = Rs("DescripcionMovimiento")
+            objExcel.ActiveSheet.Cells(V, H + 4) = Rs("FechaTransaccion")
+            objExcel.ActiveSheet.Cells(V, H + 5) = Rs("NumeroMovimiento")
+            objExcel.ActiveSheet.Cells(V, H + 6) = Rs("Beneficiario")
+            objExcel.ActiveSheet.Cells(V, H + 7) = Format(Rs("Credito"), "##,##0.00")
+            objExcel.ActiveSheet.Cells(V, H + 8) = Rs("ChequeNo")
+            objExcel.ActiveSheet.Cells(V, H + 9) = Rs("TipoMoneda")
+
+
+            
+            V = V + 1
+            i = i + 1
+          Rs.MoveNext
+         Loop
+         
+
+        
+     Set objExcel = Nothing 'una vez hemos terminado descargamos el objeto
+            
+End Sub
+
 Private Sub CmdSalir_Click()
  Unload Me
 End Sub
 
 Private Sub Command1_Click()
+Dim Sql As String, CodigoCuenta As String
 
+Me.TxtFechaIni.Visible = True
+Me.TxtFechaFin.Visible = True
+
+CodigoCuenta = Me.DBCodigo.Text
+
+'AND (Transacciones.NombreCuenta <> '**********CANCELADO*************')
+
+'Sql = "SELECT  Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo,Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.Beneficiario, Transacciones.FechaVence, IndiceTransaccion.FechaTransaccion AS Expr1, IndiceTransaccion.NumeroMovimiento AS Expr2, IndiceTransaccion.ImprimeCheque, IndiceTransaccion.TipoMoneda FROM  Periodos INNER JOIN  Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  " & _
+      "WHERE (Transacciones.Fuente = 'CHEQUE') AND (Transacciones.CodCuentas = '" & CodigoCuenta & "') ORDER BY Transacciones.FechaTransaccion,Transacciones.NumeroMovimiento"
+
+ Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.Beneficiario, Transacciones.FechaVence, IndiceTransaccion.FechaTransaccion AS Expr1, IndiceTransaccion.NumeroMovimiento AS Expr2, IndiceTransaccion.ImprimeCheque , IndiceTransaccion.TipoMoneda FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento " & _
+       "WHERE (Transacciones.Fuente = 'CHEQUE') AND (Transacciones.CodCuentas = '" & CodigoCuenta & "') AND (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(Me.TxtFechaIni.Value, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME,'" & Format(Me.TxtFechaFin.Value, "yyyy-mm-dd") & "', 102)) ORDER BY Transacciones.FechaTransaccion, Transacciones.NumeroMovimiento"
+        
+        With Rs
+          .Close
+          .CursorLocation = adUseClient
+          .Open Sql, Conexion, adOpenDynamic, adLockOptimistic
+        End With
+        
+       Me.TDBGridNominas.DataSource = Rs
+       
+
+
+
+Me.TDBGridNominas.Columns(0).Button = False
 End Sub
 
 Private Sub DBCodigo_Change()
@@ -2091,6 +2241,9 @@ End Sub
 
 Private Sub Form_Load()
 Dim Sql As String, CodigoCuenta As String
+
+Me.TxtFechaFin.Value = Format(Now, "dd/mm/yyyy")
+Me.TxtFechaIni.Value = Format(Now, "dd/mm/yyyy")
 
 With Me.AdoCheques
    .ConnectionString = Conexion
@@ -2111,13 +2264,14 @@ End With
     Sql = "SELECT  Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo,Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.Beneficiario, Transacciones.FechaVence, IndiceTransaccion.FechaTransaccion AS Expr1, IndiceTransaccion.NumeroMovimiento AS Expr2, IndiceTransaccion.ImprimeCheque, IndiceTransaccion.TipoMoneda FROM  Periodos INNER JOIN  Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo INNER JOIN IndiceTransaccion ON Transacciones.FechaTransaccion = IndiceTransaccion.FechaTransaccion AND Transacciones.NumeroMovimiento = IndiceTransaccion.NumeroMovimiento  " & _
           "WHERE (Transacciones.Fuente = '0033333333') AND (Transacciones.CodCuentas = '" & CodigoCuenta & "') AND (Transacciones.NombreCuenta <> '**********CANCELADO*************') ORDER BY Transacciones.FechaTransaccion,Transacciones.NumeroMovimiento"
  
+   
 
-        With rs
+        With Rs
           .CursorLocation = adUseClient
           .Open Sql, Conexion, adOpenDynamic, adLockOptimistic
         End With
         
-       Me.TDBGridNominas.DataSource = rs
+       Me.TDBGridNominas.DataSource = Rs
 
 Me.DtaBancos.ConnectionString = Conexion
 Me.DtaBancos.RecordSource = "SELECT Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta From Cuentas Where (((Cuentas.TipoCuenta) = 'Bancos' Or (Cuentas.TipoCuenta) = 'Bancos')) ORDER BY Cuentas.CodCuentas"
@@ -2163,7 +2317,7 @@ For Each col In cols
     If Trim(col.FilterText) <> "" Then
         n = n + 1
         If n > 1 Then tmp = tmp & " AND "
-        Select Case rs.Fields(x).Type
+        Select Case Rs.Fields(x).Type
         Case adVarWChar, adVarChar: tmp = tmp & "[" & col.DataField & "] LIKE '%" & col.FilterText & "%'"
         Case adInteger, adNumeric: tmp = tmp & "[" & col.DataField & "] = " & col.FilterText
         Case adDBTimeStamp: tmp = tmp & "[" & col.DataField & "] = #" & col.FilterText & "#"
@@ -2207,6 +2361,10 @@ TipoErrs:
 
 End Function
 
+Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
+ Rs.Close
+End Sub
+
 Private Sub TDBGridNominas_FilterChange()
 'On Error GoTo TipoErrs:
 'Dim Filtro As String
@@ -2229,8 +2387,8 @@ Private Sub TDBGridNominas_FilterChange()
     
     c = TDBGridNominas.col
     TDBGridNominas.HoldFields
-    Sql = rs.Filter
-    rs.Filter = getFilter(col, cols)
+    Sql = Rs.Filter
+    Rs.Filter = getFilter(col, cols)
     TDBGridNominas.col = c
     TDBGridNominas.EditActive = True
     

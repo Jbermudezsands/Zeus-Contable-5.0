@@ -24,7 +24,7 @@ If FrmReportes.ChkExportar.Value = 1 Then
    ' Establecer CancelError a True
     FrmReportes.CDRuta.CancelError = True
     ' Establecer los indicadores
-    FrmReportes.CDRuta.flags = cdlOFNHideReadOnly
+    FrmReportes.CDRuta.Flags = cdlOFNHideReadOnly
     ' Establecer los filtros
     FrmReportes.CDRuta.Filter = "Excel (*.XLS)|*.xls"
     ' Especificar el filtro predeterminado

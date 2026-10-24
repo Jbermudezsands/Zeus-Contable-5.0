@@ -1,15 +1,15 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
 Object = "{60CCE6A8-5C61-4F30-8513-F57EED62E86A}#8.0#0"; "todl8.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
 Begin VB.Form FrmCuentas 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Cuentas"
-   ClientHeight    =   5070
+   ClientHeight    =   5460
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   10965
@@ -17,7 +17,7 @@ Begin VB.Form FrmCuentas
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   5070
+   ScaleHeight     =   5460
    ScaleWidth      =   10965
    Begin MSAdodcLib.Adodc DtaCuentasCombo 
       Height          =   375
@@ -70,7 +70,7 @@ Begin VB.Form FrmCuentas
       Left            =   6480
       TabIndex        =   54
       Text            =   "Text9"
-      Top             =   4560
+      Top             =   4920
       Visible         =   0   'False
       Width           =   2295
    End
@@ -79,7 +79,7 @@ Begin VB.Form FrmCuentas
       Height          =   375
       Left            =   9720
       TabIndex        =   26
-      Top             =   4560
+      Top             =   4920
       Width           =   1095
    End
    Begin VB.CommandButton CmdBorrar 
@@ -87,7 +87,7 @@ Begin VB.Form FrmCuentas
       Height          =   375
       Left            =   5040
       TabIndex        =   11
-      Top             =   4560
+      Top             =   4920
       Width           =   1095
    End
    Begin VB.CommandButton CmdSiguiente 
@@ -95,7 +95,7 @@ Begin VB.Form FrmCuentas
       Height          =   375
       Left            =   3840
       TabIndex        =   10
-      Top             =   4560
+      Top             =   4920
       Width           =   1095
    End
    Begin VB.CommandButton CmdAnterior 
@@ -103,7 +103,7 @@ Begin VB.Form FrmCuentas
       Height          =   375
       Left            =   2640
       TabIndex        =   9
-      Top             =   4560
+      Top             =   4920
       Width           =   1095
    End
    Begin VB.CommandButton CmdNuevo 
@@ -111,7 +111,7 @@ Begin VB.Form FrmCuentas
       Height          =   375
       Left            =   1440
       TabIndex        =   7
-      Top             =   4560
+      Top             =   4920
       Width           =   1095
    End
    Begin VB.CommandButton CmdGrabar 
@@ -119,7 +119,7 @@ Begin VB.Form FrmCuentas
       Height          =   375
       Left            =   240
       TabIndex        =   8
-      Top             =   4560
+      Top             =   4920
       Width           =   1095
    End
    Begin MSAdodcLib.Adodc DtaSaldos 
@@ -353,13 +353,13 @@ Begin VB.Form FrmCuentas
       _Version        =   393216
    End
    Begin TabDlg.SSTab SSTab1 
-      Height          =   4335
+      Height          =   4695
       Left            =   120
       TabIndex        =   12
       Top             =   120
       Width           =   10695
       _ExtentX        =   18865
-      _ExtentY        =   7646
+      _ExtentY        =   8281
       _Version        =   393216
       TabHeight       =   520
       TabCaption(0)   =   "Informacion Cuentas"
@@ -378,9 +378,9 @@ Begin VB.Form FrmCuentas
       TabCaption(2)   =   "Informacion Cuentas"
       TabPicture(2)   =   "FrmCuentas.frx":0038
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame4"
+      Tab(2).Control(0)=   "Frame6"
       Tab(2).Control(1)=   "Frame5"
-      Tab(2).Control(2)=   "Frame6"
+      Tab(2).Control(2)=   "Frame4"
       Tab(2).ControlCount=   3
       Begin VB.Frame Frame6 
          Height          =   975
@@ -817,16 +817,50 @@ Begin VB.Form FrmCuentas
          End
       End
       Begin VB.Frame Frame1 
-         Height          =   2775
+         Height          =   3375
          Left            =   120
          TabIndex        =   14
          Top             =   480
          Width           =   10455
+         Begin VB.CommandButton CmdBuscapresupuesto 
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   300
+            Left            =   9840
+            Picture         =   "FrmCuentas.frx":053C
+            Style           =   1  'Graphical
+            TabIndex        =   63
+            Top             =   2280
+            Width           =   375
+         End
+         Begin VB.TextBox TxtPresupuesto 
+            Height          =   285
+            Left            =   7080
+            MaxLength       =   255
+            TabIndex        =   62
+            Top             =   2280
+            Width           =   2775
+         End
+         Begin VB.TextBox TxtKePresupuesto 
+            Height          =   285
+            Left            =   9720
+            TabIndex        =   61
+            Top             =   2280
+            Visible         =   0   'False
+            Width           =   615
+         End
          Begin XtremeSuiteControls.CheckBox ChkCentroCostos 
             Height          =   375
-            Left            =   5880
+            Left            =   240
             TabIndex        =   59
-            Top             =   2280
+            Top             =   2760
             Visible         =   0   'False
             Width           =   2895
             _Version        =   786432
@@ -845,7 +879,7 @@ Begin VB.Form FrmCuentas
             Width           =   3015
          End
          Begin TrueOleDBList80.TDBCombo DBCliente 
-            Bindings        =   "FrmCuentas.frx":053C
+            Bindings        =   "FrmCuentas.frx":068A
             Height          =   315
             Left            =   1080
             TabIndex        =   55
@@ -930,7 +964,7 @@ Begin VB.Form FrmCuentas
             RowDividerColor =   14215660
             RowSubDividerColor=   14215660
             AddItemSeparator=   ";"
-            _PropDict       =   $"FrmCuentas.frx":055A
+            _PropDict       =   $"FrmCuentas.frx":06A8
             _StyleDefs(0)   =   "_StyleRoot:id=0,.parent=-1,.alignment=3,.valignment=0,.bgcolor=&H80000005&"
             _StyleDefs(1)   =   ":id=0,.fgcolor=&H80000008&,.wraptext=0,.locked=0,.transparentBmp=0"
             _StyleDefs(2)   =   ":id=0,.fgpicPosition=0,.bgpicMode=0,.appearance=0,.borderSize=0,.ellipsis=0"
@@ -993,9 +1027,9 @@ Begin VB.Form FrmCuentas
          End
          Begin VB.ComboBox CmbAgrupado 
             Height          =   315
-            ItemData        =   "FrmCuentas.frx":0604
-            Left            =   6600
-            List            =   "FrmCuentas.frx":0606
+            ItemData        =   "FrmCuentas.frx":0752
+            Left            =   7080
+            List            =   "FrmCuentas.frx":0754
             TabIndex        =   29
             Top             =   1800
             Visible         =   0   'False
@@ -1003,9 +1037,9 @@ Begin VB.Form FrmCuentas
          End
          Begin VB.ComboBox CmbUbicacionResultado 
             Height          =   315
-            ItemData        =   "FrmCuentas.frx":0608
+            ItemData        =   "FrmCuentas.frx":0756
             Left            =   2760
-            List            =   "FrmCuentas.frx":060A
+            List            =   "FrmCuentas.frx":0758
             TabIndex        =   28
             Top             =   1800
             Visible         =   0   'False
@@ -1013,9 +1047,9 @@ Begin VB.Form FrmCuentas
          End
          Begin VB.ComboBox CmbUbicacion 
             Height          =   315
-            ItemData        =   "FrmCuentas.frx":060C
+            ItemData        =   "FrmCuentas.frx":075A
             Left            =   2760
-            List            =   "FrmCuentas.frx":060E
+            List            =   "FrmCuentas.frx":075C
             TabIndex        =   4
             Top             =   1800
             Width           =   2415
@@ -1023,7 +1057,7 @@ Begin VB.Form FrmCuentas
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel6 
             Height          =   255
             Left            =   120
-            OleObjectBlob   =   "FrmCuentas.frx":0610
+            OleObjectBlob   =   "FrmCuentas.frx":075E
             TabIndex        =   27
             Top             =   1800
             Width           =   2535
@@ -1040,7 +1074,7 @@ Begin VB.Form FrmCuentas
             EndProperty
             Height          =   300
             Left            =   6240
-            Picture         =   "FrmCuentas.frx":06A6
+            Picture         =   "FrmCuentas.frx":07F4
             Style           =   1  'Graphical
             TabIndex        =   0
             Top             =   240
@@ -1058,7 +1092,7 @@ Begin VB.Form FrmCuentas
             EndProperty
             Height          =   300
             Left            =   9840
-            Picture         =   "FrmCuentas.frx":07F4
+            Picture         =   "FrmCuentas.frx":0942
             Style           =   1  'Graphical
             TabIndex        =   15
             Top             =   1320
@@ -1070,13 +1104,13 @@ Begin VB.Form FrmCuentas
             Locked          =   -1  'True
             TabIndex        =   3
             Top             =   1320
-            Width           =   8535
+            Width           =   8655
          End
          Begin VB.ComboBox CmbTipo 
             Height          =   315
-            ItemData        =   "FrmCuentas.frx":0942
+            ItemData        =   "FrmCuentas.frx":0A90
             Left            =   7320
-            List            =   "FrmCuentas.frx":0944
+            List            =   "FrmCuentas.frx":0A92
             TabIndex        =   1
             Top             =   240
             Width           =   2295
@@ -1092,7 +1126,7 @@ Begin VB.Form FrmCuentas
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel5 
             Height          =   255
             Left            =   120
-            OleObjectBlob   =   "FrmCuentas.frx":0946
+            OleObjectBlob   =   "FrmCuentas.frx":0A94
             TabIndex        =   16
             Top             =   240
             Width           =   615
@@ -1100,7 +1134,7 @@ Begin VB.Form FrmCuentas
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel4 
             Height          =   255
             Left            =   120
-            OleObjectBlob   =   "FrmCuentas.frx":09B0
+            OleObjectBlob   =   "FrmCuentas.frx":0AFE
             TabIndex        =   17
             Top             =   840
             Width           =   855
@@ -1108,7 +1142,7 @@ Begin VB.Form FrmCuentas
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel3 
             Height          =   255
             Left            =   6840
-            OleObjectBlob   =   "FrmCuentas.frx":0A24
+            OleObjectBlob   =   "FrmCuentas.frx":0B72
             TabIndex        =   18
             Top             =   240
             Width           =   375
@@ -1116,7 +1150,7 @@ Begin VB.Form FrmCuentas
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel2 
             Height          =   255
             Left            =   120
-            OleObjectBlob   =   "FrmCuentas.frx":0A8A
+            OleObjectBlob   =   "FrmCuentas.frx":0BD8
             TabIndex        =   19
             Top             =   1320
             Width           =   495
@@ -1124,7 +1158,7 @@ Begin VB.Form FrmCuentas
          Begin ACTIVESKINLibCtl.SkinLabel SkinAGrupado 
             Height          =   255
             Left            =   5520
-            OleObjectBlob   =   "FrmCuentas.frx":0AF2
+            OleObjectBlob   =   "FrmCuentas.frx":0C40
             TabIndex        =   30
             Top             =   1800
             Visible         =   0   'False
@@ -1133,32 +1167,40 @@ Begin VB.Form FrmCuentas
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel17 
             Height          =   255
             Left            =   120
-            OleObjectBlob   =   "FrmCuentas.frx":0B68
+            OleObjectBlob   =   "FrmCuentas.frx":0CB6
             TabIndex        =   57
             Top             =   2280
             Width           =   2175
+         End
+         Begin ACTIVESKINLibCtl.SkinLabel SkinLabel18 
+            Height          =   255
+            Left            =   5400
+            OleObjectBlob   =   "FrmCuentas.frx":0D46
+            TabIndex        =   60
+            Top             =   2280
+            Width           =   1695
          End
       End
       Begin VB.Frame Frame2 
          Height          =   735
          Left            =   120
          TabIndex        =   13
-         Top             =   3360
+         Top             =   3840
          Visible         =   0   'False
          Width           =   10455
          Begin VB.ComboBox CmbTipoMoneda 
             Enabled         =   0   'False
             Height          =   315
-            ItemData        =   "FrmCuentas.frx":0BF8
+            ItemData        =   "FrmCuentas.frx":0DCE
             Left            =   7200
-            List            =   "FrmCuentas.frx":0C05
+            List            =   "FrmCuentas.frx":0DDB
             TabIndex        =   6
             Text            =   "Córdobas"
             Top             =   240
             Width           =   2535
          End
          Begin MSDataListLib.DataCombo DBGrupos 
-            Bindings        =   "FrmCuentas.frx":0C23
+            Bindings        =   "FrmCuentas.frx":0DF9
             Height          =   315
             Left            =   1320
             TabIndex        =   5
@@ -1174,7 +1216,7 @@ Begin VB.Form FrmCuentas
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel1 
             Height          =   255
             Left            =   6000
-            OleObjectBlob   =   "FrmCuentas.frx":0C41
+            OleObjectBlob   =   "FrmCuentas.frx":0E17
             TabIndex        =   20
             Top             =   240
             Width           =   1095
@@ -1182,7 +1224,7 @@ Begin VB.Form FrmCuentas
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel10 
             Height          =   255
             Left            =   120
-            OleObjectBlob   =   "FrmCuentas.frx":0CB5
+            OleObjectBlob   =   "FrmCuentas.frx":0E8B
             TabIndex        =   21
             Top             =   240
             Width           =   1215
@@ -1478,6 +1520,14 @@ QueProducto = "Cuenta"
 FrmConsulta.Show 1
 End Sub
 
+Private Sub CmdBuscapresupuesto_Click()
+         QueProducto = "Presupuesto"
+         FrmConsulta.Show 1
+'         Me.TxtKePresupuesto.Text = FrmConsulta.Codigo
+         Me.TxtKePresupuesto.Text = FrmConsulta.KeyPresupuesto
+         Me.TxtPresupuesto.Text = FrmConsulta.DescripcionPresupuesto
+End Sub
+
 Private Sub CmdBuscarEmpleado_Click()
 QUIEN = "Cuentas"
 FrmGrupoLista.Show 1
@@ -1535,162 +1585,170 @@ Criterio = "CodCuentas='" & Me.DBCliente.Text & "'"
 Me.DtaCuentas.Recordset.Find (Criterio)
 If DtaCuentas.Recordset.EOF Then
  DtaCuentas.Recordset.AddNew
-  DtaCuentas.Recordset("KeyGrupo") = KeyGrupoCuenta
-  DtaCuentas.Recordset!DescripcionGrupo = Me.TxtDescripcionGrupo.Text
-  DtaCuentas.Recordset("CodCuentas") = Me.DBCliente.Text
-  DtaCuentas.Recordset("DescripcionCuentas") = Me.TxtDescripcion
-  DtaCuentas.Recordset("TipoCuenta") = Me.CmbTipo.Text
-  If Me.TxtCuentaImporta.Text <> "" Then
-   DtaCuentas.Recordset("CodCuentaImporta") = Me.TxtCuentaImporta.Text
-  Else
-   DtaCuentas.Recordset("CodCuentaImporta") = Me.DBCliente.Text
-  End If
-  
- If Not Me.CmbAgrupado.Text = "" Then
-   DtaCuentas.Recordset("SubDivicion") = Me.CmbAgrupado.Text
-  End If
-  
-  If Not UbicacionReporte = "" Then
-   
-   DtaCuentas.Recordset("UbicacionReporte") = UbicacionReporte
-  End If
+     DtaCuentas.Recordset("KeyGrupo") = KeyGrupoCuenta
+     DtaCuentas.Recordset!DescripcionGrupo = Me.TxtDescripcionGrupo.Text
+     DtaCuentas.Recordset("CodCuentas") = Me.DBCliente.Text
+     DtaCuentas.Recordset("DescripcionCuentas") = Me.TxtDescripcion
+     DtaCuentas.Recordset("TipoCuenta") = Me.CmbTipo.Text
+     If Me.TxtCuentaImporta.Text <> "" Then
+      DtaCuentas.Recordset("CodCuentaImporta") = Me.TxtCuentaImporta.Text
+     Else
+      DtaCuentas.Recordset("CodCuentaImporta") = Me.DBCliente.Text
+     End If
+     
+    If Not Me.CmbAgrupado.Text = "" Then
+      DtaCuentas.Recordset("SubDivicion") = Me.CmbAgrupado.Text
+     End If
+     
+     If Not UbicacionReporte = "" Then
+      
+      DtaCuentas.Recordset("UbicacionReporte") = UbicacionReporte
+     End If
  
-  If CodGrupo <> "" Then
-   DtaCuentas.Recordset("CodGrupo") = CodGrupo
-  End If
-  DtaCuentas.Recordset("TipoMoneda") = CmbTipoMoneda
-  DtaCuentas.Recordset("SaldoActual") = 0#
+      If CodGrupo <> "" Then
+       DtaCuentas.Recordset("CodGrupo") = CodGrupo
+      End If
+      DtaCuentas.Recordset("TipoMoneda") = CmbTipoMoneda
+      DtaCuentas.Recordset("SaldoActual") = 0#
+      
+       If Me.OptRetencion.Value = True Then
+       DtaCuentas.Recordset("CausaRetencion") = True
+       DtaCuentas.Recordset("CausaIva") = False
+     Else
+       DtaCuentas.Recordset("CausaRetencion") = False
+    '   DtaCuentas.Recordset("CausaIva") = True
+     End If
+    
+      If Me.OptIva.Value = True Then
+       DtaCuentas.Recordset("CausaIva") = True
+       DtaCuentas.Recordset("CausaRetencion") = False
+      Else
+       DtaCuentas.Recordset("CausaIva") = False
+    '   DtaCuentas.Recordset("CausaRetencion") = True
+      End If
+      
+      If Not Me.TxtRetencion.Text = "" Then
+       DtaCuentas.Recordset("DescRetencion") = Me.TxtRetencion.Text
+      End If
+    
+      
+      If Not Me.TxtNombre1.Text = "" Then
+       DtaCuentas.Recordset("Nombre1") = Me.TxtNombre1.Text
+      End If
+    
+      If Not Me.TxtNombre2.Text = "" Then
+       DtaCuentas.Recordset("Nombre2") = Me.TxtNombre2.Text
+      End If
+      
+      If Not Me.TxtApellido1.Text = "" Then
+       DtaCuentas.Recordset("Apellido1") = Me.TxtApellido1.Text
+      End If
   
-   If Me.OptRetencion.Value = True Then
-   DtaCuentas.Recordset("CausaRetencion") = True
-   DtaCuentas.Recordset("CausaIva") = False
- Else
-   DtaCuentas.Recordset("CausaRetencion") = False
-'   DtaCuentas.Recordset("CausaIva") = True
- End If
-
-  If Me.OptIva.Value = True Then
-   DtaCuentas.Recordset("CausaIva") = True
-   DtaCuentas.Recordset("CausaRetencion") = False
-  Else
-   DtaCuentas.Recordset("CausaIva") = False
-'   DtaCuentas.Recordset("CausaRetencion") = True
-  End If
-  
-  If Not Me.TxtRetencion.Text = "" Then
-   DtaCuentas.Recordset("DescRetencion") = Me.TxtRetencion.Text
-  End If
-
-  
-  If Not Me.TxtNombre1.Text = "" Then
-   DtaCuentas.Recordset("Nombre1") = Me.TxtNombre1.Text
-  End If
-
-  If Not Me.TxtNombre2.Text = "" Then
-   DtaCuentas.Recordset("Nombre2") = Me.TxtNombre2.Text
-  End If
-  
-  If Not Me.TxtApellido1.Text = "" Then
-   DtaCuentas.Recordset("Apellido1") = Me.TxtApellido1.Text
-  End If
-  
-  If Not Me.TxtApellido2.Text = "" Then
-   DtaCuentas.Recordset("Apellido2") = Me.TxtApellido2.Text
-  End If
-  
-  If Not Me.txtcedula.Text = "" Then
-   DtaCuentas.Recordset("Cedula") = Me.txtcedula.Text
-  End If
-  
-  If Not Me.TxtRUC.Text = "" Then
-   DtaCuentas.Recordset("RUC") = Me.TxtRUC.Text
-  End If
-  
-  If Not Me.TxtTelefono.Text = "" Then
-   DtaCuentas.Recordset("Telefono") = Me.TxtTelefono.Text
-  End If
-  
-  If Not Me.TxtDireccion.Text = "" Then
-   DtaCuentas.Recordset("Direccion") = Me.TxtDireccion.Text
-  End If
+    If Not Me.TxtApellido2.Text = "" Then
+     DtaCuentas.Recordset("Apellido2") = Me.TxtApellido2.Text
+    End If
+    
+    If Not Me.txtcedula.Text = "" Then
+     DtaCuentas.Recordset("Cedula") = Me.txtcedula.Text
+    End If
+    
+    If Not Me.TxtRUC.Text = "" Then
+     DtaCuentas.Recordset("RUC") = Me.TxtRUC.Text
+    End If
+    
+    If Not Me.TxtTelefono.Text = "" Then
+     DtaCuentas.Recordset("Telefono") = Me.TxtTelefono.Text
+    End If
+    
+    If Not Me.TxtDireccion.Text = "" Then
+     DtaCuentas.Recordset("Direccion") = Me.TxtDireccion.Text
+    End If
   
      If Me.ChkCentroCostos.Value = xtpChecked Then
       DtaCuentas.Recordset("CentroCostos") = "True"
      Else
       DtaCuentas.Recordset("CentroCostos") = "False"
      End If
+     
+     If Not Me.TxtKePresupuesto.Text = "" Then
+      DtaCuentas.Recordset("KeyPresupuesto") = Me.TxtKePresupuesto.Text
+     End If
+     
+     If Not Me.TxtPresupuesto.Text = "" Then
+      DtaCuentas.Recordset("Presupuesto") = Me.TxtPresupuesto.Text
+     End If
 
  DtaCuentas.Recordset.Update
 Else
-  'DtaCuentas.Recordset.Edit
-  DtaCuentas.Recordset("KeyGrupo") = KeyGrupoCuenta
-  DtaCuentas.Recordset("DescripcionGrupo") = Me.TxtDescripcionGrupo.Text
-  DtaCuentas.Recordset("DescripcionCuentas") = Me.TxtDescripcion
-  DtaCuentas.Recordset("TipoCuenta") = Me.CmbTipo.Text
-  
- If Me.TxtCuentaImporta.Text <> "" Then
-   DtaCuentas.Recordset("CodCuentaImporta") = Me.TxtCuentaImporta.Text
-  Else
-   DtaCuentas.Recordset("CodCuentaImporta") = Me.DBCliente.Text
-  End If
-  
-  If Not Me.CmbAgrupado.Text = "" Then
-   DtaCuentas.Recordset("SubDivicion") = Me.CmbAgrupado.Text
-  End If
+     'DtaCuentas.Recordset.Edit
+     DtaCuentas.Recordset("KeyGrupo") = KeyGrupoCuenta
+     DtaCuentas.Recordset("DescripcionGrupo") = Me.TxtDescripcionGrupo.Text
+     DtaCuentas.Recordset("DescripcionCuentas") = Me.TxtDescripcion
+     DtaCuentas.Recordset("TipoCuenta") = Me.CmbTipo.Text
+     
+    If Me.TxtCuentaImporta.Text <> "" Then
+      DtaCuentas.Recordset("CodCuentaImporta") = Me.TxtCuentaImporta.Text
+     Else
+      DtaCuentas.Recordset("CodCuentaImporta") = Me.DBCliente.Text
+     End If
+     
+     If Not Me.CmbAgrupado.Text = "" Then
+      DtaCuentas.Recordset("SubDivicion") = Me.CmbAgrupado.Text
+     End If
   
 
- If Me.OptRetencion.Value = True Then
-   DtaCuentas.Recordset("CausaRetencion") = True
-   DtaCuentas.Recordset("CausaIva") = False
- Else
-   DtaCuentas.Recordset("CausaRetencion") = False
-'   DtaCuentas.Recordset("CausaIva") = True
- End If
+     If Me.OptRetencion.Value = True Then
+       DtaCuentas.Recordset("CausaRetencion") = True
+       DtaCuentas.Recordset("CausaIva") = False
+     Else
+       DtaCuentas.Recordset("CausaRetencion") = False
+    '   DtaCuentas.Recordset("CausaIva") = True
+     End If
+    
+      If Me.OptIva.Value = True Then
+       DtaCuentas.Recordset("CausaIva") = True
+       DtaCuentas.Recordset("CausaRetencion") = False
+      Else
+       DtaCuentas.Recordset("CausaIva") = False
+    '   DtaCuentas.Recordset("CausaRetencion") = True
+      End If
+      
+      If Not Me.TxtRetencion.Text = "" Then
+       DtaCuentas.Recordset("DescRetencion") = Me.TxtRetencion.Text
+      End If
 
-  If Me.OptIva.Value = True Then
-   DtaCuentas.Recordset("CausaIva") = True
-   DtaCuentas.Recordset("CausaRetencion") = False
-  Else
-   DtaCuentas.Recordset("CausaIva") = False
-'   DtaCuentas.Recordset("CausaRetencion") = True
-  End If
   
-  If Not Me.TxtRetencion.Text = "" Then
-   DtaCuentas.Recordset("DescRetencion") = Me.TxtRetencion.Text
-  End If
-
+      If Not Me.TxtNombre1.Text = "" Then
+       DtaCuentas.Recordset("Nombre1") = Me.TxtNombre1.Text
+      End If
+    
+      If Not Me.TxtNombre2.Text = "" Then
+       DtaCuentas.Recordset("Nombre2") = Me.TxtNombre2.Text
+      End If
+      
+      If Not Me.TxtApellido1.Text = "" Then
+       DtaCuentas.Recordset("Apellido1") = Me.TxtApellido1.Text
+      End If
+      
+      If Not Me.TxtApellido2.Text = "" Then
+       DtaCuentas.Recordset("Apellido2") = Me.TxtApellido2.Text
+      End If
+      
+      If Not Me.txtcedula.Text = "" Then
+       DtaCuentas.Recordset("Cedula") = Me.txtcedula.Text
+      End If
+      
+      If Not Me.TxtRUC.Text = "" Then
+       DtaCuentas.Recordset("RUC") = Me.TxtRUC.Text
+      End If
   
-  If Not Me.TxtNombre1.Text = "" Then
-   DtaCuentas.Recordset("Nombre1") = Me.TxtNombre1.Text
-  End If
-
-  If Not Me.TxtNombre2.Text = "" Then
-   DtaCuentas.Recordset("Nombre2") = Me.TxtNombre2.Text
-  End If
-  
-  If Not Me.TxtApellido1.Text = "" Then
-   DtaCuentas.Recordset("Apellido1") = Me.TxtApellido1.Text
-  End If
-  
-  If Not Me.TxtApellido2.Text = "" Then
-   DtaCuentas.Recordset("Apellido2") = Me.TxtApellido2.Text
-  End If
-  
-  If Not Me.txtcedula.Text = "" Then
-   DtaCuentas.Recordset("Cedula") = Me.txtcedula.Text
-  End If
-  
-  If Not Me.TxtRUC.Text = "" Then
-   DtaCuentas.Recordset("RUC") = Me.TxtRUC.Text
-  End If
-  
-  If Not Me.TxtTelefono.Text = "" Then
-   DtaCuentas.Recordset("Telefono") = Me.TxtTelefono.Text
-  End If
-  
-  If Not Me.TxtDireccion.Text = "" Then
-   DtaCuentas.Recordset("Direccion") = Me.TxtDireccion.Text
-  End If
+    If Not Me.TxtTelefono.Text = "" Then
+     DtaCuentas.Recordset("Telefono") = Me.TxtTelefono.Text
+    End If
+    
+    If Not Me.TxtDireccion.Text = "" Then
+     DtaCuentas.Recordset("Direccion") = Me.TxtDireccion.Text
+    End If
 
        If Me.ChkCentroCostos.Value = xtpChecked Then
       DtaCuentas.Recordset("CentroCostos") = "True"
@@ -1698,14 +1756,23 @@ Else
       DtaCuentas.Recordset("CentroCostos") = "False"
      End If
   
-  If Not Me.CmbUbicacion.Text = "" Then
-   DtaCuentas.Recordset("UbicacionReporte") = UbicacionReporte
-  End If
+    If Not Me.CmbUbicacion.Text = "" Then
+     DtaCuentas.Recordset("UbicacionReporte") = UbicacionReporte
+    End If
+    
+    If CodGrupo <> "" Then
+     DtaCuentas.Recordset("CodGrupo") = CodGrupo
+    End If
+    DtaCuentas.Recordset("TipoMoneda") = CmbTipoMoneda
   
-  If CodGrupo <> "" Then
-   DtaCuentas.Recordset("CodGrupo") = CodGrupo
-  End If
-  DtaCuentas.Recordset("TipoMoneda") = CmbTipoMoneda
+     If Not Me.TxtKePresupuesto.Text = "" Then
+      DtaCuentas.Recordset("KeyPresupuesto") = Me.TxtKePresupuesto.Text
+     End If
+     
+     If Not Me.TxtPresupuesto.Text = "" Then
+      DtaCuentas.Recordset("Presupuesto") = Me.TxtPresupuesto.Text
+     End If
+
  DtaCuentas.Recordset.Update
 End If
 DtaCuentas.Refresh
@@ -2095,6 +2162,8 @@ Else
    Case "Cuentas x Cobrar"
       SSTab1.TabVisible(2) = True
    Case "Cuentas x Pagar"
+      SSTab1.TabVisible(2) = True
+   Case "Otros Activos"
       SSTab1.TabVisible(2) = True
   End Select
   

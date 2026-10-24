@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
 Begin VB.Form FrmSolicitudPagoLista 
    BorderStyle     =   1  'Fixed Single
@@ -32,7 +32,7 @@ Begin VB.Form FrmSolicitudPagoLista
       _ExtentX        =   2566
       _ExtentY        =   661
       _Version        =   393216
-      Format          =   68616193
+      Format          =   191299585
       CurrentDate     =   44168
    End
    Begin VB.CommandButton CmdProcesar 
@@ -432,6 +432,8 @@ Private Sub CmdEditar_Click()
   Dim Fecha As Date, NumeroSolicitud As Double, NPeriodo As Double, Sql As String
   Dim TotalDebito As Double, TotalCredito As Double, Monto As Double
   
+  ActualizoElGrid = False
+  
     If Me.OptActivos.Value = False Then
        Me.OptActivos.Value = True
        ActualizaGrid
@@ -439,6 +441,7 @@ Private Sub CmdEditar_Click()
     
     Fecha = Me.DBGTransacciones.Columns("FechaTransaccion")
     NumeroSolicitud = Me.DBGTransacciones.Columns("NumeroSolicitud")
+    NPeriodo = BuscarPeriodo(Fecha)
     
     QUIEN = "Editar"
     FrmSolicitudPagos.NumeroSolicitud = NumeroSolicitud
@@ -449,20 +452,26 @@ Private Sub CmdEditar_Click()
     If Not Me.AdoConsulta.Recordset.EOF Then
       FrmSolicitudPagos.TxtFecha.Value = Fecha
       FrmSolicitudPagos.DBCodigo.Text = Me.AdoConsulta.Recordset("CuentaBanco")
+      If Not IsNull(Me.AdoConsulta.Recordset("KeyPresupuesto")) Then
+       FrmSolicitudPagos.TxtKeyPresupuesto.Text = Me.AdoConsulta.Recordset("KeyPresupuesto")
+      End If
+      If Not IsNull(Me.AdoConsulta.Recordset("Presupuesto")) Then
+        FrmSolicitudPagos.TxtPresupuesto.Text = Me.AdoConsulta.Recordset("Presupuesto")
+      End If
       FrmSolicitudPagos.DBCodigo_ItemChange
       FrmSolicitudPagos.TxtMemo.Text = Me.AdoConsulta.Recordset("Concepto")
       FrmSolicitudPagos.CmbMoneda.Text = Me.AdoConsulta.Recordset("TipoMoneda")
       FrmSolicitudPagos.ChkCheque.Value = Me.AdoConsulta.Recordset("ImprimeCheque")
-      FrmSolicitudPagos.TxtSubTotal.Text = Format(Me.AdoConsulta.Recordset("SubTotal"), "##,##0.00")
       FrmSolicitudPagos.TxtIVa.Text = Format(Me.AdoConsulta.Recordset("MontoIva"), "##,##0.00")
       FrmSolicitudPagos.TxtRetenciones.Text = Format(Me.AdoConsulta.Recordset("MontoRetenciones"), "##,##0.00")
+      
       FrmSolicitudPagos.TxtMonto.Text = Format(Me.AdoConsulta.Recordset("MontoSolicitud"), "##,##0.00")
       FrmSolicitudPagos.TxtNombre.Text = Format(Me.AdoConsulta.Recordset("Beneficiario"), "##,##0.00")
       FrmSolicitudPagos.DtaList.Visible = False
       
       Monto = Me.AdoConsulta.Recordset("MontoSolicitud")
       
-      NPeriodo = Me.AdoConsulta.Recordset("NPeriodo")
+'      NPeriodo = Me.AdoConsulta.Recordset("NPeriodo")
       
       If Format(Me.AdoConsulta.Recordset("MontoIva"), "##,##0.00") = "0.00" Then
          FrmSolicitudPagos.Chk15.Value = 0
@@ -530,26 +539,28 @@ Private Sub CmdEditar_Click()
         FrmSolicitudPagos.DtaTransacciones.RecordSource = Sql
         FrmSolicitudPagos.DtaTransacciones.Refresh
         
+        FrmSolicitudPagos.TxtSubTotal.Text = Format(Me.AdoConsulta.Recordset("SubTotal"), "##,##0.00")
+        
         FrmSolicitudPagos.DtaBancos.RecordSource = "SELECT Cuentas.CodCuentas, Cuentas.DescripcionCuentas, Cuentas.TipoCuenta From Cuentas WHERE (TipoCuenta = 'Caja') OR (TipoCuenta = N'Bancos') ORDER BY Cuentas.CodCuentas"
         FrmSolicitudPagos.DtaBancos.Refresh
         FrmSolicitudPagos.DBCodigo.ListField = "CodCuentas"
         
     
-        Sql = "SELECT  MAX(TransaccionesSolicitudPago.CodCuentas) AS CodCuentas, SUM(TransaccionesSolicitudPago.Debito) AS Debito, SUM(TransaccionesSolicitudPago.Credito) AS Credito, SUM(TransaccionesSolicitudPago.DebitoD) AS DebitoD, SUM(TransaccionesSolicitudPago.CreditoD) AS CreditoD FROM  Periodos INNER JOIN  TransaccionesSolicitudPago ON Periodos.NPeriodo = TransaccionesSolicitudPago.NPeriodo  " & _
-              "WHERE  (TransaccionesSolicitudPago.FechaTransaccion = CONVERT(DATETIME, '" & Format(Fecha, "yyyy-mm-dd") & "', 102)) AND (TransaccionesSolicitudPago.NumeroMovimiento = " & NumeroSolicitud & ") AND (TransaccionesSolicitudPago.NPeriodo = " & NPeriodo & ")"
-        FrmSolicitudPagos.AdoBuscar.RecordSource = Sql
-        FrmSolicitudPagos.AdoBuscar.Refresh
-        If Not FrmSolicitudPagos.AdoBuscar.Recordset.EOF Then
-          If Not IsNull(FrmSolicitudPagos.AdoBuscar.Recordset("Debito")) Then
-          TotalDebito = FrmSolicitudPagos.AdoBuscar.Recordset("Debito")
-          End If
-          If Not IsNull(FrmSolicitudPagos.AdoBuscar.Recordset("Credito")) Then
-          TotalCredito = FrmSolicitudPagos.AdoBuscar.Recordset("Credito") + Monto
-          End If
-          FrmSolicitudPagos.TxtDebito.Text = Format(TotalDebito, "##,##0.00")
-          FrmSolicitudPagos.TxtCredito.Text = Format(TotalCredito, "##,##0.00")
-          FrmSolicitudPagos.TxtDiferencia.Text = Format(TotalDebito - TotalCredito, "##,##0.00")
-        End If
+'        Sql = "SELECT  MAX(TransaccionesSolicitudPago.CodCuentas) AS CodCuentas, SUM(TransaccionesSolicitudPago.Debito) AS Debito, SUM(TransaccionesSolicitudPago.Credito) AS Credito, SUM(TransaccionesSolicitudPago.DebitoD) AS DebitoD, SUM(TransaccionesSolicitudPago.CreditoD) AS CreditoD FROM  Periodos INNER JOIN  TransaccionesSolicitudPago ON Periodos.NPeriodo = TransaccionesSolicitudPago.NPeriodo  " & _
+'              "WHERE  (TransaccionesSolicitudPago.FechaTransaccion = CONVERT(DATETIME, '" & Format(Fecha, "yyyy-mm-dd") & "', 102)) AND (TransaccionesSolicitudPago.NumeroMovimiento = " & NumeroSolicitud & ") AND (TransaccionesSolicitudPago.NPeriodo = " & NPeriodo & ")"
+'        FrmSolicitudPagos.AdoBuscar.RecordSource = Sql
+'        FrmSolicitudPagos.AdoBuscar.Refresh
+'        If Not FrmSolicitudPagos.AdoBuscar.Recordset.EOF Then
+'          If Not IsNull(FrmSolicitudPagos.AdoBuscar.Recordset("Debito")) Then
+'          TotalDebito = FrmSolicitudPagos.AdoBuscar.Recordset("Debito")
+'          End If
+'          If Not IsNull(FrmSolicitudPagos.AdoBuscar.Recordset("Credito")) Then
+'          TotalCredito = FrmSolicitudPagos.AdoBuscar.Recordset("Credito") + Monto
+'          End If
+'          FrmSolicitudPagos.TxtDebito.Text = Format(TotalDebito, "##,##0.00")
+'          FrmSolicitudPagos.TxtCredito.Text = Format(TotalCredito, "##,##0.00")
+'          FrmSolicitudPagos.TxtDiferencia.Text = Format(TotalDebito - TotalCredito, "##,##0.00")
+'        End If
          
         
           FrmSolicitudPagos.DBGTransacciones.Columns("CodCuentas").Button = True
@@ -599,6 +610,10 @@ Private Sub CmdEditar_Click()
 
     FrmSolicitudPagos.Show 1
     FrmSolicitudPagos.DtaIndice.Refresh
+    
+    If ActualizoElGrid = True Then
+      ActualizaGrid
+    End If
 End Sub
 
 Private Sub CmdEliminar_Click()
@@ -651,7 +666,7 @@ Private Sub CmdProcesar_Click()
   Dim DescripcionCuenta As String, DescripcionMovimiento As String, TipoMovimiento As String, NumeroFactura As String, Debito As Double, Credito As Double
   Dim TasaCambio As Double, FechaFactura As Date, Descuento As Double, VoucherNo As String, MontoCheque As Double, SubTotal As Double, MontoIva As Double, MontoRetenciones As Double
   Dim Iva As Boolean, ConceptoSolicitud As String, MontoIva2 As Double, MontoRetenciones2 As Double, Concepto As String
-  Dim KeyPresupuesto As String, Presupuesto As String
+  Dim KeyPresupuesto As String, Presupuesto As String, KeyPrespBanco As String, PresupBanco As String
   
     If MsgBox("¿Esta Seguro de querer PROCESAR?", vbYesNo, "Zeus Contable") = vbNo Then
       Exit Sub
@@ -719,9 +734,23 @@ Private Sub CmdProcesar_Click()
                         
                         If Not IsNull(Me.AdoConsulta.Recordset("CuentaBanco")) Then
                           CuentaBanco = Me.AdoConsulta.Recordset("CuentaBanco")
+                           '///////////////////////////////AGREGO LA CUENTA DE BANCO //////////////////
+                           KeyPresupuestoCuenta (CuentaBanco)
+                           KeyPrespBanco = CuentaPresupuesto(0)
+                           PresupBanco = CuentaPresupuesto(1)
                         Else
                           CuentaBanco = 0
                         End If
+                        
+                        
+                         If Not IsNull(Me.AdoConsulta.Recordset("KeyPresupuesto")) Then
+                            KeyPrespBanco = Me.AdoConsulta.Recordset("KeyPresupuesto")
+                         End If
+                         
+                         If Not IsNull(Me.AdoConsulta.Recordset("Presupuesto")) Then
+                            PresupBanco = Me.AdoConsulta.Recordset("Presupuesto")
+                         End If
+                         
                         
                        
                        If Not IsNull(Me.AdoConsulta.Recordset("CtaIva")) Then
@@ -879,12 +908,12 @@ Private Sub CmdProcesar_Click()
 '                        '////////////////////////////////////////////////////////////////////////////////////////
 '                        '///////////////////////AGREGO LAS CUENTAS DE IVA /////////////////////////////////////
 '                        '//////////////////////////////////////////////////////////////////////////////////////////
-'                        If Iva = True Then
-'                          Debito = MontoIva
-'                          Credito = 0
-'                          TipoMovimiento = "Debito"
-'                          Resultado = GrabaDetalleCheque(CuentaIva, Me.DTPFecha.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, TipoMovimiento, TasaCambio, Debito, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CuentaContable, DescripcionCuenta, VoucherNo)
-'                        End If
+                        If Iva = True Then
+                          Debito = MontoIva
+                          Credito = 0
+                          TipoMovimiento = "Debito"
+                          Resultado = GrabaDetalleCheque(CuentaIva, Me.DTPFecha.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, TipoMovimiento, TasaCambio, Debito, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CuentaContable, DescripcionCuenta, VoucherNo)
+                        End If
                         
                         '////////////////////////////////////////////////////////////////////////////////////////
                         '///////////////////////AGREGO LAS CUENTAS DE 1%/////////////////////////////////////
@@ -937,11 +966,14 @@ Private Sub CmdProcesar_Click()
                           Resultado = GrabaDetalleCheque(CuentaRetencion5, Me.DTPFecha.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, DescripcionMovimiento, TipoMovimiento, TasaCambio, Debito, Credito, "CHEQUE", "-", FechaFactura, Descuento, FechaVence, CuentaContable, DescripcionCuenta, VoucherNo)
                         End If
                         
-                        '///////////////////////////////AGREGO LA CUENTA DE BANCO //////////////////
+
+                        
+                         '///////////////////////////////AGREGO LA CUENTA DE BANCO //////////////////
                         Debito = 0
                         Credito = MontoCheque
                         TipoMovimiento = "Credito"
-                        Resultado = GrabaDetalleCheque(CuentaBanco, Me.DTPFecha.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, ConceptoSolicitud, TipoMovimiento, TasaCambio, Debito, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CuentaContable, Beneficiario, VoucherNo)
+                        Resultado = GrabaDetalleChequeSolicitud(CuentaBanco, Me.DTPFecha.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, ConceptoSolicitud, TipoMovimiento, TasaCambio, Debito, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CuentaContable, Beneficiario, VoucherNo, KeyPrespBanco, PresupBanco)
+'                        Resultado = GrabaDetalleCheque(CuentaBanco, Me.DTPFecha.Value, NumeroTransaccion, NumeroPeriodo, DescripcionCuenta, ConceptoSolicitud, TipoMovimiento, TasaCambio, Debito, Credito, "CHEQUE", NumeroFactura, FechaFactura, Descuento, FechaVence, CuentaContable, Beneficiario, VoucherNo)
                         
                         
                         

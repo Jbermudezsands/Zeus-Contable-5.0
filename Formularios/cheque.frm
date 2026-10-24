@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
 Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
-Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
 Object = "{60CCE6A8-5C61-4F30-8513-F57EED62E86A}#8.0#0"; "todl8.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
@@ -12,14 +12,14 @@ Begin VB.Form FrmCheque
    ClientHeight    =   7245
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   13305
+   ClientWidth     =   13350
    Icon            =   "cheque.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
    ScaleHeight     =   7245
-   ScaleWidth      =   13305
+   ScaleWidth      =   13350
    Begin MSDataListLib.DataList DtaList 
       Bindings        =   "cheque.frx":0ABA
       Height          =   1815
@@ -413,7 +413,7 @@ Begin VB.Form FrmCheque
          _ExtentX        =   2990
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   183697409
+         Format          =   190251009
          CurrentDate     =   38918
       End
       Begin MSComCtl2.DTPicker DTPFechaVence 
@@ -425,7 +425,7 @@ Begin VB.Form FrmCheque
          _ExtentX        =   2778
          _ExtentY        =   529
          _Version        =   393216
-         Format          =   183697409
+         Format          =   190251009
          CurrentDate     =   38918
       End
       Begin VB.Label LblNombres 
@@ -581,7 +581,7 @@ Begin VB.Form FrmCheque
       _ExtentY        =   503
       _Version        =   393216
       Enabled         =   0   'False
-      Format          =   184418305
+      Format          =   190251009
       CurrentDate     =   38008
    End
    Begin VB.CommandButton CmdSiguiente 
@@ -2313,6 +2313,8 @@ If Me.AdoPendientes.Recordset.BOF Then
     Me.DBGTransacciones.Columns(17).Visible = False
     Me.DBGTransacciones.Columns(18).Visible = False
     Me.DBGTransacciones.Columns(16).Visible = False
+    Me.DBGTransacciones.Columns("KeyPresupuesto").Visible = False
+    Me.DBGTransacciones.Columns("Presupuesto").Visible = False
 Else
 
     ChequeGrabado = True
@@ -2391,7 +2393,8 @@ Else
     Me.DBGTransacciones.Columns(17).Visible = False
     Me.DBGTransacciones.Columns(18).Visible = False
     Me.DBGTransacciones.Columns(16).Visible = False
-
+    Me.DBGTransacciones.Columns("KeyPresupuesto").Visible = False
+    Me.DBGTransacciones.Columns("Presupuesto").Visible = False
 
 
 
@@ -3757,7 +3760,7 @@ If Me.AdoPendientes.Recordset.EOF Then
     Me.TxtNTransacciones.Text = NTransaccion
 
 
-    Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo,Transacciones.Beneficiario,FechaVence FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE Transacciones.FechaTransaccion>='" & Format(Fechas1, "yyyymmdd") & "' And transacciones.fechatransaccion<='" & Format(Fechas2, "yyyymmdd") & "' AND Transacciones.NumeroMovimiento=" & NTransaccion & "  AND (Transacciones.ChequeNo <> '#######')ORDER BY Transacciones.NTransaccion"
+    Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo,Transacciones.Beneficiario,FechaVence, KeyPresupuesto, Presupuesto FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE Transacciones.FechaTransaccion>='" & Format(Fechas1, "yyyymmdd") & "' And transacciones.fechatransaccion<='" & Format(Fechas2, "yyyymmdd") & "' AND Transacciones.NumeroMovimiento=" & NTransaccion & "  AND (Transacciones.ChequeNo <> '#######')ORDER BY Transacciones.NTransaccion"
     Me.DtaTransacciones.RecordSource = Sql
     Me.DtaTransacciones.Refresh
     Debito = 0
@@ -3800,7 +3803,7 @@ If Me.AdoPendientes.Recordset.EOF Then
      Me.TxtCredito.Text = Format(TotalCredito, "##,##0.00")
      Me.TxtDiferencia.Text = Format(TotalDebito - TotalCredito, "##,##0.00")
      
-       Me.DBGTransacciones.Columns(0).Button = True
+    Me.DBGTransacciones.Columns(0).Button = True
     Me.DBGTransacciones.Columns(1).Locked = True
     Me.DBGTransacciones.Columns(6).Button = True
     Me.DBGTransacciones.Columns(6).Locked = True
@@ -3830,6 +3833,8 @@ If Me.AdoPendientes.Recordset.EOF Then
     Me.DBGTransacciones.Columns(17).Visible = False
     Me.DBGTransacciones.Columns(18).Visible = False
     Me.DBGTransacciones.Columns(16).Visible = False
+    Me.DBGTransacciones.Columns("KeyPresupuesto").Visible = False
+    Me.DBGTransacciones.Columns("Presupuesto").Visible = False
 Else
 
     ChequeGrabado = True
@@ -3838,7 +3843,7 @@ Else
     Fechas2 = Me.AdoPendientes.Recordset("FechaTransaccion")
     NTransaccion = Me.AdoPendientes.Recordset("NumeroMovimiento")
     Me.TxtNTransacciones.Text = NTransaccion
-    Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo,Transacciones.Beneficiario,FechaVence FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE Transacciones.FechaTransaccion>='" & Format(Fechas1, "yyyymmdd") & "' And transacciones.fechatransaccion<='" & Format(Fechas2, "yyyymmdd") & "' AND Transacciones.NumeroMovimiento=" & NTransaccion & "  AND (Transacciones.ChequeNo <> '#######')ORDER BY Transacciones.NTransaccion"
+    Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo,Transacciones.Beneficiario,FechaVence, KeyPresupuesto, Presupuesto FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE Transacciones.FechaTransaccion>='" & Format(Fechas1, "yyyymmdd") & "' And transacciones.fechatransaccion<='" & Format(Fechas2, "yyyymmdd") & "' AND Transacciones.NumeroMovimiento=" & NTransaccion & "  AND (Transacciones.ChequeNo <> '#######')ORDER BY Transacciones.NTransaccion"
     Me.DtaTransacciones.RecordSource = Sql
     Me.DtaTransacciones.Refresh
     Debito = 0
@@ -3910,7 +3915,8 @@ Else
     Me.DBGTransacciones.Columns(17).Visible = False
     Me.DBGTransacciones.Columns(18).Visible = False
     Me.DBGTransacciones.Columns(16).Visible = False
-
+    Me.DBGTransacciones.Columns("KeyPresupuesto").Visible = False
+    Me.DBGTransacciones.Columns("Presupuesto").Visible = False
 
 
 
@@ -4092,6 +4098,17 @@ If ColIndex = 8 Or ColIndex = 9 Then
         End With
   
         Me.DBGTransacciones.Enabled = False
+        
+   Else
+     
+           '////////////////////////////////////BUSCO SI ES PRESUPUESTO ///////////////////////
+           Me.DtaConsulta.RecordSource = "SELECT KeyGrupo, CodGrupo, KeyGrupoSuperior, Child, DescripcionGrupo, Imagen1, Imagen2 From EstructuraPresupuesto WHERE (DescripcionGrupo LIKE '%" & Me.DBGTransacciones.Columns("FacturaNo").Text & "%') "
+           Me.DtaConsulta.Refresh
+           If Not Me.DtaConsulta.Recordset.EOF Then
+                   Me.DBGTransacciones.Columns("KeyPresupuesto").Text = DtaConsulta.Recordset("KeyGrupo")
+                   Me.DBGTransacciones.Columns("Presupuesto").Text = DtaConsulta.Recordset("DescripcionGrupo")
+           
+           End If
         
    End If
   
@@ -4859,7 +4876,7 @@ MDIPrimero.Skin1.ApplySkin Me.CmdSiguiente.hWnd
 MDIPrimero.Skin1.ApplySkin Me.CmdAnterior.hWnd
 MDIPrimero.Skin1.ApplySkin Me.CmdMemoriza.hWnd
 MDIPrimero.Skin1.ApplySkin Me.CmdBorrar.hWnd
-MDIPrimero.Skin1.ApplySkin Me.CmdSalir.hWnd
+MDIPrimero.Skin1.ApplySkin Me.cmdSalir.hWnd
 MDIPrimero.Skin1.ApplySkin Me.CmdGrabar.hWnd
 MDIPrimero.Skin1.ApplySkin Me.CmdNuevo.hWnd
 MDIPrimero.Skin1.ApplySkin Me.SmartButton1.hWnd
@@ -4973,7 +4990,7 @@ Sql = "SELECT     Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacc
        "Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, " & _
        "Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, " & _
        "Transacciones.NumeroMovimiento, Periodos.Periodo, Transacciones.FechaDescuento, Transacciones.DescuentoDisponible, " & _
-       "Transacciones.FechaVence,Transacciones.CodCuentaProveedor,Transacciones.TipoFactura,Transacciones.NTransaccion " & _
+       "Transacciones.FechaVence,Transacciones.CodCuentaProveedor,Transacciones.TipoFactura,Transacciones.NTransaccion, Transacciones.KeyPresupuesto, Transacciones.Presupuesto " & _
        "FROM  Periodos INNER JOIN " & _
        "Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo " & _
        "Where (Transacciones.NumeroMovimiento = -1) " & _
@@ -5023,6 +5040,8 @@ Me.DBCodigo.ListField = "CodCuentas"
   DBGTransacciones.Columns(20).Visible = False
   DBGTransacciones.Columns(21).Visible = False
   DBGTransacciones.Columns(22).Visible = False
+  DBGTransacciones.Columns("KeyPresupuesto").Visible = False
+  DBGTransacciones.Columns("Presupuesto").Visible = False
   DBGTransacciones.Columns(7).Locked = True 'columna tasa de cambio
 
   
@@ -5830,6 +5849,8 @@ Select Case ColIndex
    QueProducto = "Presupuesto"
    FrmConsulta.Show 1
    Me.DBGTransacciones.Columns(4).Text = FrmConsulta.Codigo
+   Me.DBGTransacciones.Columns("KeyPresupuesto").Text = FrmConsulta.KeyPresupuesto
+   Me.DBGTransacciones.Columns("Presupuesto").Text = FrmConsulta.DescripcionPresupuesto
    
   Case 6
     Set c = DBGTransacciones.Columns(ColIndex)

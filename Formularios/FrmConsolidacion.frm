@@ -1,9 +1,9 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "Comdlg32.ocx"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "ComDlg32.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
 Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
 Begin VB.Form FrmConsolidacion 
@@ -913,7 +913,7 @@ Begin VB.Form FrmConsolidacion
          _ExtentX        =   4048
          _ExtentY        =   609
          _Version        =   393216
-         Format          =   79495169
+         Format          =   189333505
          CurrentDate     =   40603
       End
       Begin VB.Label Label3 
@@ -1482,7 +1482,7 @@ Private Sub PushButton1_Click()
 Dim NumeroTabla As Double, NumeroPeriodo1 As Double, NumeroPeriodo2 As Double, i As Double
 Dim FechaIni As String, FechaFin As String, Fecha1 As String, Fecha2 As String, NumFecha1 As Date
 Dim NumFecha2 As Date, Contador As Integer, Campo As String, Fechas As String, FechaT1 As String, FechaT2 As String, FechaT3 As String
-Dim TotalDebito As Double, TotalCredito As Double, Cadena As String, Consecutivo As Integer, NTransaccion As Double, Anulado As Integer, CodigoArchivo As String, CodigoCuenta As String
+Dim TotalDebito As Double, TotalCredito As Double, cadena As String, Consecutivo As Integer, NTransaccion As Double, Anulado As Integer, CodigoArchivo As String, CodigoCuenta As String
 Dim Fuente As String, CodCuenta As String, CodDepartamento As String, CodAcciones As String, ClaveProyecto As String, NFactura As String, Ttransaccion As String, ReferenciaCh As String, Descripcion As String, FechaDescuento As String, FechaVencimiento As String, ImporteDescuento As String, ImporteTransaccion As Double, ValorUnit As String
 Dim TipoTransaccion As String, Longitud As Double, Ultimo As Boolean, Encontrado As Boolean, Conexion As String, Directorio As String, Buscado As Boolean, TipoMovimiento As String, Salir As Boolean, Continuar As Boolean
 
@@ -1602,24 +1602,24 @@ If Me.OptExportar.Value = True Then
             Anulado = 0
             While Not EOF(1)
             Salir = False
-            Line Input #1, Cadena
+            Line Input #1, cadena
             
-             Fechas = Mid(Cadena, 1, 8)
+             Fechas = Mid(cadena, 1, 8)
              FechaT2 = Mid(Fechas, 1, 2)
              FechaT1 = Mid(Fechas, 3, 2)
              FechaT3 = Mid(Fechas, 5, 4)
              Fecha = FechaT1 & "/" & FechaT2 + "/" + FechaT3
             
-             NTransaccion = Mid(Cadena, 9, 8)
-             Fuente = Mid(Cadena, 17, 4)
-             CodCuenta = Mid(Cadena, 21, 16)
-             CodDepartamento = Mid(Cadena, 37, 3)
-             CodAcciones = Mid(Cadena, 40, 17)
-             ClaveProyecto = Mid(Cadena, 57, 15)
-             NFactura = Mid(Cadena, 72, 8)
-             Ttransaccion = Mid(Cadena, 80, 2)
-             ReferenciaCh = Mid(Cadena, 82, 6)
-             Descripcion = Mid(Cadena, 88, 35)
+             NTransaccion = Mid(cadena, 9, 8)
+             Fuente = Mid(cadena, 17, 4)
+             CodCuenta = Mid(cadena, 21, 16)
+             CodDepartamento = Mid(cadena, 37, 3)
+             CodAcciones = Mid(cadena, 40, 17)
+             ClaveProyecto = Mid(cadena, 57, 15)
+             NFactura = Mid(cadena, 72, 8)
+             Ttransaccion = Mid(cadena, 80, 2)
+             ReferenciaCh = Mid(cadena, 82, 6)
+             Descripcion = Mid(cadena, 88, 35)
              
              
              '/////////////QUITOS LOS ESPACIOS DEL CODIGO CUENTA///////////////
@@ -1641,10 +1641,10 @@ If Me.OptExportar.Value = True Then
              '///////Convierto el formato de fecha////////////////
              
              
-             ImporteTransaccion = Mid(Cadena, 140, 17)
-             ImporteDescuento = Mid(Cadena, 157, 17)
-             ValorUnit = Mid(Cadena, 174, 17)
-             TipoTransaccion = Mid(Cadena, 191, 2)
+             ImporteTransaccion = Mid(cadena, 140, 17)
+             ImporteDescuento = Mid(cadena, 157, 17)
+             ValorUnit = Mid(cadena, 174, 17)
+             TipoTransaccion = Mid(cadena, 191, 2)
             
             If Not CodCuenta = "                " Then
              If ImporteTransaccion <> 0 Then
@@ -1671,10 +1671,10 @@ If Me.OptExportar.Value = True Then
               ElseIf Ttransaccion = "05" Or Ttransaccion = "06" Or Ttransaccion = "07" Or Ttransaccion = "08" Or Ttransaccion = "09" Or Ttransaccion = "15" Or Ttransaccion = "16" Or Ttransaccion = "17" Or Ttransaccion = "18" Or Ttransaccion = "19" Or Ttransaccion = "22" Or Ttransaccion = "24" Or Ttransaccion = "25" Or Ttransaccion = "26" Or Ttransaccion = "28" Or Ttransaccion = "29" Or Ttransaccion = "30" Then
                 AdoRegistros.Recordset("ImporteTransaccionCredito") = ImporteTransaccion
               Else
-                  Cadena = "Este Archivo Contienen un Codigo Nuevo" & vbLf
-                  Cadena = Cadena & "Llame a su Soporte Tecnico para Anexarlo" & vbLf
-                  Cadena = Cadena & "Al listado Permitido, para Importar"
-                MsgBox Cadena
+                  cadena = "Este Archivo Contienen un Codigo Nuevo" & vbLf
+                  cadena = cadena & "Llame a su Soporte Tecnico para Anexarlo" & vbLf
+                  cadena = cadena & "Al listado Permitido, para Importar"
+                MsgBox cadena
                 Exit Sub
               End If
             
@@ -1722,7 +1722,7 @@ End Sub
 Private Sub PushButton2_Click()
 'On Error GoTo TipoErrs
 Dim SQLExporta As String, Longitud As Integer, Respuesta As Integer
-Dim Cadena As String, mes As String, Dia As String, ano As String
+Dim cadena As String, mes As String, Dia As String, ano As String
 Dim TextoMonto As String, TipoMovimiento As String, J As Integer
 Dim Consecutivo As Double, FechaDescuento As String, FechaVencimiento As String
 Dim NumeroTabla As Double, NumeroPeriodo1 As Double, NumeroPeriodo2 As Double, i As Double
@@ -1935,22 +1935,22 @@ If Me.OptExportar.Value = True Then
                              mes = "0" & Trim(Str(Month(Now)))
                             End If
                             
-                            Dia = Cadena & Trim(Str(Day(Now)))
+                            Dia = cadena & Trim(Str(Day(Now)))
                             Longitud = Len(Dia)
                             If Longitud = 1 Then
-                             Dia = "0" & Cadena & Trim(Str(Day(Now)))
+                             Dia = "0" & cadena & Trim(Str(Day(Now)))
                             End If
-                            ano = Cadena & Trim(Str(Year(Now)))
-                            Cadena = mes & Dia & ano
-                            Cadena = Cadena & NTransaccion
-                            Cadena = Cadena & Fuente
-                            Cadena = Cadena & Trim(AdoRegistros.Recordset("CodCuentas"))
-                            For i = 1 To 36 - Len(Cadena)
-                            Cadena = Cadena & " "
+                            ano = cadena & Trim(Str(Year(Now)))
+                            cadena = mes & Dia & ano
+                            cadena = cadena & NTransaccion
+                            cadena = cadena & Fuente
+                            cadena = cadena & Trim(AdoRegistros.Recordset("CodCuentas"))
+                            For i = 1 To 36 - Len(cadena)
+                            cadena = cadena & " "
                             Next i
-                            Cadena = Cadena & CodDepartamento & CodAcciones & ClaveProyecto & NFactura & TipoMovimiento & ReferenciaCh
-                            Cadena = Cadena & Descripcion & FechaDescuento & FechaVencimiento
-                            Cadena = Cadena & TextoMonto
+                            cadena = cadena & CodDepartamento & CodAcciones & ClaveProyecto & NFactura & TipoMovimiento & ReferenciaCh
+                            cadena = cadena & Descripcion & FechaDescuento & FechaVencimiento
+                            cadena = cadena & TextoMonto
                             
                             For i = 1 To 17 - Len(ImporteDescuento)
                                ImporteDescuento = " " & ImporteDescuento
@@ -1958,9 +1958,9 @@ If Me.OptExportar.Value = True Then
                             For i = 1 To 17 - Len(ValorUnit)
                                ValorUnit = " " & ValorUnit
                             Next i
-                            Cadena = Cadena & ImporteDescuento & ValorUnit
-                            Cadena = Cadena & TipoTransaccion
-                            Print #1, Cadena
+                            cadena = cadena & ImporteDescuento & ValorUnit
+                            cadena = cadena & TipoTransaccion
+                            Print #1, cadena
                                             
                             
                             
@@ -1969,7 +1969,7 @@ If Me.OptExportar.Value = True Then
                           .Value = J
                           Me.Caption = "Procesando:  " & J & " de " & Maximo & " Registros "
                           DoEvents
-                          Cadena = ""
+                          cadena = ""
                           Loop
                           End With
                           
@@ -2094,22 +2094,22 @@ If Me.OptExportar.Value = True Then
                              mes = "0" & Trim(Str(Month(Now)))
                             End If
                             
-                            Dia = Cadena & Trim(Str(Day(Now)))
+                            Dia = cadena & Trim(Str(Day(Now)))
                             Longitud = Len(Dia)
                             If Longitud = 1 Then
-                             Dia = "0" & Cadena & Trim(Str(Day(Now)))
+                             Dia = "0" & cadena & Trim(Str(Day(Now)))
                             End If
-                            ano = Cadena & Trim(Str(Year(Now)))
-                            Cadena = mes & Dia & ano
-                            Cadena = Cadena & NTransaccion
-                            Cadena = Cadena & Fuente
-                            Cadena = Cadena & Trim(AdoRegistros.Recordset("CodCuentas"))
-                            For i = 1 To 36 - Len(Cadena)
-                            Cadena = Cadena & " "
+                            ano = cadena & Trim(Str(Year(Now)))
+                            cadena = mes & Dia & ano
+                            cadena = cadena & NTransaccion
+                            cadena = cadena & Fuente
+                            cadena = cadena & Trim(AdoRegistros.Recordset("CodCuentas"))
+                            For i = 1 To 36 - Len(cadena)
+                            cadena = cadena & " "
                             Next i
-                            Cadena = Cadena & CodDepartamento & CodAcciones & ClaveProyecto & NFactura & TipoMovimiento & ReferenciaCh
-                            Cadena = Cadena & Descripcion & FechaDescuento & FechaVencimiento
-                            Cadena = Cadena & TextoMonto
+                            cadena = cadena & CodDepartamento & CodAcciones & ClaveProyecto & NFactura & TipoMovimiento & ReferenciaCh
+                            cadena = cadena & Descripcion & FechaDescuento & FechaVencimiento
+                            cadena = cadena & TextoMonto
                             
                             For i = 1 To 17 - Len(ImporteDescuento)
                                ImporteDescuento = " " & ImporteDescuento
@@ -2117,9 +2117,9 @@ If Me.OptExportar.Value = True Then
                             For i = 1 To 17 - Len(ValorUnit)
                                ValorUnit = " " & ValorUnit
                             Next i
-                            Cadena = Cadena & ImporteDescuento & ValorUnit
-                            Cadena = Cadena & TipoTransaccion
-                            Print #1, Cadena
+                            cadena = cadena & ImporteDescuento & ValorUnit
+                            cadena = cadena & TipoTransaccion
+                            Print #1, cadena
                                             
                             
                             
@@ -2128,7 +2128,7 @@ If Me.OptExportar.Value = True Then
                           .Value = J
                           Me.Caption = "Procesando:  " & J & " de " & Maximo & " Registros "
                           DoEvents
-                          Cadena = ""
+                          cadena = ""
                           Loop
                           End With
                           
@@ -2141,7 +2141,7 @@ If Me.OptExportar.Value = True Then
 
 Else
                     Dim FechaArchivo As Date, NumeroPeriodo As Integer, NumeroMovimiento As Integer
-                    Dim Fechas1 As String, Fechas2 As String, MovimientoArchivo As Double, SQL As String
+                    Dim Fechas1 As String, Fechas2 As String, MovimientoArchivo As Double, Sql As String
                     Dim FechaGrabada As Date, MovimientoGrabado As Double
                     Dim NombreCuenta As String, CodigoArchivo As String
                     Dim CodigoCuenta As String, CantidadRegistros As Double, ExisteCodigo As Boolean
@@ -2188,13 +2188,13 @@ Else
 '                              Me.LblProgreso.Caption = "Extraccion de la Cuenta: " & CodigoCuenta
                               DoEvents
                                
-                               SQL = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo " & _
+                               Sql = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo " & _
                                      "From Cuentas WHERE (CodCuentas = '" & CodigoCuenta & "')"
-                               Me.AdoConsulta.RecordSource = SQL
+                               Me.AdoConsulta.RecordSource = Sql
                                Me.AdoConsulta.Refresh
                                If Me.AdoConsulta.Recordset.EOF Then
-                                  Cadena = CodigoCuenta
-                                  Print #1, Cadena
+                                  cadena = CodigoCuenta
+                                  Print #1, cadena
                                   ExisteCodigo = False
                                End If
                             
@@ -2228,11 +2228,11 @@ Else
                      
                      
                       
-                      SQL = "SELECT Control, IdRegistros, Fecha, NTransaccion, Fuente, CodCuenta, CodDepartamento, CodAcciones, ClaveProyecto, FacturaNumero, TipoMovimiento, " & _
+                      Sql = "SELECT Control, IdRegistros, Fecha, NTransaccion, Fuente, CodCuenta, CodDepartamento, CodAcciones, ClaveProyecto, FacturaNumero, TipoMovimiento, " & _
                             "RefCheque, Descripcion, FechaVencimiento, ImporteTransaccionDebito, ImporteTransaccionCredito, ImporteDescuento, ValorUnitario, TipoTransaccion, " & _
                             "DebitoDolar , CreditoDolar, FechaDescuento From Registros ORDER BY Control "
                             
-                     Me.AdoAnexar.RecordSource = SQL
+                     Me.AdoAnexar.RecordSource = Sql
                      Me.AdoAnexar.Refresh
                      
                       Me.AdoAnexar.Recordset.MoveLast
@@ -2287,11 +2287,11 @@ Else
                        
                         Fuente = Me.AdoAnexar.Recordset("Fuente")
                         '////////////////////BUSCO SI EL MOVIMIENTO ESTA CUADRADO//////////////////////////////
-                         SQL = "SELECT     MAX(Control) AS Control, MAX(IdRegistros) AS IdRegistros, MAX(Fecha) AS Fecha, NTransaccion AS NTransaccion, SUM(ImporteTransaccionDebito) " & _
+                         Sql = "SELECT     MAX(Control) AS Control, MAX(IdRegistros) AS IdRegistros, MAX(Fecha) AS Fecha, NTransaccion AS NTransaccion, SUM(ImporteTransaccionDebito) " & _
                              "AS Debito, SUM(ImporteTransaccionCredito) AS Credito, SUM(ImporteTransaccionDebito) - SUM(ImporteTransaccionCredito) AS Diferencia " & _
                              "From Registros GROUP BY NTransaccion " & _
                              "HAVING  (MAX(Fecha) = '" & Format(FechaArchivo, "yyyymmdd") & "') AND (NTransaccion = " & MovimientoArchivo & " )"
-                         AdoSuma.RecordSource = SQL
+                         AdoSuma.RecordSource = Sql
                          AdoSuma.Refresh
                          If Not Me.AdoSuma.Recordset.EOF Then
                             If Format(Me.AdoSuma.Recordset("Diferencia"), "##,##0.00") <> 0# Then
@@ -2306,11 +2306,11 @@ Else
                        '///////SI NO EXISTE, PROBLEMA CON EL PERIODO O DESCUADRE AGREGO EL REGISTRO////////
                        '///////////AGREGO EL INDICE DE LA TRANSACCION/////////////////////////////////
                          
-                       SQL = "SELECT  FechaTransaccion, NumeroMovimiento, DescripcionMovimiento, Nperiodo, Fuente, TipoMoneda " & _
+                       Sql = "SELECT  FechaTransaccion, NumeroMovimiento, DescripcionMovimiento, Nperiodo, Fuente, TipoMoneda " & _
                              "From IndiceTransaccion " & _
                              "Where (NPeriodo = " & NumeroPeriodo & ") And (NumeroMovimiento = " & NumeroMovimiento & ") "
                          
-                       Me.AdoIndiceTransaccion.RecordSource = SQL
+                       Me.AdoIndiceTransaccion.RecordSource = Sql
                        Me.AdoIndiceTransaccion.Refresh
                        If Me.AdoIndiceTransaccion.Recordset.EOF Then
                     
@@ -2339,10 +2339,10 @@ Else
                         '/////////////////////////////////////////////////////////////////////////////////
                         '//////////BUSCO LA CUENTA CONTABLE PARA EL NOMBRE////////
                         '/////////////////////////////////////////////////////////////
-                        SQL = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo " & _
+                        Sql = "SELECT CodCuentas, DescripcionCuentas, TipoCuenta, CodGrupo, SaldoActual, TipoMoneda, KeyGrupo, DescripcionGrupo " & _
                             "From Cuentas WHERE (CodCuentas ='" & CodigoCuenta & "')"
                             
-                        AdoCuenta.RecordSource = SQL
+                        AdoCuenta.RecordSource = Sql
                         AdoCuenta.Refresh
                         If Not Me.AdoCuenta.Recordset.EOF Then
                          If Not IsNull(Me.AdoCuenta.Recordset("DescripcionCuentas")) Then
@@ -2361,12 +2361,12 @@ Else
                         '///////BUSCO LA TRANSACCION PARA ANEXAR O AGREGAR EL REGISTRO////////
                         '///////////////////////////////////////////////////////////////////////
                         
-                        SQL = "SELECT  CodCuentas, FechaTransaccion, NPeriodo, NTransaccion, NumeroMovimiento, NombreCuenta, VoucherNo, DescripcionMovimiento, Clave, TCambio, " & _
+                        Sql = "SELECT  CodCuentas, FechaTransaccion, NPeriodo, NTransaccion, NumeroMovimiento, NombreCuenta, VoucherNo, DescripcionMovimiento, Clave, TCambio, " & _
                              "Debito, Credito, FacturaNo, ChequeNo, Fuente, FechaTasas, Conciliada, ConciliacionProcesada, FechaDescuento, DescuentoDisponible, " & _
                              "FechaVence From Transacciones " & _
                              "Where (NPeriodo = " & NumeroPeriodo & ") And (NumeroMovimiento = " & NumeroMovimiento & ")"
                         
-                        Me.AdoTransacciones.RecordSource = SQL
+                        Me.AdoTransacciones.RecordSource = Sql
                         Me.AdoTransacciones.Refresh
                     
                           Me.AdoTransacciones.Recordset.AddNew

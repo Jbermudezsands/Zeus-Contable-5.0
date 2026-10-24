@@ -1,11 +1,11 @@
 VERSION 5.00
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Begin VB.Form frmSplash 
    BorderStyle     =   3  'Fixed Dialog
    ClientHeight    =   7335
    ClientLeft      =   255
    ClientTop       =   1410
-   ClientWidth     =   9945
+   ClientWidth     =   9930
    ClipControls    =   0   'False
    ControlBox      =   0   'False
    Icon            =   "frmSplash.frx":0000
@@ -14,7 +14,7 @@ Begin VB.Form frmSplash
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   7335
-   ScaleWidth      =   9945
+   ScaleWidth      =   9930
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Data DtaConsulta 

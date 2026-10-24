@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
+Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDatGrd.ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
 Begin VB.Form FrmMantenimientoActivos 
@@ -34,55 +34,34 @@ Begin VB.Form FrmMantenimientoActivos
          _ExtentY        =   13785
          _Version        =   393216
          Tabs            =   4
+         Tab             =   2
          TabsPerRow      =   4
          TabHeight       =   520
          TabCaption(0)   =   "Informacion General"
          TabPicture(0)   =   "FrmMantenimientoActivos.frx":0000
-         Tab(0).ControlEnabled=   -1  'True
-         Tab(0).Control(0)=   "Label40"
-         Tab(0).Control(0).Enabled=   0   'False
-         Tab(0).Control(1)=   "Label8"
-         Tab(0).Control(1).Enabled=   0   'False
-         Tab(0).Control(2)=   "Label9"
-         Tab(0).Control(2).Enabled=   0   'False
-         Tab(0).Control(3)=   "Label10"
-         Tab(0).Control(3).Enabled=   0   'False
-         Tab(0).Control(4)=   "Label11"
-         Tab(0).Control(4).Enabled=   0   'False
-         Tab(0).Control(5)=   "Label12"
-         Tab(0).Control(5).Enabled=   0   'False
-         Tab(0).Control(6)=   "Label19"
-         Tab(0).Control(6).Enabled=   0   'False
-         Tab(0).Control(7)=   "Frame5"
-         Tab(0).Control(7).Enabled=   0   'False
-         Tab(0).Control(8)=   "Frame6"
-         Tab(0).Control(8).Enabled=   0   'False
-         Tab(0).Control(9)=   "Frame7"
-         Tab(0).Control(9).Enabled=   0   'False
-         Tab(0).Control(10)=   "Text9"
-         Tab(0).Control(10).Enabled=   0   'False
-         Tab(0).Control(11)=   "Text24"
-         Tab(0).Control(11).Enabled=   0   'False
-         Tab(0).Control(12)=   "Text10"
-         Tab(0).Control(12).Enabled=   0   'False
-         Tab(0).Control(13)=   "Text16"
-         Tab(0).Control(13).Enabled=   0   'False
-         Tab(0).Control(14)=   "Text17"
-         Tab(0).Control(14).Enabled=   0   'False
-         Tab(0).Control(15)=   "Text18"
-         Tab(0).Control(15).Enabled=   0   'False
-         Tab(0).Control(16)=   "Text27"
-         Tab(0).Control(16).Enabled=   0   'False
-         Tab(0).Control(17)=   "Check1"
-         Tab(0).Control(17).Enabled=   0   'False
-         Tab(0).Control(18)=   "Frame9"
-         Tab(0).Control(18).Enabled=   0   'False
-         Tab(0).Control(19)=   "Check4"
-         Tab(0).Control(19).Enabled=   0   'False
-         Tab(0).Control(20)=   "Check3"
-         Tab(0).Control(20).Enabled=   0   'False
-         Tab(0).Control(21)=   "Check5"
-         Tab(0).Control(21).Enabled=   0   'False
+         Tab(0).ControlEnabled=   0   'False
+         Tab(0).Control(0)=   "Check5"
+         Tab(0).Control(1)=   "Check3"
+         Tab(0).Control(2)=   "Check4"
+         Tab(0).Control(3)=   "Frame9"
+         Tab(0).Control(4)=   "Check1"
+         Tab(0).Control(5)=   "Text27"
+         Tab(0).Control(6)=   "Text18"
+         Tab(0).Control(7)=   "Text17"
+         Tab(0).Control(8)=   "Text16"
+         Tab(0).Control(9)=   "Text10"
+         Tab(0).Control(10)=   "Text24"
+         Tab(0).Control(11)=   "Text9"
+         Tab(0).Control(12)=   "Frame7"
+         Tab(0).Control(13)=   "Frame6"
+         Tab(0).Control(14)=   "Frame5"
+         Tab(0).Control(15)=   "Label19"
+         Tab(0).Control(16)=   "Label12"
+         Tab(0).Control(17)=   "Label11"
+         Tab(0).Control(18)=   "Label10"
+         Tab(0).Control(19)=   "Label9"
+         Tab(0).Control(20)=   "Label8"
+         Tab(0).Control(21)=   "Label40"
          Tab(0).ControlCount=   22
          TabCaption(1)   =   "Programacion de Mantenimientos"
          TabPicture(1)   =   "FrmMantenimientoActivos.frx":001C
@@ -95,15 +74,23 @@ Begin VB.Form FrmMantenimientoActivos
          Tab(1).ControlCount=   5
          TabCaption(2)   =   "Orden de Trabajo"
          TabPicture(2)   =   "FrmMantenimientoActivos.frx":0038
-         Tab(2).ControlEnabled=   0   'False
-         Tab(2).Control(0)=   "Command9"
-         Tab(2).Control(1)=   "Command8"
-         Tab(2).Control(2)=   "Command7"
-         Tab(2).Control(3)=   "Command6"
-         Tab(2).Control(4)=   "Command5"
-         Tab(2).Control(5)=   "Command1"
-         Tab(2).Control(6)=   "Frame13"
-         Tab(2).Control(7)=   "Frame12"
+         Tab(2).ControlEnabled=   -1  'True
+         Tab(2).Control(0)=   "Frame12"
+         Tab(2).Control(0).Enabled=   0   'False
+         Tab(2).Control(1)=   "Frame13"
+         Tab(2).Control(1).Enabled=   0   'False
+         Tab(2).Control(2)=   "Command1"
+         Tab(2).Control(2).Enabled=   0   'False
+         Tab(2).Control(3)=   "Command5"
+         Tab(2).Control(3).Enabled=   0   'False
+         Tab(2).Control(4)=   "Command6"
+         Tab(2).Control(4).Enabled=   0   'False
+         Tab(2).Control(5)=   "Command7"
+         Tab(2).Control(5).Enabled=   0   'False
+         Tab(2).Control(6)=   "Command8"
+         Tab(2).Control(6).Enabled=   0   'False
+         Tab(2).Control(7)=   "Command9"
+         Tab(2).Control(7).Enabled=   0   'False
          Tab(2).ControlCount=   8
          TabCaption(3)   =   "Piezas"
          TabPicture(3)   =   "FrmMantenimientoActivos.frx":0054
@@ -120,7 +107,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   645
-            Left            =   -63360
+            Left            =   11640
             Picture         =   "FrmMantenimientoActivos.frx":0070
             Style           =   1  'Graphical
             TabIndex        =   89
@@ -139,7 +126,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   645
-            Left            =   -63360
+            Left            =   11640
             Picture         =   "FrmMantenimientoActivos.frx":05FA
             Style           =   1  'Graphical
             TabIndex        =   88
@@ -158,7 +145,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   645
-            Left            =   -63360
+            Left            =   11640
             Picture         =   "FrmMantenimientoActivos.frx":0B84
             Style           =   1  'Graphical
             TabIndex        =   87
@@ -177,7 +164,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   645
-            Left            =   -63360
+            Left            =   11640
             Picture         =   "FrmMantenimientoActivos.frx":110E
             Style           =   1  'Graphical
             TabIndex        =   86
@@ -196,7 +183,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   645
-            Left            =   -63360
+            Left            =   11640
             Picture         =   "FrmMantenimientoActivos.frx":1698
             Style           =   1  'Graphical
             TabIndex        =   85
@@ -215,7 +202,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   645
-            Left            =   -63360
+            Left            =   11640
             Picture         =   "FrmMantenimientoActivos.frx":1C22
             Style           =   1  'Graphical
             TabIndex        =   84
@@ -236,7 +223,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   3015
-            Left            =   -74880
+            Left            =   120
             TabIndex        =   82
             Top             =   4680
             Width           =   11445
@@ -368,7 +355,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   3975
-            Left            =   -74880
+            Left            =   120
             TabIndex        =   80
             Top             =   480
             Width           =   11445
@@ -731,7 +718,7 @@ Begin VB.Form FrmMantenimientoActivos
             Caption         =   "Activo Inactivo"
             Enabled         =   0   'False
             Height          =   195
-            Left            =   5760
+            Left            =   -69240
             TabIndex        =   70
             Top             =   600
             Width           =   1935
@@ -740,7 +727,7 @@ Begin VB.Form FrmMantenimientoActivos
             Caption         =   "Activo Trasladado"
             Enabled         =   0   'False
             Height          =   195
-            Left            =   5760
+            Left            =   -69240
             TabIndex        =   69
             Top             =   1080
             Width           =   1935
@@ -749,7 +736,7 @@ Begin VB.Form FrmMantenimientoActivos
             Caption         =   "Activo dado de Alta"
             Enabled         =   0   'False
             Height          =   195
-            Left            =   5760
+            Left            =   -69240
             TabIndex        =   68
             Top             =   840
             Width           =   1935
@@ -765,7 +752,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   3015
-            Left            =   7800
+            Left            =   -67200
             TabIndex        =   67
             Top             =   480
             Width           =   4335
@@ -782,7 +769,7 @@ Begin VB.Form FrmMantenimientoActivos
          Begin VB.CheckBox Check1 
             Caption         =   "Es Vehiculo?"
             Height          =   255
-            Left            =   240
+            Left            =   -74760
             TabIndex        =   66
             Top             =   3960
             Width           =   1575
@@ -798,7 +785,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   330
-            Left            =   1800
+            Left            =   -73200
             Locked          =   -1  'True
             MaxLength       =   100
             TabIndex        =   58
@@ -816,7 +803,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   330
-            Left            =   1800
+            Left            =   -73200
             Locked          =   -1  'True
             MaxLength       =   100
             TabIndex        =   57
@@ -834,7 +821,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   330
-            Left            =   5760
+            Left            =   -69240
             Locked          =   -1  'True
             MaxLength       =   100
             TabIndex        =   56
@@ -852,7 +839,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   330
-            Left            =   5760
+            Left            =   -69240
             Locked          =   -1  'True
             MaxLength       =   100
             TabIndex        =   55
@@ -870,7 +857,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   330
-            Left            =   5760
+            Left            =   -69240
             Locked          =   -1  'True
             MaxLength       =   100
             TabIndex        =   54
@@ -888,7 +875,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   330
-            Left            =   1800
+            Left            =   -73200
             Locked          =   -1  'True
             MaxLength       =   100
             TabIndex        =   53
@@ -906,7 +893,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   330
-            Left            =   1800
+            Left            =   -73200
             Locked          =   -1  'True
             MaxLength       =   100
             TabIndex        =   52
@@ -925,7 +912,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   1815
-            Left            =   240
+            Left            =   -74760
             TabIndex        =   35
             Top             =   480
             Width           =   5295
@@ -1079,7 +1066,7 @@ Begin VB.Form FrmMantenimientoActivos
                   Strikethrough   =   0   'False
                EndProperty
                CalendarForeColor=   0
-               Format          =   80281601
+               Format          =   201261057
                CurrentDate     =   38651
             End
             Begin VB.Label Label35 
@@ -1175,7 +1162,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   3375
-            Left            =   120
+            Left            =   -74880
             TabIndex        =   22
             Top             =   4320
             Width           =   5415
@@ -1272,7 +1259,7 @@ Begin VB.Form FrmMantenimientoActivos
                   Strikethrough   =   0   'False
                EndProperty
                CalendarForeColor=   0
-               Format          =   80281601
+               Format          =   201261057
                CurrentDate     =   38651
             End
             Begin MSComCtl2.DTPicker DTPicker1 
@@ -1295,7 +1282,7 @@ Begin VB.Form FrmMantenimientoActivos
                   Strikethrough   =   0   'False
                EndProperty
                CalendarForeColor=   0
-               Format          =   80281601
+               Format          =   201261057
                CurrentDate     =   38651
             End
             Begin VB.Label Label13 
@@ -1361,7 +1348,7 @@ Begin VB.Form FrmMantenimientoActivos
                Strikethrough   =   0   'False
             EndProperty
             Height          =   3375
-            Left            =   6120
+            Left            =   -68880
             TabIndex        =   9
             Top             =   4320
             Width           =   5055
@@ -1458,7 +1445,7 @@ Begin VB.Form FrmMantenimientoActivos
                   Strikethrough   =   0   'False
                EndProperty
                CalendarForeColor=   0
-               Format          =   80281601
+               Format          =   201261057
                CurrentDate     =   38651
             End
             Begin MSComCtl2.DTPicker DTPicker4 
@@ -1481,7 +1468,7 @@ Begin VB.Form FrmMantenimientoActivos
                   Strikethrough   =   0   'False
                EndProperty
                CalendarForeColor=   0
-               Format          =   80281601
+               Format          =   201261057
                CurrentDate     =   38651
             End
             Begin VB.Label Label21 
@@ -1550,7 +1537,7 @@ Begin VB.Form FrmMantenimientoActivos
             BackStyle       =   0  'Transparent
             Caption         =   "Año:"
             Height          =   195
-            Left            =   4080
+            Left            =   -70920
             TabIndex        =   65
             Top             =   3000
             Width           =   330
@@ -1560,7 +1547,7 @@ Begin VB.Form FrmMantenimientoActivos
             BackStyle       =   0  'Transparent
             Caption         =   "Color:]"
             Height          =   195
-            Left            =   4080
+            Left            =   -70920
             TabIndex        =   64
             Top             =   3240
             Width           =   450
@@ -1570,7 +1557,7 @@ Begin VB.Form FrmMantenimientoActivos
             BackStyle       =   0  'Transparent
             Caption         =   "Unidad #"
             Height          =   195
-            Left            =   120
+            Left            =   -74880
             TabIndex        =   63
             Top             =   2880
             Width           =   660
@@ -1580,7 +1567,7 @@ Begin VB.Form FrmMantenimientoActivos
             BackStyle       =   0  'Transparent
             Caption         =   "Marca:"
             Height          =   195
-            Left            =   120
+            Left            =   -74880
             TabIndex        =   62
             Top             =   3240
             Width           =   495
@@ -1590,7 +1577,7 @@ Begin VB.Form FrmMantenimientoActivos
             BackStyle       =   0  'Transparent
             Caption         =   "Modelo:"
             Height          =   195
-            Left            =   120
+            Left            =   -74880
             TabIndex        =   61
             Top             =   3600
             Width           =   570
@@ -1600,7 +1587,7 @@ Begin VB.Form FrmMantenimientoActivos
             BackStyle       =   0  'Transparent
             Caption         =   "Numero de serie (VIN):"
             Height          =   195
-            Left            =   4080
+            Left            =   -70920
             TabIndex        =   60
             Top             =   3600
             Width           =   1605
@@ -1610,7 +1597,7 @@ Begin VB.Form FrmMantenimientoActivos
             BackStyle       =   0  'Transparent
             Caption         =   "Descrip. del Activo Fijo"
             Height          =   195
-            Left            =   120
+            Left            =   -74880
             TabIndex        =   59
             Top             =   2520
             Width           =   1620
@@ -1937,8 +1924,8 @@ Dim afdescri As String
 Dim isdobleclic As Integer
 
 Private cnx As New ADODB.Connection
-Private rs As New ADODB.Recordset, rsConexion As New ADODB.Recordset
-Private SQL As String
+Private Rs As New ADODB.Recordset, rsConexion As New ADODB.Recordset
+Private Sql As String
 Private modal As Boolean
 Private getVal As Boolean
 Private Id As Integer
@@ -2008,6 +1995,8 @@ Else
         FrmOrdenTrabajo.Show vbModal
     End If
     
+    
+    
 End If
 End Sub
 
@@ -2051,16 +2040,16 @@ Adoreg.Refresh
 End Sub
 Public Function datosalta() As String
 Set rsa3 = Nothing
-SQL = "select NombreEntrega, nombrerecibe from altadebienes where IdActivoAlta=" & idactivo & ""
-rsa3.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+Sql = "select NombreEntrega, nombrerecibe from altadebienes where IdActivoAlta=" & idactivo & ""
+rsa3.Open Sql, Conexion, adOpenForwardOnly, adLockOptimistic
 datosalta = rsa3!NombreEntrega
 recibe = rsa3!NombreRecibe
 End Function
 Private Sub cargardatosAF()
 Set rsa = Nothing
-SQL = "select * from dbo.CatalogoActivoFijo where idreg=" & idactivo & ""
-rsa.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
-Text20.Text = rsa!CNTACONTABLE
+Sql = "select * from dbo.CatalogoActivoFijo where idreg=" & idactivo & ""
+rsa.Open Sql, Conexion, adOpenForwardOnly, adLockOptimistic
+Text20.Text = rsa!cntacontable
 If Not IsNull(rsa!CuentaGastos) Then
  Text7.Text = rsa!CuentaGastos
 End If
@@ -2084,11 +2073,17 @@ Text21.Text = rsa!refegeneral
 Text22.Text = rsa!Factura
 Text24.Text = rsa!DescripcionAF
 Text9.Text = rsa!Unidad
-Text27.Text = rsa!marca
-Text18.Text = rsa!modelo
+If Not IsNull(rsa("Marca")) Then
+  Text27.Text = rsa!marca
+End If
+If Not IsNull(rsa("modelo")) Then
+ Text18.Text = rsa!modelo
+End If
 Text17.Text = rsa!Año
 Text16.Text = rsa!Color
+If Not IsNull(rsa("Serie")) Then
 Text10.Text = rsa!Serie
+End If
 If rsa!isvehipropio = 1 Then
     Option1.Value = True
 Else
@@ -2113,8 +2108,8 @@ End If
 If Not IsNull(rsa!compasegvh) Then
  Text13.Text = rsa!compasegvh
 End If
-If Not IsNull(rsa!referencia) Then
-  Text14.Text = rsa!referencia
+If Not IsNull(rsa!Referencia) Then
+  Text14.Text = rsa!Referencia
 End If
 DTPicker3.Value = Format(rsa!finiasevh, "DD/MM/YYYY")
 DTPicker4.Value = Format(rsa!ffinasevh, "DD/MM/YYYY")
@@ -2155,23 +2150,23 @@ Else
     Check3.Value = 0
 End If
 If IsNull(rsa!dirfoto) Or rsa!dirfoto = "" Then
-    ruta = ""
-    Image1.Picture = LoadPicture(ruta)
+    Ruta = ""
+    Image1.Picture = LoadPicture(Ruta)
 Else
-    ruta = rsa!dirfoto
-    If Dir(ruta) <> "" Then
-     Image1.Picture = LoadPicture(ruta)
+    Ruta = rsa!dirfoto
+    If Dir(Ruta) <> "" Then
+     Image1.Picture = LoadPicture(Ruta)
     End If
 End If
 
 End Sub
 Private Sub veridAF()
-If rs.RecordCount = 0 Then
+If Rs.RecordCount = 0 Then
     idactivo = 0
      afdescri = ""
 Else
-    idactivo = rs!No
-     afdescri = rs!Activo_Fijo
+    idactivo = Rs!No
+     afdescri = Rs!Activo_Fijo
 End If
 End Sub
 
@@ -2185,7 +2180,7 @@ Else
     FrmAgregarActivoFijo.actualiza = 1
     FrmAgregarActivoFijo.idregAF = idactivo
     FrmAgregarActivoFijo.Show vbModal
-    afdescri = rs!Activo_Fijo
+    afdescri = Rs!Activo_Fijo
 End If
 End Sub
 
@@ -2202,8 +2197,8 @@ On Error GoTo TipoErrs:
     
     c = DataGrid2.col
     DataGrid2.HoldFields
-    SQL = rs.Filter
-    rs.Filter = getFilter(col, cols)
+    Sql = Rs.Filter
+    Rs.Filter = getFilter(col, cols)
     
     
     DataGrid2.col = c
@@ -2227,7 +2222,7 @@ For Each col In cols
     If Trim(col.FilterText) <> "" Then
         n = n + 1
         If n > 1 Then tmp = tmp & " AND "
-        Select Case rs.Fields(x).Type
+        Select Case Rs.Fields(x).Type
         Case adVarWChar, adVarChar: tmp = tmp & "[" & col.DataField & "] LIKE '%" & col.FilterText & "%'"
         Case adInteger, adNumeric: tmp = tmp & "[" & col.DataField & "] = " & col.FilterText
         Case adDBTimeStamp: tmp = tmp & "[" & col.DataField & "] = #" & col.FilterText & "#"
@@ -2240,7 +2235,7 @@ getFilter = tmp
 End Function
 
 Private Sub DataGrid2_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-If rs.RecordCount = 0 Then
+If Rs.RecordCount = 0 Then
 
 Else
     veridAF
@@ -2285,7 +2280,7 @@ Private Sub Form_Load()
 isdobleclic = 0
 cargarcatalogoAF
 
- Me.DataGrid2.DataSource = rs
+ Me.DataGrid2.DataSource = Rs
  Me.DataGrid2.EvenRowStyle.BackColor = RGB(216, 228, 248)
  Me.DataGrid2.OddRowStyle.BackColor = &H80000005
  Me.DataGrid2.AlternatingRowStyle = True
@@ -2308,14 +2303,14 @@ Private Sub cargarcatalogoAF()
 '        Adodc3.RecordSource = "Select idReg as No, unidad as Unidad, DescripcionAF AS Activo_Fijo, Serie from dbo.CatalogoActivoFijo WHERE(DatoAlta = 1)"
         sqlconsulta = "Select idReg as No, unidad as Unidad, DescripcionAF AS Activo_Fijo, Serie from dbo.CatalogoActivoFijo WHERE(DatoAlta = 1)"
     End If
-    With rs
-         If Not rs.State = adStateClosed Then
+    With Rs
+         If Not Rs.State = adStateClosed Then
           .Close
          End If
           .CursorLocation = adUseClient
           .Open sqlconsulta, Conexion, adOpenDynamic, adLockOptimistic
     End With
-    Me.DataGrid2.DataSource = rs
+    Me.DataGrid2.DataSource = Rs
 '    Adodc3.Refresh
 End Sub
 
@@ -2333,7 +2328,7 @@ Else
     FrmAgregarActivoFijo.actualiza = 1
     FrmAgregarActivoFijo.idregAF = idactivo
     FrmAgregarActivoFijo.Show vbModal
-    afdescri = rs!Activo_Fijo
+    afdescri = Rs!Activo_Fijo
 End If
 End Sub
 

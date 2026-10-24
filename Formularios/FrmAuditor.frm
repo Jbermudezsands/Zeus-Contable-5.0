@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
 Begin VB.Form FrmAuditor 
    BorderStyle     =   1  'Fixed Single
@@ -368,10 +368,8 @@ Begin VB.Form FrmAuditor
       TabCaption(2)   =   "Auditoria Cuentas"
       TabPicture(2)   =   "FrmAuditor.frx":0038
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "CmdTasas"
-      Tab(2).Control(0).Enabled=   0   'False
-      Tab(2).Control(1)=   "CmdAuditarCuentas"
-      Tab(2).Control(1).Enabled=   0   'False
+      Tab(2).Control(0)=   "CmdAuditarCuentas"
+      Tab(2).Control(1)=   "CmdTasas"
       Tab(2).ControlCount=   2
       Begin VB.CommandButton CmdTasas 
          Caption         =   "Tasa Cambio"
@@ -497,7 +495,7 @@ Begin VB.Form FrmAuditor
                _ExtentX        =   2566
                _ExtentY        =   503
                _Version        =   393216
-               Format          =   67174401
+               Format          =   192806913
                CurrentDate     =   39117
             End
             Begin MSComCtl2.DTPicker DTFechaIni 
@@ -510,7 +508,7 @@ Begin VB.Form FrmAuditor
                _ExtentX        =   2778
                _ExtentY        =   503
                _Version        =   393216
-               Format          =   67174401
+               Format          =   192806913
                CurrentDate     =   39117
             End
          End
@@ -579,7 +577,7 @@ Begin VB.Form FrmAuditor
                _ExtentY        =   503
                _Version        =   393216
                Enabled         =   0   'False
-               Format          =   67174401
+               Format          =   192806913
                CurrentDate     =   39117
             End
             Begin MSComCtl2.DTPicker DTPFechaIni 
@@ -592,7 +590,7 @@ Begin VB.Form FrmAuditor
                _ExtentY        =   503
                _Version        =   393216
                Enabled         =   0   'False
-               Format          =   67174401
+               Format          =   192806913
                CurrentDate     =   39117
             End
          End

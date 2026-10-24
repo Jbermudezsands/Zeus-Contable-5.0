@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
 Begin VB.Form FrmReparar 
    BorderStyle     =   1  'Fixed Single
@@ -80,36 +80,63 @@ Begin VB.Form FrmReparar
       _ExtentX        =   20346
       _ExtentY        =   11456
       _Version        =   393216
-      Tabs            =   2
-      Tab             =   1
       TabHeight       =   520
       TabCaption(0)   =   "Reparar Indices"
       TabPicture(0)   =   "FrmReparar.frx":0000
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "DBGCuentas"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Frame1"
+      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "Picture1"
+      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Reparar Transacciones"
       TabPicture(1)   =   "FrmReparar.frx":001C
-      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "SkinLabel15"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "SkinLabel14"
-      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).Control(2)=   "SkinLabel13"
-      Tab(1).Control(2).Enabled=   0   'False
       Tab(1).Control(3)=   "DBGTransacciones"
-      Tab(1).Control(3).Enabled=   0   'False
       Tab(1).Control(4)=   "Frame2"
-      Tab(1).Control(4).Enabled=   0   'False
       Tab(1).Control(5)=   "TxtDiferencia"
-      Tab(1).Control(5).Enabled=   0   'False
       Tab(1).Control(6)=   "TxtDebito"
-      Tab(1).Control(6).Enabled=   0   'False
       Tab(1).Control(7)=   "TxtCredito"
-      Tab(1).Control(7).Enabled=   0   'False
       Tab(1).ControlCount=   8
+      TabCaption(2)   =   "Base de Datos SQL"
+      TabPicture(2)   =   "FrmReparar.frx":0038
+      Tab(2).ControlEnabled=   0   'False
+      Tab(2).Control(0)=   "TxtConsultaSQL"
+      Tab(2).Control(0).Enabled=   0   'False
+      Tab(2).Control(1)=   "CmdInciar"
+      Tab(2).Control(1).Enabled=   0   'False
+      Tab(2).Control(2)=   "CmdEjecutar"
+      Tab(2).Control(2).Enabled=   0   'False
+      Tab(2).ControlCount=   3
+      Begin VB.CommandButton CmdEjecutar 
+         Caption         =   "EJECUTAR"
+         Height          =   615
+         Left            =   -66600
+         TabIndex        =   45
+         Top             =   1800
+         Width           =   1695
+      End
+      Begin VB.CommandButton CmdInciar 
+         Caption         =   "INICIAR"
+         Height          =   615
+         Left            =   -66600
+         TabIndex        =   44
+         Top             =   840
+         Width           =   1695
+      End
+      Begin VB.TextBox TxtConsultaSQL 
+         Height          =   5055
+         Left            =   -74520
+         MultiLine       =   -1  'True
+         TabIndex        =   43
+         Top             =   720
+         Width           =   7455
+      End
       Begin VB.TextBox TxtCredito 
          Alignment       =   1  'Right Justify
          BeginProperty Font 
@@ -122,7 +149,7 @@ Begin VB.Form FrmReparar
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   10080
+         Left            =   -64920
          Locked          =   -1  'True
          TabIndex        =   41
          Text            =   "0.00"
@@ -141,7 +168,7 @@ Begin VB.Form FrmReparar
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   8640
+         Left            =   -66360
          Locked          =   -1  'True
          TabIndex        =   40
          Text            =   "0.00"
@@ -161,7 +188,7 @@ Begin VB.Form FrmReparar
          EndProperty
          ForeColor       =   &H00000080&
          Height          =   375
-         Left            =   2880
+         Left            =   -72120
          Locked          =   -1  'True
          TabIndex        =   39
          Text            =   "0.00"
@@ -172,7 +199,7 @@ Begin VB.Form FrmReparar
          Appearance      =   0  'Flat
          ForeColor       =   &H80000008&
          Height          =   4335
-         Left            =   -74760
+         Left            =   240
          ScaleHeight     =   4305
          ScaleWidth      =   11025
          TabIndex        =   21
@@ -210,9 +237,9 @@ Begin VB.Form FrmReparar
             End
             Begin VB.ComboBox CmbMoneda 
                Height          =   315
-               ItemData        =   "FrmReparar.frx":0038
+               ItemData        =   "FrmReparar.frx":0054
                Left            =   1440
-               List            =   "FrmReparar.frx":0042
+               List            =   "FrmReparar.frx":005E
                TabIndex        =   31
                Text            =   "Córdobas"
                Top             =   2280
@@ -246,7 +273,7 @@ Begin VB.Form FrmReparar
             Begin ACTIVESKINLibCtl.SkinLabel SkinLabel7 
                Height          =   255
                Left            =   840
-               OleObjectBlob   =   "FrmReparar.frx":0059
+               OleObjectBlob   =   "FrmReparar.frx":0075
                TabIndex        =   25
                Top             =   240
                Width           =   615
@@ -261,13 +288,13 @@ Begin VB.Form FrmReparar
                _ExtentY        =   503
                _Version        =   393216
                Enabled         =   0   'False
-               Format          =   17104897
+               Format          =   195690497
                CurrentDate     =   39117
             End
             Begin ACTIVESKINLibCtl.SkinLabel SkinLabel8 
                Height          =   255
                Left            =   240
-               OleObjectBlob   =   "FrmReparar.frx":00C1
+               OleObjectBlob   =   "FrmReparar.frx":00DD
                TabIndex        =   27
                Top             =   600
                Width           =   1215
@@ -275,7 +302,7 @@ Begin VB.Form FrmReparar
             Begin ACTIVESKINLibCtl.SkinLabel SkinLabel9 
                Height          =   255
                Left            =   720
-               OleObjectBlob   =   "FrmReparar.frx":013B
+               OleObjectBlob   =   "FrmReparar.frx":0157
                TabIndex        =   28
                Top             =   960
                Width           =   615
@@ -283,7 +310,7 @@ Begin VB.Form FrmReparar
             Begin ACTIVESKINLibCtl.SkinLabel SkinLabel10 
                Height          =   255
                Left            =   240
-               OleObjectBlob   =   "FrmReparar.frx":01A9
+               OleObjectBlob   =   "FrmReparar.frx":01C5
                TabIndex        =   29
                Top             =   1320
                Width           =   2055
@@ -291,7 +318,7 @@ Begin VB.Form FrmReparar
             Begin ACTIVESKINLibCtl.SkinLabel SkinLabel11 
                Height          =   255
                Left            =   360
-               OleObjectBlob   =   "FrmReparar.frx":0235
+               OleObjectBlob   =   "FrmReparar.frx":0251
                TabIndex        =   32
                Top             =   2280
                Width           =   975
@@ -299,7 +326,7 @@ Begin VB.Form FrmReparar
             Begin ACTIVESKINLibCtl.SkinLabel SkinLabel12 
                Height          =   255
                Left            =   840
-               OleObjectBlob   =   "FrmReparar.frx":02A9
+               OleObjectBlob   =   "FrmReparar.frx":02C5
                TabIndex        =   33
                Top             =   2640
                Width           =   495
@@ -309,7 +336,7 @@ Begin VB.Form FrmReparar
       Begin VB.Frame Frame2 
          Caption         =   "Consulta de Indices"
          Height          =   975
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   8
          Top             =   480
          Width           =   11295
@@ -339,7 +366,7 @@ Begin VB.Form FrmReparar
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel3 
             Height          =   255
             Left            =   240
-            OleObjectBlob   =   "FrmReparar.frx":0313
+            OleObjectBlob   =   "FrmReparar.frx":032F
             TabIndex        =   10
             Top             =   360
             Width           =   495
@@ -353,13 +380,13 @@ Begin VB.Form FrmReparar
             _ExtentX        =   2566
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   17104897
+            Format          =   194838529
             CurrentDate     =   39117
          End
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel6 
             Height          =   255
             Left            =   2520
-            OleObjectBlob   =   "FrmReparar.frx":037D
+            OleObjectBlob   =   "FrmReparar.frx":0399
             TabIndex        =   16
             Top             =   360
             Width           =   1215
@@ -367,7 +394,7 @@ Begin VB.Form FrmReparar
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel4 
             Height          =   255
             Left            =   5520
-            OleObjectBlob   =   "FrmReparar.frx":03F7
+            OleObjectBlob   =   "FrmReparar.frx":0413
             TabIndex        =   20
             Top             =   360
             Width           =   735
@@ -376,7 +403,7 @@ Begin VB.Form FrmReparar
       Begin VB.Frame Frame1 
          Caption         =   "Consulta de Indices"
          Height          =   975
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   1
          Top             =   480
          Width           =   11295
@@ -414,7 +441,7 @@ Begin VB.Form FrmReparar
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel1 
             Height          =   255
             Left            =   360
-            OleObjectBlob   =   "FrmReparar.frx":0465
+            OleObjectBlob   =   "FrmReparar.frx":0481
             TabIndex        =   2
             Top             =   360
             Width           =   615
@@ -428,13 +455,13 @@ Begin VB.Form FrmReparar
             _ExtentX        =   2778
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   17104897
+            Format          =   194838529
             CurrentDate     =   39117
          End
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel5 
             Height          =   255
             Left            =   2880
-            OleObjectBlob   =   "FrmReparar.frx":04CD
+            OleObjectBlob   =   "FrmReparar.frx":04E9
             TabIndex        =   14
             Top             =   360
             Width           =   1215
@@ -442,16 +469,16 @@ Begin VB.Form FrmReparar
          Begin ACTIVESKINLibCtl.SkinLabel SkinLabel2 
             Height          =   255
             Left            =   6120
-            OleObjectBlob   =   "FrmReparar.frx":0547
+            OleObjectBlob   =   "FrmReparar.frx":0563
             TabIndex        =   17
             Top             =   360
             Width           =   735
          End
       End
       Begin TrueOleDBGrid80.TDBGrid DBGCuentas 
-         Bindings        =   "FrmReparar.frx":05B5
+         Bindings        =   "FrmReparar.frx":05D1
          Height          =   4695
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   6
          Top             =   1560
          Width           =   11295
@@ -654,9 +681,9 @@ Begin VB.Form FrmReparar
          _StyleDefs(79)  =   ":id=42,.parent=33"
       End
       Begin TrueOleDBGrid80.TDBGrid DBGTransacciones 
-         Bindings        =   "FrmReparar.frx":05CE
+         Bindings        =   "FrmReparar.frx":05EA
          Height          =   3975
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   12
          Top             =   1560
          Width           =   11295
@@ -938,24 +965,24 @@ Begin VB.Form FrmReparar
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel13 
          Height          =   255
-         Left            =   10080
-         OleObjectBlob   =   "FrmReparar.frx":05ED
+         Left            =   -64920
+         OleObjectBlob   =   "FrmReparar.frx":0609
          TabIndex        =   37
          Top             =   6120
          Width           =   1335
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel14 
          Height          =   255
-         Left            =   8640
-         OleObjectBlob   =   "FrmReparar.frx":0659
+         Left            =   -66360
+         OleObjectBlob   =   "FrmReparar.frx":0675
          TabIndex        =   38
          Top             =   6120
          Width           =   1335
       End
       Begin ACTIVESKINLibCtl.SkinLabel SkinLabel15 
          Height          =   255
-         Left            =   1440
-         OleObjectBlob   =   "FrmReparar.frx":06C3
+         Left            =   -73560
+         OleObjectBlob   =   "FrmReparar.frx":06DF
          TabIndex        =   42
          Top             =   5640
          Width           =   1335
@@ -1140,6 +1167,22 @@ Private Sub Command1_Click()
 
 End Sub
 
+Private Sub CmdEjecutar_Click()
+Dim Cnt As ADODB.Connection
+
+         Respuesta = MsgBox("Esta seguro de Ejecutar la consulta?", vbYesNo, "Ejecutando consulta")
+        If Respuesta = 6 Then
+            Set Cnt = New ADODB.Connection
+            Cnt.ConnectionString = Conexion
+            Cnt.Open
+        
+            Cnt.Execute Me.TxtConsultaSQL.Text
+            
+            MsgBox "Proceso Terminado!!!", vbCritical, "Zeus Nominas"
+        End If
+        
+End Sub
+
 Private Sub CmdGrabar_Click()
 Dim Fechas1 As String, Fechas2 As String
 
@@ -1184,6 +1227,25 @@ On Error GoTo TipoErrs
 TipoErrs:
  MsgBox err.Description
  
+End Sub
+
+Private Sub CmdInciar_Click()
+Dim cn As New ADODB.Connection
+Dim rs As New ADODB.Recordset
+Dim SQlStrin As String, NumeroNomina As Double, CodDeduccion As String, CodTipoIncentivo As String
+
+         Respuesta = MsgBox("Esta seguro de iniciar consulta?", vbYesNo, "Ejecutando consulta")
+        If Respuesta = 6 Then
+        
+          If Me.TxtConsultaSQL.Text = "" Then
+            MsgBox "Es obligario Escribir Consulta SQL", vbCritical, "Sistema Nominas"
+            Exit Sub
+          End If
+        
+          rs.Open Me.TxtConsultaSQL.Text, Conexion
+          MsgBox "Proceso Terminado!!!", vbCritical, "Zeus Nominas"
+          
+        End If
 End Sub
 
 Private Sub Command3_Click()

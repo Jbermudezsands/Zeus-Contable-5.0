@@ -1,0 +1,30 @@
+===============================================
+ REPORTE DE ERRORES DE IMPORTACION
+===============================================
+
+Archivo : C:\Users\jberm\Desktop\Nicacentro\Liliana\Transacciones  credito Enero 2026.xlsx
+Fecha   : 13/08/2026 11:53:47
+
+============================================================
+Fila          : 6
+Movimiento    : 1
+Cuenta        : 3702
+Centro Costo  : 
+Cod. Tercero  : 
+
+ERROR:
+La cuenta contable '3702' no existe.
+============================================================
+
+============================================================
+Fila          : 31
+Movimiento    : 1
+Cuenta        : 3702
+Centro Costo  : SERV0001
+Cod. Tercero  : 
+
+ERROR:
+La cuenta contable '3702' no existe.
+============================================================
+
+

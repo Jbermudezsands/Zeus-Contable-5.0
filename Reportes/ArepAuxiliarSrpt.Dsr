@@ -1,12 +1,12 @@
 VERSION 5.00
 Begin {9EB8768B-CDFA-44DF-8F3E-857A8405E1DB} ArepAuxiliarSrpt 
-   ClientHeight    =   10980
+   ClientHeight    =   11055
    ClientLeft      =   165
    ClientTop       =   555
-   ClientWidth     =   11400
+   ClientWidth     =   20370
    StartUpPosition =   3  'Windows Default
-   _ExtentX        =   20108
-   _ExtentY        =   19368
+   _ExtentX        =   35930
+   _ExtentY        =   19500
    SectionData     =   "ArepAuxiliarSrpt.dsx":0000
 End
 Attribute VB_Name = "ArepAuxiliarSrpt"
@@ -14,12 +14,13 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Dim TransaccionNo As String, FechaTransaccion As Date, Saldo As Double, TotalDebito As Double, TotalCredito As Double
+Dim TransaccionNo As String, FechaTransaccion As Date, Saldo As Double, TotalDebito As Double, TotalCredito As Double, TasaCambio As Double
 Private Sub ActiveReport_FetchData(EOF As Boolean)
     If Not EOF Then
     'Gets the current records SupplierID
       TransaccionNo = Me.DataControl1.Recordset.Fields("NumeroMovimiento")
       FechaTransaccion = Me.DataControl1.Recordset.Fields("FechaTransaccion")
+       TasaCambio = BuscaTasaCambio(FechaTransaccion)
     End If
 End Sub
 
@@ -59,6 +60,8 @@ Else
     SaldoFinalAuxiliar = Format(SaldoIni + Saldo, "###,###,###,##0.#0")
 '    Me.LblFinal.Caption = Format(SaldoIni - SaldoFin, "##,##0.00")
 End If
+
+Me.LblTasa.Caption = Format(TasaCambio, "##,##0.0000")
 
 'pone al tipo sólo D o C
 Me.Field22.Text = Mid(Me.Field22, 1, 1)

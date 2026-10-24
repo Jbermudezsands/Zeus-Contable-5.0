@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{74848F95-A02A-4286-AF0C-A3C755E4A5B3}#1.0#0"; "actskn43.ocx"
-Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDATLST.OCX"
-Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{F0D2F211-CCB0-11D0-A316-00AA00688B10}#1.0#0"; "MSDatLst.Ocx"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSAdoDc.ocx"
 Object = "{562E3E04-2C31-4ECE-83F4-4017EEE51D40}#8.0#0"; "todg8.ocx"
 Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#12.0#0"; "Codejock.Controls.v12.0.0.Demo.ocx"
 Begin VB.Form FrmAltaBienes 
@@ -834,8 +834,8 @@ If Option2.Value = True Then
     Else
         FrmBajaBienes.isotromodulo = 1
         Set rsa2 = Nothing
-        SQL = "select * from BajadeBienes where IdActivoBaja='" & idactivo & "' "
-        rsa2.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+        Sql = "select * from BajadeBienes where IdActivoBaja='" & idactivo & "' "
+        rsa2.Open Sql, Conexion, adOpenForwardOnly, adLockOptimistic
         FrmBajaBienes.Text1.Text = rsa2!IdReferencia
         FrmBajaBienes.Text1.Locked = True
         FrmBajaBienes.TxtFecha.Text = rsa2!FechaGraba
@@ -874,8 +874,8 @@ CargaADODCConta "ResponsablesAreas", adorespo, "1", dtrespo2.Name, "Trim", Conex
 End Sub
 Private Sub generareferencia()
 Set rsa = Nothing
-SQL = "select max (idreg) as idreg from AltadeBienes "
-rsa.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+Sql = "select max (idreg) as idreg from AltadeBienes "
+rsa.Open Sql, Conexion, adOpenForwardOnly, adLockOptimistic
 If IsNull(rsa!idreg) Then
     Text1.Text = "000000" & 1
 Else
@@ -947,14 +947,14 @@ End If
 End Sub
 Private Sub actualizaestadoactivo()
 Set rsa = Nothing
-SQL = "update dbo.CatalogoActivoFijo set datoalta=1, fechaalta='" & Format(Now, "DD/MM/YYYY") & "', IdActivoAlta=" & idactivo & "  where idreg='" & Trim(idactivo) & "'"
-rsa.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+Sql = "update dbo.CatalogoActivoFijo set datoalta=1, fechaalta='" & Format(Now, "DD/MM/YYYY") & "', IdActivoAlta=" & idactivo & "  where idreg='" & Trim(idactivo) & "'"
+rsa.Open Sql, Conexion, adOpenForwardOnly, adLockOptimistic
 End Sub
 
 Private Sub guardaaltabien()
 Set rsa = Nothing
-SQL = "select * from AltadeBienes "
-rsa.Open SQL, Conexion, adOpenForwardOnly, adLockOptimistic
+Sql = "select * from AltadeBienes "
+rsa.Open Sql, Conexion, adOpenForwardOnly, adLockOptimistic
 rsa.AddNew
 rsa!IdReferencia = Text1.Text
 rsa!FechaGraba = Format(CDate(TxtFecha.Text), "YYYY/MM/DD")
