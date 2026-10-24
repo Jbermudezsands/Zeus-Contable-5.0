@@ -181,7 +181,7 @@ End Function
 Private Sub CargarGrupos(ByVal Prefijos As String)
     Dim cn As ADODB.Connection, rs As ADODB.Recordset, Sql As String, P As Variant, Filtro As String
 
-    For Each P In Split(Prefijos, ",")
+    For Each P In VBA.Split(Prefijos, ",")
         If Len(Trim$(P)) > 0 Then
             If Len(Filtro) > 0 Then Filtro = Filtro & " OR "
             Filtro = Filtro & "KeyGrupo LIKE '" & SqlTexto(Trim$(P)) & "%'"
