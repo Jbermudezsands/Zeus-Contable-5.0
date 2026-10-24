@@ -481,3 +481,205 @@ End Function
 '       End If
 '
 
+
+'==============================================================================
+' Retenciones por Beneficiario
+' Une las retenciones de la contabilidad (Conexion) con el nombre del
+' beneficiario del Sistema de Facturacion (ConexionFacturacion).
+' Devuelve un recordset desconectado listo para DataControl1.Recordset.
+' Campos: Fecha, Documento, Cod_Tercero, NombreBeneficiario, Retenido,
+'         MontoBase, NTransaccion (los dos ultimos solo por compatibilidad
+'         con los controles de resumen del layout base).
+'==============================================================================
+Public Function ObtenerRsRetencionesBeneficiario( _
+    ByVal FechaDesde As Date, _
+    ByVal FechaHasta As Date, _
+    ByVal CuentaDesde As String, _
+    ByVal CuentaHasta As String, _
+    Optional ByVal Resumido As Boolean = False) As ADODB.Recordset
+
+    Dim CnConta As ADODB.Connection
+    Dim CnFact As ADODB.Connection
+    Dim RsConta As ADODB.Recordset
+    Dim RsFact As ADODB.Recordset
+    Dim RsSal As ADODB.Recordset
+    Dim RsRes As ADODB.Recordset
+    Dim CodAnt As String
+    Dim NomAnt As String
+    Dim Acum As Double
+    Dim Hay As Boolean
+    Dim Nombres As Object
+    Dim Sql As String
+    Dim Cod As String
+    Dim Nombre As String
+    Dim Fecha As Date
+    Dim Monto As Double
+    Dim NumErr As Long
+    Dim DescErr As String
+
+    On Error GoTo ErrFn
+
+    '--- Nombres de beneficiarios (Sistema de Facturacion)
+    Set Nombres = CreateObject("Scripting.Dictionary")
+    Nombres.CompareMode = 1 'vbTextCompare
+
+    Set CnFact = New ADODB.Connection
+    CnFact.Open ConexionFacturacion
+
+    Set RsFact = CnFact.Execute("SELECT Codigo_Beneficiario, " & _
+        "LTRIM(RTRIM(ISNULL(Nombre_Beneficiario,'') + ' ' + ISNULL(Apellido_Beneficiario,''))) AS Nombre " & _
+        "FROM Beneficiario")
+
+    Do While Not RsFact.EOF
+        Cod = Trim$(RsFact!Codigo_Beneficiario & "")
+        If Not Nombres.Exists(Cod) Then Nombres.Add Cod, Trim$(RsFact!Nombre & "")
+        RsFact.MoveNext
+    Loop
+
+    RsFact.Close
+    CnFact.Close
+
+    '--- Retenciones (Contabilidad): Credito - Debito por linea de transaccion
+    Sql = "SELECT T.FechaTransaccion, T.NumeroMovimiento, T.NTransaccion, " & _
+          "ISNULL(I.Fuente, ISNULL(T.Fuente, '')) AS Fuente, " & _
+          "LTRIM(RTRIM(ISNULL(T.Cod_Tercero, ''))) AS Cod_Tercero, " & _
+          "(ISNULL(T.Credito, 0) - ISNULL(T.Debito, 0)) AS Retenido " & _
+          "FROM Transacciones AS T " & _
+          "INNER JOIN Cuentas AS C ON T.CodCuentas = C.CodCuentas " & _
+          "LEFT JOIN IndiceTransaccion AS I ON T.FechaTransaccion = I.FechaTransaccion " & _
+          "AND T.NPeriodo = I.NPeriodo AND T.NumeroMovimiento = I.NumeroMovimiento " & _
+          "WHERE ISNULL(C.CausaRetencion, 0) = 1 " & _
+          "AND (ISNULL(T.Credito, 0) - ISNULL(T.Debito, 0)) <> 0 "
+
+    If Len(Trim$(CuentaDesde)) > 0 Then
+        Sql = Sql & "AND T.CodCuentas >= '" & Replace(Trim$(CuentaDesde), "'", "''") & "' "
+    End If
+    If Len(Trim$(CuentaHasta)) > 0 Then
+        Sql = Sql & "AND T.CodCuentas <= '" & Replace(Trim$(CuentaHasta), "'", "''") & "' "
+    End If
+
+    Sql = Sql & "AND T.FechaTransaccion >= '" & Format$(FechaDesde, "yyyymmdd") & "' "
+    Sql = Sql & "AND T.FechaTransaccion < '" & Format$(DateAdd("d", 1, FechaHasta), "yyyymmdd") & "' "
+    Sql = Sql & "ORDER BY T.FechaTransaccion, T.NumeroMovimiento, T.NTransaccion"
+
+    Set CnConta = New ADODB.Connection
+    CnConta.Open Conexion
+    Set RsConta = CnConta.Execute(Sql)
+
+    '--- Recordset de salida (desconectado)
+    Set RsSal = New ADODB.Recordset
+    RsSal.CursorLocation = adUseClient
+    AgregarCamposRetBenef RsSal
+    RsSal.Open
+
+
+    Do While Not RsConta.EOF
+        Fecha = RsConta!FechaTransaccion
+        Cod = Trim$(RsConta!Cod_Tercero & "")
+        Monto = CDbl(RsConta!Retenido)
+
+        If Len(Cod) = 0 Then
+            Nombre = "SIN BENEFICIARIO"
+        ElseIf Nombres.Exists(Cod) Then
+            Nombre = Nombres(Cod)
+        Else
+            Nombre = "BENEFICIARIO NO ENCONTRADO"
+        End If
+
+        RsSal.AddNew
+        RsSal!Fecha = Fecha
+        ' Fuente (primeros 4) + ddmmyyyy + "000" + NumeroMovimiento
+        RsSal!Documento = Left$(Trim$(RsConta!Fuente & ""), 4) & Format$(Fecha, "ddmmyyyy") & _
+                          "000" & Trim$(RsConta!NumeroMovimiento & "")
+        RsSal!Cod_Tercero = Cod
+        RsSal!NombreBeneficiario = Nombre
+        RsSal!Retenido = Monto
+        RsSal!MontoBase = Monto
+        RsSal!NTransaccion = CDbl(Val(RsConta!NTransaccion & ""))
+        RsSal!Grupo = 1
+        RsSal.Update
+
+        RsConta.MoveNext
+    Loop
+
+    RsConta.Close
+    CnConta.Close
+
+    If RsSal.RecordCount > 0 Then
+        RsSal.Sort = "Cod_Tercero ASC, Fecha ASC, Documento ASC"
+        RsSal.MoveFirst
+    End If
+
+    '--- Resumido: un registro por beneficiario con el total retenido
+    If Resumido Then
+        Set RsRes = New ADODB.Recordset
+        RsRes.CursorLocation = adUseClient
+        AgregarCamposRetBenef RsRes
+        RsRes.Open
+
+        Hay = False
+        Acum = 0
+        Do While Not RsSal.EOF
+            If Hay Then
+                If RsSal!Cod_Tercero <> CodAnt Then
+                    AgregarFilaRetBenef RsRes, CodAnt, NomAnt, Acum
+                    Acum = 0
+                End If
+            End If
+            CodAnt = RsSal!Cod_Tercero & ""
+            NomAnt = RsSal!NombreBeneficiario & ""
+            Acum = Acum + RsSal!Retenido
+            Hay = True
+            RsSal.MoveNext
+        Loop
+        If Hay Then AgregarFilaRetBenef RsRes, CodAnt, NomAnt, Acum
+
+        RsSal.Close
+        Set RsSal = RsRes
+        If RsSal.RecordCount > 0 Then
+            RsSal.Sort = "NombreBeneficiario ASC, Cod_Tercero ASC"
+            RsSal.MoveFirst
+        End If
+    End If
+
+    Set ObtenerRsRetencionesBeneficiario = RsSal
+    Exit Function
+
+ErrFn:
+    NumErr = err.Number
+    DescErr = err.Description
+    On Error Resume Next
+    If Not RsFact Is Nothing Then If RsFact.State = adStateOpen Then RsFact.Close
+    If Not RsConta Is Nothing Then If RsConta.State = adStateOpen Then RsConta.Close
+    If Not CnFact Is Nothing Then If CnFact.State = adStateOpen Then CnFact.Close
+    If Not CnConta Is Nothing Then If CnConta.State = adStateOpen Then CnConta.Close
+    err.Raise NumErr, "ObtenerRsRetencionesBeneficiario", DescErr
+
+End Function
+
+Private Sub AgregarCamposRetBenef(ByRef Rs As ADODB.Recordset)
+    Rs.Fields.Append "Fecha", adDate
+    Rs.Fields.Append "Documento", adVarWChar, 30
+    Rs.Fields.Append "Cod_Tercero", adVarWChar, 30
+    Rs.Fields.Append "NombreBeneficiario", adVarWChar, 200
+    Rs.Fields.Append "Retenido", adDouble
+    Rs.Fields.Append "MontoBase", adDouble
+    Rs.Fields.Append "NTransaccion", adDouble
+    Rs.Fields.Append "Grupo", adDouble
+    ' Campos vacios: los controles ocultos del layout base siguen enlazados a ellos
+    Rs.Fields.Append "ChequeNo", adVarWChar, 5
+    Rs.Fields.Append "DescripcionMovimiento", adVarWChar, 5
+    Rs.Fields.Append "DescRetencion", adVarWChar, 5
+End Sub
+
+Private Sub AgregarFilaRetBenef(ByRef Rs As ADODB.Recordset, ByVal Cod As String, _
+                                ByVal Nombre As String, ByVal Monto As Double)
+    Rs.AddNew
+    Rs!Cod_Tercero = Cod
+    Rs!NombreBeneficiario = Nombre
+    Rs!Retenido = Monto
+    Rs!MontoBase = Monto
+    Rs!NTransaccion = 0
+    Rs!Grupo = 1
+    Rs.Update
+End Sub

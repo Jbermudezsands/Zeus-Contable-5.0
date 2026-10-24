@@ -23,9 +23,9 @@ Begin VB.Form FrmReportes
    StartUpPosition =   2  'CenterScreen
    Begin SmartButtonProject.SmartButton BtnExcel 
       Height          =   855
-      Left            =   1320
+      Left            =   120
       TabIndex        =   230
-      Top             =   7080
+      Top             =   6600
       Visible         =   0   'False
       Width           =   1215
       _ExtentX        =   2143
@@ -534,14 +534,14 @@ Begin VB.Form FrmReportes
       TabCaption(1)   =   "Configuracion Reportes"
       TabPicture(1)   =   "FrmReportes.frx":1968A
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame11"
-      Tab(1).Control(1)=   "Frame10"
+      Tab(1).Control(0)=   "Frame10"
+      Tab(1).Control(1)=   "Frame11"
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "Configuracion Reportes "
       TabPicture(2)   =   "FrmReportes.frx":196A6
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame13"
-      Tab(2).Control(1)=   "Frame12"
+      Tab(2).Control(0)=   "Frame12"
+      Tab(2).Control(1)=   "Frame13"
       Tab(2).ControlCount=   2
       Begin VB.CheckBox ChkMostrarMovxMes 
          Caption         =   "Mostrar mov x mes"
@@ -2197,7 +2197,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   196083713
+            Format          =   202178561
             CurrentDate     =   37837
          End
          Begin MSComCtl2.DTPicker DTFecha1 
@@ -2209,7 +2209,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   201588737
+            Format          =   202178561
             CurrentDate     =   37837
          End
          Begin VB.Label Label4 
@@ -4027,7 +4027,7 @@ Dim UltimoOrden As Integer, RegIngresos  As Integer, PrimReg As Integer, UltReg 
 Dim Fechas1 As String, Fechas2 As String, Orden As Integer, Sql As String, i As Double
 Dim ListaMeses As Variant, CantRegistros As Double, ComboIni As Double, ComboFin As Double, TotstoFijo As Double, TotalGastoFijo As Double
 Dim mes As Double, J As Double, TotalDebito As Double, TotalCredito As Double, CodigoCuentaDesde As String, CodigoCuentaHasta As String
-Dim Rpt As Object, TotalCostoFijo As Double, Ajuste As String, SqlString As String, Cont As Double, KeyGrupo As String
+Dim rpt As Object, TotalCostoFijo As Double, Ajuste As String, SqlString As String, Cont As Double, KeyGrupo As String
 Dim fPreview As New FrmPreview, V As Double, H As Double, DescripcionGrupo As String
 Dim Rs As New ADODB.Recordset
 Dim Parche As ADODB.Connection
@@ -4937,6 +4937,60 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
 
          
    Select Case Me.CmbReportes.Text
+     Case "RETENCIONES X BENEFICIARIO DETALLE"
+     
+         Me.CmdVerReporte.Visible = False
+         Me.CmdVerReporte2.Visible = False
+         Me.CmdVerReporte3.Visible = True
+
+
+      Me.Label3.Visible = True
+      Me.CmbMoneda.Visible = True
+      Me.Label2.Visible = False
+      Me.Label4.Visible = True
+      Me.DTFecha1.Visible = True
+      Me.Label2.Visible = True
+       Me.Frame7.Visible = True
+      Me.Frame2.Visible = False
+'      Me.Frame3.Visible = True
+
+        Frame7.Caption = "Realizar Filtrado por Codigo"
+        Me.TxtDesde.Visible = False
+        Me.TxtHasta.Visible = False
+        Me.DBCodigo.Visible = True
+        Me.DBCodigoHasta.Visible = True
+        
+        CargarCuentas Me.DBCodigo, True
+        CargarCuentas Me.DBCodigoHasta, True
+     
+     
+     Case "RETENCIONES X BENEFICIARIO RESUMIDO"
+     
+         Me.CmdVerReporte.Visible = False
+         Me.CmdVerReporte2.Visible = False
+         Me.CmdVerReporte3.Visible = True
+
+
+      Me.Label3.Visible = True
+      Me.CmbMoneda.Visible = True
+      Me.Label2.Visible = False
+      Me.Label4.Visible = True
+      Me.DTFecha1.Visible = True
+      Me.Label2.Visible = True
+       Me.Frame7.Visible = True
+      Me.Frame2.Visible = False
+'      Me.Frame3.Visible = True
+
+        Frame7.Caption = "Realizar Filtrado por Codigo"
+        Me.TxtDesde.Visible = False
+        Me.TxtHasta.Visible = False
+        Me.DBCodigo.Visible = True
+        Me.DBCodigoHasta.Visible = True
+        
+        CargarCuentas Me.DBCodigo, True
+        CargarCuentas Me.DBCodigoHasta, True
+     
+     
      Case "RETENCIONES X PAGAR"
      
          Me.CmdVerReporte.Visible = False
@@ -5534,7 +5588,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
       Me.Label2.Visible = False
          Me.Frame7.Visible = False
       Me.Frame2.Visible = True
-    Me.lblTitulo.Caption = "Seleccione el Periodo"
+    Me.LblTitulo.Caption = "Seleccione el Periodo"
       Me.DtaConsulta.RecordSource = "SELECT Periodos.Periodo, Periodos.FechaPeriodo, Periodos.NumeroTabla From Periodos Where (((Periodos.Periodo) = 1) And ((Periodos.NumeroTabla) = 1 Or (Periodos.NumeroTabla) = 2 Or (Periodos.NumeroTabla) = 3))"
       Me.DtaConsulta.Refresh
       Do While Not DtaConsulta.Recordset.EOF
@@ -5788,7 +5842,7 @@ Dim RegInicioCostosOperativos As Integer 'variable que me guarda el orden donde 
 Dim RegTotalCostosOperativos As Integer 'variable que me guarda el orden donde se encuentra el registro de total de costos operativos
 Dim Rs As New ADODB.Recordset, Fecha2 As String
 Dim CodigoCuentaDesde As String, CodigoCuentaHasta As String
-Dim Rpt As Object
+Dim rpt As Object
 Dim fPreview As New FrmPreview
 
 
@@ -5863,10 +5917,10 @@ End If
 '  fPreview.arv.ReportSource = EstadoCuenta
 '  fPreview.Show 1
 
-     Set Rpt = New EstadoCuenta
-     Rpt.AdoEstadoCuenta.ConnectionString = ConexionReporte
-     Rpt.AdoEstadoCuenta.Source = Sql
-     fPreview.RunReport Rpt
+     Set rpt = New EstadoCuenta
+     rpt.AdoEstadoCuenta.ConnectionString = ConexionReporte
+     rpt.AdoEstadoCuenta.Source = Sql
+     fPreview.RunReport rpt
      fPreview.Show 1
 
 Case "ESTRUCTURA DE CUENTAS"
@@ -5890,10 +5944,10 @@ Case "ESTRUCTURA DE CUENTAS"
     ArepCatalogo.DataControl1.ConnectionString = ConexionReporte
     '    ArepCatalogo.Show 1
 
-     Set Rpt = New ArepCatalogo
-     Rpt.DataControl1.ConnectionString = ConexionReporte
-     Rpt.DataControl1.Source = "SELECT * From Reportes ORDER BY Orden"
-     fPreview.RunReport Rpt
+     Set rpt = New ArepCatalogo
+     rpt.DataControl1.ConnectionString = ConexionReporte
+     rpt.DataControl1.Source = "SELECT * From Reportes ORDER BY Orden"
+     fPreview.RunReport rpt
      fPreview.Show 1
      
 '     Dim rpt As Object
@@ -6042,10 +6096,10 @@ Case "ESTADO DE RESULTADO"
 '     fPreview.arv.ReportSource = ArepResultado
 '     fPreview.Show 1
 
-     Set Rpt = New ArepResultado
-     Rpt.DataControl1.ConnectionString = ConexionReporte
-     Rpt.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
-     fPreview.RunReport Rpt
+     Set rpt = New ArepResultado
+     rpt.DataControl1.ConnectionString = ConexionReporte
+     rpt.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
+     fPreview.RunReport rpt
      fPreview.Show 1
 
     
@@ -6167,10 +6221,10 @@ Case "RESULTADO ACUMULADO"
 '     fPreview.arv.ReportSource = ArepResultadoAcumulado
 '     fPreview.Show 1
 
-     Set Rpt = New ArepResultadoAcumulado
-     Rpt.DataControl1.ConnectionString = ConexionReporte
-     Rpt.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
-     fPreview.RunReport Rpt
+     Set rpt = New ArepResultadoAcumulado
+     rpt.DataControl1.ConnectionString = ConexionReporte
+     rpt.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
+     fPreview.RunReport rpt
      fPreview.Show 1
      
     FrmReportes.lblProgreso.Caption = ""
@@ -6286,10 +6340,10 @@ Case "RESULTADO HISTORICO"
     ArepResultadoHistorico.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
     Sql = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
    
-     Set Rpt = New ArepResultadoHistorico
-     Rpt.DataControl1.ConnectionString = ConexionReporte
-     Rpt.DataControl1.Source = Sql
-     fPreview.RunReport Rpt
+     Set rpt = New ArepResultadoHistorico
+     rpt.DataControl1.ConnectionString = ConexionReporte
+     rpt.DataControl1.Source = Sql
+     fPreview.RunReport rpt
      fPreview.Show 1
    
 '     fPreview.arv.ReportSource = ArepResultadoHistorico
@@ -6427,10 +6481,10 @@ Case "BALANCE GENERAL"
     ArepBalance.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
 '    ArepBalance.Show 1
     
-     Set Rpt = New ArepBalance
-     Rpt.DataControl1.ConnectionString = ConexionReporte
-     Rpt.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
-     fPreview.RunReport Rpt
+     Set rpt = New ArepBalance
+     rpt.DataControl1.ConnectionString = ConexionReporte
+     rpt.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
+     fPreview.RunReport rpt
 
 
      fPreview.Show 1
@@ -6561,10 +6615,10 @@ Case "BALANCE ACUMULADO"
 '     fPreview.arv.ReportSource = ArepBalanceComparativo
 '     fPreview.Show 1
 
-     Set Rpt = New ArepBalanceComparativo
-     Rpt.DataControl1.ConnectionString = ConexionReporte
-     Rpt.DataControl1.Source = Sql
-     fPreview.RunReport Rpt
+     Set rpt = New ArepBalanceComparativo
+     rpt.DataControl1.ConnectionString = ConexionReporte
+     rpt.DataControl1.Source = Sql
+     fPreview.RunReport rpt
      fPreview.Show 1
     
 
@@ -6669,10 +6723,10 @@ Case "BALANCE ACUMULADO"
 'Dim rpt As Object
 'Dim fPreview As New FrmPreview
 
-     Set Rpt = New ArepBalanceHistorico
-     Rpt.DataControl1.ConnectionString = ConexionReporte
-     Rpt.DataControl1.Source = Sql
-     fPreview.RunReport Rpt
+     Set rpt = New ArepBalanceHistorico
+     rpt.DataControl1.ConnectionString = ConexionReporte
+     rpt.DataControl1.Source = Sql
+     fPreview.RunReport rpt
      fPreview.Show 1
 
 ''    ArepBalanceHistorico.Show 1
@@ -6847,10 +6901,10 @@ Case "BALANZA DE COMPROBACION"
         QUIEN = "Balanza"
 '        ArepBalanza.Show 1
 
-            Set Rpt = New ArepBalanza
-            Rpt.DataControl1.ConnectionString = ConexionReporte
-            Rpt.DataControl1.Source = Sql
-            fPreview.RunReport Rpt
+            Set rpt = New ArepBalanza
+            rpt.DataControl1.ConnectionString = ConexionReporte
+            rpt.DataControl1.Source = Sql
+            fPreview.RunReport rpt
             fPreview.Show 1
             
 
@@ -7188,10 +7242,10 @@ Case "AUXILIAR x GRUPO"
  Sql = "SELECT Transacciones.CodCuentas, Transacciones.NombreCuenta, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.FacturaNo, Transacciones.ChequeNo, Transacciones.Clave, Transacciones.TCambio,  Transacciones.Debito, Transacciones.Credito, Transacciones.FechaTransaccion, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.Fuente, Transacciones.FechaTasas, Transacciones.NumeroMovimiento, Periodos.Periodo FROM Periodos INNER JOIN Transacciones ON Periodos.NPeriodo = Transacciones.NPeriodo WHERE (((Transacciones.FechaTransaccion) Between '" & Format(Me.DTFecha1, "yyyymmdd") & "' And '" & Format(Me.DTFecha2, "yyyymmdd") & "') AND ((Transacciones.NumeroMovimiento)=" & NumeroTransaccion & ")) ORDER BY Transacciones.NTransaccion"
 ' ArepCheque.Show 1
 
-            Set Rpt = New ArepCheque
-            Rpt.DtaCheque.ConnectionString = ConexionReporte
-            Rpt.DtaCheque.Source = Sql
-            fPreview.RunReport Rpt
+            Set rpt = New ArepCheque
+            rpt.DtaCheque.ConnectionString = ConexionReporte
+            rpt.DtaCheque.Source = Sql
+            fPreview.RunReport rpt
             fPreview.Show 1
             
   
@@ -7283,10 +7337,10 @@ Case "AUXILIAR x GRUPO"
 '     ArepPresupuestoGeneral.Label13.Caption = "PRESUPUESTO PARA EL AÑO " & Year(Fecha1)
 '    ArepPresupuesto.DataControl1.Source = SqlString
  
-            Set Rpt = New ArepPresupuestoGeneral
-            Rpt.DataControl1.ConnectionString = ConexionReporte
-            Rpt.DataControl1.Source = SqlString
-            fPreview.RunReport Rpt
+            Set rpt = New ArepPresupuestoGeneral
+            rpt.DataControl1.ConnectionString = ConexionReporte
+            rpt.DataControl1.Source = SqlString
+            fPreview.RunReport rpt
             fPreview.Show 1
  
  
@@ -7458,12 +7512,12 @@ Case "AUXILIAR x GRUPO"
 '     ArepPresupuestoArea.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
 '     ArepPresupuestoArea.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
 '     ArepPresupuestoArea.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
-            Set Rpt = New ArepPresupuestoArea
-            Rpt.DataControl1.ConnectionString = ConexionReporte
-            Rpt.DataControl1.Source = Sql
-            Rpt.FechaIni = FechaIni
-            Rpt.FechaFin = FechaFin
-            fPreview.RunReport Rpt
+            Set rpt = New ArepPresupuestoArea
+            rpt.DataControl1.ConnectionString = ConexionReporte
+            rpt.DataControl1.Source = Sql
+            rpt.FechaIni = FechaIni
+            rpt.FechaFin = FechaFin
+            fPreview.RunReport rpt
             fPreview.Show 1
             
             
@@ -7489,10 +7543,10 @@ Case "AUXILIAR DE CUENTAS"
     Sql = "SELECT Transacciones.CodCuentas, Cuentas.DescripcionCuentas, Transacciones.NPeriodo, Transacciones.NTransaccion, Transacciones.NumeroMovimiento, Transacciones.VoucherNo, Transacciones.DescripcionMovimiento, Transacciones.Clave, Transacciones.TCambio, Transacciones.Debito, Transacciones.Credito, Transacciones.FacturaNo , Transacciones.ChequeNo, Transacciones.Fuente, Transacciones.FechaTransaccion FROM  Cuentas INNER JOIN Transacciones ON Cuentas.CodCuentas = Transacciones.CodCuentas  " & _
           "WHERE (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Format(Me.DTFecha1.Value, "yyyy-mm-dd") & "', 102) AND CONVERT(DATETIME, '" & Format(Me.DTFecha2.Value, "yyyy-mm-dd") & "', 102)) ORDER BY Transacciones.NumeroMovimiento, Transacciones.NTransaccion"
 
-     Set Rpt = New ArepTransacciones
-     Rpt.DataControl1.ConnectionString = ConexionReporte
-     Rpt.DataControl1.Source = Sql
-     fPreview.RunReport Rpt
+     Set rpt = New ArepTransacciones
+     rpt.DataControl1.ConnectionString = ConexionReporte
+     rpt.DataControl1.Source = Sql
+     fPreview.RunReport rpt
 
 
      fPreview.Show 1
@@ -7751,10 +7805,10 @@ Case "AUXILIAR DE CUENTAS"
 '       ArepBank.Show 1
 
 
-        Set Rpt = New ArepBank
-        Rpt.DtaBanco.ConnectionString = ConexionReporte
-        Rpt.DtaBanco.Source = Sql
-        fPreview.RunReport Rpt
+        Set rpt = New ArepBank
+        rpt.DtaBanco.ConnectionString = ConexionReporte
+        rpt.DtaBanco.Source = Sql
+        fPreview.RunReport rpt
          fPreview.Show 1
 
            
@@ -7790,7 +7844,7 @@ Dim TotalCostos As Double, ListaActivos As Variant, TotalInventario As Double, T
 Dim TotalCuentasxPagar As Double, TotalActivos As Double, UtilidadBrutas As Double, UtilidadNetas As Double
 Dim ListaMeses As Variant, CantRegistros As Double, ComboIni As Double, ComboFin As Double, TotalCostoFijo As Double, TotalGastoFijo As Double
 Dim mes As Double, R As Variant
-Dim Rpt As Object
+Dim rpt As Object
 Dim fPreview As New FrmPreview
 Dim Rs As New ADODB.Recordset
 Dim IngresosVentas, ServiciosVentas, ComisionVentas As Double
@@ -7877,10 +7931,10 @@ Case "RETENCIONES EN LA FUENTE I.R X COBRAR"
          ArepRetencionesIR.DataControl1.Source = Sql
          
          
-     Set Rpt = New ArepRetencionesIR
-     Rpt.DataControl1.ConnectionString = ConexionReporte
-     Rpt.DataControl1.Source = Sql
-     fPreview.RunReport Rpt
+     Set rpt = New ArepRetencionesIR
+     rpt.DataControl1.ConnectionString = ConexionReporte
+     rpt.DataControl1.Source = Sql
+     fPreview.RunReport rpt
 
      fPreview.Show 1
 
@@ -7945,10 +7999,10 @@ Case "RETENCIONES EN LA FUENTE I.R X PAGAR"
          "WHERE (Cuentas.CausaRetencion = 1) AND (Cuentas.TipoCuenta = 'Cuentas x Pagar') AND (Transacciones.FechaTransaccion BETWEEN CONVERT(DATETIME, '" & Fecha1 & "', 102) AND CONVERT(DATETIME, '" & Fecha2 & "', 102)) "
          ArepRetencionesIR.DataControl1.Source = Sql
          
-     Set Rpt = New ArepRetencionesIR
-     Rpt.DataControl1.ConnectionString = ConexionReporte
-     Rpt.DataControl1.Source = Sql
-     fPreview.RunReport Rpt
+     Set rpt = New ArepRetencionesIR
+     rpt.DataControl1.ConnectionString = ConexionReporte
+     rpt.DataControl1.Source = Sql
+     fPreview.RunReport rpt
 
      fPreview.Show 1
 
@@ -8018,10 +8072,10 @@ Case "ANEXO FISCAL IVA CLIENTES"
  ArepCreditoProveedor.DataControl1.Source = Sql
 
 
-     Set Rpt = New ArepCreditoProveedor
-     Rpt.DataControl1.ConnectionString = ConexionReporte
-     Rpt.DataControl1.Source = Sql
-     fPreview.RunReport Rpt
+     Set rpt = New ArepCreditoProveedor
+     rpt.DataControl1.ConnectionString = ConexionReporte
+     rpt.DataControl1.Source = Sql
+     fPreview.RunReport rpt
      fPreview.Show 1
 
 Case "ANEXO FISCAL IVA PROVEEDOR"
@@ -8093,10 +8147,10 @@ Sql = "SELECT  Transacciones.FechaTransaccion, Transacciones.FacturaNo, Cuentas.
        
  ArepCreditoProveedor.DataControl1.Source = Sql
 
-     Set Rpt = New ArepCreditoProveedor
-     Rpt.DataControl1.ConnectionString = ConexionReporte
-     Rpt.DataControl1.Source = Sql
-     fPreview.RunReport Rpt
+     Set rpt = New ArepCreditoProveedor
+     rpt.DataControl1.ConnectionString = ConexionReporte
+     rpt.DataControl1.Source = Sql
+     fPreview.RunReport rpt
      fPreview.Show 1
 
 
@@ -8330,14 +8384,14 @@ Case "COMPARATIVO UTILIDADES"
            
 Case "RAZONES FINANCIERAS"
 
-                    Set Rpt = New ArepRazonesFinancieras
-                    fPreview.RunReport Rpt
+                    Set rpt = New ArepRazonesFinancieras
+                    fPreview.RunReport rpt
                     fPreview.Show 1
 
 Case "CATALOGO RESUMEN"
 
-                    Set Rpt = New ArepCatalogoResumen
-                    fPreview.RunReport Rpt
+                    Set rpt = New ArepCatalogoResumen
+                    fPreview.RunReport rpt
                     fPreview.Show 1
   
  
@@ -8515,10 +8569,10 @@ Case "BALANCE GENERAL TRADICIONAL"
 '            ArepBalanceTradicional.LblFecha2.Caption = Format(FechaFin, "yyyy-mm-dd")
 '            ArepBalanceTradicional.Show 1
                  
-                        Set Rpt = New ArepBalanceTradicional
+                        Set rpt = New ArepBalanceTradicional
 '                        rpt.DataControl1.ConnectionString = ConexionReporte
 '                        rpt.DataControl1.Source = SQL
-                        fPreview.RunReport Rpt
+                        fPreview.RunReport rpt
                         fPreview.Show 1
                 
 
@@ -8531,8 +8585,8 @@ Case "ESTADO DE RESULTADO TRADICIONAL"
 
     SaldoReportes ("UtilidadResultado")
 
-     Set Rpt = New ArepResultadoTradicional
-     fPreview.RunReport Rpt
+     Set rpt = New ArepResultadoTradicional
+     fPreview.RunReport rpt
      fPreview.Show 1
 
 Case "ESTADO DE RESULTADO RESUMEN ANEXOS"
@@ -8622,13 +8676,13 @@ Case "ESTADO DE RESULTADO RESUMEN ANEXOS"
     
     Me.TxtTipoReporte.Text = "ESTADO DE RESULTADO RESUMEN ANEXOS"
     
-     Set Rpt = New ArepResultadoResumen2
-     fPreview.RunReport Rpt
+     Set rpt = New ArepResultadoResumen2
+     fPreview.RunReport rpt
      fPreview.Show 1
      
      '//////////////////AHORA IMPRIMO LOS ANEXOS//////////////////////
-     Set Rpt = New ArepAnexosResultado
-     fPreview.RunReport Rpt
+     Set rpt = New ArepAnexosResultado
+     fPreview.RunReport rpt
      fPreview.Show 1
      
 
@@ -8732,8 +8786,8 @@ Case "ESTADO DE RESULTADO RESUMEN"
 
     Me.TxtTipoReporte.Text = "ESTADO DE RESULTADO RESUMEN"
 
-     Set Rpt = New ArepResultadoResumen
-     fPreview.RunReport Rpt
+     Set rpt = New ArepResultadoResumen
+     fPreview.RunReport rpt
      fPreview.Show 1
      
 Case "ESTADO DE RESULTADO RESUMEN 2"
@@ -8828,8 +8882,8 @@ Case "ESTADO DE RESULTADO RESUMEN 2"
 
     Me.TxtTipoReporte.Text = "ESTADO DE RESULTADO RESUMEN 2"
 
-     Set Rpt = New ArepResultadoResumen3
-     fPreview.RunReport Rpt
+     Set rpt = New ArepResultadoResumen3
+     fPreview.RunReport rpt
      fPreview.Show 1
      
 
@@ -8919,8 +8973,8 @@ Case "BALANCE GENERAL RESUMEN"
        
      Me.TxtTipoReporte.Text = "BALANCE GENERAL RESUMEN"
      Me.DtaReportes.Refresh
-     Set Rpt = New ArepBalancePersonalizado
-     fPreview.RunReport Rpt
+     Set rpt = New ArepBalancePersonalizado
+     fPreview.RunReport rpt
      fPreview.Show 1
      
            
@@ -9012,16 +9066,16 @@ Case "BALANCE GENERAL RESUMEN ANEXOS"
      Me.TxtTipoReporte.Text = "BALANCE GENERAL RESUMEN ANEXOS"
      
      Me.DtaReportes.Refresh
-     Set Rpt = New ArepBalancePersonalizado
-     fPreview.RunReport Rpt
+     Set rpt = New ArepBalancePersonalizado
+     fPreview.RunReport rpt
      fPreview.Show 1
     
 '     ArepBalancePersonalizado.Show 1
      
      '////////////AHORA IMPRIMO LOS ANEXOS/////////////////////////////
      'R = AnexosReporteResumen(FechaIni, FechaFin)
-     Set Rpt = New ArepAnexosBalances
-     fPreview.RunReport Rpt
+     Set rpt = New ArepAnexosBalances
+     fPreview.RunReport rpt
      fPreview.Show 1
      
 
@@ -9306,7 +9360,7 @@ Dim UltimoOrden As Integer, RegIngresos  As Integer, PrimReg As Integer, UltReg 
 Dim Fechas1 As String, Fechas2 As String, Orden As Integer, Sql As String, i As Double
 Dim ListaMeses As Variant, CantRegistros As Double, ComboIni As Double, ComboFin As Double, TotstoFijo As Double, TotalGastoFijo As Double
 Dim mes As Double, J As Double, TotalDebito As Double, TotalCredito As Double
-Dim Rpt As Object, TotalCostoFijo As Double, Ajuste As String
+Dim rpt As Object, TotalCostoFijo As Double, Ajuste As String
 Dim fPreview As New FrmPreview
 Dim Rs As New ADODB.Recordset
 Dim Parche As ADODB.Connection
@@ -9328,6 +9382,13 @@ FechaFin = Me.DTFecha2.Value
 
 
 Select Case Me.CmbReportes.Text
+
+Case "RETENCIONES X BENEFICIARIO DETALLE"
+
+   ReporteRetencionesBeneficiario False
+ "RETENCIONES X BENEFICIARIO RESUMIDO"
+
+   ReporteRetencionesBeneficiario True
 
 Case "RETENCIONES X PAGAR"
 
@@ -9470,10 +9531,10 @@ Case "ESTADO DE RESULTADO DPTO"
 '     fPreview.arv.ReportSource = ArepResultado
 '     fPreview.Show 1
 
-     Set Rpt = New ArepResultado
-     Rpt.DataControl1.ConnectionString = ConexionReporte
-     Rpt.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
-     fPreview.RunReport Rpt
+     Set rpt = New ArepResultado
+     rpt.DataControl1.ConnectionString = ConexionReporte
+     rpt.DataControl1.Source = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden From Reportes ORDER BY Orden"
+     fPreview.RunReport rpt
      fPreview.Show 1
 
     
@@ -9506,10 +9567,10 @@ Case "COMPROBANTE DE DIARIO"
 
     End If
 
-     Set Rpt = New ArepComprobanteDiario
-     Rpt.DataControl1.ConnectionString = ConexionReporte
-     Rpt.DataControl1.Source = Sql
-     fPreview.RunReport Rpt
+     Set rpt = New ArepComprobanteDiario
+     rpt.DataControl1.ConnectionString = ConexionReporte
+     rpt.DataControl1.Source = Sql
+     fPreview.RunReport rpt
 
 
      fPreview.Show 1
@@ -9900,7 +9961,7 @@ Case "PUNTO DE EQUILIBRIO"
                 ArepPuntoEquilibrio.Show 1
 
       
-     Set Rpt = New ArepPuntoEquilibrio
+     Set rpt = New ArepPuntoEquilibrio
 '     rpt.DataControl1.ConnectionString = ConexionReporte
 '     rpt.DataControl1.Source = SQL
 '     fPreview.RunReport rpt
@@ -10133,6 +10194,8 @@ Select Case QUIEN
  Case "ReportesTerceros"
   Me.CmbReportes.AddItem ("AUXILIAR CUENTAS X BENEFICIARIO")
   Me.CmbReportes.AddItem ("RETENCIONES X PAGAR")
+  Me.CmbReportes.AddItem ("RETENCIONES X BENEFICIARIO DETALLE")
+  Me.CmbReportes.AddItem ("RETENCIONES X BENEFICIARIO RESUMIDO")
  
 '  If ActivarBeneficiario = 1 Then
    
@@ -10373,7 +10436,7 @@ Private Sub GenerarAuxiliarCuentasXBeneficiario()
     Dim CodigoCuentaHasta As String
     Dim CodigoBeneficiario As String
 
-    Dim Rpt As Object
+    Dim rpt As Object
     Dim fPreview As New FrmPreview
     
 
@@ -10465,13 +10528,78 @@ MsgBox right$(Sql, 500)
     ' EJECUTAR REPORTE
     '==========================================================
 
-    Set Rpt = New ArepAuxiliar
+    Set rpt = New ArepAuxiliar
 
-    Rpt.DataControl1.ConnectionString = ConexionReporte
-    Rpt.DataControl1.Source = Sql
+    rpt.DataControl1.ConnectionString = ConexionReporte
+    rpt.DataControl1.Source = Sql
 
-    fPreview.RunReport Rpt
+    fPreview.RunReport rpt
     fPreview.Show 1
+
+End Sub
+
+Private Sub ReporteRetencionesBeneficiario(ByVal Resumido As Boolean)
+
+    Dim CodigoCuentaDesde As String
+    Dim CodigoCuentaHasta As String
+    Dim Rs As ADODB.Recordset
+
+    Dim rpt As Object
+    Dim fPreview As New FrmPreview
+
+    On Error GoTo ErrReporte
+
+    If UCase$(Left$(Trim$(Me.CmbMoneda.Text), 1)) = "C" Then
+        Moneda = "Cordobas"
+    Else
+        Moneda = "Dolares"
+    End If
+
+    '--- Validar fechas
+    If Me.DTFecha1.Value > Me.DTFecha2.Value Then
+        MsgBox "La fecha inicial no puede ser mayor que la fecha final.", _
+               vbExclamation, "Retenciones por Beneficiario"
+        Exit Sub
+    End If
+
+    '--- Rango de cuentas (vacio = sin limite)
+    CodigoCuentaDesde = Trim$(Me.DBCodigo.Text)
+    CodigoCuentaHasta = Trim$(Me.DBCodigoHasta.Text)
+
+    '--- Datos: Contabilidad (Conexion) + Beneficiario (ConexionFacturacion)
+    Set Rs = ObtenerRsRetencionesBeneficiario(Me.DTFecha1.Value, Me.DTFecha2.Value, _
+                                              CodigoCuentaDesde, CodigoCuentaHasta, Resumido)
+
+    If Rs.RecordCount = 0 Then
+        MsgBox "No hay retenciones en el rango seleccionado.", _
+               vbInformation, "Retenciones por Beneficiario"
+        Exit Sub
+    End If
+
+    '--- Reporte
+    If Resumido Then
+        Set rpt = New ArepRetencionesBeneficiarioResumido
+    Else
+        Set rpt = New ArepRetencionesBeneficiario
+    End If
+
+    rpt.FechaDesde = Me.DTFecha1.Value
+    rpt.FechaHasta = Me.DTFecha2.Value
+    rpt.CuentaDesde = CodigoCuentaDesde
+    rpt.CuentaHasta = CodigoCuentaHasta
+
+    Set rpt.DataControl1.Recordset = Rs
+
+    fPreview.RunReport rpt
+    fPreview.Show 1
+
+    Exit Sub
+
+ErrReporte:
+    MsgBox "Error al generar el reporte de retenciones por beneficiario." & vbCrLf & _
+           "Numero: " & err.Number & vbCrLf & _
+           "Descripcion: " & err.Description, _
+           vbExclamation, "Retenciones por Beneficiario"
 
 End Sub
 
@@ -10481,7 +10609,7 @@ Private Sub ReporteRetenciones()
     Dim CodigoCuentaDesde As String
     Dim CodigoCuentaHasta As String
 
-    Dim Rpt As ArepRetenciones
+    Dim rpt As ArepRetenciones
     Dim fPreview As New FrmPreview
 
     On Error GoTo ErrReporte
@@ -10508,17 +10636,17 @@ Private Sub ReporteRetenciones()
                                 CodigoCuentaDesde, CodigoCuentaHasta)
 
     '--- Reporte
-    Set Rpt = New ArepRetenciones
+    Set rpt = New ArepRetenciones
 
-    Rpt.FechaDesde = Me.DTFecha1.Value
-    Rpt.FechaHasta = Me.DTFecha2.Value
-    Rpt.CuentaDesde = CodigoCuentaDesde
-    Rpt.CuentaHasta = CodigoCuentaHasta
+    rpt.FechaDesde = Me.DTFecha1.Value
+    rpt.FechaHasta = Me.DTFecha2.Value
+    rpt.CuentaDesde = CodigoCuentaDesde
+    rpt.CuentaHasta = CodigoCuentaHasta
 
-    Rpt.DataControl1.ConnectionString = ConexionReporte
-    Rpt.DataControl1.Source = Sql
+    rpt.DataControl1.ConnectionString = ConexionReporte
+    rpt.DataControl1.Source = Sql
 
-    fPreview.RunReport Rpt
+    fPreview.RunReport rpt
     fPreview.Show 1
 
     Exit Sub
