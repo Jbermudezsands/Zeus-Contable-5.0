@@ -534,14 +534,14 @@ Begin VB.Form FrmReportes
       TabCaption(1)   =   "Configuracion Reportes"
       TabPicture(1)   =   "FrmReportes.frx":1968A
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame10"
-      Tab(1).Control(1)=   "Frame11"
+      Tab(1).Control(0)=   "Frame11"
+      Tab(1).Control(1)=   "Frame10"
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "Configuracion Reportes "
       TabPicture(2)   =   "FrmReportes.frx":196A6
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame12"
-      Tab(2).Control(1)=   "Frame13"
+      Tab(2).Control(0)=   "Frame13"
+      Tab(2).Control(1)=   "Frame12"
       Tab(2).ControlCount=   2
       Begin VB.CheckBox ChkMostrarMovxMes 
          Caption         =   "Mostrar mov x mes"
@@ -2197,7 +2197,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   202178561
+            Format          =   194904065
             CurrentDate     =   37837
          End
          Begin MSComCtl2.DTPicker DTFecha1 
@@ -2209,7 +2209,7 @@ Begin VB.Form FrmReportes
             _ExtentX        =   2355
             _ExtentY        =   503
             _Version        =   393216
-            Format          =   202178561
+            Format          =   194838529
             CurrentDate     =   37837
          End
          Begin VB.Label Label4 
@@ -4036,7 +4036,7 @@ Dim Parche As ADODB.Connection
 'On Error GoTo TipoErrs
 Me.Frame6.Visible = True
 Me.CmdVerReporte2.Enabled = False
-Me.CmdSalir.Enabled = False
+Me.cmdSalir.Enabled = False
 SaldoIni = 0
 SaldoFin = 0
 Total1 = 0
@@ -4080,8 +4080,8 @@ Case "TOTAL AUXILIAR DE CUENTAS"
     '------------------------------------------------------
     ' Consulta (resumida, sin agrupar por beneficiario)
     '------------------------------------------------------
-    Me.lblProgreso.Caption = "Consultando saldos..."
-    Me.lblProgreso.AutoSize = True
+    Me.LblProgreso.Caption = "Consultando saldos..."
+    Me.LblProgreso.AutoSize = True
     DoEvents
 
     sqlTotAux = SqlAuxiliarCuentas( _
@@ -4096,7 +4096,7 @@ Case "TOTAL AUXILIAR DE CUENTAS"
 
     If rsTotAux.EOF Then
 
-        Me.lblProgreso.Caption = ""
+        Me.LblProgreso.Caption = ""
         MsgBox "No hay movimientos para los filtros seleccionados.", vbInformation, "Zeus Contable"
 
     Else
@@ -4152,7 +4152,7 @@ Case "TOTAL AUXILIAR DE CUENTAS"
         '--------------------------------------------------
         ' Detalle por cuenta
         '--------------------------------------------------
-        Me.lblProgreso.Caption = "Exportando a Excel..."
+        Me.LblProgreso.Caption = "Exportando a Excel..."
         Me.osProgress1.Visible = True
         Me.osProgress1.Min = 0
         Me.osProgress1.Max = IIf(rsTotAux.RecordCount > 0, rsTotAux.RecordCount, 1)
@@ -4219,7 +4219,7 @@ Case "TOTAL AUXILIAR DE CUENTAS"
         '--- Subtotal del último grupo
         EscribirSubtotalGrupo filaXls, subIni, subDeb, subCre, subFin
 
-        Me.lblProgreso.Caption = ""
+        Me.LblProgreso.Caption = ""
         Me.osProgress1.Visible = False
         MsgBox "Proceso Terminado!!!", vbExclamation, "Zeus Contable"
 
@@ -4493,8 +4493,8 @@ Case "TOTAL AUXILIAR DE CUENTAS"
             
          If Option4.Value = True Then
             Me.DtaReportes.Refresh
-            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.lblProgreso.AutoSize = True
+            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.LblProgreso.AutoSize = True
             Me.osProgress1.Visible = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
@@ -4505,7 +4505,7 @@ Case "TOTAL AUXILIAR DE CUENTAS"
                 Me.osProgress1.Value = Me.osProgress1.Value + 1
             Loop
             
-            Me.lblProgreso.Caption = ""
+            Me.LblProgreso.Caption = ""
             Me.osProgress1.Visible = False
             SaldoReportes ("BalanzaCodigo")
             Me.DtaReportes.Refresh
@@ -4551,7 +4551,7 @@ Case "TOTAL AUXILIAR DE CUENTAS"
         '         fPreview.arv.ReportSource = ArepBalanza
         '         fPreview.Show 1
             End If
-            Me.lblProgreso.Caption = ""
+            Me.LblProgreso.Caption = ""
             Me.osProgress1.Visible = False
             
             
@@ -4566,8 +4566,8 @@ Case "TOTAL AUXILIAR DE CUENTAS"
          
             Me.DtaReportes.Refresh
             
-            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.lblProgreso.AutoSize = True
+            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.LblProgreso.AutoSize = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
             Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
@@ -4776,7 +4776,7 @@ Case "TOTAL AUXILIAR DE CUENTAS"
              
               End If
                  
-             Me.lblProgreso.Caption = ""
+             Me.LblProgreso.Caption = ""
             Me.osProgress1.Visible = False
             
          ElseIf Option9.Value = True Then
@@ -4833,10 +4833,10 @@ End Select
 
 Me.Frame6.Visible = False
 Me.CmdVerReporte2.Enabled = True
-Me.CmdSalir.Enabled = True
+Me.cmdSalir.Enabled = True
 Me.CmdVerReporte3.Visible = False
 Me.CmdVerReporte2.Visible = False
-Me.CmdVerReporte.Visible = True
+Me.cmdVerReporte.Visible = True
 
 End Sub
 
@@ -4915,7 +4915,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
  Me.TxtTransaccion.Visible = False
  Me.Frame3.Visible = False
  Me.Frame7.Visible = False
- Me.CmdVerReporte.Visible = True
+ Me.cmdVerReporte.Visible = True
  Me.CmdVerReporte2.Visible = False
  Me.CmdVerReporte3.Visible = False
          Me.CmbMoneda.Visible = False
@@ -4939,7 +4939,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
    Select Case Me.CmbReportes.Text
      Case "RETENCIONES X BENEFICIARIO DETALLE"
      
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = False
          Me.CmdVerReporte3.Visible = True
 
@@ -4966,7 +4966,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
      
      Case "RETENCIONES X BENEFICIARIO RESUMIDO"
      
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = False
          Me.CmdVerReporte3.Visible = True
 
@@ -4993,7 +4993,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
      
      Case "RETENCIONES X PAGAR"
      
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = False
          Me.CmdVerReporte3.Visible = True
 
@@ -5062,7 +5062,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
          Me.FrmDepartamento.top = 2160
          Me.FrmDepartamento.Caption = "Fuente"
       
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = False
          Me.CmdVerReporte3.Visible = True
         
@@ -5075,7 +5075,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
 '              Me.Frame2.Visible = False
 '              Me.Frame3.Visible = True
        Case "LISTA CUENTAS X PAGAR"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = False
          Me.CmdVerReporte3.Visible = True
         
@@ -5086,7 +5086,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
               Me.Frame2.Visible = False
               Me.Frame3.Visible = True
        Case "LISTA CUENTAS X COBRAR"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = False
          Me.CmdVerReporte3.Visible = True
         
@@ -5098,7 +5098,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
               Me.Frame3.Visible = True
          
         Case "RETENCIONES EN LA FUENTE I.R X COBRAR"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmdVerReporte3.Visible = False
          Me.Frame1.Visible = False
@@ -5126,7 +5126,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
  
               
         Case "RETENCIONES EN LA FUENTE I.R X PAGAR"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmdVerReporte3.Visible = False
          Me.Frame1.Visible = False
@@ -5153,7 +5153,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
             Loop
             
        Case "RETENCIONES EN LA FUENTE I.R X COBRAR"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmdVerReporte3.Visible = False
          Me.Frame1.Visible = False
@@ -5180,7 +5180,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
             Loop
        
        Case "ANEXO FISCAL IVA CLIENTES"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmdVerReporte3.Visible = False
          Me.Frame1.Visible = False
@@ -5207,7 +5207,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
             Loop
             
       Case "ANEXO FISCAL IVA PROVEEDOR"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmdVerReporte3.Visible = False
          Me.Frame1.Visible = False
@@ -5234,41 +5234,41 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
             Loop
          
       Case "PUNTO DE EQUILIBRIO"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = False
          Me.CmdVerReporte3.Visible = True
          Me.Frame1.Visible = False
          Me.Frame9.Visible = True
          Me.Frame4.Visible = True
       Case "COMPARATIVO INGRESOS VRS GASTOS"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmdVerReporte3.Visible = False
          Me.Frame1.Visible = False
          Me.Frame9.Visible = True
          Me.Frame4.Visible = True
       Case "COMPARATIVO UTILIDADES"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmdVerReporte3.Visible = False
          Me.Frame1.Visible = False
          Me.Frame9.Visible = True
          Me.Frame4.Visible = True
       Case "CATALOGO RESUMEN"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmdVerReporte3.Visible = False
          Me.Frame1.Visible = False
          Me.Frame4.Visible = True
       Case "RAZONES FINANCIERAS"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmdVerReporte3.Visible = False
          Me.Frame1.Visible = False
          Me.Frame4.Visible = True
       Case "BALANCE GENERAL TRADICIONAL"
          Me.CmbNivel = 3
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmdVerReporte3.Visible = False
          Me.CmbMoneda.Visible = True
@@ -5279,7 +5279,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
 
          
       Case "ESTADO DE RESULTADO TRADICIONAL"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmdVerReporte3.Visible = False
          Me.CmbMoneda.Visible = True
@@ -5289,7 +5289,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
          Me.Frame1.Visible = False
          Me.ChkQuitarMovimiento.Visible = True
       Case "ESTADO DE RESULTADO RESUMEN 2"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmdVerReporte3.Visible = False
          Me.CmbMoneda.Visible = True
@@ -5301,7 +5301,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
          Me.Frame1.Visible = False
          Me.ChkQuitarMovimiento.Visible = True
       Case "ESTADO DE RESULTADO RESUMEN"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmdVerReporte3.Visible = False
          Me.CmbMoneda.Visible = True
@@ -5314,7 +5314,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
          Me.ChkQuitarMovimiento.Visible = True
       Case "ESTADO DE RESULTADO RESUMEN ANEXOS"
          Me.SSTab.TabVisible(2) = True
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmdVerReporte3.Visible = False
          Me.CmbMoneda.Visible = True
@@ -5326,7 +5326,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
          Me.Frame1.Visible = False
          Me.ChkQuitarMovimiento.Visible = True
      Case "BALANCE GENERAL RESUMEN"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.Frame1.Visible = False
          Me.CmbMoneda.Visible = True
@@ -5336,7 +5336,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
          Me.Label6.Visible = False
          
      Case "BALANCE GENERAL RESUMEN ANEXOS"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmbMoneda.Visible = True
          Me.Label3.Visible = True
@@ -5346,7 +5346,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
          Me.Label6.Visible = False
          Me.SSTab.TabVisible(1) = True
     Case "LIBRO DIARIO"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmbMoneda.Visible = True
          Me.Label3.Visible = True
@@ -5394,7 +5394,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
          Me.ChkSinNiveles.Visible = True
          
     Case "LIBRO MAYOR"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmbMoneda.Visible = True
          Me.Label3.Visible = True
@@ -5449,7 +5449,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
          
          
     Case "DETALLE DIARIO MAYOR"
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
     Case "ESTRUCTURA DE CUENTAS"
          Me.Frame2.Visible = False
@@ -5528,7 +5528,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
       CmbBeneficiario.Visible = True
       LblBeneficiario.Visible = True
       
-         Me.CmdVerReporte.Visible = False
+         Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = False
          Me.CmdVerReporte3.Visible = True
       
@@ -5588,7 +5588,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
       Me.Label2.Visible = False
          Me.Frame7.Visible = False
       Me.Frame2.Visible = True
-    Me.LblTitulo.Caption = "Seleccione el Periodo"
+    Me.lblTitulo.Caption = "Seleccione el Periodo"
       Me.DtaConsulta.RecordSource = "SELECT Periodos.Periodo, Periodos.FechaPeriodo, Periodos.NumeroTabla From Periodos Where (((Periodos.Periodo) = 1) And ((Periodos.NumeroTabla) = 1 Or (Periodos.NumeroTabla) = 2 Or (Periodos.NumeroTabla) = 3))"
       Me.DtaConsulta.Refresh
       Do While Not DtaConsulta.Recordset.EOF
@@ -5744,7 +5744,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
     Case "ESTADO DE RESULTADO DPTO"
     
 
-      Me.CmdVerReporte.Visible = False
+      Me.cmdVerReporte.Visible = False
       Me.CmdVerReporte2.Visible = False
       Me.CmdVerReporte3.Visible = True
          
@@ -5851,8 +5851,8 @@ Dim fPreview As New FrmPreview
 
 'On Error GoTo TipoErrs
 Me.Frame6.Visible = True
-Me.CmdVerReporte.Enabled = False
-Me.CmdSalir.Enabled = False
+Me.cmdVerReporte.Enabled = False
+Me.cmdSalir.Enabled = False
 SaldoIni = 0
 SaldoFin = 0
 Total1 = 0
@@ -6007,7 +6007,7 @@ Case "ESTADO DE RESULTADO"
     
     Me.DtaReportes.Refresh
     
-    FrmReportes.lblProgreso.Caption = "Eliminando Datos del Reporte Anterior"
+    FrmReportes.LblProgreso.Caption = "Eliminando Datos del Reporte Anterior"
     FrmReportes.osProgress1.Visible = True
     FrmReportes.osProgress1.Value = 0
     FrmReportes.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
@@ -6104,7 +6104,7 @@ Case "ESTADO DE RESULTADO"
 
     
     
-    FrmReportes.lblProgreso.Caption = ""
+    FrmReportes.LblProgreso.Caption = ""
     FrmReportes.osProgress1.Visible = False
 
 
@@ -6227,7 +6227,7 @@ Case "RESULTADO ACUMULADO"
      fPreview.RunReport rpt
      fPreview.Show 1
      
-    FrmReportes.lblProgreso.Caption = ""
+    FrmReportes.LblProgreso.Caption = ""
     FrmReportes.osProgress1.Visible = False
     
 
@@ -6348,7 +6348,7 @@ Case "RESULTADO HISTORICO"
    
 '     fPreview.arv.ReportSource = ArepResultadoHistorico
 '     fPreview.Show 1
-    FrmReportes.lblProgreso.Caption = ""
+    FrmReportes.LblProgreso.Caption = ""
     FrmReportes.osProgress1.Visible = False
 
 
@@ -6748,8 +6748,8 @@ Case "BALANZA DE COMPROBACION"
  
  If Option4.Value = True Then
     Me.DtaReportes.Refresh
-    Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-    Me.lblProgreso.AutoSize = True
+    Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+    Me.LblProgreso.AutoSize = True
     Me.osProgress1.Visible = True
     Me.osProgress1.Value = 0
     Me.osProgress1.Min = 0
@@ -6760,7 +6760,7 @@ Case "BALANZA DE COMPROBACION"
         Me.osProgress1.Value = Me.osProgress1.Value + 1
     Loop
     
-    Me.lblProgreso.Caption = ""
+    Me.LblProgreso.Caption = ""
     Me.osProgress1.Visible = False
     SaldoReportes ("BalanzaCodigo")
     Me.DtaReportes.Refresh
@@ -6807,7 +6807,7 @@ Case "BALANZA DE COMPROBACION"
 '         fPreview.arv.ReportSource = ArepBalanza
 '         fPreview.Show 1
     End If
-    Me.lblProgreso.Caption = ""
+    Me.LblProgreso.Caption = ""
     Me.osProgress1.Visible = False
     
     
@@ -6821,8 +6821,8 @@ Case "BALANZA DE COMPROBACION"
  
     Me.DtaReportes.Refresh
     
-    Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-    Me.lblProgreso.AutoSize = True
+    Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+    Me.LblProgreso.AutoSize = True
     Me.osProgress1.Value = 0
     Me.osProgress1.Min = 0
     Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
@@ -6930,7 +6930,7 @@ Case "BALANZA DE COMPROBACION"
      
       End If
          
-     Me.lblProgreso.Caption = ""
+     Me.LblProgreso.Caption = ""
     Me.osProgress1.Visible = False
     
  ElseIf Option9.Value = True Then
@@ -7045,8 +7045,8 @@ Case "AUXILIAR x GRUPO"
             ArepTotalAuxiliar.DataControl1.ConnectionString = ConexionReporte
     
     Me.DtaReportes.Refresh
-    Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-    Me.lblProgreso.AutoSize = True
+    Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+    Me.LblProgreso.AutoSize = True
     Rs.Open "DELETE FROM Reportes", Conexion
 '    Me.osProgress1.Visible = True
 '    Me.osProgress1.Value = 0
@@ -7060,7 +7060,7 @@ Case "AUXILIAR x GRUPO"
 '        Me.osProgress1.Value = Me.osProgress1.Value + 1
 '    Loop
     
-    Me.lblProgreso.Caption = ""
+    Me.LblProgreso.Caption = ""
     Me.osProgress1.Visible = False
     SaldoReportes ("BalanzaCodigo")
     Me.DtaReportes.Refresh
@@ -7107,8 +7107,8 @@ Case "AUXILIAR x GRUPO"
 
             Me.DtaReportes.Refresh
             
-            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.lblProgreso.AutoSize = True
+            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.LblProgreso.AutoSize = True
             Rs.Open "DELETE FROM Reportes", Conexion
             
 '            Me.osProgress1.Value = 0
@@ -7412,7 +7412,7 @@ Case "AUXILIAR x GRUPO"
          MontoPresupuesto = Me.AdoConsultas.Recordset("Mes")
          KeyGrupo = Me.AdoConsultas.Recordset("KeyGrupo")
          
-         Me.lblProgreso.Caption = DescripcionPresupuesto
+         Me.LblProgreso.Caption = DescripcionPresupuesto
          DoEvents
          
          If KeyGrupo = "A0103" Then
@@ -7817,8 +7817,8 @@ Case "AUXILIAR DE CUENTAS"
     
 End Select
 Me.Frame6.Visible = False
-Me.CmdVerReporte.Enabled = True
-Me.CmdSalir.Enabled = True
+Me.cmdVerReporte.Enabled = True
+Me.cmdSalir.Enabled = True
 Exit Sub
 TipoErrs:
  MsgBox err.Description
@@ -7855,7 +7855,7 @@ Dim Parche As ADODB.Connection
 On Error GoTo TipoErrs
 Me.Frame6.Visible = True
 Me.CmdVerReporte2.Enabled = False
-Me.CmdSalir.Enabled = False
+Me.cmdSalir.Enabled = False
 SaldoIni = 0
 SaldoFin = 0
 Total1 = 0
@@ -9088,8 +9088,8 @@ Case "LIBRO MAYOR"
         '//////////////////////////////////////HAGO LA CONSULTA PARA LOS SALDOS INICIALES ///////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             Me.DtaReportes.Refresh
-            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.lblProgreso.AutoSize = True
+            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.LblProgreso.AutoSize = True
             Me.osProgress1.Visible = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
@@ -9105,7 +9105,7 @@ Case "LIBRO MAYOR"
             Parche.Execute "DELETE FROM Reportes"
             Parche.Close
             
-            Me.lblProgreso.Caption = ""
+            Me.LblProgreso.Caption = ""
             Me.osProgress1.Visible = False
             SaldoReportes ("BalanzaCodigo")
             Me.DtaReportes.Refresh
@@ -9199,8 +9199,8 @@ Case "LIBRO DIARIO"
         '//////////////////////////////////////HAGO LA CONSULTA PARA LOS SALDOS INICIALES ///////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             Me.DtaReportes.Refresh
-            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.lblProgreso.AutoSize = True
+            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.LblProgreso.AutoSize = True
             Me.osProgress1.Visible = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
@@ -9221,7 +9221,7 @@ Case "LIBRO DIARIO"
             Parche.Execute "DELETE FROM Reportes"
             Parche.Close
             
-            Me.lblProgreso.Caption = ""
+            Me.LblProgreso.Caption = ""
             Me.osProgress1.Visible = False
             SaldoReportes ("BalanzaCodigo")
             Me.DtaReportes.Refresh
@@ -9333,9 +9333,9 @@ End Select
 
 Me.Frame6.Visible = False
 Me.CmdVerReporte2.Enabled = True
-Me.CmdSalir.Enabled = True
+Me.cmdSalir.Enabled = True
 Me.CmdVerReporte2.Visible = False
-Me.CmdVerReporte.Visible = True
+Me.cmdVerReporte.Visible = True
 Exit Sub
 TipoErrs:
   MsgBox err.Description
@@ -9369,7 +9369,7 @@ Dim Parche As ADODB.Connection
 'On Error GoTo TipoErrs
 Me.Frame6.Visible = True
 Me.CmdVerReporte2.Enabled = False
-Me.CmdSalir.Enabled = False
+Me.cmdSalir.Enabled = False
 SaldoIni = 0
 SaldoFin = 0
 Total1 = 0
@@ -9386,7 +9386,7 @@ Select Case Me.CmbReportes.Text
 Case "RETENCIONES X BENEFICIARIO DETALLE"
 
    ReporteRetencionesBeneficiario False
- "RETENCIONES X BENEFICIARIO RESUMIDO"
+Case "RETENCIONES X BENEFICIARIO RESUMIDO"
 
    ReporteRetencionesBeneficiario True
 
@@ -9407,7 +9407,7 @@ Case "ESTADO DE RESULTADO DPTO"
     
     
     
-             Me.CmdVerReporte.Visible = False
+             Me.cmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = False
          Me.CmdVerReporte3.Visible = True
          Me.CmbMoneda.Visible = True
@@ -9456,7 +9456,7 @@ Case "ESTADO DE RESULTADO DPTO"
     
     Me.DtaReportes.Refresh
     
-    FrmReportes.lblProgreso.Caption = "Eliminando Datos del Reporte Anterior"
+    FrmReportes.LblProgreso.Caption = "Eliminando Datos del Reporte Anterior"
     FrmReportes.osProgress1.Visible = True
     FrmReportes.osProgress1.Value = 0
     FrmReportes.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
@@ -9539,7 +9539,7 @@ Case "ESTADO DE RESULTADO DPTO"
 
     
     
-    FrmReportes.lblProgreso.Caption = ""
+    FrmReportes.LblProgreso.Caption = ""
     FrmReportes.osProgress1.Visible = False
 
 Case "COMPROBANTE DE DIARIO"
@@ -9594,8 +9594,8 @@ Case "LISTA CUENTAS X PAGAR"
     
     
     Me.DtaReportes.Refresh
-    Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-    Me.lblProgreso.AutoSize = True
+    Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+    Me.LblProgreso.AutoSize = True
     Me.osProgress1.Visible = True
     Me.osProgress1.Value = 0
     Me.osProgress1.Min = 0
@@ -9607,7 +9607,7 @@ Case "LISTA CUENTAS X PAGAR"
         Me.osProgress1.Value = Me.osProgress1.Value + 1
     Loop
     
-    Me.lblProgreso.Caption = ""
+    Me.LblProgreso.Caption = ""
     Me.osProgress1.Visible = False
     Me.AdoConsultas.RecordSource = "SELECT  * From Cuentas WHERE (TipoCuenta = 'Cuentas x Pagar') ORDER BY CodCuentas"
     Me.AdoConsultas.Refresh
@@ -9656,8 +9656,8 @@ Case "LISTA CUENTAS X PAGAR"
 
             Me.DtaReportes.Refresh
             
-            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.lblProgreso.AutoSize = True
+            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.LblProgreso.AutoSize = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
             Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
@@ -9710,8 +9710,8 @@ Case "LISTA CUENTAS X COBRAR"
     
     
     Me.DtaReportes.Refresh
-    Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-    Me.lblProgreso.AutoSize = True
+    Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+    Me.LblProgreso.AutoSize = True
     Me.osProgress1.Visible = True
     Me.osProgress1.Value = 0
     Me.osProgress1.Min = 0
@@ -9723,7 +9723,7 @@ Case "LISTA CUENTAS X COBRAR"
         Me.osProgress1.Value = Me.osProgress1.Value + 1
     Loop
     
-    Me.lblProgreso.Caption = ""
+    Me.LblProgreso.Caption = ""
     Me.osProgress1.Visible = False
     Me.AdoConsultas.RecordSource = "SELECT  * From Cuentas WHERE (TipoCuenta = 'Cuentas x Cobrar') ORDER BY CodCuentas"
     Me.AdoConsultas.Refresh
@@ -9770,8 +9770,8 @@ Case "LISTA CUENTAS X COBRAR"
 
             Me.DtaReportes.Refresh
             
-            Me.lblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
-            Me.lblProgreso.AutoSize = True
+            Me.LblProgreso.Caption = "Limpiando registros del Reporte Anterior..."
+            Me.LblProgreso.AutoSize = True
             Me.osProgress1.Value = 0
             Me.osProgress1.Min = 0
             Me.osProgress1.Max = Me.DtaReportes.Recordset.RecordCount
@@ -9972,10 +9972,10 @@ End Select
 
 Me.Frame6.Visible = False
 Me.CmdVerReporte2.Enabled = True
-Me.CmdSalir.Enabled = True
+Me.cmdSalir.Enabled = True
 Me.CmdVerReporte3.Visible = False
 Me.CmdVerReporte2.Visible = False
-Me.CmdVerReporte.Visible = True
+Me.cmdVerReporte.Visible = True
 
 Exit Sub
 TipoErrs:

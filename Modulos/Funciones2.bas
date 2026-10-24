@@ -509,6 +509,8 @@ Public Function ObtenerRsRetencionesBeneficiario( _
     Dim Acum As Double
     Dim Hay As Boolean
     Dim Nombres As Object
+    Dim Cedulas As Object
+    Dim Cedula As String
     Dim Sql As String
     Dim Cod As String
     Dim Nombre As String
@@ -522,17 +524,23 @@ Public Function ObtenerRsRetencionesBeneficiario( _
     '--- Nombres de beneficiarios (Sistema de Facturacion)
     Set Nombres = CreateObject("Scripting.Dictionary")
     Nombres.CompareMode = 1 'vbTextCompare
+    Set Cedulas = CreateObject("Scripting.Dictionary")
+    Cedulas.CompareMode = 1
 
     Set CnFact = New ADODB.Connection
     CnFact.Open ConexionFacturacion
 
     Set RsFact = CnFact.Execute("SELECT Codigo_Beneficiario, " & _
-        "LTRIM(RTRIM(ISNULL(Nombre_Beneficiario,'') + ' ' + ISNULL(Apellido_Beneficiario,''))) AS Nombre " & _
+        "LTRIM(RTRIM(ISNULL(Nombre_Beneficiario,'') + ' ' + ISNULL(Apellido_Beneficiario,''))) AS Nombre, " & _
+        "LTRIM(RTRIM(ISNULL(NULLIF(LTRIM(RTRIM(Cedula)), ''), ISNULL(RUC, '')))) AS Cedula " & _
         "FROM Beneficiario")
 
     Do While Not RsFact.EOF
         Cod = Trim$(RsFact!Codigo_Beneficiario & "")
-        If Not Nombres.Exists(Cod) Then Nombres.Add Cod, Trim$(RsFact!Nombre & "")
+        If Not Nombres.Exists(Cod) Then
+            Nombres.Add Cod, Trim$(RsFact!Nombre & "")
+            Cedulas.Add Cod, Trim$(RsFact!Cedula & "")
+        End If
         RsFact.MoveNext
     Loop
 
@@ -543,7 +551,8 @@ Public Function ObtenerRsRetencionesBeneficiario( _
     Sql = "SELECT T.FechaTransaccion, T.NumeroMovimiento, T.NTransaccion, " & _
           "ISNULL(I.Fuente, ISNULL(T.Fuente, '')) AS Fuente, " & _
           "LTRIM(RTRIM(ISNULL(T.Cod_Tercero, ''))) AS Cod_Tercero, " & _
-          "(ISNULL(T.Credito, 0) - ISNULL(T.Debito, 0)) AS Retenido " & _
+          "(ISNULL(T.Credito, 0) - ISNULL(T.Debito, 0)) AS Retenido, " & _
+          "ISNULL(CONVERT(VARCHAR(30), C.DescRetencion), '') AS DescRetencion " & _
           "FROM Transacciones AS T " & _
           "INNER JOIN Cuentas AS C ON T.CodCuentas = C.CodCuentas " & _
           "LEFT JOIN IndiceTransaccion AS I ON T.FechaTransaccion = I.FechaTransaccion " & _
@@ -578,6 +587,9 @@ Public Function ObtenerRsRetencionesBeneficiario( _
         Cod = Trim$(RsConta!Cod_Tercero & "")
         Monto = CDbl(RsConta!Retenido)
 
+        Cedula = ""
+        If Cedulas.Exists(Cod) Then Cedula = Cedulas(Cod)
+
         If Len(Cod) = 0 Then
             Nombre = "SIN BENEFICIARIO"
         ElseIf Nombres.Exists(Cod) Then
@@ -597,6 +609,10 @@ Public Function ObtenerRsRetencionesBeneficiario( _
         RsSal!MontoBase = Monto
         RsSal!NTransaccion = CDbl(Val(RsConta!NTransaccion & ""))
         RsSal!Grupo = 1
+        RsSal!Cedula = Cedula
+        If Len(Trim$(RsConta!DescRetencion & "")) > 0 Then
+            RsSal!TasaRet = Trim$(CStr(Val(RsConta!DescRetencion))) & " %"
+        End If
         RsSal.Update
 
         RsConta.MoveNext
@@ -667,6 +683,8 @@ Private Sub AgregarCamposRetBenef(ByRef Rs As ADODB.Recordset)
     Rs.Fields.Append "NTransaccion", adDouble
     Rs.Fields.Append "Grupo", adDouble
     ' Campos vacios: los controles ocultos del layout base siguen enlazados a ellos
+    Rs.Fields.Append "Cedula", adVarWChar, 30
+    Rs.Fields.Append "TasaRet", adVarWChar, 20
     Rs.Fields.Append "ChequeNo", adVarWChar, 5
     Rs.Fields.Append "DescripcionMovimiento", adVarWChar, 5
     Rs.Fields.Append "DescRetencion", adVarWChar, 5

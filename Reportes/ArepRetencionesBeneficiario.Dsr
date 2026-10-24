@@ -48,8 +48,8 @@ Private Sub ActiveReport_ReportStart()
     Me.Label5.Caption = "Codigo Benef."
     Me.Label26.Caption = "Nombre Beneficiario"
     Me.Label22.Caption = "Monto Retenido"
-    Me.Label6.Visible = False
-    Me.Label27.Visible = False
+    Me.Label6.Caption = "Cedula"
+    Me.Label27.Caption = "Tasa Ret"
     Me.Label28.Visible = False
 
     '    Detalle
@@ -59,8 +59,8 @@ Private Sub ActiveReport_ReportStart()
     Me.Field24.DataField = "Cod_Tercero"
     Me.Field26.DataField = "NombreBeneficiario"
     Me.Field29.DataField = "Retenido"
-    Me.Field25.Visible = False
-    Me.Field27.Visible = False
+    Me.Field25.DataField = "Cedula"
+    Me.Field27.DataField = "TasaRet"
     Me.Field28.Visible = False
 
     '    Grupo por beneficiario (antes por cuenta)
@@ -79,16 +79,24 @@ Private Sub ActiveReport_ReportStart()
     '    Codigo y Nombre (ocupa el espacio libre hasta el Monto)
     Me.Field23.Left = Me.Field19.Left + Me.Field19.Width
     Me.Field23.Width = Me.Field23.Width * 1.6
-    Me.Field24.Left = Me.Field23.Left + Me.Field23.Width
+    Me.Field25.Left = Me.Field23.Left + Me.Field23.Width
+    Me.Field25.Width = Me.Field23.Width
+    Me.Field24.Left = Me.Field25.Left + Me.Field25.Width
+    Me.Field27.Width = Me.Field24.Width
+    Me.Field27.Left = Me.Field29.Left - Me.Field27.Width
     Me.Field26.Left = Me.Field24.Left + Me.Field24.Width
-    Me.Field26.Width = Me.Field29.Left - Me.Field26.Left
+    Me.Field26.Width = Me.Field27.Left - Me.Field26.Left
 
     Me.Label18.Left = Me.Field19.Left
     Me.Label4.Left = Me.Field23.Left
     Me.Label4.Width = Me.Field23.Width
+    Me.Label6.Left = Me.Field25.Left
+    Me.Label6.Width = Me.Field25.Width
     Me.Label5.Left = Me.Field24.Left
     Me.Label26.Left = Me.Field26.Left
     Me.Label26.Width = Me.Field26.Width
+    Me.Label27.Left = Me.Field27.Left
+    Me.Label27.Width = Me.Field27.Width
 
     Me.LblMoneda.Caption = Moneda
 
