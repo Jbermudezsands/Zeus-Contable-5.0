@@ -1,7 +1,7 @@
 Attribute VB_Name = "ResultadoDpto"
 Option Explicit
 '=====================================================================================================
-' ESTADO DE RESULTADO POR DEPARTAMENTO - VERSION EN MEMORIA
+' ESTADOS DE RESULTADO - VERSION EN MEMORIA (por Departamento, normal, acumulado e historico)
 '
 ' Funciones paralelas a CreaEstructuraDpto / SaldoReportesDpto (Funciones.bas). NO usan la tabla
 ' Reportes: una sola consulta SQL trae los saldos por Cuenta + Departamento y todo lo demas
@@ -11,7 +11,10 @@ Option Explicit
 '
 ' Funciones publicas (reutilizables por otros reportes):
 '   RptSaldosPorCuentaDpto          Saldos (Debito/Credito) por cuenta y departamento, 1 consulta.
-'   RptResultadoDptoGenerar         Recordset completo del Estado de Resultado por Dpto.
+'   RptResultadoDptoGenerar         Recordset completo del Estado de Resultado (con o sin Dpto, con o sin
+'                                   columna de saldo anterior).
+'   RptResultadoGenerar             Atajo sin Dpto (ESTADO DE RESULTADO / RESULTADO ACUMULADO / HISTORICO).
+'   RptConvertirRecordset           Divide el reporte entre una tasa (equivale a ConvertirReporte, en memoria).
 '   RptVerificarCuadreResultadoDpto Prueba: consolidado vs suma departamento por departamento.
 '
 ' Reglas de negocio (iguales al reporte original):
@@ -30,13 +33,14 @@ Private Type TGrupo
     Descripcion As String
     Nivel As Integer
     Total As Double
+    Total2 As Double
     Datos As Boolean
     Visitado As Boolean
 End Type
 
 Private mGrp() As TGrupo
 Private mNGrp As Long
-Private mSal As Variant          'GetRows: (0 Cod, 1 Desc, 2 KeyGrupo, 3 Tipo, 4 Dpto, 5 Debito, 6 Credito)
+Private mSal As Variant          'GetRows: (0 Cod, 1 Desc, 2 KeyGrupo, 3 Tipo, 4 Dpto, 5 Debito, 6 Credito, 7 Debito2, 8 Credito2)
 Private mMonto() As Double       'monto con signo contable segun tipo de cuenta
 Private mSalGrp() As Long        'indice de grupo de cada fila de mSal (-1 = cuenta fuera de la estructura)
 Private mNSal As Long
@@ -45,6 +49,9 @@ Private mOrden As Long
 Private mNivelMax As Integer
 Private mOcultarCeros As Boolean
 Private mDptoNombre As Object
+Private mMonto2() As Double      'monto del saldo anterior (< FechaDesde); solo con ConAnterior
+Private mPorDpto As Boolean
+Private mConAnterior As Boolean
 
 
 '-----------------------------------------------------------------------------------------------------
@@ -82,7 +89,8 @@ End Function
 ' FROM ... WHERE comun a todas las consultas del reporte.
 Private Function SqlDesdeDonde(ByVal FechaDesde As Date, ByVal FechaHasta As Date, _
         ByVal EnDolares As Boolean, ByVal ExcluirCierre As Boolean, _
-        ByVal DptoDesde As String, ByVal DptoHasta As String, ByVal TiposCuenta As String) As String
+        ByVal DptoDesde As String, ByVal DptoHasta As String, ByVal TiposCuenta As String, _
+        Optional ByVal SinLimiteInferior As Boolean = False) As String
     Dim Sql As String
     Sql = "FROM Cuentas c INNER JOIN Transacciones t ON c.CodCuentas = t.CodCuentas "
     If ExcluirCierre Then
@@ -92,8 +100,9 @@ Private Function SqlDesdeDonde(ByVal FechaDesde As Date, ByVal FechaHasta As Dat
     If EnDolares Then
         Sql = Sql & "INNER JOIN Tasas ta ON t.FechaTransaccion = ta.FechaTasas "
     End If
-    Sql = Sql & "WHERE t.FechaTransaccion >= '" & SqlFecha(FechaDesde) & "' " & _
-                "AND t.FechaTransaccion < '" & SqlFecha(DateAdd("d", 1, Int(FechaHasta))) & "' " & _
+    Sql = Sql & "WHERE "
+    If Not SinLimiteInferior Then Sql = Sql & "t.FechaTransaccion >= '" & SqlFecha(FechaDesde) & "' AND "
+    Sql = Sql & "t.FechaTransaccion < '" & SqlFecha(DateAdd("d", 1, Int(FechaHasta))) & "' " & _
                 "AND c.TipoCuenta IN (" & TiposCuenta & ") "
     If ExcluirCierre Then
         Sql = Sql & "AND ISNULL(i.Fuente, '') <> 'Cierre' "
@@ -135,28 +144,53 @@ End Sub
 ' RptSaldosPorCuentaDpto
 ' Una sola consulta: Debito y Credito (en la moneda pedida) por Cuenta + Departamento.
 ' Recordset desconectado, ordenado por KeyGrupo, Departamento, Cuenta.
-' Columnas: CodCuentas, DescripcionCuentas, KeyGrupo, TipoCuenta, CodDepartamento, Debito, Credito
+' Columnas: CodCuentas, DescripcionCuentas, KeyGrupo, TipoCuenta, CodDepartamento, Debito, Credito, Debito2, Credito2
+'   PorDpto = False  : no agrupa por departamento (CodDepartamento = "-")
+'   ConAnterior      : Debito2/Credito2 = movimientos anteriores a FechaDesde (saldo anterior); si no, 0
 '-----------------------------------------------------------------------------------------------------
 Public Function RptSaldosPorCuentaDpto(ByVal FechaDesde As Date, ByVal FechaHasta As Date, _
         ByVal EnDolares As Boolean, ByVal ExcluirCierre As Boolean, _
         Optional ByVal DptoDesde As String = "", Optional ByVal DptoHasta As String = "", _
-        Optional ByVal TiposCuenta As String = "'Ingresos - Ventas','Costos','Gastos'") As ADODB.Recordset
+        Optional ByVal TiposCuenta As String = "'Ingresos - Ventas','Costos','Gastos'", _
+        Optional ByVal PorDpto As Boolean = True, Optional ByVal ConAnterior As Boolean = False) As ADODB.Recordset
     Dim cn As ADODB.Connection, rs As ADODB.Recordset, Sql As String
     Dim ErrNum As Long, ErrDesc As String, ErrSrc As String
+    Dim ColDpto As String, Corte As String, Cols As String
 
     Set cn = New ADODB.Connection
     cn.CursorLocation = adUseClient
     cn.Open Conexion
     On Error GoTo Falla
 
-    If EnDolares Then ValidaTasas cn, FechaDesde, FechaHasta
+    If ConAnterior Then
+        If EnDolares Then ValidaTasas cn, DateSerial(1900, 1, 1), FechaHasta
+    Else
+        If EnDolares Then ValidaTasas cn, FechaDesde, FechaHasta
+    End If
 
-    Sql = "SELECT c.CodCuentas, c.DescripcionCuentas, c.KeyGrupo, c.TipoCuenta, " & SqlDpto(False) & " AS CodDepartamento, " & _
-          "SUM(" & SqlImporte("Debito", EnDolares) & ") AS Debito, " & _
-          "SUM(" & SqlImporte("Credito", EnDolares) & ") AS Credito " & _
-          SqlDesdeDonde(FechaDesde, FechaHasta, EnDolares, ExcluirCierre, DptoDesde, DptoHasta, TiposCuenta) & _
-          "GROUP BY c.CodCuentas, c.DescripcionCuentas, c.KeyGrupo, c.TipoCuenta, " & SqlDpto(False) & " " & _
-          "ORDER BY c.KeyGrupo, " & SqlDpto(False) & ", c.CodCuentas"
+    If PorDpto Then
+        ColDpto = SqlDpto(False)
+    Else
+        ColDpto = "'-'"
+    End If
+
+    'Columna 1 = movimientos FechaDesde..FechaHasta. Columna 2 (ConAnterior) = todo lo anterior a FechaDesde.
+    If ConAnterior Then
+        Corte = "'" & SqlFecha(FechaDesde) & "'"
+        Cols = "SUM(CASE WHEN t.FechaTransaccion >= " & Corte & " THEN " & SqlImporte("Debito", EnDolares) & " END) AS Debito, " & _
+               "SUM(CASE WHEN t.FechaTransaccion >= " & Corte & " THEN " & SqlImporte("Credito", EnDolares) & " END) AS Credito, " & _
+               "SUM(CASE WHEN t.FechaTransaccion < " & Corte & " THEN " & SqlImporte("Debito", EnDolares) & " END) AS Debito2, " & _
+               "SUM(CASE WHEN t.FechaTransaccion < " & Corte & " THEN " & SqlImporte("Credito", EnDolares) & " END) AS Credito2 "
+    Else
+        Cols = "SUM(" & SqlImporte("Debito", EnDolares) & ") AS Debito, " & _
+               "SUM(" & SqlImporte("Credito", EnDolares) & ") AS Credito, " & _
+               "CAST(0 AS float) AS Debito2, CAST(0 AS float) AS Credito2 "
+    End If
+
+    Sql = "SELECT c.CodCuentas, c.DescripcionCuentas, c.KeyGrupo, c.TipoCuenta, " & ColDpto & " AS CodDepartamento, " & Cols & _
+          SqlDesdeDonde(FechaDesde, FechaHasta, EnDolares, ExcluirCierre, DptoDesde, DptoHasta, TiposCuenta, ConAnterior) & _
+          "GROUP BY c.CodCuentas, c.DescripcionCuentas, c.KeyGrupo, c.TipoCuenta" & IIf(PorDpto, ", " & ColDpto, "") & " " & _
+          "ORDER BY c.KeyGrupo, " & IIf(PorDpto, ColDpto & ", ", "") & "c.CodCuentas"
 
     Set rs = New ADODB.Recordset
     rs.CursorLocation = adUseClient
@@ -259,17 +293,22 @@ Public Function RptResultadoDptoGenerar(ByVal FechaDesde As Date, ByVal FechaHas
         ByVal DptoDesde As String, ByVal DptoHasta As String, _
         ByVal NivelMax As Integer, ByVal OcultarCeros As Boolean, _
         Optional ByRef Advertencias As String = "", _
-        Optional ByVal Prefijos As String = "D,G,O") As ADODB.Recordset
+        Optional ByVal Prefijos As String = "D,G,O", _
+        Optional ByVal PorDpto As Boolean = True, Optional ByVal ConAnterior As Boolean = False) As ADODB.Recordset
     Dim rsSal As ADODB.Recordset, dKeys As Object
     Dim i As Long, g As Long, Clave As String
     Dim IngresosTot As Double, GastosTot As Double, SinGrupo As Double
+    Dim IngresosTot2 As Double, GastosTot2 As Double
 
     Advertencias = ""
     mNivelMax = NivelMax
     mOcultarCeros = OcultarCeros
+    mPorDpto = PorDpto
+    mConAnterior = ConAnterior
     mOrden = 0
 
-    Set rsSal = RptSaldosPorCuentaDpto(FechaDesde, FechaHasta, EnDolares, ExcluirCierre, DptoDesde, DptoHasta)
+    Set rsSal = RptSaldosPorCuentaDpto(FechaDesde, FechaHasta, EnDolares, ExcluirCierre, DptoDesde, DptoHasta, _
+                                       "'Ingresos - Ventas','Costos','Gastos'", PorDpto, ConAnterior)
     CargarGrupos Prefijos
 
     Set dKeys = CreateObject("Scripting.Dictionary")
@@ -287,26 +326,33 @@ Public Function RptResultadoDptoGenerar(ByVal FechaDesde As Date, ByVal FechaHas
     rsSal.Close
     If mNSal > 0 Then
         ReDim mMonto(0 To mNSal - 1)
+        ReDim mMonto2(0 To mNSal - 1)
         ReDim mSalGrp(0 To mNSal - 1)
     Else
         ReDim mMonto(0 To 0)
+        ReDim mMonto2(0 To 0)
         ReDim mSalGrp(0 To 0)
     End If
 
     For i = 0 To mNSal - 1
         If (mSal(3, i) & "") = TIPO_INGRESOS Then
             mMonto(i) = Dbl(mSal(6, i)) - Dbl(mSal(5, i))
+            mMonto2(i) = Dbl(mSal(8, i)) - Dbl(mSal(7, i))
             IngresosTot = IngresosTot + mMonto(i)
+            IngresosTot2 = IngresosTot2 + mMonto2(i)
         Else
             mMonto(i) = Dbl(mSal(5, i)) - Dbl(mSal(6, i))
+            mMonto2(i) = Dbl(mSal(7, i)) - Dbl(mSal(8, i))
             GastosTot = GastosTot + mMonto(i)
+            GastosTot2 = GastosTot2 + mMonto2(i)
         End If
         Clave = mSal(2, i) & ""
         If dKeys.Exists(Clave) Then
             g = dKeys(Clave)
             mSalGrp(i) = g
             mGrp(g).Total = mGrp(g).Total + mMonto(i)
-            If Abs(mMonto(i)) > EPS Then mGrp(g).Datos = True
+            mGrp(g).Total2 = mGrp(g).Total2 + mMonto2(i)
+            If Abs(mMonto(i)) > EPS Or Abs(mMonto2(i)) > EPS Then mGrp(g).Datos = True
         Else
             mSalGrp(i) = -1
             SinGrupo = SinGrupo + mMonto(i)
@@ -329,8 +375,8 @@ Public Function RptResultadoDptoGenerar(ByVal FechaDesde As Date, ByVal FechaHas
         If EsRaiz(g, dKeys) Then EmitirGrupo g
     Next
 
-    AgregaFila " Total Costos y Gastos", "CG", "", "", 1, 0, GastosTot, True, "", ""
-    AgregaFila " Resultado Periodo", "RP", "", "", 1, 0, IngresosTot - GastosTot, True, "", ""
+    AgregaFila " Total Costos y Gastos", "CG", "", "", 1, 0, GastosTot, 0, GastosTot2, True, "", ""
+    AgregaFila " Resultado Periodo", "RP", "", "", 1, 0, IngresosTot - GastosTot, 0, IngresosTot2 - GastosTot2, True, "", ""
 
     If SinGrupo <> 0 Then
         Advertencias = Advertencias & "El Resultado Periodo incluye " & Format$(SinGrupo, "#,##0.00") & _
@@ -357,6 +403,7 @@ Private Sub CalcularGrupo(ByVal g As Long)
             If mGrp(c).Superior = mGrp(g).Key And Not mGrp(c).Visitado Then
                 CalcularGrupo c
                 mGrp(g).Total = mGrp(g).Total + mGrp(c).Total
+                mGrp(g).Total2 = mGrp(g).Total2 + mGrp(c).Total2
                 If mGrp(c).Datos Then mGrp(g).Datos = True
             End If
         End If
@@ -370,7 +417,7 @@ Private Sub EmitirGrupo(ByVal g As Long)
     If mOcultarCeros And Not mGrp(g).Datos Then Exit Sub
 
     AgregaFila Space$(mGrp(g).Nivel - 1) & mGrp(g).Descripcion, mGrp(g).Key, mGrp(g).Superior, "", _
-               mGrp(g).Nivel, 0, 0, False, "", ""
+               mGrp(g).Nivel, 0, 0, 0, 0, False, "", ""
 
     EmitirCuentasGrupo g
 
@@ -381,12 +428,13 @@ Private Sub EmitirGrupo(ByVal g As Long)
     Next
 
     AgregaFila Space$(mGrp(g).Nivel - 1) & "Total " & mGrp(g).Descripcion, mGrp(g).Key, mGrp(g).Superior, "", _
-               mGrp(g).Nivel, 0, mGrp(g).Total, True, "", ""
+               mGrp(g).Nivel, 0, mGrp(g).Total, 0, mGrp(g).Total2, True, "", ""
 End Sub
 
-' Cuentas del grupo agrupadas por departamento: encabezado, cuentas, total del departamento.
+' Cuentas del grupo. Con departamentos: encabezado, cuentas y total por departamento.
+' Sin departamentos (mPorDpto = False): solo las cuentas, en orden de codigo.
 Private Sub EmitirCuentasGrupo(ByVal g As Long)
-    Dim i As Long, Dpto As String, DptoActual As String, Abierto As Boolean, TotDpto As Double
+    Dim i As Long, Dpto As String, DptoActual As String, Abierto As Boolean, TotDpto As Double, TotDpto2 As Double
     Dim Nivel As Integer, Key As String, Sup As String
 
     Nivel = mGrp(g).Nivel
@@ -395,26 +443,30 @@ Private Sub EmitirCuentasGrupo(ByVal g As Long)
 
     For i = 0 To mNSal - 1
         If mSalGrp(i) = g Then
-            If Not (mOcultarCeros And Abs(mMonto(i)) < EPS) Then
+            If Not (mOcultarCeros And Abs(mMonto(i)) < EPS And Abs(mMonto2(i)) < EPS) Then
                 Dpto = mSal(4, i) & ""
-                If Abierto And Dpto <> DptoActual Then
-                    AgregaFila Space$(Nivel) & "Total " & NombreDpto(DptoActual), Key, Sup, "", Nivel + 1, 0, TotDpto, True, DptoActual, ""
-                    Abierto = False
-                End If
-                If Not Abierto Then
-                    AgregaFila Space$(Nivel) & NombreDpto(Dpto), Key, Sup, "", Nivel + 1, 0, 0, False, Dpto, ""
-                    DptoActual = Dpto
-                    TotDpto = 0
-                    Abierto = True
+                If mPorDpto Then
+                    If Abierto And Dpto <> DptoActual Then
+                        AgregaFila Space$(Nivel) & "Total " & NombreDpto(DptoActual), Key, Sup, "", Nivel + 1, 0, TotDpto, 0, TotDpto2, True, DptoActual, ""
+                        Abierto = False
+                    End If
+                    If Not Abierto Then
+                        AgregaFila Space$(Nivel) & NombreDpto(Dpto), Key, Sup, "", Nivel + 1, 0, 0, 0, 0, False, Dpto, ""
+                        DptoActual = Dpto
+                        TotDpto = 0
+                        TotDpto2 = 0
+                        Abierto = True
+                    End If
                 End If
                 AgregaFila Space$(Nivel) & mSal(0, i) & "." & (mSal(1, i) & ""), mSal(0, i) & "", "", Key, Nivel + 1, _
-                           mMonto(i), 0, False, Dpto, mSal(0, i) & ""
+                           mMonto(i), 0, mMonto2(i), 0, False, Dpto, mSal(0, i) & ""
                 TotDpto = TotDpto + mMonto(i)
+                TotDpto2 = TotDpto2 + mMonto2(i)
             End If
         End If
     Next
     If Abierto Then
-        AgregaFila Space$(Nivel) & "Total " & NombreDpto(DptoActual), Key, Sup, "", Nivel + 1, 0, TotDpto, True, DptoActual, ""
+        AgregaFila Space$(Nivel) & "Total " & NombreDpto(DptoActual), Key, Sup, "", Nivel + 1, 0, TotDpto, 0, TotDpto2, True, DptoActual, ""
     End If
 End Sub
 
@@ -447,9 +499,9 @@ Private Function NuevoRecordset() As ADODB.Recordset
 End Function
 
 ' Agrega una fila aplicando el filtro de nivel (misma regla que CmbNivel en el reporte original:
-' se quita todo lo mayor al nivel y, en el nivel elegido, solo se dejan los "Total").
 Private Sub AgregaFila(ByVal Descripcion As String, ByVal KeyGrupo As String, ByVal KeySuperior As String, _
         ByVal KeyCuenta As String, ByVal Nivel As Integer, ByVal Debe1 As Double, ByVal Haber1 As Double, _
+        ByVal Debe2 As Double, ByVal Haber2 As Double, _
         ByVal EsTotal As Boolean, ByVal CodDpto As String, ByVal CodCuenta As String)
     If mNivelMax > 0 Then
         If Nivel > mNivelMax Then Exit Sub
@@ -460,10 +512,17 @@ Private Sub AgregaFila(ByVal Descripcion As String, ByVal KeyGrupo As String, By
     mRs.Fields("Descripcion").Value = Descripcion
     mRs.Fields("Debe1").Value = Debe1
     mRs.Fields("Haber1").Value = Haber1
-    mRs.Fields("Debe2").Value = 0
-    mRs.Fields("Haber2").Value = 0
-    mRs.Fields("Debe3").Value = 0
-    mRs.Fields("Haber3").Value = 0
+    mRs.Fields("Debe2").Value = Debe2
+    mRs.Fields("Haber2").Value = Haber2
+    'Columna 3 = columna 1 + columna 2 (igual que "Update Reportes set debe3=debe1+debe2,haber3=haber1+haber2");
+    'el reporte por departamento nunca la lleno, se deja en 0.
+    If mPorDpto Then
+        mRs.Fields("Debe3").Value = 0
+        mRs.Fields("Haber3").Value = 0
+    Else
+        mRs.Fields("Debe3").Value = Debe1 + Debe2
+        mRs.Fields("Haber3").Value = Haber1 + Haber2
+    End If
     mRs.Fields("KeyGrupo").Value = KeyGrupo
     mRs.Fields("KeyGrupoSuperior").Value = KeySuperior
     mRs.Fields("KeyGrupoCuenta").Value = KeyCuenta
@@ -472,6 +531,36 @@ Private Sub AgregaFila(ByVal Descripcion As String, ByVal KeyGrupo As String, By
     mRs.Fields("CodDepartamento").Value = CodDpto
     mRs.Fields("CodCuentas").Value = CodCuenta
     mRs.Update
+End Sub
+
+
+'-----------------------------------------------------------------------------------------------------
+' Atajos y utilidades para los reportes sin departamento
+'-----------------------------------------------------------------------------------------------------
+' ESTADO DE RESULTADO (ConAnterior = False) y RESULTADO ACUMULADO / HISTORICO (ConAnterior = True:
+' columna 1 = actividad del periodo, columna 2 = saldo anterior a FechaDesde, columna 3 = suma).
+Public Function RptResultadoGenerar(ByVal FechaDesde As Date, ByVal FechaHasta As Date, _
+        ByVal EnDolares As Boolean, ByVal ExcluirCierre As Boolean, _
+        ByVal NivelMax As Integer, ByVal OcultarCeros As Boolean, ByVal ConAnterior As Boolean, _
+        Optional ByRef Advertencias As String = "") As ADODB.Recordset
+    Set RptResultadoGenerar = RptResultadoDptoGenerar(FechaDesde, FechaHasta, EnDolares, ExcluirCierre, "", "", _
+                                  NivelMax, OcultarCeros, Advertencias, "D,G,O", False, ConAnterior)
+End Function
+
+' Divide todas las columnas del reporte entre la tasa (equivale a ConvertirReporte, sin tocar la BD).
+Public Sub RptConvertirRecordset(rs As ADODB.Recordset, ByVal TasaCambio As Double)
+    Dim Campo As Variant
+    If TasaCambio = 0 Then Err.Raise vbObjectError + 1002, "ResultadoDpto", "La tasa de cambio no puede ser cero."
+    If rs.BOF And rs.EOF Then Exit Sub
+    rs.MoveFirst
+    Do While Not rs.EOF
+        For Each Campo In VBA.Split("Debe1,Haber1,Debe2,Haber2,Debe3,Haber3", ",")
+            rs.Fields(CStr(Campo)).Value = Round(CDbl(rs.Fields(CStr(Campo)).Value) / TasaCambio, 2)
+        Next
+        rs.Update
+        rs.MoveNext
+    Loop
+    rs.MoveFirst
 End Sub
 
 
@@ -545,4 +634,29 @@ Public Function RptVerificarCuadreResultadoDpto(ByVal FechaDesde As Date, ByVal 
         Texto = Texto & "OK: cuadra."
     End If
     RptVerificarCuadreResultadoDpto = Texto
+End Function
+
+' True si la estructura trae los grupos de Utilidad Bruta configurados (MDIPrimero.AdoConfiguracion);
+' en ese caso el reporte original reordena filas con Utilidadbruta, que esta version todavia no hace.
+Public Function RptHayUtilidadBruta(rs As ADODB.Recordset) As Boolean
+    Dim Nombres As Variant, N As Variant, Texto As String, Hay As Boolean
+    With MDIPrimero.AdoConfiguracion.Recordset
+        Nombres = Array(.Fields("OtrosINgresos").Value & "", .Fields("Costos").Value & "", _
+                        .Fields("Ingresos").Value & "", .Fields("CostosOperativos").Value & "")
+    End With
+    For Each N In Nombres
+        If Len(Trim$(N)) = 0 Then Exit Function
+        Hay = False
+        If Not (rs.BOF And rs.EOF) Then
+            rs.MoveFirst
+            Do While Not rs.EOF
+                Texto = rs.Fields("Descripcion").Value & ""
+                If InStr(1, Texto, CStr(N), vbTextCompare) > 0 Then Hay = True: Exit Do
+                rs.MoveNext
+            Loop
+            rs.MoveFirst
+        End If
+        If Not Hay Then Exit Function
+    Next
+    RptHayUtilidadBruta = True
 End Function
