@@ -80,7 +80,7 @@ Private Sub ActiveReport_ReportStart()
     Me.Field23.Left = Me.Field19.Left + Me.Field19.Width
     Me.Field23.Width = Me.Field23.Width * 1.6
     Me.Field25.Left = Me.Field23.Left + Me.Field23.Width
-    Me.Field25.Width = Me.Field23.Width
+    Me.Field25.Width = Me.Field23.Width * 1.4
     Me.Field24.Left = Me.Field25.Left + Me.Field25.Width
     Me.Field27.Width = Me.Field24.Width
     Me.Field27.Left = Me.Field29.Left - Me.Field27.Width

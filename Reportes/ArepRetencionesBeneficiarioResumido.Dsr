@@ -46,8 +46,8 @@ Private Sub ActiveReport_ReportStart()
     '    Encabezado de columnas
     Me.Label18.Visible = False
     Me.Label4.Visible = False
-    Me.Label6.Visible = False
-    Me.Label27.Visible = False
+    Me.Label6.Caption = "Cedula"
+    Me.Label27.Caption = "Tasa Ret"
     Me.Label28.Visible = False
     Me.Label5.Caption = "Codigo Benef."
     Me.Label26.Caption = "Nombre Beneficiario"
@@ -61,18 +61,25 @@ Private Sub ActiveReport_ReportStart()
     Me.Field29.DataField = "Retenido"
     Me.Field19.Visible = False
     Me.Field23.Visible = False
-    Me.Field25.Visible = False
-    Me.Field27.Visible = False
+    Me.Field25.DataField = "Cedula"
+    Me.Field27.DataField = "TasaRet"
     Me.Field28.Visible = False
 
-    '    Reacomodar columnas: Codigo, Nombre (ocupa el espacio libre), Total
+    '    Reacomodar columnas: Codigo, Cedula, Nombre (espacio libre), Tasa, Total
     Me.Field24.Left = Me.Field19.Left
-    Me.Field26.Left = Me.Field24.Left + Me.Field24.Width
-    Me.Field26.Width = Me.Field29.Left - Me.Field26.Left
+    Me.Field25.Left = Me.Field24.Left + Me.Field24.Width
+    Me.Field25.Width = Me.Field23.Width * 2.2
+    Me.Field27.Width = Me.Field24.Width
+    Me.Field27.Left = Me.Field29.Left - Me.Field27.Width
+    Me.Field26.Left = Me.Field25.Left + Me.Field25.Width
+    Me.Field26.Width = Me.Field27.Left - Me.Field26.Left
     Me.Label5.Left = Me.Field24.Left
+    Me.Label6.Left = Me.Field25.Left
+    Me.Label6.Width = Me.Field25.Width
     Me.Label26.Left = Me.Field26.Left
     Me.Label26.Width = Me.Field26.Width
-
+    Me.Label27.Left = Me.Field27.Left
+    Me.Label27.Width = Me.Field27.Width
     '    Sin agrupar: el grupo (constante) solo sirve para el total general del pie
     Me.Sections("GroupHeader1").DataField = "Grupo"
     Me.Sections("GroupHeader1").Visible = False

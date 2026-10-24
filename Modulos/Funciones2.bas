@@ -506,6 +506,8 @@ Public Function ObtenerRsRetencionesBeneficiario( _
     Dim RsRes As ADODB.Recordset
     Dim CodAnt As String
     Dim NomAnt As String
+    Dim CedAnt As String
+    Dim TasaAnt As String
     Dim Acum As Double
     Dim Hay As Boolean
     Dim Nombres As Object
@@ -638,17 +640,24 @@ Public Function ObtenerRsRetencionesBeneficiario( _
         Do While Not RsSal.EOF
             If Hay Then
                 If RsSal!Cod_Tercero <> CodAnt Then
-                    AgregarFilaRetBenef RsRes, CodAnt, NomAnt, Acum
+                    AgregarFilaRetBenef RsRes, CodAnt, NomAnt, CedAnt, TasaAnt, Acum
                     Acum = 0
                 End If
             End If
+            ' Tasa: si el beneficiario tiene lineas con tasas distintas se muestra "Varias"
+            If Hay And RsSal!Cod_Tercero = CodAnt Then
+                If (RsSal!TasaRet & "") <> TasaAnt Then TasaAnt = "Varias"
+            Else
+                TasaAnt = RsSal!TasaRet & ""
+            End If
             CodAnt = RsSal!Cod_Tercero & ""
             NomAnt = RsSal!NombreBeneficiario & ""
+            CedAnt = RsSal!Cedula & ""
             Acum = Acum + RsSal!Retenido
             Hay = True
             RsSal.MoveNext
         Loop
-        If Hay Then AgregarFilaRetBenef RsRes, CodAnt, NomAnt, Acum
+        If Hay Then AgregarFilaRetBenef RsRes, CodAnt, NomAnt, CedAnt, TasaAnt, Acum
 
         RsSal.Close
         Set RsSal = RsRes
@@ -691,10 +700,13 @@ Private Sub AgregarCamposRetBenef(ByRef Rs As ADODB.Recordset)
 End Sub
 
 Private Sub AgregarFilaRetBenef(ByRef Rs As ADODB.Recordset, ByVal Cod As String, _
-                                ByVal Nombre As String, ByVal Monto As Double)
+                                ByVal Nombre As String, ByVal Cedula As String, _
+                                ByVal Tasa As String, ByVal Monto As Double)
     Rs.AddNew
     Rs!Cod_Tercero = Cod
     Rs!NombreBeneficiario = Nombre
+    Rs!Cedula = Cedula
+    Rs!TasaRet = Tasa
     Rs!Retenido = Monto
     Rs!MontoBase = Monto
     Rs!NTransaccion = 0
