@@ -84,6 +84,7 @@ Form=Formularios\FrmPeriodos.frm
 Module=mod_Sahred; Modulos\mod_Sahred.bas
 Module=Variables; Modulos\Variables.bas
 Module=Funciones; Modulos\Funciones.bas
+Module=ResultadoDpto; Modulos\ResultadoDpto.bas
 Class=clsTape; Modulos\tape.cls
 Class=cls_NumSpanishWord; Modulos\cls_NumSpanishWord.cls
 Class=cls_NumEnglishWord; Modulos\cls_NumEnglishWord.cls

@@ -4279,7 +4279,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
         Me.DtaConsulta.Recordset.MoveNext
       Loop
       
-    Case "ESTADO DE RESULTADO DPTO"
+    Case "ESTADO DE RESULTADO DPTO", "ESTADO DE RESULTADO DPTO (NUEVO)"
     
       Me.CmdVerReporte.Visible = False
       Me.CmdVerReporte2.Visible = False
@@ -7723,6 +7723,59 @@ FechaFin = Me.DTFecha2.Value
 
 
 Select Case Me.CmbReportes.Text
+Case "ESTADO DE RESULTADO DPTO (NUEVO)"
+    '--- Version en memoria (Modulos\ResultadoDpto.bas): no usa la tabla Reportes ---
+    Dim rsResDpto As ADODB.Recordset, AdvResDpto As String, ErrResDpto As String
+    NumeroPeriodo1 = Me.CmbIni.Text
+    NumeroPeriodo2 = Me.CmbFin.Text
+
+    If Me.Option8 = True Then
+     NumeroTabla = 1
+    ElseIf Me.Option7 = True Then
+      NumeroTabla = 2
+    ElseIf Me.Option6 = True Then
+      NumeroTabla = 3
+    End If
+
+    Me.DtaConsulta.RecordSource = "SELECT Periodos.Periodo, Periodos.FechaPeriodo, Periodos.NumeroTabla From Periodos WHERE (((Periodos.Periodo) Between " & NumeroPeriodo1 & " And " & NumeroPeriodo2 & ") AND ((Periodos.NumeroTabla)=" & NumeroTabla & "))"
+    Me.DtaConsulta.Refresh
+    Me.DtaConsulta.Recordset.MoveLast
+    i = Me.DtaConsulta.Recordset.RecordCount
+    Me.DtaConsulta.Recordset.MoveFirst
+    Do While Not DtaConsulta.Recordset.EOF
+      If i = 1 Then
+        FechaIni = "01/" & Month(Me.DtaConsulta.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaConsulta.Recordset("FechaPeriodo"))
+        FechaFin = Me.DtaConsulta.Recordset("FechaPeriodo")
+      ElseIf NumeroPeriodo1 = Me.DtaConsulta.Recordset("Periodo") Then
+        FechaIni = "01/" & Month(Me.DtaConsulta.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaConsulta.Recordset("FechaPeriodo"))
+      ElseIf NumeroPeriodo2 = Me.DtaConsulta.Recordset("Periodo") Then
+        FechaFin = Me.DtaConsulta.Recordset("FechaPeriodo")
+      End If
+      Me.DtaConsulta.Recordset.MoveNext
+    Loop
+
+    Me.LblProgreso.Caption = "Generando Estado de Resultado por Departamento..."
+    Me.MousePointer = vbHourglass
+    DoEvents
+
+    On Error Resume Next
+    Set rsResDpto = RptResultadoDptoGenerar(FechaIni, FechaFin, (Left$(Me.CmbMoneda.Text, 1) = "D"), _
+                       (Me.ChkQuitarMovimiento.Value = 1), Me.TxtDptoDesde.Text, Me.TxtDptoHasta.Text, _
+                       Val(Me.CmbNivel.Text), True, AdvResDpto)
+    If Err.Number <> 0 Then ErrResDpto = Err.Description
+    On Error GoTo 0
+    Me.MousePointer = vbDefault
+    Me.LblProgreso.Caption = ""
+
+    If Len(ErrResDpto) > 0 Then
+      MsgBox ErrResDpto, vbCritical, "Sistema Contable"
+    Else
+      If Len(AdvResDpto) > 0 Then MsgBox AdvResDpto, vbExclamation, "Estado de Resultado por Departamento"
+      Set rpt = New ArepResultado
+      Set rpt.DataControl1.Recordset = rsResDpto
+      fPreview.RunReport rpt
+      fPreview.Show 1
+    End If
 Case "ESTADO DE RESULTADO DPTO"
     NumeroPeriodo1 = Me.CmbIni.Text
     NumeroPeriodo2 = Me.CmbFin.Text
@@ -8500,6 +8553,7 @@ Select Case QUIEN
   Me.CmbReportes.AddItem ("BALANCE GENERAL TRADICIONAL")
   Me.CmbReportes.AddItem ("ESTADO DE RESULTADO")
   Me.CmbReportes.AddItem ("ESTADO DE RESULTADO DPTO")
+  Me.CmbReportes.AddItem ("ESTADO DE RESULTADO DPTO (NUEVO)")
   Me.CmbReportes.AddItem ("RESULTADO ACUMULADO")
   Me.CmbReportes.AddItem ("RESULTADO HISTORICO")
   Me.CmbReportes.AddItem ("ESTADO DE RESULTADO RESUMEN")
