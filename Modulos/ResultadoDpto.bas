@@ -908,11 +908,8 @@ Public Function RptAnexosFiltrar(ByVal Condiciones As String) As ADODB.Recordset
         Filtro = Filtro & "Ubicacion = '" & SqlTexto(Nom) & "'"
         p = InStr(q + 1, Condiciones, "N'")
     Loop
-    If Len(Filtro) > 0 Then
-        rs.Filter = "(" & Filtro & ") AND CodCuentas <> ''"
-    Else
-        rs.Filter = "CodCuentas <> ''"
-    End If
+    'Solo las filas de cuenta traen Ubicacion; ADO no admite comparar contra '' en Filter
+    If Len(Filtro) > 0 Then rs.Filter = Filtro
     rs.Sort = "Orden"
     Set RptAnexosFiltrar = rs
 End Function
