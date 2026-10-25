@@ -252,11 +252,15 @@ End If
     End If
     
      '/////////////////////////////////////BUSCO LA UTILIDAD DEL PERIODO ////////////////////////
+     If RptUbicActivo Then
+       UtilidadNeta = RptResultadoRP(True)
+     Else
      MDIPrimero.AdoConsulta.RecordSource = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden, CodCuentas, Ubicacion, Orden AS Expr1, Haber3 - Debe3 AS Resultado From Reportes WHERE (KeyGrupo = 'RP') ORDER BY Expr1"
      MDIPrimero.AdoConsulta.Refresh
      If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
        UtilidadNeta = MDIPrimero.AdoConsulta.Recordset("Resultado")
   
+     End If
      End If
     
 '    UtilidadNeta = Totalingresos - TotalCostos - TotalGastos

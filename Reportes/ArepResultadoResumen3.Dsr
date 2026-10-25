@@ -403,19 +403,28 @@ Dim Mes As Double, R As Variant, TipoReporte As String
      If FrmReportes.OptAcumulado.Value = True Then
       Dim TotalUtilidadNetaP As Double
      '/////////////////////////////////////BUSCO LA UTILIDAD DEL PERIODO ////////////////////////
+       If RptUbicActivo Then
+         TotalUtilidadNeta = RptResultadoRP(False)
+         TotalUtilidadNetaP = RptResultadoRP(True)
+       Else
        MDIPrimero.AdoConsulta.RecordSource = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden, CodCuentas, Ubicacion, Orden AS Expr1, Haber3 - Debe3 AS Resultado,Haber2 - Debe2 AS Resultado2 From Reportes WHERE (KeyGrupo = 'RP') ORDER BY Expr1"
        MDIPrimero.AdoConsulta.Refresh
        If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
          TotalUtilidadNeta = MDIPrimero.AdoConsulta.Recordset("Resultado")
          TotalUtilidadNetaP = MDIPrimero.AdoConsulta.Recordset("Resultado2")
        End If
+       End If
      Else
      '/////////////////////////////////////BUSCO LA UTILIDAD DEL PERIODO ////////////////////////
+       If RptUbicActivo Then
+         TotalUtilidadNeta = RptResultadoRP(True)
+       Else
        MDIPrimero.AdoConsulta.RecordSource = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden, CodCuentas, Ubicacion, Orden AS Expr1, Haber2 - Debe2 AS Resultado From Reportes WHERE (KeyGrupo = 'RP') ORDER BY Expr1"
        MDIPrimero.AdoConsulta.Refresh
        If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
          TotalUtilidadNeta = MDIPrimero.AdoConsulta.Recordset("Resultado")
     
+       End If
        End If
      End If
      

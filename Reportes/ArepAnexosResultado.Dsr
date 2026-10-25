@@ -208,8 +208,12 @@ If Condiciones <> "" Then
     Me.LblFechaFin = Format(FechaFin, "dd/mm/yyyy")
     Me.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
     Me.LblFechaIni = Format(FechaIni, "dd/mm/yyyy")
-    Me.DataControl1.ConnectionString = ConexionReporte
-    Me.DataControl1.Source = SQL
+    If RptUbicActivo Then
+      Set Me.DataControl1.Recordset = RptAnexosFiltrar(Condiciones)
+    Else
+      Me.DataControl1.ConnectionString = ConexionReporte
+      Me.DataControl1.Source = SQL
+    End If
 
 End If
 End Sub

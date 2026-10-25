@@ -62,6 +62,8 @@ Private mFilaUbic As String      'datos extra de la fila de cuenta que se esta a
 Private mFilaTipo As String
 Private mFilaDescCta As String
 Private mRsAnexos As ADODB.Recordset
+Private mRP2 As Double           'Resultado Periodo: Haber2 - Debe2 de la fila RP
+Private mRP3 As Double           'Resultado Periodo: Haber3 - Debe3 de la fila RP
 
 'Verdadero mientras un Balance Resumen (NUEVO) esta imprimiendo: SaldosPersonalizados y ArepAnexosBalances
 'leen de memoria en vez de la tabla Reportes. El formulario lo apaga con RptUbicacionesLiberar.
@@ -845,9 +847,15 @@ Private Sub RptCargarUbicaciones(rs As ADODB.Recordset)
     mUbicSaldo.CompareMode = vbTextCompare
     Set mUbicPeriodo = CreateObject("Scripting.Dictionary")
     mUbicPeriodo.CompareMode = vbTextCompare
+    mRP2 = 0
+    mRP3 = 0
     If rs.BOF And rs.EOF Then Exit Sub
     rs.MoveFirst
     Do While Not rs.EOF
+        If (rs.Fields("KeyGrupo").Value & "") = "RP" Then
+            mRP3 = CDbl(rs.Fields("Haber3").Value) - CDbl(rs.Fields("Debe3").Value)
+            mRP2 = CDbl(rs.Fields("Haber2").Value) - CDbl(rs.Fields("Debe2").Value)
+        End If
         Ub = rs.Fields("Ubicacion").Value & ""
         If Len(Ub) > 0 Then
             mUbicSaldo(Ub) = mUbicSaldo(Ub) + CDbl(rs.Fields("Debe3").Value) - CDbl(rs.Fields("Haber3").Value)
@@ -857,6 +865,26 @@ Private Sub RptCargarUbicaciones(rs As ADODB.Recordset)
     Loop
     rs.MoveFirst
 End Sub
+
+' ESTADO DE RESULTADO RESUMEN / RESUMEN 2 / RESUMEN ANEXOS / TRADICIONAL. ArepResultadoResumen* piden cada
+' renglon con SaldosPersonalizados y la utilidad con la fila RP de Reportes (RptResultadoRP); mientras
+' RptUbicActivo = True leen de aqui. OcultarCeros solo importa para los anexos (lista de cuentas).
+Public Function RptResultadoResumenGenerar(ByVal FechaDesde As Date, ByVal FechaHasta As Date, _
+        ByVal EnDolares As Boolean, ByVal ExcluirCierre As Boolean, ByVal OcultarCeros As Boolean, _
+        Optional ByRef Advertencias As String = "") As ADODB.Recordset
+    Dim rs As ADODB.Recordset
+    RptUbicacionesLiberar
+    Set rs = RptResultadoGenerar(FechaDesde, FechaHasta, EnDolares, ExcluirCierre, 0, OcultarCeros, True, Advertencias)
+    RptCargarUbicaciones rs
+    Set mRsAnexos = rs
+    RptUbicActivo = True
+    Set RptResultadoResumenGenerar = rs
+End Function
+
+' Utilidad (fila RP): Periodo = True actividad del periodo (Haber2 - Debe2), False saldo (Haber3 - Debe3).
+Public Function RptResultadoRP(ByVal Periodo As Boolean) As Double
+    If Periodo Then RptResultadoRP = mRP2 Else RptResultadoRP = mRP3
+End Function
 
 Public Function RptUbicacionSaldo(ByVal Ubicacion As String) As Double
     If mUbicSaldo.Exists(Ubicacion) Then RptUbicacionSaldo = mUbicSaldo(Ubicacion)

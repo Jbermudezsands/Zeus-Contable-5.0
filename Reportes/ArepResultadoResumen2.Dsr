@@ -343,11 +343,15 @@ Dim Mes As Double, R As Variant, TipoReporte As String
     Me.LblTotalGastoOperacion.Caption = Format(TotalGastoVentas + TotalGastosAdmon + TotalIngresosFinancieros + TotalOtrosGastos, "##,##0.00")
     
      '/////////////////////////////////////BUSCO LA UTILIDAD DEL PERIODO ////////////////////////
+     If RptUbicActivo Then
+       TotalUtilidadNeta = RptResultadoRP(FrmReportes.OptPeriodo.Value)
+     Else
      MDIPrimero.AdoConsulta.RecordSource = "SELECT Descripcion, Debe1, Haber1, Debe2, Haber2, Debe3, Haber3, KeyGrupo, KeyGrupoSuperior, KeyGrupoCuenta, Nivel, Orden, CodCuentas, Ubicacion, Orden AS Expr1, Haber3 - Debe3 AS Resultado From Reportes WHERE (KeyGrupo = 'RP') ORDER BY Expr1"
      MDIPrimero.AdoConsulta.Refresh
      If Not MDIPrimero.AdoConsulta.Recordset.EOF Then
        TotalUtilidadNeta = MDIPrimero.AdoConsulta.Recordset("Resultado")
     End If
+     End If
 '    TotalUtilidadNeta = TotalUtilidadBruta - (TotalGastoVentas + TotalGastosAdmon + TotalIngresosFinancieros + TotalOtrosGastos) - TotalImpuestos
     Me.LblUtilidadNeta.Caption = Format(TotalUtilidadNeta, "##,##0.00")
     

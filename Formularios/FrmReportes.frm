@@ -3857,7 +3857,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
          Me.ChkQuitarMovimiento.Visible = True
 
          
-      Case "ESTADO DE RESULTADO TRADICIONAL"
+      Case "ESTADO DE RESULTADO TRADICIONAL", "ESTADO DE RESULTADO TRADICIONAL (NUEVO)"
          Me.CmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmdVerReporte3.Visible = False
@@ -3867,19 +3867,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
          Me.Frame4.Visible = True
          Me.Frame1.Visible = False
          Me.ChkQuitarMovimiento.Visible = True
-      Case "ESTADO DE RESULTADO RESUMEN 2"
-         Me.CmdVerReporte.Visible = False
-         Me.CmdVerReporte2.Visible = True
-         Me.CmdVerReporte3.Visible = False
-         Me.CmbMoneda.Visible = True
-         Me.Label3.Visible = True
-         Me.Frame9.Visible = True
-         Me.Frame4.Visible = True
-         Me.CmbNivel.Visible = False
-         Me.Label6.Visible = False
-         Me.Frame1.Visible = False
-         Me.ChkQuitarMovimiento.Visible = True
-      Case "ESTADO DE RESULTADO RESUMEN"
+      Case "ESTADO DE RESULTADO RESUMEN 2", "ESTADO DE RESULTADO RESUMEN 2 (NUEVO)"
          Me.CmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmdVerReporte3.Visible = False
@@ -3891,7 +3879,19 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
          Me.Label6.Visible = False
          Me.Frame1.Visible = False
          Me.ChkQuitarMovimiento.Visible = True
-      Case "ESTADO DE RESULTADO RESUMEN ANEXOS"
+      Case "ESTADO DE RESULTADO RESUMEN", "ESTADO DE RESULTADO RESUMEN (NUEVO)"
+         Me.CmdVerReporte.Visible = False
+         Me.CmdVerReporte2.Visible = True
+         Me.CmdVerReporte3.Visible = False
+         Me.CmbMoneda.Visible = True
+         Me.Label3.Visible = True
+         Me.Frame9.Visible = True
+         Me.Frame4.Visible = True
+         Me.CmbNivel.Visible = False
+         Me.Label6.Visible = False
+         Me.Frame1.Visible = False
+         Me.ChkQuitarMovimiento.Visible = True
+      Case "ESTADO DE RESULTADO RESUMEN ANEXOS", "ESTADO DE RESULTADO RESUMEN ANEXOS (NUEVO)"
          Me.SSTab.TabVisible(2) = True
          Me.CmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
@@ -7421,6 +7421,88 @@ Case "ESTADO DE RESULTADO RESUMEN 2"
      fPreview.Show 1
      
 
+Case "ESTADO DE RESULTADO RESUMEN (NUEVO)", "ESTADO DE RESULTADO RESUMEN 2 (NUEVO)", "ESTADO DE RESULTADO RESUMEN ANEXOS (NUEVO)", "ESTADO DE RESULTADO TRADICIONAL (NUEVO)"
+    '--- Version en memoria (Modulos\ResultadoDpto.bas): no usa la tabla Reportes ---
+    Dim rsRR As ADODB.Recordset, AdvRR As String, ErrRR As String, NombreRR As String
+    NombreRR = Left$(Me.CmbReportes.Text, Len(Me.CmbReportes.Text) - Len(" (NUEVO)"))
+    NumeroPeriodo1 = Me.CmbIni.Text
+    NumeroPeriodo2 = Me.CmbFin.Text
+
+    If Me.Option8 = True Then
+     NumeroTabla = 1
+    ElseIf Me.Option7 = True Then
+      NumeroTabla = 2
+    ElseIf Me.Option6 = True Then
+      NumeroTabla = 3
+    End If
+
+    Me.DtaConsulta.RecordSource = "SELECT Periodos.Periodo, Periodos.FechaPeriodo, Periodos.NumeroTabla From Periodos WHERE (((Periodos.Periodo) Between " & NumeroPeriodo1 & " And " & NumeroPeriodo2 & ") AND ((Periodos.NumeroTabla)=" & NumeroTabla & "))"
+    Me.DtaConsulta.Refresh
+    If Me.DtaConsulta.Recordset.EOF Then
+      MsgBox "Error en el Periodo", vbCritical, "Zeus Contable"
+    Else
+      Me.DtaConsulta.Recordset.MoveLast
+      i = Me.DtaConsulta.Recordset.RecordCount
+      Me.DtaConsulta.Recordset.MoveFirst
+      Do While Not DtaConsulta.Recordset.EOF
+        If i = 1 Then
+          FechaIni = "01/" & Month(Me.DtaConsulta.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaConsulta.Recordset("FechaPeriodo"))
+          FechaFin = Me.DtaConsulta.Recordset("FechaPeriodo")
+        ElseIf NumeroPeriodo1 = Me.DtaConsulta.Recordset("Periodo") Then
+          FechaIni = "01/" & Month(Me.DtaConsulta.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaConsulta.Recordset("FechaPeriodo"))
+        ElseIf NumeroPeriodo2 = Me.DtaConsulta.Recordset("Periodo") Then
+          FechaFin = Me.DtaConsulta.Recordset("FechaPeriodo")
+        End If
+        Me.DtaConsulta.Recordset.MoveNext
+      Loop
+
+      Me.LblProgreso.Caption = "Generando " & Me.CmbReportes.Text & "..."
+      Me.MousePointer = vbHourglass
+      DoEvents
+
+      On Error Resume Next
+      'Los renglones salen de SaldosPersonalizados/RptResultadoRP (memoria); solo los anexos listan cuentas
+      Set rsRR = RptResultadoResumenGenerar(FechaIni, FechaFin, (Left$(Me.CmbMoneda.Text, 1) = "D"), _
+                     (Me.ChkQuitarMovimiento.Value = 1), (NombreRR = "ESTADO DE RESULTADO RESUMEN ANEXOS"), AdvRR)
+      If Err.Number <> 0 Then ErrRR = Err.Description
+      On Error GoTo 0
+      Me.MousePointer = vbDefault
+      Me.LblProgreso.Caption = ""
+
+      If Len(ErrRR) > 0 Then
+        RptUbicacionesLiberar
+        MsgBox ErrRR, vbCritical, "Sistema Contable"
+      Else
+        If Len(AdvRR) > 0 Then MsgBox AdvRR, vbExclamation, Me.CmbReportes.Text
+        Select Case NombreRR
+          Case "ESTADO DE RESULTADO RESUMEN"
+            Me.TxtTipoReporte.Text = NombreRR
+            Set rpt = New ArepResultadoResumen
+            fPreview.RunReport rpt
+            fPreview.Show 1
+          Case "ESTADO DE RESULTADO RESUMEN 2"
+            Me.TxtTipoReporte.Text = NombreRR
+            Set rpt = New ArepResultadoResumen3
+            fPreview.RunReport rpt
+            fPreview.Show 1
+          Case "ESTADO DE RESULTADO RESUMEN ANEXOS"
+            ActualizaConfiguracionReporteResultado
+            Me.TxtTipoReporte.Text = NombreRR
+            Set rpt = New ArepResultadoResumen2
+            fPreview.RunReport rpt
+            fPreview.Show 1
+            Set rpt = New ArepAnexosResultado
+            fPreview.RunReport rpt
+            fPreview.Show 1
+          Case "ESTADO DE RESULTADO TRADICIONAL"
+            Set rpt = New ArepResultadoTradicional
+            fPreview.RunReport rpt
+            fPreview.Show 1
+        End Select
+        RptUbicacionesLiberar
+      End If
+    End If
+
 Case "BALANCE GENERAL RESUMEN (NUEVO)", "BALANCE GENERAL RESUMEN ANEXOS (NUEVO)"
     '--- Version en memoria (Modulos\ResultadoDpto.bas): no usa la tabla Reportes ---
     Dim rsResu As ADODB.Recordset, AdvResu As String, ErrResu As String, ConAnexos As Boolean
@@ -8819,9 +8901,13 @@ Select Case QUIEN
   Me.CmbReportes.AddItem ("RESULTADO HISTORICO")
   Me.CmbReportes.AddItem ("RESULTADO HISTORICO (NUEVO)")
   Me.CmbReportes.AddItem ("ESTADO DE RESULTADO RESUMEN")
+  Me.CmbReportes.AddItem ("ESTADO DE RESULTADO RESUMEN (NUEVO)")
   Me.CmbReportes.AddItem ("ESTADO DE RESULTADO RESUMEN 2")
+  Me.CmbReportes.AddItem ("ESTADO DE RESULTADO RESUMEN 2 (NUEVO)")
   Me.CmbReportes.AddItem ("ESTADO DE RESULTADO RESUMEN ANEXOS")
+  Me.CmbReportes.AddItem ("ESTADO DE RESULTADO RESUMEN ANEXOS (NUEVO)")
   Me.CmbReportes.AddItem ("ESTADO DE RESULTADO TRADICIONAL")
+  Me.CmbReportes.AddItem ("ESTADO DE RESULTADO TRADICIONAL (NUEVO)")
   Me.Frame7.Visible = False
   Me.Label2.Visible = False
   Me.LblTransaccion.Visible = False
