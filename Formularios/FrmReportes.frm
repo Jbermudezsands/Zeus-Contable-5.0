@@ -3904,7 +3904,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
          Me.Label6.Visible = False
          Me.Frame1.Visible = False
          Me.ChkQuitarMovimiento.Visible = True
-     Case "BALANCE GENERAL RESUMEN"
+     Case "BALANCE GENERAL RESUMEN", "BALANCE GENERAL RESUMEN (NUEVO)"
          Me.CmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.Frame1.Visible = False
@@ -3914,7 +3914,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
          Me.CmbNivel.Visible = False
          Me.Label6.Visible = False
          
-     Case "BALANCE GENERAL RESUMEN ANEXOS"
+     Case "BALANCE GENERAL RESUMEN ANEXOS", "BALANCE GENERAL RESUMEN ANEXOS (NUEVO)"
          Me.CmdVerReporte.Visible = False
          Me.CmdVerReporte2.Visible = True
          Me.CmbMoneda.Visible = True
@@ -6400,6 +6400,7 @@ FechaFin = Me.DTFecha2.Value
 
 
 
+RptUbicacionesLiberar   'por si un reporte anterior quedo a medias (los resumen NUEVO leen de memoria)
 Select Case Me.CmbReportes.Text
 
 Case "RETENCIONES EN LA FUENTE I.R X COBRAR"
@@ -7419,6 +7420,78 @@ Case "ESTADO DE RESULTADO RESUMEN 2"
      fPreview.RunReport rpt
      fPreview.Show 1
      
+
+Case "BALANCE GENERAL RESUMEN (NUEVO)", "BALANCE GENERAL RESUMEN ANEXOS (NUEVO)"
+    '--- Version en memoria (Modulos\ResultadoDpto.bas): no usa la tabla Reportes ---
+    Dim rsResu As ADODB.Recordset, AdvResu As String, ErrResu As String, ConAnexos As Boolean
+    ConAnexos = (Me.CmbReportes.Text = "BALANCE GENERAL RESUMEN ANEXOS (NUEVO)")
+    NumeroPeriodo1 = Me.CmbIni.Text
+    NumeroPeriodo2 = Me.CmbFin.Text
+
+    If Me.Option8 = True Then
+     NumeroTabla = 1
+    ElseIf Me.Option7 = True Then
+      NumeroTabla = 2
+    ElseIf Me.Option6 = True Then
+      NumeroTabla = 3
+    End If
+
+    Me.DtaConsulta.RecordSource = "SELECT Periodos.Periodo, Periodos.FechaPeriodo, Periodos.NumeroTabla From Periodos WHERE (((Periodos.Periodo) Between " & NumeroPeriodo1 & " And " & NumeroPeriodo2 & ") AND ((Periodos.NumeroTabla)=" & NumeroTabla & "))"
+    Me.DtaConsulta.Refresh
+    If Me.DtaConsulta.Recordset.EOF Then
+      MsgBox "Error en el Periodo", vbCritical, "Zeus Contable"
+    Else
+      Me.DtaConsulta.Recordset.MoveLast
+      i = Me.DtaConsulta.Recordset.RecordCount
+      Me.DtaConsulta.Recordset.MoveFirst
+      Do While Not DtaConsulta.Recordset.EOF
+        If i = 1 Then
+          FechaIni = "01/" & Month(Me.DtaConsulta.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaConsulta.Recordset("FechaPeriodo"))
+          FechaFin = Me.DtaConsulta.Recordset("FechaPeriodo")
+        ElseIf NumeroPeriodo1 = Me.DtaConsulta.Recordset("Periodo") Then
+          FechaIni = "01/" & Month(Me.DtaConsulta.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaConsulta.Recordset("FechaPeriodo"))
+        ElseIf NumeroPeriodo2 = Me.DtaConsulta.Recordset("Periodo") Then
+          FechaFin = Me.DtaConsulta.Recordset("FechaPeriodo")
+        End If
+        Me.DtaConsulta.Recordset.MoveNext
+      Loop
+
+      Me.LblProgreso.Caption = "Generando " & Me.CmbReportes.Text & "..."
+      Me.MousePointer = vbHourglass
+      DoEvents
+
+      On Error Resume Next
+      'Resumen Anexos: el original convierte todo entre la tasa de FechaFin (ConvertirReporte) siempre
+      Set rsResu = RptBalanceResumenGenerar(FechaIni, FechaFin, (Left$(Me.CmbMoneda.Text, 1) = "D"), ConAnexos, AdvResu)
+      If Err.Number <> 0 Then ErrResu = Err.Description
+      On Error GoTo 0
+      Me.MousePointer = vbDefault
+      Me.LblProgreso.Caption = ""
+
+      If Len(ErrResu) > 0 Then
+        RptUbicacionesLiberar
+        MsgBox ErrResu, vbCritical, "Sistema Contable"
+      Else
+        If Len(AdvResu) > 0 Then MsgBox AdvResu, vbExclamation, Me.CmbReportes.Text
+        If ConAnexos Then
+          ActualizaConfiguracionReporte
+          Me.TxtTipoReporte.Text = "BALANCE GENERAL RESUMEN ANEXOS"
+        Else
+          Me.TxtTipoReporte.Text = "BALANCE GENERAL RESUMEN"
+        End If
+
+        Set rpt = New ArepBalancePersonalizado
+        fPreview.RunReport rpt
+        fPreview.Show 1
+
+        If ConAnexos Then
+          Set rpt = New ArepAnexosBalances
+          fPreview.RunReport rpt
+          fPreview.Show 1
+        End If
+        RptUbicacionesLiberar
+      End If
+    End If
 
 Case "BALANCE GENERAL RESUMEN"
     NumeroPeriodo1 = Me.CmbIni.Text
@@ -8733,7 +8806,9 @@ Select Case QUIEN
   Me.CmbReportes.AddItem ("BALANCE HISTORICO")
   Me.CmbReportes.AddItem ("BALANCE HISTORICO (NUEVO)")
   Me.CmbReportes.AddItem ("BALANCE GENERAL RESUMEN")
+  Me.CmbReportes.AddItem ("BALANCE GENERAL RESUMEN (NUEVO)")
   Me.CmbReportes.AddItem ("BALANCE GENERAL RESUMEN ANEXOS")
+  Me.CmbReportes.AddItem ("BALANCE GENERAL RESUMEN ANEXOS (NUEVO)")
   Me.CmbReportes.AddItem ("BALANCE GENERAL TRADICIONAL")
   Me.CmbReportes.AddItem ("ESTADO DE RESULTADO")
   Me.CmbReportes.AddItem ("ESTADO DE RESULTADO (NUEVO)")

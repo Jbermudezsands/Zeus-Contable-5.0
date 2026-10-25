@@ -553,6 +553,12 @@ Public Sub SaldosPersonalizados(TipoCuenta As String)
     
     ResultadoPersonalizado = 0
     ResultadoPersonalizadoPeriodo = 0
+    'Balance Resumen (NUEVO): los saldos salen de memoria (Modulos\ResultadoDpto.bas), no de la tabla Reportes
+    If RptUbicActivo Then
+        ResultadoPersonalizado = RptUbicacionSaldo(TipoCuenta)
+        ResultadoPersonalizadoPeriodo = RptUbicacionPeriodo(TipoCuenta)
+        Exit Sub
+    End If
     FrmReportes.DtaConsulta.RecordSource = "SELECT MAX(Descripcion) AS Descripcion, SUM(Debe1) AS Debe1, SUM(Haber1) AS Haber1, SUM(Debe2) AS Debe2, SUM(Haber2) AS Haber2, SUM(Debe3) " & _
                       "AS Debe3, SUM(Haber3) AS Haber3, SUM(Debe3) - SUM(Haber3) AS Saldo, SUM(Debe2) - SUM(Haber2) AS SaldoPeriodo, MAX(KeyGrupo) AS KeyGrupo, MAX(KeyGrupoSuperior) " & _
                       "AS KeyGrupoSuperior, MAX(KeyGrupoCuenta) AS KeyGrupoCuenta, MAX(Nivel) AS Nivel, MAX(Orden) AS Orden, MAX(CodCuentas) AS CodCuentas, " & _

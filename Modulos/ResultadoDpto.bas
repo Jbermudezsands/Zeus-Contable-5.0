@@ -41,7 +41,7 @@ End Type
 
 Private mGrp() As TGrupo
 Private mNGrp As Long
-Private mSal As Variant          'GetRows: (0 Cod, 1 Desc, 2 KeyGrupo, 3 Tipo, 4 Dpto, 5 Debito, 6 Credito, 7 Debito2, 8 Credito2)
+Private mSal As Variant          'GetRows: (0 Cod, 1 Desc, 2 KeyGrupo, 3 Tipo, 4 Dpto, 5 Debito, 6 Credito, 7 Debito2, 8 Credito2, 9 UbicacionReporte)
 Private mMonto() As Double       'monto con signo contable segun tipo de cuenta
 Private mSalGrp() As Long        'indice de grupo de cada fila de mSal (-1 = cuenta fuera de la estructura)
 Private mNSal As Long
@@ -56,6 +56,16 @@ Private mConAnterior As Boolean
 Private mBalance As Boolean
 Private mResul1 As Double        'Balance: resultado acumulado anterior (columna 1)
 Private mResul2 As Double        'Balance: resultado del periodo (columna 2)
+Private mUbicSaldo As Object     'Balance: Ubicacion -> saldo (col 1 + col 2), para SaldosPersonalizados
+Private mUbicPeriodo As Object   'Balance: Ubicacion -> actividad del periodo (col 2)
+Private mFilaUbic As String      'datos extra de la fila de cuenta que se esta agregando (AgregaFila los consume)
+Private mFilaTipo As String
+Private mFilaDescCta As String
+Private mRsAnexos As ADODB.Recordset
+
+'Verdadero mientras un Balance Resumen (NUEVO) esta imprimiendo: SaldosPersonalizados y ArepAnexosBalances
+'leen de memoria en vez de la tabla Reportes. El formulario lo apaga con RptUbicacionesLiberar.
+Public RptUbicActivo As Boolean
 
 
 '-----------------------------------------------------------------------------------------------------
@@ -199,9 +209,9 @@ Public Function RptSaldosPorCuentaDpto(ByVal FechaDesde As Date, ByVal FechaHast
                "CAST(0 AS float) AS Debito2, CAST(0 AS float) AS Credito2 "
     End If
 
-    Sql = "SELECT c.CodCuentas, c.DescripcionCuentas, c.KeyGrupo, c.TipoCuenta, " & ColDpto & " AS CodDepartamento, " & Cols & _
+    Sql = "SELECT c.CodCuentas, c.DescripcionCuentas, c.KeyGrupo, c.TipoCuenta, " & ColDpto & " AS CodDepartamento, " & Cols & ", c.UbicacionReporte " & _
           SqlDesdeDonde(FechaDesde, FechaHasta, EnDolares, ExcluirCierre, DptoDesde, DptoHasta, TiposCuenta, ConAnterior, AjusteExcluir) & _
-          "GROUP BY c.CodCuentas, c.DescripcionCuentas, c.KeyGrupo, c.TipoCuenta" & IIf(PorDpto, ", " & ColDpto, "") & " " & _
+          "GROUP BY c.CodCuentas, c.DescripcionCuentas, c.KeyGrupo, c.TipoCuenta, c.UbicacionReporte" & IIf(PorDpto, ", " & ColDpto, "") & " " & _
           "ORDER BY c.KeyGrupo, " & IIf(PorDpto, ColDpto & ", ", "") & "c.CodCuentas"
 
     Set rs = New ADODB.Recordset
@@ -512,6 +522,7 @@ Private Sub EmitirGrupo(ByVal g As Long)
 
     'Balance: la utilidad del ejercicio va como una cuenta mas del Capital, justo antes de su total
     If mBalance And StrComp(mGrp(g).Key, "C", vbTextCompare) = 0 Then
+        mFilaUbic = "Resultado Periodo"
         AgregaFila Space$(mGrp(g).Nivel) & " Resultado Periodo", "RP", "", mGrp(g).Key, mGrp(g).Nivel, _
                    mResul1, 0, mResul2, 0, False, "", ""
     End If
@@ -547,6 +558,9 @@ Private Sub EmitirCuentasGrupo(ByVal g As Long)
                         Abierto = True
                     End If
                 End If
+                mFilaUbic = UbicacionDeCuenta(mSal(9, i) & "", mSal(3, i) & "")
+                mFilaTipo = mSal(3, i) & ""
+                mFilaDescCta = mSal(1, i) & ""
                 AgregaFila Space$(Nivel) & mSal(0, i) & "." & (mSal(1, i) & ""), mSal(0, i) & "", "", Key, Nivel + 1, _
                            mMonto(i), 0, mMonto2(i), 0, False, Dpto, mSal(0, i) & ""
                 TotDpto = TotDpto + mMonto(i)
@@ -584,6 +598,9 @@ Private Function NuevoRecordset() As ADODB.Recordset
         .Append "Orden", adInteger
         .Append "CodDepartamento", adVarWChar, 50, adFldIsNullable
         .Append "CodCuentas", adVarWChar, 50, adFldIsNullable
+        .Append "Ubicacion", adVarWChar, 100, adFldIsNullable
+        .Append "TipoCuenta", adVarWChar, 50, adFldIsNullable
+        .Append "DescripcionCuentas", adVarWChar, 255, adFldIsNullable
     End With
     rs.Open
     Set NuevoRecordset = rs
@@ -595,8 +612,10 @@ Private Sub AgregaFila(ByVal Descripcion As String, ByVal KeyGrupo As String, By
         ByVal Debe2 As Double, ByVal Haber2 As Double, _
         ByVal EsTotal As Boolean, ByVal CodDpto As String, ByVal CodCuenta As String)
     If mNivelMax > 0 Then
-        If Nivel > mNivelMax Then Exit Sub
-        If Nivel = mNivelMax And Not EsTotal Then Exit Sub
+        If Nivel > mNivelMax Or (Nivel = mNivelMax And Not EsTotal) Then
+            mFilaUbic = "": mFilaTipo = "": mFilaDescCta = ""
+            Exit Sub
+        End If
     End If
     mOrden = mOrden + 1
     mRs.AddNew
@@ -623,6 +642,12 @@ Private Sub AgregaFila(ByVal Descripcion As String, ByVal KeyGrupo As String, By
     mRs.Fields("Orden").Value = mOrden
     mRs.Fields("CodDepartamento").Value = CodDpto
     mRs.Fields("CodCuentas").Value = CodCuenta
+    mRs.Fields("Ubicacion").Value = mFilaUbic
+    mRs.Fields("TipoCuenta").Value = mFilaTipo
+    mRs.Fields("DescripcionCuentas").Value = mFilaDescCta
+    mFilaUbic = ""
+    mFilaTipo = ""
+    mFilaDescCta = ""
     mRs.Update
 End Sub
 
@@ -658,7 +683,7 @@ Public Sub RptConvertirRecordset(rs As ADODB.Recordset, ByVal TasaCambio As Doub
     If rs.BOF And rs.EOF Then Exit Sub
     rs.MoveFirst
     Do While Not rs.EOF
-        For Each Campo In VBA.Split("Debe1,Haber1,Debe2,Haber2,Debe3,Haber3", ",")
+        For Each Campo In VBA.Split("Debe1,Haber1,Debe2,Haber2,Debe3,Haber3,TotalDebe,TotalHaber", ",")
             rs.Fields(CStr(Campo)).Value = Round(CDbl(rs.Fields(CStr(Campo)).Value) / TasaCambio, 2)
         Next
         rs.Update
@@ -764,3 +789,109 @@ Public Function RptHayUtilidadBruta(rs As ADODB.Recordset) As Boolean
     Next
     RptHayUtilidadBruta = True
 End Function
+
+
+'-----------------------------------------------------------------------------------------------------
+' BALANCE GENERAL RESUMEN / RESUMEN ANEXOS (en memoria)
+' ArepBalancePersonalizado pide cada renglon con SaldosPersonalizados("Cajas"...) y ArepAnexosBalances
+' lee las cuentas de Reportes. Mientras RptUbicActivo = True ambos leen de aqui (ver Funciones.bas y
+' ArepAnexosBalances). Siempre llamar RptUbicacionesLiberar al terminar.
+'-----------------------------------------------------------------------------------------------------
+' Ubicacion de la cuenta en el reporte resumen: Cuentas.UbicacionReporte o, si esta vacia, la que
+' corresponde al tipo de cuenta (mismo mapeo que CreaEstructura).
+Private Function UbicacionDeCuenta(ByVal Ubicacion As String, ByVal TipoCuenta As String) As String
+    If Len(Trim$(Ubicacion)) > 0 Then
+        UbicacionDeCuenta = Ubicacion
+        Exit Function
+    End If
+    Select Case TipoCuenta
+        Case "Caja": UbicacionDeCuenta = "Cajas"
+        Case "Bancos": UbicacionDeCuenta = "Bancos"
+        Case "Cuentas x Cobrar": UbicacionDeCuenta = "Cuentas x Cobrar"
+        Case "Inventario": UbicacionDeCuenta = "Inventario"
+        Case "Activo Fijo": UbicacionDeCuenta = "Terreno y Edificios"
+        Case "Papeleria - Utiles": UbicacionDeCuenta = "Papeleria y Utiles de Oficina"
+        Case "Otros Activos": UbicacionDeCuenta = "Otros Activos"
+        Case "Cuentas x Pagar": UbicacionDeCuenta = "Proveedores"
+        Case "Pasivo": UbicacionDeCuenta = "Pasivos Acumulados"
+        Case "Otros Pasivos": UbicacionDeCuenta = "Otros Pasivos"
+        Case "Capital": UbicacionDeCuenta = "Acciones Comunes"
+        Case "Ingresos - Ventas": UbicacionDeCuenta = "Ingresos - Ventas"
+        Case "Costos": UbicacionDeCuenta = "Costos"
+        Case "Gastos": UbicacionDeCuenta = "Gastos"
+    End Select
+End Function
+
+' Genera el balance completo (sin filtros de nivel ni ceros, como el original) y lo deja disponible para
+' los reportes resumen. Devuelve el mismo recordset que RptBalanceGenerar.
+Public Function RptBalanceResumenGenerar(ByVal FechaDesde As Date, ByVal FechaHasta As Date, _
+        ByVal EnDolares As Boolean, ByVal Convertir As Boolean, _
+        Optional ByRef Advertencias As String = "") As ADODB.Recordset
+    Dim rs As ADODB.Recordset
+    RptUbicacionesLiberar
+    Set rs = RptBalanceGenerar(FechaDesde, FechaHasta, EnDolares, 0, False, Advertencias)
+    'Resumen Anexos: el original ejecuta ConvertirReporte(FechaFin) siempre (divide todo entre la tasa de FechaFin)
+    If Convertir Then RptConvertirRecordset rs, BuscaTasaCambio(FechaHasta)
+    RptCargarUbicaciones rs
+    Set mRsAnexos = rs
+    RptUbicActivo = True
+    Set RptBalanceResumenGenerar = rs
+End Function
+
+' Equivale a SaldosPersonalizados: SUM(Debe3)-SUM(Haber3) y SUM(Debe2)-SUM(Haber2) de las filas por Ubicacion.
+Private Sub RptCargarUbicaciones(rs As ADODB.Recordset)
+    Dim Ub As String
+    Set mUbicSaldo = CreateObject("Scripting.Dictionary")
+    mUbicSaldo.CompareMode = vbTextCompare
+    Set mUbicPeriodo = CreateObject("Scripting.Dictionary")
+    mUbicPeriodo.CompareMode = vbTextCompare
+    If rs.BOF And rs.EOF Then Exit Sub
+    rs.MoveFirst
+    Do While Not rs.EOF
+        Ub = rs.Fields("Ubicacion").Value & ""
+        If Len(Ub) > 0 Then
+            mUbicSaldo(Ub) = mUbicSaldo(Ub) + CDbl(rs.Fields("Debe3").Value) - CDbl(rs.Fields("Haber3").Value)
+            mUbicPeriodo(Ub) = mUbicPeriodo(Ub) + CDbl(rs.Fields("Debe2").Value) - CDbl(rs.Fields("Haber2").Value)
+        End If
+        rs.MoveNext
+    Loop
+    rs.MoveFirst
+End Sub
+
+Public Function RptUbicacionSaldo(ByVal Ubicacion As String) As Double
+    If mUbicSaldo.Exists(Ubicacion) Then RptUbicacionSaldo = mUbicSaldo(Ubicacion)
+End Function
+
+Public Function RptUbicacionPeriodo(ByVal Ubicacion As String) As Double
+    If mUbicPeriodo.Exists(Ubicacion) Then RptUbicacionPeriodo = mUbicPeriodo(Ubicacion)
+End Function
+
+' Filas de cuenta para ArepAnexosBalances. Condiciones es el WHERE que arma el reporte con los checks
+' (... Reportes.Ubicacion = N'Cajas' OR ...); de ahi se toman los nombres de Ubicacion.
+Public Function RptAnexosFiltrar(ByVal Condiciones As String) As ADODB.Recordset
+    Dim rs As ADODB.Recordset, Filtro As String, p As Long, q As Long, Nom As String
+    Set rs = mRsAnexos.Clone
+    p = InStr(Condiciones, "N'")
+    Do While p > 0
+        q = InStr(p + 2, Condiciones, "'")
+        If q = 0 Then Exit Do
+        Nom = Mid$(Condiciones, p + 2, q - p - 2)
+        If Len(Filtro) > 0 Then Filtro = Filtro & " OR "
+        Filtro = Filtro & "Ubicacion = '" & SqlTexto(Nom) & "'"
+        p = InStr(q + 1, Condiciones, "N'")
+    Loop
+    If Len(Filtro) > 0 Then
+        rs.Filter = "(" & Filtro & ") AND CodCuentas <> ''"
+    Else
+        rs.Filter = "CodCuentas <> ''"
+    End If
+    rs.Sort = "Orden"
+    Set RptAnexosFiltrar = rs
+End Function
+
+Public Sub RptUbicacionesLiberar()
+    RptUbicActivo = False
+    Set mUbicSaldo = Nothing
+    Set mUbicPeriodo = Nothing
+    Set mRsAnexos = Nothing
+End Sub
