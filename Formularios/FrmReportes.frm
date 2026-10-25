@@ -4147,7 +4147,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
         
         Me.DtaConsulta.Recordset.MoveNext
       Loop
-   Case "BALANCE GENERAL"
+   Case "BALANCE GENERAL", "BALANCE GENERAL (NUEVO)"
       Me.Frame4.Visible = True
       Me.Frame1.Visible = False
       Me.CmbMoneda.Visible = True
@@ -4210,7 +4210,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
         Me.DtaConsulta.Recordset.MoveNext
       Loop
       
-    Case "BALANCE ACUMULADO"
+    Case "BALANCE ACUMULADO", "BALANCE ACUMULADO (NUEVO)"
       Me.Frame4.Visible = True
       Me.Frame1.Visible = False
       Me.DtaConsulta.RecordSource = "SELECT Periodos.Periodo, Periodos.FechaPeriodo, Periodos.NumeroTabla From Periodos Where (((Periodos.Periodo) = 1) And ((Periodos.NumeroTabla) = 1 Or (Periodos.NumeroTabla) = 2 Or (Periodos.NumeroTabla) = 3))"
@@ -4230,7 +4230,7 @@ Dim CostosProduccion, CostosGeneralesProduccion As Double
         Me.DtaConsulta.Recordset.MoveNext
       Loop
       
-    Case "BALANCE HISTORICO"
+    Case "BALANCE HISTORICO", "BALANCE HISTORICO (NUEVO)"
       Me.Frame4.Visible = True
       Me.Frame1.Visible = False
       Me.DtaConsulta.RecordSource = "SELECT Periodos.Periodo, Periodos.FechaPeriodo, Periodos.NumeroTabla From Periodos Where (((Periodos.Periodo) = 1) And ((Periodos.NumeroTabla) = 1 Or (Periodos.NumeroTabla) = 2 Or (Periodos.NumeroTabla) = 3))"
@@ -4488,6 +4488,97 @@ Case "ESTADO DE RESULTADO (NUEVO)", "RESULTADO ACUMULADO (NUEVO)", "RESULTADO HI
 
 
 
+
+Case "BALANCE GENERAL (NUEVO)", "BALANCE ACUMULADO (NUEVO)", "BALANCE HISTORICO (NUEVO)"
+    '--- Version en memoria (Modulos\ResultadoDpto.bas): no usa la tabla Reportes ---
+    Dim rsBal As ADODB.Recordset, AdvBal As String, ErrBal As String, TipoBal As Integer
+    If Me.CmbReportes.Text = "BALANCE ACUMULADO (NUEVO)" Then
+      TipoBal = 1
+    ElseIf Me.CmbReportes.Text = "BALANCE HISTORICO (NUEVO)" Then
+      TipoBal = 2
+    Else
+      TipoBal = 0
+    End If
+    NumeroPeriodo1 = Me.CmbIni.Text
+    NumeroPeriodo2 = Me.CmbFin.Text
+
+    If Me.Option8 = True Then
+     NumeroTabla = 1
+    ElseIf Me.Option7 = True Then
+      NumeroTabla = 2
+    ElseIf Me.Option6 = True Then
+      NumeroTabla = 3
+    End If
+
+    Me.DtaConsulta.RecordSource = "SELECT Periodos.Periodo, Periodos.FechaPeriodo, Periodos.NumeroTabla From Periodos WHERE (((Periodos.Periodo) Between " & NumeroPeriodo1 & " And " & NumeroPeriodo2 & ") AND ((Periodos.NumeroTabla)=" & NumeroTabla & "))"
+    Me.DtaConsulta.Refresh
+    If Me.DtaConsulta.Recordset.EOF Then
+      MsgBox "Error en el Periodo", vbCritical, "Zeus Contable"
+    Else
+      Me.DtaConsulta.Recordset.MoveLast
+      i = Me.DtaConsulta.Recordset.RecordCount
+      Me.DtaConsulta.Recordset.MoveFirst
+      Do While Not DtaConsulta.Recordset.EOF
+        If i = 1 Then
+          FechaIni = "01/" & Month(Me.DtaConsulta.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaConsulta.Recordset("FechaPeriodo"))
+          FechaFin = Me.DtaConsulta.Recordset("FechaPeriodo")
+        ElseIf NumeroPeriodo1 = Me.DtaConsulta.Recordset("Periodo") Then
+          FechaIni = "01/" & Month(Me.DtaConsulta.Recordset("FechaPeriodo")) & "/" & Year(Me.DtaConsulta.Recordset("FechaPeriodo"))
+        ElseIf NumeroPeriodo2 = Me.DtaConsulta.Recordset("Periodo") Then
+          FechaFin = Me.DtaConsulta.Recordset("FechaPeriodo")
+        End If
+        Me.DtaConsulta.Recordset.MoveNext
+      Loop
+
+      Me.LblProgreso.Caption = "Generando " & Me.CmbReportes.Text & "..."
+      Me.MousePointer = vbHourglass
+      DoEvents
+
+      On Error Resume Next
+      Set rsBal = RptBalanceGenerar(FechaIni, FechaFin, (Left$(Me.CmbMoneda.Text, 1) = "D"), _
+                     Val(Me.CmbNivel.Text), True, AdvBal)
+      If Err.Number <> 0 Then ErrBal = Err.Description
+      On Error GoTo 0
+      Me.MousePointer = vbDefault
+      Me.LblProgreso.Caption = ""
+
+      If Len(ErrBal) > 0 Then
+        MsgBox ErrBal, vbCritical, "Sistema Contable"
+      Else
+        If Len(AdvBal) > 0 Then MsgBox AdvBal, vbExclamation, Me.CmbReportes.Text
+        If TipoBal = 1 Then
+          Set rpt = New ArepBalanceComparativo
+        ElseIf TipoBal = 2 Then
+          Set rpt = New ArepBalanceHistorico
+        Else
+          Set rpt = New ArepBalance
+        End If
+        Set rpt.DataControl1.Recordset = rsBal
+        'Encabezados: se ponen en la instancia que se imprime (si el reporte no tiene el control, se ignora)
+        On Error Resume Next
+        rpt.LblMoneda.Caption = "Expresado en " & Me.CmbMoneda.Text
+        If Dir(RutaLogo) <> "" Then rpt.Logo.Picture = LoadPicture(RutaLogo)
+        rpt.LblEmpresa = Me.DtaDatosEmpresa.Recordset("NombreEmpresa")
+        rpt.LblEmpresa1 = Me.DtaDatosEmpresa.Recordset("Direccion")
+        rpt.LblEmpresa2 = "RUC: " & Me.DtaDatosEmpresa.Recordset("NumeroRuc")
+        rpt.LblFechaFin = FechaFin
+        rpt.LblFechaImpreso = Format(Now, "dd/mm/yyyy")
+        rpt.LblFechaIni = FechaIni
+        If TipoBal = 1 Then
+          rpt.LblBalance.Caption = "BALANCE GENERAL ACUMULADO"
+          rpt.LblActual.Caption = "ACTIVIDAD PERIODO"
+          rpt.LblAcumulado.Caption = "SALDO HASTA " & FechaFin
+        ElseIf TipoBal = 2 Then
+          rpt.LblBalance.Caption = "BALANCE GENERAL HISTORICO"
+          rpt.LblSaldoAntes.Caption = "SALDO ANTES  " & FechaIni
+          rpt.LblSaldoPeriodo.Caption = "ACTIVIDAD PERIODO"
+          rpt.LblSaldoAcumulado.Caption = "SALDO HASTA  " & FechaFin
+        End If
+        On Error GoTo 0
+        fPreview.RunReport rpt
+        fPreview.Show 1
+      End If
+    End If
 
 Case "CUENTAS X COBRAR"
 
@@ -8636,8 +8727,11 @@ Select Case QUIEN
  
  Case "EstadosFinancieros"
   Me.CmbReportes.AddItem ("BALANCE GENERAL")
+  Me.CmbReportes.AddItem ("BALANCE GENERAL (NUEVO)")
   Me.CmbReportes.AddItem ("BALANCE ACUMULADO")
+  Me.CmbReportes.AddItem ("BALANCE ACUMULADO (NUEVO)")
   Me.CmbReportes.AddItem ("BALANCE HISTORICO")
+  Me.CmbReportes.AddItem ("BALANCE HISTORICO (NUEVO)")
   Me.CmbReportes.AddItem ("BALANCE GENERAL RESUMEN")
   Me.CmbReportes.AddItem ("BALANCE GENERAL RESUMEN ANEXOS")
   Me.CmbReportes.AddItem ("BALANCE GENERAL TRADICIONAL")
